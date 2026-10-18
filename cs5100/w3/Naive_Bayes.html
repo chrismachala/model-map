@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naive Bayes · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w3_Naive_Bayes" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip cls">Classification model</span><span class="chip">Week 3</span><span class="chip">3 techniques</span></div>
+  <h1>Naive Bayes</h1>
+  <p class="tagline">Like LDA, but with one bold shortcut: pretend that, within each class, the inputs have nothing to do with each other. Then you can handle each input on its own and multiply.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> classification.<br />
+<strong>Week:</strong> 3.<br />
+<strong>Book:</strong> ISLP 4.4.4.<br />
+<strong>Techniques on this page:</strong> the independence assumption, per-input pictures (bell curves for numbers, counts for categories), multiplying and applying Bayes’ theorem.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="LDA.html">LDA</a> needs to describe how <strong>all</strong> the inputs behave together in each class: not just each input’s spread, but how every pair moves together. With many inputs that’s a lot to estimate, and with little data the estimates are shaky (high variance).</p>
+<p>Naive Bayes skips the hard part. It assumes that <strong>within a class</strong>, knowing one input tells you nothing about another. Then you only need a simple one-input description per input per class, which needs far less data. It’s “naive” because that’s rarely exactly true, but it often works well anyway, especially with <strong>many inputs and not much data</strong> (spam filters are the classic example).</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>independent</td>
+<td>knowing one thing doesn’t change the chances of the other</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(f_{kj}(x_j)\)</span></td>
+<td>how typical the value <span class="math inline">\(x_j\)</span> of input <span class="math inline">\(j\)</span> is within class <span class="math inline">\(k\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\prod_j\)</span></td>
+<td>multiply over all the inputs</td>
+</tr>
+<tr class="even">
+<td>prior, posterior</td>
+<td>as in <a href="LDA.html">LDA</a>: chance before and after seeing the inputs</td>
+</tr>
+<tr class="odd">
+<td>underflow</td>
+<td>multiplying many tiny numbers gives a number so small the computer rounds it to 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-independence-shortcut">Technique 1: the independence shortcut</h2>
+<p><strong>Problem it solves:</strong> describing all the inputs together is hard; describing them one at a time is easy.</p>
+<p><span class="math display">\[f_k(x) = f_{k1}(x_1)\times f_{k2}(x_2)\times\cdots\times f_{kp}(x_p)\]</span></p>
+<p>“How typical is this whole customer in class <span class="math inline">\(k\)</span>” becomes “how typical is their balance in class <span class="math inline">\(k\)</span>” times “how typical is their student status in class <span class="math inline">\(k\)</span>”, and so on.</p>
+<h2 id="technique-2-one-picture-per-input">Technique 2: one picture per input</h2>
+<p><strong>Problem it solves:</strong> different inputs are different kinds of thing, so each can get its own kind of description.</p>
+<ul>
+<li><strong>Numeric input</strong> (balance): a bell curve per class, with that class’s own average and spread for that input.</li>
+<li><strong>Category input</strong> (student yes/no): just count. The chance of “student = yes” in class <span class="math inline">\(k\)</span> is the fraction of class <span class="math inline">\(k\)</span> training points who are students.</li>
+</ul>
+<h2 id="technique-3-multiply-then-bayes-theorem">Technique 3: multiply, then Bayes’ theorem</h2>
+<ol type="1">
+<li>For each class, look up each input’s value in that class’s picture.</li>
+<li>Multiply them, and multiply by the prior <span class="math inline">\(\pi_k\)</span>.</li>
+<li>Divide each class’s result by the total so they add to 1:</li>
+</ol>
+<p><span class="math display">\[P(Y = k \mid x) = \frac{\pi_k\,f_{k1}(x_1)\cdots f_{kp}(x_p)}{\sum_l \pi_l\,f_{l1}(x_1)\cdots f_{lp}(x_p)}\]</span></p>
+<ol start="4" type="1">
+<li>Pick the biggest.</li>
+</ol>
+<p>In code, step 2 is done by <strong>adding logs</strong> instead of multiplying, to avoid underflow.</p>
+<div class="example">
+<p><strong>Worked example: spam filter.</strong> <span class="math inline">\(P(\text{spam}) = 0.4\)</span>. “free” appears in 50% of spam and 5% of normal emails. “meeting” appears in 10% of spam and 40% of normal emails. An email contains both words.</p>
+<ul>
+<li>Spam: <span class="math inline">\(0.4 \times 0.5 \times 0.1 = 0.020\)</span></li>
+<li>Normal: <span class="math inline">\(0.6 \times 0.05 \times 0.4 = 0.012\)</span></li>
+<li><span class="math inline">\(P(\text{spam} \mid \text{email}) = 0.020/(0.020 + 0.012) = 0.625\)</span>. Flag it as spam.</li>
+</ul>
+</div>
+<div class="example">
+<p><strong>Worked example: balance and student.</strong> Balance in £1000s.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>prior</th>
+<th>balance average</th>
+<th>balance spread (sd)</th>
+<th>P(student)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>no default</td>
+<td>0.7</td>
+<td>0.8</td>
+<td>0.4</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td>default</td>
+<td>0.3</td>
+<td>1.8</td>
+<td>0.4</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+<p>New customer: balance 1.4, student.</p>
+<ol type="1">
+<li>Balance bell-curve heights: no default, <span class="math inline">\((1.4 - 0.8)/0.4 = 1.5\)</span> sds from centre, height <span class="math inline">\(0.324\)</span>. Default, <span class="math inline">\(-1\)</span> sd, height <span class="math inline">\(0.605\)</span>.</li>
+<li>Student: <span class="math inline">\(0.3\)</span> and <span class="math inline">\(0.5\)</span>.</li>
+<li>Multiply with priors: no default <span class="math inline">\(0.7 \times 0.324 \times 0.3 = 0.068\)</span>; default <span class="math inline">\(0.3 \times 0.605 \times 0.5 = 0.091\)</span>.</li>
+<li><span class="math inline">\(P(\text{default}) = 0.091/(0.068 + 0.091) = 0.57\)</span>. Predict default.</li>
+</ol>
+</div>
+<h2 id="naive-bayes-vs-lda">Naive Bayes vs LDA</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>LDA</th>
+<th>Naive Bayes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>inputs allowed to move together within a class?</td>
+<td>yes</td>
+<td>no (that’s the shortcut)</td>
+</tr>
+<tr class="even">
+<td>spread</td>
+<td>same for every class</td>
+<td>each class can have its own</td>
+</tr>
+<tr class="odd">
+<td>mixes numbers and categories easily?</td>
+<td>not really</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td>best when</td>
+<td>moderate number of inputs, bell-shaped data</td>
+<td>many inputs, little data</td>
+</tr>
+</tbody>
+</table>
+<p>Why the shortcut often helps: it adds some bias (the assumption is wrong) but removes a lot of variance (far fewer things to estimate). The same trade-off as everywhere in this course.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4.4.4 Naive Bayes</td>
+<td><strong>Read</strong></td>
+<td>Core, including the worked example in Table 4.9</td>
+</tr>
+<tr class="even">
+<td>4.5.1 Analytical comparison</td>
+<td>Skim</td>
+<td>Where naive Bayes fits relative to LDA and logistic regression</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 4.4.4). I want practice questions on NAIVE BAYES, done by hand:
+- what the independence-within-class assumption means and why it&#39;s &quot;naive&quot;
+- spam-filter style questions with word probabilities per class and a prior
+- mixed inputs: a categorical predictor (estimate by counting) and a numeric predictor (Gaussian with a per-class mean and sd; give me the density values or the z-scores so I can work by hand)
+- multiplying the per-predictor probabilities with the prior and normalising to get posteriors
+- estimating the per-class probabilities from a small training table
+- why naive Bayes can work well when p is large and n small (bias vs variance)
+- how naive Bayes differs from LDA
+- why code adds logs instead of multiplying
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/LDA.html"><small>&larr; Previous</small>LDA</a><a class="next" href="../w3/Judging_Classifiers.html"><small>Next &rarr;</small>Judging classifiers</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

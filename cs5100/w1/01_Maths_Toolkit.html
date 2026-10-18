@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maths toolkit · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w1_01_Maths_Toolkit" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not a model: toolkit</span><span class="chip">Week 1</span></div>
+  <h1>Maths toolkit</h1>
+  <p class="tagline">Not a model. These are the tools the models borrow. Each one says which model needs it, so you know why you're learning it.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="why">
+<p><span class="label">Why the week 1 slides suddenly do calculus</span></p>
+<p>Fitting a model means <strong>finding the numbers that make its error as small as possible</strong>. “Make something as small as possible” is exactly what calculus is for: at the bottom of a valley the ground is flat, and calculus measures how steep the ground is. That’s the only reason it’s here. You’ll use it properly in <a href="../w2/Linear_Regression.html">linear regression</a> (week 2) and <a href="../w3/Logistic_Regression.html">logistic regression</a> (week 3).</p>
+</div>
+<h2 id="data-as-a-grid-of-numbers-vectors-and-matrices">1. Data as a grid of numbers (vectors and matrices)</h2>
+<p><strong>Used by:</strong> every model.</p>
+<p>A spreadsheet of data is called the <strong>data matrix</strong> <span class="math inline">\(\mathbf{X}\)</span>. It has <span class="math inline">\(n\)</span> rows (people) and <span class="math inline">\(p\)</span> columns (pieces of information).</p>
+<p><span class="math display">\[\mathbf{X} = \begin{pmatrix} x_{11} &amp; \dots &amp; x_{1p}\\ \vdots &amp; \ddots &amp; \vdots\\ x_{n1} &amp; \dots &amp; x_{np}\end{pmatrix}\]</span></p>
+<ul>
+<li>A <strong>row</strong> <span class="math inline">\(x_i\)</span> is one person: all their information.</li>
+<li>A <strong>column</strong> <span class="math inline">\(\mathbf{x}_j\)</span> is one piece of information for everyone.</li>
+<li>A <strong>vector</strong> is just a list of numbers. A <strong>matrix</strong> is a grid of numbers.</li>
+<li>The <strong>transpose</strong> <span class="math inline">\(^T\)</span> flips a row into a column (or a grid on its side). It’s bookkeeping, nothing deep.</li>
+</ul>
+<p>In code, a pandas DataFrame <em>is</em> <span class="math inline">\(\mathbf{X}\)</span>, and <code>df.shape</code> gives <span class="math inline">\((n, p)\)</span>.</p>
+<h3 id="the-dot-product">The dot product</h3>
+<p><strong>Used by:</strong> linear regression, logistic regression, correlation.</p>
+<p><strong>Problem it solves:</strong> “multiply each input by its weight and add it all up” happens constantly. The dot product is the shorthand.</p>
+<p><span class="math display">\[a \cdot b = a^T b = a_1 b_1 + a_2 b_2 + \dots + a_p b_p\]</span></p>
+<div class="example">
+<p><span class="math inline">\(a = (1, 2, 3)\)</span>, <span class="math inline">\(b = (4, 5, 6)\)</span>: <span class="math inline">\(\ a\cdot b = 4 + 10 + 18 = 32\)</span>.</p>
+<p>In NumPy that’s <code>a @ b</code>. Careful: <code>a * b</code> gives <span class="math inline">\((4, 10, 18)\)</span>, multiplying piece by piece without adding.</p>
+</div>
+<h2 id="the-derivative-how-steep-is-it-here">2. The derivative: how steep is it here?</h2>
+<p><strong>Used by:</strong> linear regression (finding the best line), logistic regression, gradient descent.</p>
+<p>The <strong>derivative</strong> <span class="math inline">\(f&#39;(z)\)</span> is the <strong>slope</strong> of the graph of <span class="math inline">\(f\)</span> at the point <span class="math inline">\(z\)</span>: how much <span class="math inline">\(f\)</span> goes up if you nudge <span class="math inline">\(z\)</span> up a tiny bit. You can always estimate it with a calculator:</p>
+<p><span class="math display">\[f&#39;(z) \approx \frac{f(z + h) - f(z)}{h}\quad\text{for a tiny } h\]</span></p>
+<p>The slides write the exact version with a limit, <span class="math inline">\(\lim_{\delta\to 0}\)</span>, which just means “make the nudge smaller and smaller and see what the answer settles on.”</p>
+<div data-widget="slope">
+
+</div>
+<div class="example">
+<p><span class="math inline">\(f(z) = z^2\)</span> at <span class="math inline">\(z = 3\)</span>, nudge <span class="math inline">\(h = 0.0001\)</span>: <span class="math inline">\(\ \dfrac{3.0001^2 - 9}{0.0001} \approx 6.0001\)</span>. The exact rule below gives <span class="math inline">\(2z = 6\)</span>.</p>
+<p>The slides’ version done exactly: <span class="math inline">\(\dfrac{(z+\delta)^2 - z^2}{\delta} = \dfrac{2z\delta + \delta^2}{\delta} = 2z + \delta\)</span>, and as <span class="math inline">\(\delta\)</span> shrinks to 0 that’s <span class="math inline">\(2z\)</span>.</p>
+</div>
+<p><strong>Why we care:</strong> at the lowest point of a valley the slope is <strong>zero</strong>. So “find the best numbers” becomes “find where the slope is zero.”</p>
+<h3 id="the-rules-so-you-dont-need-the-limit-every-time">The rules (so you don’t need the limit every time)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Its slope</th>
+<th>Plain words</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a constant <span class="math inline">\(c\)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td>flat ground has no slope</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(z^r\)</span></td>
+<td><span class="math inline">\(r z^{r-1}\)</span></td>
+<td>bring the power down, reduce it by one</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(e^z\)</span></td>
+<td><span class="math inline">\(e^z\)</span></td>
+<td>the exponential is its own slope</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\log z\)</span></td>
+<td><span class="math inline">\(1/z\)</span></td>
+<td>(log means natural log, ln, in this course)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(f + g\)</span></td>
+<td><span class="math inline">\(f&#39; + g&#39;\)</span></td>
+<td>slope of a sum = sum of slopes</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(f \cdot g\)</span></td>
+<td><span class="math inline">\(f&#39;g + fg&#39;\)</span></td>
+<td>product rule</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(f(g(z))\)</span></td>
+<td><span class="math inline">\(f&#39;(g(z))\cdot g&#39;(z)\)</span></td>
+<td><strong>chain rule</strong>, see below</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-chain-rule-functions-inside-functions">The chain rule: functions inside functions</h3>
+<p><strong>Problem it solves:</strong> most model errors are “a function of a function” (a square of a difference, a log of a sigmoid). The chain rule says: <strong>multiply the slopes along the chain.</strong></p>
+<div class="example">
+<p><span class="math inline">\(\dfrac{d}{dz}(5z - 2)^3\)</span>. Outside: something cubed, slope <span class="math inline">\(3(\text{something})^2\)</span>. Inside: <span class="math inline">\(5z - 2\)</span>, slope <span class="math inline">\(5\)</span>. Multiply: <span class="math inline">\(3(5z-2)^2 \cdot 5 = 15(5z-2)^2\)</span>.</p>
+<p><span class="math inline">\(\dfrac{d}{dz}e^{-z^2}\)</span>. Outside <span class="math inline">\(e^{u}\)</span> has slope <span class="math inline">\(e^u\)</span>, inside <span class="math inline">\(-z^2\)</span> has slope <span class="math inline">\(-2z\)</span>. Answer: <span class="math inline">\(-2z\,e^{-z^2}\)</span>.</p>
+</div>
+<h2 id="several-dials-at-once-partial-derivatives-and-the-gradient">3. Several dials at once: partial derivatives and the gradient</h2>
+<p><strong>Used by:</strong> every model with more than one number to fit (which is all of them).</p>
+<p>A model usually has several numbers to tune, like <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. A <strong>partial derivative</strong> <span class="math inline">\(\partial f/\partial z_1\)</span> is the slope if you turn <strong>only</strong> dial <span class="math inline">\(z_1\)</span> and hold the others still. To compute it, treat the other letters as fixed numbers.</p>
+<p>The <strong>gradient</strong> <span class="math inline">\(\nabla f\)</span> (“nabla f” or “del f”) is the list of all the partial slopes. It points in the direction that goes <strong>uphill fastest</strong>. Go the opposite way and you go downhill. That’s the whole idea of gradient descent (week 2).</p>
+<div class="example">
+<p><span class="math inline">\(f(z_1, z_2) = z_1^2 z_2 + 3z_2\)</span>.</p>
+<ul>
+<li>Turn only <span class="math inline">\(z_1\)</span> (treat <span class="math inline">\(z_2\)</span> as a number): <span class="math inline">\(\partial f/\partial z_1 = 2z_1 z_2\)</span>.</li>
+<li>Turn only <span class="math inline">\(z_2\)</span>: <span class="math inline">\(\partial f/\partial z_2 = z_1^2 + 3\)</span>.</li>
+<li>Gradient: <span class="math inline">\(\nabla f = (2z_1z_2,\ z_1^2 + 3)\)</span>. At <span class="math inline">\((1, 2)\)</span> it’s <span class="math inline">\((4, 4)\)</span>.</li>
+</ul>
+</div>
+<h2 id="the-slides-key-example-preview-of-fitting-a-line">4. The slides’ key example: preview of fitting a line</h2>
+<p>This slide is the bridge to week 2. The model is “guess <span class="math inline">\(y\)</span> as <span class="math inline">\(z\)</span> times <span class="math inline">\(x\)</span>” (a line through the origin with slope <span class="math inline">\(z\)</span>). Its total squared error is</p>
+<p><span class="math display">\[g(z) = \sum_{i=1}^n (z x_i - y_i)^2\]</span></p>
+<p>Slope, by the sum rule and chain rule: <span class="math inline">\(\ g&#39;(z) = \sum_i 2(z x_i - y_i)\,x_i\)</span>.</p>
+<p>Set it to zero to find the bottom of the valley:</p>
+<p><span class="math display">\[z\sum x_i^2 = \sum x_i y_i \quad\Rightarrow\quad z^* = \frac{\sum x_i y_i}{\sum x_i^2}\]</span></p>
+<div class="example">
+<p><span class="math inline">\(x = (1, 2, 3)\)</span>, <span class="math inline">\(y = (2, 3, 7)\)</span>. <span class="math inline">\(\sum x_iy_i = 2 + 6 + 21 = 29\)</span>, <span class="math inline">\(\sum x_i^2 = 14\)</span>, so the best slope is <span class="math inline">\(29/14 \approx 2.07\)</span>.</p>
+</div>
+<p>That is linear regression in miniature. Week 2 does the same with an intercept.</p>
+<h2 id="correlation-from-the-week-1-lab">5. Correlation (from the week 1 lab)</h2>
+<p><strong>Used by:</strong> lab Q2, and it reappears inside <span class="math inline">\(R^2\)</span> in week 2.</p>
+<p><strong>Problem it solves:</strong> “do these two columns move together, and how strongly?” in a single number from <span class="math inline">\(-1\)</span> to <span class="math inline">\(1\)</span>.</p>
+<p>Centre both lists (subtract their averages) to get <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Then</p>
+<p><span class="math display">\[r = \frac{a\cdot b}{\sqrt{a\cdot a}\,\sqrt{b\cdot b}}\]</span></p>
+<p><span class="math inline">\(r\)</span> near <span class="math inline">\(+1\)</span>: they rise together in a straight-line way. Near <span class="math inline">\(-1\)</span>: one rises as the other falls. Near 0: no <em>straight-line</em> link (there might still be a curved one).</p>
+<div class="example">
+<p><span class="math inline">\(x = (1,2,3,4,5)\)</span>, <span class="math inline">\(y = (2,4,5,4,5)\)</span>. Averages 3 and 4. <span class="math inline">\(a = (-2,-1,0,1,2)\)</span>, <span class="math inline">\(b = (-2,0,1,0,1)\)</span>. <span class="math inline">\(a\cdot b = 6\)</span>, <span class="math inline">\(a\cdot a = 10\)</span>, <span class="math inline">\(b\cdot b = 6\)</span>. <span class="math inline">\(r = 6/\sqrt{60} \approx 0.775\)</span>.</p>
+</div>
+<h2 id="practice-prompt">6. Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP). I need practice with the MATHS TOOLKIT used to fit models, by hand:
+- dot products of small vectors, and the shape of a data matrix (n rows, p columns)
+- derivatives from the definition (limit / tiny nudge) for simple functions
+- derivative rules: power, exp, log, sum, product, and especially the CHAIN RULE
+- partial derivatives and the gradient of functions of 2-3 variables, evaluated at a point
+- differentiating a sum of squared errors like g(z) = sum (z*x_i - y_i)^2 and setting it to zero to find the best z
+- Pearson correlation by hand for 3-5 data points
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder. Use small whole numbers so I can work by hand.
+3. Wait for my answer, then mark it and show the full working step by step, naming the rule used at each step.
+4. If I make a mistake, explain what went wrong and give me a similar question.
+5. Every 5 questions, summarise what I&#39;m good at and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w1/00_Start_Here_The_Big_Picture.html"><small>&larr; Previous</small>Start here: the big picture</a><a class="next" href="../w1/Bayes_Classifier.html"><small>Next &rarr;</small>Bayes classifier</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

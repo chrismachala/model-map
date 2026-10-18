@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hybrid architectures · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w3_Hybrid_Architectures" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip hyb">Hybrid agent</span><span class="chip">Week 3</span><span class="chip">5 techniques</span></div>
+  <h1>Hybrid architectures</h1>
+  <p class="tagline">Fast reflexes and slow planning in one agent, arranged in layers. The big design question is who gets control when: every layer at once with a referee (horizontal), or up and down a chain (vertical).</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> hybrid agent.<br />
+<strong>Week:</strong> 3 (slides 34 to 43, appendix B slides 53 to 55).<br />
+<strong>Book:</strong> Wooldridge 5.2 Hybrid agents (pp. 92 to 94), 5.2.2 InteRRaP (pp. 96 to 98), 5.2.1 TouringMachines (skim).<br />
+<strong>Techniques on this page:</strong> horizontal vs vertical layering, counting the interactions, InteRRaP’s layers and control flow, TouringMachines’ censors and suppressors, comparing the three families.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Neither extreme is good enough. <a href="BDI_Control_Loop.html">Deliberative agents</a> plan well but react slowly. <a href="Subsumption.html">Reactive agents</a> react instantly but can’t think ahead or explain themselves.</p>
+<p>So combine them: <strong>reactive layers</strong> handle changes fast, without reasoning; a <strong>deliberative layer</strong> plans with symbols. Once there are layers, the new problem is <strong>meta-level control</strong>: which layer is in charge, when? Almost every real agent today, including LLM agents with safety rules around them, is a hybrid.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>layer</td>
+<td>one sub-system of the agent, working at one level of abstraction</td>
+</tr>
+<tr class="even">
+<td>horizontal layering</td>
+<td>every layer sees the sensors and proposes actions</td>
+</tr>
+<tr class="odd">
+<td>mediator</td>
+<td>the referee that picks between layers’ proposals</td>
+</tr>
+<tr class="even">
+<td>vertical layering</td>
+<td>at most one layer sees the sensors, at most one acts</td>
+</tr>
+<tr class="odd">
+<td>one-pass</td>
+<td>control goes up through the layers once; the top one acts</td>
+</tr>
+<tr class="even">
+<td>two-pass</td>
+<td>information goes up, control comes back down</td>
+</tr>
+<tr class="odd">
+<td>knowledge base</td>
+<td>a layer’s own store of facts (world, mental or social model)</td>
+</tr>
+<tr class="even">
+<td>censor / suppressor</td>
+<td>TouringMachines rules that block an action / block a percept</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-horizontal-vs-vertical-layering">Technique 1: horizontal vs vertical layering</h2>
+<p><strong>Problem it solves:</strong> the two ways to wire the layers together (slides 36 to 37).</p>
+<ul>
+<li><strong>Horizontal:</strong> every layer is connected to the sensors and to the action output. Each acts like a small agent and <strong>suggests</strong> an action; a <strong>mediator</strong> reconciles them.</li>
+<li><strong>Vertical:</strong> at most one layer reads the sensors and at most one produces actions.
+<ul>
+<li><strong>One-pass</strong> (filtering): control flows up through each layer and the last one acts.</li>
+<li><strong>Two-pass</strong> (abstraction): information flows up, control flows back down, like an organisation where reports go up and orders come down.</li>
+</ul></li>
+</ul>
+<h2 id="technique-2-counting-the-interactions">Technique 2: counting the interactions</h2>
+<p><strong>Problem it solves:</strong> the book’s argument for why vertical layering is easier to design (pp. 93 to 94), which the slides leave out.</p>
+<p><span class="math inline">\(n\)</span> layers, each able to suggest <span class="math inline">\(m\)</span> actions:</p>
+<ul>
+<li><strong>Horizontal:</strong> the mediator must handle every combination of suggestions: <span class="math inline">\(m^n\)</span>.</li>
+<li><strong>Vertical:</strong> layers only meet at the <span class="math inline">\(n - 1\)</span> interfaces between neighbours, each with at most <span class="math inline">\(m \times m\)</span> pairs: <span class="math inline">\(m^2(n - 1)\)</span>.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(n\)</span></th>
+<th><span class="math inline">\(m\)</span></th>
+<th>Horizontal <span class="math inline">\(m^n\)</span></th>
+<th>Vertical <span class="math inline">\(m^2(n-1)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>4</td>
+<td>16</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>4</td>
+<td>64</td>
+<td>32</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>10</td>
+<td>1,000</td>
+<td>200</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>5</td>
+<td>625</td>
+<td>75</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(n = 5\)</span>, <span class="math inline">\(m = 3\)</span>: horizontal <span class="math inline">\(3^5 = 243\)</span>; vertical <span class="math inline">\(3^2 \times 4 = 36\)</span>.</p>
+<p>With <span class="math inline">\(n = 2\)</span> they’re equal (<span class="math inline">\(m^2 = m^2 \times 1\)</span>): there’s only one interface, and every pair of suggestions crosses it. Vertical only pulls ahead from three layers up.</p>
+</div>
+<div data-widget="layers">
+
+</div>
+<p><strong>The catch:</strong> vertical layering is <strong>less fault-tolerant</strong>. Control has to pass through every layer, so one failed layer stops the whole agent. Horizontal layering puts a central mediator in every decision, which is a bottleneck.</p>
+<h2 id="technique-3-interrap">Technique 3: InteRRaP</h2>
+<p><strong>Problem it solves:</strong> the main worked architecture (Müller 1996; slides 38 to 39). It is <strong>vertical, two-pass</strong>, with three layers, each paired with its own knowledge base:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Knowledge base</th>
+<th>Deals with</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cooperative planning layer (CPL)</td>
+<td>social model</td>
+<td>other agents: joint plans</td>
+</tr>
+<tr class="even">
+<td>local planning layer (LPL)</td>
+<td>mental model</td>
+<td>the agent’s own plans and goals</td>
+</tr>
+<tr class="odd">
+<td>behaviour-based layer (BBL)</td>
+<td>world model</td>
+<td>reactive behaviour</td>
+</tr>
+</tbody>
+</table>
+<p>Below them is the <strong>world interface</strong> (perception, communication, action). Each layer has two functions: <strong>SG</strong> (situation recognition and goal activation) and <strong>PS</strong> (problem solving: planning and scheduling).</p>
+<ul>
+<li><strong>Upward activation:</strong> a layer passes control up when the situation is beyond it.</li>
+<li><strong>Downward commitment:</strong> a higher layer achieves its goals using the lower layer’s primitives.</li>
+</ul>
+<p>A layer may only use its own knowledge base and those below it.</p>
+<div class="example">
+<p><strong>Worked example: a delivery robot on InteRRaP.</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Path through the layers</th>
+<th>Who decides</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>obstacle directly ahead</td>
+<td>BBL handles it</td>
+<td>BBL (a reflex)</td>
+</tr>
+<tr class="even">
+<td>corridor blocked, needs a new route</td>
+<td>BBL → LPL (up); LPL plans; LPL → BBL (down) to move</td>
+<td>LPL</td>
+</tr>
+<tr class="odd">
+<td>another robot wants the same lift</td>
+<td>BBL → LPL → CPL (up); CPL negotiates; CPL → LPL → BBL (down)</td>
+<td>CPL</td>
+</tr>
+</tbody>
+</table>
+<p>Perception arrives at the bottom and actions leave from the bottom. Information goes up until some layer is competent, then control comes back down. That’s “two-pass”.</p>
+</div>
+<h2 id="technique-4-touringmachines">Technique 4: TouringMachines</h2>
+<p><strong>Problem it solves:</strong> the horizontal contrast (Ferguson 1992; appendix B, book pp. 94 to 96).</p>
+<p>Three layers side by side, all fed by perception: a <strong>reactive</strong> layer (situation-action rules, like “if a kerb is in front and close, change direction”), a <strong>planning</strong> layer, and a <strong>modelling</strong> layer (models of other agents, used to predict conflicts). Since every layer can propose actions, a <strong>control sub-system</strong> of rules arbitrates:</p>
+<ul>
+<li><strong>censor</strong> rules stop an action a layer proposed from reaching the effectors;</li>
+<li><strong>suppressor</strong> rules stop sensor information from reaching a layer.</li>
+</ul>
+<p><strong>InteRRaP vs TouringMachines:</strong> both have three layers doing similar jobs. InteRRaP is vertical (two-pass), with a knowledge base per layer; TouringMachines is horizontal, with a rule-based supervisor.</p>
+<h2 id="technique-5-comparing-the-three-families">Technique 5: comparing the three families</h2>
+<p><strong>Problem it solves:</strong> the summary table for “compare deliberative, reactive and hybrid” questions (slide 42).</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Deliberative (BDI)</th>
+<th>Reactive (subsumption)</th>
+<th>Hybrid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>representation</td>
+<td>explicit beliefs, goals, plans</td>
+<td>none or very little</td>
+<td>both, in different layers</td>
+</tr>
+<tr class="even">
+<td>decision speed</td>
+<td>slow</td>
+<td>very fast, constant time</td>
+<td>fast reflexes, slower planning</td>
+</tr>
+<tr class="odd">
+<td>pro-activeness</td>
+<td>strong</td>
+<td>weak (percept-driven)</td>
+<td>strong in upper layers</td>
+</tr>
+<tr class="even">
+<td>transparency</td>
+<td>high</td>
+<td>low</td>
+<td>medium; layer interactions are complex</td>
+</tr>
+<tr class="odd">
+<td>weak spot</td>
+<td>cost; calculative rationality</td>
+<td>no long-term view; no method</td>
+<td>complexity; lack of conceptual clarity</td>
+</tr>
+</tbody>
+</table>
+<p>The tension underneath it all is <strong>reactivity vs pro-activeness</strong>: responding in time vs pursuing goals systematically. Weeks 2 and 3 are three different answers.</p>
+<p><strong>Who gets the final word? (slide 40)</strong> Should an LLM planner ever override a hard-coded safety reflex? Two defensible answers: <strong>the reflex always wins</strong> (it’s simple, verifiable and fast; that’s subsumption’s principle), or <strong>override only through a transparent channel</strong> (logged, human-approved), never on the planner’s own say-so. Either way, the arbitration rule is fixed by the designer, not by the component it constrains.</p>
+<p><strong>Today (slide 43):</strong> the deliberate-plan-execute cycle became ReAct (think, act, observe); the belief store became agent memory; hand-written plan libraries became LLM-generated plans; InteRRaP’s world model became learned world models.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5.2 intro, pp. 92 to 94</td>
+<td><strong>Read</strong></td>
+<td>Horizontal vs vertical, and the <span class="math inline">\(m^n\)</span> vs <span class="math inline">\(m^2(n-1)\)</span> argument</td>
+</tr>
+<tr class="even">
+<td>5.2.1 TouringMachines</td>
+<td>Skim</td>
+<td>Appendix B of the slides</td>
+</tr>
+<tr class="odd">
+<td>5.2.2 InteRRaP, pp. 96 to 98</td>
+<td><strong>Read</strong></td>
+<td>Slides 38 to 39</td>
+</tr>
+<tr class="even">
+<td>5.2.3 3T, 5.2.4 Stanley</td>
+<td>Skip</td>
+<td>Not on the slides</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., 5.2). I want practice on HYBRID AGENT ARCHITECTURES:
+- why hybrids exist (reactivity vs pro-activeness) and the meta-level control problem
+- horizontal vs vertical layering; one-pass vs two-pass control
+- counting designer interactions: m^n (horizontal) vs m^2(n-1) (vertical), and the fault-tolerance trade-off
+- InteRRaP: the three layers and their knowledge bases, SG and PS, upward activation and downward commitment; tracing which layer handles a situation
+- TouringMachines: its three layers, censor vs suppressor rules
+- comparing deliberative, reactive and hybrid architectures on representation, speed, pro-activeness and transparency
+- whether an LLM planner should ever override a safety reflex
+- mapping the classical ideas to modern agentic AI (ReAct, agent memory, LLM-generated plans)
+
+Please:
+1. Use plain, everyday language and explain any term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder.
+3. Wait for my answer, then mark it and show a model answer with working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/Subsumption.html"><small>&larr; Previous</small>Subsumption (Brooks)</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

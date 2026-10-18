@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Environment properties · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w1_Environment_Properties" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 1</span><span class="chip">3 techniques</span></div>
+  <h1>Environment properties</h1>
+  <p class="tagline">Six yes/no questions about the world an agent lives in. The answers tell you how hard the agent is to build and which parts its architecture will need.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> toolkit.<br />
+<strong>Week:</strong> 1 (slides 25 to 28, appendix slides 39 to 44).<br />
+<strong>Book:</strong> Wooldridge p. 25 (the Environments box) and p. 26.<br />
+<strong>Techniques on this page:</strong> the six properties, classifying an environment, reading off what the architecture needs.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>You can’t judge an agent design without knowing its world. A rule-follower that’s perfect for Sudoku is hopeless in traffic. These six properties are the standard way to describe the world, and the lecture’s table (Technique 3) links each “hard” answer to a part the agent must have: memory, planning, fast reaction, models of other agents.</p>
+<p>Expect “classify this environment and justify each property” in the quiz and the exam.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>accessible / fully observable</td>
+<td>the agent can get complete, accurate, up-to-date information about the state</td>
+</tr>
+<tr class="even">
+<td>deterministic</td>
+<td>each action has one guaranteed effect</td>
+</tr>
+<tr class="odd">
+<td>stochastic / non-deterministic</td>
+<td>the same action can lead to different results</td>
+</tr>
+<tr class="even">
+<td>episodic</td>
+<td>decisions come in separate episodes; one doesn’t affect the next</td>
+</tr>
+<tr class="odd">
+<td>sequential</td>
+<td>today’s decision changes tomorrow’s situation</td>
+</tr>
+<tr class="even">
+<td>static</td>
+<td>nothing changes except through the agent’s own actions</td>
+</tr>
+<tr class="odd">
+<td>dynamic</td>
+<td>other processes change the world while the agent thinks</td>
+</tr>
+<tr class="even">
+<td>semi-dynamic</td>
+<td>the world doesn’t change, but the agent’s score does with time (chess with a clock)</td>
+</tr>
+<tr class="odd">
+<td>discrete</td>
+<td>a fixed, finite number of actions and percepts</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-six-properties">Technique 1: the six properties</h2>
+<p><strong>Problem it solves:</strong> a fixed vocabulary for “how hard is this world?”.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Question to ask</th>
+<th>Harder end</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>fully vs partially observable</td>
+<td>can it see everything relevant, accurately and now?</td>
+<td>partially</td>
+</tr>
+<tr class="even">
+<td>deterministic vs stochastic</td>
+<td>does each action have one guaranteed effect?</td>
+<td>stochastic</td>
+</tr>
+<tr class="odd">
+<td>episodic vs sequential</td>
+<td>are decisions independent of each other?</td>
+<td>sequential</td>
+</tr>
+<tr class="even">
+<td>static vs dynamic</td>
+<td>does the world change only when the agent acts?</td>
+<td>dynamic</td>
+</tr>
+<tr class="odd">
+<td>discrete vs continuous</td>
+<td>finitely many actions and percepts?</td>
+<td>continuous</td>
+</tr>
+<tr class="even">
+<td>single- vs multi-agent</td>
+<td>does it share the world with other decision-makers?</td>
+<td>multi-agent</td>
+</tr>
+</tbody>
+</table>
+<p>Wooldridge’s summary (p. 25): the hardest environments are <strong>inaccessible, non-deterministic, dynamic and continuous</strong>. The physical world and the Internet are both.</p>
+<p><strong>Episodic, carefully.</strong> A part inspector on an assembly line is episodic: judging this part doesn’t affect whether the next one is faulty. Chess and driving are sequential: a move now has consequences later. Episodic is easier because the agent never has to think ahead.</p>
+<h2 id="technique-2-classify-an-environment">Technique 2: classify an environment</h2>
+<p><strong>Problem it solves:</strong> the exam question itself. Go property by property and give a one-line reason for each.</p>
+<div class="example">
+<p><strong>Worked example: the lecture’s pair (slide 28).</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Sudoku</th>
+<th>Flight booking agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>observable</td>
+<td>fully</td>
+<td>partially (can’t see other customers or future prices)</td>
+</tr>
+<tr class="even">
+<td>agents</td>
+<td>single</td>
+<td>multi (other bookers, airline pricing systems)</td>
+</tr>
+<tr class="odd">
+<td>deterministic?</td>
+<td>deterministic</td>
+<td>stochastic (the seat may go before you click)</td>
+</tr>
+<tr class="even">
+<td>episodic?</td>
+<td>sequential (each number constrains later ones)</td>
+<td>sequential (leg 1 constrains leg 2)</td>
+</tr>
+<tr class="odd">
+<td>static?</td>
+<td>static</td>
+<td>dynamic (prices change while it decides)</td>
+</tr>
+<tr class="even">
+<td>discrete?</td>
+<td>discrete</td>
+<td>discrete (finite flights and actions)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="example">
+<p><strong>Worked example: more to practise on.</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Environment</th>
+<th>Observable</th>
+<th>Deterministic</th>
+<th>Episodic</th>
+<th>Static</th>
+<th>Discrete</th>
+<th>Agents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>crossword</td>
+<td>fully</td>
+<td>yes</td>
+<td>sequential</td>
+<td>static</td>
+<td>discrete</td>
+<td>single</td>
+</tr>
+<tr class="even">
+<td>chess with a clock</td>
+<td>fully</td>
+<td>yes</td>
+<td>sequential</td>
+<td>semi-dynamic</td>
+<td>discrete</td>
+<td>multi</td>
+</tr>
+<tr class="odd">
+<td>poker</td>
+<td>partially</td>
+<td>stochastic</td>
+<td>sequential</td>
+<td>static</td>
+<td>discrete</td>
+<td>multi</td>
+</tr>
+<tr class="even">
+<td>taxi driving</td>
+<td>partially</td>
+<td>stochastic</td>
+<td>sequential</td>
+<td>dynamic</td>
+<td>continuous</td>
+<td>multi</td>
+</tr>
+<tr class="odd">
+<td>image classifier</td>
+<td>fully (for its task)</td>
+<td>yes</td>
+<td>episodic</td>
+<td>static</td>
+<td>continuous (pixels)</td>
+<td>single</td>
+</tr>
+<tr class="even">
+<td>spam filter</td>
+<td>partially</td>
+<td>stochastic</td>
+<td>episodic</td>
+<td>dynamic</td>
+<td>discrete</td>
+<td>arguably multi (spammers adapt)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Many answers depend on <strong>how you model</strong> the world. State your assumption in a phrase: “thermostat: discrete, <em>if we model temperature as too cold / OK</em>”. That’s exactly how the book models it (p. 36).</p>
+<div class="warn">
+<p><strong>Multi-agent usually means dynamic.</strong> From one agent’s point of view, the others change the world in ways it doesn’t control, which is the definition of dynamic.</p>
+</div>
+<div data-widget="envquiz">
+
+</div>
+<h2 id="technique-3-from-environment-to-architecture">Technique 3: from environment to architecture</h2>
+<p><strong>Problem it solves:</strong> connects this page to every later week. Each hard property calls for a particular part.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>If the environment…</th>
+<th>the agent may need…</th>
+<th>You’ll meet it in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>reveals only part of the state</td>
+<td>internal state, memory, beliefs, a world model</td>
+<td><a href="Formal_Agent_Model.html">formal model</a> (<code>see</code>/<code>next</code>), BDI beliefs</td>
+</tr>
+<tr class="even">
+<td>has uncertain action outcomes</td>
+<td>reasoning under uncertainty, learning</td>
+<td>expected utility; later RL weeks</td>
+</tr>
+<tr class="odd">
+<td>has consequences that unfold over time</td>
+<td>planning, thinking about long-term effects</td>
+<td><a href="../w2/STRIPS_Planning.html">STRIPS planning</a></td>
+</tr>
+<tr class="even">
+<td>changes while the agent is deciding</td>
+<td>fast reaction, continual updating</td>
+<td><a href="../w3/Intention_Reconsideration.html">reconsideration</a>, <a href="../w3/Subsumption.html">subsumption</a></td>
+</tr>
+<tr class="odd">
+<td>contains other decision-makers</td>
+<td>models of others, communication, coordination</td>
+<td>Part II of the module</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example: an automated stock-trading agent.</strong></p>
+<p>Partially observable (other traders’ intentions are hidden), stochastic (prices), sequential (positions carry over), dynamic (the market moves while it thinks), discrete in practice (prices in ticks), multi-agent (other traders).</p>
+<p>So it needs: a <strong>world model</strong> of the market (partial observability), <strong>fast reaction</strong> (dynamic), and <strong>models of other traders</strong> (multi-agent).</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Environments box, p. 25</td>
+<td><strong>Read</strong></td>
+<td>The slides’ appendix (slides 39 to 44) is this almost word for word</td>
+</tr>
+<tr class="even">
+<td>p. 26, episodic and real time</td>
+<td><strong>Read</strong></td>
+<td>The book’s wording for episodic vs non-episodic</td>
+</tr>
+<tr class="odd">
+<td>Russell &amp; Norvig ch. 2 (not your book)</td>
+<td>Optional</td>
+<td>Where the slides take the property names from, including semi-dynamic</td>
+</tr>
+</tbody>
+</table>
+<p>The book says <em>accessible / inaccessible</em> where the slides say <em>fully / partially observable</em>, and <em>non-deterministic</em> where they say <em>stochastic</em>. Same ideas.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., p. 25; Russell &amp; Norvig ch. 2). I want practice on ENVIRONMENT PROPERTIES:
+- the six properties: fully/partially observable (accessible), deterministic/stochastic, episodic/sequential, static/dynamic (and semi-dynamic), discrete/continuous, single/multi-agent
+- classifying a described environment on all six, with a one-line justification each (games, robots, web agents, trading, chatbots, assembly lines...)
+- spotting answers that depend on how the environment is modelled, and stating the assumption
+- for a given environment, which architecture components it calls for (memory or a world model, planning, fast reaction, models of other agents)
+- why multi-agent environments are effectively dynamic, and why episodic is easier than sequential
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE environment or question at a time, easy first, then harder.
+3. Wait for my answer, then mark each property and show a model answer with reasons.
+4. If I get one wrong, explain why and give me a similar case.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w1/00_Start_Here_What_Is_An_Agent.html"><small>&larr; Previous</small>Start here: what is an agent?</a><a class="next" href="../w1/Formal_Agent_Model.html"><small>Next &rarr;</small>The formal agent model</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

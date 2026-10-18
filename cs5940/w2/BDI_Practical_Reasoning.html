@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BDI and practical reasoning · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w2_BDI_Practical_Reasoning" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 2</span><span class="chip">5 techniques</span></div>
+  <h1>BDI and practical reasoning</h1>
+  <p class="tagline">Model the agent's mind as beliefs (what it thinks is true), desires (what it would like) and intentions (what it has decided to do). First decide what to aim for, then work out how.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative agent (BDI).<br />
+<strong>Week:</strong> 2 (slides 28 to 31). Continued in week 3’s <a href="../w3/BDI_Control_Loop.html">control loop</a>.<br />
+<strong>Book:</strong> Wooldridge ch. 4 intro and 4.1 Practical reasoning (pp. 65 to 69).<br />
+<strong>Techniques on this page:</strong> the three attitudes, practical vs theoretical reasoning, deliberation vs means-ends reasoning, the four jobs intentions do, the asymmetry thesis.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Real agents have <strong>limited time and memory</strong>. They can’t keep re-weighing every option forever, or they’d never act. Humans cope by <strong>committing</strong>: once you’ve decided to finish the coursework tonight, you stop seriously considering the party.</p>
+<p>BDI (Bratman 1987) builds that into an agent. <strong>Intentions</strong> are decisions the agent sticks to, which keeps deliberation cheap and gives its behaviour a direction. This is the most important architecture in Part I of the module: week 3’s control loops and AgentSpeak are both BDI.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>belief</td>
+<td>what the agent thinks is true (about the world, itself, other agents): <strong>informational</strong></td>
+</tr>
+<tr class="even">
+<td>desire</td>
+<td>a state of affairs it would like to bring about: <strong>motivational</strong></td>
+</tr>
+<tr class="odd">
+<td>intention</td>
+<td>an option it has <strong>committed</strong> to: <strong>deliberative</strong></td>
+</tr>
+<tr class="even">
+<td>event</td>
+<td>something that happens (from sensors or inside the agent) and triggers activity</td>
+</tr>
+<tr class="odd">
+<td>practical reasoning</td>
+<td>reasoning about <strong>what to do</strong></td>
+</tr>
+<tr class="even">
+<td>theoretical reasoning</td>
+<td>reasoning about <strong>what to believe</strong></td>
+</tr>
+<tr class="odd">
+<td>deliberation</td>
+<td>deciding <strong>what</strong> to achieve</td>
+</tr>
+<tr class="even">
+<td>means-ends reasoning</td>
+<td>deciding <strong>how</strong> to achieve it (planning)</td>
+</tr>
+<tr class="odd">
+<td>bounded rational</td>
+<td>does the best it can with limited time and memory</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-three-attitudes">Technique 1: the three attitudes</h2>
+<p><strong>Problem it solves:</strong> a structure for the agent’s state that maps onto how we explain people.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Attitude</th>
+<th>Kind of state</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Beliefs</strong></td>
+<td>informational</td>
+<td>what it believes about the world, itself and others</td>
+</tr>
+<tr class="even">
+<td><strong>Desires</strong></td>
+<td>motivational</td>
+<td>what it wishes to bring about (may conflict)</td>
+</tr>
+<tr class="odd">
+<td><strong>Intentions</strong></td>
+<td>deliberative</td>
+<td>what it has <strong>chosen</strong> to do</td>
+</tr>
+</tbody>
+</table>
+<p>Plus <strong>events</strong>, external or internal, that trigger activity.</p>
+<p>Intentions are stronger than desires: a desire “must vie with my other relevant desires”; once I intend something, “the matter is settled” (Bratman 1990).</p>
+<h2 id="technique-2-practical-vs-theoretical-reasoning">Technique 2: practical vs theoretical reasoning</h2>
+<p><strong>Problem it solves:</strong> a short-answer classic.</p>
+<ul>
+<li><strong>Practical reasoning</strong> is directed at <strong>actions</strong>: weighing considerations for and against options, using what you desire and what you believe. Deciding to take the bus rather than the train.</li>
+<li><strong>Theoretical reasoning</strong> is directed at <strong>beliefs</strong>: all men are mortal, Socrates is a man, so Socrates is mortal.</li>
+</ul>
+<div class="example">
+<p><strong>Worked example.</strong> (a) Deducing the train is late from the timetable and the clock: <strong>theoretical</strong> (it’s about what to believe). (b) Deciding to run for the bus: <strong>practical</strong> (it’s about what to do).</p>
+</div>
+<h2 id="technique-3-deliberation-then-means-ends-reasoning">Technique 3: deliberation, then means-ends reasoning</h2>
+<p><strong>Problem it solves:</strong> splits “what should I do?” into two smaller questions.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Activity</th>
+<th>Question</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Deliberation</strong></td>
+<td><em>What</em> state of affairs do I want to achieve?</td>
+<td><strong>intentions</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Means-ends reasoning</strong></td>
+<td><em>How</em> do I get there?</td>
+<td><strong>plans</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The book’s example (p. 66): after graduating you decide on a career in academia (deliberation), then work out how: apply for a PhD, and so on (means-ends reasoning). Means-ends reasoning is <a href="STRIPS_Planning.html">STRIPS planning</a> or a library of ready-made plans.</p>
+<p><strong>Resource bounds (slide 31):</strong> computation costs time, so an agent <strong>can’t deliberate forever</strong>. It must commit to a state of affairs, even one that may not be optimal. That’s why intentions exist.</p>
+<h2 id="technique-4-the-four-jobs-intentions-do">Technique 4: the four jobs intentions do</h2>
+<p><strong>Problem it solves:</strong> the book pp. 67 to 69 list, which slide 31 points you to and exams love.</p>
+<ol type="1">
+<li><strong>Intentions drive means-ends reasoning.</strong> If I intend something I’ll try to work out how, and if one plan fails I’ll try another.</li>
+<li><strong>Intentions persist.</strong> I don’t drop them without good reason: usually only when achieved, impossible, or no longer wanted.</li>
+<li><strong>Intentions constrain future deliberation.</strong> I won’t entertain options that clash with them (a “filter of admissibility”). Intending to write a book rules out partying every night. This keeps deliberation cheap.</li>
+<li><strong>Intentions influence beliefs about the future.</strong> I can plan on the assumption I’ll achieve them.</li>
+</ol>
+<div class="example">
+<p><strong>Worked example.</strong> You intend to finish the coursework tonight and a friend invites you out. Which property explains why you don’t seriously weigh it? <strong>Intentions constrain future deliberation</strong> (job 3).</p>
+</div>
+<h2 id="technique-5-the-asymmetry-thesis">Technique 5: the asymmetry thesis</h2>
+<p><strong>Problem it solves:</strong> a precise test of whether an intention is rational.</p>
+<ul>
+<li>Intending <span class="math inline">\(\varphi\)</span> while believing you <strong>will not</strong> achieve it (<strong>intention–belief inconsistency</strong>) is <strong>irrational</strong>.</li>
+<li>Intending <span class="math inline">\(\varphi\)</span> <strong>without</strong> believing you will achieve it (<strong>intention–belief incompleteness</strong>) is <strong>fine</strong>: rational agents know they might fail.</li>
+</ul>
+<div class="example">
+<p><strong>Worked example.</strong> Intending to pass the exam while believing you <em>might</em> fail: rational (incompleteness). While believing you <em>will</em> fail: irrational (inconsistency).</p>
+</div>
+<h2 id="looking-ahead-the-formal-functions">Looking ahead: the formal functions</h2>
+<p>The book (p. 69) gives deliberation three functions, which week 3 builds into a loop: <span class="math inline">\(brf\)</span> revises beliefs from a percept, <span class="math inline">\(options\)</span> generates desires from beliefs and intentions, and <span class="math inline">\(filter\)</span> picks which desires to commit to. See <a href="../w3/BDI_Control_Loop.html">the BDI control loop</a>.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ch. 4 intro + 4.1 Practical reasoning, pp. 65 to 69</td>
+<td><strong>Read</strong></td>
+<td>Deliberation and means-ends reasoning, resource bounds, the properties of intentions on pp. 67 to 69. Core</td>
+</tr>
+<tr class="even">
+<td>p. 69, <em>options / filter / brf</em></td>
+<td>Skim now</td>
+<td>Used properly in week 3</td>
+</tr>
+<tr class="odd">
+<td>4.2 Means-ends reasoning</td>
+<td><strong>Read</strong></td>
+<td>See <a href="STRIPS_Planning.html">STRIPS planning</a></td>
+</tr>
+<tr class="even">
+<td>4.3, 4.4</td>
+<td>Week 3</td>
+<td>The control loop and PRS</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., ch. 4 intro and 4.1; Bratman). I want practice on BDI AND PRACTICAL REASONING:
+- beliefs, desires and intentions: what each is (informational, motivational, deliberative) and how intentions differ from desires
+- classifying examples as practical or theoretical reasoning
+- deliberation (what, outputs intentions) vs means-ends reasoning (how, outputs plans)
+- resource bounds and why bounded agents need to commit
+- the four roles of intentions (drive means-ends reasoning, persist, constrain future deliberation, influence beliefs about the future), applied to everyday scenarios
+- the asymmetry thesis: intention-belief inconsistency vs incompleteness
+- what the options, filter and brf functions do
+
+Please:
+1. Use plain, everyday language and explain any term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, using everyday scenarios as well as robots.
+3. Wait for my answer, then mark it and show a model answer.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/Agent0.html"><small>&larr; Previous</small>Agent0 (agent-oriented programming)</a><a class="next" href="../w2/STRIPS_Planning.html"><small>Next &rarr;</small>STRIPS planning</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

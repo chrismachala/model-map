@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CS5940 Model Map · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../_assets/tex-svg.js"></script>
+<script defer src="../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_index" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../cs5100/index.html">CS5100</a>
+<a class="on" href="../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a class="active" aria-current="page" href="index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip home">Start here</span></div>
+  <h1>CS5940 Model Map</h1>
+  <p class="tagline">One page per kind of agent, showing what problem it solves, which techniques live inside it, and how it answers the same design questions as the others. Start here when the lectures feel like a parade of acronyms.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="why">
+<p><span class="label">The pattern behind the module</span></p>
+<p>The CS5940 lectures teach <strong>architectures</strong>: ways of building the inside of an agent. Every one of them is an answer to the same few questions from week 1: <em>what can it observe, what does it remember, what is its goal, how does it decide, what can it do?</em></p>
+<ul>
+<li>A <strong>deliberative</strong> agent keeps an explicit model of the world and reasons about it: prove what to do, commit to intentions, plan.</li>
+<li>A <strong>reactive</strong> agent skips the reasoning and maps what it senses straight to an action, by priority.</li>
+<li>A <strong>hybrid</strong> agent stacks both in layers.</li>
+<li>The <strong>practicals</strong> build an LLM-based agent from scratch, one layer of scaffold at a time.</li>
+</ul>
+<p>And the same tension runs through all of them: <strong>react in time</strong> to a changing world, or <strong>pursue goals</strong> systematically? Each architecture strikes a different balance.</p>
+</div>
+<h2 id="pick-a-page">Pick a page</h2>
+<div class="filter"><button class="on" data-f="all">All</button><button data-f="delib">Deliberative</button><button data-f="react">Reactive</button><button data-f="hyb">Hybrid</button><button data-f="tool">Toolkits</button><button data-f="prac">Practicals</button><button data-f="w1">Week 1</button><button data-f="w2">Week 2</button><button data-f="w3">Week 3</button></div>
+<div class="grid"><a class="tile" href="w1/00_Start_Here_What_Is_An_Agent.html" data-kind="tool" data-week="w1" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="wk">W1</span><div class="t"><span class="dot tool"></span>Start here: what is an agent?</div><div class="d">Definitions, agent vs workflow, the delegation problem, six design questions, five traditions.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/Environment_Properties.html" data-kind="tool" data-week="w1" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="wk">W1</span><div class="t"><span class="dot tool"></span>Environment properties</div><div class="d">Observable, deterministic, episodic, static, discrete, single-agent: and what each one demands.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/Formal_Agent_Model.html" data-kind="tool" data-week="w1" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="wk">W1</span><div class="t"><span class="dot tool"></span>The formal agent model</div><div class="d">Runs, see / next / action, expected utility, achievement and maintenance tasks. The maths of week 1.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/LLM_Chat_Loop.html" data-kind="prac" data-week="w1" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="wk">W1</span><div class="t"><span class="dot prac"></span>Practical 1: the chat loop</div><div class="d">The model forgets everything: your messages list is the memory. Why tokens grow quadratically.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Deductive_Reasoning_Agents.html" data-kind="delib" data-week="w2" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="wk">W2</span><div class="t"><span class="dot delib"></span>Deductive reasoning agents</div><div class="d">Choose actions by proving them. The vacuum world, the closed world, calculative rationality.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Teleo_Reactive_Programs.html" data-kind="react" data-week="w2" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="wk">W2</span><div class="t"><span class="dot react"></span>Teleo-reactive programs</div><div class="d">An ordered list of rules, re-checked every cycle, that pushes towards a goal.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Agent0.html" data-kind="delib" data-week="w2" data-page="cs5940_w2_Agent0" data-total="5"><span class="wk">W2</span><div class="t"><span class="dot delib"></span>Agent0 (agent-oriented programming)</div><div class="d">Program agents in beliefs and commitments. Commitment rules, REQUEST and INFORM.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/BDI_Practical_Reasoning.html" data-kind="delib" data-week="w2" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="wk">W2</span><div class="t"><span class="dot delib"></span>BDI and practical reasoning</div><div class="d">Beliefs, desires, intentions. Deliberation decides what; means-ends reasoning decides how.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/STRIPS_Planning.html" data-kind="delib" data-week="w2" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="wk">W2</span><div class="t"><span class="dot delib"></span>STRIPS planning</div><div class="d">Pre, add and delete lists in the blocks world. A plan is a path through states.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Coach_Practical.html" data-kind="prac" data-week="w2" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="wk">W2</span><div class="t"><span class="dot prac"></span>Practical 2: the running coach</div><div class="d">call_llm, token budgets, config files, a user profile, and a trimmed conversation window.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/BDI_Control_Loop.html" data-kind="delib" data-week="w3" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="wk">W3</span><div class="t"><span class="dot delib"></span>The BDI control loop</div><div class="d">Cycles 1 to 4: options, filter, plan, and how long to stay committed to ends and means.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Intention_Reconsideration.html" data-kind="delib" data-week="w3" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="wk">W3</span><div class="t"><span class="dot delib"></span>Intention reconsideration</div><div class="d">Cycle 5, when reconsidering is worth it, and bold vs cautious agents (Kinny and Georgeff).</div><div class="bar"><i></i></div></a><a class="tile" href="w3/AgentSpeak.html" data-kind="delib" data-week="w3" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="wk">W3</span><div class="t"><span class="dot delib"></span>AgentSpeak(L)</div><div class="d">BDI as a programming language: events, plans, the applicable unifier, intention stacks.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Subsumption.html" data-kind="react" data-week="w3" data-page="cs5940_w3_Subsumption" data-total="5"><span class="wk">W3</span><div class="t"><span class="dot react"></span>Subsumption (Brooks)</div><div class="d">No symbols, no reasoning: layered behaviours, lowest wins. The Mars explorer and its crumbs.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Hybrid_Architectures.html" data-kind="hyb" data-week="w3" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="wk">W3</span><div class="t"><span class="dot hyb"></span>Hybrid architectures</div><div class="d">Reflexes and planning in layers. Horizontal vs vertical, InteRRaP, TouringMachines.</div><div class="bar"><i></i></div></a></div>
+<h2 id="each-architecture-against-the-design-questions">Each architecture against the design questions</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Architecture</th>
+<th>What it remembers</th>
+<th>Where the goal lives</th>
+<th>How it decides</th>
+<th>Weak spot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="w2/Deductive_Reasoning_Agents.html">Deductive agent</a></td>
+<td>a database of logical facts <span class="math inline">\(\Delta\)</span></td>
+<td>nowhere explicit (in the designer’s head)</td>
+<td>prove <span class="math inline">\(Do(\alpha)\)</span> from rules <span class="math inline">\(\rho\)</span></td>
+<td>slow; calculative rationality</td>
+</tr>
+<tr class="even">
+<td><a href="w2/Teleo_Reactive_Programs.html">Teleo-reactive program</a></td>
+<td>nothing beyond the current percept</td>
+<td>implicit, the program is written for it</td>
+<td>first true rule in an ordered list</td>
+<td>can’t reason about its goal</td>
+</tr>
+<tr class="odd">
+<td><a href="w2/Agent0.html">Agent0</a></td>
+<td>beliefs, capabilities, commitments</td>
+<td>implicit: honour commitments</td>
+<td>commitment rules on incoming messages</td>
+<td>no planning; can’t ask for help</td>
+</tr>
+<tr class="even">
+<td><a href="w2/BDI_Practical_Reasoning.html">BDI</a> + <a href="w2/STRIPS_Planning.html">STRIPS</a></td>
+<td>beliefs, desires, intentions</td>
+<td>explicit intentions</td>
+<td>deliberate (what), then plan (how)</td>
+<td>deliberation takes time</td>
+</tr>
+<tr class="odd">
+<td><a href="w3/BDI_Control_Loop.html">BDI control loop</a> + <a href="w3/Intention_Reconsideration.html">reconsideration</a></td>
+<td><span class="math inline">\(B\)</span>, <span class="math inline">\(D\)</span>, <span class="math inline">\(I\)</span>, current plan</td>
+<td>explicit intentions</td>
+<td>options, filter, plan; replan if unsound; reconsider when cheap test says so</td>
+<td>choosing how bold to be</td>
+</tr>
+<tr class="even">
+<td><a href="w3/AgentSpeak.html">AgentSpeak(L)</a></td>
+<td>belief base, events, intention stacks</td>
+<td>goals inside plans and events</td>
+<td>pick an applicable plan from a library</td>
+<td>only handles what someone wrote a plan for</td>
+</tr>
+<tr class="odd">
+<td><a href="w3/Subsumption.html">Subsumption</a></td>
+<td>nothing</td>
+<td>implicit in the behaviours</td>
+<td>the highest-priority behaviour that fires</td>
+<td>no long-term view; hard to engineer</td>
+</tr>
+<tr class="even">
+<td><a href="w3/Hybrid_Architectures.html">Hybrid (InteRRaP, TouringMachines)</a></td>
+<td>a model per layer</td>
+<td>upper layers</td>
+<td>reflex first; escalate up layers when needed</td>
+<td>complexity</td>
+</tr>
+<tr class="odd">
+<td><a href="w1/LLM_Chat_Loop.html">LLM practicals</a></td>
+<td>the <code>messages</code> list your code keeps</td>
+<td>the system prompt</td>
+<td>model inference inside your loop</td>
+<td>the model is stateless and can be confidently wrong</td>
+</tr>
+</tbody>
+</table>
+<h2 id="techniques-that-keep-coming-back">Techniques that keep coming back</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Technique</th>
+<th>What problem it solves</th>
+<th>Appears in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>state vs observation</td>
+<td>two situations look the same, so the agent needs memory</td>
+<td>formal model, BDI beliefs, the practicals’ history</td>
+</tr>
+<tr class="even">
+<td><code>see</code> / <code>next</code> / <code>action</code></td>
+<td>the general shape of an agent with memory</td>
+<td>formal model, deductive agents, subsumption</td>
+</tr>
+<tr class="odd">
+<td>closed world + negation as failure</td>
+<td>“not provable” means false</td>
+<td>deductive agents, STRIPS, AgentSpeak contexts</td>
+</tr>
+<tr class="even">
+<td>first applicable rule wins</td>
+<td>fast, predictable choice when several rules match</td>
+<td>deductive agents (order of <span class="math inline">\(Ac\)</span>), teleo-reactive, AgentSpeak’s <span class="math inline">\(S_O\)</span>, subsumption</td>
+</tr>
+<tr class="odd">
+<td>commitment</td>
+<td>stop re-deciding everything</td>
+<td>Agent0 commitments, BDI intentions, commitment strategies</td>
+</tr>
+<tr class="even">
+<td>meta-level control</td>
+<td>decide <em>whether</em> to think</td>
+<td>reconsideration, hybrid layers</td>
+</tr>
+<tr class="odd">
+<td>plan libraries vs planning from scratch</td>
+<td>speed vs flexibility</td>
+<td>STRIPS, AgentSpeak, LLM-generated plans</td>
+</tr>
+<tr class="even">
+<td>resending context</td>
+<td>the LLM remembers nothing between calls</td>
+<td>both practicals</td>
+</tr>
+<tr class="odd">
+<td>counting things</td>
+<td>how hard a design is</td>
+<td><span class="math inline">\(\lvert Ac\rvert^{\lvert E\rvert}\)</span> agents, 22 blocks states, <span class="math inline">\(m^n\)</span> vs <span class="math inline">\(m^2(n-1)\)</span>, tokens per turn</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-the-weeks-build-on-each-other">How the weeks build on each other</h2>
+<ol type="1">
+<li><strong>Week 1</strong> sets the stage: what counts as an agent, why delegating to one is risky, how to describe its environment, and the maths of runs and utility. The practical shows that an LLM on its own remembers nothing.</li>
+<li><strong>Week 2</strong> builds the first real architectures, all symbolic: prove what to do (deductive), follow ordered rules towards a goal (teleo-reactive), program in beliefs and commitments (Agent0), and BDI with STRIPS planning. The practical adds budgets, settings and a trimmed memory.</li>
+<li><strong>Week 3</strong> asks what happens when the world changes while the agent is thinking. BDI answers with commitment and controlled reconsideration, and gets a language (AgentSpeak). Brooks answers by not thinking at all (subsumption). Hybrids do both, in layers.</li>
+</ol>
+<h2 id="how-to-use-these-pages">How to use these pages</h2>
+<ul>
+<li>Read the green <strong>“why this exists”</strong> box first on every page. That’s the context the lectures skip.</li>
+<li>Purple boxes are <strong>plain-English word lists</strong>. Yellow boxes are <strong>worked examples</strong> to copy out by hand. Red boxes flag <strong>slide typos</strong> and points the slides compress.</li>
+<li>Turn on <strong>Try-first</strong> (top bar) to hide every worked example until you’ve had a go on paper.</li>
+<li>Press <strong>Mark as understood</strong> on each technique. Your progress shows in the sidebar, on these tiles and on the module picker (saved in this browser only).</li>
+<li>Play with the <strong>interactive demos</strong>: step the vacuum and corridor robots, stack blocks with STRIPS, run an AgentSpeak trace, pit bold against cautious agents, and more.</li>
+<li>Each page ends with a <strong>practice prompt</strong>. Click “Copy prompt” and paste it into any AI chat to get questions one at a time, with model answers after you reply.</li>
+<li>Each page says which parts of Wooldridge are on the slides and which you can skip. In the scanned PDF, add 21 to the book’s page number.</li>
+</ul>
+<p style="color:var(--muted);font-size:.9rem">
+Built from the week 1 to 3 slides and practical pages, and the CS5940 study guides. Wooldridge has no chapter list for this module, so the reading advice is matched against the slides. Pages for later weeks can be added in new w4, w5… folders.
+</p>
+
+<nav class="pager"><a class="next" href="w1/00_Start_Here_What_Is_An_Agent.html"><small>Next &rarr;</small>Start here: what is an agent?</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

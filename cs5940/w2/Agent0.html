@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent0 (agent-oriented programming) · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w2_Agent0" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 2</span><span class="chip">5 techniques</span></div>
+  <h1>Agent0 (agent-oriented programming)</h1>
+  <p class="tagline">Program an agent directly in terms of what it believes, what it can do and what it has promised. Agent0's whole behaviour comes from commitment rules: "if I get this message and believe this, commit to that action".</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative agent (agent-oriented programming).<br />
+<strong>Week:</strong> 2 (slides 16 to 27, appendix on PLACA).<br />
+<strong>Book:</strong> Wooldridge 3.2 Agent-oriented programming (pp. 55 to 56).<br />
+<strong>Techniques on this page:</strong> reading Agent0 notation, applying a commitment rule, message types, the Agent0 cycle, Agent0’s implicit goals and PLACA.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>In week 1 we described agents using everyday mental words: it <em>believes</em> the door is shut, it <em>promised</em> to open it. Shoham (1993) asked: why not <strong>program</strong> agents in exactly those words? That’s <strong>agent-oriented programming (AOP)</strong>, and Agent0 is its first language.</p>
+<p>It’s also the first architecture built for <strong>many agents talking to each other</strong>: agents send each other REQUESTs and INFORMs, and an agent decides for itself whether to accept a request. “Objects do it for free; agents do it because they want to” becomes actual code.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AOP</td>
+<td>agent-oriented programming: programs written in beliefs, capabilities and commitments</td>
+</tr>
+<tr class="even">
+<td>intentional stance</td>
+<td>explaining a system as if it had beliefs and desires (book 2.4)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(B^t_a\ \varphi^{t&#39;}\)</span></td>
+<td>at time <span class="math inline">\(t\)</span>, agent <span class="math inline">\(a\)</span> believes <span class="math inline">\(\varphi\)</span> holds at time <span class="math inline">\(t&#39;\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(CAN^t_a\ \varphi^{t&#39;}\)</span></td>
+<td>at time <span class="math inline">\(t\)</span>, <span class="math inline">\(a\)</span> can make <span class="math inline">\(\varphi\)</span> true at time <span class="math inline">\(t&#39;\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(CMT^t_{a,b}\ DO^{t&#39;}\ \alpha\)</span></td>
+<td>at time <span class="math inline">\(t\)</span>, <span class="math inline">\(a\)</span> is committed <strong>to <span class="math inline">\(b\)</span></strong> to do <span class="math inline">\(\alpha\)</span> at time <span class="math inline">\(t&#39;\)</span></td>
+</tr>
+<tr class="even">
+<td>commitment rule</td>
+<td>if a message condition and a mental condition match, commit to an action</td>
+</tr>
+<tr class="odd">
+<td>REQUEST / UNREQUEST</td>
+<td>ask another agent to do (or stop) an action: changes <strong>commitments</strong></td>
+</tr>
+<tr class="even">
+<td>INFORM</td>
+<td>tell another agent a fact: changes <strong>beliefs</strong></td>
+</tr>
+<tr class="odd">
+<td>REFRAIN</td>
+<td>block commitments to an action</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-reading-the-notation">Technique 1: reading the notation</h2>
+<p><strong>Problem it solves:</strong> the symbols look scary but follow one pattern.</p>
+<p><strong>The first time is when the attitude is held; the inner time is when the fact is true or the action happens.</strong></p>
+<p>Agent0 has four components:</p>
+<ol type="1">
+<li><strong>Capabilities</strong>: <span class="math inline">\(CAN^5_{robot}\ open(door)^8\)</span>: at time 5 the robot can make sure the door is open at time 8.</li>
+<li><strong>Initial beliefs</strong>: <span class="math inline">\(B^3_a\ closed(door)^7\)</span>: at time 3, <span class="math inline">\(a\)</span> believes the door will be closed at 7. They can nest: <span class="math inline">\(B^0_a B^{10}_b\ like(a,b)^7\)</span>.</li>
+<li><strong>Initial commitments</strong>: <span class="math inline">\(CMT^0_{a,b}\ DO^{12}\ raise(alarm)\)</span>: at time 0, <span class="math inline">\(a\)</span> is committed to <span class="math inline">\(b\)</span> to raise the alarm at 12. A commitment is always <strong>to someone</strong>.</li>
+<li><strong>Commitment rules</strong>, which drive everything else.</li>
+</ol>
+<div class="example">
+<p><strong>Worked example: translate.</strong></p>
+<ul>
+<li><span class="math inline">\(B^2_a\ open(door)^5\)</span>: “at time 2, <span class="math inline">\(a\)</span> believes the door will be open at time 5.”</li>
+<li><span class="math inline">\(CMT^1_{a,b}\ DO^4\ close(door)\)</span>: “at time 1, <span class="math inline">\(a\)</span> is committed to <span class="math inline">\(b\)</span> to close the door at time 4.”</li>
+</ul>
+</div>
+<h2 id="technique-2-applying-a-commitment-rule">Technique 2: applying a commitment rule</h2>
+<p><strong>Problem it solves:</strong> decides whether the agent takes on a new commitment.</p>
+<p><span class="math display">\[COMMIT(\textit{msgcond},\ \textit{mntlcond},\ \textit{agent},\ \textit{action})\]</span></p>
+<ul>
+<li><em>msgcond</em> is matched against the <strong>messages received</strong>;</li>
+<li><em>mntlcond</em> is matched against the agent’s <strong>beliefs and commitments</strong>;</li>
+<li>if both match, the agent becomes <strong>committed</strong> to the action.</li>
+</ul>
+<p>The slides’ rule, in words: <em>if I get a REQUEST from an agent to do an action at some time, and I believe that agent is a friend, and I can do the action, and I’m not committed to anything else at that time, then commit to it.</em></p>
+<div class="example">
+<p><strong>Worked example.</strong> At cycle 5, agent <span class="math inline">\(a\)</span> receives <code>(b, REQUEST, DO(10, open(door)))</code>. It believes <span class="math inline">\(Friend(b)\)</span>, has the capability <span class="math inline">\(open(door)\)</span>, and already has <span class="math inline">\(CMT_{a,c}\,DO^{10}\,water(plants)\)</span>.</p>
+<ul>
+<li>Message condition: a REQUEST from <span class="math inline">\(b\)</span> ✓.</li>
+<li><span class="math inline">\(Friend(b)\)</span> ✓; <span class="math inline">\(CAN(a, open(door))\)</span> ✓; <em>not committed to anything at 10</em>: ✗.</li>
+</ul>
+<p>The rule <strong>does not fire</strong>. If the plant-watering were at time 11 instead, it would fire and add <span class="math inline">\(CMT_{a,b}\,DO^{10}\,open(door)\)</span>.</p>
+</div>
+<h2 id="technique-3-actions-and-messages">Technique 3: actions and messages</h2>
+<p><strong>Problem it solves:</strong> knowing which message changes what.</p>
+<ul>
+<li><strong>Private actions</strong> <code>(DO time action)</code>: run internally.</li>
+<li><strong>Communicative actions:</strong> <code>(REQUEST time agent action)</code> and <code>(UNREQUEST time agent action)</code> change the receiver’s <strong>commitments</strong>; <code>(INFORM time agent fact)</code> changes its <strong>beliefs</strong>; <code>(REFRAIN action)</code> blocks commitments to an action.</li>
+<li><strong>Conditional actions</strong> <code>(IF mntlcond action)</code>: e.g. if I believe Smith works at IBM at <span class="math inline">\(t\)</span>, inform <span class="math inline">\(a\)</span> at <span class="math inline">\(t + 1\)</span>.</li>
+</ul>
+<p>The airline example (slide 18) shows the style: the passenger <em>requests</em>, the clerk <em>informs</em>, <em>refuses</em> a double booking because of a constraint, and <em>requests permission</em> from a supervisor.</p>
+<h2 id="technique-4-the-agent0-cycle">Technique 4: the Agent0 cycle</h2>
+<p><strong>Problem it solves:</strong> how the agent actually runs. All agents run <strong>in step</strong>; time = cycle number.</p>
+<ol type="1">
+<li>Read the messages that arrived last cycle; update beliefs and commitments using the commitment rules.</li>
+<li>Reconsider each commitment in the light of the new beliefs.</li>
+<li>Execute the actions of commitments whose time is now (if the capability still holds).</li>
+<li>Repeat.</li>
+</ol>
+<h2 id="technique-5-implicit-goals-and-placa">Technique 5: implicit goals, and PLACA</h2>
+<p><strong>Problem it solves:</strong> explains what Agent0 can’t do, and what fixes it.</p>
+<p>Agent0 has <strong>no explicit goals</strong>. Each agent’s implicit goal is to (a) honour each commitment while it still believes it’s capable, and (b) tell the requester as soon as it believes it no longer is. It <strong>can’t ask for help</strong> with a request it accepted (it only accepts requests it can do itself).</p>
+<p><strong>PLACA</strong> (Thomas 1993) adds <strong>planning</strong> and requests via <strong>high-level goals</strong>: its rules can <code>ADOPT (INTEND ...)</code> and inform the requester (“if someone asks me to print something, and I can, and they’re not a manager, and I’m not busy, adopt the intention to print it by 5pm and tell them”).</p>
+<p><strong>Discussion (slide 27): rigid commitment or delegation?</strong> For LLM agent teams, an overloaded agent that quietly hands work to another breaks accountability (the requester trusted <em>this</em> agent) and can cascade. Going back to the requester keeps control but adds delay. A middle ground is delegation <strong>with notification</strong>, the PLACA style.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3.2 Agent-oriented programming, pp. 55 to 56</td>
+<td><strong>Read</strong></td>
+<td>Agent0 in two pages. The slides go further (notation, conditional actions, goals)</td>
+</tr>
+<tr class="even">
+<td>2.4 Agents as intentional systems</td>
+<td>Skim</td>
+<td>The intentional stance AOP is built on</td>
+</tr>
+<tr class="odd">
+<td>PLACA</td>
+<td>Not in the book</td>
+<td>Slides’ appendix only. Optional</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., 3.2; Shoham&#39;s Agent0). I want practice on AGENT0 and AGENT-ORIENTED PROGRAMMING:
+- the idea of AOP and the intentional stance
+- reading and writing Agent0 notation: B^t_a phi^t&#39;, CAN^t_a phi^t&#39;, CMT^t_{a,b} DO^t&#39; action (which time means what)
+- applying a commitment rule COMMIT(msgcond, mntlcond, agent, action) to a given message, beliefs, capabilities and existing commitments: does it fire?
+- REQUEST, UNREQUEST, INFORM, REFRAIN and conditional actions: which change beliefs and which change commitments
+- the Agent0 execution cycle
+- Agent0&#39;s implicit goals, why it can&#39;t ask for help, and what PLACA adds
+- the rigid-commitment vs delegation discussion for LLM agent teams
+
+Please:
+1. Use plain, everyday language and explain any notation in one short sentence.
+2. Give me ONE question at a time, easy first, then harder.
+3. Wait for my answer, then mark it and show a model answer, checking each condition of a rule one by one.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/Teleo_Reactive_Programs.html"><small>&larr; Previous</small>Teleo-reactive programs</a><a class="next" href="../w2/BDI_Practical_Reasoning.html"><small>Next &rarr;</small>BDI and practical reasoning</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

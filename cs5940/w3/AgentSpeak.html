@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentSpeak(L) · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w3_AgentSpeak" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 3</span><span class="chip">6 techniques</span></div>
+  <h1>AgentSpeak(L)</h1>
+  <p class="tagline">BDI as a real programming language. The agent keeps beliefs, reacts to events by picking a plan from its library, and runs each intention as a stack of half-finished plans. It's Prolog-style matching plus a BDI loop.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative agent (BDI language).<br />
+<strong>Week:</strong> 3 (slides 15 to 25, appendix A slides 47 to 52).<br />
+<strong>Book:</strong> not in Wooldridge (only its ancestor PRS, 4.4). The slides are the source.<br />
+<strong>Techniques on this page:</strong> the agent’s state, beliefs, goals and events, writing plans, finding the applicable unifier, selection functions, tracing the execution cycle.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The <a href="BDI_Control_Loop.html">BDI control loop</a> is an algorithm on paper. To actually build BDI agents you need a language. <strong>PRS</strong> (1987) was one of the first working BDI systems, but its “language” was just its implementation: nothing small and precise to reason about or teach. <strong>AgentSpeak(L)</strong> (Rao 1996) distils PRS into a language with a small syntax and a precise meaning.</p>
+<p>Like PRS, it doesn’t plan from scratch: it picks plans from a <strong>library</strong> the programmer wrote. That makes it fast and predictable, at the cost of only handling situations someone wrote a plan for.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>belief</td>
+<td>a fact like <code>location(robot, kitchen)</code></td>
+</tr>
+<tr class="even">
+<td><code>!b</code></td>
+<td>achievement goal: “make <span class="math inline">\(b\)</span> true” (usually triggers a plan)</td>
+</tr>
+<tr class="odd">
+<td><code>?b</code></td>
+<td>test goal: “is <span class="math inline">\(b\)</span> true?” (a query that can fill in variables)</td>
+</tr>
+<tr class="even">
+<td><code>+p</code>, <code>-p</code></td>
+<td>events: belief <span class="math inline">\(p\)</span> was added / removed (external)</td>
+</tr>
+<tr class="odd">
+<td><code>+!p</code></td>
+<td>event: a goal <span class="math inline">\(p\)</span> was posted by a running plan (internal)</td>
+</tr>
+<tr class="even">
+<td>plan</td>
+<td><code>trigger : context &lt;- body.</code></td>
+</tr>
+<tr class="odd">
+<td>relevant</td>
+<td>the plan’s trigger matches the event</td>
+</tr>
+<tr class="even">
+<td>applicable</td>
+<td>relevant <strong>and</strong> its context holds given the beliefs</td>
+</tr>
+<tr class="odd">
+<td>substitution <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\sigma\)</span></td>
+<td>which value each variable gets, e.g. <span class="math inline">\(\{R/rock145\}\)</span></td>
+</tr>
+<tr class="even">
+<td>intention</td>
+<td>a <strong>stack</strong> of partly executed plans</td>
+</tr>
+<tr class="odd">
+<td>Jason</td>
+<td>the standard AgentSpeak interpreter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-agents-state">Technique 1: the agent’s state</h2>
+<p><strong>Problem it solves:</strong> knowing what’s inside an AgentSpeak agent.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>belief base <span class="math inline">\(B\)</span></td>
+<td>ground facts, like Agent0’s beliefs</td>
+</tr>
+<tr class="even">
+<td>event store <span class="math inline">\(E\)</span></td>
+<td>pending events to react to</td>
+</tr>
+<tr class="odd">
+<td>intentions <span class="math inline">\(I\)</span></td>
+<td>plans currently running (each a stack)</td>
+</tr>
+<tr class="even">
+<td>plan library <span class="math inline">\(P\)</span></td>
+<td>the agent’s plans</td>
+</tr>
+<tr class="odd">
+<td>primitive actions</td>
+<td>what it can do directly</td>
+</tr>
+</tbody>
+</table>
+<p>There are <strong>no separate desires</strong>: goals appear inside plans and as events.</p>
+<h2 id="technique-2-beliefs-goals-and-events">Technique 2: beliefs, goals and events</h2>
+<p><strong>Problem it solves:</strong> the vocabulary every trace uses.</p>
+<ul>
+<li><strong>Goals:</strong> <code>?b</code> tests whether <span class="math inline">\(b\)</span> follows from beliefs (and binds variables). <code>!b</code> asks to bring about a world where <span class="math inline">\(b\)</span> is believed; it posts an internal event that triggers a plan.</li>
+<li><strong>Events:</strong> <code>+p</code> / <code>-p</code> come from perception or messages: <strong>external</strong>. <code>+!p</code> comes from a running intention <span class="math inline">\(i\)</span> meeting <code>!p</code>: <strong>internal</strong>, stored as <span class="math inline">\((+!p, i)\)</span>, “achieve <span class="math inline">\(p\)</span> as part of intention <span class="math inline">\(i\)</span>”.</li>
+<li><strong>Intention:</strong> a stack <span class="math inline">\([r_k, \dots, r_1]\)</span>. <span class="math inline">\(r_1\)</span> started it; the top <span class="math inline">\(r_k\)</span> is running now; each plan was pushed to achieve a subgoal of the one below.</li>
+</ul>
+<h2 id="technique-3-writing-plans">Technique 3: writing plans</h2>
+<p><strong>Problem it solves:</strong> the program itself.</p>
+<pre><code>triggering_event : context &lt;- body.
+     e           : b1 &amp; ... &amp; bm &lt;- h1; ...; hk.</code></pre>
+<ul>
+<li>the <strong>trigger</strong> says which events the plan is relevant to;</li>
+<li>the <strong>context</strong> is belief conditions that must hold for it to be applicable;</li>
+<li>the <strong>body</strong> is actions, <code>!</code> goals and <code>?</code> goals, in order.</li>
+</ul>
+<pre><code>+!quench_thirst : have_glass &lt;-
+        !have_soft_drink;
+        fill_glass;
+        drink.
+
++!have_soft_drink : soft_drink_in_fridge &lt;-
+        open_fridge;
+        get_soft_drink.
+
++rock_seen(R) : not battery(low) &lt;-
+        ?location(R, L);
+        !move_to(L);
+        pick_up(R).</code></pre>
+<h2 id="technique-4-the-applicable-unifier">Technique 4: the applicable unifier</h2>
+<p><strong>Problem it solves:</strong> decides whether a plan can handle an event, and fills in its variables.</p>
+<p>A plan <code>e' : b1 &amp; ... &amp; bm &lt;- body</code> is <strong>applicable</strong> to event <span class="math inline">\(e\)</span> if</p>
+<ol type="1">
+<li>the trigger unifies with the event: <span class="math inline">\(e\theta = e&#39;\theta\)</span>, and</li>
+<li>the context follows from current beliefs under some further <span class="math inline">\(\sigma\)</span>.</li>
+</ol>
+<p><span class="math inline">\(\theta\sigma\)</span> is the <strong>applicable unifier</strong>. It’s Prolog: match the head, then solve the body against the beliefs.</p>
+<div class="example">
+<p><strong>Worked example (slide 25).</strong> Plan: <code>+rock_seen(R) : not battery(low) &amp; location(R, L) &lt;- !move_to(L); pick_up(R).</code> The robot perceives <code>+rock_seen(rock145)</code>, believes <code>location(rock145, (3,5,1))</code>, and doesn’t believe <code>battery(low)</code>.</p>
+<ol type="1">
+<li>Unify the trigger: <span class="math inline">\(\theta = \{R/rock145\}\)</span>.</li>
+<li>Context: <code>not battery(low)</code> holds (not in <span class="math inline">\(B\)</span>: negation as failure). <code>location(rock145, L)</code> matches, giving <span class="math inline">\(\sigma = \{L/(3,5,1)\}\)</span>.</li>
+<li>Body: <code>!move_to((3,5,1)); pick_up(rock145).</code></li>
+</ol>
+<p>If the robot believed <code>battery(low)</code>, step 2 fails: the plan is still <strong>relevant</strong> but not <strong>applicable</strong>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example: an order.</strong> Plan <code>+order(Item, Qty) : stock(Item, S) &amp; price(Item, P) &lt;- !reserve(Item, Qty); bill(P).</code> Beliefs <code>stock(tea, 40)</code>, <code>price(tea, 3)</code>, <code>price(coffee, 5)</code>.</p>
+<ul>
+<li>Event <code>+order(tea, 2)</code>: <span class="math inline">\(\theta = \{Item/tea, Qty/2\}\)</span>, <span class="math inline">\(\sigma = \{S/40, P/3\}\)</span>, body <code>!reserve(tea, 2); bill(3).</code></li>
+<li>Event <code>+order(coffee, 1)</code>: relevant, but <code>stock(coffee, S)</code> can’t be proved, so <strong>not applicable</strong>.</li>
+</ul>
+</div>
+<h2 id="technique-5-selection-functions">Technique 5: selection functions</h2>
+<p><strong>Problem it solves:</strong> when several things could happen next, who decides?</p>
+<ul>
+<li><span class="math inline">\(S_E\)</span> picks the <strong>event</strong> to handle;</li>
+<li><span class="math inline">\(S_O\)</span> picks the <strong>option</strong>: which applicable plan;</li>
+<li><span class="math inline">\(S_I\)</span> picks which <strong>intention</strong> to run a step of.</li>
+</ul>
+<p>These are <strong>not written in AgentSpeak</strong>. Usual defaults (Jason’s): <span class="math inline">\(S_E\)</span> oldest event first, <span class="math inline">\(S_O\)</span> first applicable plan in the order written, <span class="math inline">\(S_I\)</span> round-robin. So <strong>the order of your plans matters</strong>, as in Prolog.</p>
+<p><strong>Discussion (slide 23): is “precise syntax, unprogrammable semantics” progress?</strong> The most important choice, which plan to run, sits outside the language. A fair position: the opacity has been <strong>narrowed and relocated</strong>, not removed. Everything else now has a precise meaning, and the three functions can be fixed and documented.</p>
+<h2 id="technique-6-tracing-the-execution-cycle">Technique 6: tracing the execution cycle</h2>
+<p><strong>Problem it solves:</strong> the long exam question: list the actions and the intention stack step by step.</p>
+<p>Each cycle:</p>
+<ol type="1">
+<li>perceive, update <span class="math inline">\(B\)</span>; each change becomes a <code>+b</code> or <code>-b</code> event;</li>
+<li><span class="math inline">\(e := S_E(E)\)</span>;</li>
+<li>pick an applicable plan with <span class="math inline">\(S_O\)</span>;</li>
+<li>if <span class="math inline">\(e\)</span> is internal (from intention <span class="math inline">\(i\)</span>), <strong>push</strong> the plan on top of <span class="math inline">\(i\)</span>; otherwise start a <strong>new</strong> intention;</li>
+<li><span class="math inline">\(i := S_I(I)\)</span>; look at the first step of <span class="math inline">\(i\)</span>’s top plan: an <strong>action</strong> runs; <code>!b</code> posts <span class="math inline">\((+!b, i)\)</span> and <span class="math inline">\(i\)</span> waits; <code>?b</code> binds variables if it follows from beliefs, <strong>otherwise “???”</strong>;</li>
+<li>if the top plan’s body is empty, <strong>pop</strong> it; if the intention is empty, remove it.</li>
+</ol>
+<div class="example">
+<p><strong>Worked example: quench thirst.</strong> Beliefs <span class="math inline">\(\{have\_glass, soft\_drink\_in\_fridge\}\)</span>; event <code>+!quench_thirst</code>.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Event → plan</th>
+<th>Intention (top on the right)</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>+!quench_thirst</code> → plan 1</td>
+<td>[P1: <code>!have_soft_drink; fill_glass; drink</code>]</td>
+<td>none: posts <code>+!have_soft_drink</code></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>+!have_soft_drink</code> → plan 2, pushed</td>
+<td>[P1: <code>fill_glass; drink</code>, P2: <code>open_fridge; get_soft_drink</code>]</td>
+<td><code>open_fridge</code></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>none</td>
+<td>[P1: <code>fill_glass; drink</code>, P2: <code>get_soft_drink</code>]</td>
+<td><code>get_soft_drink</code>, P2 popped</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>none</td>
+<td>[P1: <code>drink</code>]</td>
+<td><code>fill_glass</code></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>none</td>
+<td>[] → removed</td>
+<td><code>drink</code></td>
+</tr>
+</tbody>
+</table>
+<p>Actions: <code>open_fridge, get_soft_drink, fill_glass, drink</code>; the stack reaches depth 2. With no drink in the fridge, step 2 finds no applicable plan and the intention fails before any action.</p>
+</div>
+<div data-widget="agentspeak">
+
+</div>
+<div class="example">
+<p><strong>Worked example: the cleaning robot (appendix A).</strong> Rooms <code>a - b - c - d</code>; robot at <code>a</code>, bin at <code>d</code>, it perceives <code>+location(waste, c)</code>.</p>
+<p>The waste plan posts <code>!location(robot, c)</code>; a recursive plan moves one room at a time (<code>move(a,b)</code>, <code>move(b,c)</code>) until the base case holds; then <code>pickup(waste)</code>; then <code>!bin(waste)</code> gives <code>move(c,d)</code> and <code>drop(waste)</code>.</p>
+<p>Actions: <code>move(a,b), move(b,c), pickup(waste), move(c,d), drop(waste)</code>. The deepest stack is 4 plans. Events like <code>+location(robot, b)</code> have no relevant plan (<code>robot</code> doesn’t unify with <code>waste</code>), so they’re discarded.</p>
+</div>
+<div class="warn">
+<p><strong>Slide 51’s “???”.</strong> The slides deliberately leave a failed test goal open. In Jason, the plan <strong>fails</strong> and a goal-deletion event <code>-!g</code> is generated, which a failure plan can handle; otherwise the intention is dropped. A subgoal with no applicable plan fails the same way.</p>
+</div>
+<p><strong>Jason (slide 52)</strong> is AgentSpeak’s practical implementation: it adds strong negation, plan-failure handling, speech-act communication, organisations (Moise) and distribution (JADE). You don’t need its details for the exam.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AgentSpeak(L)</td>
+<td>Not in the book</td>
+<td>Slides 15 to 25 and appendix A are the source</td>
+</tr>
+<tr class="even">
+<td>4.4 The Procedural Reasoning System, pp. 79 to 82</td>
+<td><strong>Read</strong></td>
+<td>PRS, which AgentSpeak was distilled from. Short</td>
+</tr>
+<tr class="odd">
+<td>Rao (1996); Bordini, Hübner and Wooldridge (2007), <em>Programming Multi-Agent Systems in AgentSpeak using Jason</em></td>
+<td>Optional</td>
+<td>The original paper and the standard textbook</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Rao&#39;s AgentSpeak(L) and the Jason interpreter; Wooldridge 4.4 on PRS). I want practice on AGENTSPEAK(L):
+- the agent&#39;s state (beliefs, events, intentions as stacks, plan library) and why there are no separate desires
+- test goals ?b vs achievement goals !b; external events (+p, -p) vs internal events (+!p)
+- reading and writing plans &quot;trigger : context &lt;- body.&quot;
+- relevant vs applicable plans, and computing theta, sigma and the instantiated body for a given event and belief base (including negation as failure in contexts)
+- the selection functions S_E, S_O, S_I, their usual defaults, and why plan order matters
+- tracing the execution cycle step by step: which plan is chosen, how the intention stack grows and shrinks, which actions run
+- what happens when a test goal or subgoal fails
+
+Please:
+1. Use plain, everyday language and explain any notation in one short sentence.
+2. Give me ONE question at a time, easy first, then harder; give the plan library and beliefs in full.
+3. Wait for my answer, then mark it and show the full trace with the intention stack at each step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/Intention_Reconsideration.html"><small>&larr; Previous</small>Intention reconsideration</a><a class="next" href="../w3/Subsumption.html"><small>Next &rarr;</small>Subsumption (Brooks)</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

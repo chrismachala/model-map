@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KNN regression · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w2_KNN_Regression" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip reg">Regression model</span><span class="chip">Week 2</span><span class="chip">3 techniques</span></div>
+  <h1>KNN regression</h1>
+  <p class="tagline">Week 1's KNN, but for numbers: instead of a majority vote, take the average answer of the K nearest neighbours.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> regression.<br />
+<strong>Week:</strong> 2 (lab Q2 compares it with linear regression on the Boston housing data).<br />
+<strong>Book:</strong> ISLP 3.5 (recommended; not in the slide headers but it’s exactly lab Q2).<br />
+<strong>Techniques on this page:</strong> neighbourhood average, normalising, the comparison with linear regression.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="Linear_Regression.html">Linear regression</a> assumes a straight-line shape. If the true relationship is curvy in ways you can’t guess, that assumption hurts. KNN regression assumes <strong>no shape</strong>: to predict a house price, it averages the prices of the most similar houses. It’s the non-parametric alternative, and the lab asks you to compare the two.</p>
+<p>If you’ve read the <a href="../w1/KNN.html">KNN classifier</a> page, you already know 90% of this.</p>
+</div>
+<h2 id="technique-1-the-neighbourhood-average">Technique 1: the neighbourhood average</h2>
+<ol type="1">
+<li>Find the <span class="math inline">\(K\)</span> training points nearest to the new point <span class="math inline">\(x_0\)</span> (same distance as week 1).</li>
+<li>Predict the <strong>average</strong> of their <span class="math inline">\(y\)</span> values:</li>
+</ol>
+<p><span class="math display">\[\hat y(x_0) = \frac1K\sum_{i\,\in\,\text{neighbours}} y_i\]</span></p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(x = (1,2,3,4,5,6)\)</span>, <span class="math inline">\(y = (1.0, 1.5, 2.5, 3.0, 5.0, 6.0)\)</span>.</p>
+<ul>
+<li>New point <span class="math inline">\(x_0 = 3.4\)</span>, <span class="math inline">\(K = 3\)</span>. Nearest: <span class="math inline">\(x = 3\)</span> (gap 0.4), <span class="math inline">\(x = 4\)</span> (0.6), <span class="math inline">\(x = 2\)</span> (1.4). Prediction <span class="math inline">\((2.5 + 3.0 + 1.5)/3 \approx 2.33\)</span>.</li>
+<li>New point <span class="math inline">\(x_0 = 5.2\)</span>, <span class="math inline">\(K = 2\)</span>. Nearest: <span class="math inline">\(x = 5\)</span> (0.2), <span class="math inline">\(x = 6\)</span> (0.8). Prediction <span class="math inline">\((5.0 + 6.0)/2 = 5.5\)</span>.</li>
+</ul>
+</div>
+<p><span class="math inline">\(K\)</span> is the same bendiness dial as before. <span class="math inline">\(K = 1\)</span> has zero training error (every point predicts itself) and means nothing. Large <span class="math inline">\(K\)</span> flattens everything towards the overall average. Choose <span class="math inline">\(K\)</span> on a <strong>validation set</strong> (see <a href="Ridge_Regression.html">ridge regression</a> for the train/validation/test recipe).</p>
+<h2 id="technique-2-normalise-first">Technique 2: normalise first</h2>
+<p>Distances add up raw differences. In the Boston data, <code>TAX</code> is in the hundreds and <code>NOX</code> is around 0.5, so without rescaling, “nearest” would mean “similar tax” and nothing else. The lab’s <code>normalize()</code> rescales each column to average 0 and spread 1. Strictly, use the <strong>training</strong> set’s average and spread for all three splits, so no information leaks from the test data.</p>
+<h2 id="technique-3-knn-vs-linear-regression-lab-q2">Technique 3: KNN vs linear regression (lab Q2)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Usually wins</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>the truth is close to a straight line</td>
+<td>linear regression</td>
+<td>right shape, low variance</td>
+</tr>
+<tr class="even">
+<td>strongly curved truth, plenty of data</td>
+<td>KNN with a good <span class="math inline">\(K\)</span></td>
+<td>no wrong shape assumed</td>
+</tr>
+<tr class="odd">
+<td>many inputs (large <span class="math inline">\(p\)</span>)</td>
+<td>linear regression</td>
+<td>with many inputs every point is far from every other, so “neighbours” aren’t really near (the <strong>curse of dimensionality</strong>)</td>
+</tr>
+<tr class="even">
+<td>you need to explain <em>why</em></td>
+<td>linear regression</td>
+<td>coefficients can be read; KNN is a black box</td>
+</tr>
+</tbody>
+</table>
+<p>Compare them fairly: choose each one’s settings on the validation set, then compare on the test set once.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3.5 Comparison of linear regression with KNN</td>
+<td><strong>Read</strong></td>
+<td>Exactly the argument lab Q2 wants, with Figures 3.16 to 3.20</td>
+</tr>
+<tr class="even">
+<td>2.2.3 KNN</td>
+<td>Already done</td>
+<td>See the <a href="../w1/KNN.html">KNN</a> page</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 3.5). I want practice questions on KNN REGRESSION:
+- predicting by averaging the y values of the K nearest neighbours, from small tables in 1D and 2D
+- the effect of K on flexibility, training error and test error
+- why features must be normalised, with a numeric example, and why to use the training set&#39;s mean and standard deviation
+- comparing KNN regression with linear regression: when each wins, the curse of dimensionality, interpretability
+- choosing K with a validation set
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with small numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/Ridge_Regression.html"><small>&larr; Previous</small>Ridge regression</a><a class="next" href="../w3/Logistic_Regression.html"><small>Next &rarr;</small>Logistic regression</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

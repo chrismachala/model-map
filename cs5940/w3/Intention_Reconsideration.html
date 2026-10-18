@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intention reconsideration · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w3_Intention_Reconsideration" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 3</span><span class="chip">5 techniques</span></div>
+  <h1>Intention reconsideration</h1>
+  <p class="tagline">How often should an agent stop and ask "is this still the right goal?" Never, and it chases goals that no longer matter. Always, and it never gets anything done. The answer depends on how fast the world changes.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative agent (BDI meta-level control).<br />
+<strong>Week:</strong> 3 (slides 12 to 14).<br />
+<strong>Book:</strong> Wooldridge 4.3, pp. 77 to 79 (Table 4.2, Kinny and Georgeff).<br />
+<strong>Techniques on this page:</strong> cycle (5) with <code>reconsider</code>, when <code>reconsider</code> is optimal, bold vs cautious agents, the maths of dynamism, ending the meta-level regress.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="BDI_Control_Loop.html">Cycle (4)</a> only rethinks its <strong>intentions</strong> between plans. If a better opportunity turns up mid-plan, or the goal quietly stops making sense, it won’t notice.</p>
+<p>The two obvious fixes both fail (book p. 77). <strong>Never reconsider</strong> and the agent keeps pursuing intentions that can’t succeed or no longer matter. <strong>Reconsider after every action</strong> and, since deliberation is expensive, it spends its time thinking instead of acting.</p>
+<p>The solution is a <strong>cheap test</strong> that decides <em>whether</em> to deliberate. How eager that test should be is the Kinny and Georgeff experiment: one of the few real experimental results in the module, and good exam material.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>meta-level control</td>
+<td>a decision about whether to make a decision</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(reconsider(I, B)\)</span></td>
+<td>a cheap yes/no test: should I deliberate now?</td>
+</tr>
+<tr class="odd">
+<td>boldness <span class="math inline">\(k\)</span></td>
+<td>the most plan steps the agent runs before reconsidering</td>
+</tr>
+<tr class="even">
+<td>bold agent</td>
+<td>never reconsiders until the plan is finished (<span class="math inline">\(k = \infty\)</span>)</td>
+</tr>
+<tr class="odd">
+<td>cautious agent</td>
+<td>reconsiders after every action (<span class="math inline">\(k = 1\)</span>)</td>
+</tr>
+<tr class="even">
+<td>dynamism <span class="math inline">\(\gamma\)</span> (gamma)</td>
+<td>how fast the world changes: changes per pass of the control loop</td>
+</tr>
+<tr class="odd">
+<td>effectiveness</td>
+<td>intentions achieved ÷ intentions the agent had (1 = everything)</td>
+</tr>
+<tr class="even">
+<td>Poisson process</td>
+<td>events that happen at random at a steady average rate</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-cycle-5">Technique 1: cycle (5)</h2>
+<p><strong>Problem it solves:</strong> adds controlled reconsideration of <strong>ends</strong>, separate from repairing <strong>means</strong>.</p>
+<pre><code>9.  while not (empty(π) or succeeded(I, B) or impossible(I, B)) do
+10.     α := head(π);  11. execute(α);  12. π := tail(π);
+13.     get next percept ρ;  14. B := brf(B, ρ);
+15.     if reconsider(I, B) then          /* commitment to ends, controlled */
+16.         D := options(B, I);
+17.         I := filter(B, D, I);
+18.     end-if
+19.     if not sound(π, I, B) then        /* commitment to means */
+20.         π := plan(B, I);
+21.     end-if
+22. end-while</code></pre>
+<p><strong>Why this order?</strong> Lines 15 to 18 may change <span class="math inline">\(I\)</span> but don’t replan. If <span class="math inline">\(I\)</span> changed, the old plan no longer achieves it, so <span class="math inline">\(sound(\pi, I, B)\)</span> fails and lines 19 to 21 replan. Rethinking the goal and repairing the plan are kept separate.</p>
+<h2 id="technique-2-when-is-reconsider-optimal">Technique 2: when is reconsider optimal?</h2>
+<p><strong>Problem it solves:</strong> a precise definition of “a good reconsider function” (book Table 4.2).</p>
+<p>Assume deliberation always picks the best intentions and time always costs something.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Chose to deliberate?</th>
+<th>Would deliberating change intentions?</th>
+<th>Optimal?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>no</td>
+<td>no</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>no</td>
+<td>yes</td>
+<td>no: missed a change</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>yes</td>
+<td>no</td>
+<td>no: wasted effort</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>yes</td>
+<td>yes</td>
+<td><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<p>So <strong>optimal ⟺ it deliberates exactly when deliberating would change the intentions.</strong></p>
+<p><strong>The hidden assumption:</strong> <span class="math inline">\(reconsider\)</span> must be <strong>much cheaper than deliberation</strong>. Otherwise it could just run deliberation inside itself as an oracle, which would cost as much as always deliberating.</p>
+<h2 id="technique-3-bold-vs-cautious-agents">Technique 3: bold vs cautious agents</h2>
+<p><strong>Problem it solves:</strong> which reconsideration policy to choose for a given environment (Kinny and Georgeff, 1991).</p>
+<ul>
+<li><strong>Low <span class="math inline">\(\gamma\)</span> (calm world): bold agents win.</strong> Cautious agents waste time rethinking commitments that are still fine.</li>
+<li><strong>High <span class="math inline">\(\gamma\)</span> (fast-changing world): cautious agents win.</strong> They spot doomed intentions early and grab new opportunities.</li>
+</ul>
+<p>The book’s bottom line: <strong>different environments need different strategies</strong>. And the cost of deliberation matters too: make it expensive enough and cautious loses everywhere.</p>
+<h2 id="technique-4-the-maths-of-dynamism">Technique 4: the maths of dynamism</h2>
+<p><strong>Problem it solves:</strong> puts a number on why a bold agent’s plans go stale.</p>
+<p>Model world changes as random events at rate <span class="math inline">\(\gamma\)</span> per step. A bold agent commits to an <span class="math inline">\(n\)</span>-step plan and doesn’t look again. The plan survives only if nothing changes for <span class="math inline">\(n\)</span> steps:</p>
+<p><span class="math display">\[P(\text{no change in } n \text{ steps}) = e^{-\gamma n}.\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\gamma\)</span></th>
+<th><span class="math inline">\(n = 5\)</span></th>
+<th><span class="math inline">\(n = 10\)</span></th>
+<th><span class="math inline">\(n = 20\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.02</td>
+<td>0.905</td>
+<td>0.819</td>
+<td>0.670</td>
+</tr>
+<tr class="even">
+<td>0.1</td>
+<td>0.607</td>
+<td>0.368</td>
+<td>0.135</td>
+</tr>
+<tr class="odd">
+<td>0.4</td>
+<td>0.135</td>
+<td>0.018</td>
+<td>0.0003</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(\gamma = 0.05\)</span>, 8-step plans: <span class="math inline">\(e^{-0.05 \times 8} = e^{-0.4} \approx 0.670\)</span>. A third of the bold agent’s plans are stale before they finish.</p>
+<p>A cautious agent instead pays a deliberation cost <span class="math inline">\(d\)</span> on every step: <span class="math inline">\(n \cdot d\)</span> per plan rather than <span class="math inline">\(d\)</span>. With <span class="math inline">\(d\)</span> = a quarter of a step and <span class="math inline">\(n = 10\)</span>, that’s 2.5 extra steps per plan. Expensive in a calm world; cheap compared with walking to a target that’s already gone in a busy one.</p>
+</div>
+<div data-widget="boldness">
+
+</div>
+<h2 id="technique-5-ending-the-regress">Technique 5: ending the regress</h2>
+<p><strong>Problem it solves:</strong> the slide 14 question: deciding whether to reconsider is itself a decision, so do we need a meta-meta-level, forever?</p>
+<p>A good answer: <strong>the regress stops at something fixed and cheap.</strong> <span class="math inline">\(reconsider\)</span> isn’t another deliberator; it’s a hard-wired, constant-time test, like “reconsider only if a belief my intention depends on has changed”, “every <span class="math inline">\(k\)</span> steps”, or “when a surprising percept arrives”. The designer picks it once, offline, from what they know about the environment’s dynamism (exactly what Kinny and Georgeff measured). It’s the same reason <a href="Subsumption.html">reactive rules</a> exist.</p>
+<p><strong>With an LLM as the planner</strong> (the week 3 notebook): a cautious agent calls the LLM after every step (6 calls, about 3× the tokens); a bold one is cheap but walks into a closed door; a single-minded agent with a cheap <span class="math inline">\(sound()\)</span> check gets both: no wasted actions and only 2 calls. That’s Table 4.2’s hidden assumption in practice.</p>
+<div class="warn">
+<p><strong>Notation.</strong> Slide 13 writes dynamism as <span class="math inline">\(\gamma\)</span>. The book doesn’t use the symbol; it says “rate of world change”.</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4.3, pp. 77 to 79</td>
+<td><strong>Read</strong></td>
+<td>Reconsideration, Table 4.2 (p. 78), Kinny and Georgeff’s results (pp. 78 to 79)</td>
+</tr>
+<tr class="even">
+<td>Ch. 4 notes</td>
+<td>Skip</td>
+<td>References only</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., 4.3 pp. 77-79). I want practice on INTENTION RECONSIDERATION:
+- cycle (5): where reconsider, options, filter, sound and plan sit, and why reconsidering ends comes before repairing means
+- the four situations of Table 4.2 and when reconsider is optimal; why reconsider must be much cheaper than deliberation
+- bold vs cautious agents, boldness k, dynamism gamma, effectiveness, and Kinny and Georgeff&#39;s results
+- the probability a bold agent&#39;s n-step plan survives, e^(-gamma n), and comparing it with a cautious agent&#39;s deliberation cost n*d
+- choosing a reconsideration strategy for a described environment
+- why the meta-level regress stops at a cheap, fixed test
+- the cost of cautious reconsideration when the planner is an LLM (tokens per call)
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/BDI_Control_Loop.html"><small>&larr; Previous</small>The BDI control loop</a><a class="next" href="../w3/AgentSpeak.html"><small>Next &rarr;</small>AgentSpeak(L)</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teleo-reactive programs · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w2_Teleo_Reactive_Programs" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip react">Reactive agent</span><span class="chip">Week 2</span><span class="chip">4 techniques</span></div>
+  <h1>Teleo-reactive programs</h1>
+  <p class="tagline">An ordered list of condition-action rules, checked from the top on every cycle. The first true rule wins. It heads for a goal (teleo) while reacting to whatever has just changed (reactive).</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> reactive agent (goal-directed rules).<br />
+<strong>Week:</strong> 2 (slides 12 to 15).<br />
+<strong>Book:</strong> not in Wooldridge. Source: Nilsson (1994) and the slides.<br />
+<strong>Techniques on this page:</strong> running a TR program, tracing it cycle by cycle, why the order of rules matters, implicit vs explicit goals.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The <a href="Deductive_Reasoning_Agents.html">deductive agent</a> has two problems: proving things is slow, and its flat rule set has <strong>no goal</strong> in it, so every rule must guard against all the others.</p>
+<p>A teleo-reactive (TR) program fixes both cheaply. It puts the rules in <strong>priority order</strong>, writes them <strong>for a named goal</strong>, and re-checks them <strong>every cycle</strong>. There’s no planning ahead: if the world changes, the next cycle simply picks a different rule.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>teleo</td>
+<td>aimed at a goal (Greek <em>telos</em>, end)</td>
+</tr>
+<tr class="even">
+<td>reactive</td>
+<td>responds directly to the current situation, without planning</td>
+</tr>
+<tr class="odd">
+<td>condition-action rule</td>
+<td>“if this is true, do that”: <span class="math inline">\(c \to a\)</span></td>
+</tr>
+<tr class="even">
+<td>cycle</td>
+<td>one check of the rule list, followed by one action</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(nil\)</span></td>
+<td>do nothing (the program has finished or is stuck)</td>
+</tr>
+<tr class="even">
+<td>implicit goal</td>
+<td>a goal the rules pursue without ever writing it down as a symbol</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-how-a-tr-program-runs">Technique 1: how a TR program runs</h2>
+<p><strong>Problem it solves:</strong> choosing an action quickly and safely in a changing world.</p>
+<p><span class="math display">\[c_1 \to a_1,\quad c_2 \to a_2,\quad \dots,\quad c_m \to a_m\]</span></p>
+<p>On <strong>every cycle</strong>: check the conditions <strong>from the top</strong>, and do the action of the <strong>first</strong> rule whose condition is true.</p>
+<p>The slides’ program for the goal “sweep and clean the room”:</p>
+<p><span class="math display">\[sweep\_clean(X,Y): \begin{cases} dirty(X,Y) &amp; \to do(clean)\\ \neg wall(front) &amp; \to do(forward)\\ wall(front) \wedge \neg wall(left) &amp; \to do(turn(left))\\ wall(front) \wedge wall(left) &amp; \to nil \end{cases}\]</span></p>
+<p>Read the priorities as: <em>clean here</em> beats <em>keep moving</em> beats <em>turn at a wall</em> beats <em>stop, boxed in</em>.</p>
+<h2 id="technique-2-tracing-cycle-by-cycle">Technique 2: tracing cycle by cycle</h2>
+<p><strong>Problem it solves:</strong> the exam exercise: given a world, list the actions.</p>
+<div class="example">
+<p><strong>Worked example: a 3-cell corridor.</strong> Cells <span class="math inline">\(x = 1, 2, 3\)</span>, robot at 1 facing east. Walls along the whole north side (so “left” is always a wall) and at the east end. Dirt on cell 2.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cycle</th>
+<th>Cell</th>
+<th>dirty?</th>
+<th>wall ahead?</th>
+<th>wall left?</th>
+<th>First true rule</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>rule 2</td>
+<td>forward</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td><strong>rule 1</strong></td>
+<td>clean</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>rule 2</td>
+<td>forward</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>3</td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>rule 4</td>
+<td>nil (stop)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reactivity:</strong> if someone drops dirt on cell 3 while the robot is on cell 2, it cleans it on arrival with no replanning, because rule 1 is checked first every cycle.</p>
+</div>
+<div data-widget="tr">
+
+</div>
+<h2 id="technique-3-order-matters">Technique 3: order matters</h2>
+<p><strong>Problem it solves:</strong> explains the most common mistake when writing TR programs.</p>
+<p>Swap rules 1 and 2 and the robot drives straight over dirt whenever the way ahead is clear: on cycle 2 above, rule “no wall ahead → forward” would be checked first and win.</p>
+<p>Compared with the deductive agent’s flat set <span class="math inline">\(\rho\)</span>: the TR program is <strong>ordered</strong> (priority settles conflicts), <strong>re-evaluated every cycle</strong>, and <strong>written towards a named goal</strong>. The flat set has no priority and no goal, so each rule needs extra guards like <span class="math inline">\(\neg dirty\)</span>.</p>
+<h2 id="technique-4-is-an-implicit-goal-still-a-goal">Technique 4: is an implicit goal still a goal?</h2>
+<p><strong>Problem it solves:</strong> the slide 14 discussion question, which makes a good short exam answer.</p>
+<p><span class="math inline">\(sweep\_clean\)</span> never writes “room clean” down as a symbol, yet every rule moves the robot towards it. A defensible position:</p>
+<ul>
+<li>explicit goals are <strong>not needed for goal-directed behaviour</strong>;</li>
+<li>they <strong>are</strong> needed for the agent to <strong>reason about</strong> its goal (drop it, swap it, explain it), and for a <strong>human to verify</strong> it.</li>
+</ul>
+<p>Compare week 1’s thermostat: its objective is also implicit in its rule. Explicit goals come back with <a href="BDI_Practical_Reasoning.html">BDI</a> intentions.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>n/a</td>
+<td>Teleo-reactive programs aren’t in the book</td>
+</tr>
+<tr class="even">
+<td>Slides 12 to 15</td>
+<td><strong>Read</strong></td>
+<td>The only course source</td>
+</tr>
+<tr class="odd">
+<td>Nilsson (1994), “Teleo-reactive programs for agent control”</td>
+<td>Optional</td>
+<td>The original paper, if you want more</td>
+</tr>
+</tbody>
+</table>
+<p>The closest thing in the book is the reactive-agent material in 5.1 (see <a href="../w3/Subsumption.html">subsumption</a>), which also picks the first applicable behaviour by priority.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (week 2, Nilsson&#39;s teleo-reactive programs). I want practice on TELEO-REACTIVE PROGRAMS:
+- how a TR program runs: ordered condition-action rules, checked from the top every cycle, first true rule fires
+- tracing a TR program (like sweep_clean: dirty -&gt; clean; no wall ahead -&gt; forward; wall ahead and no wall left -&gt; turn left; walls ahead and left -&gt; nil) through small grid or corridor worlds, cycle by cycle
+- what happens when the environment changes mid-run (new dirt, a door closing)
+- what goes wrong when rules are reordered
+- writing my own short TR program for a simple goal
+- comparing a TR program with a flat rule set of a deductive agent, and with subsumption
+- whether an implicit goal is still a goal
+
+Please:
+1. Use plain, everyday language and explain any term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder; for traces, describe the world precisely.
+3. Wait for my answer, then mark it and show the full cycle-by-cycle trace.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/Deductive_Reasoning_Agents.html"><small>&larr; Previous</small>Deductive reasoning agents</a><a class="next" href="../w2/Agent0.html"><small>Next &rarr;</small>Agent0 (agent-oriented programming)</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

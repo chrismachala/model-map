@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear regression · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w2_Linear_Regression" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a class="active" aria-current="page" href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip reg">Regression model</span><span class="chip">Week 2</span><span class="chip">8 techniques</span></div>
+  <h1>Linear regression</h1>
+  <p class="tagline">Draw the straight line (or flat surface) that runs closest to the data, then use it to predict. The foundation most later models are built on.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> regression (the answer is a number).<br />
+<strong>Week:</strong> 2.<br />
+<strong>Book:</strong> ISLP 3.1, 3.2.1, 3.3.1, 3.3.2 (interactions), parts of 3.3.3. See the reading table at the bottom.<br />
+<strong>Techniques on this page:</strong> least squares, solving for the best line by hand, the matrix formula, gradient descent, judging the fit (RSE and <span class="math inline">\(R^2\)</span>), dummy variables, interactions, checking the assumptions.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>You have inputs (TV advertising budget) and a numeric answer (sales). You want two things: <strong>predict</strong> sales for a new budget, and <strong>understand</strong> how much each extra pound of advertising adds. Linear regression assumes the simplest possible shape, a straight line, so the whole rule is described by a couple of numbers you can read directly.</p>
+<p>Why bother with something so simple? Because it’s easy to fit, easy to read, and nearly every later model is a tweak of it: <a href="Polynomial_and_Step_Regression.html">polynomial regression</a> bends it, <a href="Ridge_Regression.html">ridge regression</a> calms it down, and <a href="../w3/Logistic_Regression.html">logistic regression</a> squashes it into a probability.</p>
+</div>
+<h2 id="the-model">The model</h2>
+<p><strong>One input</strong> (simple linear regression):</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X + \epsilon\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> (“beta zero”), the <strong>intercept</strong>: the value of the line when <span class="math inline">\(X = 0\)</span>.</li>
+<li><span class="math inline">\(\beta_1\)</span>, the <strong>slope</strong>: how much <span class="math inline">\(Y\)</span> goes up for each extra 1 unit of <span class="math inline">\(X\)</span>.</li>
+<li><span class="math inline">\(\epsilon\)</span>: the luck the line can’t explain.</li>
+</ul>
+<p><strong>Several inputs</strong> (multiple linear regression):</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \dots + \beta_pX_p + \epsilon\]</span></p>
+<p>Each <span class="math inline">\(\beta_j\)</span> means: <em>the average change in <span class="math inline">\(Y\)</span> when <span class="math inline">\(X_j\)</span> goes up by 1, <strong>with all the other inputs held fixed</strong>.</em></p>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>coefficients, <span class="math inline">\(\beta\)</span></td>
+<td>the numbers that set the line’s position and tilt</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat\beta\)</span></td>
+<td>our estimate of those numbers from data</td>
+</tr>
+<tr class="odd">
+<td>fitted value, <span class="math inline">\(\hat y_i\)</span></td>
+<td>what the line predicts for training row <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td>residual, <span class="math inline">\(e_i = y_i - \hat y_i\)</span></td>
+<td>how far the real point is above or below the line</td>
+</tr>
+<tr class="odd">
+<td>RSS</td>
+<td>residual sum of squares: add up the squared residuals. The line’s total “wrongness”</td>
+</tr>
+<tr class="even">
+<td>least squares</td>
+<td>choosing the line with the smallest RSS</td>
+</tr>
+<tr class="odd">
+<td>design matrix</td>
+<td>the data grid with an extra column of 1s added at the front</td>
+</tr>
+<tr class="even">
+<td>learning rate, <span class="math inline">\(\eta\)</span> (“eta”)</td>
+<td>the step size in gradient descent</td>
+</tr>
+<tr class="odd">
+<td>epoch</td>
+<td>one full step of gradient descent</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-least-squares-what-closest-line-means">Technique 1: least squares (what “closest line” means)</h2>
+<p><strong>Problem it solves:</strong> there are infinitely many lines. We need a rule for which one is best.</p>
+<p>For each point, measure the vertical gap to the line (the residual), square it, and add them all up:</p>
+<p><span class="math display">\[\text{RSS}(\beta_0, \beta_1) = \sum_{i=1}^n \big(y_i - (\beta_0 + \beta_1 x_i)\big)^2\]</span></p>
+<p>The best line is the one with the <strong>smallest RSS</strong>. Squaring stops positive and negative gaps cancelling out and punishes big misses more.</p>
+<div class="warn">
+<p><strong>Slide typo:</strong> slide equation (4) is missing brackets. It must be <span class="math inline">\(y_i - (\hat\beta_0 + \hat\beta_1 x_i)\)</span>, not <span class="math inline">\(y_i - \hat\beta_0 + \hat\beta_1 x_i\)</span>.</p>
+</div>
+<h2 id="technique-2-finding-the-best-line-exactly-by-setting-the-slope-to-zero">Technique 2: finding the best line exactly, by setting the slope to zero</h2>
+<p><strong>Problem it solves:</strong> “smallest RSS” is a goal. This technique gives an actual answer.</p>
+<p>The RSS, viewed as a function of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, is shaped like a <strong>bowl</strong> (the slides show it as a 3D surface). The bottom of a bowl is where it’s flat in every direction, so set both partial slopes (from the <a href="../w1/01_Maths_Toolkit.html">maths toolkit</a>) to zero:</p>
+<p><span class="math display">\[\frac{\partial\,\text{RSS}}{\partial\beta_0} = -2\sum_i (y_i - \beta_0 - \beta_1x_i) = 0, \qquad \frac{\partial\,\text{RSS}}{\partial\beta_1} = -2\sum_i (y_i - \beta_0 - \beta_1x_i)\,x_i = 0\]</span></p>
+<p>Solving those two equations gives:</p>
+<p><span class="math display">\[\hat\beta_1 = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}, \qquad \hat\beta_0 = \bar y - \hat\beta_1\bar x\]</span></p>
+<p><span class="math inline">\(\bar x\)</span> (“x bar”) is the average of the <span class="math inline">\(x\)</span> values. The second formula means the best line always passes through the point (average <span class="math inline">\(x\)</span>, average <span class="math inline">\(y\)</span>).</p>
+<div class="warn">
+<p><strong>Slide typo:</strong> in equation (15), the bottom must be squared: <span class="math inline">\(\sum (x_i - \bar x)^{2}\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(x = (1, 2, 3, 4, 5)\)</span>, <span class="math inline">\(y = (2, 4, 5, 4, 5)\)</span>.</p>
+<ol type="1">
+<li>Averages: <span class="math inline">\(\bar x = 3\)</span>, <span class="math inline">\(\bar y = 4\)</span>.</li>
+<li>Subtract them: <span class="math inline">\(x - \bar x = (-2, -1, 0, 1, 2)\)</span> and <span class="math inline">\(y - \bar y = (-2, 0, 1, 0, 1)\)</span>.</li>
+<li>Top: multiply pairs and add: <span class="math inline">\(4 + 0 + 0 + 0 + 2 = 6\)</span>. Bottom: square and add: <span class="math inline">\(4 + 1 + 0 + 1 + 4 = 10\)</span>.</li>
+<li><span class="math inline">\(\hat\beta_1 = 6/10 = 0.6\)</span> and <span class="math inline">\(\hat\beta_0 = 4 - 0.6 \times 3 = 2.2\)</span>.</li>
+<li>Line: <span class="math inline">\(\hat y = 2.2 + 0.6x\)</span>. Predictions <span class="math inline">\((2.8, 3.4, 4.0, 4.6, 5.2)\)</span>.</li>
+<li>Residuals: <span class="math inline">\((-0.8, 0.6, 1.0, -0.6, -0.2)\)</span>. They add to zero (always true with an intercept). RSS <span class="math inline">\(= 0.64 + 0.36 + 1 + 0.36 + 0.04 = 2.4\)</span>.</li>
+</ol>
+</div>
+<h2 id="technique-3-the-matrix-formula-many-inputs-at-once">Technique 3: the matrix formula (many inputs at once)</h2>
+<p><strong>Problem it solves:</strong> with 13 inputs (the Boston data), solving 14 equations by hand is hopeless. Matrices write them all in one line.</p>
+<p>Put a 1 at the front of each row of data (so <span class="math inline">\(\beta_0\)</span> gets multiplied by 1), and stack the rows into the design matrix <span class="math inline">\(\mathbf X\)</span>. Then the predictions are <span class="math inline">\(\hat{\mathbf y} = \mathbf X\beta\)</span>, and setting the gradient to zero gives the <strong>normal equations</strong>:</p>
+<p><span class="math display">\[\mathbf X^T\mathbf X\,\hat\beta = \mathbf X^T\mathbf y \qquad\Rightarrow\qquad \hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\]</span></p>
+<p>The <span class="math inline">\(^{-1}\)</span> means the <strong>inverse</strong> of a matrix, the matrix version of “divide by”. It only exists when no input is an exact copy or combination of others, and you have more rows than coefficients.</p>
+<p>For a 2×2 matrix you can do it by hand:</p>
+<p><span class="math display">\[\begin{pmatrix}a &amp; b\\ c &amp; d\end{pmatrix}^{-1} = \frac{1}{ad - bc}\begin{pmatrix}d &amp; -b\\ -c &amp; a\end{pmatrix}\]</span></p>
+<div class="example">
+<p><strong>Same data, matrix way.</strong> Rows of <span class="math inline">\(\mathbf X\)</span> are <span class="math inline">\((1, x_i)\)</span>.</p>
+<p><span class="math inline">\(\mathbf X^T\mathbf X = \begin{pmatrix} n &amp; \sum x\\ \sum x &amp; \sum x^2\end{pmatrix} = \begin{pmatrix}5 &amp; 15\\ 15 &amp; 55\end{pmatrix}\)</span>, <span class="math inline">\(\quad\mathbf X^T\mathbf y = \begin{pmatrix}\sum y\\ \sum xy\end{pmatrix} = \begin{pmatrix}20\\ 66\end{pmatrix}\)</span>.</p>
+<p><span class="math inline">\(ad - bc = 275 - 225 = 50\)</span>. So <span class="math inline">\(\hat\beta = \frac{1}{50}\begin{pmatrix}55 &amp; -15\\ -15 &amp; 5\end{pmatrix}\begin{pmatrix}20\\66\end{pmatrix} = \frac1{50}\begin{pmatrix}110\\30\end{pmatrix} = \begin{pmatrix}2.2\\0.6\end{pmatrix}\)</span>. Same answer as before.</p>
+</div>
+<p><strong>Why use several inputs together, not one at a time?</strong> The slides’ advertising example: alone, Newspaper spending looks useful (slope 0.055). Together with Radio, it drops to about 0. Newspaper and Radio budgets tend to rise together, so on its own Newspaper was taking credit for Radio’s effect. Each <span class="math inline">\(\beta_j\)</span> in a multiple regression is the effect <em>with the others held fixed</em>.</p>
+<h2 id="technique-4-gradient-descent-walk-downhill-instead">Technique 4: gradient descent (walk downhill instead)</h2>
+<p><strong>Problem it solves:</strong> the matrix formula gets slow with huge data, and for many later models (like <a href="../w3/Logistic_Regression.html">logistic regression</a>) there <strong>is no formula at all</strong>. Gradient descent works anyway. It’s what the week 2 lab uses.</p>
+<p>The idea: stand somewhere on the bowl, feel which way is uphill (the gradient), take a small step the other way, repeat.</p>
+<p><span class="math display">\[\beta^{(t+1)} = \beta^{(t)} - \eta\,\nabla\text{RSS}(\beta^{(t)})\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta^{(t)}\)</span> is where you are after <span class="math inline">\(t\)</span> steps.</li>
+<li><span class="math inline">\(\eta\)</span> (“eta”), the <strong>learning rate</strong>, is the step size. You choose it.</li>
+<li>For linear regression, <span class="math inline">\(\nabla\text{RSS} = -2\sum_i (y_i - \hat y_i)\,\tilde x_i\)</span>, where <span class="math inline">\(\tilde x_i\)</span> is row <span class="math inline">\(i\)</span> with the 1 at the front.</li>
+</ul>
+<div class="example">
+<p><strong>Worked example (one number to find).</strong> Use the centred data above, so the model is just <span class="math inline">\(\hat y = \beta x\)</span> (centring removes the intercept). Then the slope of the RSS is <span class="math inline">\(-2(6 - 10\beta)\)</span>. With <span class="math inline">\(\eta = 0.01\)</span>, starting at <span class="math inline">\(\beta = 0\)</span>:</p>
+<table>
+<thead>
+<tr class="header">
+<th>step</th>
+<th><span class="math inline">\(\beta\)</span></th>
+<th>slope of RSS</th>
+<th>new <span class="math inline">\(\beta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td><span class="math inline">\(-12\)</span></td>
+<td><span class="math inline">\(0 + 0.01 \times 12 = 0.12\)</span></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0.12</td>
+<td><span class="math inline">\(-9.6\)</span></td>
+<td><span class="math inline">\(0.216\)</span></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0.216</td>
+<td><span class="math inline">\(-7.68\)</span></td>
+<td><span class="math inline">\(0.293\)</span></td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td></td>
+<td></td>
+<td>heads to <span class="math inline">\(0.6\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Each step closes 20% of the gap to the answer 0.6.</p>
+</div>
+<div data-widget="gd">
+
+</div>
+<p><strong>Two things the lab cares about:</strong></p>
+<ul>
+<li><strong>Step size:</strong> too big and you overshoot the bottom and fly off (the numbers blow up). Too small and it takes forever. Here it only works if <span class="math inline">\(\eta &lt; 1/10\)</span>.</li>
+<li><strong>Normalise the inputs first.</strong> If one input is in thousands and another in fractions, no single step size suits both. That’s why the lab gives you <code>normalize()</code>.</li>
+<li><strong>Starting point doesn’t matter</strong> (lab Q1 with 10 random starts): the RSS is one bowl with one bottom, so every start ends in the same place.</li>
+</ul>
+<h2 id="technique-5-judging-the-fit-rse-and-r2">Technique 5: judging the fit (RSE and <span class="math inline">\(R^2\)</span>)</h2>
+<p><strong>Problem it solves:</strong> you have a line. Is it any good?</p>
+<p><strong>RSE (residual standard error):</strong> the typical size of a miss, in the same units as <span class="math inline">\(Y\)</span>.</p>
+<p><span class="math display">\[\text{RSE} = \sqrt{\frac{\text{RSS}}{n - p - 1}}\]</span></p>
+<p>Why divide by <span class="math inline">\(n - p - 1\)</span> and not <span class="math inline">\(n\)</span>? Because the line was fitted to these same points, its residuals come out a bit too small. Each of the <span class="math inline">\(p + 1\)</span> numbers you estimated “uses up” one data point’s worth of freedom, so you divide by what’s left.</p>
+<p><strong><span class="math inline">\(R^2\)</span>:</strong> the fraction of the variation in <span class="math inline">\(Y\)</span> that the model explains, from 0 to 1, no units.</p>
+<p><span class="math display">\[\text{TSS} = \sum_i (y_i - \bar y)^2, \qquad R^2 = 1 - \frac{\text{RSS}}{\text{TSS}}\]</span></p>
+<p>TSS is how spread out <span class="math inline">\(Y\)</span> is before you use any inputs (just guessing the average). RSS is what’s left after using the line. In simple regression <span class="math inline">\(R^2\)</span> equals the correlation squared.</p>
+<div class="example">
+<p><strong>Continuing the example.</strong> RSS <span class="math inline">\(= 2.4\)</span>. TSS <span class="math inline">\(= 4 + 0 + 1 + 0 + 1 = 6\)</span>. <span class="math inline">\(R^2 = 1 - 2.4/6 = 0.6\)</span> (and the week 1 correlation was 0.775, and <span class="math inline">\(0.775^2 = 0.6\)</span>). RSE <span class="math inline">\(= \sqrt{2.4/(5 - 1 - 1)} = \sqrt{0.8} \approx 0.89\)</span>.</p>
+</div>
+<p><strong>A warning:</strong> a high <span class="math inline">\(R^2\)</span> on training data doesn’t prove the model is good on new data. See the overfitting trap in the <a href="../w1/00_Start_Here_The_Big_Picture.html">big picture</a>.</p>
+<p><strong>The estimates wobble.</strong> A different sample would give a slightly different <span class="math inline">\(\hat\beta\)</span>. The slides give how much: <span class="math inline">\(\text{var}(\hat\beta) = \sigma^2(\mathbf X^T\mathbf X)^{-1}\)</span>. You don’t need to compute it; just know it gets <strong>worse</strong> with more noise, less data, or inputs that copy each other. That last case is why <a href="Ridge_Regression.html">ridge regression</a> exists.</p>
+<h2 id="technique-6-dummy-variables-using-categories-as-inputs">Technique 6: dummy variables (using categories as inputs)</h2>
+<p><strong>Problem it solves:</strong> the formula needs numbers, but some inputs are categories (owns a house: yes or no; region: East, West, South).</p>
+<p><strong>Two categories:</strong> make a column that is 1 for “yes” and 0 for “no”. Then <span class="math inline">\(\beta_0\)</span> is the average for the “no” group and <span class="math inline">\(\beta_1\)</span> is the <strong>difference</strong> between groups.</p>
+<p><strong>More than two categories:</strong> with <span class="math inline">\(m\)</span> categories, make <span class="math inline">\(m - 1\)</span> columns. The category without a column is the <strong>baseline</strong>, and each <span class="math inline">\(\beta\)</span> is that category’s difference from the baseline. (Making <span class="math inline">\(m\)</span> columns breaks the matrix formula, because they always add up to the column of 1s.)</p>
+<div class="example">
+<p>Region with East as baseline: West column, South column. East: <span class="math inline">\(\beta_0\)</span>. West: <span class="math inline">\(\beta_0 + \beta_1\)</span>. South: <span class="math inline">\(\beta_0 + \beta_2\)</span>. If average balances are East 500, West 550, South 620, then <span class="math inline">\(\beta_0 = 500\)</span>, <span class="math inline">\(\beta_1 = 50\)</span>, <span class="math inline">\(\beta_2 = 120\)</span>.</p>
+</div>
+<p>In pandas: <code>pd.get_dummies(df['region'], drop_first=True)</code>.</p>
+<h2 id="technique-7-interactions-when-one-input-changes-anothers-effect">Technique 7: interactions (when one input changes another’s effect)</h2>
+<p><strong>Problem it solves:</strong> plain linear regression assumes each input’s effect is the same regardless of the others. But radio ads might make TV ads work better.</p>
+<p>Add a column that is the two inputs multiplied together:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X_{TV} + \beta_2X_{Radio} + \beta_3\,X_{TV}X_{Radio} + \epsilon\]</span></p>
+<p>Now one more unit of TV adds <span class="math inline">\(\beta_1 + \beta_3 X_{Radio}\)</span>: more when radio spend is higher. It’s still fitted by ordinary least squares; you just added a column.</p>
+<div class="warn">
+<p><strong>Slide typo:</strong> equations (48) and (49) leave out the interaction’s own coefficient. It should be <span class="math inline">\((\beta_{TV} + \beta_3X_{Radio})X_{TV}\)</span>.</p>
+</div>
+<h2 id="technique-8-checking-the-assumptions-with-a-residual-plot">Technique 8: checking the assumptions with a residual plot</h2>
+<p><strong>Problem it solves:</strong> the model assumes a straight-line shape, effects that simply add up, and luck of roughly the same size everywhere. How do you know if that’s wrong?</p>
+<p>Plot residuals (up/down) against predictions (across). Healthy: a shapeless horizontal band. A <strong>U shape</strong> means the true rule is curved (try <a href="Polynomial_and_Step_Regression.html">polynomial terms</a>). A <strong>funnel</strong> that widens means the luck gets bigger for bigger values.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<p><code>C3C6C7.txt</code> names chapters 3, 6 and 7. For this page, chapter 3:</p>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3.1.1 Estimating the coefficients</td>
+<td><strong>Read</strong></td>
+<td>Least squares, the formulas</td>
+</tr>
+<tr class="even">
+<td>3.1.2 Accuracy of the coefficient estimates</td>
+<td>Skim</td>
+<td>Only the idea that <span class="math inline">\(\hat\beta\)</span> wobbles. <strong>Skip</strong> standard errors, confidence intervals, t-statistics, p-values</td>
+</tr>
+<tr class="odd">
+<td>3.1.3 Accuracy of the model</td>
+<td><strong>Read</strong></td>
+<td>RSE and <span class="math inline">\(R^2\)</span></td>
+</tr>
+<tr class="even">
+<td>3.2.1 Multiple regression coefficients</td>
+<td><strong>Read</strong></td>
+<td>Including the newspaper/radio example</td>
+</tr>
+<tr class="odd">
+<td>3.2.2 Some important questions</td>
+<td>Skip</td>
+<td>F-statistic and variable selection are not on the slides</td>
+</tr>
+<tr class="even">
+<td>3.3.1 Qualitative predictors</td>
+<td><strong>Read</strong></td>
+<td>Dummy variables</td>
+</tr>
+<tr class="odd">
+<td>3.3.2 Extensions</td>
+<td><strong>Read</strong></td>
+<td>Interactions and polynomial terms</td>
+</tr>
+<tr class="even">
+<td>3.3.3 Potential problems</td>
+<td>Skim</td>
+<td>Non-linearity, correlated errors, non-constant variance, collinearity only. Skip outliers, leverage, VIF</td>
+</tr>
+<tr class="odd">
+<td>3.4 Marketing plan</td>
+<td>Skip</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3.5 Linear regression vs KNN</td>
+<td>Recommended</td>
+<td>For lab Q2, see <a href="KNN_Regression.html">KNN regression</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, chapter 3). I want practice questions on LINEAR REGRESSION, done by hand:
+- computing the least-squares slope and intercept from 4-6 data points (beta1 = Sxy/Sxx, beta0 = ybar - beta1*xbar)
+- residuals, RSS, TSS, R-squared and RSE
+- deriving the formulas by setting partial derivatives of RSS to zero
+- the matrix form: building the design matrix X, computing X^T X and X^T y, and solving with a 2x2 inverse
+- gradient descent steps by hand, choosing a learning rate, and why too large a learning rate diverges; why normalising helps
+- interpreting coefficients in multiple regression (&quot;holding other predictors fixed&quot;), and why correlated predictors can change a coefficient
+- dummy variables for categories (m-1 dummies, baseline), and interaction terms
+- reading a residual plot (U-shape, funnel)
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder. Use small whole numbers so I can work by hand.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain what went wrong and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise next.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w1/KNN.html"><small>&larr; Previous</small>KNN (classifier)</a><a class="next" href="../w2/Polynomial_and_Step_Regression.html"><small>Next &rarr;</small>Polynomial &amp; step regression</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

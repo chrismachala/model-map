@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-nearest neighbours (KNN) · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w1_KNN" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip cls">Classification model</span><span class="chip">Week 1</span><span class="chip">4 techniques</span></div>
+  <h1>K-nearest neighbours (KNN)</h1>
+  <p class="tagline">"To guess for someone new, look at the K most similar people you already know and go with the majority." That's the whole model.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> classification here. The same idea does regression in week 2 (<a href="../w2/KNN_Regression.html">KNN regression</a>) and comes back as a classifier in week 3.<br />
+<strong>Weeks:</strong> 1, 2 and 3.<br />
+<strong>Book:</strong> ISLP 2.2.3 (second half, “K-Nearest Neighbors”). Also 4.7 lab mentions it.<br />
+<strong>Techniques on this page:</strong> distance, neighbourhood vote, choosing <span class="math inline">\(K\)</span>, normalising features.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The <a href="Bayes_Classifier.html">Bayes classifier</a> is perfect, but it needs the true chance of each category, which we never know. KNN is the simplest possible way to <strong>estimate</strong> those chances from data: <em>the chance of “default” for this person is roughly the fraction of similar people who defaulted.</em></p>
+<p>It assumes <strong>no shape</strong> for the rule (it’s non-parametric), so it can follow any pattern, however curvy. That flexibility is also its weakness: it needs a lot of data, and you have to choose how many neighbours to listen to.</p>
+</div>
+<h2 id="the-idea-in-everyday-words">The idea in everyday words</h2>
+<p>You move to a new street and want to guess whether your neighbours recycle. You look at the 5 nearest houses: 4 have recycling bins out. Your guess: probably yes, with a “chance” of 4/5.</p>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(K\)</span></td>
+<td>how many neighbours you look at. You choose it.</td>
+</tr>
+<tr class="even">
+<td>neighbours, <span class="math inline">\(\mathcal{N}_{x_0}\)</span></td>
+<td>the <span class="math inline">\(K\)</span> training points closest to the new point <span class="math inline">\(x_0\)</span>. The curly N is just a name for that group.</td>
+</tr>
+<tr class="odd">
+<td>Euclidean distance</td>
+<td>ordinary straight-line distance, like with a ruler</td>
+</tr>
+<tr class="even">
+<td>non-parametric</td>
+<td>doesn’t assume any shape for the rule; just uses the data directly</td>
+</tr>
+<tr class="odd">
+<td>flexible</td>
+<td>able to bend to follow the data closely</td>
+</tr>
+<tr class="even">
+<td>overfitting</td>
+<td>bending so much it follows the luck, not the pattern</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-measuring-distance">Technique 1: measuring distance</h2>
+<p><strong>Problem it solves:</strong> “closest” needs a definition when there are several inputs.</p>
+<p>For two points, square the difference in each input, add them up, and take the square root (Pythagoras):</p>
+<p><span class="math display">\[\text{distance}(x, x_0) = \sqrt{(x_1 - x_{01})^2 + (x_2 - x_{02})^2 + \dots + (x_p - x_{0p})^2}\]</span></p>
+<p>With one input it’s just <span class="math inline">\(|x - x_0|\)</span> (the gap, ignoring sign). The week 3 lab skips the square root because it doesn’t change which points are closest.</p>
+<div class="example">
+<p>From <span class="math inline">\((1, 1)\)</span> to <span class="math inline">\((0, 0)\)</span>: <span class="math inline">\(\sqrt{1^2 + 1^2} = \sqrt2 \approx 1.41\)</span>. From <span class="math inline">\((1,1)\)</span> to <span class="math inline">\((3, 0)\)</span>: <span class="math inline">\(\sqrt{2^2 + 1^2} = \sqrt5 \approx 2.24\)</span>.</p>
+</div>
+<h2 id="technique-2-the-neighbourhood-vote">Technique 2: the neighbourhood vote</h2>
+<p><strong>Problem it solves:</strong> turning the neighbours into a chance for each category, and then a decision.</p>
+<ol type="1">
+<li>Find the <span class="math inline">\(K\)</span> training points closest to the new point <span class="math inline">\(x_0\)</span>.</li>
+<li>The estimated chance of category <span class="math inline">\(k\)</span> is the fraction of those neighbours in category <span class="math inline">\(k\)</span>: <span class="math display">\[\tilde P(Y = k \mid X = x_0) = \frac{1}{K}\sum_{\text{neighbours}} \mathbb{1}(y = k)\]</span> The sum with the indicator <span class="math inline">\(\mathbb 1\)</span> just <strong>counts</strong> neighbours in category <span class="math inline">\(k\)</span>. Dividing by <span class="math inline">\(K\)</span> turns the count into a fraction.</li>
+<li>Pick the category with the biggest fraction (the Bayes classifier rule, using these estimates).</li>
+</ol>
+<div class="warn">
+<p><strong>Slide typo:</strong> slide equation (33) leaves out the <span class="math inline">\(\frac1K\)</span>. Without it you get a count, not a chance. The book (eq. 2.12) and the slide’s own worked example (<span class="math inline">\(\tfrac13\)</span>, <span class="math inline">\(\tfrac23\)</span>) include it.</p>
+</div>
+<div class="example">
+<p><strong>Worked example (one input).</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y\)</span></td>
+<td>A</td>
+<td>A</td>
+<td>B</td>
+<td>B</td>
+<td>B</td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p>New point <span class="math inline">\(x_0 = 3.4\)</span>. Gaps: <span class="math inline">\(x{=}3\)</span>: 0.4, <span class="math inline">\(x{=}4\)</span>: 0.6, <span class="math inline">\(x{=}2\)</span>: 1.4, <span class="math inline">\(x{=}5\)</span>: 1.6, <span class="math inline">\(x{=}1\)</span>: 2.4, <span class="math inline">\(x{=}6\)</span>: 2.6.</p>
+<ul>
+<li><span class="math inline">\(K = 1\)</span>: nearest is <span class="math inline">\(x = 3\)</span> (B). Predict <strong>B</strong>.</li>
+<li><span class="math inline">\(K = 3\)</span>: B, B, A. Chance of B is <span class="math inline">\(2/3\)</span>. Predict <strong>B</strong>.</li>
+<li><span class="math inline">\(K = 5\)</span>: B, B, A, B, A. Chance of B is <span class="math inline">\(3/5\)</span>. Predict <strong>B</strong>.</li>
+<li><span class="math inline">\(K = 6\)</span>: everyone, 3 A and 3 B: a <strong>tie</strong>. That’s why odd <span class="math inline">\(K\)</span> is preferred with two categories.</li>
+</ul>
+</div>
+<div data-widget="knn">
+
+</div>
+<h2 id="technique-3-choosing-k-the-bendiness-dial">Technique 3: choosing <span class="math inline">\(K\)</span> (the bendiness dial)</h2>
+<p><strong>Problem it solves:</strong> KNN has no numbers to fit, but it has one setting, <span class="math inline">\(K\)</span>, and it decides everything.</p>
+<ul>
+<li><strong>Small <span class="math inline">\(K\)</span> (like 1):</strong> very bendy. The boundary between categories is jagged and chases individual points. <strong>Training error is zero</strong> for <span class="math inline">\(K = 1\)</span> (each training point’s nearest neighbour is itself), but that’s memorising, not learning. Low bias, high variance.</li>
+<li><strong>Large <span class="math inline">\(K\)</span> (like 100):</strong> very smooth, nearly a straight boundary. It ignores real local patterns. High bias, low variance.</li>
+<li><strong>In between (the slides show <span class="math inline">\(K = 10\)</span>):</strong> can get very close to the Bayes classifier.</li>
+</ul>
+<p>If you plot error against <span class="math inline">\(1/K\)</span> (so more bendy is to the right), <strong>training error keeps falling, but test error falls and then rises again</strong>: the U shape from the <a href="00_Start_Here_The_Big_Picture.html">big picture</a>. The best <span class="math inline">\(K\)</span> is at the bottom of the U. You choose it with a <strong>validation set</strong> (week 2), never with training error.</p>
+<h2 id="technique-4-normalising-features-put-inputs-on-the-same-scale">Technique 4: normalising features (put inputs on the same scale)</h2>
+<p><strong>Problem it solves:</strong> distance adds up raw differences, so an input measured in big units drowns out the others.</p>
+<p>House age ranges 0 to 100 years; number of rooms ranges 3 to 9. Without fixing this, “nearest” is almost entirely about age. The fix is to rescale each input to have average 0 and spread 1 (subtract the column’s mean, divide by its standard deviation). The week 2 lab’s <code>normalize()</code> does exactly this.</p>
+<h2 id="strengths-and-weaknesses">Strengths and weaknesses</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Good at</th>
+<th>Bad at</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>any shape of boundary, however curvy</td>
+<td>needs lots of data</td>
+</tr>
+<tr class="even">
+<td>no assumptions</td>
+<td>slow to predict (measures distance to every training point)</td>
+</tr>
+<tr class="odd">
+<td>very easy to explain</td>
+<td>many inputs make “nearby” meaningless (the curse of dimensionality)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>tells you nothing about <em>why</em> (no coefficients to read)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ISLP 2.2.3, “K-Nearest Neighbors” part, Figures 2.14 to 2.17</td>
+<td><strong>Read</strong></td>
+<td>Exactly the slides: the <span class="math inline">\(K = 3\)</span> picture, <span class="math inline">\(K = 10\)</span> vs Bayes, <span class="math inline">\(K = 1\)</span> vs <span class="math inline">\(K = 100\)</span>, the U-curve</td>
+</tr>
+<tr class="even">
+<td>2.4 Exercise 7</td>
+<td><strong>Do</strong></td>
+<td>KNN by hand, a perfect exam-style practice</td>
+</tr>
+<tr class="odd">
+<td>3.5 Comparison of linear regression with KNN</td>
+<td>Week 2</td>
+<td>See <a href="../w2/KNN_Regression.html">KNN regression</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 2.2.3). I want practice questions on K-NEAREST NEIGHBOURS (KNN) for classification:
+- computing Euclidean distances by hand in 1D and 2D
+- finding the K nearest neighbours of a test point from a small table
+- estimating class probabilities as the fraction of neighbours in each class (with the 1/K)
+- predicting the class for different K (1, 3, 5...), including ties
+- how K controls flexibility: small K vs large K, bias vs variance, training error vs test error, the U-shaped test error curve
+- why features should be normalised before KNN, with a numeric example
+- when KNN is a good or bad choice
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder. Use small tables of 5-8 training points with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain what went wrong and give me a similar question.
+5. Mix calculations with a few &quot;explain why&quot; questions.
+6. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w1/Bayes_Classifier.html"><small>&larr; Previous</small>Bayes classifier</a><a class="next" href="../w2/Linear_Regression.html"><small>Next &rarr;</small>Linear regression</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

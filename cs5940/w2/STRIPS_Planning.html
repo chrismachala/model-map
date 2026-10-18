@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STRIPS planning · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w2_STRIPS_Planning" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 2</span><span class="chip">4 techniques</span></div>
+  <h1>STRIPS planning</h1>
+  <p class="tagline">Means-ends reasoning as search. Describe each action by what it needs and what it adds and deletes, then look for a sequence of actions that turns the start state into one where the goal holds.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative technique (the “how” half of BDI).<br />
+<strong>Week:</strong> 2 (slides 32 to 41).<br />
+<strong>Book:</strong> Wooldridge 4.2 Means-ends reasoning (pp. 69 to 75).<br />
+<strong>Techniques on this page:</strong> the planning problem, the transition function, applying STRIPS actions in the blocks world, checking a plan state by state, plan libraries and HTN.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>A <a href="BDI_Practical_Reasoning.html">BDI</a> agent decides <strong>what</strong> to achieve (an intention). It still needs to work out <strong>how</strong>. Planning is <strong>automatic programming</strong>: give it a goal, the available actions and the current state, and it produces the program (the plan) itself.</p>
+<p>This is the only real maths in week 2, and “verify this plan state by state” is a very likely exam question. It also explains a modern worry: an LLM can write a plan that <em>looks</em> right but contains a step whose preconditions don’t hold.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(m_0\)</span></td>
+<td>the start state: a set of facts that are true</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(g_t\)</span></td>
+<td>the goal: facts that must be true at the end</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td>the available actions</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(pre(a)\)</span></td>
+<td>preconditions: facts that must hold before <span class="math inline">\(a\)</span> can run</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(add(a)\)</span>, <span class="math inline">\(del(a)\)</span></td>
+<td>facts <span class="math inline">\(a\)</span> makes true, facts <span class="math inline">\(a\)</span> makes false</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\tau(m, a)\)</span></td>
+<td>the state after doing <span class="math inline">\(a\)</span> in state <span class="math inline">\(m\)</span></td>
+</tr>
+<tr class="odd">
+<td>plan <span class="math inline">\(\pi\)</span></td>
+<td>a sequence of actions <span class="math inline">\(\langle a_1, \dots, a_n \rangle\)</span></td>
+</tr>
+<tr class="even">
+<td>closed world</td>
+<td>a fact not in the state is false</td>
+</tr>
+<tr class="odd">
+<td>HTN</td>
+<td>hierarchical task network: break a big task into smaller tasks</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-planning-problem">Technique 1: the planning problem</h2>
+<p><strong>Problem it solves:</strong> states exactly what a planner is given and what counts as success.</p>
+<p>A planning problem is <span class="math inline">\(\langle m_0, g_t, A \rangle\)</span>. Each action is <span class="math inline">\(a = \langle pre(a), \langle del(a), add(a) \rangle \rangle\)</span>.</p>
+<p><span class="math display">\[\tau(m, a) = (m \setminus del(a)) \cup add(a), \qquad \text{allowed only if } pre(a) \subseteq m.\]</span></p>
+<p>In words: if every precondition is in the state, remove the delete list and add the add list.</p>
+<p>A plan <span class="math inline">\(\pi\)</span> <strong>solves</strong> the problem if, applying each action in turn, every action is allowed and the final state contains the goal: <span class="math inline">\(g_t \subseteq m_n\)</span>. So planning is <strong>search</strong> through the graph of states that <span class="math inline">\(\tau\)</span> creates.</p>
+<p><strong>Why a delete list?</strong> Under the closed world assumption a state lists only the true facts. Actions make some facts false (after a pickup the arm isn’t empty), and the only way to say so is to remove them.</p>
+<h2 id="technique-2-strips-actions-in-the-blocks-world">Technique 2: STRIPS actions in the blocks world</h2>
+<p><strong>Problem it solves:</strong> the standard example, used on the slides and in the book.</p>
+<p>Facts: <span class="math inline">\(on(X,Y)\)</span>, <span class="math inline">\(onTable(X)\)</span>, <span class="math inline">\(clear(X)\)</span> (nothing on top of <span class="math inline">\(X\)</span>), <span class="math inline">\(holding(X)\)</span>, <span class="math inline">\(armEmpty\)</span>.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>pre</th>
+<th>del</th>
+<th>add</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(stack(X,Y)\)</span></td>
+<td><span class="math inline">\(clear(Y), holding(X)\)</span></td>
+<td><span class="math inline">\(clear(Y), holding(X)\)</span></td>
+<td><span class="math inline">\(armEmpty, on(X,Y)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(unstack(X,Y)\)</span></td>
+<td><span class="math inline">\(on(X,Y), clear(X), armEmpty\)</span></td>
+<td><span class="math inline">\(on(X,Y), armEmpty\)</span></td>
+<td><span class="math inline">\(holding(X), clear(Y)\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(pickup(X)\)</span></td>
+<td><span class="math inline">\(clear(X), onTable(X), armEmpty\)</span></td>
+<td><span class="math inline">\(onTable(X), armEmpty\)</span></td>
+<td><span class="math inline">\(holding(X)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(putdown(X)\)</span></td>
+<td><span class="math inline">\(holding(X)\)</span></td>
+<td><span class="math inline">\(holding(X)\)</span></td>
+<td><span class="math inline">\(armEmpty, onTable(X)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(stack\)</span>/<span class="math inline">\(unstack\)</span> and <span class="math inline">\(pickup\)</span>/<span class="math inline">\(putdown\)</span> undo each other. Note <span class="math inline">\(clear(X)\)</span> stays true while <span class="math inline">\(X\)</span> is held.</p>
+<h2 id="technique-3-checking-a-plan-state-by-state">Technique 3: checking a plan state by state</h2>
+<p><strong>Problem it solves:</strong> proves a plan works, and catches steps that can’t run.</p>
+<div class="example">
+<p><strong>Worked example: build the tower A on B on C.</strong></p>
+<p><span class="math inline">\(m_0 = \{armEmpty, clear(A), on(A,B), onTable(B), onTable(C), clear(C)\}\)</span> (A on B; B and C on the table). Goal <span class="math inline">\(g_t = \{on(A,B), on(B,C), onTable(C)\}\)</span>.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+<th>pre ✓?</th>
+<th>Removed</th>
+<th>Added</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><span class="math inline">\(unstack(A,B)\)</span></td>
+<td><span class="math inline">\(on(A,B), clear(A), armEmpty\)</span> ✓</td>
+<td><span class="math inline">\(on(A,B), armEmpty\)</span></td>
+<td><span class="math inline">\(holding(A), clear(B)\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(putdown(A)\)</span></td>
+<td><span class="math inline">\(holding(A)\)</span> ✓</td>
+<td><span class="math inline">\(holding(A)\)</span></td>
+<td><span class="math inline">\(armEmpty, onTable(A)\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(pickup(B)\)</span></td>
+<td><span class="math inline">\(clear(B), onTable(B), armEmpty\)</span> ✓</td>
+<td><span class="math inline">\(onTable(B), armEmpty\)</span></td>
+<td><span class="math inline">\(holding(B)\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(stack(B,C)\)</span></td>
+<td><span class="math inline">\(clear(C), holding(B)\)</span> ✓</td>
+<td><span class="math inline">\(clear(C), holding(B)\)</span></td>
+<td><span class="math inline">\(armEmpty, on(B,C)\)</span></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><span class="math inline">\(pickup(A)\)</span></td>
+<td><span class="math inline">\(clear(A), onTable(A), armEmpty\)</span> ✓</td>
+<td><span class="math inline">\(onTable(A), armEmpty\)</span></td>
+<td><span class="math inline">\(holding(A)\)</span></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><span class="math inline">\(stack(A,B)\)</span></td>
+<td><span class="math inline">\(clear(B), holding(A)\)</span> ✓</td>
+<td><span class="math inline">\(clear(B), holding(A)\)</span></td>
+<td><span class="math inline">\(armEmpty, on(A,B)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Final state <span class="math inline">\(\{clear(A), on(A,B), on(B,C), onTable(C), armEmpty\}\)</span> contains the goal, so the plan works. It’s also <strong>shortest</strong>: B must end on C but starts under A, so A has to come off, go somewhere, and go back.</p>
+</div>
+<div class="example">
+<p><strong>Worked example: spot the illegal step.</strong> From <span class="math inline">\(m_0\)</span> above, can we start with <span class="math inline">\(pickup(B)\)</span>? It needs <span class="math inline">\(clear(B)\)</span>, but A is on B, so <strong>no</strong>. A planner that checks <span class="math inline">\(pre(a) \subseteq m\)</span> would never propose it.</p>
+</div>
+<div data-widget="blocks">
+
+</div>
+<p><strong>How big is the search?</strong> With 3 blocks there are 13 ways to arrange them in stacks, plus 9 states with one block held: <strong>22 states</strong>. Small here, but it explodes as blocks are added, which is why planning is expensive.</p>
+<h2 id="technique-4-first-principles-libraries-and-htn">Technique 4: first principles, libraries and HTN</h2>
+<p><strong>Problem it solves:</strong> planning from scratch is slow, so real BDI systems usually don’t.</p>
+<ul>
+<li><strong>Planning from first principles:</strong> search for <span class="math inline">\(\pi\)</span> from the STRIPS descriptions, as above. General, but expensive.</li>
+<li><strong>Plan libraries:</strong> the programmer writes plans for particular goals in advance. Cheap, but brittle (no plan for a situation nobody foresaw). PRS and <a href="../w3/AgentSpeak.html">AgentSpeak</a> use libraries.</li>
+<li>Plans can be richer than lists (<code>while</code>, <code>if-then-else</code>).</li>
+<li><strong>HTN:</strong> break a high-level task into subtasks, recursively, down to primitive actions (“move tower” → “clear top”, “move block”, …). Often much cheaper when subtasks repeat.</li>
+</ul>
+<p><strong>Discussion (slide 41): is an LLM’s chain of thought planning?</strong> It <em>looks</em> like first-principles search, but it draws on patterns from training, more like an implicit library. And unlike a STRIPS planner it doesn’t check <span class="math inline">\(pre(a) \subseteq m\)</span>, so it can produce plans that look right but can’t run. A sensible design: let the LLM propose, and check with <span class="math inline">\(\tau\)</span>.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4.2 Means-ends reasoning, pp. 69 to 75</td>
+<td><strong>Read</strong></td>
+<td>STRIPS and the blocks world with the same predicates and four actions as the slides. Core</td>
+</tr>
+<tr class="even">
+<td>HTN</td>
+<td>Slides only</td>
+<td>Slides 39 to 41</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., 4.2). I want practice on STRIPS PLANNING in the blocks world, worked by hand:
+- the planning problem &lt;m0, g, A&gt;, actions as &lt;pre, del, add&gt;, and tau(m, a) = (m minus del) union add, defined only if pre is a subset of m
+- whether an action is applicable in a given state, and the state after applying it
+- writing a plan from one arrangement of blocks to another, and verifying it state by state
+- spotting an illegal step in a proposed plan
+- why STRIPS needs delete lists (closed world assumption)
+- counting states for small numbers of blocks
+- planning from first principles vs plan libraries vs HTN, and whether an LLM&#39;s chain of thought counts as planning
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder; always list the states as sets of facts.
+3. Wait for my answer, then mark it and show the full state-by-state working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/BDI_Practical_Reasoning.html"><small>&larr; Previous</small>BDI and practical reasoning</a><a class="next" href="../w2/Coach_Practical.html"><small>Next &rarr;</small>Practical 2: the running coach</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

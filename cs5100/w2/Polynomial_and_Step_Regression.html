@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polynomial and step regression (basis functions) · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w2_Polynomial_and_Step_Regression" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip reg">Regression model</span><span class="chip">Week 2</span><span class="chip">4 techniques</span></div>
+  <h1>Polynomial and step regression (basis functions)</h1>
+  <p class="tagline">Linear regression can only draw straight lines. The trick here: invent new input columns (like x², or "is x between 2 and 5?") so the same straight-line machinery draws curves and steps.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> regression.<br />
+<strong>Week:</strong> 2.<br />
+<strong>Book:</strong> ISLP 3.3.2 (non-linear terms), 7.1, 7.2, 7.3.<br />
+<strong>Techniques on this page:</strong> polynomial features, step functions, the general basis-function recipe, choosing how flexible to be.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Real relationships are often curved. Car fuel efficiency drops fast as horsepower rises, then levels off. A straight line can’t follow that, so it’s wrong in a systematic way (high <strong>bias</strong>, from the <a href="../w1/00_Start_Here_The_Big_Picture.html">big picture</a>).</p>
+<p>We’d like curves, but we don’t want to throw away everything we learned about <a href="Linear_Regression.html">linear regression</a>. The clever bit: the word “linear” in linear regression refers to the <strong>coefficients <span class="math inline">\(\beta\)</span></strong>, not to <span class="math inline">\(X\)</span>. As long as each <span class="math inline">\(\beta\)</span> just multiplies a column, you can put anything you like in the columns, including <span class="math inline">\(x^2\)</span>, and least squares still works unchanged.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>polynomial</td>
+<td>a sum of powers: <span class="math inline">\(x\)</span>, <span class="math inline">\(x^2\)</span>, <span class="math inline">\(x^3\)</span>, …</td>
+</tr>
+<tr class="even">
+<td>degree</td>
+<td>the highest power used. Degree 2 = a curve with one bend, degree 3 = up to two bends</td>
+</tr>
+<tr class="odd">
+<td>feature engineering</td>
+<td>making new input columns out of old ones</td>
+</tr>
+<tr class="even">
+<td>step function, piecewise constant</td>
+<td>a flat value in each range, jumping between ranges, like a staircase</td>
+</tr>
+<tr class="odd">
+<td>cut points, knots, <span class="math inline">\(c_k\)</span></td>
+<td>where the ranges start and end</td>
+</tr>
+<tr class="even">
+<td>basis functions, <span class="math inline">\(b_k(x)\)</span></td>
+<td>the general name for “whatever new columns you decided to make”</td>
+</tr>
+<tr class="odd">
+<td>global vs local</td>
+<td>global: changing data in one place changes the curve everywhere; local: only nearby</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-polynomial-features">Technique 1: polynomial features</h2>
+<p><strong>Problem it solves:</strong> a smooth curve.</p>
+<p>Add powers of <span class="math inline">\(X\)</span> as extra columns:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X + \beta_2X^2 + \beta_3X^3 + \epsilon\]</span></p>
+<p>Then fit exactly as in linear regression, with the design matrix having columns <span class="math inline">\(1, x, x^2, x^3\)</span>.</p>
+<div class="example">
+<p><strong>Design matrix.</strong> Data <span class="math inline">\(x = (1, 2, 3)\)</span>, degree 2. Each row is <span class="math inline">\((1, x, x^2)\)</span>:</p>
+<p><span class="math display">\[\mathbf X = \begin{pmatrix}1 &amp; 1 &amp; 1\\ 1 &amp; 2 &amp; 4\\ 1 &amp; 3 &amp; 9\end{pmatrix}\]</span></p>
+<p>For a cubic, the row for <span class="math inline">\(x = 2\)</span> would be <span class="math inline">\((1, 2, 4, 8)\)</span>.</p>
+</div>
+<p><strong>Is it still linear?</strong> Ask: is every <span class="math inline">\(\beta\)</span> just multiplying a column you can compute in advance?</p>
+<ul>
+<li><span class="math inline">\(Y = \beta_0 + \beta_1\log X + \beta_2\sqrt X\)</span>: <strong>yes</strong>, the columns are <span class="math inline">\(\log x\)</span> and <span class="math inline">\(\sqrt x\)</span>.</li>
+<li><span class="math inline">\(Y = \beta_0 + e^{\beta_1 X}\)</span>: <strong>no</strong>, <span class="math inline">\(\beta_1\)</span> is stuck inside the exponential.</li>
+</ul>
+<p><strong>Why not degree 20?</strong> High degrees wiggle wildly, especially near the edges of the data, and fit the luck. People rarely go above 3 or 4. Polynomials are also <strong>global</strong>: a few odd points at one end change the whole curve.</p>
+<p><strong>Non-linear example from the slides:</strong> in <span class="math inline">\(Y = \beta_0 + \beta_1X^2\)</span>, increasing <span class="math inline">\(X\)</span> by <span class="math inline">\(\Delta\)</span> changes <span class="math inline">\(Y\)</span> by <span class="math inline">\(2\beta_1X\Delta + \beta_1\Delta^2\)</span>, which depends on where <span class="math inline">\(X\)</span> already is. That’s what “not linear in <span class="math inline">\(X\)</span>” means.</p>
+<h2 id="technique-2-step-functions-piecewise-constant-regression">Technique 2: step functions (piecewise constant regression)</h2>
+<p><strong>Problem it solves:</strong> polynomials are global. Sometimes you want each range of <span class="math inline">\(X\)</span> to have its own level, unaffected by far-away data (e.g. wage by age group).</p>
+<p>Choose cut points <span class="math inline">\(c_1 &lt; c_2 &lt; \dots &lt; c_K\)</span> and make one yes/no column per range:</p>
+<p><span class="math display">\[C_0(X) = \mathbb 1(X &lt; c_1),\quad C_1(X) = \mathbb 1(c_1 \le X &lt; c_2),\ \dots,\ C_K(X) = \mathbb 1(c_K \le X)\]</span></p>
+<p>For any <span class="math inline">\(x\)</span>, exactly one of these is 1. Fit <span class="math inline">\(Y = \sum_k \beta_k C_k(X)\)</span> with least squares, and each <span class="math inline">\(\hat\beta_k\)</span> turns out to be <strong>the average <span class="math inline">\(y\)</span> in that range</strong>.</p>
+<div class="example">
+<p><span class="math inline">\(x = (1, 2, 3, 6, 7, 8)\)</span>, <span class="math inline">\(y = (3, 5, 4, 10, 12, 11)\)</span>, one cut at <span class="math inline">\(c = 5\)</span>.</p>
+<ul>
+<li>Range <span class="math inline">\(x &lt; 5\)</span>: average <span class="math inline">\((3 + 5 + 4)/3 = 4\)</span>.</li>
+<li>Range <span class="math inline">\(x \ge 5\)</span>: average <span class="math inline">\((10 + 12 + 11)/3 = 11\)</span>.</li>
+</ul>
+<p>The fit is a staircase: 4, then jumps to 11 at <span class="math inline">\(x = 5\)</span>.</p>
+<p>With cuts at 2 and 5, the columns for <span class="math inline">\(x = 3.7\)</span> are <span class="math inline">\((0, 1, 0)\)</span> and for <span class="math inline">\(x = 5\)</span> are <span class="math inline">\((0, 0, 1)\)</span>.</p>
+</div>
+<p>These are just <a href="Linear_Regression.html">dummy variables</a> made from a number instead of a category. Downside: the jumps can be unnatural, and you must pick the cut points.</p>
+<h2 id="technique-3-basis-functions-the-general-recipe">Technique 3: basis functions (the general recipe)</h2>
+<p><strong>Problem it solves:</strong> gives one name to all of the above, so you can invent your own.</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1b_1(X) + \beta_2b_2(X) + \dots + \beta_Kb_K(X) + \epsilon\]</span></p>
+<p>You pick the functions <span class="math inline">\(b_k\)</span> <strong>before</strong> fitting. Compute them for every training row, put them in the columns, run least squares. Examples:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Basis</th>
+<th><span class="math inline">\(b_k(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>polynomial</td>
+<td><span class="math inline">\(x^k\)</span></td>
+</tr>
+<tr class="even">
+<td>step</td>
+<td><span class="math inline">\(\mathbb 1(c_k \le x &lt; c_{k+1})\)</span></td>
+</tr>
+<tr class="odd">
+<td>Fourier (waves)</td>
+<td><span class="math inline">\(\cos\big((2k+1)\pi x/2\big)\)</span></td>
+</tr>
+<tr class="even">
+<td>piecewise polynomial (regression splines, only mentioned)</td>
+<td><span class="math inline">\(x^r\)</span> inside one range, 0 outside</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technique-4-deciding-how-flexible-to-be">Technique 4: deciding how flexible to be</h2>
+<p><strong>Problem it solves:</strong> every extra column makes the model bendier. Too few and you miss the shape (bias); too many and you chase the luck (variance).</p>
+<p>More columns also means more coefficients to estimate from the same data. When the number of columns gets close to the number of rows, estimates become unstable. This is exactly the situation <a href="Ridge_Regression.html">ridge regression</a> was invented for.</p>
+<p>How to choose the degree or the number of cuts: try several, and pick the one with the lowest error on a <strong>validation set</strong> (data held back from fitting). Never pick by training error; the bendiest option always wins there.</p>
+<div data-widget="poly">
+
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3.3.2 “Non-linear relationships” (the <code>Auto</code> horsepower example)</td>
+<td><strong>Read</strong></td>
+<td>The slides’ motivation</td>
+</tr>
+<tr class="even">
+<td>7.1 Polynomial regression</td>
+<td><strong>Read</strong></td>
+<td>Skip the bits about standard errors and confidence bands</td>
+</tr>
+<tr class="odd">
+<td>7.2 Step functions</td>
+<td><strong>Read</strong></td>
+<td>This is the “piecewise constant” part of the slides, even though 7.2 isn’t in the slide header</td>
+</tr>
+<tr class="even">
+<td>7.3 Basis functions</td>
+<td><strong>Read</strong></td>
+<td>One page</td>
+</tr>
+<tr class="odd">
+<td>7.4 to 7.7 (splines, smoothing splines, local regression, GAMs)</td>
+<td>Skip</td>
+<td>Only mentioned in one line on the slides</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, sections 3.3.2, 7.1-7.3). I want practice questions on POLYNOMIAL REGRESSION, STEP FUNCTIONS and BASIS FUNCTIONS:
+- writing design-matrix rows for polynomial models of different degrees
+- deciding whether a given model is &quot;linear in the coefficients&quot; and can be fitted with least squares
+- computing step-function (piecewise constant) fits by hand: indicator columns for given cut points, and the fitted value = mean of y in each bin
+- explaining why &quot;linear&quot; refers to the betas, not to x
+- the trade-off of higher degree / more cut points: flexibility, bias vs variance, overfitting, behaviour at the edges
+- choosing degree or number of cuts with a validation set
+- interpreting how a change in x changes y when x^2 is in the model
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with small numbers I can do by hand.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/Linear_Regression.html"><small>&larr; Previous</small>Linear regression</a><a class="next" href="../w2/Ridge_Regression.html"><small>Next &rarr;</small>Ridge regression</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

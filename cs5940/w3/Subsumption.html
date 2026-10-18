@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subsumption (Brooks) · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w3_Subsumption" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip react">Reactive agent</span><span class="chip">Week 3</span><span class="chip">5 techniques</span></div>
+  <h1>Subsumption (Brooks)</h1>
+  <p class="tagline">Throw away the symbols and the reasoning. Give the robot a stack of simple behaviours, "if this, do that", and let the most basic one that applies win. Intelligence emerges from the robot interacting with its world.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> reactive agent.<br />
+<strong>Week:</strong> 3 (slides 26 to 33).<br />
+<strong>Book:</strong> Wooldridge 5.1 intro and 5.1.1 The subsumption architecture (pp. 85 to 90), 5.1.5 Limitations (p. 92).<br />
+<strong>Techniques on this page:</strong> Brooks’s three theses, behaviours and inhibition, the action function (and its cost), the Mars explorer, the limitations.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Deductive and BDI agents pay for symbolic reasoning: turning the world into symbols (transduction), representing it, and now deciding when to <a href="Intention_Reconsideration.html">reconsider</a>. In a fast, messy physical world that can be too slow.</p>
+<p>Brooks (1991) took the radical line: <strong>don’t reason at all.</strong> Wire perceptions straight to actions in prioritised layers. Decisions take constant time, and surprisingly clever group behaviour can <strong>emerge</strong> from very simple rules, like ants finding food.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>situated, embodied</td>
+<td>intelligence lives in a body acting in the real world, not in a disembodied prover</td>
+</tr>
+<tr class="even">
+<td>emergent</td>
+<td>arising from interaction, not programmed directly</td>
+</tr>
+<tr class="odd">
+<td>behaviour <span class="math inline">\((c, a)\)</span></td>
+<td>a rule: if the percept is in condition set <span class="math inline">\(c\)</span>, do action <span class="math inline">\(a\)</span></td>
+</tr>
+<tr class="even">
+<td>fires</td>
+<td>the behaviour’s condition matches the current percept</td>
+</tr>
+<tr class="odd">
+<td>inhibition <span class="math inline">\(\prec\)</span></td>
+<td><span class="math inline">\(b_1 \prec b_2\)</span>: <span class="math inline">\(b_1\)</span> beats <span class="math inline">\(b_2\)</span> (it’s lower in the hierarchy, more basic)</td>
+</tr>
+<tr class="even">
+<td>gradient</td>
+<td>a signal that’s stronger nearer the base, so “up the gradient” means “towards home”</td>
+</tr>
+<tr class="odd">
+<td>stigmergy</td>
+<td>cooperating by leaving signs in the environment (ant pheromones, crumbs)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-brookss-three-theses">Technique 1: Brooks’s three theses</h2>
+<p><strong>Problem it solves:</strong> a short-answer classic. Intelligence</p>
+<ol type="1">
+<li>can be generated <strong>without explicit representations</strong> of the symbolic-AI kind;</li>
+<li>can be generated <strong>without explicit abstract reasoning</strong> of that kind;</li>
+<li>is an <strong>emergent</strong> property of certain complex systems.</li>
+</ol>
+<p>Two ideas drive it: <strong>situatedness and embodiment</strong> (real intelligence is in the world) and <strong>intelligence and emergence</strong> (it comes from interaction with the environment; it’s “in the eye of the beholder”).</p>
+<h2 id="technique-2-behaviours-and-inhibition">Technique 2: behaviours and inhibition</h2>
+<p><strong>Problem it solves:</strong> how the agent is built.</p>
+<p>A <strong>subsumption architecture</strong> is a hierarchy of task-accomplishing <strong>behaviours</strong>, each a simple “if situation, then action” rule. Behaviours compete; <strong>lower layers are more primitive</strong> (avoid obstacles) <strong>and take precedence</strong>.</p>
+<p>Formally (slide 30, book p. 87):</p>
+<ul>
+<li><span class="math inline">\(see\)</span> maps states to percepts, as in <a href="../w1/Formal_Agent_Model.html">week 1</a>;</li>
+<li>a behaviour is <span class="math inline">\((c, a)\)</span> with <span class="math inline">\(c \subseteq Per\)</span>, <span class="math inline">\(a \in Ac\)</span>; it <strong>fires</strong> in state <span class="math inline">\(s\)</span> iff <span class="math inline">\(see(s) \in c\)</span>;</li>
+<li>the agent’s behaviours <span class="math inline">\(R\)</span> come with an <strong>inhibition</strong> relation <span class="math inline">\(\prec\)</span>, a strict total order. <span class="math inline">\(b_1 \prec b_2\)</span> means <span class="math inline">\(b_1\)</span> inhibits <span class="math inline">\(b_2\)</span>.</li>
+</ul>
+<h2 id="technique-3-the-action-function">Technique 3: the action function</h2>
+<p><strong>Problem it solves:</strong> picks the action, very fast.</p>
+<pre><code>function action(p : Per) : Ac
+    var fired : ℘(R)
+begin
+    fired := {(c, a) | (c, a) ∈ R and p ∈ c}
+    for each (c, a) ∈ fired do
+        if not (∃(c&#39;, a&#39;) ∈ fired such that (c&#39;, a&#39;) ≺ (c, a)) then
+            return a
+    return null
+end</code></pre>
+<p>In words: find every behaviour that fires, and return the action of the one no other firing behaviour inhibits. If none fire, do nothing.</p>
+<p><strong>Cost.</strong> As written, at most <span class="math inline">\(n^2\)</span> comparisons for <span class="math inline">\(n\)</span> behaviours. Since <span class="math inline">\(\prec\)</span> is a total order you can do better: keep the behaviours sorted and return the <strong>first that fires</strong>, at most <span class="math inline">\(n\)</span> checks. Wired into hardware it’s constant time. Compare theorem proving, which can be undecidable.</p>
+<div class="example">
+<p><strong>Worked example.</strong> Highest priority first: <span class="math inline">\(b_1\)</span>: if <code>cliff</code> then <code>stop</code>; <span class="math inline">\(b_2\)</span>: if <code>bump</code> then <code>reverse</code>; <span class="math inline">\(b_3\)</span>: if <code>light</code> then <code>go_to_light</code>; <span class="math inline">\(b_4\)</span>: if true then <code>wander</code>. Percept {<code>bump</code>, <code>light</code>}.</p>
+<p><span class="math inline">\(b_2\)</span>, <span class="math inline">\(b_3\)</span> and <span class="math inline">\(b_4\)</span> fire. <span class="math inline">\(b_2\)</span> is highest among them: <strong>reverse</strong>. In inhibition notation, <span class="math inline">\(b_2 \prec b_3\)</span>.</p>
+</div>
+<h2 id="technique-4-the-mars-explorer">Technique 4: the Mars explorer</h2>
+<p><strong>Problem it solves:</strong> shows cooperation emerging with no communication at all (Steels; slide 31, book pp. 87 to 90).</p>
+<p>Robots collect rock samples that lie in clusters at unknown places. A beacon at the base creates a gradient. Behaviours, highest priority first:</p>
+<ol type="1">
+<li>If you detect an obstacle, change direction.</li>
+<li>If carrying samples and at the base, drop them.</li>
+<li>If carrying samples and not at the base, drop 2 crumbs and travel up the gradient.</li>
+<li>If you detect a sample, pick it up.</li>
+<li>If you sense crumbs, pick up 1 crumb and travel down the gradient.</li>
+<li>If true, move randomly.</li>
+</ol>
+<div class="example">
+<p><strong>Worked example: which behaviour wins?</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Percept</th>
+<th>Fire</th>
+<th>Chosen</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>at a sample, not carrying</td>
+<td>4, 6</td>
+<td><strong>4</strong> pick up</td>
+</tr>
+<tr class="even">
+<td>carrying, at a sample, not at base</td>
+<td>3, 4, 6</td>
+<td><strong>3</strong> go home</td>
+</tr>
+<tr class="odd">
+<td>on crumbs, not carrying, no sample</td>
+<td>5, 6</td>
+<td><strong>5</strong> follow the trail out</td>
+</tr>
+<tr class="even">
+<td>carrying, on crumbs, not at base</td>
+<td>3, 5, 6</td>
+<td><strong>3</strong> go home</td>
+</tr>
+<tr class="odd">
+<td>obstacle ahead, carrying</td>
+<td>1, 3, 6</td>
+<td><strong>1</strong> change direction</td>
+</tr>
+<tr class="even">
+<td>nothing special</td>
+<td>6</td>
+<td><strong>6</strong> random walk</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div data-widget="mars">
+
+</div>
+<p><strong>Why the crumbs work.</strong> A robot carrying a sample home lays a trail. Others who find it follow it <strong>away</strong> from base, towards the cluster, picking crumbs up as they go. A trail to an exhausted cluster fades; a productive one is refreshed by every robot coming home along it. The robots never talk: <strong>the environment carries the information.</strong> That’s implicit cooperation (stigmergy), and an early example of the emergence studied in Part III. In the week 3 notebook’s simulation, crumbs raised deliveries from 25.3 to 35.8 samples on average.</p>
+<h2 id="technique-5-the-limitations">Technique 5: the limitations</h2>
+<p><strong>Problem it solves:</strong> the other half of any “evaluate subsumption” answer (slide 32, book 5.1.5).</p>
+<ul>
+<li><strong>Local information only:</strong> decisions use the current percept, so no long-term or non-local view.</li>
+<li><strong>Why does it work?</strong> Behaviour “emerges”, so the link between rules, world and overall behaviour isn’t understood. You lose BDI’s knowledge-level transparency.</li>
+<li><strong>Hard to debug</strong> when it doesn’t work.</li>
+<li><strong>No design method:</strong> trial and error, and very hard beyond a handful of layers (the book says fewer than about ten).</li>
+<li><strong>Hard to explain to humans:</strong> there’s no symbolic state to report.</li>
+</ul>
+<p><strong>Discussion (slide 33): “black-box but effective” today.</strong> The same critique fits deep learning and LLM agents, which dominate anyway. A fair position: transparency was traded for capability because it paid off, but the price shows in safety-critical settings, which is why <a href="Hybrid_Architectures.html">hybrid designs</a> put a transparent layer around an opaque one.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5.1 intro + 5.1.1, pp. 85 to 90</td>
+<td><strong>Read</strong></td>
+<td>The theses, the formal action function (slide 30), the Mars explorer with the crumbs explained in more detail</td>
+</tr>
+<tr class="even">
+<td>5.1.2 PENGI, 5.1.3 Situated automata, 5.1.4 Agent network architecture</td>
+<td>Skip</td>
+<td>Not on the slides</td>
+</tr>
+<tr class="odd">
+<td>5.1.5 Limitations, p. 92</td>
+<td><strong>Read</strong></td>
+<td>Slide 32 nearly word for word</td>
+</tr>
+<tr class="even">
+<td>Brooks (1991), “Intelligence without representation”</td>
+<td>Optional</td>
+<td>Short and readable; slide 28 suggests it</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., 5.1; Brooks 1991). I want practice on THE SUBSUMPTION ARCHITECTURE:
+- Brooks&#39;s three theses, situatedness/embodiment and emergence
+- behaviours (c, a), when a behaviour fires, the inhibition relation and what b1 &lt; b2 means
+- applying the action function: given a prioritised list of behaviours and a percept, which fire and which action is chosen
+- the cost of action selection (n^2 as written, n if sorted, constant in hardware) vs theorem proving
+- the Mars explorer: which behaviour wins in a given situation, and why crumb trails give implicit cooperation (and fade when a cluster is used up)
+- the limitations of purely reactive agents
+- whether &quot;black-box but effective&quot; is acceptable today
+
+Please:
+1. Use plain, everyday language and explain any notation in one short sentence.
+2. Give me ONE question at a time, easy first, then harder.
+3. Wait for my answer, then mark it and show a model answer.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/AgentSpeak.html"><small>&larr; Previous</small>AgentSpeak(L)</a><a class="next" href="../w3/Hybrid_Architectures.html"><small>Next &rarr;</small>Hybrid architectures</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

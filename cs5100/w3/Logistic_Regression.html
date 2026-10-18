@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logistic regression · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w3_Logistic_Regression" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a class="active" aria-current="page" href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip cls">Classification model</span><span class="chip">Week 3</span><span class="chip">7 techniques</span></div>
+  <h1>Logistic regression</h1>
+  <p class="tagline">Take linear regression's straight line and squash it into an S-curve that stays between 0 and 1, so it can be read as a probability. Despite the name, it's for classification.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> classification (the answer is a category).<br />
+<strong>Week:</strong> 3.<br />
+<strong>Book:</strong> ISLP 4.1, 4.2, 4.3 (see the reading table for what to skip).<br />
+<strong>Techniques on this page:</strong> the sigmoid, odds and log-odds, maximum likelihood, the negative log-likelihood, gradient descent, softmax for more than two classes, dummy variables and penalties carried over from week 2.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>You want the chance a customer defaults, given their balance. That’s what the <a href="../w1/Bayes_Classifier.html">Bayes classifier</a> needs. Why not use <a href="../w2/Linear_Regression.html">linear regression</a> on 0/1 answers?</p>
+<ol type="1">
+<li><strong>A straight line goes on forever.</strong> For small balances it predicts negative probabilities; for large ones, above 1. Probabilities have to stay between 0 and 1.</li>
+<li><strong>With more than two categories, the numbers are just labels.</strong> Coding eye colour as brown = 0, green = 1, blue = 2 would claim green is “halfway” between the others. Renumber them and linear regression gives different answers. That’s nonsense.</li>
+</ol>
+<p>Logistic regression keeps the useful part (a weighted sum of inputs, readable coefficients) and fixes the range problem by bending the line into an S.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sigmoid, logistic function, <span class="math inline">\(\sigma(z)\)</span></td>
+<td>the S-shaped squashing function. Any number in, a number between 0 and 1 out</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(p(X)\)</span></td>
+<td>the model’s chance that <span class="math inline">\(Y = 1\)</span> for inputs <span class="math inline">\(X\)</span></td>
+</tr>
+<tr class="odd">
+<td>odds</td>
+<td><span class="math inline">\(p/(1-p)\)</span>: how many times more likely yes is than no. <span class="math inline">\(p = 0.8\)</span> gives odds of 4</td>
+</tr>
+<tr class="even">
+<td>log-odds, logit</td>
+<td>the log of the odds. In this model it’s a straight line in <span class="math inline">\(X\)</span></td>
+</tr>
+<tr class="odd">
+<td>likelihood</td>
+<td>how probable the observed data is, according to the model with these coefficients</td>
+</tr>
+<tr class="even">
+<td>maximum likelihood</td>
+<td>choose the coefficients that make the observed data most probable</td>
+</tr>
+<tr class="odd">
+<td>negative log-likelihood (NLL), cross-entropy, log loss</td>
+<td>the same thing turned into an error to minimise</td>
+</tr>
+<tr class="even">
+<td>softmax</td>
+<td>the version for more than two categories</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\prod\)</span></td>
+<td>“multiply them all together”, like <span class="math inline">\(\sum\)</span> means “add them all”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-sigmoid-squashing-a-line-into-a-probability">Technique 1: the sigmoid (squashing a line into a probability)</h2>
+<p><strong>Problem it solves:</strong> keep the prediction between 0 and 1.</p>
+<p>Compute a straight-line score <span class="math inline">\(z = \beta_0 + \beta_1X\)</span> (any number), then squash it:</p>
+<p><span class="math display">\[p(X) = \sigma(z) = \frac{1}{1 + e^{-z}}\]</span></p>
+<p>Why it stays in range: <span class="math inline">\(e^{-z}\)</span> is always positive, so the bottom is always more than 1, so the fraction is always between 0 and 1.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(z\)</span></th>
+<th><span class="math inline">\(-3\)</span></th>
+<th><span class="math inline">\(-2\)</span></th>
+<th><span class="math inline">\(-1\)</span></th>
+<th><span class="math inline">\(0\)</span></th>
+<th><span class="math inline">\(1\)</span></th>
+<th><span class="math inline">\(2\)</span></th>
+<th><span class="math inline">\(3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\sigma(z)\)</span></td>
+<td>0.047</td>
+<td>0.119</td>
+<td>0.269</td>
+<td><strong>0.5</strong></td>
+<td>0.731</td>
+<td>0.881</td>
+<td>0.953</td>
+</tr>
+</tbody>
+</table>
+<p>Patterns to remember: <span class="math inline">\(\sigma(0) = 0.5\)</span>; big positive <span class="math inline">\(z\)</span> gives nearly 1; big negative gives nearly 0; and it’s symmetric, <span class="math inline">\(\sigma(-z) = 1 - \sigma(z)\)</span>.</p>
+<div data-widget="sigmoid">
+
+</div>
+<p><strong>Its slope</strong> (needed for fitting) has a neat form, found with the chain rule:</p>
+<p><span class="math display">\[\sigma&#39;(z) = \sigma(z)\big(1 - \sigma(z)\big)\]</span></p>
+<p>At <span class="math inline">\(z = 0\)</span> that’s <span class="math inline">\(0.5 \times 0.5 = 0.25\)</span>, the steepest point.</p>
+<h2 id="technique-2-odds-and-log-odds-reading-the-coefficients">Technique 2: odds and log-odds (reading the coefficients)</h2>
+<p><strong>Problem it solves:</strong> in linear regression, <span class="math inline">\(\beta_1\)</span> was “the change in <span class="math inline">\(Y\)</span> per unit of <span class="math inline">\(X\)</span>.” What does it mean now?</p>
+<p>With a little algebra, the odds for this model come out as simply <span class="math inline">\(e^z\)</span>. Take logs:</p>
+<p><span class="math display">\[\log\frac{p(X)}{1 - p(X)} = \beta_0 + \beta_1X\]</span></p>
+<p>So the model is a straight line, but in <strong>log-odds</strong>, not in probability. That’s why it counts as a “linear” model.</p>
+<p>What <span class="math inline">\(\beta_1\)</span> means:</p>
+<ul>
+<li><strong>Its sign:</strong> positive means the chance rises with <span class="math inline">\(X\)</span>.</li>
+<li><strong>Exactly:</strong> increasing <span class="math inline">\(X\)</span> by 1 <strong>multiplies the odds by <span class="math inline">\(e^{\beta_1}\)</span></strong>.</li>
+<li><strong>On the probability itself:</strong> not a fixed amount. Near <span class="math inline">\(p = 0.5\)</span> a change in <span class="math inline">\(X\)</span> moves <span class="math inline">\(p\)</span> a lot; near 0 or 1, hardly at all. Precisely, <span class="math inline">\(dp/dX = p(1-p)\beta_1\)</span>.</li>
+</ul>
+<p><strong>Decision boundary:</strong> with the “predict 1 if <span class="math inline">\(p \ge 0.5\)</span>” rule, you predict 1 exactly when <span class="math inline">\(z \ge 0\)</span>. So the boundary is where <span class="math inline">\(\beta_0 + \beta_1x = 0\)</span>, i.e. <span class="math inline">\(x = -\beta_0/\beta_1\)</span>. With two inputs it’s a straight line on the chart.</p>
+<div class="example">
+<p><strong>Worked example (slide 24).</strong> <span class="math inline">\(\hat\beta = (-0.5,\ 0.001)\)</span>, balance <span class="math inline">\(x = 1000\)</span>.</p>
+<ol type="1">
+<li>Score: <span class="math inline">\(z = -0.5 + 0.001 \times 1000 = 0.5\)</span>.</li>
+<li>Probability: <span class="math inline">\(\hat p = 1/(1 + e^{-0.5}) = 1/1.6065 = 0.6225\)</span>. Predict default.</li>
+<li>Odds: <span class="math inline">\(e^{0.5} = 1.649\)</span> (and <span class="math inline">\(0.6225/0.3775 = 1.649\)</span>, it checks).</li>
+<li>Another £100 multiplies the odds by <span class="math inline">\(e^{0.1} = 1.105\)</span>, a 10.5% rise.</li>
+<li>Boundary: <span class="math inline">\(x = 0.5/0.001 = 500\)</span>. Balances over £500 are predicted to default.</li>
+</ol>
+</div>
+<h2 id="technique-3-maximum-likelihood-what-best-coefficients-means-now">Technique 3: maximum likelihood (what “best coefficients” means now)</h2>
+<p><strong>Problem it solves:</strong> least squares made sense for numbers. For yes/no answers with probability predictions, a better question is: <strong>which coefficients make what actually happened look most likely?</strong></p>
+<p>For one customer with predicted chance <span class="math inline">\(p_i\)</span>: if they defaulted, the model gave that outcome chance <span class="math inline">\(p_i\)</span>; if not, <span class="math inline">\(1 - p_i\)</span>. A compact way to write both cases is <span class="math inline">\(p_i^{\,y_i}(1-p_i)^{1-y_i}\)</span> (try <span class="math inline">\(y_i = 1\)</span> and <span class="math inline">\(y_i = 0\)</span>: anything to the power 0 is 1). Multiply over all customers to get the <strong>likelihood</strong>:</p>
+<p><span class="math display">\[\ell(\beta) = \prod_{i=1}^n p_i^{\,y_i}(1 - p_i)^{1 - y_i}\]</span></p>
+<div class="example">
+<p>Three customers, actual <span class="math inline">\(y = (1, 0, 1)\)</span>.</p>
+<ul>
+<li>Model A predicts <span class="math inline">\(p = (0.9, 0.2, 0.8)\)</span>: <span class="math inline">\(\ell = 0.9 \times 0.8 \times 0.8 = 0.576\)</span>.</li>
+<li>Model B predicts <span class="math inline">\(p = (0.6, 0.5, 0.5)\)</span>: <span class="math inline">\(\ell = 0.6 \times 0.5 \times 0.5 = 0.15\)</span>.</li>
+</ul>
+<p>A makes the real outcomes nearly four times more likely, so maximum likelihood prefers A.</p>
+</div>
+<p><strong>A general principle from slide 20:</strong> least squares is itself maximum likelihood when the luck <span class="math inline">\(\epsilon\)</span> is bell-shaped. So this isn’t a new idea replacing week 2; week 2 was a special case.</p>
+<h2 id="technique-4-the-negative-log-likelihood-turning-it-into-an-error">Technique 4: the negative log-likelihood (turning it into an error)</h2>
+<p><strong>Problem it solves:</strong> multiplying thousands of small numbers underflows to zero on a computer, and products are awkward to differentiate.</p>
+<p>Take the log (products become sums, and the best <span class="math inline">\(\beta\)</span> doesn’t change because log only ever goes up). Flip the sign so that smaller is better, like the RSS:</p>
+<p><span class="math display">\[L(\beta) = -\sum_{i=1}^n\Big[y_i\log p_i + (1 - y_i)\log(1 - p_i)\Big]\]</span></p>
+<p>Each customer contributes <span class="math inline">\(-\log(\text{chance the model gave to what really happened})\)</span>. Confident and right: close to 0. Confident and wrong: big (<span class="math inline">\(-\log 0.01 = 4.6\)</span>).</p>
+<p>Model A above: <span class="math inline">\(L = -\log 0.576 = 0.55\)</span>. Model B: <span class="math inline">\(L = -\log 0.15 = 1.90\)</span>.</p>
+<div class="warn">
+<p><strong>Notation clash:</strong> on the slides <span class="math inline">\(\ell\)</span> is the likelihood and you minimise <span class="math inline">\(-\log\ell\)</span>. In the lab, <span class="math inline">\(\ell\)</span> already means the negative log-likelihood. Same thing, different letter.</p>
+</div>
+<h2 id="technique-5-gradient-descent-because-theres-no-formula">Technique 5: gradient descent (because there’s no formula)</h2>
+<p><strong>Problem it solves:</strong> for linear regression we set the slope to zero and solved. Here the coefficients are trapped inside the sigmoid, so the equations can’t be solved by algebra. We walk downhill instead, exactly as in <a href="../w2/Linear_Regression.html">week 2</a>.</p>
+<p>Using the chain rule three times and cancelling, the gradient simplifies beautifully:</p>
+<p><span class="math display">\[\nabla L(\beta) = -\sum_{i=1}^n (y_i - p_i)\,\tilde x_i\]</span></p>
+<p>where <span class="math inline">\(\tilde x_i = (1, x_i)\)</span>. That’s “actual minus predicted, times the inputs”: the same shape as week 2’s gradient. Then step: <span class="math inline">\(\beta \leftarrow \beta - \eta\,\nabla L\)</span>.</p>
+<div class="example">
+<p><strong>One step by hand.</strong> Data <span class="math inline">\(x = (-1, 0, 1, 2)\)</span>, <span class="math inline">\(y = (0, 0, 1, 1)\)</span>. Start <span class="math inline">\(\beta = (0, 0)\)</span>, step size <span class="math inline">\(\eta = 0.1\)</span>.</p>
+<ul>
+<li>All scores are 0, so every <span class="math inline">\(p_i = 0.5\)</span>. <span class="math inline">\(y - p = (-0.5, -0.5, 0.5, 0.5)\)</span>.</li>
+<li>Intercept part: <span class="math inline">\(-\sum(y_i - p_i) = 0\)</span>.</li>
+<li>Slope part: <span class="math inline">\(-\sum(y_i - p_i)x_i = -(0.5 + 0 + 0.5 + 1) = -2\)</span>.</li>
+<li>New <span class="math inline">\(\beta = (0, 0) - 0.1 \times (0, -2) = (0, 0.2)\)</span>.</li>
+</ul>
+<p>The loss drops from 2.77 to 2.40. Keep going and it keeps falling.</p>
+</div>
+<div class="warn">
+<p><strong>Lab bug:</strong> <code>grad_log_likelihood</code> uses <code>np.sum(...)</code> with no <code>axis</code>, which adds every number into one, so all coefficients get the same update. It should be <code>np.sum(..., axis=0)</code>.</p>
+</div>
+<h2 id="technique-6-softmax-more-than-two-categories">Technique 6: softmax (more than two categories)</h2>
+<p><strong>Problem it solves:</strong> the sigmoid handles yes/no. For several categories, give each its own score <span class="math inline">\(z_k\)</span> and turn the scores into chances that add to 1:</p>
+<p><span class="math display">\[\hat p_k = \frac{e^{z_k}}{\sum_{k&#39;} e^{z_{k&#39;}}}\]</span></p>
+<p>Each <span class="math inline">\(e^{z_k}\)</span> is positive; dividing by the total makes them add to 1. With two categories this is exactly the sigmoid.</p>
+<div class="example">
+<p>Scores <span class="math inline">\(z = (2, 1, 0)\)</span>. <span class="math inline">\(e^2 = 7.389\)</span>, <span class="math inline">\(e^1 = 2.718\)</span>, <span class="math inline">\(e^0 = 1\)</span>, total <span class="math inline">\(11.107\)</span>. Chances <span class="math inline">\((0.665, 0.245, 0.090)\)</span>. Predict the first category.</p>
+</div>
+<div data-widget="softmax">
+
+</div>
+<h2 id="technique-7-tools-carried-over-from-week-2">Technique 7: tools carried over from week 2</h2>
+<ul>
+<li><strong>Several inputs:</strong> <span class="math inline">\(p(x) = \sigma(\beta_0 + \beta_1x_1 + \dots + \beta_px_p)\)</span>. Each <span class="math inline">\(\beta_j\)</span> is the change in log-odds per unit of <span class="math inline">\(x_j\)</span>, others held fixed.</li>
+<li><strong>Dummy variables</strong> for categories like <code>student</code> (lab Q1).</li>
+<li><strong>An <span class="math inline">\(L_2\)</span> penalty</strong>, exactly like <a href="../w2/Ridge_Regression.html">ridge</a>: add <span class="math inline">\(\lambda\sum_{j\ge1}\beta_j^2\)</span>, whose gradient adds <span class="math inline">\(2\lambda\beta_j\)</span> (lab Q2). Don’t penalise the intercept.</li>
+</ul>
+<p><strong>The student paradox (read before lab Q1):</strong> on its own, being a student <em>raises</em> the default chance. Add balance, and being a student <em>lowers</em> it. Both are true: students tend to carry bigger balances, and balance drives defaults. Same lesson as week 2’s newspaper and radio.</p>
+<h2 id="how-it-compares">How it compares</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Logistic regression</th>
+<th><a href="LDA.html">LDA</a></th>
+<th><a href="Naive_Bayes.html">Naive Bayes</a></th>
+<th><a href="../w1/KNN.html">KNN</a></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>estimates the chances by</td>
+<td>S-curve of a straight line</td>
+<td>bell curves per class, then Bayes’ theorem</td>
+<td>one-input-at-a-time pictures per class</td>
+<td>counting neighbours</td>
+</tr>
+<tr class="even">
+<td>boundary shape</td>
+<td>straight</td>
+<td>straight</td>
+<td>can curve</td>
+<td>any shape</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<p><code>C4.txt</code> names chapter 4.</p>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4.1 Overview of classification</td>
+<td><strong>Read</strong></td>
+<td>Introduces the <code>Default</code> data the lab uses</td>
+</tr>
+<tr class="even">
+<td>4.2 Why not linear regression?</td>
+<td><strong>Read</strong></td>
+<td>The “why” above</td>
+</tr>
+<tr class="odd">
+<td>4.3.1 The logistic model</td>
+<td><strong>Read</strong></td>
+<td>Sigmoid, odds, log-odds</td>
+</tr>
+<tr class="even">
+<td>4.3.2 Estimating the coefficients</td>
+<td>First half</td>
+<td>The likelihood. <strong>Skip</strong> standard errors, z-statistics, p-values</td>
+</tr>
+<tr class="odd">
+<td>4.3.3 Making predictions</td>
+<td><strong>Read</strong></td>
+<td>Includes the <code>student</code> dummy</td>
+</tr>
+<tr class="even">
+<td>4.3.4 Multiple logistic regression</td>
+<td><strong>Read</strong></td>
+<td>The student paradox</td>
+</tr>
+<tr class="odd">
+<td>4.3.5 Multinomial logistic regression</td>
+<td><strong>Read</strong> the softmax part</td>
+<td>The “baseline class” version is a skim</td>
+</tr>
+<tr class="even">
+<td>4.6 Generalised linear models</td>
+<td>Skip</td>
+<td>Not on the slides</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 4.3). I want practice questions on LOGISTIC REGRESSION, done by hand:
+- why linear regression fails for classification
+- computing the sigmoid sigma(z) = 1/(1+e^-z) for given coefficients and inputs, and the predicted class
+- odds and log-odds: converting between p, odds and log-odds; e^beta as the odds multiplier; dp/dx = p(1-p)beta
+- finding the decision boundary x = -beta0/beta1, and the x that gives a chosen probability
+- deriving sigma&#39;(z) = sigma(z)(1 - sigma(z)) with the chain rule
+- writing and computing the likelihood and negative log-likelihood for 2-4 data points; comparing two models by likelihood
+- the gradient -sum (y_i - p_i) x_i and doing one or two gradient descent steps by hand
+- softmax for 3 classes, and why softmax with 2 classes is the sigmoid
+- adding an L2 penalty to the gradient (intercept not penalised)
+- the student paradox / why a coefficient can change sign when another predictor is added
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder. Use friendly numbers and tell me the e^x values I&#39;ll need if they aren&#39;t obvious.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/KNN_Regression.html"><small>&larr; Previous</small>KNN regression</a><a class="next" href="../w3/LDA.html"><small>Next &rarr;</small>LDA</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The BDI control loop · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w3_BDI_Control_Loop" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a class="active" aria-current="page" href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 3</span><span class="chip">5 techniques</span></div>
+  <h1>The BDI control loop</h1>
+  <p class="tagline">BDI turned into an algorithm: perceive, update beliefs, pick intentions, plan, act. Then four refinements, each fixing a way the previous loop goes wrong when the world changes mid-plan.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative agent (BDI).<br />
+<strong>Week:</strong> 3 (slides 5 to 11).<br />
+<strong>Book:</strong> Wooldridge 4.3 Implementing a practical reasoning agent (pp. 75 to 77).<br />
+<strong>Techniques on this page:</strong> the basic loop, splitting deliberation into options and filter, commitment strategies, commitment to means (replanning with <code>sound</code>), commitment to ends (<code>succeeded</code> and <code>impossible</code>).</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="../w2/BDI_Practical_Reasoning.html">Last week’s BDI</a> said <em>what</em> a BDI agent has in its head. This page says how it <strong>runs</strong>.</p>
+<p>The trouble is time. Deliberating and planning take a while, and the world keeps changing. A loop that plans and then executes blindly is the <a href="../w2/Deductive_Reasoning_Agents.html">deductive agent’s</a> calculative rationality all over again: a plan that was right when it started may be wrong when it’s carried out. Each cycle on this page fixes one more way that can go wrong. Cycle 5, with controlled reconsideration, is on <a href="Intention_Reconsideration.html">the next page</a>.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(B, D, I\)</span></td>
+<td>the agent’s current beliefs, desires and intentions</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\rho\)</span></td>
+<td>the latest percept (here, not the deductive agent’s rules)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(brf\)</span></td>
+<td>belief revision: update beliefs with a new percept</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(options\)</span></td>
+<td>generate desires (what could I aim for?) from beliefs and current intentions</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(filter\)</span></td>
+<td>choose which desires to commit to: these become intentions</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(plan\)</span></td>
+<td>means-ends reasoning: a plan <span class="math inline">\(\pi\)</span> for the intentions</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(sound(\pi, I, B)\)</span></td>
+<td>“given what I now believe, this plan will still achieve <span class="math inline">\(I\)</span>”</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(succeeded(I, B)\)</span>, <span class="math inline">\(impossible(I, B)\)</span></td>
+<td>the intentions are already achieved / can no longer be achieved</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\wp(X)\)</span></td>
+<td>“sets of <span class="math inline">\(X\)</span>”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-basic-loop-cycle-1">Technique 1: the basic loop, cycle (1)</h2>
+<p><strong>Problem it solves:</strong> a first runnable version of BDI.</p>
+<pre><code>1. B := B0;                   /* initial beliefs */
+2. while true do
+3.     get next percept ρ;
+4.     B := brf(B, ρ);        /* belief revision */
+5.     I := deliberate(B);
+6.     π := plan(B, I);
+7.     execute(π)
+8. end-while</code></pre>
+<p><strong>The flaw (slide 6):</strong> if deliberation starts at <span class="math inline">\(t_0\)</span> and the plan is executed up to <span class="math inline">\(t_2\)</span>, the plan was right for the world at <span class="math inline">\(t_0\)</span>. That’s calculative rationality.</p>
+<h2 id="technique-2-deliberation-options-filter-cycle-2">Technique 2: deliberation = options + filter, cycle (2)</h2>
+<p><strong>Problem it solves:</strong> separates “what could I do?” from “what will I commit to?”.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Type</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(brf\)</span></td>
+<td><span class="math inline">\(\wp(Bel) \times Per \to \wp(Bel)\)</span></td>
+<td>new beliefs</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(options\)</span></td>
+<td><span class="math inline">\(\wp(Bel) \times \wp(Int) \to \wp(Des)\)</span></td>
+<td><strong>desires</strong></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(filter\)</span></td>
+<td><span class="math inline">\(\wp(Bel) \times \wp(Des) \times \wp(Int) \to \wp(Int)\)</span></td>
+<td><strong>intentions</strong></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(plan\)</span></td>
+<td><span class="math inline">\(\wp(Bel) \times \wp(Int) \to Plan\)</span></td>
+<td>a plan (STRIPS search or a library)</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(options\)</span> takes the current <strong>intentions</strong> as input: what you’ve already committed to shapes what you’ll consider (“intentions filter options”).</p>
+<pre><code>1. B := B0;  2. I := I0;
+3. while true do
+4.     get next percept ρ;    5. B := brf(B, ρ);
+6.     D := options(B, I);    7. I := filter(B, D, I);
+8.     π := plan(B, I);       9. execute(π)
+10. end-while</code></pre>
+<div class="example">
+<p><strong>Worked example: the delivery robot, run on cycle (2).</strong> Five rooms:</p>
+<pre><code>   lab ─── hall ─── office
+    │                 │
+  garden ─── yard ────┘</code></pre>
+<p>The robot is in the lab with a package for the office. <span class="math inline">\(D = I = \{deliver(package, office)\}\)</span>, and <span class="math inline">\(plan\)</span> gives the shortest route <span class="math inline">\([go(hall), go(office), drop(package)]\)</span>.</p>
+<p>The hall–office door <strong>closes just after the robot reaches the hall</strong>. Cycle (2) executes the whole plan without looking: <span class="math inline">\(go(office)\)</span> fails, <span class="math inline">\(drop\)</span> in the hall fails. Only then does it perceive and plan the long way: <span class="math inline">\([go(lab), go(garden), go(yard), go(office), drop]\)</span>.</p>
+<p>Total: <strong>8 actions, 2 of them wasted</strong>.</p>
+</div>
+<h2 id="technique-3-commitment-strategies">Technique 3: commitment strategies</h2>
+<p><strong>Problem it solves:</strong> “how long should an intention last?”</p>
+<p>The book’s story (p. 76): Willie the household robot. Asked for a beer, the first Willie does something else (<strong>under-committed</strong>). The fixed Willie fetches the beer even after being told “never mind” (<strong>over-committed</strong>). The final Willie smashes the last bottle on the way: its rules let it drop commitments that became impossible, and it made this one impossible itself.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>Keeps the intention until it believes…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Blind</strong> (fanatical)</td>
+<td>…it has been achieved</td>
+</tr>
+<tr class="even">
+<td><strong>Single-minded</strong></td>
+<td>…it has been achieved, <strong>or</strong> it’s no longer possible</td>
+</tr>
+<tr class="odd">
+<td><strong>Open-minded</strong> (book only)</td>
+<td>…it is no longer possible (originally: while it’s still desired)</td>
+</tr>
+</tbody>
+</table>
+<p>Commitment applies to two things (slide 10): the <strong>ends</strong> (the intention) and the <strong>means</strong> (the plan). Cycle (2) is over-committed to both.</p>
+<h2 id="technique-4-commitment-to-means-cycle-3">Technique 4: commitment to means, cycle (3)</h2>
+<p><strong>Problem it solves:</strong> notices a broken plan and fixes it, without changing the goal.</p>
+<p>Execute one action at a time and look after each:</p>
+<pre><code>9.  while not empty(π) do
+10.     α := head(π);  11. execute(α);  12. π := tail(π);
+13.     get next percept ρ;  14. B := brf(B, ρ);
+15.     if not sound(π, I, B) then
+16.         π := plan(B, I);
+17.     end-if
+18. end-while</code></pre>
+<div class="example">
+<p><strong>Worked example: the delivery robot on cycle (3).</strong> After <span class="math inline">\(go(hall)\)</span> it sees the door is shut. <span class="math inline">\(sound([go(office), drop], I, B)\)</span> is false, so it replans from the hall: <span class="math inline">\([go(lab), go(garden), go(yard), go(office), drop]\)</span>.</p>
+<p>Total: <strong>6 actions, none wasted</strong>, against cycle (2)’s 8.</p>
+</div>
+<h2 id="technique-5-commitment-to-ends-cycle-4">Technique 5: commitment to ends, cycle (4)</h2>
+<p><strong>Problem it solves:</strong> stops working on a goal that’s already done or can never be done.</p>
+<p>Cycle (4) changes only line 9:</p>
+<pre><code>9.  while not (empty(π) or succeeded(I, B) or impossible(I, B)) do</code></pre>
+<div class="example">
+<p><strong>Worked example.</strong> A colleague delivers the package while the robot is in the garden.</p>
+<ul>
+<li><strong>Cycle (3)</strong> carries on to the office and tries to drop a package that’s already been delivered: it only checks whether the <em>plan</em> is sound.</li>
+<li><strong>Cycle (4)</strong> notices <span class="math inline">\(succeeded(I, B)\)</span> in the garden and stops.</li>
+</ul>
+<p>If every route to the office were blocked, cycle (3) would replan forever; cycle (4) exits on <span class="math inline">\(impossible(I, B)\)</span>.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cycle</th>
+<th>Looks during execution?</th>
+<th>Fixes a broken plan?</th>
+<th>Stops when done or impossible?</th>
+<th>Slide’s label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(2)</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>blindly committed</td>
+</tr>
+<tr class="even">
+<td>(3)</td>
+<td>yes, after every action</td>
+<td>yes (<span class="math inline">\(sound\)</span>)</td>
+<td>no</td>
+<td>“single-minded” (see below)</td>
+</tr>
+<tr class="odd">
+<td>(4)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>single-minded (3 + 4 together)</td>
+</tr>
+</tbody>
+</table>
+<div class="warn">
+<p><strong>Slide labels, slightly off.</strong> Slide 9 calls cycle (3) single-minded, but single-minded commitment needs the “achieved or impossible” test, which only cycle (4) adds. Slide 11 sorts it out: cycles (3) and (4) <em>together</em> are single-minded, matching the book’s Figure 4.3. Slide 9 also calls cycle (2) “blindly committed”: read it as blindly committed <strong>to the plan</strong>, since it doesn’t even check whether the goal is achieved.</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4.3, pp. 75 to 77</td>
+<td><strong>Read</strong></td>
+<td>The control loop (Figure 4.3 = slide 13’s final cycle), the Willie story, commitment strategies</td>
+</tr>
+<tr class="even">
+<td>4.3, pp. 77 to 79</td>
+<td><strong>Read</strong></td>
+<td>Reconsideration: see <a href="Intention_Reconsideration.html">the next page</a></td>
+</tr>
+<tr class="odd">
+<td>4.4 PRS</td>
+<td><strong>Read</strong></td>
+<td>See <a href="AgentSpeak.html">AgentSpeak</a></td>
+</tr>
+</tbody>
+</table>
+<p>The book lists three commitment strategies; the slides only use blind and single-minded. Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., 4.3). I want practice on THE BDI CONTROL LOOP, cycles (1) to (4):
+- the basic loop (perceive, brf, deliberate, plan, execute) and why it suffers from calculative rationality
+- the types and roles of brf, options, filter and plan, and why options takes the current intentions
+- blind, single-minded and open-minded commitment; the Willie robot story
+- commitment to means (cycle 3: execute one step, perceive, replan if not sound) vs commitment to ends (cycle 4: stop on succeeded or impossible)
+- tracing a robot through a small map of rooms when a door closes or someone else achieves the goal: count actions and wasted actions for each cycle
+- why the slides&#39; labels for cycles (2) and (3) are a little loose
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder; describe maps and events precisely.
+3. Wait for my answer, then mark it and show the full trace or model answer.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/Coach_Practical.html"><small>&larr; Previous</small>Practical 2: the running coach</a><a class="next" href="../w3/Intention_Reconsideration.html"><small>Next &rarr;</small>Intention reconsideration</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

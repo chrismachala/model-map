@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start here: the big picture · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w1_00_Start_Here_The_Big_Picture" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a class="active" aria-current="page" href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not a model: toolkit</span><span class="chip">Week 1</span></div>
+  <h1>Start here: the big picture</h1>
+  <p class="tagline">Not a model. This is the frame that every model in the course fits inside. Read it once and the rest of the course stops appearing out of thin air.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="why">
+<p><span class="label">Why this page exists</span></p>
+<p>Week 1’s slides jump between examples, notation, calculus and the Bayes classifier. They look unrelated, but they’re all pieces of one story: <strong>we want to guess an answer from some information, and we want to know how good our guess is.</strong> Every model after this is just a different way of making the guess.</p>
+</div>
+<h2 id="the-one-idea-behind-the-whole-course">1. The one idea behind the whole course</h2>
+<p>You have some <strong>information</strong> about something (a person’s age and years of education) and you want to guess an <strong>answer</strong> (their income). The course writes this as:</p>
+<p><span class="math display">\[Y = f(X) + \epsilon\]</span></p>
+<p>Read it out loud as: <em>“the answer equals some rule applied to the information, plus some luck.”</em></p>
+<ul>
+<li><span class="math inline">\(X\)</span> is the information you have (the <strong>inputs</strong>). It can be several things, <span class="math inline">\(X_1, X_2, \dots, X_p\)</span>.</li>
+<li><span class="math inline">\(Y\)</span> is the answer you want (the <strong>output</strong>).</li>
+<li><span class="math inline">\(f\)</span> is the <strong>true rule</strong> connecting them. Nobody knows it. Our whole job is to estimate it.</li>
+<li><span class="math inline">\(\epsilon\)</span> (the Greek letter “epsilon”) is the <strong>luck</strong>: things that affect <span class="math inline">\(Y\)</span> that <span class="math inline">\(X\)</span> doesn’t capture. Two people with the same education still earn different amounts. It averages out to zero.</li>
+</ul>
+<p>Our estimate of the rule is written <span class="math inline">\(\hat f\)</span> (“f-hat”). <strong>The hat always means “our estimate”.</strong> So <span class="math inline">\(\hat y\)</span> is a predicted answer and <span class="math inline">\(\hat\beta\)</span> is an estimated number.</p>
+<div class="words">
+<p><span class="label">Words you’ll hear, in plain English</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>predictor, feature, variable, input</td>
+<td>a piece of information, one column of the spreadsheet</td>
+</tr>
+<tr class="even">
+<td>response, output, target</td>
+<td>the thing you’re trying to guess</td>
+</tr>
+<tr class="odd">
+<td>observation, data point</td>
+<td>one row of the spreadsheet (one person, one car)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(n\)</span></td>
+<td>how many rows (people) you have</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(p\)</span></td>
+<td>how many columns of information (predictors) you have</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{ij}\)</span></td>
+<td>the value in row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span></td>
+</tr>
+<tr class="odd">
+<td>training data</td>
+<td>the rows you learn from</td>
+</tr>
+<tr class="even">
+<td>test data</td>
+<td>new rows the model has never seen, used to check it honestly</td>
+</tr>
+<tr class="odd">
+<td>model</td>
+<td>a shape you assume the rule <span class="math inline">\(f\)</span> has, with some numbers left to fill in</td>
+</tr>
+<tr class="even">
+<td>parameters, coefficients</td>
+<td>the numbers you fill in, often called <span class="math inline">\(\beta\)</span> (“beta”)</td>
+</tr>
+<tr class="odd">
+<td>fitting, training</td>
+<td>choosing those numbers using the training data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="two-kinds-of-question">2. Two kinds of question</h2>
+<p>Every problem in this course is one of these. Look at what kind of thing the <strong>answer</strong> is.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>If the answer is…</th>
+<th>It’s called</th>
+<th>Examples</th>
+<th>Models for it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a <strong>number</strong></td>
+<td><strong>regression</strong></td>
+<td>income, house price, wage</td>
+<td>linear regression, polynomial regression, ridge, KNN regression</td>
+</tr>
+<tr class="even">
+<td>a <strong>category</strong></td>
+<td><strong>classification</strong></td>
+<td>default yes/no, spam or not, eye colour</td>
+<td>Bayes classifier, KNN, logistic regression, LDA, naive Bayes</td>
+</tr>
+</tbody>
+</table>
+<p>(Logistic regression is a classification model despite its name. That name confuses everyone.)</p>
+<p>There’s also a third kind where there is <strong>no answer column at all</strong>, and you just look for groups in the data. That’s <strong>unsupervised learning</strong> (e.g. clustering). Weeks 1 to 3 only touch it in one example; everything else is <strong>supervised</strong>, meaning you have the answers for your training rows.</p>
+<h2 id="two-reasons-to-build-a-model">3. Two reasons to build a model</h2>
+<ul>
+<li><strong>Prediction:</strong> you only care that the guess is accurate. The model can be a black box. (“Will this patient react badly to the drug?”)</li>
+<li><strong>Inference</strong> (understanding): you want to know <em>how</em> the inputs affect the answer. The model must be readable. (“Which kind of advert actually increases sales, and by how much?”)</li>
+</ul>
+<p>This matters later: simple models like linear regression are easy to read, so they’re good for understanding. Flexible models like KNN can predict well but tell you little about <em>why</em>.</p>
+<h2 id="two-ways-to-estimate-the-rule">4. Two ways to estimate the rule</h2>
+<div class="card">
+<p><strong>Parametric: assume a shape, then fill in a few numbers.</strong><br />
+“I’ll assume income is a straight line in education: <span class="math inline">\(f(X) = \beta_0 + \beta_1 X\)</span>.” Now you only need two numbers. Easy, needs less data, easy to read. The risk: if the true rule is curved, your straight line is wrong no matter how much data you have.</p>
+<p><strong>Non-parametric: don’t assume a shape, just follow the data.</strong><br />
+KNN is the example: “to guess for a new person, look at the most similar people I already know.” No shape assumed, so it can follow any pattern. The cost: it needs a lot more data, and you have to decide how smooth or bumpy to let it be.</p>
+</div>
+<h2 id="how-we-score-a-model">5. How we score a model</h2>
+<p>You can’t improve what you can’t measure. There are two scores, one for each kind of question.</p>
+<div class="technique">
+<p><span class="label">Technique: mean squared error (MSE), for regression</span></p>
+<p><strong>Problem it solves:</strong> “My guesses are off by different amounts for different people. Give me one number for how wrong I am overall.”</p>
+<p>Take each error (guess minus truth), square it so negatives don’t cancel positives and big misses count extra, then average:</p>
+<p><span class="math display">\[\text{MSE} = \frac1n \sum_{i=1}^n \big(\hat y_i - y_i\big)^2\]</span></p>
+<p>The <span class="math inline">\(\sum\)</span> (“sigma”) just means <em>add up over every row <span class="math inline">\(i\)</span> from 1 to <span class="math inline">\(n\)</span></em>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example.</strong> Truth <span class="math inline">\(y = (3, 5, 2, 8)\)</span>, guesses <span class="math inline">\(\hat y = (2.5, 5, 3, 7)\)</span>. Errors: <span class="math inline">\(-0.5,\ 0,\ 1,\ -1\)</span>. Squared: <span class="math inline">\(0.25,\ 0,\ 1,\ 1\)</span>. Total <span class="math inline">\(2.25\)</span>. Divide by 4: <strong>MSE = 0.5625</strong>.</p>
+</div>
+<div class="technique">
+<p><span class="label">Technique: error rate, for classification</span></p>
+<p><strong>Problem it solves:</strong> the same, but when answers are categories, “how far off” makes no sense. You’re either right or wrong.</p>
+<p><span class="math display">\[\text{error rate} = \frac1n\sum_{i=1}^n \mathbb{1}(\hat y_i \neq y_i)\]</span></p>
+<p>The <span class="math inline">\(\mathbb{1}(\dots)\)</span> is the <strong>indicator</strong>: it’s 1 if the thing in brackets is true and 0 if not. So the sum just <strong>counts the mistakes</strong>, and dividing by <span class="math inline">\(n\)</span> makes it a fraction. Accuracy is <span class="math inline">\(1 - \text{error rate}\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example.</strong> Truth (A, B, B, A, C), guesses (A, B, A, A, C). One wrong out of five, so error rate <span class="math inline">\(= 0.2\)</span> and accuracy <span class="math inline">\(= 0.8\)</span>.</p>
+</div>
+<h2 id="the-trap-training-score-vs-test-score">6. The trap: training score vs test score</h2>
+<p>This is the single most important idea in the course, and it explains why so many later techniques exist.</p>
+<p>A model that is allowed to be very bendy can <strong>memorise</strong> the training data, including the luck <span class="math inline">\(\epsilon\)</span>. Its training score looks perfect, but on new data it does badly, because the luck it memorised doesn’t repeat. This is <strong>overfitting</strong>.</p>
+<p>So the score that matters is on <strong>test data</strong> (rows the model never saw). The training score is a misleading guide.</p>
+<div class="why">
+<p><span class="label">Why later weeks exist</span></p>
+<p>Almost every “new technique” from week 2 onward is an answer to this trap:</p>
+<ul>
+<li><strong>Validation sets</strong> (week 2): hold some data back to choose settings honestly.</li>
+<li><strong>Ridge regression</strong> (week 2): deliberately stop a model from bending too much.</li>
+<li><strong>Choosing <span class="math inline">\(K\)</span></strong> in KNN (weeks 1 to 3): <span class="math inline">\(K\)</span> is literally a bendiness dial.</li>
+</ul>
+</div>
+<h2 id="bias-and-variance-the-two-ways-to-be-wrong">7. Bias and variance: the two ways to be wrong</h2>
+<p>The slides state this without much explanation:</p>
+<p><span class="math display">\[\text{test MSE} = \text{bias}^2 + \text{variance} + \text{irreducible error}\]</span></p>
+<p>In plain words, a model can be wrong for three reasons:</p>
+<ol type="1">
+<li><strong>Bias: it’s too stiff.</strong> It assumed the wrong shape (a straight line for a curve). Even with infinite data it would be off. Simple models have high bias.</li>
+<li><strong>Variance: it’s too jumpy.</strong> Give it a slightly different training set and it changes a lot, because it was chasing the luck. Bendy models have high variance.</li>
+<li><strong>Irreducible error: the luck itself.</strong> No model can predict <span class="math inline">\(\epsilon\)</span>. This is a floor nobody can beat.</li>
+</ol>
+<p>Making a model more flexible lowers bias but raises variance. So if you plot test error against flexibility you get a <strong>U shape</strong>: too stiff on the left, too jumpy on the right, best in the middle. You’ll see this U shape in KNN, polynomial regression and ridge regression. It’s the same idea every time.</p>
+<div data-widget="poly">
+
+</div>
+<h2 id="where-each-model-sits">8. Where each model sits</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Week</th>
+<th>Question type</th>
+<th>Shape assumed?</th>
+<th>Page</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bayes classifier</td>
+<td>1</td>
+<td>classification</td>
+<td>the “perfect” ideal, not usable directly</td>
+<td><a href="Bayes_Classifier.html">Bayes classifier</a></td>
+</tr>
+<tr class="even">
+<td>KNN</td>
+<td>1, 2, 3</td>
+<td>both</td>
+<td>no</td>
+<td><a href="KNN.html">KNN</a>, <a href="../w2/KNN_Regression.html">KNN regression</a></td>
+</tr>
+<tr class="odd">
+<td>Linear regression</td>
+<td>2</td>
+<td>regression</td>
+<td>yes, a straight line or flat plane</td>
+<td><a href="../w2/Linear_Regression.html">Linear regression</a></td>
+</tr>
+<tr class="even">
+<td>Polynomial and step regression</td>
+<td>2</td>
+<td>regression</td>
+<td>yes, curves built from pieces</td>
+<td><a href="../w2/Polynomial_and_Step_Regression.html">Polynomial and step regression</a></td>
+</tr>
+<tr class="odd">
+<td>Ridge regression</td>
+<td>2</td>
+<td>regression</td>
+<td>yes, plus a “don’t bend too much” rule</td>
+<td><a href="../w2/Ridge_Regression.html">Ridge regression</a></td>
+</tr>
+<tr class="even">
+<td>Logistic regression</td>
+<td>3</td>
+<td>classification</td>
+<td>yes, an S-curve of probability</td>
+<td><a href="../w3/Logistic_Regression.html">Logistic regression</a></td>
+</tr>
+<tr class="odd">
+<td>LDA</td>
+<td>3</td>
+<td>classification</td>
+<td>yes, bell curves per class</td>
+<td><a href="../w3/LDA.html">LDA</a></td>
+</tr>
+<tr class="even">
+<td>Naive Bayes</td>
+<td>3</td>
+<td>classification</td>
+<td>yes, inputs independent per class</td>
+<td><a href="../w3/Naive_Bayes.html">Naive Bayes</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-to-read-in-the-book-islp-and-what-to-skip">9. What to read in the book (ISLP), and what to skip</h2>
+<p>The file <code>C1C2.txt</code> names chapters 1 and 2. Not all of those chapters are on the slides:</p>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ch. 1: Wage, Stock Market, Gene Expression examples</td>
+<td><strong>Read</strong></td>
+<td>Same examples as the slides</td>
+</tr>
+<tr class="even">
+<td>Ch. 1: Notation and Simple Matrix Algebra</td>
+<td><strong>Read</strong></td>
+<td>The course uses this notation exactly</td>
+</tr>
+<tr class="odd">
+<td>Ch. 1: history, “This Book”, “Who should read”, data sets, website</td>
+<td>Skip</td>
+<td>Not on the slides</td>
+</tr>
+<tr class="even">
+<td>2.1.1 Why estimate <span class="math inline">\(f\)</span>?</td>
+<td><strong>Read</strong></td>
+<td>Prediction vs inference, reducible vs irreducible error</td>
+</tr>
+<tr class="odd">
+<td>2.1.2 How do we estimate <span class="math inline">\(f\)</span>?</td>
+<td><strong>Read</strong></td>
+<td>Parametric vs non-parametric</td>
+</tr>
+<tr class="even">
+<td>2.1.3 Accuracy vs interpretability</td>
+<td>Skim</td>
+<td>One slide on flexibility covers it</td>
+</tr>
+<tr class="odd">
+<td>2.1.4 Supervised vs unsupervised</td>
+<td><strong>Read</strong></td>
+<td>Skip the semi-supervised paragraph</td>
+</tr>
+<tr class="even">
+<td>2.1.5 Regression vs classification</td>
+<td><strong>Read</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2.2.1 Measuring quality of fit</td>
+<td>Skim</td>
+<td>MSE, training vs test error</td>
+</tr>
+<tr class="even">
+<td>2.2.2 Bias-variance trade-off</td>
+<td>Skim</td>
+<td>Slides only state the formula. Know the meaning, skip the derivation</td>
+</tr>
+<tr class="odd">
+<td>2.2.3 The classification setting</td>
+<td><strong>Read</strong></td>
+<td>Bayes classifier and KNN, see their pages</td>
+</tr>
+<tr class="even">
+<td>2.3 Lab</td>
+<td>Optional</td>
+<td>The course lab covers the same Python</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">10. Practice prompt</h2>
+<p>Paste this into any AI chat when you want practice questions.</p>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook: &quot;An Introduction to Statistical Learning with Python&quot;, ISLP, chapters 1-2). I want practice questions on the BIG PICTURE ideas, not a specific model:
+- the setup Y = f(X) + epsilon, and what f-hat means
+- regression vs classification (deciding from the type of the answer)
+- prediction vs inference
+- parametric vs non-parametric
+- computing MSE and error rate by hand from small lists of numbers
+- training error vs test error, and overfitting
+- bias, variance and irreducible error, and the U-shaped test error curve
+
+Please:
+1. Use plain, everyday language. If you use a technical term, explain it in one short sentence.
+2. Give me ONE question at a time, starting easy and getting harder. Mix short &quot;which type of problem is this?&quot; scenarios with small calculations.
+3. Wait for my answer. Then tell me if I&#39;m right, and show the full worked solution step by step.
+4. If I get one wrong, give me a similar question before moving on.
+5. After every 5 questions, tell me which ideas I seem solid on and which need more work.</code></pre>
+</div>
+
+<nav class="pager"><a href="../index.html"><small>&larr; Previous</small>Home: the map</a><a class="next" href="../w1/01_Maths_Toolkit.html"><small>Next &rarr;</small>Maths toolkit</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

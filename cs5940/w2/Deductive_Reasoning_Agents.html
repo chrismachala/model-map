@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deductive reasoning agents · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w2_Deductive_Reasoning_Agents" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a class="active" aria-current="page" href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 2</span><span class="chip">5 techniques</span></div>
+  <h1>Deductive reasoning agents</h1>
+  <p class="tagline">The classic symbolic agent. Its beliefs are logical facts, its program is a set of rules, and it chooses an action by proving that it should take it.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative agent (symbolic).<br />
+<strong>Week:</strong> 2 (slides 3 to 12).<br />
+<strong>Book:</strong> Wooldridge ch. 3 intro (pp. 49 to 50) and 3.1 Agents as theorem provers (pp. 50 to 55).<br />
+<strong>Techniques on this page:</strong> the two open problems, action selection by proof, negation as failure and the closed world, tracing the vacuum world, calculative rationality.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>We want an agent whose decisions are <strong>explainable and checkable</strong>. If the agent keeps its knowledge as logical facts and decides by logical inference, every action comes with a proof you can inspect. It can’t invent an ungrounded answer the way a generative model can: it can only be wrong if its facts or rules are wrong.</p>
+<p>This is the first architecture of the module and the purest <strong>deliberative</strong> agent: an explicit symbolic model of the world, plus decisions made by symbolic reasoning. Everything later in weeks 2 and 3 is a response to its weaknesses (slow, no goals, hard to keep up with a changing world).</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>deliberative agent</td>
+<td>keeps an explicit symbolic world model and decides by reasoning over it</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta\)</span> (delta)</td>
+<td>the agent’s database of facts: its beliefs about the current state</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\rho\)</span> (rho)</td>
+<td>the rules: the agent’s “program”</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta \vdash_\rho \varphi\)</span></td>
+<td><span class="math inline">\(\varphi\)</span> can be <strong>proved</strong> from the facts using the rules</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Do(\alpha)\)</span></td>
+<td>“the agent should do action <span class="math inline">\(\alpha\)</span>”</td>
+</tr>
+<tr class="even">
+<td>Horn clause</td>
+<td>a rule of the form “if these all hold, then that” (Prolog’s rules)</td>
+</tr>
+<tr class="odd">
+<td>negation as failure, <code>\+</code></td>
+<td>“not <span class="math inline">\(G\)</span>” succeeds when <span class="math inline">\(G\)</span> can’t be proved</td>
+</tr>
+<tr class="even">
+<td>closed world assumption</td>
+<td>anything you can’t prove is taken to be false</td>
+</tr>
+<tr class="odd">
+<td>transduction</td>
+<td>turning the real world into symbols (vision, speech, sensors)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-two-open-problems">Technique 1: the two open problems</h2>
+<p><strong>Problem it solves:</strong> tells you <em>why</em> this approach is hard before you build anything.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Question</th>
+<th>Hard when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>transduction</strong></td>
+<td>can we turn the world into an accurate symbolic description <strong>in time</strong> to use it?</td>
+<td>vision, speech, physical robots (easier with structured web APIs)</td>
+</tr>
+<tr class="even">
+<td><strong>representation / reasoning</strong></td>
+<td>can we represent complex real things symbolically and reason with them <strong>in time</strong>?</td>
+<td>common sense, time and change, the cost of proofs</td>
+</tr>
+</tbody>
+</table>
+<p>Both say “in time”: a correct answer that arrives too late is useless.</p>
+<div class="warn">
+<p><strong>Does “no hallucination” survive? (slide 6)</strong> Not fully. Inference is sound <em>relative to</em> <span class="math inline">\(\Delta\)</span>. If an LLM or a noisy sensor fills <span class="math inline">\(\Delta\)</span> and gets a fact wrong, the agent will <em>soundly</em> derive a wrong action from it. The hallucination moves into transduction. What you keep is <strong>traceability</strong>: the proof shows which belief was wrong.</p>
+</div>
+<h2 id="technique-2-action-selection-by-proof">Technique 2: action selection by proof</h2>
+<p><strong>Problem it solves:</strong> turns “what should I do?” into a logic query.</p>
+<pre><code>function action(Δ) returns an action
+    for each α in Ac:
+        if Δ ⊢ρ Do(α): return α          # 1. an action I can prove I should do
+    for each α in Ac:
+        if Δ ⊬ρ ¬Do(α): return α          # 2. an action I can&#39;t prove I mustn&#39;t do
+    return null                           # 3. nothing found</code></pre>
+<p>“Act if you can prove you should, or if you can’t prove you shouldn’t. Otherwise do nothing.”</p>
+<ul>
+<li>The <strong>order of <span class="math inline">\(Ac\)</span> matters</strong>: if several <span class="math inline">\(Do(\alpha)\)</span> are provable, the first wins. Rule writers usually make conditions mutually exclusive so it never comes up.</li>
+<li>Step 2 can pick an action that is merely <strong>not forbidden</strong>, so an agent with too few rules still does something.</li>
+</ul>
+<p>In the book’s notation the internal state is a database <span class="math inline">\(D\)</span>, and week 1’s functions become <span class="math inline">\(see: E \to Per\)</span>, <span class="math inline">\(next: D \times Per \to D\)</span> and <span class="math inline">\(action: D \to Ac\)</span>, with <span class="math inline">\(action\)</span> defined by proof (see <a href="../w1/Formal_Agent_Model.html">the formal agent model</a>).</p>
+<h2 id="technique-3-negation-as-failure-and-the-closed-world">Technique 3: negation as failure and the closed world</h2>
+<p><strong>Problem it solves:</strong> lets rules say “if there is <strong>no</strong> dirt here” without listing every clean square.</p>
+<p>In Prolog, step 1 is the query <code>?- do(A).</code> and step 2 is <code>?- \+ not_do(A).</code>. <code>\+ G</code> succeeds whenever <code>G</code> can’t be proved. That’s the <strong>closed world assumption</strong>: what isn’t in <span class="math inline">\(\Delta\)</span> and can’t be derived is false. So if <code>dirty(1,1)</code> isn’t in the database, <code>\+ dirty(1,1)</code> succeeds.</p>
+<div class="warn">
+<p><strong>Slide 9 typo.</strong> The Prolog rule <code>do(forward) :- location(1,1), dirty(1,1), facing("E").</code> has lost its negation. The logic rule above it says <span class="math inline">\(\neg dirty(1,1)\)</span>, so it should be <code>\+ dirty(1,1)</code>. As written, the robot would drive <em>away</em> from dirt.</p>
+</div>
+<h2 id="technique-4-tracing-the-vacuum-world">Technique 4: tracing the vacuum world</h2>
+<p><strong>Problem it solves:</strong> the standard exam exercise: given <span class="math inline">\(\Delta\)</span>, which action is proved, by which rule?</p>
+<p>The slides’ rules:</p>
+<ol type="1">
+<li><span class="math inline">\(location(X,Y) \wedge dirty(X,Y) \to do(clean)\)</span></li>
+<li><span class="math inline">\(location(X,Y) \wedge odd(X) \wedge facing(\text{S}) \to do(turn(left))\)</span></li>
+<li><span class="math inline">\(location(X,Y) \wedge odd(X) \wedge facing(D) \wedge D \in \{\text{W},\text{N}\} \to do(turn(right))\)</span></li>
+<li><span class="math inline">\(location(X,Y) \wedge odd(X) \wedge facing(\text{E}) \wedge \neg dirty(X,Y) \wedge \neg wall(front) \to do(forward)\)</span></li>
+</ol>
+<p>with <span class="math inline">\(odd(X) \leftarrow X \bmod 2 = 1\)</span>.</p>
+<div class="example">
+<p><strong>Worked example: the slide 11 proof.</strong> <span class="math inline">\(\Delta = \{location(1,1),\ facing(\text{S})\}\)</span>.</p>
+<ul>
+<li>Rule 1 needs <span class="math inline">\(dirty(1,1)\)</span>. Not in <span class="math inline">\(\Delta\)</span>, not provable, so false (closed world).</li>
+<li>Rule 2: <span class="math inline">\(location(1,1)\)</span> ✓, <span class="math inline">\(odd(1)\)</span> ✓, <span class="math inline">\(facing(\text{S})\)</span> ✓. So <span class="math inline">\(\Delta \vdash_\rho do(turn(left))\)</span>.</li>
+<li>Rules 3 and 4 need facing W, N or E: fail.</li>
+</ul>
+<p>The first loop returns <strong>turn(left)</strong>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example: two more.</strong></p>
+<p><span class="math inline">\(\Delta = \{location(3,2),\ facing(\text{E}),\ dirty(3,2)\}\)</span>: rule 1 fires; rule 4 fails on <span class="math inline">\(\neg dirty\)</span>. Only <span class="math inline">\(Do(clean)\)</span> is provable: <strong>clean</strong>.</p>
+<p><span class="math inline">\(\Delta = \{location(2,2),\ facing(\text{E})\}\)</span>: <span class="math inline">\(odd(2)\)</span> fails, so rules 2 to 4 can’t fire, and there’s no dirt. Nothing is provable, so step 2 returns the first action that isn’t forbidden: simply the first action in <span class="math inline">\(Ac\)</span>. The slide’s rules are only a fragment (“…plus a lot more rules”).</p>
+</div>
+<div data-widget="vacuum">
+
+</div>
+<p>The book’s vacuum world (pp. 52 to 54) is a different hand-written route: a 3 × 3 grid starting at <span class="math inline">\((0,0)\)</span> facing north, actions <em>forward</em>, <em>suck</em>, <em>turn</em> (right only), and an update <span class="math inline">\(next(DB, p) = (DB \setminus old(DB)) \cup new(DB, p)\)</span>. Don’t mix its rules with the slides’.</p>
+<h2 id="technique-5-calculative-rationality">Technique 5: calculative rationality</h2>
+<p><strong>Problem it solves:</strong> names the main weakness, and tells you when this design is acceptable.</p>
+<p>Proving <span class="math inline">\(Do(\alpha)\)</span> starts at time <span class="math inline">\(t_1\)</span> and finishes at <span class="math inline">\(t_2\)</span>. The action was right <strong>for the world at <span class="math inline">\(t_1\)</span></strong>. If the world changed in between, it may be wrong by the time it’s done.</p>
+<p>An agent has <strong>calculative rationality</strong> if it picks an action that was optimal <em>when it started deciding</em>. That’s only acceptable in an (effectively) <strong>static</strong> environment. With full first-order logic the prover may not even finish.</p>
+<p><strong>Verdict:</strong> elegant, clean semantics, inspectable proofs; but slow, and transduction and representing time and change are hard.</p>
+<p><strong>Where is the goal? (slide 12)</strong> Nowhere. <span class="math inline">\(\rho\)</span> is a flat list of condition-action rules; “clean the room” lives only in the programmer’s head. That’s the motivation for <a href="Teleo_Reactive_Programs.html">teleo-reactive programs</a>.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ch. 3 intro, pp. 49 to 50</td>
+<td><strong>Read</strong></td>
+<td>Deliberative agents and the two open problems (slide 5, nearly word for word)</td>
+</tr>
+<tr class="even">
+<td>3.1 Agents as theorem provers, pp. 50 to 55</td>
+<td><strong>Read</strong></td>
+<td>Figure 3.2 is slide 8; the vacuum world; calculative rationality (not named on the slides but the key criticism)</td>
+</tr>
+<tr class="odd">
+<td>3.3 Concurrent MetateM</td>
+<td>Skip</td>
+<td>Only named on the slides</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., ch. 3 intro and 3.1). I want practice on DEDUCTIVE REASONING AGENTS:
+- what makes an agent deliberative; the transduction and representation/reasoning problems
+- the action-selection function (prove Do(a); else pick an action not provably forbidden; else null) and why the order of actions matters
+- tracing vacuum-world rules: give me a database Delta (location, facing, dirty, wall facts) and rules like location(X,Y) &amp; odd(X) &amp; facing(S) -&gt; do(turn(left)); I say which rule fires and which action is returned
+- Prolog negation as failure and the closed world assumption
+- calculative rationality and why deductive agents struggle in dynamic environments
+- whether &quot;no hallucination&quot; survives when an LLM fills the database
+- why a flat rule set has no explicit goal
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder.
+3. Wait for my answer, then mark it and show the full reasoning (which conditions hold, which fail).
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w1/LLM_Chat_Loop.html"><small>&larr; Previous</small>Practical 1: the chat loop</a><a class="next" href="../w2/Teleo_Reactive_Programs.html"><small>Next &rarr;</small>Teleo-reactive programs</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

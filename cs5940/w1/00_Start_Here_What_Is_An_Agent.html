@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start here: what is an agent? · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a class="active" aria-current="page" href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 1</span><span class="chip">6 techniques</span></div>
+  <h1>Start here: what is an agent?</h1>
+  <p class="tagline">Not an architecture. This is the frame every agent in the module fits inside: what counts as an agent, why handing a goal to one is risky, and the six questions you ask about any agent design.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> toolkit (the language for the rest of the module).<br />
+<strong>Week:</strong> 1 (lecture 1, slides 7 to 36).<br />
+<strong>Book:</strong> Wooldridge chapter 2 opening (pp. 21 to 26), 2.1, 2.2. Chapter 1 skim.<br />
+<strong>Techniques on this page:</strong> the definition checklist, agent vs workflow, the six design dimensions, the twelve-question template, placing a design in one of the five traditions.</p>
+</div>
+<div class="why">
+<p><span class="label">Why this page exists</span></p>
+<p>Every later week introduces a new <strong>architecture</strong>: a way of building the inside of an agent (prove what to do, follow ordered rules, keep beliefs and intentions, stack reflexes in layers, call an LLM). They only make sense once you know <strong>what job an agent is doing</strong> and <strong>which questions every design has to answer</strong>.</p>
+<p>That’s what week 1 gives you. It’s also the exam’s favourite opening move: “is this system an agent?”, “classify this environment”, “analyse this design against the six dimensions”. Learn these as checklists and you can answer them for any system, including ones you’ve never seen.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>agent</td>
+<td>a system that lives in an environment, senses it, and chooses its own actions to meet a goal someone gave it</td>
+</tr>
+<tr class="even">
+<td>environment</td>
+<td>everything outside the agent that it senses and acts on</td>
+</tr>
+<tr class="odd">
+<td>situated</td>
+<td>it is <em>in</em> an environment, not just transforming input to output</td>
+</tr>
+<tr class="even">
+<td>autonomous</td>
+<td>it decides for itself <em>how</em> to act, without a human choosing each step</td>
+</tr>
+<tr class="odd">
+<td>delegation</td>
+<td>handing a goal to the agent and letting it decide the steps</td>
+</tr>
+<tr class="even">
+<td>percept, observation <span class="math inline">\(o_t\)</span></td>
+<td>what the agent is told about the world at time <span class="math inline">\(t\)</span></td>
+</tr>
+<tr class="odd">
+<td>state <span class="math inline">\(s_t\)</span></td>
+<td>what is actually true about the world at time <span class="math inline">\(t\)</span></td>
+</tr>
+<tr class="even">
+<td>effector, actuator, tool</td>
+<td>the means by which it acts (a motor, a shell command, an API call)</td>
+</tr>
+<tr class="odd">
+<td>scaffold</td>
+<td>the ordinary code wrapped around an LLM: the loop, the tools, the permissions</td>
+</tr>
+<tr class="even">
+<td>workflow</td>
+<td>a fixed sequence of steps a programmer chose, even if an LLM does some of them</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-definition-checklist">Technique 1: the definition checklist</h2>
+<p><strong>Problem it solves:</strong> “Is this thing an agent?” has no obvious answer. A checklist turns it into three yes/no questions.</p>
+<p>The lecture compares four definitions:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Definition, in short</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Russell &amp; Norvig</td>
+<td>anything that <strong>perceives</strong> its environment through sensors and <strong>acts</strong> on it through effectors</td>
+</tr>
+<tr class="even">
+<td>Wooldridge</td>
+<td>a computer system <strong>situated</strong> in an environment, capable of <strong>autonomous action</strong> to meet its <strong>delegated objectives</strong></td>
+</tr>
+<tr class="odd">
+<td>OpenAI</td>
+<td>a system that <strong>independently accomplishes tasks</strong> on your behalf, with an LLM managing the workflow</td>
+</tr>
+<tr class="even">
+<td>Anthropic</td>
+<td>a system where an LLM <strong>dynamically directs its own processes and tool use</strong></td>
+</tr>
+</tbody>
+</table>
+<p>What Wooldridge adds to Russell &amp; Norvig: <strong>autonomy</strong> and <strong>objectives</strong>. Under R&amp;N alone a light sensor wired to a lamp is an agent. Wooldridge also asks for decision-making aimed at a goal.</p>
+<p>The common core, as a checklist:</p>
+<ol type="1">
+<li>Is it <strong>situated</strong>: does it sense and act on an environment?</li>
+<li>Is it <strong>autonomous</strong>: does it choose its own actions?</li>
+<li>Is it <strong>goal-directed</strong>: is it pursuing an objective someone delegated to it?</li>
+</ol>
+<div class="example">
+<p><strong>Worked example: where’s the boundary?</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>System</th>
+<th>Agent?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>thermostat</td>
+<td>weak yes</td>
+<td>senses, acts, has a set-point; autonomy is one fixed rule</td>
+</tr>
+<tr class="even">
+<td>calculator</td>
+<td>no</td>
+<td>input to output, no environment, no ongoing interaction</td>
+</tr>
+<tr class="odd">
+<td>spam filter</td>
+<td>borderline</td>
+<td>senses and acts, but each decision is a fixed classification</td>
+</tr>
+<tr class="even">
+<td>LLM coding agent</td>
+<td>yes</td>
+<td>reads files and test output, picks commands, pursues a task</td>
+</tr>
+<tr class="odd">
+<td>self-driving car</td>
+<td>yes</td>
+<td>situated, autonomous, goal-directed</td>
+</tr>
+</tbody>
+</table>
+<p>Most real systems sit on a <strong>spectrum</strong> of autonomy (book pp. 22 to 23), with “a Java method that just does what it’s told” at one end and humans at the other.</p>
+</div>
+<h2 id="technique-2-agent-vs-workflow">Technique 2: agent vs workflow</h2>
+<p><strong>Problem it solves:</strong> lots of products are called “AI agents”. This test tells you which ones really are.</p>
+<ul>
+<li>A <strong>workflow</strong> follows <strong>predefined code paths</strong>. An LLM may do some steps, but the programmer fixed the order. “Summarise the email, translate it, file it”: always those three steps.</li>
+<li>An <strong>agent</strong> <strong>decides the steps at run time</strong>: which tool next, whether to retry, when it’s finished.</li>
+</ul>
+<div class="example">
+<p><strong>Worked example.</strong></p>
+<ol type="a">
+<li><p>A script that always asks an LLM to summarise a document, then emails the summary: <strong>workflow</strong> (the path is fixed in code).</p></li>
+<li><p>An LLM that reads a bug report, decides which files to open, runs the tests, and keeps editing until they pass: <strong>agent</strong> (the model picks the steps and when to stop).</p></li>
+</ol>
+<p>Your week 1 practical program is <strong>not yet an agent</strong> by this test, and the practical says so: your Python loop decides everything and the model only produces text.</p>
+</div>
+<h2 id="technique-3-the-delegation-problem">Technique 3: the delegation problem</h2>
+<p><strong>Problem it solves:</strong> explains <em>why</em> agents need safety rules, permissions and off-switches.</p>
+<p>Giving a system an objective <strong>and</strong> freedom over how to pursue it means it may pursue the objective in ways you didn’t intend, and you may not be able to stop it.</p>
+<ul>
+<li><strong>The Sorcerer’s Apprentice:</strong> the broom fetches water exactly as told and won’t stop. The objective was underspecified (“fetch water”, not “fetch enough and stop”) and there was no off-switch.</li>
+<li><strong>The book’s answer, adjustable autonomy (p. 23):</strong> hand the decision back to a human when the human would decide much better, when uncertainty is high, when the decision could cause harm, or when the agent lacks the capability.</li>
+</ul>
+<p>The trade-off: an agent that always asks is useless; one that never asks is dangerous.</p>
+<h2 id="technique-4-the-six-design-dimensions">Technique 4: the six design dimensions</h2>
+<p><strong>Problem it solves:</strong> a fixed list of questions you can ask about <strong>any</strong> agent, from a thermostat to an LLM coding agent.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Question</th>
+<th>What to look for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>What can it <strong>observe</strong>?</td>
+<td>state <span class="math inline">\(s_t\)</span> vs observation <span class="math inline">\(o_t\)</span>; partial observability</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>What does it <strong>represent or remember</strong>?</td>
+<td>internal state, a world model, memory</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>What <strong>objective</strong> drives it?</td>
+<td>goal, utility, reward, delegated task, instructions, constraints</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>How does it <strong>decide</strong>?</td>
+<td>rules, logic, search, planning, a learned policy, model inference</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>What <strong>changes with experience</strong>?</td>
+<td>learning vs what stays engineered (rules, prompts, tools, permissions)</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>What can it <strong>actually do</strong>?</td>
+<td>its actions, tools and permissions, and their cost and reversibility</td>
+</tr>
+</tbody>
+</table>
+<p>Two ideas the lecture leans on:</p>
+<ul>
+<li><strong>State vs observation (slide 19).</strong> If two different states give the <strong>same observation</strong>, an agent with no memory must act the same in both. To tell them apart it needs memory or a world model. A thermostat reading “cold” can’t tell “heater just came on” from “window open”.</li>
+<li><strong>Capability (slide 24).</strong> What an agent can do depends on what it is <strong>able and permitted</strong> to do, not on what it knows. An LLM may know the command to delete a database; with no shell tool, it can’t run it.</li>
+</ul>
+<div class="example">
+<p><strong>Worked example: thermostat vs LLM coding agent (slide 32).</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Thermostat</th>
+<th>LLM coding agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>observe</td>
+<td>temperature</td>
+<td>prompts, files, tool outputs, test failures</td>
+</tr>
+<tr class="even">
+<td>remember</td>
+<td>nothing</td>
+<td>the context, plus maybe external memory</td>
+</tr>
+<tr class="odd">
+<td>objective</td>
+<td>a set-point</td>
+<td>delegated task + instructions + constraints</td>
+</tr>
+<tr class="even">
+<td>decide</td>
+<td>one fixed rule</td>
+<td>model inference inside a tool loop</td>
+</tr>
+<tr class="odd">
+<td>learn</td>
+<td>nothing</td>
+<td>before deployment; <strong>no weight changes during a task</strong></td>
+</tr>
+<tr class="even">
+<td>do</td>
+<td>heat or cool</td>
+<td>edit files, run commands, call tools</td>
+</tr>
+</tbody>
+</table>
+<p>Quiz trap: an LLM agent <em>seems</em> to learn within a session. Its weights don’t change. What changes is its <strong>context</strong>, which is memory, not learning.</p>
+</div>
+<h2 id="technique-5-the-twelve-question-template">Technique 5: the twelve-question template</h2>
+<p><strong>Problem it solves:</strong> “analyse this agent” questions. Run down this list and you won’t miss a part of the design.</p>
+<ol type="1">
+<li>What is the environment? 2. What can the agent observe? 3. What actions are available? 4. What internal state persists? 5. What knowledge, beliefs or world model does it keep? 6. What kind of memory exists? 7. How is the objective represented? 8. How are decisions made? 9. Does it plan? 10. Does it learn, and on what timescale? 11. What remains engineered? 12. What are its characteristic failure modes?</li>
+</ol>
+<p>These come back for every architecture in the module. Each later page answers them for its own kind of agent.</p>
+<h2 id="technique-6-the-five-traditions">Technique 6: the five traditions</h2>
+<p><strong>Problem it solves:</strong> gives you a map of where each later week’s architecture sits.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tradition</th>
+<th>Central idea</th>
+<th>In this module</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Symbolic / planning</td>
+<td>explicit reasoning over representations</td>
+<td>week 2: <a href="../w2/Deductive_Reasoning_Agents.html">deductive agents</a>, <a href="../w2/Agent0.html">Agent0</a>, <a href="../w2/STRIPS_Planning.html">STRIPS</a></td>
+</tr>
+<tr class="even">
+<td>BDI</td>
+<td>beliefs, desires, intentions, deliberation</td>
+<td>weeks 2 and 3: <a href="../w2/BDI_Practical_Reasoning.html">BDI</a>, <a href="../w3/BDI_Control_Loop.html">the control loop</a>, <a href="../w3/AgentSpeak.html">AgentSpeak</a></td>
+</tr>
+<tr class="odd">
+<td>Reactive / behaviour-based</td>
+<td>direct perception-to-action coupling</td>
+<td>weeks 2 and 3: <a href="../w2/Teleo_Reactive_Programs.html">teleo-reactive</a>, <a href="../w3/Subsumption.html">subsumption</a></td>
+</tr>
+<tr class="even">
+<td>Reinforcement learning</td>
+<td>policies shaped by reward</td>
+<td>later weeks</td>
+</tr>
+<tr class="odd">
+<td>LLM-based / tool-using</td>
+<td>a pretrained model plus context, tools, memory and a scaffold</td>
+<td>the practicals</td>
+</tr>
+</tbody>
+</table>
+<p>This is <strong>not a progress ladder</strong> (slide 31). Each trades off representation, reaction, planning and learning differently, and modern agents are usually <strong>hybrids</strong>: an LLM coding agent is a learned model plus symbolic tools (compilers, test runners) plus a fixed control loop.</p>
+<p><strong>Where is the agent in an LLM agent? (slide 33)</strong> A strong answer: not the LLM alone (no memory between calls, no actions, no persistent goal). The LLM <strong>plus</strong> its context, tools and control loop together meet Wooldridge’s definition.</p>
+<h2 id="when-theres-more-than-one-agent">When there’s more than one agent</h2>
+<p>Another agent in the environment changes it <strong>strategically</strong>: its actions may depend on what it thinks <em>you</em> will do, and your goals may align, conflict or partly overlap. That adds new questions (communication, coordination, cooperation, competition, collective decisions), which are Part II of the module.</p>
+<p>The book’s slogan (2.2): <strong>“Objects do it for free; agents do it because they want to.”</strong> You can call an object’s method; you can only <em>request</em> an action from another agent, and it decides.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ch. 1 intro and 1.1</td>
+<td>Skim</td>
+<td>The five trends, and the micro (agent design) vs macro (society design) split</td>
+</tr>
+<tr class="even">
+<td>1.2 Views of the field</td>
+<td>Skip</td>
+<td>Dated background</td>
+</tr>
+<tr class="odd">
+<td>1.3 FAQ</td>
+<td>Optional</td>
+<td>“Isn’t this just AI?” Not on the slides</td>
+</tr>
+<tr class="even">
+<td>Ch. 2 opening, pp. 21 to 24</td>
+<td><strong>Read</strong></td>
+<td>Slide 9’s definition word for word, varieties of autonomy, the thermostat</td>
+</tr>
+<tr class="odd">
+<td>Environments box, p. 25</td>
+<td><strong>Read</strong></td>
+<td>See <a href="Environment_Properties.html">environment properties</a></td>
+</tr>
+<tr class="even">
+<td>2.1 Intelligent agents</td>
+<td><strong>Read</strong></td>
+<td>Reactivity, pro-activeness, social ability. Likely quiz material</td>
+</tr>
+<tr class="odd">
+<td>2.2 Agents and objects</td>
+<td><strong>Read</strong></td>
+<td>Short and often examined</td>
+</tr>
+<tr class="even">
+<td>2.3 Expert systems, 2.4 Intentional systems</td>
+<td>Skim</td>
+<td>2.4 sets up BDI</td>
+</tr>
+<tr class="odd">
+<td>2.5 and 2.6</td>
+<td>Recommended</td>
+<td>The maths: see <a href="Formal_Agent_Model.html">the formal agent model</a></td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21. Nothing in the book covers the LLM definitions, agent vs workflow, or the practicals: the slides are the source.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents (textbook: Wooldridge, An Introduction to MultiAgent Systems, 2nd ed., chapters 1 and 2). I want practice questions on WHAT AN AGENT IS:
+- the Russell &amp; Norvig, Wooldridge, OpenAI and Anthropic definitions, and what Wooldridge adds (autonomy, delegated objectives)
+- deciding whether a described system is an agent, with reasons (thermostat, spam filter, chatbot, coding agent, smart doorbell...)
+- agent vs workflow: is the control flow fixed by the programmer or chosen by the model at run time?
+- the delegation problem and adjustable autonomy (when should an agent hand control back to a human?)
+- the six design dimensions (observe, remember, objective, decide, learn, act), state vs observation, and capability vs knowledge
+- using the twelve recurring questions to analyse an agent design
+- placing a design in one of the five traditions (symbolic, BDI, reactive, RL, LLM-based), and why LLM agents are hybrids
+- &quot;objects do it for free; agents do it because they want to&quot;
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, in the style of a university quiz or exam.
+3. Wait for my answer, then mark it and show a model answer.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../index.html"><small>&larr; Previous</small>Home: the map</a><a class="next" href="../w1/Environment_Properties.html"><small>Next &rarr;</small>Environment properties</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

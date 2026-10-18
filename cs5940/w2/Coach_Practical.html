@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practical 2: the running coach · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w2_Coach_Practical" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip prac">Practical: LLM code</span><span class="chip">Week 2</span><span class="chip">6 techniques</span></div>
+  <h1>Practical 2: the running coach</h1>
+  <p class="tagline">Week 1's script grows into reusable parts for a running coach: one function for every model call, a token budget, a settings file, a user profile, and a conversation that forgets old messages on purpose.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> practical (LLM code).<br />
+<strong>Week:</strong> 2 practical, Parts 1 to 4.<br />
+<strong>Book:</strong> none. The practical pages are the source.<br />
+<strong>Techniques on this page:</strong> <code>call_llm</code>, thinking models, the token budget (and its overshoot), <code>config.toml</code>, the user profile in the system prompt, the trimmed conversation window, save and resume.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Week 1’s program worked, but every call was copy-pasted, costs grew without limit, and settings and secrets were mixed into the code. Week 2 turns it into an application you can control: <strong>one place</strong> where every model call goes through, a <strong>budget</strong> so a runaway loop can’t burn your hourly allowance, and <strong>state the application owns</strong>, including the decision about what to forget.</p>
+<blockquote>
+<p><strong>Key idea:</strong> state belongs to the application, including the decision about what to forget.</p>
+</blockquote>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>token</td>
+<td>a small piece of text (about ¾ of a word); costs and limits are counted in these</td>
+</tr>
+<tr class="even">
+<td>context window</td>
+<td>the most tokens one request can hold, every message included</td>
+</tr>
+<tr class="odd">
+<td>temperature</td>
+<td>randomness: near 0, the model almost always picks its most likely next word</td>
+</tr>
+<tr class="even">
+<td>thinking / reasoning model</td>
+<td>writes out reasoning before answering: better on multi-step problems, more tokens, slower</td>
+</tr>
+<tr class="odd">
+<td><code>extra_body</code></td>
+<td>passes a server-specific setting through LiteLLM unchanged</td>
+</tr>
+<tr class="even">
+<td>TOML</td>
+<td>a settings-file format that, unlike JSON, allows comments</td>
+</tr>
+<tr class="odd">
+<td>type hints</td>
+<td><code>messages: list[dict]</code>: documentation Python doesn’t enforce</td>
+</tr>
+<tr class="even">
+<td><code>max_messages</code> (<span class="math inline">\(k\)</span>)</td>
+<td>how many recent history messages are sent each turn</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-one-function-for-every-model-call">Technique 1: one function for every model call</h2>
+<p><strong>Problem it solves:</strong> change the model, count tokens or enforce a budget <strong>once</strong>, not everywhere.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>MODEL <span class="op">=</span> <span class="st">&quot;openai/qwen3-14b&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> call_llm(messages: <span class="bu">list</span>[<span class="bu">dict</span>], temperature: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.2</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>[<span class="bu">str</span>, Any]:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Send messages to the model and return (reply_text, usage).&quot;&quot;&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> completion(model<span class="op">=</span>MODEL, api_base<span class="op">=</span>os.environ[<span class="st">&quot;OPENAI_BASE_URL&quot;</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                          api_key<span class="op">=</span>os.environ[<span class="st">&quot;OPENAI_API_KEY&quot;</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                          messages<span class="op">=</span>messages, temperature<span class="op">=</span>temperature)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> response.choices[<span class="dv">0</span>].message.content <span class="kw">or</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> text, response.usage</span></code></pre></div>
+<p>The <code>or ""</code> guards against <code>content</code> being <code>None</code>. The coach uses temperature 0.2 for consistent advice.</p>
+<h2 id="technique-2-thinking-and-keeping-it-out-of-the-history">Technique 2: thinking, and keeping it out of the history</h2>
+<p><strong>Problem it solves:</strong> use extra reasoning only when it’s worth the cost.</p>
+<p>Qwen3 is <strong>hybrid</strong>: thinking is off by default on the course server and switched on per request:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>extra_body<span class="op">=</span>{<span class="st">&quot;chat_template_kwargs&quot;</span>: {<span class="st">&quot;enable_thinking&quot;</span>: thinking}}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>reasoning <span class="op">=</span> <span class="bu">getattr</span>(message, <span class="st">&quot;reasoning_content&quot;</span>, <span class="va">None</span>)   <span class="co"># None if there isn&#39;t any</span></span></code></pre></div>
+<p>For “Hello!” thinking is wasted; for “Is 20 km a week enough for a 10 km race?” it helps.</p>
+<p><strong>Why not store the reasoning in the history?</strong> It’s often far longer than the answer, and the whole history is resent every turn, so it would multiply the cost of every later call. <code>call_llm</code> returns only <code>message.content</code>, and <code>.strip()</code> removes the blank lines left behind.</p>
+<h2 id="technique-3-the-token-budget">Technique 3: the token budget</h2>
+<p><strong>Problem it solves:</strong> stops a bug from spending the course allowance (700,000 tokens per hour, 2,000,000 per day).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>TOKENS_USED <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>TOKEN_BUDGET <span class="op">=</span> <span class="dv">100_000</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TokenBudgetExceeded(<span class="pp">Exception</span>): ...</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> call_llm(...):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> TOKENS_USED</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> TOKENS_USED <span class="op">&gt;=</span> TOKEN_BUDGET:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> TokenBudgetExceeded(<span class="ss">f&quot;This run has used its budget of </span><span class="sc">{</span>TOKEN_BUDGET<span class="sc">}</span><span class="ss"> tokens.&quot;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> completion(...)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    TOKENS_USED <span class="op">+=</span> response.usage.total_tokens</span></code></pre></div>
+<p><strong>The overshoot.</strong> The check happens <strong>before</strong> each call, using the total so far. If every call uses <span class="math inline">\(c\)</span> tokens and the budget is <span class="math inline">\(B\)</span>:</p>
+<p><span class="math display">\[\text{calls made} = \left\lceil \frac{B}{c} \right\rceil, \qquad \text{tokens used} = c\left\lceil \frac{B}{c} \right\rceil &lt; B + c.\]</span></p>
+<p>A run can overshoot by <strong>less than one call’s worth</strong>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(B = 10{,}000\)</span>, <span class="math inline">\(c = 4{,}000\)</span>. Before call 1 the total is 0, before call 2 it’s 4,000, before call 3 it’s 8,000: all below 10,000, so 3 calls run (<span class="math inline">\(\lceil 2.5 \rceil = 3\)</span>), using <strong>12,000</strong> tokens. The <strong>4th</strong> call raises <code>TokenBudgetExceeded</code>.</p>
+<p>With <span class="math inline">\(B = 100{,}000\)</span> and <span class="math inline">\(c = 3{,}000\)</span>: <span class="math inline">\(\lceil 33.3 \rceil = 34\)</span> calls, 102,000 tokens, an overshoot of 2,000.</p>
+</div>
+<h2 id="technique-4-settings-in-config.toml">Technique 4: settings in config.toml</h2>
+<p><strong>Problem it solves:</strong> change settings without editing code, and record which settings gave a result.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode toml"><code class="sourceCode toml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># config.toml. Secrets (API key, server URL) stay in environment variables.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">[model]</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">&quot;openai/qwen3-14b&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">temperature</span> <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">thinking</span> <span class="op">=</span> <span class="cn">false</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">token_budget</span> <span class="op">=</span> <span class="dv">100_000</span>   <span class="co"># per script run</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>CONFIG_FILE <span class="op">=</span> Path(<span class="va">__file__</span>).with_name(<span class="st">&quot;config.toml&quot;</span>)   <span class="co"># next to config.py, wherever you run from</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>CONFIG <span class="op">=</span> tomllib.loads(CONFIG_FILE.read_text(encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>))</span></code></pre></div>
+<p><strong>What goes where:</strong> values you change between runs (model, temperature, thinking, budget) go in <code>config.toml</code>; <strong>secrets never do</strong> (environment variables); logic stays in code. The file is read once, at import, so restart Python after editing it.</p>
+<h2 id="technique-5-the-user-profile">Technique 5: the user profile</h2>
+<p><strong>Problem it solves:</strong> makes advice specific to the runner, by putting facts in the system prompt.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_system_prompt(profile: <span class="bu">dict</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f&quot;&quot;&quot;You are a supportive running coach.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ss">Give short, practical advice (at most 5 sentences).</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">Athlete profile:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="sc">{</span>json<span class="sc">.</span>dumps(profile, indent<span class="op">=</span><span class="dv">2</span>)<span class="sc">}</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ss">&quot;&quot;&quot;</span></span></code></pre></div>
+<p><strong>Who decides what the model sees?</strong> The application. Changing <code>current_weekly_km</code> from 25 to 5 should change the advice. Changing <code>race_date</code> tells you little, because <strong>the model doesn’t know today’s date</strong> unless you put it in the prompt too.</p>
+<p>In lecture terms the profile is explicit, inspectable state, a bit like a <a href="Deductive_Reasoning_Agents.html">deductive agent’s</a> <span class="math inline">\(\Delta\)</span>. But the LLM doesn’t reason soundly over it: it can still contradict the profile, so inspect the output.</p>
+<h2 id="technique-6-the-trimmed-conversation-window">Technique 6: the trimmed conversation window</h2>
+<p><strong>Problem it solves:</strong> keeps each request’s cost bounded, at the price of forgetting.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Conversation:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, system_prompt: <span class="bu">str</span>, max_messages: <span class="bu">int</span> <span class="op">=</span> <span class="dv">10</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.system_prompt <span class="op">=</span> system_prompt</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.max_messages <span class="op">=</span> max_messages</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.history: <span class="bu">list</span>[<span class="bu">dict</span>] <span class="op">=</span> []</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_messages(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">dict</span>]:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        recent <span class="op">=</span> <span class="va">self</span>.history[<span class="op">-</span><span class="va">self</span>.max_messages:]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;system&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="va">self</span>.system_prompt}] <span class="op">+</span> recent</span></code></pre></div>
+<p><strong>Why is the system prompt outside the window?</strong> It holds the role, the rules and the profile. If it were trimmed the coach would turn into a generic assistant after a few turns.</p>
+<p><strong>The maths.</strong> At turn <span class="math inline">\(t\)</span> (after <code>add_user</code>) the history holds <span class="math inline">\(2t - 1\)</span> messages. The turn-1 message is still sent iff</p>
+<p><span class="math display">\[2t - 1 \le k \iff t \le \frac{k + 1}{2}.\]</span></p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(k = 4\)</span>: turn 1’s message is sent at turns 1 and 2 only (<span class="math inline">\(t \le 2.5\)</span>). From turn 3 it’s gone, so at turn 6 the coach can’t know your shoe size. The model didn’t “forget”: your application chose not to send it.</p>
+<p><span class="math inline">\(k = 6\)</span>: sent up to turn 3. Default <span class="math inline">\(k = 10\)</span>: up to turn 5.</p>
+<p>At turn 3 with <span class="math inline">\(k = 4\)</span>, <code>get_messages()</code> returns 5 messages: the system message plus the last 4 of the history’s 5.</p>
+</div>
+<div data-widget="tokens" data-window="4">
+
+</div>
+<p>Without trimming, the prompt grows every turn (quadratic total, as in <a href="../w1/LLM_Chat_Loop.html">week 1</a>). With a window it grows until the window is full, then stays roughly flat at about <span class="math inline">\(s + k\bar m\)</span> tokens.</p>
+<p><strong>Save and resume:</strong> load <code>session.json</code> at start-up if it exists, and <code>conv.save(SESSION_FILE)</code> before <code>break</code>. The system prompt isn’t saved, because it’s rebuilt from the current profile each run.</p>
+<h2 id="connecting-it-to-the-lecture">Connecting it to the lecture</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lecture idea</th>
+<th>In the coach</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>explicit world model <span class="math inline">\(\Delta\)</span></td>
+<td><code>profile.json</code> and the history: explicit, inspectable state</td>
+</tr>
+<tr class="even">
+<td>“no hallucination” relative to <span class="math inline">\(\Delta\)</span></td>
+<td><strong>doesn’t hold</strong>: the LLM can contradict the profile</td>
+</tr>
+<tr class="odd">
+<td>commitment over time (Agent0, BDI)</td>
+<td>not yet: no goals or intentions of its own</td>
+</tr>
+<tr class="even">
+<td>plan libraries vs first principles</td>
+<td>not yet: the coach only talks</td>
+</tr>
+</tbody>
+</table>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents. The week 2 practical builds a running coach in Python with LiteLLM: a call_llm(messages, temperature) function, an optional Qwen3 thinking mode, a TOKEN_BUDGET checked before each call, settings in config.toml, a JSON user profile in the system prompt, and a Conversation class that sends only the last max_messages history messages plus the system prompt. I want practice on:
+- why every call goes through one function, and what &quot;or &#39;&#39;&quot; and type hints are for
+- when to switch thinking on, and why reasoning text is kept out of the history
+- token budget arithmetic: number of calls ceil(B/c), tokens used, which call raises, and the overshoot &lt; one call
+- what belongs in config.toml vs environment variables vs code
+- why the profile goes in the system prompt, and why changing race_date tells you little
+- the trimmed window: the turn-1 message is sent iff 2t - 1 &lt;= k; how many messages get_messages() returns; why the system prompt is never trimmed
+- save/resume with session.json
+- linking the coach to the lecture (explicit state, no commitments, no planning)
+
+Please:
+1. Use plain, everyday language and explain any term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder; include code-reading and arithmetic questions.
+3. Wait for my answer, then mark it and show a model answer with working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w2/STRIPS_Planning.html"><small>&larr; Previous</small>STRIPS planning</a><a class="next" href="../w3/BDI_Control_Loop.html"><small>Next &rarr;</small>The BDI control loop</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

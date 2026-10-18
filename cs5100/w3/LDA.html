@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear discriminant analysis (LDA) · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w3_LDA" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip cls">Classification model</span><span class="chip">Week 3</span><span class="chip">5 techniques</span></div>
+  <h1>Linear discriminant analysis (LDA)</h1>
+  <p class="tagline">Instead of asking "given this balance, will they default?", LDA first describes what balances look like in each group, then flips that around with Bayes' theorem.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> classification.<br />
+<strong>Week:</strong> 3.<br />
+<strong>Book:</strong> ISLP 4.4 intro, 4.4.1, 4.4.2 (skim the maths).<br />
+<strong>Techniques on this page:</strong> Bayes’ theorem, priors, densities, the bell curve (Gaussian), estimating means and a pooled spread, the discriminant score, the decision boundary.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="Logistic_Regression.html">Logistic regression</a> models the chance of each class <strong>directly</strong>. LDA takes the opposite route, called a <strong>generative</strong> approach:</p>
+<ol type="1">
+<li>Describe each group separately: “defaulters tend to have balances around £1800, non-defaulters around £800, both spread out by about the same amount.”</li>
+<li>Use <strong>Bayes’ theorem</strong> to turn that into “given this balance, what’s the chance they’re a defaulter?”</li>
+</ol>
+<p>Why go the long way round? Describing each group is often easier and more stable, especially with <strong>little data</strong> or when the groups are <strong>well separated</strong> (logistic regression’s coefficients can run off to infinity in that case). And it handles several classes naturally. The price is an assumption: that each group’s values form a bell curve.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>generative model</td>
+<td>describes how the inputs look <em>within</em> each class, then flips it</td>
+</tr>
+<tr class="even">
+<td>prior, <span class="math inline">\(\pi_k\)</span> (“pi k”)</td>
+<td>how common class <span class="math inline">\(k\)</span> is overall, before looking at any input. Nothing to do with the number 3.14 here</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(f_k(x)\)</span></td>
+<td>how typical the value <span class="math inline">\(x\)</span> is <strong>within</strong> class <span class="math inline">\(k\)</span></td>
+</tr>
+<tr class="even">
+<td>posterior, <span class="math inline">\(p_k(x)\)</span></td>
+<td>the chance of class <span class="math inline">\(k\)</span> <strong>after</strong> seeing <span class="math inline">\(x\)</span>. What we want</td>
+</tr>
+<tr class="odd">
+<td>density</td>
+<td>a curve whose height says how common values near <span class="math inline">\(x\)</span> are (for measurements, where exact values have zero chance)</td>
+</tr>
+<tr class="even">
+<td>Gaussian, normal distribution</td>
+<td>the bell curve</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mu_k\)</span> (“mu k”)</td>
+<td>the centre (average) of class <span class="math inline">\(k\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma^2\)</span> (“sigma squared”), variance</td>
+<td>how spread out the values are. LDA assumes every class has the <strong>same</strong> spread</td>
+</tr>
+<tr class="odd">
+<td>discriminant, <span class="math inline">\(\delta_k(x)\)</span> (“delta k”)</td>
+<td>a score for each class; the biggest score wins</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-bayes-theorem-flipping-the-question">Technique 1: Bayes’ theorem (flipping the question)</h2>
+<p><strong>Problem it solves:</strong> we know “how common is a high balance among defaulters?” but we want “how likely is a default among high-balance people?” Those are different questions.</p>
+<p>The easiest way to see it is by counting. 1000 customers, 30 default. 80% of defaulters have a high balance; 10% of non-defaulters do.</p>
+<ul>
+<li>Defaulters with a high balance: <span class="math inline">\(30 \times 0.8 = 24\)</span>.</li>
+<li>Non-defaulters with a high balance: <span class="math inline">\(970 \times 0.1 = 97\)</span>.</li>
+<li>So among the 121 high-balance customers, 24 default: <span class="math inline">\(24/121 = 0.198\)</span>.</li>
+</ul>
+<p>That calculation <strong>is</strong> Bayes’ theorem. In symbols:</p>
+<p><span class="math display">\[p_k(x) = P(Y = k \mid X = x) = \frac{\pi_k\,f_k(x)}{\sum_l \pi_l\,f_l(x)}\]</span></p>
+<p>Top: (how common the class is) × (how typical <span class="math inline">\(x\)</span> is in it). Bottom: the same for every class, added up, so the answers sum to 1.</p>
+<p><strong>Lesson:</strong> even though a high balance is 8 times more typical of defaulters, the chance is only about 20%, because defaulters are rare. <strong>Priors matter.</strong></p>
+<div data-widget="bayes">
+
+</div>
+<div class="warn">
+<p>Don’t confuse Bayes’ <strong>theorem</strong> (this flipping formula) with the Bayes <strong>classifier</strong> (<a href="../w1/Bayes_Classifier.html">week 1</a>, “pick the most likely class”). LDA uses both: the theorem to get the chances, then the classifier to choose.</p>
+</div>
+<h2 id="technique-2-the-bell-curve-assuming-a-shape-for-each-class">Technique 2: the bell curve (assuming a shape for each class)</h2>
+<p><strong>Problem it solves:</strong> <span class="math inline">\(f_k(x)\)</span> could be any shape, and estimating an arbitrary shape needs lots of data. LDA assumes a bell curve, which is described by just a centre and a spread:</p>
+<p><span class="math display">\[f_k(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\Big(-\frac{(x - \mu_k)^2}{2\sigma^2}\Big)\]</span></p>
+<p>Read it in pieces: <span class="math inline">\((x - \mu_k)^2\)</span> is how far <span class="math inline">\(x\)</span> is from the class centre; dividing by <span class="math inline">\(2\sigma^2\)</span> scales that by the spread; <span class="math inline">\(\exp(-\dots)\)</span> turns “far” into “small”, giving the bell with its peak at <span class="math inline">\(\mu_k\)</span>; the bit in front just makes the total area 1.</p>
+<p>The key assumption: <strong>same spread <span class="math inline">\(\sigma^2\)</span> for every class</strong>, different centres <span class="math inline">\(\mu_k\)</span>.</p>
+<h2 id="technique-3-estimating-the-pieces-from-data">Technique 3: estimating the pieces from data</h2>
+<p><strong>Problem it solves:</strong> the formula needs <span class="math inline">\(\pi_k\)</span>, <span class="math inline">\(\mu_k\)</span> and <span class="math inline">\(\sigma^2\)</span>. Fitting LDA is just counting and averaging. No gradient descent needed.</p>
+<p><span class="math display">\[\hat\pi_k = \frac{n_k}{n}, \qquad \hat\mu_k = \text{average of } x \text{ in class } k, \qquad \hat\sigma^2 = \frac{1}{n - m}\sum_k\ \sum_{i \in \text{class } k}(x_i - \hat\mu_k)^2\]</span></p>
+<p><span class="math inline">\(n_k\)</span> is how many training points are in class <span class="math inline">\(k\)</span>, and <span class="math inline">\(m\)</span> is the number of classes. The spread is <strong>pooled</strong>: each point is measured from <strong>its own class’s</strong> centre, then everything is added up.</p>
+<div class="warn">
+<p><strong>Slide error:</strong> equation (31) measures the spread from the <strong>overall</strong> average instead of each class’s own average. That’s much too big when the classes are far apart. Use the book’s version (eq. 4.20), shown above.</p>
+</div>
+<h2 id="technique-4-the-discriminant-score-a-shortcut-for-comparing-classes">Technique 4: the discriminant score (a shortcut for comparing classes)</h2>
+<p><strong>Problem it solves:</strong> you don’t need the full posterior to pick a winner. The bottom of Bayes’ theorem is the same for every class, so just compare the tops. Taking logs (never changes which is biggest) and dropping the pieces that are the same for every class leaves:</p>
+<p><span class="math display">\[\delta_k(x) = \frac{x\,\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log\pi_k \qquad\text{predict the class with the biggest } \delta_k(x)\]</span></p>
+<p>This is a straight line in <span class="math inline">\(x\)</span>, which is where the name <em>linear</em> discriminant analysis comes from. Deriving it needs only algebra and log rules.</p>
+<h2 id="technique-5-the-decision-boundary">Technique 5: the decision boundary</h2>
+<p>With two classes, set <span class="math inline">\(\delta_0(x) = \delta_1(x)\)</span> and solve:</p>
+<p><span class="math display">\[x^* = \frac{\mu_0 + \mu_1}{2} + \frac{\sigma^2}{\mu_1 - \mu_0}\log\frac{\pi_0}{\pi_1}\]</span></p>
+<p>With equal priors the log is 0 and the boundary is <strong>halfway between the centres</strong>. Unequal priors nudge it towards the rarer class, giving the common class more room.</p>
+<div class="example">
+<p><strong>Full worked example.</strong> Class 0: <span class="math inline">\(x = (1, 2, 3)\)</span>. Class 1: <span class="math inline">\(x = (5, 6, 7, 8)\)</span>. So <span class="math inline">\(n = 7\)</span>, <span class="math inline">\(m = 2\)</span>.</p>
+<ol type="1">
+<li>Priors: <span class="math inline">\(\hat\pi_0 = 3/7 = 0.429\)</span>, <span class="math inline">\(\hat\pi_1 = 4/7 = 0.571\)</span>.</li>
+<li>Centres: <span class="math inline">\(\hat\mu_0 = 2\)</span>, <span class="math inline">\(\hat\mu_1 = 6.5\)</span>.</li>
+<li>Pooled spread: class 0 squared gaps <span class="math inline">\(1 + 0 + 1 = 2\)</span>; class 1: <span class="math inline">\(2.25 + 0.25 + 0.25 + 2.25 = 5\)</span>. <span class="math inline">\(\hat\sigma^2 = 7/(7 - 2) = 1.4\)</span>.</li>
+<li>Classify <span class="math inline">\(x = 4\)</span>:
+<ul>
+<li><span class="math inline">\(\delta_0(4) = \frac{4 \times 2}{1.4} - \frac{4}{2.8} + \log\frac37 = 5.714 - 1.429 - 0.847 = 3.438\)</span></li>
+<li><span class="math inline">\(\delta_1(4) = \frac{4 \times 6.5}{1.4} - \frac{42.25}{2.8} + \log\frac47 = 18.571 - 15.089 - 0.560 = 2.923\)</span></li>
+<li>Class 0 has the bigger score: predict <strong>class 0</strong>.</li>
+</ul></li>
+<li>Boundary: <span class="math inline">\(x^* = 4.25 + \frac{1.4}{4.5}\log\frac{3}{4} = 4.25 - 0.09 = 4.16\)</span>. Slightly left of the midpoint because class 1 is more common; <span class="math inline">\(x = 4\)</span> is just on the class 0 side.</li>
+</ol>
+</div>
+<div data-widget="lda">
+
+</div>
+<h2 id="several-inputs-skim">Several inputs (skim)</h2>
+<p>With <span class="math inline">\(p\)</span> inputs, each class becomes a bell-shaped “hill” in <span class="math inline">\(p\)</span> dimensions with its own centre <span class="math inline">\(\mu_k\)</span> (a list of averages) and a <strong>shared</strong> shape <span class="math inline">\(\Sigma\)</span> (“big sigma”, the table of spreads and how inputs move together). The score becomes <span class="math inline">\(\delta_k(x) = x^T\Sigma^{-1}\mu_k - \tfrac12\mu_k^T\Sigma^{-1}\mu_k + \log\pi_k\)</span>, still a straight-line boundary. You only need the idea, not the calculation.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4.4 intro (generative models)</td>
+<td><strong>Read</strong></td>
+<td>Bayes’ theorem, priors, densities</td>
+</tr>
+<tr class="even">
+<td>4.4.1 LDA for one predictor</td>
+<td><strong>Read</strong></td>
+<td>Core. Use its eq. 4.20 for the spread, not slide eq. 31</td>
+</tr>
+<tr class="odd">
+<td>4.4.2 LDA for more than one predictor</td>
+<td>Skim the maths</td>
+<td>Then <strong>read carefully</strong> from the confusion matrix to the end: see <a href="Judging_Classifiers.html">judging classifiers</a></td>
+</tr>
+<tr class="even">
+<td>4.4.3 QDA</td>
+<td>Skip</td>
+<td>Not on the slides (it’s LDA with a different spread per class)</td>
+</tr>
+<tr class="odd">
+<td>4.5.1 Analytical comparison</td>
+<td>Skim</td>
+<td>Useful for “which method when”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, sections 4.4-4.4.2). I want practice questions on LINEAR DISCRIMINANT ANALYSIS (LDA), done by hand:
+- Bayes&#39; theorem as counting (e.g. 1000 people, a % with a condition, test results), then with the formula pi_k f_k(x) / sum
+- why priors matter (rare classes)
+- the difference between Bayes&#39; theorem and the Bayes classifier
+- estimating priors, class means and the POOLED within-class variance (divide by n - m) from small 1D data sets
+- computing discriminant scores delta_k(x) = x*mu_k/sigma^2 - mu_k^2/(2 sigma^2) + log(pi_k) and choosing the class
+- finding the two-class decision boundary, with equal and unequal priors
+- why LDA is called linear, and when it might beat logistic regression
+- reading the Gaussian density formula piece by piece
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder. Use small data sets (2-4 points per class) with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/Logistic_Regression.html"><small>&larr; Previous</small>Logistic regression</a><a class="next" href="../w3/Naive_Bayes.html"><small>Next &rarr;</small>Naive Bayes</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

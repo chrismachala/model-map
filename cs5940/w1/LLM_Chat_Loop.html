@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practical 1: the chat loop · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w1_LLM_Chat_Loop" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip prac">Practical: LLM code</span><span class="chip">Week 1</span><span class="chip">6 techniques</span></div>
+  <h1>Practical 1: the chat loop</h1>
+  <p class="tagline">Your first LLM program. The big surprise: the model remembers nothing between calls. Your program has to resend the whole conversation every time, and that is where memory, cost and context limits all come from.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> practical (LLM code).<br />
+<strong>Week:</strong> 1 practical, Parts 1 to 4.<br />
+<strong>Book:</strong> none. The practical pages are the source.<br />
+<strong>Techniques on this page:</strong> the first request, the statelessness experiment, conversation history with roles, the system message, the interactive loop, the cost of a growing context.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The practicals build an LLM-based agent <strong>from scratch</strong>, with no framework, so you can see and debug every part. Week 1 is the base layer: a chat loop.</p>
+<p>The lesson that matters for the whole module: <strong>the LLM does not control your application; your code does.</strong> Your code decides what the model is sent, what it’s allowed to do, and what happens to its reply. Later practicals add tools, retrieval and decisions on top, but they all stand on this loop.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>LLM</td>
+<td>a model that takes text in and generates text out</td>
+</tr>
+<tr class="even">
+<td>LLM server</td>
+<td>where the model runs; your program talks to it over the network</td>
+</tr>
+<tr class="odd">
+<td>API</td>
+<td>the agreed format for requests (model, messages, settings) and responses</td>
+</tr>
+<tr class="even">
+<td>LiteLLM</td>
+<td>a Python library with one <code>completion(...)</code> call for many providers</td>
+</tr>
+<tr class="odd">
+<td><code>openai/qwen3-14b</code></td>
+<td>“use the OpenAI request format” + “the Qwen3-14B model on the course server” (it is <strong>not</strong> an OpenAI model)</td>
+</tr>
+<tr class="even">
+<td>stateless</td>
+<td>each call starts from nothing; nothing is remembered between calls</td>
+</tr>
+<tr class="odd">
+<td>token</td>
+<td>a small piece of text (roughly ¾ of a word); costs and limits are counted in tokens</td>
+</tr>
+<tr class="even">
+<td>role</td>
+<td>who a message is from: <code>system</code>, <code>user</code> or <code>assistant</code></td>
+</tr>
+<tr class="odd">
+<td>virtual environment (venv)</td>
+<td>a private folder of Python packages for one project</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-setup-and-the-first-request">Technique 1: setup and the first request</h2>
+<p><strong>Problem it solves:</strong> talk to the course model safely, without leaking your key.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.config/csx940/env     <span class="co"># sets OPENAI_BASE_URL and OPENAI_API_KEY</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install litellm</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> litellm <span class="im">import</span> completion</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> completion(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">&quot;openai/qwen3-14b&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    api_base<span class="op">=</span>os.environ[<span class="st">&quot;OPENAI_BASE_URL&quot;</span>],   <span class="co"># where the server is</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    api_key<span class="op">=</span>os.environ[<span class="st">&quot;OPENAI_API_KEY&quot;</span>],     <span class="co"># the credential</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="st">&quot;What is the capital of France?&quot;</span>}],</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.choices[<span class="dv">0</span>].message.content)</span></code></pre></div>
+<p>Read the last line left to right: the list of generated <code>choices</code> (usually one), the first, its <code>message</code>, its text <code>content</code>. The response also carries <code>usage</code> (prompt, completion and total tokens).</p>
+<ul>
+<li><strong>Why a venv?</strong> It keeps this project’s packages apart from everything else, so installs don’t break each other.</li>
+<li><strong>Why not put the key in the code?</strong> Code gets shared, screenshotted and committed to Git. An environment variable keeps the secret out of the file.</li>
+</ul>
+<h2 id="technique-2-the-statelessness-experiment">Technique 2: the statelessness experiment</h2>
+<p><strong>Problem it solves:</strong> shows you, by experiment, where memory does and doesn’t live.</p>
+<ol type="1">
+<li>Send <code>"My favourite module is CS3940."</code></li>
+<li>Change the message to <code>"What is my favourite module?"</code> and run again.</li>
+</ol>
+<p>The model <strong>doesn’t know</strong>. The second request contained only the second message. It may say so, or guess (which is why you inspect rather than trust).</p>
+<blockquote>
+<p><strong>Key idea:</strong> the model can only use the context your application sends with the current request.</p>
+</blockquote>
+<p>Web chat apps <em>seem</em> to remember because the app resends the conversation every time.</p>
+<h2 id="technique-3-conversation-history-with-roles">Technique 3: conversation history with roles</h2>
+<p><strong>Problem it solves:</strong> gives the model a memory, by sending the whole conversation each time.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Role</th>
+<th>Written by</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>system</code></td>
+<td>you, the developer</td>
+<td>instructions about behaviour (“You are a teaching assistant…”)</td>
+</tr>
+<tr class="even">
+<td><code>user</code></td>
+<td>the person</td>
+<td>their messages</td>
+</tr>
+<tr class="odd">
+<td><code>assistant</code></td>
+<td>the model</td>
+<td>its earlier replies</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> []</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>messages.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="st">&quot;My favourite module is CS3940.&quot;</span>})</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> completion(model<span class="op">=</span>..., api_base<span class="op">=</span>..., api_key<span class="op">=</span>..., messages<span class="op">=</span>messages)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> response.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>messages.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;assistant&quot;</span>, <span class="st">&quot;content&quot;</span>: answer})</span></code></pre></div>
+<p><strong>Where is the memory?</strong> In the <code>messages</code> list. Not in the model, not in LiteLLM.</p>
+<p><strong>Why store the model’s replies too?</strong> Without them the model sees a user talking to nobody. It can’t resolve “what did you mean by that?”, repeats itself, and loses questions it asked (which the study-assistant challenge needs).</p>
+<h2 id="technique-4-the-system-message">Technique 4: the system message</h2>
+<p><strong>Problem it solves:</strong> sets behaviour for the whole session, separately from what the user types.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;role&quot;</span>: <span class="st">&quot;system&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="st">&quot;You are a pirate. Answer every question like a pirate.&quot;</span>},</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="st">&quot;Explain what a Python list is.&quot;</span>},</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<p>Same question, different system message, different style. Try “one sentence”, “explain to a 10-year-old”, “at most 30 words”. The model <strong>usually</strong> complies but not always: instructions influence behaviour, they don’t guarantee it.</p>
+<p><strong>Study-assistant challenge:</strong> where should the topic the user picks go? <strong>Best in the system message</strong> (<code>f"... The topic is {topic}."</code>), because it should hold for the whole session and stays at the top of the context.</p>
+<h2 id="technique-5-the-interactive-loop">Technique 5: the interactive loop</h2>
+<p><strong>Problem it solves:</strong> a real conversation, one turn after another.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> []</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    user_message <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;You: &quot;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> user_message.strip().lower() <span class="op">==</span> <span class="st">&quot;quit&quot;</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    messages.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: user_message})</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> completion(model<span class="op">=</span>..., api_base<span class="op">=</span>..., api_key<span class="op">=</span>..., messages<span class="op">=</span>messages)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> response.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    messages.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;assistant&quot;</span>, <span class="st">&quot;content&quot;</span>: answer})</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Assistant:&quot;</span>, answer)</span></code></pre></div>
+<p>get input → add to messages → send → receive → store → repeat. The practical’s version uses <code>.lower()</code> only; adding <code>.strip()</code> also catches <code>" Quit "</code>.</p>
+<p><strong>In the lecture’s terms:</strong> observation = what the user types; memory = the <code>messages</code> list (outside the model); objective = the system prompt; decision = model inference; learning = none; actions = printing text. No tools and no choice of control flow, so it is <strong>not yet an agent</strong> (see <a href="00_Start_Here_What_Is_An_Agent.html">agent vs workflow</a>).</p>
+<h2 id="technique-6-the-cost-of-a-growing-context">Technique 6: the cost of a growing context</h2>
+<p><strong>Problem it solves:</strong> explains why long chats get slow and expensive, and why week 2 trims the history.</p>
+<p>Say the system prompt is <span class="math inline">\(s\)</span> tokens, each user message <span class="math inline">\(u\)</span> and each reply <span class="math inline">\(a\)</span>. Request <span class="math inline">\(t\)</span> carries the system prompt, <span class="math inline">\(t\)</span> user messages and <span class="math inline">\(t - 1\)</span> replies:</p>
+<p><span class="math display">\[\text{tokens sent at turn } t = s + t\,u + (t-1)\,a\]</span></p>
+<p>Adding up <span class="math inline">\(T\)</span> turns, with <span class="math inline">\(\sum_{t=1}^T t = \frac{T(T+1)}{2}\)</span>:</p>
+<p><span class="math display">\[\text{total} = T s + u\,\frac{T(T+1)}{2} + a\,\frac{T(T-1)}{2}\]</span></p>
+<p>That is <strong>quadratic</strong> in <span class="math inline">\(T\)</span>: double the conversation and the input tokens roughly quadruple.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(s = 50\)</span>, <span class="math inline">\(u = 20\)</span>, <span class="math inline">\(a = 80\)</span>, <span class="math inline">\(T = 10\)</span>.</p>
+<ul>
+<li>Turn 1 sends <span class="math inline">\(50 + 20 + 0 = 70\)</span> tokens; turn 10 sends <span class="math inline">\(50 + 200 + 720 = 970\)</span>.</li>
+<li>Total: <span class="math inline">\(10 \times 50 + 20 \times 55 + 80 \times 45 = 500 + 1100 + 3600 = 5200\)</span>.</li>
+</ul>
+</div>
+<div data-widget="tokens">
+
+</div>
+<h2 id="the-practicals-rules-and-why">The practical’s rules, and why</h2>
+<ol type="1">
+<li>Use the LLM only through the interfaces provided.</li>
+<li>No unrestricted web access for the LLM.</li>
+<li><strong>Never automatically run code the LLM wrote.</strong> Treat it as untrusted input.</li>
+<li>No secrets or personal data in prompts.</li>
+<li>Credentials outside source code.</li>
+<li>Inspect what the system does; a response is not automatically correct.</li>
+</ol>
+<p>These limit <strong>what the agent can actually do</strong> (design dimension 6), which is the <a href="00_Start_Here_What_Is_An_Agent.html">delegation problem</a> handled in practice.</p>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents. The week 1 practical builds a chat program in Python with LiteLLM (model &quot;openai/qwen3-14b&quot;, OPENAI_BASE_URL and OPENAI_API_KEY in environment variables). I want practice on THE LLM CHAT LOOP:
+- reading response.choices[0].message.content and the usage fields
+- why an API call is stateless, and predicting what the model says in a two-run experiment
+- building the messages list with system / user / assistant roles, and why the assistant&#39;s replies must be stored
+- where to put instructions (system message vs first user message)
+- writing and debugging the input loop (quit handling, .strip().lower())
+- token arithmetic: tokens sent at turn t = s + t*u + (t-1)*a, and the quadratic total over T turns
+- why secrets stay in environment variables, why venvs, and why generated code must never be run automatically
+- whether this program is an agent or a workflow
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder; include short &quot;what does this code print / what&#39;s the bug&quot; questions.
+3. Wait for my answer, then mark it and show a model answer (with code where useful).
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w1/Formal_Agent_Model.html"><small>&larr; Previous</small>The formal agent model</a><a class="next" href="../w2/Deductive_Reasoning_Agents.html"><small>Next &rarr;</small>Deductive reasoning agents</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>
