@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock exam: weeks 1 to 4 · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s18_mock_exam", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s18_mock_exam" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a class="active" aria-current="page" href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 18 of 18</span><span class="chip">Final</span><span class="chip">about 60 min</span></div>
+  <h1>Mock exam: weeks 1 to 4</h1>
+  <p class="tagline">Four questions in the shape of Nicolo Colombo's half of the 2024 and 2025 papers: explain, write the formula, discuss flexibility, then a small hand calculation. Pass 70% to finish the path. Calculation parts get fresh numbers every attempt.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<h2 id="how-to-sit-this-mock">How to sit this mock</h2>
+<ul>
+<li><strong>Time it.</strong> The real paper is 2 hours for 100 marks, about 1.2 minutes per mark. This mock is about 60 marks, so give yourself <strong>70 minutes</strong>, no notes, calculator allowed.</li>
+<li><strong>Write on paper first</strong> for the written parts, as you would in the exam, then type or summarise your answer and mark it honestly against the scheme.</li>
+<li><strong>Show the working</strong> for calculations on paper; here only the final numbers are checked, but in the exam the steps carry most of the marks.</li>
+<li><strong>After marking,</strong> go back to the stage for every part you dropped marks on. Retake the mock a few days later: the numbers will be different.</li>
+</ul>
+<p>The real paper will also have two questions on second-half topics (past years: bagging and out-of-bag error, boosting, clustering, multiple testing, PageRank, tf-idf). Those will be added when they’ve been taught.</p>
+<h2 id="mock-exam">Mock exam</h2>
+<div class="test" data-pass="70">
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>Q1 Linear regression. (a) [4 marks]</strong> Why would you use a linear regression model? Include a real-world example, and write the model for a single input with parameters <span class="math inline">\(\lambda \in \mathbb R^2\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Output is real-valued; reason to use: simple, interpretable, cheap, little data, good when roughly linear.</label></li>
+<li><label><input type="checkbox" checked="" />A specific example naming input and output.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span> with intercept and slope explained.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\lambda\)</span> fitted by minimising the RSS.</label></li>
+</ul>
+<div class="model">
+<p>Linear regression predicts a real-valued output that is expected to vary roughly linearly with the inputs; it is simple, cheap, needs little data and is interpretable, since the slope gives the average change in the output per unit change of the input. Example: predicting a flat’s rent in pounds from its floor area. <span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span> with <span class="math inline">\(\lambda = (\lambda_0, \lambda_1) \in \mathbb R^2\)</span> (intercept, slope), fitted by minimising <span class="math inline">\(\sum_n(Y_n - f(X_n))^2\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>Q1 (b) [3 marks]</strong> Write the residual sum of squares of <span class="math inline">\(f\)</span> on <span class="math inline">\(D = \{(X_n, Y_n)\}_{n=1}^N\)</span> and explain each symbol.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\mathrm{RSS}(\lambda) = \sum_{n=1}^N\big(Y_n - f(X_n)\big)^2\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(Y_n\)</span> observed output, <span class="math inline">\(f(X_n) = \lambda_0 + \lambda_1X_n\)</span> the prediction; the difference is the residual.</label></li>
+<li><label><input type="checkbox" checked="" />Squares make all residuals positive and punish large ones; least squares minimises it.</label></li>
+</ul>
+<div class="model">
+<p><span class="math inline">\(\mathrm{RSS}(\lambda) = \sum_{n=1}^{N}\big(Y_n - (\lambda_0 + \lambda_1X_n)\big)^2\)</span>: for each of the <span class="math inline">\(N\)</span> training pairs, the residual is the observed output <span class="math inline">\(Y_n\)</span> minus the model’s prediction <span class="math inline">\(f(X_n)\)</span>; squaring makes every miss positive and penalises large misses more. Least squares chooses <span class="math inline">\(\lambda\)</span> to minimise it.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="3" data-marks="5">
+<p><strong>Q1 (c) [5 marks]</strong> A polynomial model <span class="math inline">\(f(X) = \lambda\cdot\phi(X)\)</span> has <span class="math inline">\(\lambda \in \mathbb R^d\)</span>. Discuss the relationship between the degrees of freedom, <span class="math inline">\(d\)</span> and the model’s flexibility.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Degrees of freedom = number of free parameters = <span class="math inline">\(d\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Larger <span class="math inline">\(d\)</span>: more flexible, lower bias, lower training RSS.</label></li>
+<li><label><input type="checkbox" checked="" />Larger <span class="math inline">\(d\)</span>: higher variance; as <span class="math inline">\(d \to N\)</span> the model interpolates the data and overfits (<span class="math inline">\(d &gt; N\)</span>: no unique solution).</label></li>
+<li><label><input type="checkbox" checked="" />Model stays linear in <span class="math inline">\(\lambda\)</span> (least squares still applies).</label></li>
+<li><label><input type="checkbox" checked="" />Choose <span class="math inline">\(d\)</span> by validation error / regularise.</label></li>
+</ul>
+<div class="model">
+<p>The degrees of freedom are the number of free parameters, <span class="math inline">\(d\)</span>. Increasing <span class="math inline">\(d\)</span> adds basis functions, so the model can follow more complex curves: flexibility rises, bias and training RSS fall. But the <span class="math inline">\(d\)</span> parameters are estimated from the same <span class="math inline">\(N\)</span> points, so variance rises; as <span class="math inline">\(d\)</span> approaches <span class="math inline">\(N\)</span> the model can interpolate the training data and fits the noise (overfitting, rising test error), and for <span class="math inline">\(d &gt; N\)</span> the solution is not unique. The model remains linear in <span class="math inline">\(\lambda\)</span>, so least squares still applies. <span class="math inline">\(d\)</span> should be chosen on a validation set or controlled by regularisation.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="ols" data-marks="4">
+
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>Q2 Decision trees. (a) [3 marks]</strong> Write the entropy of a data set <span class="math inline">\(D\)</span> with labels in <span class="math inline">\(\{\text{yes}, \text{no}\}\)</span>, defining <span class="math inline">\(p_{yes}\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(p_{yes} = \frac1N\sum_n\mathbb 1(Y_n = \text{yes})\)</span>, <span class="math inline">\(p_{no} = 1 - p_{yes}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(H(D) = -p_{yes}\log p_{yes} - p_{no}\log p_{no}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />0 for a pure set, largest at <span class="math inline">\(p_{yes} = 0.5\)</span>.</label></li>
+</ul>
+<div class="model">
+<p>With <span class="math inline">\(p_{yes} = \frac1N\sum_{n=1}^N\mathbb 1(Y_n = \text{yes})\)</span> and <span class="math inline">\(p_{no} = 1 - p_{yes}\)</span>: <span class="math inline">\(H(D) = -p_{yes}\log p_{yes} - p_{no}\log p_{no}\)</span> (with <span class="math inline">\(0\log 0 = 0\)</span>). It is 0 when all labels agree and maximal (<span class="math inline">\(\log 2\)</span>) when <span class="math inline">\(p_{yes} = 0.5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="4" data-marks="5">
+<p><strong>Q2 (b) [5 marks]</strong> Discuss the flexibility of decision trees in terms of the number of terminal nodes. Give a technique to mitigate overfitting.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />More terminal nodes = smaller regions = more flexible, lower training error.</label></li>
+<li><label><input type="checkbox" checked="" />Lower bias, higher variance; too many leaves fit noise (overfitting).</label></li>
+<li><label><input type="checkbox" checked="" />Cost-complexity pruning: minimise RSS (or impurity) <span class="math inline">\(+ \alpha|T|\)</span> over subtrees of a large tree.</label></li>
+<li><label><input type="checkbox" checked="" />Larger <span class="math inline">\(\alpha\)</span>, fewer leaves; <span class="math inline">\(\alpha\)</span> chosen on validation data / cross-validation.</label></li>
+<li><label><input type="checkbox" checked="" />(Or another valid technique, e.g. maximum depth / minimum leaf size, explained.)</label></li>
+</ul>
+<div class="model">
+<p>Each terminal node is a region with its own constant prediction, so more terminal nodes mean smaller regions and a more flexible model: lower bias and lower training error (zero with one point per leaf), but higher variance, since each prediction rests on fewer points, so a large tree fits the noise and overfits. To mitigate this, grow a large tree and prune it with cost-complexity pruning, choosing the subtree that minimises the training error plus <span class="math inline">\(\alpha|T|\)</span>; larger <span class="math inline">\(\alpha\)</span> gives smaller trees, and <span class="math inline">\(\alpha\)</span> is chosen by validation error (or cross-validation).</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="stump" data-marks="4">
+
+</div>
+<div class="q" kind="gen" data-gen="gain" data-marks="3">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>Q3 Neural networks. (a) [4 marks]</strong> What is a neural network? Describe the role of input, hidden and output neurons.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Input neurons hold the input features.</label></li>
+<li><label><input type="checkbox" checked="" />Hidden neurons compute a non-linear activation of a weighted sum of their inputs plus a bias.</label></li>
+<li><label><input type="checkbox" checked="" />Output neuron(s) combine hidden activations (linearly for regression; softmax/sigmoid for classes).</label></li>
+<li><label><input type="checkbox" checked="" />Weights learned from data by gradient descent / backpropagation.</label></li>
+</ul>
+<div class="model">
+<p>A neural network maps inputs to outputs through layers of simple units. Input neurons hold the features <span class="math inline">\(X_1, \dots, X_p\)</span>; each hidden neuron computes <span class="math inline">\(g(w_0 + \sum_jw_jX_j)\)</span> with a non-linear activation such as ReLU or the sigmoid, creating learned features; the output neuron combines the hidden activations, <span class="math inline">\(\beta_0 + \sum_k\beta_kA_k\)</span> (followed by a sigmoid or softmax for classification). The weights and biases are learned by gradient descent with backpropagation.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="nnparams" data-marks="3">
+
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>Q3 (c) [3 marks]</strong> Why is a neural network more flexible than a linear model? Write an objective function you could use to train it on real-valued outputs.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Non-linear activations make <span class="math inline">\(f\)</span> non-linear in <span class="math inline">\(X\)</span> (curves, interactions); learned features; more hidden units = more flexible.</label></li>
+<li><label><input type="checkbox" checked="" />Without the non-linearity it collapses to a linear model.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\frac1N\sum_n(Y_n - f(X_n))^2\)</span> (MSE), minimised by gradient descent.</label></li>
+</ul>
+<div class="model">
+<p>Its hidden neurons apply non-linear activations to weighted sums of the inputs, so <span class="math inline">\(f\)</span> can bend and represent interactions; it learns its own features, and with enough hidden neurons can approximate almost any smooth function (with identity activations it would collapse to a linear model). Objective: <span class="math inline">\(L(\lambda) = \frac1N\sum_{n=1}^N(Y_n - f(X_n; \lambda))^2\)</span>, minimised by gradient descent with backpropagation.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="nnfwd" data-marks="4">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>Q4 Classification. (a) [4 marks]</strong> Explain the role of <span class="math inline">\(K\)</span> in KNN classification and how it controls bias and variance.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Prediction = majority vote among the <span class="math inline">\(K\)</span> nearest training points.</label></li>
+<li><label><input type="checkbox" checked="" />Small <span class="math inline">\(K\)</span>: flexible, low bias, high variance (1-NN has zero training error, overfits).</label></li>
+<li><label><input type="checkbox" checked="" />Large <span class="math inline">\(K\)</span>: smooth, high bias, low variance (underfits).</label></li>
+<li><label><input type="checkbox" checked="" />Choose <span class="math inline">\(K\)</span> on validation data (test error U-shaped).</label></li>
+</ul>
+<div class="model">
+<p>KNN predicts the majority class among the <span class="math inline">\(K\)</span> training points nearest to the new point. Small <span class="math inline">\(K\)</span> gives a jagged, very flexible boundary with low bias and high variance (<span class="math inline">\(K = 1\)</span> has zero training error and overfits); large <span class="math inline">\(K\)</span> averages over many points, giving a smooth boundary with high bias and low variance (<span class="math inline">\(K = n\)</span> predicts the majority class everywhere). Test error is U-shaped in <span class="math inline">\(K\)</span>, so <span class="math inline">\(K\)</span> is chosen on a validation set.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>Q4 (b) [4 marks]</strong> For the sigmoid <span class="math inline">\(\sigma(t) = 1/(1 + e^{-t})\)</span>, give its domain and range and show that <span class="math inline">\(\sigma&#39;(t) = \sigma(t)(1 - \sigma(t))\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Domain <span class="math inline">\(\mathbb R\)</span>, range <span class="math inline">\((0, 1)\)</span>, never reaching 0 or 1.</label></li>
+<li><label><input type="checkbox" checked="" />Chain rule: <span class="math inline">\(\sigma&#39; = e^{-t}/(1 + e^{-t})^2\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Split into <span class="math inline">\(\frac{1}{1 + e^{-t}}\cdot\frac{e^{-t}}{1 + e^{-t}}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Second factor <span class="math inline">\(= 1 - \sigma(t)\)</span>.</label></li>
+</ul>
+<div class="model">
+<p>Domain: all real <span class="math inline">\(t\)</span>; range: <span class="math inline">\((0, 1)\)</span>. <span class="math inline">\(\sigma&#39;(t) = -(1 + e^{-t})^{-2}(-e^{-t}) = \frac{e^{-t}}{(1 + e^{-t})^2} = \frac{1}{1 + e^{-t}}\cdot\frac{e^{-t}}{1 + e^{-t}} = \sigma(t)(1 - \sigma(t))\)</span>, since <span class="math inline">\(1 - \sigma(t) = \frac{e^{-t}}{1 + e^{-t}}\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="logit" data-marks="3">
+
+</div>
+<div class="q" kind="gen" data-gen="knn" data-marks="3">
+
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s17_training_networks.html"><small>&larr; Stage 17</small>Training neural networks</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

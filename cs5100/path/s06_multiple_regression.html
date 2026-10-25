@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multiple regression · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s06_multiple_regression", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s06_multiple_regression" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a class="active" aria-current="page" href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 6 of 18</span><span class="chip">Week 2 · Regression</span><span class="chip">about 40 min</span></div>
+  <h1>Multiple regression</h1>
+  <p class="tagline">Many inputs at once: one formula, $\hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y$, covers them all. Then the two tricks that let a linear model use categories and interactions.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 3.2.1 (multiple regression, including the newspaper/radio correlation example): <strong>read</strong>. 3.2.2 (F-statistic, variable selection): <strong>skip</strong>. 3.3.1 qualitative predictors and 3.3.2 interactions: <strong>read</strong>. 3.3.3 potential problems: <strong>skim</strong> non-linearity, correlated errors, non-constant variance and collinearity; <strong>skip</strong> outliers, leverage and VIF.</p>
+</div>
+<div class="warn">
+<p><span class="label">Slide typo</span></p>
+<p>Eqs. (48)-(49), the interaction model, should read <span class="math inline">\(Y = \beta_0 + (\beta_{TV} + \beta_3X_{Radio})X_{TV} + \beta_{Radio}X_{Radio} + \epsilon\)</span>: the interaction term needs its own coefficient <span class="math inline">\(\beta_3\)</span>.</p>
+</div>
+<h2 id="many-inputs-one-model">1. Many inputs, one model</h2>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X_1 + \dots + \beta_pX_p + \epsilon.\]</span></p>
+<p><span class="math inline">\(\beta_j\)</span> is the <strong>average change in <span class="math inline">\(Y\)</span> for a one-unit increase in <span class="math inline">\(X_j\)</span>, holding all the other inputs fixed</strong>.</p>
+<p><strong>Why not run separate simple regressions?</strong> They give no single prediction, and each one ignores the other inputs, which misleads when inputs are correlated. The slides’ example: alone, Newspaper advertising gets slope 0.055 and looks useful. With Radio in the model too, Newspaper’s slope drops to about <span class="math inline">\(-0.001\)</span>. Newspaper spend is correlated with Radio spend, so on its own it was taking credit for Radio’s effect.</p>
+<div class="q" kind="num" data-answer="11.8" label="sales">
+<p>A fitted model is <span class="math inline">\(\widehat{\text{Sales}} = 3 + 0.05\,\text{TV} + 0.19\,\text{Radio}\)</span> (budgets in £1000s, sales in 1000s of units). Predict sales for TV = 100 and Radio = 20 (in 1000s of units).</p>
+<div class="expl">
+<p><span class="math inline">\(3 + 0.05 \times 100 + 0.19 \times 20 = 3 + 5 + 3.8 = 11.8\)</span>, i.e. 11,800 units. Interpretation of 0.19: holding TV fixed, each extra £1000 on radio goes with about 190 more units sold, on average.</p>
+</div>
+</div>
+<h2 id="the-matrix-formula">2. The matrix formula</h2>
+<p>Put a 1 in front of every input vector, <span class="math inline">\(\tilde x_i = (1, x_{i1}, \dots, x_{ip})\)</span>, so the intercept is just another coefficient. Stack these as the rows of the <span class="math inline">\(n \times (p + 1)\)</span> <strong>design matrix</strong> <span class="math inline">\(\mathbf X\)</span> (first column all ones). Then</p>
+<p><span class="math display">\[\hat{\mathbf y} = \mathbf X\beta, \qquad \mathrm{RSS}(\beta) = (\mathbf y - \mathbf X\beta)^T(\mathbf y - \mathbf X\beta).\]</span></p>
+<p>Setting the gradient <span class="math inline">\(\nabla\mathrm{RSS} = -2\mathbf X^T(\mathbf y - \mathbf X\beta)\)</span> to zero gives the <strong>normal equations</strong> <span class="math inline">\(\mathbf X^T\mathbf X\hat\beta = \mathbf X^T\mathbf y\)</span>, so</p>
+<p><span class="math display">\[\boxed{\hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y}.\]</span></p>
+<p>The inverse exists when the columns of <span class="math inline">\(\mathbf X\)</span> are linearly independent: no input is an exact combination of others, and <span class="math inline">\(n \ge p + 1\)</span>. For a <span class="math inline">\(2 \times 2\)</span> matrix:</p>
+<p><span class="math display">\[\begin{pmatrix}a &amp; b\\ c &amp; d\end{pmatrix}^{-1} = \frac{1}{ad - bc}\begin{pmatrix}d &amp; -b\\ -c &amp; a\end{pmatrix}.\]</span></p>
+<p>In code, don’t invert: use <code>np.linalg.solve(X.T @ X, X.T @ y)</code> or <code>np.linalg.lstsq(X, y)</code>.</p>
+<div class="example">
+<p><strong>Worked example: same answer as stage 5.</strong> <span class="math inline">\(x = (1, 2, 3, 4, 5)\)</span>, <span class="math inline">\(y = (2, 4, 5, 4, 5)\)</span>; rows of <span class="math inline">\(\mathbf X\)</span> are <span class="math inline">\((1, x_i)\)</span>.</p>
+<p><span class="math inline">\(\mathbf X^T\mathbf X = \begin{pmatrix} n &amp; \sum x_i\\ \sum x_i &amp; \sum x_i^2\end{pmatrix} = \begin{pmatrix}5 &amp; 15\\ 15 &amp; 55\end{pmatrix}\)</span> and <span class="math inline">\(\mathbf X^T\mathbf y = \begin{pmatrix}\sum y_i\\ \sum x_iy_i\end{pmatrix} = \begin{pmatrix}20\\ 66\end{pmatrix}\)</span>.</p>
+<p>Determinant <span class="math inline">\(5 \times 55 - 15 \times 15 = 50\)</span>, so <span class="math inline">\(\hat\beta = \frac{1}{50}\begin{pmatrix}55 &amp; -15\\ -15 &amp; 5\end{pmatrix}\begin{pmatrix}20\\ 66\end{pmatrix} = \frac{1}{50}\begin{pmatrix}110\\ 30\end{pmatrix} = \begin{pmatrix}2.2\\ 0.6\end{pmatrix}\)</span>. ✓</p>
+</div>
+<div class="q" kind="num" data-answer="1.4" label="β̂₁">
+<p>For <span class="math inline">\(x = (0, 1, 2, 3)\)</span>, <span class="math inline">\(y = (1, 3, 2, 6)\)</span>: <span class="math inline">\(\mathbf X^T\mathbf X = \begin{pmatrix}4 &amp; 6\\ 6 &amp; 14\end{pmatrix}\)</span> and <span class="math inline">\(\mathbf X^T\mathbf y = \begin{pmatrix}12\\ 25\end{pmatrix}\)</span>. Solve for <span class="math inline">\(\hat\beta_1\)</span>.</p>
+<div class="expl">
+<p>Determinant <span class="math inline">\(56 - 36 = 20\)</span>. <span class="math inline">\(\hat\beta = \frac{1}{20}\begin{pmatrix}14 &amp; -6\\ -6 &amp; 4\end{pmatrix}\begin{pmatrix}12\\ 25\end{pmatrix} = \frac{1}{20}\begin{pmatrix}18\\ 28\end{pmatrix} = \begin{pmatrix}0.9\\ 1.4\end{pmatrix}\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>You have <span class="math inline">\(n = 50\)</span> observations and keep adding inputs until <span class="math inline">\(p = 60\)</span>. What happens to <span class="math inline">\(\hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Nothing: more inputs always help.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\mathbf X\)</span> is <span class="math inline">\(50 \times 61\)</span>, its columns can’t be independent, <span class="math inline">\(\mathbf X^T\mathbf X\)</span> is singular, and there’s no unique least-squares solution.</label></li>
+<li><label><input type="checkbox" />The RSS becomes negative.</label></li>
+<li><label><input type="checkbox" />It becomes ridge regression.</label></li>
+</ul>
+<div class="expl">
+<p>With more parameters than observations there are infinitely many perfect fits. Stage 8’s ridge penalty is one fix.</p>
+</div>
+</div>
+<h2 id="categories-as-inputs-dummy-variables">3. Categories as inputs: dummy variables</h2>
+<p>To use “owns a house?” as an input, create <span class="math inline">\(x_i = 1\)</span> for owners, 0 otherwise:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1x_i + \epsilon_i:\quad \text{non-owners } \beta_0,\quad \text{owners } \beta_0 + \beta_1.\]</span></p>
+<p>So <span class="math inline">\(\beta_0\)</span> is the <strong>baseline</strong> group’s mean and <span class="math inline">\(\beta_1\)</span> is the <strong>difference</strong> between the groups. With <span class="math inline">\(m\)</span> levels, use <strong><span class="math inline">\(m - 1\)</span> dummies</strong>; the level without a dummy is the baseline. Using <span class="math inline">\(m\)</span> dummies would make them sum to the intercept column (perfect collinearity), and <span class="math inline">\(\mathbf X^T\mathbf X\)</span> would be singular. In pandas: <code>pd.get_dummies(df['region'], drop_first=True)</code>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> Mean balances: East 500, West 550, South 620. With East as the baseline: <span class="math inline">\(\beta_0 = 500\)</span>, <span class="math inline">\(\beta_{West} = 50\)</span>, <span class="math inline">\(\beta_{South} = 120\)</span>. With South as the baseline: <span class="math inline">\(\beta_0 = 620\)</span>, <span class="math inline">\(\beta_{East} = -120\)</span>, <span class="math inline">\(\beta_{West} = -70\)</span>. Predictions don’t change, only the interpretation.</p>
+<p>Adding Age as well, <span class="math inline">\(\widehat{\text{balance}} = 300 + 50\,\text{West} + 120\,\text{South} + 4\,\text{Age}\)</span> gives three <strong>parallel</strong> lines: same slope for age, different intercepts. A 40-year-old in the South: <span class="math inline">\(300 + 120 + 160 = 580\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="4" label="dummies">
+<p>A predictor has 5 levels. How many dummy variables do you include alongside the intercept?</p>
+<div class="expl">
+<p><span class="math inline">\(m - 1 = 4\)</span>. The fifth level is the baseline.</p>
+</div>
+</div>
+<h2 id="interactions">4. Interactions</h2>
+<p>Linear regression assumes <strong>additivity</strong>: the effect of <span class="math inline">\(X_1\)</span> doesn’t depend on <span class="math inline">\(X_2\)</span>. If radio advertising makes TV advertising work better, add a product column:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_1X_2 + \epsilon.\]</span></p>
+<p>Now the effect of one more unit of <span class="math inline">\(X_1\)</span> is <span class="math inline">\(\beta_1 + \beta_3X_2\)</span>, which depends on <span class="math inline">\(X_2\)</span>. It is still <strong>linear in the <span class="math inline">\(\beta\)</span>’s</strong>: <span class="math inline">\(X_1X_2\)</span> is just another column of <span class="math inline">\(\mathbf X\)</span>, and the same least-squares formula fits it.</p>
+<p>The model’s other assumptions (stage 7 has more): uncorrelated errors with constant variance. Check them with a plot of residuals against fitted values: a shapeless band is healthy, a U-shape means a missed non-linearity, a funnel means non-constant variance.</p>
+<div class="q" kind="num" data-answer="1" label="effect">
+<p><span class="math inline">\(\hat Y = 10 + 3X_1 - 2X_2 + 1.5X_1X_2\)</span>. By how much does <span class="math inline">\(\hat Y\)</span> change when <span class="math inline">\(X_2\)</span> increases by 1, if <span class="math inline">\(X_1 = 2\)</span>?</p>
+<div class="expl">
+<p>The effect of <span class="math inline">\(X_2\)</span> is <span class="math inline">\(-2 + 1.5X_1 = -2 + 3 = 1\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="mcq">
+<p>In a multiple regression, what does <span class="math inline">\(\hat\beta_2 = -0.8\)</span> mean?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />When <span class="math inline">\(X_2\)</span> goes up by 1, <span class="math inline">\(Y\)</span> goes down by 0.8 whatever happens to the other inputs.</label></li>
+<li><label><input type="checkbox" checked="" />Holding the other inputs fixed, a one-unit increase in <span class="math inline">\(X_2\)</span> goes with an average decrease of 0.8 in <span class="math inline">\(Y\)</span>.</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(X_2\)</span> and <span class="math inline">\(Y\)</span> have correlation <span class="math inline">\(-0.8\)</span>.</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(X_2\)</span> explains 80% of the variance.</label></li>
+</ul>
+<div class="expl">
+<p>“Holding the others fixed” is the key phrase. A coefficient is not a correlation.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2.2" label="β̂₀">
+<p><span class="math inline">\(\mathbf X^T\mathbf X = \begin{pmatrix}5 &amp; 15\\ 15 &amp; 55\end{pmatrix}\)</span>, <span class="math inline">\(\mathbf X^T\mathbf y = \begin{pmatrix}20\\ 66\end{pmatrix}\)</span>. Give <span class="math inline">\(\hat\beta_0\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\frac{1}{50}(55 \times 20 - 15 \times 66) = \frac{110}{50} = 2.2\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why can’t you include a dummy for every one of the <span class="math inline">\(m\)</span> levels of a categorical input, plus an intercept?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It would take too long to fit.</label></li>
+<li><label><input type="checkbox" checked="" />The <span class="math inline">\(m\)</span> dummies always add up to 1, the intercept column, so the columns are linearly dependent and <span class="math inline">\(\mathbf X^T\mathbf X\)</span> can’t be inverted.</label></li>
+<li><label><input type="checkbox" />Dummies can only be 0 or 1.</label></li>
+<li><label><input type="checkbox" />It would change the predictions.</label></li>
+</ul>
+<div class="expl">
+<p>Perfect collinearity: no unique solution.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="170" label="ŷ">
+<p><span class="math inline">\(\widehat{\text{income}} = 20 + 15\,\text{Graduate} + 4\,\text{Age} + 0.5\,\text{Graduate}\times\text{Age}\)</span> (in £1000s; Graduate is 0/1). Predict for a 30-year-old graduate.</p>
+<div class="expl">
+<p><span class="math inline">\(20 + 15 \times 1 + 4 \times 30 + 0.5 \times 1 \times 30 = 20 + 15 + 120 + 15 = 170\)</span>. For graduates the age slope is <span class="math inline">\(4 + 0.5 = 4.5\)</span>; for non-graduates it is 4.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Alone, Newspaper has a positive slope for Sales; in a model with Radio it is about zero. The best explanation:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The multiple regression is wrong.</label></li>
+<li><label><input type="checkbox" checked="" />Newspaper spend is correlated with Radio spend; alone it absorbs Radio’s effect, but with Radio held fixed it adds nothing.</label></li>
+<li><label><input type="checkbox" />Newspaper has a non-linear effect.</label></li>
+<li><label><input type="checkbox" />The data have outliers.</label></li>
+</ul>
+<div class="expl">
+<p>The same story appears in week 3 (the student paradox in logistic regression).</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Is <span class="math inline">\(Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_1X_2 + \epsilon\)</span> a linear model?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Yes: it’s linear in the parameters <span class="math inline">\(\beta\)</span>; <span class="math inline">\(X_1X_2\)</span> is just an extra column.</label></li>
+<li><label><input type="checkbox" />No: it contains a product of inputs.</label></li>
+<li><label><input type="checkbox" />Only if <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are independent.</label></li>
+<li><label><input type="checkbox" />Only if <span class="math inline">\(\beta_3 = 0\)</span>.</label></li>
+</ul>
+<div class="expl">
+<p>“Linear” refers to the parameters. Least squares fits it with the same formula.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s05_simple_regression.html"><small>&larr; Stage 5</small>Simple linear regression</a><a class="next" href="s07_basis_functions.html"><small>Stage 7 &rarr;</small>Polynomials, steps and flexibility</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

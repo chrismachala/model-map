@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple linear regression · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s05_simple_regression", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s05_simple_regression" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a class="active" aria-current="page" href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 5 of 18</span><span class="chip">Week 2 · Regression</span><span class="chip">about 45 min</span></div>
+  <h1>Simple linear regression</h1>
+  <p class="tagline">Fit the closest straight line to the data. You'll derive the formula yourself from stage 2's "set the slope to zero", fit a line by hand, and score it with RSS, R² and RSE.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>The 2024 paper’s first question was linear regression: why you’d use it (with an example), the model formula, the RSS formula, how degrees of freedom relate to flexibility, and a small calculation. This stage and the next two cover every part.</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 3.1.1 (least squares, the <span class="math inline">\(\hat\beta\)</span> formulas) and 3.1.3 (RSE and <span class="math inline">\(R^2\)</span>): <strong>read</strong>. 3.1.2: <strong>skim</strong> only the idea that <span class="math inline">\(\hat\beta\)</span> changes from sample to sample; <strong>skip</strong> standard errors, confidence intervals, t-statistics and p-values (not on the slides).</p>
+</div>
+<div class="warn">
+<p><span class="label">Slide typos</span></p>
+<p>Eq. (4) writes <span class="math inline">\(\sum(y_i - \hat\beta_0 + \hat\beta_1x_i)^2\)</span>: it should be <span class="math inline">\(\sum\big(y_i - (\hat\beta_0 + \hat\beta_1x_i)\big)^2\)</span>. Eq. (15)’s denominator must be squared, <span class="math inline">\(\sum(x_i - \bar x)^2\)</span>. The TSS sum should start at <span class="math inline">\(i = 1\)</span>.</p>
+</div>
+<h2 id="the-model-and-least-squares">1. The model and least squares</h2>
+<p>One input <span class="math inline">\(X\)</span>, a numeric output <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X + \epsilon.\]</span></p>
+<p><span class="math inline">\(\beta_0\)</span> is the <strong>intercept</strong> (the line’s value at <span class="math inline">\(X = 0\)</span>), <span class="math inline">\(\beta_1\)</span> the <strong>slope</strong> (the change in <span class="math inline">\(Y\)</span> per unit increase in <span class="math inline">\(X\)</span>). The exam writes this <span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span> with <span class="math inline">\(\lambda \in \mathbb R^2\)</span>.</p>
+<p><strong>Why use it?</strong> It’s simple, fast, interpretable (the slope says how strongly and in which direction <span class="math inline">\(Y\)</span> moves with <span class="math inline">\(X\)</span>), it needs little data, and many fancier methods are extensions of it. Example: predicting a house’s price from its floor area.</p>
+<p>Given estimates <span class="math inline">\(\hat\beta_0, \hat\beta_1\)</span>, the <strong>residuals</strong> are the vertical misses <span class="math inline">\(e_i = y_i - \hat y_i\)</span>, and <strong>least squares</strong> chooses the line that minimises the <strong>residual sum of squares</strong>:</p>
+<p><span class="math display">\[\mathrm{RSS}(\beta_0, \beta_1) = \sum_{i=1}^n\big(y_i - \beta_0 - \beta_1x_i\big)^2.\]</span></p>
+<div class="q" kind="mcq">
+<p>Which is the residual sum of squares for the model <span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span> and data <span class="math inline">\(D = \{(X_n, Y_n)\}_{n=1}^N\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\sum_{n=1}^{N}\big(Y_n - \lambda_0 - \lambda_1X_n\big)^2\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\sum_{n=1}^{N}\big(Y_n - \lambda_0 + \lambda_1X_n\big)^2\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\frac1N\sum_{n=1}^{N}|Y_n - \lambda_0 - \lambda_1X_n|\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\sum_{n=1}^{N}\big(Y_n - \bar Y\big)^2\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Square each vertical miss <span class="math inline">\(Y_n - f(X_n)\)</span> and add them up. The second option is the slide-typo version (wrong sign); the last is the TSS.</p>
+</div>
+</div>
+<h2 id="deriving-the-formulas">2. Deriving the formulas</h2>
+<p>The RSS is a bowl-shaped (convex) function of <span class="math inline">\((\beta_0, \beta_1)\)</span> with a single lowest point. Find it by setting both partial derivatives to zero (stage 2, chain rule):</p>
+<p><span class="math display">\[\frac{\partial\mathrm{RSS}}{\partial\beta_0} = -2\sum_i(y_i - \beta_0 - \beta_1x_i) = 0, \qquad \frac{\partial\mathrm{RSS}}{\partial\beta_1} = -2\sum_i x_i(y_i - \beta_0 - \beta_1x_i) = 0.\]</span></p>
+<p>The first gives <span class="math inline">\(\sum y_i = n\beta_0 + \beta_1\sum x_i\)</span>, so</p>
+<p><span class="math display">\[\boxed{\hat\beta_0 = \bar y - \hat\beta_1\bar x}\]</span></p>
+<p>(the line always passes through <span class="math inline">\((\bar x, \bar y)\)</span>). Substituting into the second and tidying up gives</p>
+<p><span class="math display">\[\boxed{\hat\beta_1 = \frac{\sum_i(x_i - \bar x)(y_i - \bar y)}{\sum_i(x_i - \bar x)^2} = \frac{S_{xy}}{S_{xx}}}.\]</span></p>
+<p>Two consequences of the first equation: the residuals <strong>sum to zero</strong>, <span class="math inline">\(\sum_i e_i = 0\)</span>, whenever there’s an intercept; and <span class="math inline">\(\hat\beta_1 = r_{xy}\,s_y/s_x\)</span>, the correlation rescaled into units of <span class="math inline">\(Y\)</span> per unit of <span class="math inline">\(X\)</span>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(x = (1, 2, 3, 4, 5)\)</span>, <span class="math inline">\(y = (2, 4, 5, 4, 5)\)</span>.</p>
+<ol type="1">
+<li>Means <span class="math inline">\(\bar x = 3\)</span>, <span class="math inline">\(\bar y = 4\)</span>.</li>
+<li>Centred: <span class="math inline">\(x - \bar x = (-2, -1, 0, 1, 2)\)</span>, <span class="math inline">\(y - \bar y = (-2, 0, 1, 0, 1)\)</span>.</li>
+<li><span class="math inline">\(S_{xy} = 4 + 0 + 0 + 0 + 2 = 6\)</span>, <span class="math inline">\(S_{xx} = 4 + 1 + 0 + 1 + 4 = 10\)</span>.</li>
+<li><span class="math inline">\(\hat\beta_1 = 0.6\)</span>, <span class="math inline">\(\hat\beta_0 = 4 - 0.6 \times 3 = 2.2\)</span>. Line: <span class="math inline">\(\hat y = 2.2 + 0.6x\)</span>.</li>
+<li>Fitted <span class="math inline">\((2.8, 3.4, 4.0, 4.6, 5.2)\)</span>; residuals <span class="math inline">\((-0.8, 0.6, 1.0, -0.6, -0.2)\)</span>, which sum to 0.</li>
+<li><span class="math inline">\(\mathrm{RSS} = 0.64 + 0.36 + 1 + 0.36 + 0.04 = 2.4\)</span>.</li>
+</ol>
+</div>
+<div class="q" kind="gen" data-gen="ols">
+
+</div>
+<div class="q" kind="mcq">
+<p>Why do the residuals of a least-squares line with an intercept always sum to zero?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Because positive and negative errors are equally likely.</label></li>
+<li><label><input type="checkbox" checked="" />Because setting <span class="math inline">\(\partial\mathrm{RSS}/\partial\beta_0 = 0\)</span> gives <span class="math inline">\(-2\sum_i(y_i - \hat\beta_0 - \hat\beta_1x_i) = -2\sum_i e_i = 0\)</span>.</label></li>
+<li><label><input type="checkbox" />Because <span class="math inline">\(\epsilon\)</span> has mean zero.</label></li>
+<li><label><input type="checkbox" />They don’t; only the squared residuals sum to the RSS.</label></li>
+</ul>
+<div class="expl">
+<p>It’s an algebraic fact about the fitted line, not a probability statement: it holds for every data set.</p>
+</div>
+</div>
+<h2 id="how-good-is-the-fit-tss-rss-and-r2">3. How good is the fit? TSS, RSS and <span class="math inline">\(R^2\)</span></h2>
+<ul>
+<li><strong>TSS</strong> <span class="math inline">\(= \sum_i(y_i - \bar y)^2\)</span>: the variation in <span class="math inline">\(Y\)</span> <strong>before</strong> regression (the RSS of the flat line <span class="math inline">\(\hat y = \bar y\)</span>).</li>
+<li><strong>RSS</strong>: the variation <strong>left over</strong> after regression.</li>
+<li><span class="math display">\[R^2 = 1 - \frac{\mathrm{RSS}}{\mathrm{TSS}} \in [0, 1]:\]</span> the <strong>proportion of the variance of <span class="math inline">\(Y\)</span> explained</strong> by the model. It has no units.</li>
+</ul>
+<p><span class="math inline">\(R^2\)</span> near 1: the line explains most of the variation. Near 0: it explains little, either because the noise is large or because the true relationship isn’t a line. In simple regression <span class="math inline">\(R^2 = r_{xy}^2\)</span>, the squared correlation.</p>
+<div class="example">
+<p><strong>Worked example (continued).</strong> <span class="math inline">\(\mathrm{TSS} = 4 + 0 + 1 + 0 + 1 = 6\)</span>, <span class="math inline">\(\mathrm{RSS} = 2.4\)</span>, so <span class="math inline">\(R^2 = 1 - 2.4/6 = 0.6\)</span>. The correlation of this data is <span class="math inline">\(0.7746\)</span>, and <span class="math inline">\(0.7746^2 = 0.6\)</span>. ✓</p>
+</div>
+<div class="q" kind="gen" data-gen="rsq">
+
+</div>
+<h2 id="rse-and-degrees-of-freedom">4. RSE and degrees of freedom</h2>
+<p>The <strong>residual standard error</strong> estimates the typical size of <span class="math inline">\(\epsilon\)</span>, in the units of <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[\mathrm{RSE} = \sqrt{\frac{\mathrm{RSS}}{n - p - 1}}\]</span></p>
+<p>with <span class="math inline">\(p\)</span> inputs (<span class="math inline">\(p = 1\)</span> here, so <span class="math inline">\(n - 2\)</span>). Why not divide by <span class="math inline">\(n\)</span>? Each estimated parameter “uses up” one <strong>degree of freedom</strong>: the residuals must satisfy <span class="math inline">\(p + 1\)</span> equations (the derivative conditions), so only <span class="math inline">\(n - p - 1\)</span> of them are free. Same reason the sample variance divides by <span class="math inline">\(n - 1\)</span>: its deviations must sum to zero.</p>
+<p><strong>Degrees of freedom and flexibility.</strong> A model’s number of free parameters (its degrees of freedom) measures its flexibility. A line has 2. More parameters, more flexible: lower bias, higher variance. With <span class="math inline">\(n\)</span> points, a model with <span class="math inline">\(n\)</span> parameters can pass through every point (RSS <span class="math inline">\(= 0\)</span>, nothing left to estimate the noise with): perfectly overfitted. That’s the link the 2024 paper asked about.</p>
+<p>Also worth knowing: <span class="math inline">\(\hat\beta\)</span> is a random variable (another sample gives another line). In simple regression <span class="math inline">\(\mathrm{var}(\hat\beta_1) = \sigma^2/S_{xx}\)</span>: estimates are steadier with less noise, more data and more spread-out <span class="math inline">\(x\)</span> values.</p>
+<div class="example">
+<p><strong>Worked example.</strong> From the running example, <span class="math inline">\(\mathrm{RSE} = \sqrt{2.4/(5 - 2)} = \sqrt{0.8} \approx 0.894\)</span>. A model with <span class="math inline">\(n = 20\)</span>, <span class="math inline">\(p = 3\)</span> and <span class="math inline">\(\mathrm{RSS} = 34\)</span>: <span class="math inline">\(\mathrm{RSE} = \sqrt{34/16} \approx 1.458\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="1.449" data-tol="0.005" label="RSE">
+<p>A simple linear regression on <span class="math inline">\(n = 4\)</span> points has <span class="math inline">\(\mathrm{RSS} = 4.2\)</span>. Compute the RSE.</p>
+<div class="expl">
+<p><span class="math inline">\(\sqrt{4.2/(4 - 2)} = \sqrt{2.1} \approx 1.449\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Model A predicts sales (in thousands) with RSE 2.1. Model B predicts house prices (in pounds) with RSE 21,000. Which fits better?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A, because its RSE is smaller.</label></li>
+<li><label><input type="checkbox" />B, because it has more data.</label></li>
+<li><label><input type="checkbox" checked="" />You can’t tell from the RSE: it’s in each response’s own units. Compare <span class="math inline">\(R^2\)</span> instead.</label></li>
+<li><label><input type="checkbox" />They fit equally well.</label></li>
+</ul>
+<div class="expl">
+<p>RSE is in units of <span class="math inline">\(Y\)</span>. <span class="math inline">\(R^2\)</span> is unit-free, so it’s the fair comparison.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, exam formats 1 and 2; 2024 Q1.)</strong> Why would you use a linear regression model? Include a real-world example, and write the model for one input with parameters <span class="math inline">\(\lambda \in \mathbb R^2\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A reason: simple, interpretable (slope = change in <span class="math inline">\(Y\)</span> per unit <span class="math inline">\(X\)</span>), cheap, needs little data, good for inference and prediction when the relationship is roughly linear.</label></li>
+<li><label><input type="checkbox" checked="" />Output is a real number (regression), with a specific example naming input and output.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span>, with <span class="math inline">\(\lambda_0\)</span> the intercept and <span class="math inline">\(\lambda_1\)</span> the slope.</label></li>
+<li><label><input type="checkbox" checked="" />Mentions fitting <span class="math inline">\(\lambda\)</span> by minimising the RSS (least squares).</label></li>
+</ul>
+<div class="model">
+<p>Linear regression is used when the output is a real number and we expect it to change roughly linearly with the inputs. It is simple, cheap to fit, needs relatively little data and is easy to interpret: the slope says how much <span class="math inline">\(Y\)</span> changes, on average, per unit increase in <span class="math inline">\(X\)</span>, so it is useful for both prediction and inference. Example: predicting a flat’s monthly rent (output, in pounds) from its floor area in square metres (input). With one input the model is <span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span>, <span class="math inline">\(\lambda = (\lambda_0, \lambda_1) \in \mathbb R^2\)</span>, where <span class="math inline">\(\lambda_0\)</span> is the intercept and <span class="math inline">\(\lambda_1\)</span> the slope; <span class="math inline">\(\lambda\)</span> is chosen to minimise the residual sum of squares <span class="math inline">\(\sum_n(Y_n - f(X_n))^2\)</span> on the training data.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="ols">
+
+</div>
+<div class="q" kind="gen" data-gen="rsq">
+
+</div>
+<div class="q" kind="num" data-answer="3.0" label="RSE">
+<p>A fit with <span class="math inline">\(n = 12\)</span> points and <span class="math inline">\(p = 1\)</span> input has <span class="math inline">\(\mathrm{RSS} = 90\)</span>. Compute the RSE.</p>
+<div class="expl">
+<p><span class="math inline">\(\sqrt{90/(12 - 1 - 1)} = \sqrt{9} = 3\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A least-squares line has <span class="math inline">\(R^2 = 0.36\)</span>. What is the correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, if the slope is negative?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\(0.36\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(-0.36\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(-0.6\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(0.6\)</span></label></li>
+</ul>
+<div class="expl">
+<p>In simple regression <span class="math inline">\(R^2 = r^2\)</span>, so <span class="math inline">\(|r| = 0.6\)</span>, and <span class="math inline">\(r\)</span> has the sign of the slope.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>You fit polynomials of increasing degree to 10 data points. What happens at degree 9?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The RSS is at its largest.</label></li>
+<li><label><input type="checkbox" checked="" />The curve has 10 parameters and can pass through all 10 points, so the training RSS is 0: it has used up every degree of freedom and badly overfits.</label></li>
+<li><label><input type="checkbox" />The test error is guaranteed to be 0.</label></li>
+<li><label><input type="checkbox" />Least squares has no solution.</label></li>
+</ul>
+<div class="expl">
+<p>As many parameters as data points means a perfect fit to the training data, noise included. Training RSS 0 says nothing good about the test error.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s04_bayes_knn.html"><small>&larr; Stage 4</small>Bayes classifier and KNN</a><a class="next" href="s06_multiple_regression.html"><small>Stage 6 &rarr;</small>Multiple regression</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

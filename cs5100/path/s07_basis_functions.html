@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polynomials, steps and flexibility · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s07_basis_functions", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s07_basis_functions" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a class="active" aria-current="page" href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 7 of 18</span><span class="chip">Week 2 · Regression</span><span class="chip">about 35 min</span></div>
+  <h1>Polynomials, steps and flexibility</h1>
+  <p class="tagline">Bend a straight line by inventing new columns: $X^2$, $X^3$, or "is $X$ in this range?". The model stays linear in its parameters, so least squares still works, and the number of columns becomes your flexibility knob.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>This is the heart of 2024 Q1: a polynomial model written as <span class="math inline">\(f(X) = \lambda \cdot \phi(X)\)</span> with <span class="math inline">\(\lambda \in \mathbb R^d\)</span>, the point that it is “non-linear in <span class="math inline">\(X\)</span> but linear in <span class="math inline">\(\lambda\)</span>”, and a discussion of how the dimension <span class="math inline">\(d\)</span> (the degrees of freedom) controls flexibility and overfitting.</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 7.1 polynomial regression, 7.2 step functions and 7.3 basis functions: <strong>read</strong> (they are short). 7.4 to 7.7 (splines, smoothing splines, local regression, GAMs): <strong>skip</strong>, the slides only mention regression splines in one line. 3.3.2’s “non-linear relationships” paragraph (horsepower squared) is the same idea.</p>
+</div>
+<h2 id="polynomial-regression">1. Polynomial regression</h2>
+<p>Replace <span class="math inline">\(X\)</span> by the new columns <span class="math inline">\(X, X^2, \dots, X^d\)</span>:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X + \beta_2X^2 + \dots + \beta_dX^d + \epsilon.\]</span></p>
+<p>The fitted curve is <strong>non-linear in <span class="math inline">\(X\)</span></strong>, but the model is <strong>linear in the parameters <span class="math inline">\(\beta\)</span></strong>: each <span class="math inline">\(\beta_j\)</span> just multiplies a known column. So you build the design matrix with the powers precomputed and use the same least-squares formula, <span class="math inline">\(\hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span>.</p>
+<p>Design-matrix rows for degree 2 and <span class="math inline">\(x = 1, 2, 3\)</span>: <span class="math inline">\((1, 1, 1)\)</span>, <span class="math inline">\((1, 2, 4)\)</span>, <span class="math inline">\((1, 3, 9)\)</span>. With two inputs you can include <span class="math inline">\(X_1, X_2, X_1X_2, X_1^2, X_2^2\)</span>.</p>
+<p>Degree is rarely above 3 or 4. High degrees are wildly flexible and swing about near the edges of the data, and polynomials are <strong>global</strong>: moving data in one region changes the curve everywhere.</p>
+<div data-widget="poly">
+
+</div>
+<div class="q" kind="mcq">
+<p>Which of these models can be fitted by ordinary least squares?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(Y = \beta_0 + \beta_1\log X + \beta_2\sqrt X + \epsilon\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(Y = \beta_0 + e^{\beta_1X} + \epsilon\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(Y = \beta_0X^{\beta_1} + \epsilon\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(Y = \beta_0/(1 + \beta_1X) + \epsilon\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Only the first is linear in the parameters: <span class="math inline">\(\log X\)</span> and <span class="math inline">\(\sqrt X\)</span> are just new columns. In the others a parameter sits inside a non-linear function.</p>
+</div>
+</div>
+<h2 id="step-functions">2. Step functions</h2>
+<p>Polynomials impose one global shape. <strong>Step functions</strong> cut the range of <span class="math inline">\(X\)</span> at points <span class="math inline">\(c_1 &lt; c_2 &lt; \dots &lt; c_K\)</span> and fit a constant in each bin. The new columns are indicators:</p>
+<p><span class="math display">\[C_0(X) = \mathbb 1(X &lt; c_1),\quad C_k(X) = \mathbb 1(c_k \le X &lt; c_{k+1}),\quad C_K(X) = \mathbb 1(X \ge c_K).\]</span></p>
+<p>Exactly one is 1 for any <span class="math inline">\(X\)</span>. Fitting <span class="math inline">\(Y = \sum_k\beta_kC_k(X) + \epsilon\)</span> by least squares gives <span class="math inline">\(\hat\beta_k\)</span> = <strong>the mean of <span class="math inline">\(y\)</span> in bin <span class="math inline">\(k\)</span></strong>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(x = (1, 2, 3, 6, 7, 8)\)</span>, <span class="math inline">\(y = (3, 5, 4, 10, 12, 11)\)</span>, one cut at <span class="math inline">\(c = 5\)</span>. Bin <span class="math inline">\(X &lt; 5\)</span> has mean <span class="math inline">\((3 + 5 + 4)/3 = 4\)</span>; bin <span class="math inline">\(X \ge 5\)</span> has mean <span class="math inline">\(11\)</span>. The fit is a step from 4 to 11 at <span class="math inline">\(x = 5\)</span>. With cuts at 2 and 5, the indicator row for <span class="math inline">\(x = 3.7\)</span> is <span class="math inline">\((0, 1, 0)\)</span> and for <span class="math inline">\(x = 5\)</span> it is <span class="math inline">\((0, 0, 1)\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="8" label="ŷ">
+<p>Step regression with one cut at <span class="math inline">\(c = 4\)</span> on <span class="math inline">\(x = (1, 2, 3, 5, 6)\)</span>, <span class="math inline">\(y = (2, 4, 3, 7, 9)\)</span>. What does the fit predict at <span class="math inline">\(x = 5.5\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(x = 5.5\)</span> is in the bin <span class="math inline">\(X \ge 4\)</span>, whose points have <span class="math inline">\(y = 7, 9\)</span>, mean 8.</p>
+</div>
+</div>
+<h2 id="basis-functions-the-general-recipe">3. Basis functions: the general recipe</h2>
+<p>Polynomials and steps are special cases of</p>
+<p><span class="math display">\[Y = \beta_0 + \sum_{k=1}^{K}\beta_k\,b_k(X) + \epsilon,\]</span></p>
+<p>where the <strong>basis functions</strong> <span class="math inline">\(b_k\)</span> are fixed and chosen <strong>before</strong> fitting: powers <span class="math inline">\(x^k\)</span>, indicators, Fourier terms <span class="math inline">\(\cos\big((2k + 1)\pi x/2\big)\)</span>, or pieces of polynomials between knots (regression splines). Compute every <span class="math inline">\(b_k(x_i)\)</span>, put them in <span class="math inline">\(\mathbf X\)</span>, run least squares. In the exam’s notation: <span class="math inline">\(f(X) = \lambda \cdot \phi(X)\)</span> with the feature vector <span class="math inline">\(\phi(X) = (1, b_1(X), \dots, b_K(X))\)</span> and <span class="math inline">\(\lambda \in \mathbb R^{K + 1}\)</span>.</p>
+<p>(Week 4’s neural networks do the same thing, except that they <strong>learn</strong> their basis functions from the data instead of having you choose them.)</p>
+<div class="q" kind="gen" data-gen="polydf">
+
+</div>
+<h2 id="degrees-of-freedom-and-flexibility-2024-q1">4. Degrees of freedom and flexibility (2024 Q1)</h2>
+<p>The number of parameters <span class="math inline">\(d\)</span> (the length of <span class="math inline">\(\lambda\)</span>, the model’s <strong>degrees of freedom</strong>) is the flexibility knob:</p>
+<ul>
+<li><strong>Larger <span class="math inline">\(d\)</span></strong> (higher degree, more knots or bins): a more flexible curve. Training RSS can only go down. Lower bias, higher variance.</li>
+<li><strong><span class="math inline">\(d\)</span> close to <span class="math inline">\(n\)</span>:</strong> each parameter is estimated from very few points, so <span class="math inline">\(\hat\lambda\)</span> varies wildly between samples (recall <span class="math inline">\(\mathrm{var}(\hat\beta) = \sigma^2(\mathbf X^T\mathbf X)^{-1}\)</span>). At <span class="math inline">\(d = n\)</span> the curve passes through every point: training RSS 0, terrible test error.</li>
+<li><strong><span class="math inline">\(d &gt; n\)</span>:</strong> no unique solution at all.</li>
+<li><strong>Too small <span class="math inline">\(d\)</span>:</strong> underfitting (a line through a curve).</li>
+</ul>
+<p>Choose <span class="math inline">\(d\)</span> by validation error (U-shaped in <span class="math inline">\(d\)</span>), or keep <span class="math inline">\(d\)</span> large and shrink the parameters with a penalty (stage 8’s ridge, where a large penalty makes the model <em>less</em> flexible). Notice the clash of letters: in 2024 the parameters were called <span class="math inline">\(\lambda\)</span>; in ridge regression <span class="math inline">\(\lambda\)</span> is the penalty. Read each question’s definitions.</p>
+<div class="example">
+<p><strong>Worked example: a full-marks discussion.</strong> <em>“Discuss the relationship between the degrees of freedom, the dimension <span class="math inline">\(d\)</span> of <span class="math inline">\(\lambda\)</span> and the model’s flexibility.”</em></p>
+<p>“The degrees of freedom are the number of free parameters, here <span class="math inline">\(d\)</span>, the dimension of <span class="math inline">\(\lambda\)</span>. Increasing <span class="math inline">\(d\)</span> (for example raising the polynomial degree) adds basis functions, so the model can represent more complicated curves: it becomes more flexible, its bias falls and its training RSS decreases. But each extra parameter must be estimated from the same <span class="math inline">\(N\)</span> points, so the variance of <span class="math inline">\(\hat\lambda\)</span> grows; when <span class="math inline">\(d\)</span> approaches <span class="math inline">\(N\)</span> the model can interpolate the training data, fitting the noise (overfitting), and the test error rises. For <span class="math inline">\(d &gt; N\)</span> the least-squares solution is not unique. So <span class="math inline">\(d\)</span> should be chosen on a validation set, or the parameters should be regularised.”</p>
+</div>
+<div class="q" kind="multi">
+<p>You raise a polynomial’s degree from 2 to 8 with 30 data points. Tick everything that is true.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The training RSS cannot increase.</label></li>
+<li><label><input type="checkbox" checked="" />The model’s variance increases.</label></li>
+<li><label><input type="checkbox" />The test error must decrease.</label></li>
+<li><label><input type="checkbox" checked="" />The number of parameters goes from 3 to 9.</label></li>
+<li><label><input type="checkbox" />The model is no longer linear in its parameters.</label></li>
+</ul>
+<div class="expl">
+<p>The degree-2 model is nested in the degree-8 one, so least squares can’t do worse on the training data. The test error may go either way (U-shape). It stays linear in the parameters.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="self" data-need="3" data-marks="5">
+<p><strong>(5 marks, exam format 3; 2024 Q1.)</strong> A polynomial regression model is written <span class="math inline">\(f(X) = \lambda \cdot \phi(X)\)</span> with <span class="math inline">\(\lambda \in \mathbb R^d\)</span>. Explain why it is “non-linear in <span class="math inline">\(X\)</span> but linear in <span class="math inline">\(\lambda\)</span>”, and discuss how <span class="math inline">\(d\)</span> relates to the model’s flexibility and to overfitting.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\phi(X) = (1, X, X^2, \dots)\)</span> is a fixed non-linear transformation of <span class="math inline">\(X\)</span>, so <span class="math inline">\(f\)</span> is a curve in <span class="math inline">\(X\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(f\)</span> is a weighted sum of fixed features, so it is linear in <span class="math inline">\(\lambda\)</span> and least squares still applies (same formula with <span class="math inline">\(\phi(X_n)\)</span> as rows).</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(d\)</span> = number of parameters = degrees of freedom; larger <span class="math inline">\(d\)</span> means more flexible, lower bias, lower training RSS.</label></li>
+<li><label><input type="checkbox" checked="" />Larger <span class="math inline">\(d\)</span> also means higher variance; when <span class="math inline">\(d\)</span> approaches <span class="math inline">\(N\)</span> the model interpolates and overfits (test error rises); <span class="math inline">\(d &gt; N\)</span> has no unique solution.</label></li>
+<li><label><input type="checkbox" checked="" />Choose <span class="math inline">\(d\)</span> on a validation set (or regularise).</label></li>
+</ul>
+<div class="model">
+<p>The feature map <span class="math inline">\(\phi(X) = (1, X, X^2, \dots, X^{d - 1})\)</span> is a fixed, non-linear function of the input, so <span class="math inline">\(f(X) = \lambda\cdot\phi(X)\)</span> draws a curve in <span class="math inline">\(X\)</span>. But <span class="math inline">\(f\)</span> is a weighted sum of these known features with weights <span class="math inline">\(\lambda\)</span>, so it is linear in the parameters: the RSS is still a quadratic bowl in <span class="math inline">\(\lambda\)</span> and least squares applies with the rows <span class="math inline">\(\phi(X_n)\)</span> in the design matrix. The dimension <span class="math inline">\(d\)</span> is the number of free parameters (the degrees of freedom). Increasing <span class="math inline">\(d\)</span> makes the model more flexible: it can follow more complicated shapes, so the bias and the training RSS go down. At the same time the variance increases, because more parameters are estimated from the same <span class="math inline">\(N\)</span> points; as <span class="math inline">\(d\)</span> approaches <span class="math inline">\(N\)</span> the curve can pass through every training point and fits the noise, so the test error goes up (overfitting), and for <span class="math inline">\(d &gt; N\)</span> there is no unique solution. <span class="math inline">\(d\)</span> should therefore be chosen by validation error, or the parameters shrunk with a penalty.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="polydf">
+
+</div>
+<div class="q" kind="mcq">
+<p>What is the design-matrix row for <span class="math inline">\(x = 2\)</span> in a cubic polynomial model?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\((2, 4, 8)\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\((1, 2, 4, 8)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\((1, 2, 3)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\((1, 2, 2^2)\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Intercept column, then <span class="math inline">\(x, x^2, x^3\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="10">
+<p>Step regression with cuts at 2 and 5 on <span class="math inline">\(x = (1, 1.5, 3, 4, 6, 7)\)</span>, <span class="math inline">\(y = (2, 4, 9, 11, 20, 22)\)</span>. What does the fit predict at <span class="math inline">\(x = 3.5\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(x = 3.5\)</span> is in the bin <span class="math inline">\([2, 5)\)</span>, which holds <span class="math inline">\(y = 9, 11\)</span>: mean 10. So the prediction is <strong>10</strong>. (If you answered 11 you took a single point instead of the bin mean.)</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A residual plot for a linear fit shows a clear U-shape. What should you try?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Removing the intercept.</label></li>
+<li><label><input type="checkbox" checked="" />Adding non-linear terms such as <span class="math inline">\(X^2\)</span> (or other basis functions).</label></li>
+<li><label><input type="checkbox" />Using fewer data points.</label></li>
+<li><label><input type="checkbox" />Nothing: residual plots don’t matter.</label></li>
+</ul>
+<div class="expl">
+<p>A U-shape means the straight line systematically misses a curve.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why are polynomials called “global” and step functions “local”?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Changing data in one region changes a polynomial’s whole curve, but only that bin’s constant for a step function.</label></li>
+<li><label><input type="checkbox" />Polynomials use all inputs; steps use one.</label></li>
+<li><label><input type="checkbox" />Polynomials can’t be fitted by least squares.</label></li>
+<li><label><input type="checkbox" />Step functions need more data.</label></li>
+</ul>
+<div class="expl">
+<p>That’s the motivation for steps and splines in ISLP 7.2.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s06_multiple_regression.html"><small>&larr; Stage 6</small>Multiple regression</a><a class="next" href="s08_gd_ridge.html"><small>Stage 8 &rarr;</small>Gradient descent, ridge and KNN regression</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

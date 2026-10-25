@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maths toolkit · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s02_maths", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s02_maths" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a class="active" aria-current="page" href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 2 of 18</span><span class="chip">Week 1 · Foundations</span><span class="chip">about 40 min</span></div>
+  <h1>Maths toolkit</h1>
+  <p class="tagline">Fitting a model means finding the bottom of an error valley. For that you need vectors (to hold the data and parameters) and derivatives (to find the bottom). This stage is all the maths weeks 1 to 4 lean on.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>You’ll practise the operations that appear inside exam calculations: dot products (the 2023 orthogonality question), Euclidean distance written for any <span class="math inline">\(n\)</span> (the 2023 KNN question), derivatives with the chain rule (the 2023 sigmoid-derivative proof), and setting a derivative to zero to minimise a sum of squared errors (the whole of week 2).</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP chapter 1, <em>Notation and Simple Matrix Algebra</em> (two pages). The calculus on the week 1 slides (“Linear algebra and calculus basics”) goes beyond the book, so this stage is the reference. Nothing else in the book is needed here.</p>
+</div>
+<h2 id="vectors-the-data-matrix-and-the-dot-product">1. Vectors, the data matrix and the dot product</h2>
+<p>A data point is a <strong>vector</strong> <span class="math inline">\(x_i = (x_{i1}, \dots, x_{ip})\)</span>: one number per input. Stack the <span class="math inline">\(n\)</span> data points as rows and you get the <strong>data matrix</strong> <span class="math inline">\(\mathbf X\)</span>, with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns. Row <span class="math inline">\(i\)</span> is one observation; column <span class="math inline">\(j\)</span>, written <span class="math inline">\(\mathbf x_j\)</span>, is every observation of input <span class="math inline">\(j\)</span>. In pandas, a DataFrame <em>is</em> <span class="math inline">\(\mathbf X\)</span>: <code>df.shape == (n, p)</code>.</p>
+<p>The <strong>transpose</strong> <span class="math inline">\(^T\)</span> turns a row into a column (and a matrix’s rows into its columns).</p>
+<p>For two vectors of the same length, the <strong>dot (inner) product</strong> is a single number:</p>
+<p><span class="math display">\[a \cdot b = a^Tb = \sum_{j=1}^{p} a_jb_j.\]</span></p>
+<p>Two vectors are <strong>orthogonal</strong> (at right angles) exactly when <span class="math inline">\(a \cdot b = 0\)</span>.</p>
+<p>The <strong>outer product</strong> <span class="math inline">\(ab^T\)</span> is a <span class="math inline">\(p \times p\)</span> matrix with entries <span class="math inline">\(a_jb_k\)</span>. In NumPy, <code>a @ b</code> is the dot product, <code>np.outer(a, b)</code> the outer product, and <code>a * b</code> is <strong>elementwise</strong>, which is neither.</p>
+<div class="example">
+<p><strong>Worked example (2023 Q1c).</strong> Are <span class="math inline">\((1, 2, -3)\)</span> and <span class="math inline">\((5, -4, -1)\)</span> orthogonal?</p>
+<p><span class="math inline">\(1 \times 5 + 2 \times (-4) + (-3) \times (-1) = 5 - 8 + 3 = 0\)</span>. The dot product is 0, so <strong>yes</strong>.</p>
+<p>And for <span class="math inline">\(a = (1, 2, 3)\)</span>, <span class="math inline">\(b = (4, 5, 6)\)</span>: <span class="math inline">\(a \cdot b = 4 + 10 + 18 = 32\)</span>, while <code>a * b</code> <span class="math inline">\(= (4, 10, 18)\)</span>.</p>
+</div>
+<div class="q" kind="gen" data-gen="dot">
+
+</div>
+<div class="q" kind="mcq">
+<p>A data set has 392 cars and 7 numeric variables. What shape is <span class="math inline">\(\mathbf X\)</span>, and how long is the column <span class="math inline">\(\mathbf x_3\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(392 \times 7\)</span>; <span class="math inline">\(\mathbf x_3\)</span> has 392 entries</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(7 \times 392\)</span>; <span class="math inline">\(\mathbf x_3\)</span> has 7 entries</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(392 \times 7\)</span>; <span class="math inline">\(\mathbf x_3\)</span> has 7 entries</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(7 \times 7\)</span>; <span class="math inline">\(\mathbf x_3\)</span> has 392 entries</label></li>
+</ul>
+<div class="expl">
+<p>Rows are observations (<span class="math inline">\(n = 392\)</span>), columns are variables (<span class="math inline">\(p = 7\)</span>). A column holds one variable for every observation, so it has <span class="math inline">\(n = 392\)</span> entries. Mixing up rows and columns is the most common notation slip.</p>
+</div>
+</div>
+<h2 id="lengths-and-distances">2. Lengths and distances</h2>
+<p>The <strong>Euclidean length</strong> of a vector is <span class="math inline">\(\|v\| = \sqrt{v \cdot v} = \sqrt{\sum_j v_j^2}\)</span>, and the <strong>distance</strong> between two points in <span class="math inline">\(\mathbb R^n\)</span> is the length of their difference:</p>
+<p><span class="math display">\[d(x, x&#39;) = \|x - x&#39;\| = \sqrt{\sum_{i=1}^{n}(x_i - x&#39;_i)^2}.\]</span></p>
+<p>This is the distance KNN uses. The 2023 paper asked you to “write a distance measure in <span class="math inline">\(\mathbb R^n\)</span> showing the dependence on <span class="math inline">\(n\)</span>”: write exactly this, with the sum running to <span class="math inline">\(n\)</span>.</p>
+<p>More generally the <strong><span class="math inline">\(p\)</span>-norm</strong> is <span class="math inline">\(\|v\|_p = \big(\sum_j |v_j|^p\big)^{1/p}\)</span> (week 2 lab). <span class="math inline">\(p = 2\)</span> is Euclidean; <span class="math inline">\(p = 1\)</span> is the sum of absolute values.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(x = (1, 2, 2)\)</span>, <span class="math inline">\(x&#39; = (4, -2, 2)\)</span>. Differences <span class="math inline">\((-3, 4, 0)\)</span>, squares <span class="math inline">\(9, 16, 0\)</span>, so <span class="math inline">\(d = \sqrt{25} = 5\)</span>. The 1-norm of the difference is <span class="math inline">\(3 + 4 + 0 = 7\)</span>.</p>
+</div>
+<div class="q" kind="gen" data-gen="dist">
+
+</div>
+<div class="q" kind="num" data-answer="7" label="1-norm">
+<p>Compute the 1-norm <span class="math inline">\(\|(3, -4)\|_1\)</span>. (The 2-norm is 5.)</p>
+<div class="expl">
+<p><span class="math inline">\(|3| + |-4| = 7\)</span>.</p>
+</div>
+</div>
+<h2 id="derivatives-and-the-rules-you-need">3. Derivatives, and the rules you need</h2>
+<p>The <strong>derivative</strong> <span class="math inline">\(f&#39;(z)\)</span> is the slope of <span class="math inline">\(f\)</span> at <span class="math inline">\(z\)</span>: how much <span class="math inline">\(f\)</span> rises per unit step, for a tiny step.</p>
+<p><span class="math display">\[f&#39;(z) = \lim_{\delta \to 0}\frac{f(z + \delta) - f(z)}{\delta}.\]</span></p>
+<p>Slide example, <span class="math inline">\(f(z) = z^2\)</span>: <span class="math inline">\(\frac{(z + \delta)^2 - z^2}{\delta} = \frac{2z\delta + \delta^2}{\delta} = 2z + \delta \to 2z\)</span>.</p>
+<div data-widget="slope">
+
+</div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rule</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>power</td>
+<td><span class="math inline">\((z^r)&#39; = rz^{r-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>exp and log</td>
+<td><span class="math inline">\((e^z)&#39; = e^z\)</span>, <span class="math inline">\(\quad(\log z)&#39; = 1/z\)</span> (log means natural log)</td>
+</tr>
+<tr class="odd">
+<td>sum, constant</td>
+<td><span class="math inline">\((f + g)&#39; = f&#39; + g&#39;\)</span>, <span class="math inline">\(\quad(cf)&#39; = cf&#39;\)</span></td>
+</tr>
+<tr class="even">
+<td>product</td>
+<td><span class="math inline">\((fg)&#39; = f&#39;g + fg&#39;\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>chain</strong></td>
+<td><span class="math inline">\(\big(f(g(z))\big)&#39; = f&#39;(g(z))\,g&#39;(z)\)</span>: multiply the slopes along the chain</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example: the chain rule four ways.</strong></p>
+<ol type="1">
+<li><span class="math inline">\((e^{-z^2})&#39; = e^{-z^2} \cdot (-2z)\)</span>.</li>
+<li><span class="math inline">\((\log(1 + z^2))&#39; = \frac{1}{1 + z^2} \cdot 2z\)</span>.</li>
+<li><span class="math inline">\(((5z - 2)^3)&#39; = 3(5z - 2)^2 \cdot 5 = 15(5z - 2)^2\)</span>.</li>
+<li><span class="math inline">\(\big(\frac{1}{1 + e^{-z}}\big)&#39;\)</span>: the outer <span class="math inline">\(u^{-1}\)</span> has slope <span class="math inline">\(-u^{-2}\)</span>, the inner <span class="math inline">\(u = 1 + e^{-z}\)</span> has slope <span class="math inline">\(-e^{-z}\)</span>. Product: <span class="math inline">\(\frac{e^{-z}}{(1 + e^{-z})^2}\)</span>. That’s the sigmoid’s derivative, which you’ll rewrite as <span class="math inline">\(\sigma(1 - \sigma)\)</span> in stage 9.</li>
+</ol>
+</div>
+<div class="q" kind="mcq">
+<p>What is the derivative of <span class="math inline">\(f(z) = \log(1 + e^{z})\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\(\frac{1}{1 + e^{z}}\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\frac{e^{z}}{1 + e^{z}}\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\log(e^{z})\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\frac{1}{e^{z}}\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Chain rule: the outer <span class="math inline">\(\log u\)</span> has slope <span class="math inline">\(1/u\)</span>, the inner <span class="math inline">\(u = 1 + e^z\)</span> has slope <span class="math inline">\(e^z\)</span>. Multiply: <span class="math inline">\(\frac{e^z}{1 + e^z}\)</span>, which is the sigmoid <span class="math inline">\(\sigma(z)\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2" label="f′(1)">
+<p>For <span class="math inline">\(f(z) = z^4 - 2z + 7\)</span>, give <span class="math inline">\(f&#39;(1)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(f&#39;(z) = 4z^3 - 2\)</span> (power rule; the constant 7 has slope 0), so <span class="math inline">\(f&#39;(1) = 4 - 2 = 2\)</span>.</p>
+</div>
+</div>
+<h2 id="partial-derivatives-gradients-and-finding-a-minimum">4. Partial derivatives, gradients, and finding a minimum</h2>
+<p>If <span class="math inline">\(f\)</span> depends on several numbers <span class="math inline">\(z = (z_1, \dots, z_p)\)</span>, the <strong>partial derivative</strong> <span class="math inline">\(\partial_{z_j}f\)</span> is the ordinary derivative in <span class="math inline">\(z_j\)</span> with every other <span class="math inline">\(z\)</span> held constant. The <strong>gradient</strong> stacks them: <span class="math inline">\(\nabla f = (\partial_{z_1}f, \dots, \partial_{z_p}f)^T\)</span>. It points uphill; minus the gradient points downhill.</p>
+<p>At the bottom of a smooth valley every slope is zero. So to <strong>minimise</strong> an error, set its derivative (or gradient) to zero and solve.</p>
+<div class="example">
+<p><strong>Worked example (the slides’ key example).</strong> Fit a line through the origin, <span class="math inline">\(\hat y = zx\)</span>, by minimising <span class="math inline">\(g(z) = \sum_{i=1}^n (zx_i - y_i)^2\)</span>.</p>
+<p><span class="math display">\[g&#39;(z) = \sum_i 2(zx_i - y_i)\,x_i \quad\text{(sum rule, then chain rule)}.\]</span></p>
+<p>Set it to zero: <span class="math inline">\(z\sum_i x_i^2 = \sum_i x_iy_i\)</span>, so <span class="math inline">\(z^* = \dfrac{\sum_i x_iy_i}{\sum_i x_i^2}\)</span>.</p>
+<p>Data <span class="math inline">\(x = (1, 2, 3)\)</span>, <span class="math inline">\(y = (2, 3, 7)\)</span>: <span class="math inline">\(\sum x_iy_i = 2 + 6 + 21 = 29\)</span>, <span class="math inline">\(\sum x_i^2 = 14\)</span>, so <span class="math inline">\(z^* = 29/14 \approx 2.071\)</span>. It’s a minimum because <span class="math inline">\(g&#39;&#39;(z) = 2\sum x_i^2 = 28 &gt; 0\)</span>.</p>
+<p>Partial derivatives: <span class="math inline">\(f(z_1, z_2) = z_1^2z_2 + 3z_2\)</span> has <span class="math inline">\(\nabla f = (2z_1z_2,\ z_1^2 + 3)\)</span>; at <span class="math inline">\((1, 2)\)</span> that’s <span class="math inline">\((4, 4)\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="2.2" label="z*">
+<p>Using the formula above, find the best slope <span class="math inline">\(z^*\)</span> for a line through the origin fitted to <span class="math inline">\(x = (1, 2)\)</span>, <span class="math inline">\(y = (3, 4)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\sum x_iy_i = 3 + 8 = 11\)</span> and <span class="math inline">\(\sum x_i^2 = 1 + 4 = 5\)</span>, so <span class="math inline">\(z^* = 11/5 = 2.2\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="4" label="∂f/∂z₂ at (1, 2)">
+<p>For <span class="math inline">\(f(z_1, z_2) = z_1^2z_2 + 3z_2\)</span>, what is <span class="math inline">\(\partial f/\partial z_2\)</span> at <span class="math inline">\((z_1, z_2) = (1, 2)\)</span>?</p>
+<div class="expl">
+<p>Treat <span class="math inline">\(z_1\)</span> as a constant: <span class="math inline">\(\partial f/\partial z_2 = z_1^2 + 3 = 1 + 3 = 4\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="dot">
+
+</div>
+<div class="q" kind="gen" data-gen="dist">
+
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>(3 marks, exam format 2.)</strong> Write a formula for the Euclidean distance between two points <span class="math inline">\(x, x&#39; \in \mathbb R^n\)</span>, showing explicitly how it depends on <span class="math inline">\(n\)</span>, and say what each symbol means.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(d(x, x&#39;) = \sqrt{\sum_{i=1}^{n}(x_i - x&#39;_i)^2}\)</span>, with the sum running to <span class="math inline">\(n\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(x_i\)</span>, <span class="math inline">\(x&#39;_i\)</span> are the <span class="math inline">\(i\)</span>-th coordinates of the two points.</label></li>
+<li><label><input type="checkbox" checked="" />Says it is the length <span class="math inline">\(\|x - x&#39;\|\)</span>, or that each extra dimension adds one squared difference.</label></li>
+</ul>
+<div class="model">
+<p><span class="math inline">\(d(x, x&#39;) = \|x - x&#39;\|_2 = \sqrt{\sum_{i=1}^{n}(x_i - x&#39;_i)^2}\)</span>, where <span class="math inline">\(x = (x_1, \dots, x_n)\)</span> and <span class="math inline">\(x&#39; = (x&#39;_1, \dots, x&#39;_n)\)</span> are the two points and <span class="math inline">\(x_i, x&#39;_i\)</span> their <span class="math inline">\(i\)</span>-th coordinates. Each of the <span class="math inline">\(n\)</span> dimensions contributes one squared difference, so the distance depends on <span class="math inline">\(n\)</span> through the number of terms in the sum.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What is <span class="math inline">\(\frac{d}{dz}\, z e^{2z}\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\(2e^{2z}\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\((1 + 2z)e^{2z}\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(2ze^{2z}\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(e^{2z} + 2z\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Product rule: <span class="math inline">\((z)&#39;e^{2z} + z(e^{2z})&#39; = e^{2z} + z \cdot 2e^{2z} = (1 + 2z)e^{2z}\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="-4" label="∂f/∂z₁">
+<p>For <span class="math inline">\(f(z_1, z_2, z_3) = z_1z_2 + z_3^2 - 4z_1\)</span>, give <span class="math inline">\(\partial f/\partial z_1\)</span> at the point <span class="math inline">\((1, 0, 2)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\partial f/\partial z_1 = z_2 - 4\)</span> (treat <span class="math inline">\(z_2, z_3\)</span> as constants). At <span class="math inline">\(z_2 = 0\)</span> that’s <span class="math inline">\(-4\)</span>. The full gradient there is <span class="math inline">\((-4, 1, 4)\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>For <span class="math inline">\(L(\beta_0, \beta_1) = \sum_{i=1}^n (y_i - \beta_0 - \beta_1x_i)^2\)</span>, which is <span class="math inline">\(\partial L/\partial\beta_1\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\(2\sum_i (y_i - \beta_0 - \beta_1x_i)\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(-2\sum_i x_i(y_i - \beta_0 - \beta_1x_i)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(-2\sum_i (y_i - \beta_0 - \beta_1x_i)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\sum_i x_i^2\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Chain rule on each term: the outer square gives <span class="math inline">\(2(y_i - \beta_0 - \beta_1x_i)\)</span>, and the inner bracket has slope <span class="math inline">\(-x_i\)</span> in <span class="math inline">\(\beta_1\)</span>. This is the simple linear regression loss you’ll minimise in stage 5. The third option is <span class="math inline">\(\partial L/\partial\beta_0\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2.0714" data-tol="0.002" label="z*">
+<p>Minimise <span class="math inline">\(g(z) = \sum_i (zx_i - y_i)^2\)</span> for <span class="math inline">\(x = (1, 2, 3)\)</span>, <span class="math inline">\(y = (2, 3, 7)\)</span>. Give <span class="math inline">\(z^*\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(z^* = \sum x_iy_i / \sum x_i^2 = 29/14 \approx 2.071\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s01_big_picture.html"><small>&larr; Stage 1</small>The big picture</a><a class="next" href="s03_accuracy.html"><small>Stage 3 &rarr;</small>Accuracy, flexibility and overfitting</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

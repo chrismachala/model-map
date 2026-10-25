@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classification trees · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s14_classification_trees", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s14_classification_trees" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a class="active" aria-current="page" href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 14 of 18</span><span class="chip">Week 4 · Trees and neural networks</span><span class="chip">about 40 min</span></div>
+  <h1>Classification trees</h1>
+  <p class="tagline">Same boxes, but each leaf votes for a class. To grow the tree you need a measure of how mixed a leaf is: the error rate, the Gini index or the entropy. The past papers end their tree questions with exactly these calculations.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>2024 Q2 and 2025 Q1 both asked for the entropy or Gini formula, a decision stump on a 3-to-5-point data set, a prediction with the Bayes classifier inside a leaf, and an entropy or purity calculation. All of that is here, with fresh-number drills.</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 8.1.2 <em>Classification trees</em>: <strong>read</strong> (error rate, Gini, entropy, eqs. 8.5 to 8.7, the Heart example). Read the RestECG&lt;1 paragraph on p. 341 carefully: it is the best explanation of why Gini beats the error rate. <strong>Skim</strong> the page on splitting qualitative inputs (Thal:a, ChestPain:bc); it’s not on the slides.</p>
+</div>
+<h2 id="leaves-that-vote">1. Leaves that vote</h2>
+<p>In leaf <span class="math inline">\(R_m\)</span>, let <span class="math inline">\(\hat p_{mk}\)</span> be the fraction of its training points in class <span class="math inline">\(k\)</span>. It estimates <span class="math inline">\(P(Y = k \mid X \in R_m)\)</span>. The leaf predicts the class with the biggest <span class="math inline">\(\hat p_{mk}\)</span>: the <strong>Bayes classifier</strong> rule (stage 4) with probabilities estimated by counting, much like KNN.</p>
+<p>A leaf with 7 “yes” and 3 “no” predicts “yes”, with <span class="math inline">\(\hat P(\text{yes}) = 0.7\)</span>.</p>
+<div class="q" kind="num" data-answer="0.25" label="P̂(Y = 1)">
+<p>A leaf holds 9 points of class 0 and 3 of class 1. What is <span class="math inline">\(\hat P(Y = 1)\)</span> in that leaf?</p>
+<div class="expl">
+<p><span class="math inline">\(3/12 = 0.25\)</span>. The leaf predicts class 0.</p>
+</div>
+</div>
+<h2 id="three-impurity-measures">2. Three impurity measures</h2>
+<p>A leaf is <strong>pure</strong> if all its points share one class. With class fractions <span class="math inline">\(\hat p_{mk}\)</span> (<span class="math inline">\(\log\)</span> = natural log, and <span class="math inline">\(0\log 0 = 0\)</span>):</p>
+<p><span class="math display">\[E = 1 - \max_k\hat p_{mk},\qquad G = \sum_k\hat p_{mk}(1 - \hat p_{mk}),\qquad H = -\sum_k\hat p_{mk}\log\hat p_{mk}.\]</span></p>
+<p>(error rate, <strong>Gini index</strong>, <strong>entropy</strong>). For two classes with fractions <span class="math inline">\(p\)</span> and <span class="math inline">\(1 - p\)</span>: <span class="math inline">\(G = 2p(1 - p)\)</span> and <span class="math inline">\(H = -p\log p - (1 - p)\log(1 - p)\)</span>. In the exam’s notation with <span class="math inline">\(D = \{(X_n, Y_n)\}\)</span>: <span class="math inline">\(p_{yes} = \frac1N\sum_n\mathbb 1(Y_n = \text{yes})\)</span>.</p>
+<p>All three are 0 for a pure leaf and largest at an even mix:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(p\)</span></th>
+<th>error</th>
+<th>Gini</th>
+<th>entropy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 or 1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0.1</td>
+<td>0.10</td>
+<td>0.18</td>
+<td>0.33</td>
+</tr>
+<tr class="odd">
+<td>0.3</td>
+<td>0.30</td>
+<td>0.42</td>
+<td>0.61</td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td>0.50</td>
+<td>0.50</td>
+<td>0.69</td>
+</tr>
+</tbody>
+</table>
+<div data-widget="impurity">
+
+</div>
+<div class="q" kind="gen" data-gen="impurity">
+
+</div>
+<h2 id="scoring-a-split-information-gain">3. Scoring a split: information gain</h2>
+<p>A split of <span class="math inline">\(R_m\)</span> into <span class="math inline">\(R_{low}\)</span> and <span class="math inline">\(R_{high}\)</span> is scored by how much it lowers the size-weighted impurity:</p>
+<p><span class="math display">\[\Delta = G(R_m) - \frac{|R_{low}|\,G(R_{low}) + |R_{high}|\,G(R_{high})}{|R_m|}.\]</span></p>
+<p>Pick the split with the largest <strong>gain</strong> (entropy works the same way). <strong>Why not just the error rate?</strong> It isn’t sensitive enough. A region with 8 A and 2 B split into (4 A, 2 B) and (4 A, 0 B): the error stays at 0.2 (no improvement), but Gini drops from 0.32 to 0.267, because the split isolated a pure group and left a smaller mixed one that a later split can clean up. A one-step-greedy algorithm needs a measure that rewards that progress. (The error rate is still fine for pruning.)</p>
+<div class="example">
+<p><strong>Worked example.</strong> A region of 10 points, 6 A and 4 B: Gini <span class="math inline">\(0.48\)</span>.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>split</th>
+<th>left</th>
+<th>right</th>
+<th>Gini after</th>
+<th>gain</th>
+<th>error after</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>(4 A, 0 B)</td>
+<td>(2 A, 4 B)</td>
+<td><span class="math inline">\(0.4(0) + 0.6(0.444) = 0.267\)</span></td>
+<td><strong>0.213</strong></td>
+<td>0.2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>(3, 1)</td>
+<td>(3, 3)</td>
+<td><span class="math inline">\(0.4(0.375) + 0.6(0.5) = 0.45\)</span></td>
+<td>0.030</td>
+<td>0.4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>(5, 1)</td>
+<td>(1, 3)</td>
+<td><span class="math inline">\(0.6(0.278) + 0.4(0.375) = 0.317\)</span></td>
+<td>0.163</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+<p>Splits 1 and 3 tie on error rate; Gini prefers split 1, which makes a pure leaf.</p>
+</div>
+<div class="q" kind="gen" data-gen="gain">
+
+</div>
+<h2 id="decision-stumps-the-exam-calculations">4. Decision stumps: the exam calculations</h2>
+<p>A <strong>decision stump</strong> is a tree with one split. The papers give a tiny data set and ask you to split, predict and compute an impurity.</p>
+<div class="example">
+<p><strong>Worked example (2024 Q2d-e).</strong> <span class="math inline">\(D = \{(-1, \text{no}), (1, \text{no}), (4, \text{yes}), (10, \text{no}), (13, \text{no})\}\)</span>, threshold <span class="math inline">\(\xi = 2\)</span>.</p>
+<ul>
+<li><span class="math inline">\(B_1 = \{X &lt; 2\} = \{-1, 1\}\)</span>: both “no”. <span class="math inline">\(B_2 = \{X \ge 2\} = \{4, 10, 13\}\)</span>: one “yes”, two “no”.</li>
+<li>Predict at <span class="math inline">\(X = 5\)</span>: it’s in <span class="math inline">\(B_2\)</span>, where <span class="math inline">\(\hat p_{yes} = 1/3\)</span>, so the Bayes classifier says <strong>no</strong>.</li>
+<li><span class="math inline">\(H(B_1) = 0\)</span> (pure). <span class="math inline">\(H(B_2) = -\frac13\log\frac13 - \frac23\log\frac23\)</span>.</li>
+<li>The paper’s weighted entropy <span class="math inline">\(H^*(T_1) = |B_1|H(B_1) + |B_2|H(B_2) = 0 + 3\big(-\frac13\log\frac13 - \frac23\log\frac23\big) = \log 3 + 2\log\frac32 \approx 1.91\)</span> (natural log).</li>
+</ul>
+<p><strong>Worked example (2025 Q1e).</strong> <span class="math inline">\(D = \{(1, \text{yes}), (\frac12, \text{yes}), (\frac13, \text{no})\}\)</span>. Which threshold gives purer regions?</p>
+<ul>
+<li><span class="math inline">\(\xi_1\)</span> between <span class="math inline">\(\frac13\)</span> and <span class="math inline">\(\frac12\)</span>: left <span class="math inline">\(\{\frac13: \text{no}\}\)</span>, right <span class="math inline">\(\{\frac12, 1: \text{yes, yes}\}\)</span>. <strong>Both pure.</strong></li>
+<li><span class="math inline">\(\xi_2\)</span> between <span class="math inline">\(\frac12\)</span> and 1: left <span class="math inline">\(\{\frac13, \frac12\}\)</span> is mixed.</li>
+<li><span class="math inline">\(\xi_1\)</span> wins. <span class="math inline">\(X = 0\)</span> falls in the left region, so <span class="math inline">\(P(Y = \text{yes} \mid X = 0) = \mathbf 0\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="stump">
+
+</div>
+<div class="q" kind="num" data-answer="0" label="P(yes | X = 0.2)">
+<p>Data <span class="math inline">\(\{(2, \text{yes}), (3, \text{yes}), (0.5, \text{no}), (1, \text{no})\}\)</span>. Using the purest one-split stump, what is <span class="math inline">\(P(Y = \text{yes} \mid X = 0.2)\)</span>?</p>
+<div class="expl">
+<p>Splitting between 1 and 2 gives left <span class="math inline">\(\{0.5, 1\}\)</span> = no, no and right <span class="math inline">\(\{2, 3\}\)</span> = yes, yes: both pure. <span class="math inline">\(X = 0.2\)</span> is on the left, where <span class="math inline">\(\hat p_{yes} = 0\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, exam format 2; 2025 Q1.)</strong> Write the entropy and the Gini index of a data set <span class="math inline">\(D = \{(X_n, Y_n)\}_{n=1}^N\)</span> with <span class="math inline">\(Y_n \in \{\text{yes}, \text{no}\}\)</span>, defining every symbol, and say which value each takes for a pure set.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(p_{yes} = \frac1N\sum_n\mathbb 1(Y_n = \text{yes})\)</span>, <span class="math inline">\(p_{no} = 1 - p_{yes}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(H(D) = -p_{yes}\log p_{yes} - p_{no}\log p_{no}\)</span> (with <span class="math inline">\(0\log0 = 0\)</span>).</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(G(D) = p_{yes}(1 - p_{yes}) + p_{no}(1 - p_{no}) = 2p_{yes}(1 - p_{yes})\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Both are 0 for a pure set and largest at <span class="math inline">\(p_{yes} = 0.5\)</span>.</label></li>
+</ul>
+<div class="model">
+<p>Let <span class="math inline">\(p_{yes} = \frac1N\sum_{n=1}^N\mathbb 1(Y_n = \text{yes})\)</span> be the fraction of “yes” labels and <span class="math inline">\(p_{no} = 1 - p_{yes}\)</span>. The entropy is <span class="math inline">\(H(D) = -p_{yes}\log p_{yes} - p_{no}\log p_{no}\)</span> (taking <span class="math inline">\(0\log 0 = 0\)</span>), and the Gini index is <span class="math inline">\(G(D) = p_{yes}(1 - p_{yes}) + p_{no}(1 - p_{no}) = 2p_{yes}(1 - p_{yes})\)</span>. Both measure how mixed the labels are: both are 0 when the set is pure (all yes or all no) and both are largest when <span class="math inline">\(p_{yes} = 0.5\)</span> (entropy <span class="math inline">\(\log 2\)</span>, Gini <span class="math inline">\(0.5\)</span>).</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="stump">
+
+</div>
+<div class="q" kind="gen" data-gen="gain">
+
+</div>
+<div class="q" kind="gen" data-gen="impurity">
+
+</div>
+<div class="q" kind="num" data-answer="0.625" label="Gini">
+<p>Three classes with fractions <span class="math inline">\((0.5, 0.25, 0.25)\)</span>. Compute the Gini index.</p>
+<div class="expl">
+<p><span class="math inline">\(0.5 \times 0.5 + 0.25 \times 0.75 + 0.25 \times 0.75 = 0.25 + 0.1875 + 0.1875 = 0.625\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>True or false: a split whose two halves predict the same class can never be chosen when the tree is grown with the Gini index.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="expl">
+<p>Splitting (8 A, 2 B) into (4 A, 2 B) and (4 A, 0 B) leaves both halves predicting A, but the Gini index still drops (0.32 to 0.267), so it can be chosen. ISLP’s Heart tree has splits like this.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s13_regression_trees.html"><small>&larr; Stage 13</small>Regression trees</a><a class="next" href="s15_pruning.html"><small>Stage 15 &rarr;</small>Tree pruning</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

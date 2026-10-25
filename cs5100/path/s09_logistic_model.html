@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logistic regression: the model · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s09_logistic_model", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s09_logistic_model" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a class="active" aria-current="page" href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 9 of 18</span><span class="chip">Week 3 · Classification</span><span class="chip">about 40 min</span></div>
+  <h1>Logistic regression: the model</h1>
+  <p class="tagline">When the answer is a category, predict its probability. Logistic regression squashes a straight line into an S-curve between 0 and 1. You'll learn the sigmoid's properties, prove its derivative (a past exam question), and predict by hand.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>2023 Q3 was all logistic regression: the sigmoid’s domain and range, a “show that <span class="math inline">\(\sigma&#39; = \sigma(1 - \sigma)\)</span>” proof, the likelihood used for training, and a prediction with <span class="math inline">\(\lambda = [1, 1, -1]\)</span>. This stage covers everything except training (that’s stage 10).</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 4.1 and 4.2 (why not linear regression): <strong>read</strong>, short. 4.3.1 the logistic model: <strong>read</strong>. 4.3.3 making predictions: <strong>read</strong>. 4.3.4 multiple logistic regression: <strong>read</strong>, including the student paradox (lab Q1 asks you to explain it).</p>
+</div>
+<div class="warn">
+<p><span class="label">Slide typos</span></p>
+<p>Slide 7 lists the classes as <span class="math inline">\(\{\text{yes}, \text{no}\}\)</span>; with <span class="math inline">\(Y = 1\)</span> meaning “defaults” the order is <span class="math inline">\(\{\text{no}, \text{yes}\}\)</span>. Slide 17 says <span class="math inline">\(\hat p(x_i) \approx P(Y = 0 \mid X = x_i)\)</span> where it means <span class="math inline">\(P(Y = 1 \mid X = x_i)\)</span>.</p>
+</div>
+<h2 id="why-not-just-fit-a-line">1. Why not just fit a line?</h2>
+<p>Classes are coded <span class="math inline">\(Y \in \{0, \dots, m - 1\}\)</span>, but the codes are <strong>labels</strong>, not numbers: brown = 0, green = 1, blue = 2 is a free choice. Two problems with linear regression on codes:</p>
+<ol type="1">
+<li><strong>More than two classes:</strong> a line assumes green is “halfway” between brown and blue. Renumber the classes and you get a different fit and different predictions from the same data.</li>
+<li><strong>Two classes:</strong> a line fitted to 0/1 data can be read as an estimate of <span class="math inline">\(P(Y = 1 \mid X)\)</span>, but nothing stops it going below 0 or above 1.</li>
+</ol>
+<p>Every classifier this week follows the same recipe: <strong>estimate</strong> <span class="math inline">\(P(Y = k \mid X = x)\)</span> for each class, then apply the <strong>Bayes classifier</strong> rule from stage 4: pick the biggest.</p>
+<div class="q" kind="mcq">
+<p>A linear regression of default (0/1) on balance gives <span class="math inline">\(\hat p(x) = -0.08 + 0.0002x\)</span>. What’s wrong at a balance of 6000?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Nothing; it predicts default.</label></li>
+<li><label><input type="checkbox" checked="" />It gives <span class="math inline">\(1.12\)</span>, which can’t be a probability: a straight line eventually leaves <span class="math inline">\([0, 1]\)</span>.</label></li>
+<li><label><input type="checkbox" />It gives a negative probability.</label></li>
+<li><label><input type="checkbox" />The slope is too small.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(-0.08 + 1.2 = 1.12\)</span>. (At balance 0 it gives <span class="math inline">\(-0.08\)</span>, also impossible.)</p>
+</div>
+</div>
+<h2 id="the-sigmoid">2. The sigmoid</h2>
+<p>Keep the linear part <span class="math inline">\(t = \beta_0 + \beta_1X\)</span> (any real number) and squash it into <span class="math inline">\((0, 1)\)</span> with the <strong>sigmoid</strong> (logistic) function:</p>
+<p><span class="math display">\[\sigma(t) = \frac{1}{1 + e^{-t}} = \frac{e^t}{1 + e^t}, \qquad p(X) = P(Y = 1 \mid X) = \sigma(\beta_0 + \beta_1X).\]</span></p>
+<p>Properties to know for the exam:</p>
+<ul>
+<li><strong>Domain:</strong> all real numbers. <strong>Range:</strong> strictly between 0 and 1. It never reaches 0 or 1, because <span class="math inline">\(e^{-t} &gt; 0\)</span> makes the denominator bigger than 1 and finite.</li>
+<li><span class="math inline">\(\sigma(0) = 0.5\)</span>; large positive <span class="math inline">\(t\)</span> gives nearly 1; large negative <span class="math inline">\(t\)</span> nearly 0.</li>
+<li>Symmetry: <span class="math inline">\(\sigma(-t) = 1 - \sigma(t)\)</span>.</li>
+<li>It’s increasing, so <span class="math inline">\(\sigma(t) &gt; 0.5\)</span> exactly when <span class="math inline">\(t &gt; 0\)</span>.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span></th>
+<th><span class="math inline">\(-3\)</span></th>
+<th><span class="math inline">\(-2\)</span></th>
+<th><span class="math inline">\(-1\)</span></th>
+<th><span class="math inline">\(0\)</span></th>
+<th><span class="math inline">\(1\)</span></th>
+<th><span class="math inline">\(2\)</span></th>
+<th><span class="math inline">\(3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\sigma(t)\)</span></td>
+<td>0.047</td>
+<td>0.119</td>
+<td>0.269</td>
+<td>0.5</td>
+<td>0.731</td>
+<td>0.881</td>
+<td>0.953</td>
+</tr>
+</tbody>
+</table>
+<div data-widget="sigmoid">
+
+</div>
+<div class="q" kind="num" data-answer="0.269" data-tol="0.003" label="σ(−1)">
+<p>Compute <span class="math inline">\(\sigma(-1)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(1/(1 + e^{1}) = 1/3.718 = 0.269\)</span>. Check: <span class="math inline">\(\sigma(1) = 0.731\)</span> and the two add to 1.</p>
+</div>
+</div>
+<h2 id="odds-log-odds-and-the-derivative">3. Odds, log-odds, and the derivative</h2>
+<p>The <strong>odds</strong> are <span class="math inline">\(\frac{p}{1 - p}\)</span>. For the logistic model, <span class="math inline">\(1 - p = \frac{1}{1 + e^t}\)</span>, so</p>
+<p><span class="math display">\[\frac{p}{1 - p} = e^{t}, \qquad \log\frac{p}{1 - p} = \beta_0 + \beta_1X.\]</span></p>
+<p>The <strong>log-odds</strong> (logit) are linear in <span class="math inline">\(X\)</span>: that’s the sense in which logistic regression is “linear”. Increasing <span class="math inline">\(X\)</span> by 1 adds <span class="math inline">\(\beta_1\)</span> to the log-odds, so it <strong>multiplies the odds by <span class="math inline">\(e^{\beta_1}\)</span></strong>. The change in <span class="math inline">\(p\)</span> itself is not fixed: it depends on where you are on the S-curve.</p>
+<p><strong>The derivative (2023 Q3c, a “show that”).</strong></p>
+<p><span class="math display">\[\sigma&#39;(t) = \frac{d}{dt}(1 + e^{-t})^{-1} = -(1 + e^{-t})^{-2}\cdot(-e^{-t}) = \frac{e^{-t}}{(1 + e^{-t})^2} = \underbrace{\frac{1}{1 + e^{-t}}}_{\sigma(t)}\cdot\underbrace{\frac{e^{-t}}{1 + e^{-t}}}_{1 - \sigma(t)}.\]</span></p>
+<p>The last factor is <span class="math inline">\(1 - \sigma(t)\)</span> because <span class="math inline">\(1 - \frac{1}{1 + e^{-t}} = \frac{e^{-t}}{1 + e^{-t}}\)</span>. So <span class="math inline">\(\boxed{\sigma&#39;(t) = \sigma(t)\big(1 - \sigma(t)\big)}\)</span>. Check at <span class="math inline">\(t = 0\)</span>: <span class="math inline">\(0.5 \times 0.5 = 0.25\)</span>, the steepest point.</p>
+<p>By the chain rule, <span class="math inline">\(\frac{dp}{dX} = p(1 - p)\beta_1\)</span>: biggest (<span class="math inline">\(0.25\beta_1\)</span>) where <span class="math inline">\(p = 0.5\)</span>, tiny near 0 or 1.</p>
+<div class="q" kind="gen" data-gen="odds">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, 2023 Q3c.)</strong> Show that <span class="math inline">\(\sigma&#39;(t) = \sigma(t)(1 - \sigma(t))\)</span>. Write it out, then reveal the model answer and mark yourself.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Writes <span class="math inline">\(\sigma = (1 + e^{-t})^{-1}\)</span> and uses the chain rule.</label></li>
+<li><label><input type="checkbox" checked="" />Gets <span class="math inline">\(\sigma&#39;(t) = e^{-t}/(1 + e^{-t})^2\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Splits it into <span class="math inline">\(\frac{1}{1 + e^{-t}}\cdot\frac{e^{-t}}{1 + e^{-t}}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Shows <span class="math inline">\(\frac{e^{-t}}{1 + e^{-t}} = 1 - \sigma(t)\)</span>.</label></li>
+</ul>
+<div class="model">
+<p><span class="math inline">\(\sigma(t) = (1 + e^{-t})^{-1}\)</span>. By the chain rule, with outer function <span class="math inline">\(u^{-1}\)</span> (slope <span class="math inline">\(-u^{-2}\)</span>) and inner <span class="math inline">\(u = 1 + e^{-t}\)</span> (slope <span class="math inline">\(-e^{-t}\)</span>): <span class="math inline">\(\sigma&#39;(t) = -(1 + e^{-t})^{-2}(-e^{-t}) = \frac{e^{-t}}{(1 + e^{-t})^2} = \frac{1}{1 + e^{-t}}\cdot\frac{e^{-t}}{1 + e^{-t}}\)</span>. The first factor is <span class="math inline">\(\sigma(t)\)</span>, and the second is <span class="math inline">\(\frac{(1 + e^{-t}) - 1}{1 + e^{-t}} = 1 - \frac{1}{1 + e^{-t}} = 1 - \sigma(t)\)</span>. Hence <span class="math inline">\(\sigma&#39;(t) = \sigma(t)(1 - \sigma(t))\)</span>.</p>
+</div>
+</div>
+<h2 id="predicting-and-several-inputs">4. Predicting, and several inputs</h2>
+<p>With <span class="math inline">\(p\)</span> inputs, put a 1 in front of <span class="math inline">\(x\)</span> and write <span class="math inline">\(t = \tilde x^T\beta = \beta_0 + \sum_j\beta_jx_j\)</span>; then <span class="math inline">\(p(x) = \sigma(t)\)</span>. Predict class 1 when <span class="math inline">\(\sigma(t) \ge 0.5\)</span>, i.e. when <span class="math inline">\(t \ge 0\)</span>. So the <strong>decision boundary</strong> <span class="math inline">\(\beta_0 + \beta_1x_1 + \beta_2x_2 = 0\)</span> is a <strong>straight line</strong> in the input plane.</p>
+<p>Everything from week 2 carries over: dummy variables, polynomial features, penalties. <span class="math inline">\(\beta_j\)</span> is the change in log-odds per unit of <span class="math inline">\(x_j\)</span> holding the others fixed. <strong>The student paradox</strong> (ISLP 4.3.4): alone, <code>student</code> has a positive coefficient (students default more); with <code>balance</code> in the model it turns negative (at the same balance, students default less). Students carry bigger balances. Same story as stage 6’s newspaper example.</p>
+<div class="example">
+<p><strong>Worked example (2023 Q3e).</strong> <span class="math inline">\(\lambda = [1, 1, -1]\)</span>, <span class="math inline">\(x = [-\tfrac13, 1]\)</span>, <span class="math inline">\(P(Y = \text{green} \mid x) = \sigma(\lambda_0 + \lambda_1x_1 + \lambda_2x_2)\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(t = 1 + 1 \cdot(-\tfrac13) + (-1)\cdot 1 = -\tfrac13\)</span>.</li>
+<li><span class="math inline">\(\sigma(-\tfrac13) = \frac{1}{1 + e^{1/3}} = \frac{1}{1 + 1.3956} \approx 0.417\)</span>.</li>
+<li>Below 0.5, so predict <strong>red</strong>. (Shortcut: <span class="math inline">\(t &lt; 0\)</span> already tells you.)</li>
+</ol>
+<p>Slides’ example: <span class="math inline">\(\hat\beta = (-0.5, 0.001)\)</span>, balance 1000: <span class="math inline">\(t = 0.5\)</span>, <span class="math inline">\(\hat p = 0.622\)</span>, predict default. Boundary at balance <span class="math inline">\(0.5/0.001 = 500\)</span>.</p>
+</div>
+<div class="q" kind="gen" data-gen="logit">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="logit">
+
+</div>
+<div class="q" kind="mcq">
+<p>What are the domain and the range of <span class="math inline">\(\sigma(t) = 1/(1 + e^{-t})\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />domain <span class="math inline">\([0, 1]\)</span>, range <span class="math inline">\(\mathbb R\)</span></label></li>
+<li><label><input type="checkbox" checked="" />domain <span class="math inline">\(\mathbb R\)</span>, range <span class="math inline">\((0, 1)\)</span>, never reaching 0 or 1</label></li>
+<li><label><input type="checkbox" />domain <span class="math inline">\(\mathbb R\)</span>, range <span class="math inline">\([0, 1]\)</span></label></li>
+<li><label><input type="checkbox" />domain <span class="math inline">\(t &gt; 0\)</span>, range <span class="math inline">\((0, 1)\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Any real <span class="math inline">\(t\)</span> works; <span class="math inline">\(e^{-t} &gt; 0\)</span> keeps <span class="math inline">\(\sigma\)</span> strictly inside <span class="math inline">\((0, 1)\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks.)</strong> Show that <span class="math inline">\(\sigma&#39;(t) = \sigma(t)(1 - \sigma(t))\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Writes <span class="math inline">\(\sigma = (1 + e^{-t})^{-1}\)</span> and uses the chain rule.</label></li>
+<li><label><input type="checkbox" checked="" />Gets <span class="math inline">\(\sigma&#39;(t) = e^{-t}/(1 + e^{-t})^2\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Splits it into <span class="math inline">\(\frac{1}{1 + e^{-t}}\cdot\frac{e^{-t}}{1 + e^{-t}}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Shows <span class="math inline">\(\frac{e^{-t}}{1 + e^{-t}} = 1 - \sigma(t)\)</span>.</label></li>
+</ul>
+<div class="model">
+<p><span class="math inline">\(\sigma&#39;(t) = -(1 + e^{-t})^{-2}\cdot(-e^{-t}) = \frac{e^{-t}}{(1 + e^{-t})^2} = \frac{1}{1 + e^{-t}}\cdot\frac{e^{-t}}{1 + e^{-t}} = \sigma(t)\big(1 - \sigma(t)\big)\)</span>, since <span class="math inline">\(1 - \sigma(t) = \frac{1 + e^{-t} - 1}{1 + e^{-t}} = \frac{e^{-t}}{1 + e^{-t}}\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="1.386" data-tol="0.005" label="log-odds">
+<p>A logistic model gives <span class="math inline">\(p = 0.8\)</span>. What are the log-odds?</p>
+<div class="expl">
+<p><span class="math inline">\(\log(0.8/0.2) = \log 4 \approx 1.386\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="10.39" data-tol="0.02" label="x">
+<p><span class="math inline">\(\hat\beta = (-3, 0.5)\)</span>. At what <span class="math inline">\(x\)</span> is <span class="math inline">\(\hat p = 0.9\)</span>?</p>
+<div class="expl">
+<p>Need <span class="math inline">\(t = \log(0.9/0.1) = \log 9 = 2.197\)</span>. So <span class="math inline">\(-3 + 0.5x = 2.197\)</span>, <span class="math inline">\(x = 10.39\)</span>. (The 50% boundary is at <span class="math inline">\(x = 6\)</span>.)</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>True or false: in logistic regression, increasing <span class="math inline">\(x_1\)</span> by 1 always increases <span class="math inline">\(p\)</span> by <span class="math inline">\(\beta_1\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(\beta_1\)</span> is the change in the <strong>log-odds</strong>. The change in <span class="math inline">\(p\)</span> is about <span class="math inline">\(p(1 - p)\beta_1\)</span>, which depends on where you are.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="odds">
+
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s08_gd_ridge.html"><small>&larr; Stage 8</small>Gradient descent, ridge and KNN regression</a><a class="next" href="s10_logistic_fit.html"><small>Stage 10 &rarr;</small>Fitting logistic regression</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

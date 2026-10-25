@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regression trees · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s13_regression_trees", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s13_regression_trees" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a class="active" aria-current="page" href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 13 of 18</span><span class="chip">Week 4 · Trees and neural networks</span><span class="chip">about 35 min</span></div>
+  <h1>Regression trees</h1>
+  <p class="tagline">Ask a sequence of yes/no questions, each about one input. The answers cut the input space into boxes, and each box predicts the average of its training points. Growing the tree is a greedy search for the cut that lowers the RSS most.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>Decision trees were on both the 2024 and 2025 papers (25 marks each time), and the lecturer’s week 4 matches 2025 Q1 almost exactly. Stages 13 to 15 take you through every part.</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 8.1 intro and 8.1.1 <em>Regression trees</em> up to “Tree pruning” (Hitters example, eqs. 8.1 to 8.3): <strong>read</strong>. 8.1.3 <em>Trees versus linear models</em> and 8.1.4 <em>advantages and disadvantages</em>: <strong>read</strong> (short, and lab Q1 is that comparison). 8.2 (bagging, random forests, boosting): <strong>skip for now</strong>; it is the most-examined second-half topic, so it will get its own stage when it’s taught.</p>
+</div>
+<h2 id="boxes-from-yesno-questions">1. Boxes from yes/no questions</h2>
+<p>A tree splits the input space with questions “is <span class="math inline">\(X_j &lt; s\)</span>?”. Each answer sends you left (yes) or right (no) until you reach a <strong>leaf</strong>:</p>
+<pre><code>             Years &lt; 4.5 ?
+            /             \
+          yes              no
+       R1: 5.11      Hits &lt; 117.5 ?
+                     /           \
+                   yes            no
+                R2: 6.00       R3: 6.74</code></pre>
+<p>This is ISLP Fig. 8.1: a baseball player’s <strong>log</strong> salary from <code>Years</code> and <code>Hits</code>. The leaf value is the average of the training players in it. The regions are <strong>boxes</strong> with edges parallel to the axes (<span class="math inline">\(R_1 = \{\text{Years} &lt; 4.5\}\)</span>, <span class="math inline">\(R_2 = \{\text{Years} \ge 4.5, \text{Hits} &lt; 117.5\}\)</span>, <span class="math inline">\(R_3 = \{\text{Years} \ge 4.5, \text{Hits} \ge 117.5\}\)</span>); they don’t overlap and they cover everything.</p>
+<p>Vocabulary: the <strong>root</strong> is the first question; <strong>internal nodes</strong> are questions; <strong>leaves</strong> (terminal nodes) are the regions; the <strong>depth</strong> is the number of questions on the longest path.</p>
+<p><strong>Predicting:</strong> follow the questions to a leaf <span class="math inline">\(R_x\)</span> and output the average <span class="math inline">\(\hat y = \frac{1}{|R_x|}\sum_{i \in R_x}y_i\)</span> of its training responses. As a formula, <span class="math inline">\(f(X) = \sum_m c_m\mathbb 1(X \in R_m)\)</span>: piecewise constant.</p>
+<p><strong>Why people like trees:</strong> you can read them like a flow chart (<code>Years</code> is the most important input; for inexperienced players <code>Hits</code> barely matters), they handle categorical inputs easily, and they need <strong>no scaling</strong> (rescaling an input just rescales its thresholds). <strong>Weakness:</strong> high variance; a small change in the data can change the whole tree.</p>
+<div class="q" kind="num" data-answer="6.00" label="prediction">
+<p>Using the tree above, what log-salary is predicted for a player with 10 years and 100 hits?</p>
+<div class="expl">
+<p>Years <span class="math inline">\(\ge 4.5\)</span>, so go right; Hits <span class="math inline">\(&lt; 117.5\)</span>, so go left: leaf <span class="math inline">\(R_2\)</span>, 6.00. (A player with 3 years gets 5.11 whatever their hits.)</p>
+</div>
+</div>
+<h2 id="growing-a-tree-greedy-splitting-by-rss">2. Growing a tree: greedy splitting by RSS</h2>
+<p>Score a tree <span class="math inline">\(T\)</span> with leaves <span class="math inline">\(R_1, \dots, R_J\)</span> by its training RSS:</p>
+<p><span class="math display">\[\mathrm{RSS}(T) = \sum_{m=1}^{J}\sum_{i \in R_m}(y_i - \hat y_{R_m})^2.\]</span></p>
+<p>(The leaf average is the best constant: <span class="math inline">\(\frac{d}{dc}\sum(y_i - c)^2 = 0\)</span> gives <span class="math inline">\(c = \bar y\)</span>.)</p>
+<p>Trying every possible tree is impossible, so <strong>recursive binary splitting</strong> works <strong>top-down</strong> and <strong>greedily</strong>:</p>
+<ol type="1">
+<li>Start with one region holding all the data.</li>
+<li>Try every input <span class="math inline">\(j\)</span> and every cutpoint <span class="math inline">\(s\)</span>, splitting into <span class="math inline">\(\{x_j &lt; s\}\)</span> and <span class="math inline">\(\{x_j \ge s\}\)</span>. Keep the split with the smallest RSS.</li>
+<li>Then try every split of <strong>any</strong> current region; keep the one with the smallest total RSS (= the biggest drop). Repeat.</li>
+</ol>
+<p>Only the gaps between neighbouring data values matter, so the candidate cutpoints are the <strong>midpoints</strong> of neighbouring distinct values. Greedy means a split is never revisited, even if a different early split would have allowed a better tree later.</p>
+<div data-widget="treesplit">
+
+</div>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(x = (1, 2, 3, 5, 7, 8)\)</span>, <span class="math inline">\(y = (2, 3, 5, 8, 9, 12)\)</span>. Root mean 6.5, root RSS 73.5.</p>
+<table>
+<thead>
+<tr class="header">
+<th>cut <span class="math inline">\(s\)</span></th>
+<th>left <span class="math inline">\(y\)</span>, mean, RSS</th>
+<th>right <span class="math inline">\(y\)</span>, mean, RSS</th>
+<th>total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.5</td>
+<td>{2}, 2, 0</td>
+<td>{3, 5, 8, 9, 12}, 7.4, 49.2</td>
+<td>49.2</td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td>{2, 3}, 2.5, 0.5</td>
+<td>{5, 8, 9, 12}, 8.5, 25</td>
+<td>25.5</td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong></td>
+<td>{2, 3, 5}, 3.33, 4.67</td>
+<td>{8, 9, 12}, 9.67, 8.67</td>
+<td><strong>13.33</strong></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>{2, 3, 5, 8}, 4.5, 21</td>
+<td>{9, 12}, 10.5, 4.5</td>
+<td>25.5</td>
+</tr>
+<tr class="odd">
+<td>7.5</td>
+<td>{2, 3, 5, 8, 9}, 5.4, 37.2</td>
+<td>{12}, 12, 0</td>
+<td>37.2</td>
+</tr>
+</tbody>
+</table>
+<p>Best first split: <span class="math inline">\(s = 4\)</span>. Second split: the left region’s best cut (at 2.5) saves <span class="math inline">\(4.67 - 0.5 = 4.17\)</span>; the right region’s best cut (at 7.5) saves <span class="math inline">\(8.67 - 0.5 = 8.17\)</span>. The right one wins: leaves <span class="math inline">\(x &lt; 4 \to 3.33\)</span>, <span class="math inline">\(4 \le x &lt; 7.5 \to 8.5\)</span>, <span class="math inline">\(x \ge 7.5 \to 12\)</span>, total RSS 5.17.</p>
+</div>
+<div class="q" kind="gen" data-gen="split">
+
+</div>
+<h2 id="when-to-stop-and-why-it-matters">3. When to stop, and why it matters</h2>
+<p>Keep splitting until a <strong>stopping rule</strong>: a maximum depth (<code>max_depth</code>) or a minimum number of points per leaf (<span class="math inline">\(n_{\text{stop}}\)</span>). With <span class="math inline">\(n_{\text{stop}} = 1\)</span> every leaf holds one training point, predicts it exactly, and the training RSS is 0: the tree has memorised the data, noise included. That’s extreme overfitting. More leaves = more flexible (stage 15 controls this with pruning).</p>
+<p><strong>Trees vs linear models</strong> (ISLP 8.1.3): if the truth is close to a straight line, a tree must approximate it with a staircase and linear regression wins. If the truth is very non-linear or box-shaped, the tree wins.</p>
+<p>In sklearn: <code>DecisionTreeRegressor(max_depth=10).fit(X, y)</code>, and <code>plot_tree</code> shows each node’s split (sklearn sends “<span class="math inline">\(\le\)</span>” left), its <code>squared_error</code> (MSE = RSS/n), <code>samples</code>, and <code>value</code> (the mean).</p>
+<div class="q" kind="mcq">
+<p>Why does rescaling income from pounds to thousands of pounds change KNN’s predictions but not a tree’s?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A tree only asks “is income <span class="math inline">\(&lt; s\)</span>?”; in thousands the same question is “is income <span class="math inline">\(&lt; s/1000\)</span>?”, which sends the same points each way. KNN’s distances change.</label></li>
+<li><label><input type="checkbox" />Trees ignore income.</label></li>
+<li><label><input type="checkbox" />Trees standardise automatically.</label></li>
+<li><label><input type="checkbox" />It changes both.</label></li>
+</ul>
+<div class="expl">
+<p>Splits depend only on the order of the values within one input, never on distances across inputs.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="split">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, exam formats 1 and 2.)</strong> Explain what a regression tree is, how it predicts, and write the quantity minimised when choosing a split.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Partitions the input space into non-overlapping boxes by a sequence of binary questions <span class="math inline">\(X_j &lt; s\)</span> (internal nodes), ending in leaves.</label></li>
+<li><label><input type="checkbox" checked="" />Predicts a new point by the mean response of the training points in its leaf.</label></li>
+<li><label><input type="checkbox" checked="" />Split chosen to minimise <span class="math inline">\(\sum_{i \in R_{low}}(y_i - \bar y_{low})^2 + \sum_{i \in R_{high}}(y_i - \bar y_{high})^2\)</span> over inputs <span class="math inline">\(j\)</span> and cutpoints <span class="math inline">\(s\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Greedy, top-down (recursive binary splitting), stops at a minimum leaf size or depth.</label></li>
+</ul>
+<div class="model">
+<p>A regression tree divides the input space into non-overlapping rectangular regions (boxes) using a sequence of yes/no questions of the form “is <span class="math inline">\(X_j &lt; s\)</span>?”; each question is an internal node and the final regions are the leaves. To predict for a new <span class="math inline">\(x\)</span> we follow the questions to its leaf and output the average response of the training points in that leaf. The tree is grown top-down and greedily: at each step, over every region, input <span class="math inline">\(j\)</span> and cutpoint <span class="math inline">\(s\)</span>, we choose the split that minimises <span class="math inline">\(\sum_{i: x_{ij} &lt; s}(y_i - \bar y_{low})^2 + \sum_{i: x_{ij} \ge s}(y_i - \bar y_{high})^2\)</span> (the RSS of the two new regions), and we stop when the leaves reach a minimum size or the tree a maximum depth.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="26" label="RSS">
+<p>A leaf holds responses 4, 6 and 11. What is its RSS?</p>
+<div class="expl">
+<p>Mean 7. RSS <span class="math inline">\(= 9 + 1 + 16 = 26\)</span>. The leaf predicts 7.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="15" label="drop">
+<p>A region has RSS 50. Split A gives halves with RSS 20 and 15; split B gives 5 and 32. By how much does the chosen split reduce the RSS?</p>
+<div class="expl">
+<p>A totals 35, B totals 37. Greedy picks A: a drop of <span class="math inline">\(50 - 35 = 15\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A tree is grown until every leaf contains a single training point. What is its training RSS, and is that good?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Large; the tree underfits.</label></li>
+<li><label><input type="checkbox" checked="" />Zero; it has memorised the noise and will overfit (high variance).</label></li>
+<li><label><input type="checkbox" />Zero; it is the best possible tree.</label></li>
+<li><label><input type="checkbox" />It can’t be computed.</label></li>
+</ul>
+<div class="expl">
+<p>Each leaf predicts its own point exactly. Training error says nothing about test error.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is a straight line plus noise. Which model is likely to do better on test data?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />linear regression</label></li>
+<li><label><input type="checkbox" />a deep regression tree</label></li>
+<li><label><input type="checkbox" />they will be identical</label></li>
+<li><label><input type="checkbox" />a tree, because trees are more flexible</label></li>
+</ul>
+<div class="expl">
+<p>A tree can only build a staircase approximation of a line (ISLP 8.1.3).</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s12_judging.html"><small>&larr; Stage 12</small>Judging classifiers</a><a class="next" href="s14_classification_trees.html"><small>Stage 14 &rarr;</small>Classification trees</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

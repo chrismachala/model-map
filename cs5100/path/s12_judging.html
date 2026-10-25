@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Judging classifiers · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s12_judging", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s12_judging" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a class="active" aria-current="page" href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 12 of 18</span><span class="chip">Week 3 · Classification</span><span class="chip">about 35 min</span></div>
+  <h1>Judging classifiers</h1>
+  <p class="tagline">A single error rate hides which mistakes a classifier makes. The confusion matrix counts them, the threshold trades one kind for the other, and the ROC curve and AUC summarise every threshold at once. Then: which of the week's four classifiers to use when.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>The week 3 lab ends with ROC curves and AUC for logistic regression and KNN. The slides stop at KNN, so this stage follows ISLP 4.4.2 and the lab.</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 4.4.2 from the confusion matrix (Table 4.4) to the end of the section: thresholds, sensitivity and specificity, the ROC curve and AUC (Fig. 4.8, Tables 4.6 and 4.7). <strong>Read</strong> it. 4.5.1 analytical comparison: <strong>skim</strong> the conclusions, skip the algebra. 4.5.2: <strong>skip</strong>.</p>
+</div>
+<h2 id="knn-as-a-classifier-and-the-four-way-comparison">1. KNN as a classifier, and the four-way comparison</h2>
+<p>KNN classification (stage 4) estimates <span class="math inline">\(\hat p_k(x)\)</span> as the fraction of the <span class="math inline">\(K\)</span> nearest training points in class <span class="math inline">\(k\)</span>; with two classes, <span class="math inline">\(\hat p_1(x)\)</span> is just the mean of the neighbours’ 0/1 labels (the lab’s <code>np.mean(Ny)</code>). It makes <strong>no assumption</strong> about the classes’ shape and can draw <strong>curved boundaries</strong>, but needs lots of data, is slow to predict, needs normalised inputs, and its <span class="math inline">\(K\)</span> must be chosen on validation data. With <span class="math inline">\(K = 4\)</span> and a 2-2 vote, <code>np.argmax</code> picks class 0: odd <span class="math inline">\(K\)</span> avoids ties.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>How it estimates <span class="math inline">\(P(Y = k \mid x)\)</span></th>
+<th>Boundary</th>
+<th>Watch out for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logistic regression</td>
+<td>directly, sigmoid (or softmax) of a linear function</td>
+<td>straight</td>
+<td>separable data: coefficients grow forever without a penalty</td>
+</tr>
+<tr class="even">
+<td>LDA</td>
+<td>Gaussian per class with shared variance, then Bayes</td>
+<td>straight</td>
+<td>relies on the Gaussian assumption; good with small <span class="math inline">\(n\)</span> when it holds</td>
+</tr>
+<tr class="odd">
+<td>Naive Bayes</td>
+<td>independent inputs per class, then Bayes</td>
+<td>can curve</td>
+<td>the independence assumption; great when <span class="math inline">\(p\)</span> is large</td>
+</tr>
+<tr class="even">
+<td>KNN</td>
+<td>vote among the <span class="math inline">\(K\)</span> nearest</td>
+<td>any shape</td>
+<td>needs lots of data, scaling, choice of <span class="math inline">\(K\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="num" data-answer="0.4" label="p̂₁">
+<p>Training data <span class="math inline">\((x, y)\)</span>: <span class="math inline">\((1, 0), (2, 0), (3, 1), (4, 0), (5, 1), (6, 1)\)</span>. KNN with <span class="math inline">\(K = 5\)</span> at <span class="math inline">\(x = 3.4\)</span>: what is <span class="math inline">\(\hat p_1\)</span>?</p>
+<div class="expl">
+<p>Nearest five: <span class="math inline">\(x = 3\)</span> (1), 4 (0), 2 (0), 5 (1), 1 (0). Two 1s out of five: <span class="math inline">\(\hat p_1 = 0.4\)</span>, predict 0.</p>
+</div>
+</div>
+<h2 id="the-confusion-matrix">2. The confusion matrix</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Predicted 0</th>
+<th>Predicted 1</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Actually 0</strong></td>
+<td>TN</td>
+<td>FP</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td><strong>Actually 1</strong></td>
+<td>FN</td>
+<td>TP</td>
+<td>P</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>TPR</strong>, sensitivity, recall <span class="math inline">\(= TP/P\)</span>: of the real positives, how many did we catch?</li>
+<li><strong>TNR</strong>, specificity <span class="math inline">\(= TN/N\)</span>: of the real negatives, how many did we correctly clear?</li>
+<li><strong>FPR</strong> $= FP/N = 1 - $ specificity. <strong>FNR</strong> <span class="math inline">\(= FN/P\)</span>.</li>
+<li><strong>Accuracy</strong> <span class="math inline">\(= (TP + TN)/(P + N)\)</span>; error rate $= 1 - $ accuracy.</li>
+</ul>
+<p><strong>Why accuracy misleads.</strong> Only 3.33% of the <code>Default</code> customers default. A “classifier” that always says no is 96.7% accurate and catches nobody (TPR 0). That’s why the lab subsamples the negatives to get a balanced data set before training.</p>
+<div class="q" kind="gen" data-gen="confusion">
+
+</div>
+<h2 id="thresholds-and-the-roc-curve">3. Thresholds and the ROC curve</h2>
+<p>Predict 1 when <span class="math inline">\(\hat p(x) \ge \xi\)</span>. Lowering <span class="math inline">\(\xi\)</span> from 0.5 catches more positives (TPR up) but flags more negatives wrongly (FPR up). A bank that badly wants to catch defaulters might use <span class="math inline">\(\xi = 0.2\)</span>.</p>
+<p>The <strong>ROC curve</strong> plots TPR against FPR for <strong>every</strong> threshold. <span class="math inline">\(\xi\)</span> above every score gives <span class="math inline">\((0, 0)\)</span>; <span class="math inline">\(\xi = 0\)</span> gives <span class="math inline">\((1, 1)\)</span>. A perfect classifier reaches the top-left corner <span class="math inline">\((0, 1)\)</span>; random scores follow the diagonal.</p>
+<p>The <strong>AUC</strong> (area under the curve) is 1 for perfect, 0.5 for random guessing. It equals <strong>the probability that a randomly chosen positive gets a higher score than a randomly chosen negative</strong>, which gives a way to compute it by counting pairs.</p>
+<div class="example">
+<p><strong>Worked example.</strong> Eight test points sorted by score: <span class="math inline">\((0.9, 1), (0.8, 1), (0.7, 0), (0.6, 1), (0.55, 0), (0.4, 1), (0.3, 0), (0.2, 0)\)</span>. <span class="math inline">\(P = N = 4\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\xi = 0.75\)</span>: top two predicted 1: TP 2, FP 0, so (FPR, TPR) <span class="math inline">\(= (0, 0.5)\)</span>.</li>
+<li><span class="math inline">\(\xi = 0.5\)</span>: top five: TP 3, FP 2, so <span class="math inline">\((0.5, 0.75)\)</span>; accuracy <span class="math inline">\(5/8\)</span>.</li>
+<li>AUC by pairs: positive 0.9 beats all 4 negatives, 0.8 beats 4, 0.6 beats 3 (0.55, 0.3, 0.2), 0.4 beats 2. Total <span class="math inline">\(13/16 = 0.8125\)</span>.</li>
+</ul>
+</div>
+<div data-widget="roc">
+
+</div>
+<div class="q" kind="gen" data-gen="auc">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="confusion">
+
+</div>
+<div class="q" kind="gen" data-gen="auc">
+
+</div>
+<div class="q" kind="mcq">
+<p>A classifier’s scores are random numbers unrelated to the labels. Roughly what is its AUC?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" checked="" />0.5</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" />it depends on the threshold</label></li>
+</ul>
+<div class="expl">
+<p>Random scores: a positive outscores a negative half the time. The AUC doesn’t depend on any single threshold.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Lowering the threshold <span class="math inline">\(\xi\)</span> from 0.5 to 0.2 will:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />raise (or keep) both the TPR and the FPR</label></li>
+<li><label><input type="checkbox" />raise the TPR and lower the FPR</label></li>
+<li><label><input type="checkbox" />lower both</label></li>
+<li><label><input type="checkbox" />leave the confusion matrix unchanged</label></li>
+</ul>
+<div class="expl">
+<p>More points are predicted positive, which catches more true positives and more false positives.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>(3 marks.)</strong> In a data set where 3% of customers default, a model has 97% accuracy. Explain why this might be a poor model, and name a better way to judge it.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Predicting “no default” for everyone already gives 97% accuracy, so accuracy says nothing about catching defaulters.</label></li>
+<li><label><input type="checkbox" checked="" />Look at the confusion matrix: sensitivity (TPR) and specificity / FPR.</label></li>
+<li><label><input type="checkbox" checked="" />Use the ROC curve / AUC (threshold-free), or balance the classes as the lab does.</label></li>
+</ul>
+<div class="model">
+<p>With 3% defaulters, the trivial rule “nobody defaults” is already 97% accurate while catching no defaulters at all, so 97% accuracy may mean the model is useless for the job. We should look at the confusion matrix, in particular the true positive rate (sensitivity: the fraction of real defaulters caught) and the false positive rate, possibly at a lower threshold, and summarise performance across all thresholds with the ROC curve and its AUC (0.5 is guessing, 1 is perfect). Balancing the classes for training, as the lab does, also helps.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which classifier can draw a curved decision boundary with no assumption about the shape of the classes?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />logistic regression with the raw inputs</label></li>
+<li><label><input type="checkbox" />LDA</label></li>
+<li><label><input type="checkbox" checked="" />KNN</label></li>
+<li><label><input type="checkbox" />all of them</label></li>
+</ul>
+<div class="expl">
+<p>Logistic regression and LDA give straight boundaries (unless you add polynomial features).</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.8" label="TNR">
+<p>TP = 40, FN = 10, FP = 30, TN = 120. What is the specificity (TNR)?</p>
+<div class="expl">
+<p><span class="math inline">\(N = 150\)</span>, <span class="math inline">\(TNR = 120/150 = 0.8\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s11_generative.html"><small>&larr; Stage 11</small>LDA and naive Bayes</a><a class="next" href="s13_regression_trees.html"><small>Stage 13 &rarr;</small>Regression trees</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

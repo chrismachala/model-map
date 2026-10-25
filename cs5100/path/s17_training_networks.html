@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training neural networks · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s17_training_networks", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s17_training_networks" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a class="active" aria-current="page" href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 17 of 18</span><span class="chip">Week 4 · Trees and neural networks</span><span class="chip">about 45 min</span></div>
+  <h1>Training neural networks</h1>
+  <p class="tagline">Choose an objective (squared error for numbers, cross-entropy for classes), then walk downhill with gradient descent. Backpropagation is just the chain rule run backwards. The landscape has many valleys, and the network can overfit, so start small, go slow and stop early.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>2025 Q2 asked for “an objective function for a neural network”. This stage gives you that, backprop by hand, the classification version with softmax, and the PyTorch training loop from the lab (including the lab’s double-softmax bug).</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 10.7 <em>Fitting a neural network</em> (non-convexity, Fig. 10.17), 10.7.1 <em>Backpropagation</em> and 10.7.2 <em>Regularization and SGD</em>: <strong>read</strong>. 10.2 p. 405 (softmax, one-hot, cross-entropy, eqs. 10.13 and 10.14): <strong>read</strong>. 10.7.3 dropout and 10.7.4 tuning: <strong>skim</strong>. 10.8 double descent: <strong>skip</strong>. Note the book puts <span class="math inline">\(\frac12\)</span> in front of the RSS, so its gradients have <span class="math inline">\(-(y - f)\)</span> where the slides have <span class="math inline">\(-2(y - f)\)</span>: same direction, different step size.</p>
+</div>
+<div class="warn">
+<p><span class="label">Lab bug</span></p>
+<p><code>ShallowNet.forward</code> ends with <code>nn.Softmax</code>, then the loss is <code>nn.CrossEntropyLoss</code>, which applies softmax again internally. Predictions are still right (softmax keeps the order), but the loss can’t go below <span class="math inline">\(\log(1 + 9/e) \approx 1.461\)</span>, which is why the lab’s losses flatten at about 1.465, and the gradients are weakened. Fix: return the raw scores (logits) from <code>forward</code>; call <code>torch.softmax</code> only when you want probabilities.</p>
+</div>
+<h2 id="the-objective-and-why-its-hard-to-minimise">1. The objective, and why it’s hard to minimise</h2>
+<p>For a numeric output, minimise the squared error over all parameters <span class="math inline">\(\theta\)</span> (all the <span class="math inline">\(w\)</span>’s and <span class="math inline">\(\beta\)</span>’s):</p>
+<p><span class="math display">\[\mathrm{RSS}(\theta) = \sum_{i=1}^{n}\big(y_i - f(x_i)\big)^2 \quad\text{or the MSE}\quad \frac1N\sum_{n=1}^{N}\big(Y_n - f(X_n)\big)^2.\]</span></p>
+<p>The <span class="math inline">\(w\)</span>’s sit inside <span class="math inline">\(g\)</span>, so there is no closed-form solution: use gradient descent. And unlike linear regression’s single bowl, the objective is <strong>non-convex</strong>: many valleys, so gradient descent can stop in a <strong>local minimum</strong>, and where it ends depends on where it starts. One reason: swapping two hidden units gives exactly the same <span class="math inline">\(f\)</span>, so every solution has copies.</p>
+<p><strong>Starting point:</strong> small <strong>random</strong> weights, not zeros. With all-zero weights every hidden unit computes the same thing and gets the same gradient, so they stay identical forever. Small, because large weights push sigmoids into their flat tails, where the slope is nearly 0.</p>
+<div data-widget="nonconvex">
+
+</div>
+<div class="q" kind="mcq">
+<p>Why do networks start training from small random weights rather than all zeros?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Zeros make the loss infinite.</label></li>
+<li><label><input type="checkbox" checked="" />With identical starting weights every hidden unit gets the same gradient and stays identical; randomness breaks the symmetry.</label></li>
+<li><label><input type="checkbox" />Random weights guarantee the global minimum.</label></li>
+<li><label><input type="checkbox" />Zeros are not allowed in PyTorch.</label></li>
+</ul>
+<div class="expl">
+<p>Random starts break the symmetry; they don’t guarantee the global minimum (the landscape is non-convex).</p>
+</div>
+</div>
+<h2 id="backpropagation-by-hand">2. Backpropagation by hand</h2>
+<p>The gradient of a sum is the sum of gradients, so work with one point, <span class="math inline">\(R_i = (y_i - f(x_i))^2\)</span>. Write <span class="math inline">\(z_{ik}\)</span> for unit <span class="math inline">\(k\)</span>’s weighted sum and <span class="math inline">\(A_{ik} = g(z_{ik})\)</span>. Chain rule:</p>
+<p><span class="math display">\[\frac{\partial R_i}{\partial\beta_k} = -2(y_i - f(x_i))\,A_{ik},\qquad \frac{\partial R_i}{\partial w_{kj}} = -2(y_i - f(x_i))\cdot\beta_k\cdot g&#39;(z_{ik})\cdot x_{ij}\]</span></p>
+<p>(with <span class="math inline">\(A_{i0} = 1\)</span> for <span class="math inline">\(\beta_0\)</span>, and <span class="math inline">\(x_{i0} = 1\)</span> for the bias <span class="math inline">\(w_{k0}\)</span>). Both start with the <strong>residual</strong>: a <strong>forward pass</strong> computes the <span class="math inline">\(z\)</span>’s, <span class="math inline">\(A\)</span>’s and <span class="math inline">\(f\)</span>; then the error is sent <strong>backwards</strong>, to each output weight scaled by its unit’s activation, and further back to each hidden weight scaled by <span class="math inline">\(\beta_k\)</span>, the slope <span class="math inline">\(g&#39;\)</span> and the input. Hence <em>back</em>propagation. With ReLU, <span class="math inline">\(g&#39;(z) = 1\)</span> if <span class="math inline">\(z &gt; 0\)</span> and 0 otherwise: a unit that’s off gets no gradient (a unit off for every point is <strong>dead</strong>).</p>
+<div class="example">
+<p><strong>Worked example.</strong> One input, two ReLU units: <span class="math inline">\((w_{10}, w_{11}) = (0, 1)\)</span>, <span class="math inline">\((w_{20}, w_{21}) = (1, -1)\)</span>; <span class="math inline">\(\beta = (0.5, 1, 2)\)</span>. One point <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(y = 3\)</span>.</p>
+<p>Forward: <span class="math inline">\(z_1 = 2\)</span>, <span class="math inline">\(A_1 = 2\)</span>; <span class="math inline">\(z_2 = -1\)</span>, <span class="math inline">\(A_2 = 0\)</span>; <span class="math inline">\(f = 0.5 + 2 + 0 = 2.5\)</span>; residual <span class="math inline">\(0.5\)</span>; <span class="math inline">\(-2e = -1\)</span>.</p>
+<p>Backward: <span class="math inline">\(\partial R/\partial\beta_0 = -1\)</span>, <span class="math inline">\(\partial R/\partial\beta_1 = -1 \times 2 = -2\)</span>, <span class="math inline">\(\partial R/\partial\beta_2 = 0\)</span>; <span class="math inline">\(\partial R/\partial w_{11} = -1 \times 1 \times 1 \times 2 = -2\)</span>; unit 2’s weights get 0 (it’s off).</p>
+<p>One step with <span class="math inline">\(\eta = 0.05\)</span>: <span class="math inline">\(\beta_0 = 0.55\)</span>, <span class="math inline">\(\beta_1 = 1.1\)</span>, <span class="math inline">\(w_{10} = 0.05\)</span>, <span class="math inline">\(w_{11} = 1.1\)</span>. New <span class="math inline">\(f = 0.55 + 1.1 \times 2.25 = 3.025\)</span>: the loss fell from 0.25 to 0.0006.</p>
+</div>
+<div class="q" kind="gen" data-gen="backprop">
+
+</div>
+<h2 id="classification-networks-softmax-and-cross-entropy">3. Classification networks: softmax and cross-entropy</h2>
+<p><strong>Two classes:</strong> <span class="math inline">\(P(Y = 1 \mid X) = \sigma(f(X))\)</span>, trained with week 3’s negative log-likelihood. Logistic regression is this with no hidden layer.</p>
+<p><strong><span class="math inline">\(M\)</span> classes:</strong> <span class="math inline">\(M\)</span> outputs <span class="math inline">\(f_0, \dots, f_{M - 1}\)</span> sharing the hidden layer, turned into probabilities by <strong>softmax</strong>, <span class="math inline">\(p_m = e^{f_m}/\sum_{m&#39;}e^{f_{m&#39;}}\)</span>. Encode the label as <strong>one-hot</strong> (<span class="math inline">\(y_{im} = 1\)</span> for the true class). The loss is the <strong>cross-entropy</strong>:</p>
+<p><span class="math display">\[\ell(\theta) = -\sum_{i=1}^{n}\sum_{m}y_{im}\log p_m(x_i) = -\sum_i\log p_{y_i}(x_i):\]</span></p>
+<p>minus the log-probability of the true class. Its gradient at the outputs is simply <span class="math inline">\(p_m - y_{im}\)</span> (predicted minus truth), then backprop as before. Predict the argmax. Parameters: <span class="math inline">\(K(p + 1) + M(K + 1)\)</span>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> Logits <span class="math inline">\((2, 1, 0)\)</span>, true class 0. Softmax <span class="math inline">\((0.665, 0.245, 0.090)\)</span>, loss <span class="math inline">\(-\log 0.665 = 0.408\)</span>. Output gradient <span class="math inline">\((0.665 - 1, 0.245, 0.090) = (-0.335, 0.245, 0.090)\)</span>: raise the true class’s score, lower the others.</p>
+</div>
+<div class="q" kind="gen" data-gen="softmax">
+
+</div>
+<h2 id="fighting-overfitting-and-the-pytorch-loop">4. Fighting overfitting, and the PyTorch loop</h2>
+<p>A network has many parameters, so it can memorise a small training set. Two strategies (slide 43):</p>
+<ol type="1">
+<li><strong>Regularisation:</strong> add a ridge penalty, <span class="math inline">\(R(\theta) = \mathrm{RSS} + \lambda\|\theta\|^2\)</span> (not on the biases), <span class="math inline">\(\lambda\)</span> chosen on validation data. PyTorch’s <code>weight_decay</code>.</li>
+<li><strong>Slow learning + early stopping:</strong> small random start, small steps, watch the validation loss each epoch and stop (keep the best epoch’s weights) when it starts rising while the training loss keeps falling.</li>
+</ol>
+<p>Also: fewer hidden units. <strong>Minibatches:</strong> each step uses a random batch (e.g. 32 points) instead of all <span class="math inline">\(n\)</span>: stochastic gradient descent; one <strong>epoch</strong> is one pass through the data (<span class="math inline">\(\lceil n/\text{batch}\rceil\)</span> steps). The lab’s <strong>Adam</strong> is gradient descent with automatic per-parameter step sizes.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> X_b, y_b <span class="kw">in</span> train_loader:      <span class="co"># one epoch, minibatch by minibatch</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> model(X_b)               <span class="co"># forward pass (logits!)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> criterion(out, y_b)     <span class="co"># CrossEntropyLoss for classes, MSELoss for numbers</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    optimizer.zero_grad()          <span class="co"># clear old gradients (they accumulate otherwise)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    loss.backward()                <span class="co"># backpropagation</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    optimizer.step()               <span class="co"># theta &lt;- theta - eta * grad (or Adam&#39;s version)</span></span></code></pre></div>
+<div class="q" kind="num" data-answer="2400" label="steps">
+<p>1,257 training images, batch size 32, 60 epochs. How many optimiser steps?</p>
+<div class="expl">
+<p><span class="math inline">\(\lceil 1257/32\rceil = 40\)</span> steps per epoch, so <span class="math inline">\(40 \times 60 = 2400\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The validation loss falls for 30 epochs, then rises while the training loss keeps falling. What’s happening and what do you do?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Underfitting: train longer.</label></li>
+<li><label><input type="checkbox" checked="" />Overfitting after epoch 30: stop early (keep the epoch-30 weights), or add a penalty, or use fewer hidden units.</label></li>
+<li><label><input type="checkbox" />The learning rate is too small.</label></li>
+<li><label><input type="checkbox" />A bug in the loss.</label></li>
+</ul>
+<div class="expl">
+<p>Training loss down, validation loss up: the classic overfitting signature.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, exam format 2; 2025 Q2.)</strong> Write an objective function for training a neural network <span class="math inline">\(f\)</span> with parameters <span class="math inline">\(\lambda\)</span> on <span class="math inline">\(D = \{(X_n, Y_n)\}_{n=1}^{N}\)</span> with <span class="math inline">\(Y_n \in \mathbb R\)</span>, and explain how it is minimised.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\frac1N\sum_{n=1}^{N}\big(Y_n - f(X_n; \lambda)\big)^2\)</span> (MSE / RSS), optionally <span class="math inline">\(+\,\mu\|\lambda\|^2\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Minimised by gradient descent: <span class="math inline">\(\lambda \leftarrow \lambda - \eta\nabla L(\lambda)\)</span>, gradients computed by backpropagation (chain rule).</label></li>
+<li><label><input type="checkbox" checked="" />Non-convex (no closed form, local minima): start from small random values.</label></li>
+<li><label><input type="checkbox" checked="" />Control overfitting: early stopping on validation loss, or the penalty.</label></li>
+</ul>
+<div class="model">
+<p>For a real-valued output, a standard objective is the mean squared error <span class="math inline">\(L(\lambda) = \frac1N\sum_{n=1}^{N}\big(Y_n - f(X_n; \lambda)\big)^2\)</span>, possibly plus a ridge penalty <span class="math inline">\(\mu\|\lambda\|^2\)</span> on the weights to limit overfitting. Because the parameters sit inside the non-linear activations there is no closed-form minimiser and <span class="math inline">\(L\)</span> is non-convex, so we start from small random parameters and use gradient descent, <span class="math inline">\(\lambda^{(t+1)} = \lambda^{(t)} - \eta\nabla L(\lambda^{(t)})\)</span>, often on minibatches, with the gradient computed by backpropagation (the chain rule applied from the output back to the inputs). We monitor the loss on a validation set and stop when it starts to rise (early stopping). (For classification, the objective would instead be the cross-entropy <span class="math inline">\(-\sum_n\log p_{Y_n}(X_n)\)</span> with a softmax output.)</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="backprop">
+
+</div>
+<div class="q" kind="gen" data-gen="softmax">
+
+</div>
+<div class="q" kind="num" data-answer="2410" label="parameters">
+<p>A digits classifier has <span class="math inline">\(p = 64\)</span> inputs, <span class="math inline">\(K = 32\)</span> hidden units and <span class="math inline">\(M = 10\)</span> outputs. How many parameters?</p>
+<div class="expl">
+<p><span class="math inline">\(32 \times 65 + 10 \times 33 = 2080 + 330 = 2410\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What goes wrong if you forget <code>optimizer.zero_grad()</code> in the training loop?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Nothing.</label></li>
+<li><label><input type="checkbox" checked="" />PyTorch adds each new gradient to the stored ones, so every step uses the sum of all past gradients.</label></li>
+<li><label><input type="checkbox" />The model resets every step.</label></li>
+<li><label><input type="checkbox" />The loss becomes negative.</label></li>
+</ul>
+<div class="expl">
+<p>Gradients accumulate by design (useful for some tricks), so they must be cleared each step.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why does applying softmax twice (the lab bug) still give the right predicted class?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Softmax preserves the order of the scores, so the argmax is unchanged; only the loss values and gradients are distorted.</label></li>
+<li><label><input type="checkbox" />It doesn’t: accuracy drops to chance.</label></li>
+<li><label><input type="checkbox" />Because CrossEntropyLoss removes the extra softmax.</label></li>
+<li><label><input type="checkbox" />Because there are only 10 classes.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(e^z\)</span> is increasing and every score is divided by the same total.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s16_neural_networks.html"><small>&larr; Stage 16</small>Neural networks: the model</a><a class="next" href="s18_mock_exam.html"><small>Stage 18 &rarr;</small>Mock exam (weeks 1-4)</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

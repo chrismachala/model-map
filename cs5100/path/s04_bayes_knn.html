@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bayes classifier and KNN · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s04_bayes_knn", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s04_bayes_knn" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a class="active" aria-current="page" href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 4 of 18</span><span class="chip">Week 1 · Foundations</span><span class="chip">about 40 min</span></div>
+  <h1>Bayes classifier and KNN</h1>
+  <p class="tagline">The Bayes classifier is the best classifier there could ever be, and you can never actually build it. KNN is the simplest way to imitate it. Both come back in every later week.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>The 2023 paper had a full KNN question: write a distance in <span class="math inline">\(\mathbb R^n\)</span>, explain KNN for regression and for classification, explain the role of <span class="math inline">\(K\)</span> in terms of bias and variance, and classify a point by hand. By the end of this stage you can do all of it.</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 2.2.3 <em>The classification setting</em>: read all of it (Bayes classifier, Bayes error rate, KNN, figures 2.13 to 2.17). Exercise 2.4.7 (KNN by hand) is excellent practice. KNN <em>regression</em> is in 3.5 (you’ll meet it properly in stage 8).</p>
+</div>
+<div class="warn">
+<p><span class="label">Slide typo</span></p>
+<p>Slide equation (33) for KNN leaves out the <span class="math inline">\(\frac1K\)</span>. Without it you get a count, not a probability. The book (2.12) and the slide’s own <span class="math inline">\(K = 3\)</span> example (<span class="math inline">\(\frac13\)</span>, <span class="math inline">\(\frac23\)</span>) both include it.</p>
+</div>
+<h2 id="the-bayes-classifier-pick-the-most-likely-class">1. The Bayes classifier: pick the most likely class</h2>
+<p>For a classification problem, the <strong>conditional probability</strong> <span class="math inline">\(P(Y = k \mid X = x_0)\)</span> is the chance that a point at <span class="math inline">\(x_0\)</span> belongs to class <span class="math inline">\(k\)</span>. The <strong>Bayes classifier</strong> picks the class with the biggest one:</p>
+<p><span class="math display">\[\hat Y(x_0) = \arg\max_k P(Y = k \mid X = x_0).\]</span></p>
+<p>(<span class="math inline">\(\arg\max_k\)</span> means “the <span class="math inline">\(k\)</span> that makes it biggest”, not the biggest value.) With two classes this is: predict 1 if <span class="math inline">\(P(Y = 1 \mid x_0) &gt; 0.5\)</span>.</p>
+<p>It <strong>minimises the test error rate</strong>: no classifier can do better. Its error rate, the <strong>Bayes error rate</strong>, is</p>
+<p><span class="math display">\[1 - \mathbb E\Big[\max_k P(Y = k \mid X)\Big],\]</span></p>
+<p>and at a single point <span class="math inline">\(x_0\)</span> the chance it’s wrong is <span class="math inline">\(1 - \max_k P(Y = k \mid x_0)\)</span>. Whenever the classes overlap this is not zero: it’s the classification version of the irreducible error.</p>
+<div data-widget="bayes">
+
+</div>
+<div class="example">
+<p><strong>Worked example.</strong></p>
+<ol type="1">
+<li><span class="math inline">\(P(Y = 1 \mid x_0) = 0.7\)</span>: predict 1; chance of being wrong at <span class="math inline">\(x_0\)</span> is <span class="math inline">\(0.3\)</span>.</li>
+<li>Three classes with probabilities <span class="math inline">\((0.2, 0.5, 0.3)\)</span>: predict class 2; error at <span class="math inline">\(x_0\)</span> is <span class="math inline">\(0.5\)</span>.</li>
+<li><span class="math inline">\(X\)</span> takes two values: <span class="math inline">\(P(X = a) = 0.6\)</span> with <span class="math inline">\(P(Y = 1 \mid a) = 0.9\)</span>, and <span class="math inline">\(P(X = b) = 0.4\)</span> with <span class="math inline">\(P(Y = 1 \mid b) = 0.3\)</span>. Bayes predicts 1 at <span class="math inline">\(a\)</span> and 0 at <span class="math inline">\(b\)</span>. Overall Bayes error <span class="math inline">\(= 0.6 \times 0.1 + 0.4 \times 0.3 = 0.18\)</span>.</li>
+</ol>
+</div>
+<div class="q" kind="num" data-answer="0.65" label="error at x₀">
+<p>Four classes with <span class="math inline">\(P(Y = k \mid x_0) = (0.1, 0.25, 0.35, 0.3)\)</span>. What is the probability that the Bayes classifier is wrong at <span class="math inline">\(x_0\)</span>?</p>
+<div class="expl">
+<p>It predicts class 3 (0.35), so the error probability is <span class="math inline">\(1 - 0.35 = 0.65\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why can’t we use the Bayes classifier in practice?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It is too slow to compute.</label></li>
+<li><label><input type="checkbox" checked="" />It needs the true probabilities <span class="math inline">\(P(Y = k \mid X)\)</span>, which we never know. Real classifiers estimate them.</label></li>
+<li><label><input type="checkbox" />It only works for two classes.</label></li>
+<li><label><input type="checkbox" />It overfits.</label></li>
+</ul>
+<div class="expl">
+<p>It’s the gold standard. Every classifier in the course (KNN, logistic regression, LDA, naive Bayes, trees, networks) is a way of <em>estimating</em> those probabilities and then applying the same “pick the biggest” rule.</p>
+</div>
+</div>
+<h2 id="k-nearest-neighbours">2. K-nearest neighbours</h2>
+<p>KNN estimates <span class="math inline">\(P(Y = k \mid x_0)\)</span> by looking at the training points nearest to <span class="math inline">\(x_0\)</span>:</p>
+<ol type="1">
+<li>Choose <span class="math inline">\(K\)</span>. Find the <span class="math inline">\(K\)</span> training points closest to <span class="math inline">\(x_0\)</span> (Euclidean distance, stage 2). Call them <span class="math inline">\(\mathcal N_{x_0}\)</span>.</li>
+<li>Estimate each class probability as the fraction of those neighbours in the class: <span class="math display">\[\tilde P(Y = k \mid x_0) = \frac{1}{K}\sum_{(x, y) \in \mathcal N_{x_0}}\mathbb 1(y = k).\]</span></li>
+<li>Predict the class with the biggest estimate: a majority vote.</li>
+</ol>
+<p>For <strong>regression</strong>, step 2 changes to averaging the neighbours’ responses: <span class="math inline">\(\hat y(x_0) = \frac1K\sum_{i \in \mathcal N_{x_0}} y_i\)</span>.</p>
+<div data-widget="knn">
+
+</div>
+<div class="example">
+<p><strong>Worked example (1-D).</strong> Training data <span class="math inline">\(x = 1, 2, 3, 4, 5, 6\)</span> with labels A, A, B, B, B, A. Test point <span class="math inline">\(x_0 = 3.4\)</span>.</p>
+<p>Distances: <span class="math inline">\(|3 - 3.4| = 0.4\)</span> (B), <span class="math inline">\(0.6\)</span> (B, at 4), <span class="math inline">\(1.4\)</span> (A, at 2), <span class="math inline">\(1.6\)</span> (B, at 5), <span class="math inline">\(2.4\)</span> (A, at 1), <span class="math inline">\(2.6\)</span> (A, at 6).</p>
+<ul>
+<li><span class="math inline">\(K = 1\)</span>: {B}, so <span class="math inline">\(\tilde P(B) = 1\)</span>: predict B.</li>
+<li><span class="math inline">\(K = 3\)</span>: {B, B, A}, so <span class="math inline">\(\tilde P(B) = 2/3\)</span>: predict B.</li>
+<li><span class="math inline">\(K = 5\)</span>: {B, B, A, B, A}, so <span class="math inline">\(\tilde P(B) = 3/5\)</span>: predict B.</li>
+<li><span class="math inline">\(K = 6\)</span>: three of each, a tie. That’s one reason to use odd <span class="math inline">\(K\)</span> with two classes.</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="knn">
+
+</div>
+<div class="q" kind="num" data-answer="2.333" data-tol="0.01" label="ŷ(3.4)">
+<p>KNN <strong>regression</strong>: <span class="math inline">\(x = (1, 2, 3, 4, 5, 6)\)</span> with <span class="math inline">\(y = (1.0, 1.5, 2.5, 3.0, 5.0, 6.0)\)</span>. Predict at <span class="math inline">\(x_0 = 3.4\)</span> with <span class="math inline">\(K = 3\)</span>.</p>
+<div class="expl">
+<p>The nearest are <span class="math inline">\(x = 3, 4, 2\)</span> (distances 0.4, 0.6, 1.4), so <span class="math inline">\(\hat y = (2.5 + 3.0 + 1.5)/3 \approx 2.333\)</span>.</p>
+</div>
+</div>
+<h2 id="the-role-of-k">3. The role of <span class="math inline">\(K\)</span></h2>
+<p><span class="math inline">\(K\)</span> is KNN’s flexibility knob, and it runs <strong>backwards</strong>: small <span class="math inline">\(K\)</span> means flexible.</p>
+<ul>
+<li><strong>Small <span class="math inline">\(K\)</span></strong> (e.g. <span class="math inline">\(K = 1\)</span>): the decision boundary is jagged and follows individual points. <strong>Low bias, high variance.</strong> The training error of 1-NN is 0 (each training point is its own nearest neighbour), which tells you nothing about the test error. This is overfitting.</li>
+<li><strong>Large <span class="math inline">\(K\)</span></strong> (e.g. <span class="math inline">\(K = 100\)</span>, or <span class="math inline">\(K = n\)</span>, which predicts the majority class everywhere): a smooth, almost straight boundary. <strong>High bias, low variance.</strong> Underfitting.</li>
+<li>In between, KNN can come surprisingly close to the Bayes classifier (the slides show <span class="math inline">\(K = 10\)</span>).</li>
+</ul>
+<p>Plot error against <span class="math inline">\(1/K\)</span> (so flexibility increases to the right): training error falls steadily, test error is U-shaped, and the test error never goes below the Bayes error rate. Choose <span class="math inline">\(K\)</span> on a validation set.</p>
+<p>One more practical point: because KNN measures distances, inputs on big scales (income in pounds) swamp inputs on small scales (number of children). <strong>Standardise</strong> the inputs first.</p>
+<div class="q" kind="mcq">
+<p>The true decision boundary is highly non-linear. Should the best <span class="math inline">\(K\)</span> be small or large?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Small: a small <span class="math inline">\(K\)</span> gives a flexible boundary that can follow the curves.</label></li>
+<li><label><input type="checkbox" />Large: a large <span class="math inline">\(K\)</span> averages out the curves.</label></li>
+<li><label><input type="checkbox" />It doesn’t matter.</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(K\)</span> should equal <span class="math inline">\(n\)</span>.</label></li>
+</ul>
+<div class="expl">
+<p>ISLP exercise 2.4.7(c). A large <span class="math inline">\(K\)</span> smooths the boundary towards a straight line, which has high bias here.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="self" data-need="4" data-marks="5">
+<p><strong>(5 marks, exam format 3; 2023 Q2.)</strong> Explain the role of <span class="math inline">\(K\)</span> in KNN and how it controls the bias and the variance of the model.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(K\)</span> is the number of nearest training points used for the vote (classification) or average (regression).</label></li>
+<li><label><input type="checkbox" checked="" />Small <span class="math inline">\(K\)</span> = flexible, jagged boundary: low bias, high variance (1-NN has zero training error and overfits).</label></li>
+<li><label><input type="checkbox" checked="" />Large <span class="math inline">\(K\)</span> = smooth boundary: high bias, low variance (underfits; <span class="math inline">\(K = n\)</span> predicts the majority class everywhere).</label></li>
+<li><label><input type="checkbox" checked="" />Test error is U-shaped in <span class="math inline">\(K\)</span> (or <span class="math inline">\(1/K\)</span>), while training error is not.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(K\)</span> is chosen on a validation set or by cross-validation.</label></li>
+</ul>
+<div class="model">
+<p>In KNN, <span class="math inline">\(K\)</span> is the number of nearest training points whose labels are combined to predict at a new point (by majority vote for classification, by averaging for regression). It controls the model’s flexibility. With small <span class="math inline">\(K\)</span>, the prediction depends on very few nearby points, so the decision boundary is jagged and can follow complicated shapes: the bias is low but the variance is high, because changing a single training point changes the predictions; <span class="math inline">\(K = 1\)</span> even has zero training error, which is overfitting. With large <span class="math inline">\(K\)</span> many points are averaged, so the boundary is smooth: the variance is low but the bias is high, and at <span class="math inline">\(K = n\)</span> the model predicts the majority class everywhere. The test error is therefore U-shaped as <span class="math inline">\(K\)</span> varies, and <span class="math inline">\(K\)</span> should be chosen to minimise the error on a validation set (or by cross-validation).</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="knn">
+
+</div>
+<div class="q" kind="num" data-answer="0.45" label="error at x₀">
+<p>Binary problem with <span class="math inline">\(P(Y = 1 \mid x_0) = 0.45\)</span>. What is the Bayes classifier’s probability of error at <span class="math inline">\(x_0\)</span>?</p>
+<div class="expl">
+<p>It predicts 0 (probability 0.55), so it’s wrong with probability <span class="math inline">\(1 - 0.55 = 0.45\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>True or false: with enough data and the right <span class="math inline">\(K\)</span>, KNN can achieve a test error rate <strong>below</strong> the Bayes error rate.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="expl">
+<p>False. The Bayes classifier is optimal by definition, so its error rate is a lower bound for every classifier, KNN included.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>How does KNN for regression differ from KNN for classification?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Regression averages the neighbours’ responses; classification takes a majority vote of their labels.</label></li>
+<li><label><input type="checkbox" />Regression uses a different distance.</label></li>
+<li><label><input type="checkbox" />Regression needs <span class="math inline">\(K = 1\)</span>.</label></li>
+<li><label><input type="checkbox" />There is no KNN for regression.</label></li>
+</ul>
+<div class="expl">
+<p>Same neighbours, same distance: only the way the neighbours’ outputs are combined changes.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="dist">
+
+</div>
+<div class="q" kind="num" data-answer="0.3" label="Bayes error">
+<p><span class="math inline">\(P(X = a) = 0.5\)</span> with <span class="math inline">\(P(Y = 1 \mid a) = 0.8\)</span>, and <span class="math inline">\(P(X = b) = 0.5\)</span> with <span class="math inline">\(P(Y = 1 \mid b) = 0.4\)</span>. What is the overall Bayes error rate?</p>
+<div class="expl">
+<p>At <span class="math inline">\(a\)</span> predict 1 (wrong with probability 0.2); at <span class="math inline">\(b\)</span> predict 0 (wrong with probability 0.4). Overall <span class="math inline">\(0.5 \times 0.2 + 0.5 \times 0.4 = 0.3\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s03_accuracy.html"><small>&larr; Stage 3</small>Accuracy, flexibility and overfitting</a><a class="next" href="s05_simple_regression.html"><small>Stage 5 &rarr;</small>Simple linear regression</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

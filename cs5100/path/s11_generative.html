@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LDA and naive Bayes · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s11_generative", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s11_generative" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a class="active" aria-current="page" href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 11 of 18</span><span class="chip">Week 3 · Classification</span><span class="chip">about 45 min</span></div>
+  <h1>LDA and naive Bayes</h1>
+  <p class="tagline">Instead of modelling "class given inputs" directly, describe what the inputs look like inside each class, then flip it round with Bayes' theorem. LDA assumes bell curves with a shared spread; naive Bayes assumes the inputs are independent within each class.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>LDA and naive Bayes are new this year, so no past paper has asked about them yet. Expect them in the same five formats: explain with an example, write the formula (Bayes’ theorem, the discriminant), discuss flexibility (why naive Bayes has low variance), and a small calculation (a posterior, a boundary).</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 4.4 intro, 4.4.1 LDA for <span class="math inline">\(p = 1\)</span> (note the pooled variance, eq. 4.20), and 4.4.4 naive Bayes: <strong>read</strong>. 4.4.2 LDA for <span class="math inline">\(p &gt; 1\)</span>: <strong>skim</strong> the multivariate maths (the confusion-matrix and ROC half is stage 12). 4.4.3 QDA: <strong>skip</strong>. 4.5.1: <strong>skim</strong> for “which method when”.</p>
+</div>
+<div class="warn">
+<p><span class="label">Slide issues</span></p>
+<p>Eq. (31) estimates <span class="math inline">\(\sigma^2\)</span> from the spread around the <strong>overall</strong> mean. LDA needs the spread <strong>within each class</strong>, around each class’s own mean (ISLP 4.20, used below). The slide version is far too big when the class means are apart. Eq. (33) is not <em>equal</em> to <span class="math inline">\(\log p_k(x)\)</span>; it drops terms that are the same for every class, which is fine for picking the winner. Slide 27’s “<span class="math inline">\(X = k\)</span>” should be “<span class="math inline">\(X = x\)</span>”.</p>
+</div>
+<h2 id="bayes-theorem-by-counting">1. Bayes’ theorem, by counting</h2>
+<p>1000 customers, 30 of whom default. 80% of defaulters have a high balance; 10% of the others do. A new customer has a high balance: how likely are they to default?</p>
+<ul>
+<li>Defaulters with a high balance: <span class="math inline">\(30 \times 0.8 = 24\)</span>. Others with a high balance: <span class="math inline">\(970 \times 0.1 = 97\)</span>.</li>
+<li>Of the 121 high-balance customers, 24 default: <span class="math inline">\(24/121 = 0.198\)</span>.</li>
+</ul>
+<p>That is <strong>Bayes’ theorem</strong>. With the <strong>prior</strong> <span class="math inline">\(\pi_k = P(Y = k)\)</span> and the class-conditional <span class="math inline">\(f_k(x) = P(X = x \mid Y = k)\)</span>:</p>
+<p><span class="math display">\[p_k(x) = P(Y = k \mid X = x) = \frac{\pi_kf_k(x)}{\sum_l\pi_lf_l(x)}.\]</span></p>
+<p><span class="math inline">\(p_k(x)\)</span> is the <strong>posterior</strong>. Lesson: even though a high balance is 8 times more typical of defaulters, the posterior is only 20%, because defaulters are rare. <strong>Priors matter.</strong> For a continuous <span class="math inline">\(X\)</span>, <span class="math inline">\(f_k\)</span> is a <strong>density</strong> (a curve whose area gives probabilities); Bayes’ theorem works the same way.</p>
+<div data-widget="bayes">
+
+</div>
+<div class="q" kind="gen" data-gen="bayes">
+
+</div>
+<h2 id="lda-with-one-input">2. LDA with one input</h2>
+<p>LDA <strong>assumes</strong> that within each class <span class="math inline">\(X\)</span> is Gaussian with its own mean <span class="math inline">\(\mu_k\)</span> and a <strong>shared</strong> variance <span class="math inline">\(\sigma^2\)</span>:</p>
+<p><span class="math display">\[f_k(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\Big(-\frac{(x - \mu_k)^2}{2\sigma^2}\Big).\]</span></p>
+<p><strong>Fitting</strong> is counting and averaging:</p>
+<p><span class="math display">\[\hat\pi_k = \frac{n_k}{n},\qquad \hat\mu_k = \text{mean of class } k,\qquad \hat\sigma^2 = \frac{1}{n - m}\sum_k\sum_{i: y_i = k}(x_i - \hat\mu_k)^2.\]</span></p>
+<p><strong>Predicting.</strong> Compare the numerators <span class="math inline">\(\pi_kf_k(x)\)</span> (the denominator is shared). Take logs, expand <span class="math inline">\((x - \mu_k)^2\)</span>, and drop the terms with no <span class="math inline">\(k\)</span> in them. What’s left is the <strong>discriminant</strong>:</p>
+<p><span class="math display">\[\boxed{\delta_k(x) = \frac{x\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log\pi_k}, \qquad \hat Y = \arg\max_k\delta_k(x).\]</span></p>
+<p>It is a straight line in <span class="math inline">\(x\)</span>, hence <em>linear</em> discriminant analysis. Setting <span class="math inline">\(\delta_0 = \delta_1\)</span> gives the two-class boundary</p>
+<p><span class="math display">\[x^* = \frac{\mu_0 + \mu_1}{2} + \frac{\sigma^2}{\mu_1 - \mu_0}\log\frac{\pi_0}{\pi_1}:\]</span></p>
+<p>the <strong>midpoint</strong> of the means when the priors are equal, pushed towards the rarer class otherwise.</p>
+<div data-widget="lda">
+
+</div>
+<div class="example">
+<p><strong>Worked example.</strong> Class 0: <span class="math inline">\(x = (1, 2, 3)\)</span>. Class 1: <span class="math inline">\(x = (5, 6, 7, 8)\)</span>. So <span class="math inline">\(n = 7\)</span>, <span class="math inline">\(m = 2\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(\hat\pi_0 = 3/7\)</span>, <span class="math inline">\(\hat\pi_1 = 4/7\)</span>; <span class="math inline">\(\hat\mu_0 = 2\)</span>, <span class="math inline">\(\hat\mu_1 = 6.5\)</span>.</li>
+<li>Within-class squared deviations: class 0: <span class="math inline">\(1 + 0 + 1 = 2\)</span>; class 1: <span class="math inline">\(2.25 + 0.25 + 0.25 + 2.25 = 5\)</span>. <span class="math inline">\(\hat\sigma^2 = 7/5 = 1.4\)</span>. (Slide eq. 31 would give 6.95.)</li>
+<li>At <span class="math inline">\(x = 4\)</span>: <span class="math inline">\(\delta_0 = \frac{8}{1.4} - \frac{4}{2.8} + \log\frac37 = 3.438\)</span>; <span class="math inline">\(\delta_1 = \frac{26}{1.4} - \frac{42.25}{2.8} + \log\frac47 = 2.923\)</span>. Predict <strong>class 0</strong>.</li>
+<li>Boundary: <span class="math inline">\(x^* = 4.25 + \frac{1.4}{4.5}\log\frac{3/7}{4/7} = 4.25 - 0.09 = 4.16\)</span>, just left of the midpoint, since class 1 is more common.</li>
+</ol>
+</div>
+<div class="q" kind="gen" data-gen="lda">
+
+</div>
+<div class="q" kind="mcq">
+<p>With <span class="math inline">\(p\)</span> inputs, LDA assumes each class is a multivariate Gaussian with its own mean vector and a <strong>shared</strong> covariance matrix. What shape are its decision boundaries?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />straight lines (planes)</label></li>
+<li><label><input type="checkbox" />circles</label></li>
+<li><label><input type="checkbox" />any shape</label></li>
+<li><label><input type="checkbox" />boxes</label></li>
+</ul>
+<div class="expl">
+<p>The discriminant <span class="math inline">\(\delta_k(x) = x^T\Sigma^{-1}\mu_k - \frac12\mu_k^T\Sigma^{-1}\mu_k + \log\pi_k\)</span> is still linear in <span class="math inline">\(x\)</span>. (QDA, with a covariance per class, gives curved boundaries.)</p>
+</div>
+</div>
+<h2 id="naive-bayes">3. Naive Bayes</h2>
+<p>With many inputs, describing the joint density <span class="math inline">\(f_k(x_1, \dots, x_p)\)</span> is hard. Naive Bayes assumes the inputs are <strong>independent within each class</strong>:</p>
+<p><span class="math display">\[f_k(x) = f_{k1}(x_1)\times f_{k2}(x_2)\times\cdots\times f_{kp}(x_p).\]</span></p>
+<p>Each <span class="math inline">\(f_{kj}\)</span> can be its own kind: a Gaussian per class for a number, or simple counting for a category (<span class="math inline">\(P(X_j = c \mid Y = k) = n_{ck}/n_k\)</span>). Then apply Bayes’ theorem.</p>
+<p>It’s rarely exactly true, but it often works well, especially when <span class="math inline">\(p\)</span> is large relative to <span class="math inline">\(n\)</span>: estimating <span class="math inline">\(p\)</span> one-dimensional things is much easier than one <span class="math inline">\(p\)</span>-dimensional thing, and the reduced <strong>variance</strong> usually outweighs the added <strong>bias</strong>.</p>
+<div class="example">
+<p><strong>Worked example: spam filter.</strong> <span class="math inline">\(P(\text{spam}) = 0.4\)</span>. “free” appears in 50% of spam and 5% of ham; “meeting” in 10% of spam and 40% of ham. An email has both words.</p>
+<p>Spam: <span class="math inline">\(0.4 \times 0.5 \times 0.1 = 0.020\)</span>. Ham: <span class="math inline">\(0.6 \times 0.05 \times 0.4 = 0.012\)</span>. <span class="math inline">\(P(\text{spam} \mid \text{email}) = 0.020/0.032 = 0.625\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="0.954" data-tol="0.005" label="P(spam | email)">
+<p><span class="math inline">\(P(\text{spam}) = 0.3\)</span>. “win” appears in 60% of spam and 5% of ham; “prize” in 40% of spam and 10% of ham. Assuming independence within each class, what is <span class="math inline">\(P(\text{spam})\)</span> for an email containing both?</p>
+<div class="expl">
+<p>Spam: <span class="math inline">\(0.3 \times 0.6 \times 0.4 = 0.072\)</span>. Ham: <span class="math inline">\(0.7 \times 0.05 \times 0.1 = 0.0035\)</span>. Posterior <span class="math inline">\(0.072/0.0755 = 0.954\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="bayes">
+
+</div>
+<div class="q" kind="gen" data-gen="lda">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, exam formats 1 and 3.)</strong> Explain the assumption naive Bayes makes, give an example where it is used, and explain why it can work well even when the assumption is false.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Assumes the inputs are independent of each other within each class, so <span class="math inline">\(f_k(x) = \prod_j f_{kj}(x_j)\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Classifies by Bayes’ theorem: posterior <span class="math inline">\(\propto \pi_k\prod_jf_{kj}(x_j)\)</span>, pick the largest.</label></li>
+<li><label><input type="checkbox" checked="" />A concrete example (e.g. spam filtering from word occurrences).</label></li>
+<li><label><input type="checkbox" checked="" />Works because estimating <span class="math inline">\(p\)</span> one-dimensional distributions needs far less data: low variance, which can outweigh the bias (especially when <span class="math inline">\(p\)</span> is large relative to <span class="math inline">\(n\)</span>).</label></li>
+</ul>
+<div class="model">
+<p>Naive Bayes assumes that, within each class <span class="math inline">\(k\)</span>, the inputs are independent, so the class-conditional density factorises: <span class="math inline">\(f_k(x) = f_{k1}(x_1)\cdots f_{kp}(x_p)\)</span>. Each one-dimensional <span class="math inline">\(f_{kj}\)</span> is easy to estimate (a Gaussian for a number, counts for a category). It then classifies with Bayes’ theorem, <span class="math inline">\(P(Y = k \mid x) \propto \pi_k\prod_jf_{kj}(x_j)\)</span>, choosing the largest. Example: spam filtering, where the inputs are whether each word appears in the email. The independence assumption is usually false (words co-occur), but it means only <span class="math inline">\(p\)</span> simple distributions per class are estimated instead of one <span class="math inline">\(p\)</span>-dimensional one, so the model has low variance; the bias it introduces is often smaller than the variance it removes, especially when there are many inputs and relatively few observations.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.109" data-tol="0.003" label="posterior">
+<p>2% of customers default. A late payment is seen in 90% of defaulters and 15% of non-defaulters. Someone has a late payment. What is the probability they default?</p>
+<div class="expl">
+<p><span class="math inline">\(\frac{0.02 \times 0.9}{0.02 \times 0.9 + 0.98 \times 0.15} = \frac{0.018}{0.165} = 0.109\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="5" label="x*">
+<p>LDA with one input, equal priors, <span class="math inline">\(\hat\mu_0 = 2\)</span>, <span class="math inline">\(\hat\mu_1 = 8\)</span>, <span class="math inline">\(\hat\sigma^2 = 3.33\)</span>. Where is the decision boundary?</p>
+<div class="expl">
+<p>With equal priors <span class="math inline">\(\log(\pi_0/\pi_1) = 0\)</span>, so the boundary is the midpoint <span class="math inline">\((2 + 8)/2 = 5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>How does Gaussian naive Bayes differ from LDA?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />LDA lets the inputs be correlated but makes every class share one covariance matrix; Gaussian naive Bayes assumes no correlation within a class but lets each class have its own variances.</label></li>
+<li><label><input type="checkbox" />They are the same model.</label></li>
+<li><label><input type="checkbox" />Naive Bayes can’t use priors.</label></li>
+<li><label><input type="checkbox" />LDA can only handle two classes.</label></li>
+</ul>
+<div class="expl">
+<p>Different simplifying assumptions, both generative, both using Bayes’ theorem.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s10_logistic_fit.html"><small>&larr; Stage 10</small>Fitting logistic regression</a><a class="next" href="s12_judging.html"><small>Stage 12 &rarr;</small>Judging classifiers</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

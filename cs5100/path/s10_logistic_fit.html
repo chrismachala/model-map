@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fitting logistic regression · CS5100 Learning Path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}], "stage": "s10_logistic_fit", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s10_logistic_fit" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a class="active" aria-current="page" href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 10 of 18</span><span class="chip">Week 3 · Classification</span><span class="chip">about 40 min</span></div>
+  <h1>Fitting logistic regression</h1>
+  <p class="tagline">Choose the parameters that make what actually happened as probable as possible. That's maximum likelihood; taking logs turns it into the negative log-likelihood, which gradient descent minimises. Then softmax handles more than two classes.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>2023 Q3 asked for the objective used to train logistic regression; the 2025 neural network question asked for an objective function too. The negative log-likelihood (cross-entropy) is the answer to both whenever the output is a class.</p>
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 4.3.2 estimating the coefficients: <strong>read the first half</strong> (the likelihood, eq. 4.5). <strong>Skip</strong> Table 4.1’s standard errors, z-statistics and p-values. 4.3.5 multinomial logistic regression: <strong>read</strong> the softmax version (eq. 4.13); <strong>skim</strong> the baseline-class version (eq. 4.10).</p>
+</div>
+<div class="warn">
+<p><span class="label">Slide and lab notes</span></p>
+<p>On the slides <span class="math inline">\(\ell\)</span> is the likelihood and <span class="math inline">\(-\log\ell\)</span> is minimised; in the lab notebook <span class="math inline">\(\ell\)</span> already means the <em>negative log</em>-likelihood. <strong>Lab bug:</strong> <code>grad_log_likelihood</code> ends with <code>np.sum(...)</code> without <code>axis=0</code>, so it returns one number instead of a length-3 vector, and every coefficient gets the same update. Fix: <code>np.sum(..., axis=0)</code>.</p>
+</div>
+<h2 id="the-likelihood">1. The likelihood</h2>
+<p>For one training point with model probability <span class="math inline">\(p_i = \sigma(\tilde x_i^T\beta)\)</span>, the probability the model gave to what actually happened is <span class="math inline">\(p_i\)</span> if <span class="math inline">\(y_i = 1\)</span> and <span class="math inline">\(1 - p_i\)</span> if <span class="math inline">\(y_i = 0\)</span>. Both at once: <span class="math inline">\(p_i^{y_i}(1 - p_i)^{1 - y_i}\)</span>. Treating points as independent, the probability of the whole data set is the <strong>likelihood</strong>:</p>
+<p><span class="math display">\[\ell(\beta) = \prod_{i=1}^{n}p_i^{\,y_i}(1 - p_i)^{1 - y_i}.\]</span></p>
+<p><strong>Maximum likelihood</strong> chooses the <span class="math inline">\(\beta\)</span> that makes <span class="math inline">\(\ell\)</span> biggest.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(y = (1, 0, 1)\)</span>. Model A gives <span class="math inline">\(p = (0.9, 0.2, 0.8)\)</span>: <span class="math inline">\(\ell = 0.9 \times 0.8 \times 0.8 = 0.576\)</span>. Model B gives <span class="math inline">\(p = (0.6, 0.5, 0.5)\)</span>: <span class="math inline">\(\ell = 0.6 \times 0.5 \times 0.5 = 0.15\)</span>. A explains the data almost four times better.</p>
+</div>
+<div class="q" kind="num" data-answer="0.56" label="likelihood">
+<p><span class="math inline">\(y = (1, 0)\)</span> and the model gives <span class="math inline">\(p = (0.8, 0.3)\)</span>. Compute the likelihood.</p>
+<div class="expl">
+<p><span class="math inline">\(0.8 \times (1 - 0.3) = 0.8 \times 0.7 = 0.56\)</span>.</p>
+</div>
+</div>
+<h2 id="the-negative-log-likelihood">2. The negative log-likelihood</h2>
+<p>Products of many numbers below 1 underflow to 0 on a computer and are awkward to differentiate. Take logs (products become sums; the best <span class="math inline">\(\beta\)</span> doesn’t change, since log is increasing) and flip the sign so we <strong>minimise</strong>:</p>
+<p><span class="math display">\[\boxed{L(\beta) = -\log\ell(\beta) = -\sum_{i=1}^{n}\Big[y_i\log p_i + (1 - y_i)\log(1 - p_i)\Big]}\]</span></p>
+<p>This is the <strong>negative log-likelihood</strong>, also called <strong>cross-entropy</strong> or <strong>log loss</strong>. Each term is <span class="math inline">\(-\log(\text{probability given to the truth})\)</span>: near 0 when confident and right, huge when confident and wrong (<span class="math inline">\(-\log 0.01 = 4.6\)</span>).</p>
+<p>Least squares is itself maximum likelihood when the errors are Gaussian, so maximum likelihood is the general principle and week 2 was a special case.</p>
+<div class="q" kind="gen" data-gen="nll">
+
+</div>
+<div class="q" kind="num" data-answer="4.605" data-tol="0.01" label="contribution">
+<p>A point has <span class="math inline">\(y = 1\)</span> but the model gives <span class="math inline">\(p = 0.01\)</span>. How much does it add to the NLL?</p>
+<div class="expl">
+<p><span class="math inline">\(-\log 0.01 = 4.605\)</span>. With <span class="math inline">\(p = 0.99\)</span> it would add only <span class="math inline">\(0.01\)</span>. Confident mistakes are punished hard.</p>
+</div>
+</div>
+<h2 id="the-gradient-and-gradient-descent">3. The gradient and gradient descent</h2>
+<p>Setting <span class="math inline">\(\nabla L = 0\)</span> has no algebraic solution (<span class="math inline">\(\beta\)</span> is trapped inside the sigmoid), so we use gradient descent. Chain rule on one point, <span class="math inline">\(\beta \to t_i \to p_i \to L_i\)</span>:</p>
+<p><span class="math display">\[\frac{\partial L_i}{\partial p_i} = -\Big[\frac{y_i}{p_i} - \frac{1 - y_i}{1 - p_i}\Big],\quad \frac{\partial p_i}{\partial t_i} = p_i(1 - p_i),\quad \frac{\partial t_i}{\partial\beta} = \tilde x_i.\]</span></p>
+<p>Multiply the first two and everything cancels to <span class="math inline">\(-(y_i - p_i)\)</span>. So</p>
+<p><span class="math display">\[\boxed{\nabla L(\beta) = -\sum_{i=1}^{n}(y_i - p_i)\,\tilde x_i = -\tilde{\mathbf X}^T(\mathbf y - \mathbf p)}\]</span></p>
+<p>Same shape as the RSS gradient: each point pushes along its own <span class="math inline">\(\tilde x_i\)</span> in proportion to how wrong it was. The NLL is convex, so gradient descent with a small step finds the minimum.</p>
+<div class="example">
+<p><strong>Worked example: one step by hand.</strong> <span class="math inline">\(x = (-1, 0, 1, 2)\)</span>, <span class="math inline">\(y = (0, 0, 1, 1)\)</span>, start <span class="math inline">\(\beta = (0, 0)\)</span>, <span class="math inline">\(\eta = 0.1\)</span>.</p>
+<p>All <span class="math inline">\(p_i = 0.5\)</span>, <span class="math inline">\(L = 4\log 2 = 2.773\)</span>. <span class="math inline">\(y - p = (-0.5, -0.5, 0.5, 0.5)\)</span>.</p>
+<p><span class="math inline">\(\partial L/\partial\beta_0 = -\sum(y_i - p_i) = 0\)</span>. <span class="math inline">\(\partial L/\partial\beta_1 = -\sum(y_i - p_i)x_i = -(0.5 + 0 + 0.5 + 1) = -2\)</span>.</p>
+<p><span class="math inline">\(\beta \leftarrow (0, 0) - 0.1(0, -2) = (0, 0.2)\)</span>. New loss <span class="math inline">\(2.402\)</span>: lower. (These classes are perfectly separable at <span class="math inline">\(x = 0.5\)</span>, so <span class="math inline">\(\beta_1\)</span> would grow forever; an <span class="math inline">\(L_2\)</span> penalty, lab Q2, stops that.)</p>
+</div>
+<div class="q" kind="num" data-answer="0.1" label="new β₁">
+<p>One point, <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(y = 1\)</span>. At <span class="math inline">\(\beta = (0, 0)\)</span> its gradient is <span class="math inline">\(-(y - p)\tilde x\)</span> with <span class="math inline">\(p = 0.5\)</span>. After one step with <span class="math inline">\(\eta = 0.1\)</span>, what is <span class="math inline">\(\beta_1\)</span>?</p>
+<div class="expl">
+<p>Gradient <span class="math inline">\(-(0.5)(1, 2) = (-0.5, -1)\)</span>. <span class="math inline">\(\beta = (0, 0) - 0.1(-0.5, -1) = (0.05, 0.1)\)</span>, so <span class="math inline">\(\beta_1 = 0.1\)</span>.</p>
+</div>
+</div>
+<h2 id="more-than-two-classes-softmax">4. More than two classes: softmax</h2>
+<p>Give each class <span class="math inline">\(k\)</span> its own linear score <span class="math inline">\(z_k = \beta_{k0} + \sum_j\beta_{kj}x_j\)</span> (so <span class="math inline">\((p + 1) \times m\)</span> coefficients), and turn the scores into probabilities:</p>
+<p><span class="math display">\[\hat p_k(x) = \frac{e^{z_k}}{\sum_{k&#39;}e^{z_{k&#39;}}}.\]</span></p>
+<p>Each <span class="math inline">\(e^{z_k}\)</span> is positive and dividing by the total makes them sum to 1; a bigger score always gets a bigger probability, so the predicted class is the argmax of the scores. Adding the same constant to every score changes nothing (that’s why code subtracts <span class="math inline">\(\max z\)</span> first). With two classes, softmax is the sigmoid of the difference of the scores.</p>
+<div class="example">
+<p><strong>Worked example.</strong> Scores <span class="math inline">\((2, 1, 0)\)</span>: <span class="math inline">\(e^2 = 7.389\)</span>, <span class="math inline">\(e^1 = 2.718\)</span>, <span class="math inline">\(e^0 = 1\)</span>, total 11.107, probabilities <span class="math inline">\((0.665, 0.245, 0.090)\)</span>. Predict class 1 (the first).</p>
+</div>
+<div data-widget="softmax">
+
+</div>
+<div class="q" kind="gen" data-gen="softmax">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, exam format 2; 2023 Q3.)</strong> Write down the objective function minimised to train a logistic regression model on <span class="math inline">\(D = \{(X_n, Y_n)\}_{n=1}^N\)</span> with <span class="math inline">\(Y_n \in \{0, 1\}\)</span>, and explain where it comes from.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(L(\lambda) = -\sum_n\big[Y_n\log\sigma(\lambda\cdot\tilde X_n) + (1 - Y_n)\log(1 - \sigma(\lambda\cdot\tilde X_n))\big]\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />It is minus the log of the likelihood <span class="math inline">\(\prod_n p_n^{Y_n}(1 - p_n)^{1 - Y_n}\)</span>, the probability of the observed labels.</label></li>
+<li><label><input type="checkbox" checked="" />Taking logs turns the product into a sum without changing the best parameters; minimised by gradient descent (no closed form).</label></li>
+<li><label><input type="checkbox" checked="" />Each term is <span class="math inline">\(-\log\)</span> of the probability given to the true label (confident mistakes cost a lot).</label></li>
+</ul>
+<div class="model">
+<p>With <span class="math inline">\(p_n = P(Y = 1 \mid X_n) = \sigma(\lambda_0 + \lambda_1X_{n1} + \dots)\)</span>, the likelihood of the observed labels is <span class="math inline">\(\ell(\lambda) = \prod_{n=1}^N p_n^{Y_n}(1 - p_n)^{1 - Y_n}\)</span> (each factor is the probability the model gives to what actually happened, assuming independent points). Maximising it is the same as minimising the negative log-likelihood <span class="math inline">\(L(\lambda) = -\sum_{n=1}^N\big[Y_n\log p_n + (1 - Y_n)\log(1 - p_n)\big]\)</span>, because log is increasing; the log turns the product into a sum, which is numerically stable and easy to differentiate. There is no closed-form minimiser, so <span class="math inline">\(\lambda\)</span> is found by gradient descent, using <span class="math inline">\(\nabla L = -\sum_n(Y_n - p_n)\tilde X_n\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="nll">
+
+</div>
+<div class="q" kind="gen" data-gen="softmax">
+
+</div>
+<div class="q" kind="mcq">
+<p>Why can’t logistic regression be fitted with a formula like <span class="math inline">\((\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Because the data are categorical.</label></li>
+<li><label><input type="checkbox" checked="" />Because <span class="math inline">\(\beta\)</span> sits inside the non-linear sigmoid, so <span class="math inline">\(\sum_i(y_i - p_i)\tilde x_i = 0\)</span> has no closed-form solution.</label></li>
+<li><label><input type="checkbox" />Because the NLL has many minima.</label></li>
+<li><label><input type="checkbox" />It can.</label></li>
+</ul>
+<div class="expl">
+<p>The NLL is convex (one minimum), but it has no algebraic minimiser. Gradient descent finds it.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="15" label="coefficients">
+<p>How many coefficients does multinomial (softmax) logistic regression have with <span class="math inline">\(m = 3\)</span> classes and <span class="math inline">\(p = 4\)</span> inputs?</p>
+<div class="expl">
+<p><span class="math inline">\((p + 1)\times m = 5 \times 3 = 15\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>In the lab, <code>grad_log_likelihood</code> returns <code>np.sum(A)</code> where <code>A</code> has shape <span class="math inline">\(n \times 3\)</span>. What goes wrong?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Nothing.</label></li>
+<li><label><input type="checkbox" checked="" />It adds all <span class="math inline">\(3n\)</span> numbers into one scalar, so all three coefficients get the same update. It should sum over rows with <code>axis=0</code>.</label></li>
+<li><label><input type="checkbox" />It returns an <span class="math inline">\(n\)</span>-vector.</label></li>
+<li><label><input type="checkbox" />It divides by <span class="math inline">\(n\)</span>.</label></li>
+</ul>
+<div class="expl">
+<p>A quick numerical-gradient check (nudge each <span class="math inline">\(\beta_j\)</span> by <span class="math inline">\(\pm h\)</span>) catches this kind of bug.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s09_logistic_model.html"><small>&larr; Stage 9</small>Logistic regression: the model</a><a class="next" href="s11_generative.html"><small>Stage 11 &rarr;</small>LDA and naive Bayes</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

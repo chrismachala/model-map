@@ -233,3 +233,9 @@ a.iconbtn{text-decoration:none;display:inline-flex;align-items:center;gap:2px}
 .widget .log{font:13px/1.5 ui-monospace,Consolas,monospace;background:var(--surface-2);border-radius:8px;padding:8px 10px;max-height:180px;overflow:auto;white-space:pre-wrap;margin-top:6px}
 .modswitch a{display:flex!important;justify-content:center;align-items:center}
 .homebtn{gap:6px!important}
+
+.dot.path{background:linear-gradient(135deg,var(--accent),var(--tool))}
+.pathcta{display:flex;gap:16px;align-items:center;background:linear-gradient(135deg,var(--accent-soft),var(--surface));border:1px solid var(--accent);border-radius:16px;padding:16px 20px;margin:18px 0;color:var(--ink);text-decoration:none}
+.pathcta .ic{font-size:2rem}
+.pathcta b{display:block;font-size:1.05rem}
+.pathcta:hover{box-shadow:var(--shadow)}
