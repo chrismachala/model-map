@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When reinforcement learning goes wrong · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w4_RL_Limits" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 4</span><span class="chip">3 techniques</span></div>
+  <h1>When reinforcement learning goes wrong</h1>
+  <p class="tagline">An optimiser does exactly what the reward says, not what you meant. Add tables that explode and a world that drifts away from training, and you have the three classic failures that motivate the rest of the module.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> not an agent: the limits of everything on the week 4 pages.<br />
+<strong>Week:</strong> 4 (slides 51 to 56).<br />
+<strong>Book:</strong> not in Wooldridge.<br />
+<strong>Techniques on this page:</strong> spotting reward hacking, counting table sizes, recognising distribution shift.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="Value_Iteration.html">Value iteration</a> and <a href="Q_Learning.html">Q-learning</a> find the policy that maximises expected return <strong>as defined by <span class="math inline">\(R\)</span></strong>. That’s a strength and a danger: if <span class="math inline">\(R\)</span> is only a proxy for the goal, the agent will find the gap. And everything this week was a table, which only works for tiny worlds. Knowing these limits is exam material, and it sets up topic 5 (function approximation) and topic 11 (specification gaming).</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>proxy reward</td>
+<td>a measurable stand-in for what we really want</td>
+</tr>
+<tr class="even">
+<td>reward hacking</td>
+<td>maximising the proxy in a way that defeats the intent</td>
+</tr>
+<tr class="odd">
+<td>specification problem</td>
+<td>the fault is in what we asked for, not in the optimiser</td>
+</tr>
+<tr class="even">
+<td>sample efficiency</td>
+<td>how much experience learning needs</td>
+</tr>
+<tr class="odd">
+<td>tabular</td>
+<td>one stored number per state (or state–action pair)</td>
+</tr>
+<tr class="even">
+<td>distribution shift</td>
+<td>the deployed agent meets states unlike its training ones</td>
+</tr>
+<tr class="odd">
+<td>function approximation</td>
+<td>computing <span class="math inline">\(V\)</span>, <span class="math inline">\(Q\)</span> or <span class="math inline">\(\pi\)</span> with a function (e.g. a neural network) instead of a table</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-spotting-reward-hacking">Technique 1: spotting reward hacking</h2>
+<p><strong>Problem it solves:</strong> predicts how an agent will exploit a badly specified reward (slides 51 to 52).</p>
+<ul>
+<li><strong>The boat race</strong> (Clark and Amodei 2016): rewarded for hitting score targets, the agent circled a lagoon hitting respawning targets for ever instead of finishing.</li>
+<li><strong>RLHF</strong> (Gao et al. 2023): optimise harder against a learned reward model and the proxy keeps rising while true human preference eventually falls.</li>
+<li><strong>The gridworld:</strong> give a positive reward per step and the “optimal” agent never reaches the goal.</li>
+</ul>
+<p>There is <strong>no purely algorithmic fix</strong>. A better optimiser finds the loophole faster.</p>
+<div class="example">
+<p><strong>Worked example (a boat race MDP).</strong> Cells 0 → 1 → 2 → 3 → finish (+1). At cell 1 the boat can loop through a bonus lagoon (+0.3) and come back to cell 1. <span class="math inline">\(\gamma = 0.95\)</span>.</p>
+<p>Looping for ever from cell 1 is worth <span class="math inline">\(0.3/(1-0.95) = 6\)</span>. Racing on is worth <span class="math inline">\(0.95^2 \times 1 \approx 0.90\)</span>. The optimal policy loops for ever.</p>
+<p><strong>Fix:</strong> pay the bonus only once. Now the state must record whether it’s been collected, <span class="math inline">\((cell, taken)\)</span>, because the reward depends on history: a <a href="MDPs.html">Markov property</a> lesson. The new optimal policy takes the bonus once, then finishes: worth <span class="math inline">\(0.95(0.3 + 0.95^3) = 1.10\)</span> from the start.</p>
+</div>
+<p><strong>Whose failure is it? (slide 52).</strong> The human wrote the imperfect reward, but if optimisers are known to exploit gaps, robustness to them is part of good algorithm design too. Mitigations: learn rewards from human comparisons (RLHF, itself a proxy), penalise side effects, limit how hard you optimise (RLHF’s KL penalty), monitor for “high score, weird behaviour”, keep a human in the loop.</p>
+<h2 id="technique-2-counting-table-sizes">Technique 2: counting table sizes</h2>
+<p><strong>Problem it solves:</strong> shows why tabular methods don’t scale (slide 53).</p>
+<p><span class="math inline">\(n\)</span> binary features give <span class="math inline">\(2^n\)</span> states; a Q-table needs <span class="math inline">\(2^n \times |A|\)</span> entries, each needing many visits.</p>
+<div class="example">
+<p><strong>Worked example.</strong> 10 features, 4 actions: <span class="math inline">\(1024 \times 4 = 4096\)</span> entries. 20 features, 5 actions: <span class="math inline">\(2^{20} \times 5 = 5{,}242{,}880\)</span>. 30 features: over a billion states. A <span class="math inline">\(100 \times 100\)</span> greyscale image as the state: <span class="math inline">\(256^{10000}\)</span>.</p>
+</div>
+<p>Worse, table entries share nothing: learning about one state teaches the agent nothing about a near-identical one. <strong>Function approximation</strong> (topic 5) computes <span class="math inline">\(Q(s, a)\)</span> from features, so similar states share what’s learned.</p>
+<h2 id="technique-3-recognising-distribution-shift">Technique 3: recognising distribution shift</h2>
+<p><strong>Problem it solves:</strong> explains why an agent that was fine in training misbehaves in deployment (slide 54).</p>
+<p><span class="math inline">\(Q\)</span> and <span class="math inline">\(\pi\)</span> are learned from the states the agent visited. Deployment can lead to states it rarely or never saw, where estimates are unreliable (in a table, maybe still the initial values). For LLM agents: fine-tuned on one mix of prompts and tools, it may behave unpredictably on another.</p>
+<div class="warn">
+<p><strong>The takeaway (slide 56).</strong> MDPs formalise sequential decisions; basic RL learns values or policies from consequences when they can’t be supplied in advance. But it’s only as good as its state (Markov?), its observations (full?), its reward (the right one?) and its table (small enough?).</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Amodei et al. (2016), “Concrete Problems in AI Safety”</td>
+<td>Optional</td>
+<td>readable; sections on reward hacking and distributional shift</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 4 (MDPs and reinforcement learning). I want practice on THE LIMITS OF REINFORCEMENT LEARNING:
+- defining reward hacking and predicting how an agent would exploit a described reward (boat race, gridworld with positive living reward, RLHF reward models)
+- why reward hacking is a specification problem, and practical mitigations
+- fixing a reward that depends on history by adding information to the state
+- counting Q-table sizes for n binary features and |A| actions, and why tables don&#39;t generalise
+- distribution shift, with examples for robots and LLM agents
+- how these motivate function approximation
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/POMDPs_and_Belief.html"><small>&larr; Previous</small>POMDPs and belief states</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

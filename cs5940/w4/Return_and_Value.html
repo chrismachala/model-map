@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Return, value and the Bellman equation · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w4_Return_and_Value" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 4</span><span class="chip">5 techniques</span></div>
+  <h1>Return, value and the Bellman equation</h1>
+  <p class="tagline">A reward tells you how good one step was. To choose well you need to know how good a situation is in the long run. That number is the value, and the Bellman equation says how to compute it from the next step's value.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> not an agent: the toolkit behind value iteration and Q-learning.<br />
+<strong>Week:</strong> 4 (slides 17 to 24).<br />
+<strong>Book:</strong> Wooldridge 2.6, utility over runs and expected utility (pp. 38 to 41). The Bellman equation isn’t in the book: Sutton and Barto 3.3 to 3.6.<br />
+<strong>Techniques on this page:</strong> the discounted return, choosing γ, state and action values, the Bellman equation, the Bellman optimality equation.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>In the <a href="MDPs.html">gridworld</a>, the safe route and the risky route both cost −0.04 a step. Nothing in the immediate reward tells them apart: the difference is a 1-in-10 chance of falling into the −1 <strong>later</strong> (slide 17).</p>
+<p>So the agent needs a number for “how good is it to be here, counting everything that might follow”. That’s the <strong>value</strong>. And the trick that makes it computable is that the value of a state can be written in terms of the values of the states one step away.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>return <span class="math inline">\(G_t\)</span></td>
+<td>the total (discounted) reward from time <span class="math inline">\(t\)</span> onwards, along one run</td>
+</tr>
+<tr class="even">
+<td>discount factor <span class="math inline">\(\gamma\)</span></td>
+<td>a reward <span class="math inline">\(k\)</span> steps away counts <span class="math inline">\(\gamma^k\)</span> as much as one now</td>
+</tr>
+<tr class="odd">
+<td>myopic / far-sighted</td>
+<td><span class="math inline">\(\gamma\)</span> near 0 / <span class="math inline">\(\gamma\)</span> near 1</td>
+</tr>
+<tr class="even">
+<td>episodic task</td>
+<td>every run ends in a terminal state</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(V^\pi(s)\)</span></td>
+<td>the average return from <span class="math inline">\(s\)</span> if you follow policy <span class="math inline">\(\pi\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Q^\pi(s, a)\)</span></td>
+<td>the average return if you do <span class="math inline">\(a\)</span> in <span class="math inline">\(s\)</span>, then follow <span class="math inline">\(\pi\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(V^*\)</span>, <span class="math inline">\(Q^*\)</span></td>
+<td>the same, for the best possible policy</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbb E\)</span></td>
+<td>“the average over everything that could happen”</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\arg\max_a\)</span></td>
+<td>the action that gives the biggest value (not the value itself)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-discounted-return">Technique 1: the discounted return</h2>
+<p><strong>Problem it solves:</strong> one number for a whole run of rewards.</p>
+<p><span class="math display">\[G_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \cdots = \sum_{k=0}^{\infty}\gamma^k r_{t+k+1}\]</span></p>
+<p>The crucial identity: <span class="math inline">\(G_t = r_{t+1} + \gamma G_{t+1}\)</span>. “Reward now, plus the discounted return from the next step.” You can compute a return backwards from the end.</p>
+<div class="example">
+<p><strong>Worked example (slide 20).</strong> The top route from <span class="math inline">\(s_{1,1}\)</span> with no slips: rewards −0.04, −0.04, −0.04, −0.04, +1.</p>
+<p><span class="math inline">\(\gamma = 1\)</span>: <span class="math inline">\(G_0 = 4(-0.04) + 1 = 0.84\)</span>.</p>
+<p><span class="math inline">\(\gamma = 0.9\)</span>, backwards: <span class="math inline">\(G_4 = 1\)</span>, <span class="math inline">\(G_3 = -0.04 + 0.9 = 0.86\)</span>, <span class="math inline">\(G_2 = -0.04 + 0.774 = 0.734\)</span>, <span class="math inline">\(G_1 = -0.04 + 0.6606 = 0.6206\)</span>, <span class="math inline">\(G_0 = -0.04 + 0.5585 = 0.5185 \approx 0.52\)</span>.</p>
+<p>This lucky run (no slip in 5 moves) has probability <span class="math inline">\(0.8^5 \approx 0.33\)</span>. Other runs give other returns, which is why value is an <strong>average</strong>.</p>
+</div>
+<div data-widget="discount">
+
+</div>
+<h2 id="technique-2-choosing-γ">Technique 2: choosing γ</h2>
+<p><strong>Problem it solves:</strong> keeps the return finite, and sets how patient the agent is.</p>
+<p>With rewards no bigger than <span class="math inline">\(r_{max}\)</span>, <span class="math inline">\(|G_t| \le r_{max}/(1-\gamma)\)</span>. A constant reward <span class="math inline">\(r\)</span> forever is worth exactly <span class="math inline">\(r/(1-\gamma)\)</span>: −0.04 forever with <span class="math inline">\(\gamma = 0.9\)</span> is −0.4. So <strong><span class="math inline">\(\gamma &lt; 1\)</span> is needed when runs can go on for ever</strong> (slide 7 says <span class="math inline">\(\gamma \in [0, 1)\)</span>).</p>
+<p><strong><span class="math inline">\(\gamma = 1\)</span> is fine for episodic tasks</strong>: the sum has finitely many terms. That’s why slide 20 can use it.</p>
+<div class="warn">
+<p><strong>γ is a value judgement (slide 19).</strong> Agents differing only in <span class="math inline">\(\gamma\)</span> can act oppositely in the same state. In the gridworld, <span class="math inline">\(\gamma = 1\)</span> sends the bottom row the safe way round; <span class="math inline">\(\gamma = 0.9\)</span> makes the agent impatient enough to go past the −1. Who sets an AI system’s patience is an ethical question, not just a tuning one.</p>
+</div>
+<h2 id="technique-3-state-value-and-action-value">Technique 3: state value and action value</h2>
+<p><strong>Problem it solves:</strong> “how good is it here?” and “how good is it to do this here?”.</p>
+<p><span class="math display">\[V^\pi(s) = \mathbb E_\pi[G_t \mid s_t = s], \qquad Q^\pi(s, a) = \mathbb E_\pi[G_t \mid s_t = s, a_t = a]\]</span></p>
+<p>The average is over every run that could happen, weighted by its probability. This is Wooldridge’s <strong>expected utility</strong> (book p. 40, equation 2.1), starting from a particular state. And <span class="math inline">\(V^\pi(s) = \sum_a \pi(a \mid s)\, Q^\pi(s, a)\)</span>.</p>
+<h2 id="technique-4-the-bellman-equation">Technique 4: the Bellman equation</h2>
+<p><strong>Problem it solves:</strong> computes values without listing every possible run.</p>
+<p>Average the identity <span class="math inline">\(G_t = r_{t+1} + \gamma G_{t+1}\)</span>:</p>
+<p><span class="math display">\[V^\pi(s) = \sum_a \pi(a \mid s) \sum_{s&#39;} P(s&#39; \mid s, a)\,\big[R(s, a, s&#39;) + \gamma V^\pi(s&#39;)\big]\]</span></p>
+<p>Inside out: reward for landing in <span class="math inline">\(s&#39;\)</span> plus the discounted value from there; averaged over where you might land; averaged over what the policy might do. <strong>“Reward now + value of what comes next.”</strong> One equation per state; for a fixed policy they’re ordinary simultaneous equations.</p>
+<div class="example">
+<p><strong>Worked example (the corridor).</strong> <span class="math inline">\(s_1 \leftrightarrow s_2 \to s_3\)</span> (goal, value 0). Moves are certain; West from <span class="math inline">\(s_1\)</span> stays put. −0.1 per step, <span class="math inline">\(R(s_2, E, s_3) = 0.9\)</span>, <span class="math inline">\(\gamma = 0.9\)</span>.</p>
+<p><strong>Always East:</strong> <span class="math inline">\(V(s_2) = 0.9\)</span>; <span class="math inline">\(V(s_1) = -0.1 + 0.9(0.9) = 0.71\)</span>.</p>
+<p><strong>East or West at random (0.5 each):</strong> <span class="math inline">\(V(s_1) = -0.1 + 0.45V(s_2) + 0.45V(s_1)\)</span> and <span class="math inline">\(V(s_2) = 0.4 + 0.45V(s_1)\)</span>. Substitute: <span class="math inline">\(0.55V(s_1) = 0.08 + 0.2025V(s_1)\)</span>, so <span class="math inline">\(V(s_1) = 0.08/0.3475 = 0.230\)</span> and <span class="math inline">\(V(s_2) = 0.504\)</span>. Dithering costs a lot.</p>
+</div>
+<h2 id="technique-5-the-bellman-optimality-equation">Technique 5: the Bellman optimality equation</h2>
+<p><strong>Problem it solves:</strong> describes the <em>best</em> values, and from them the best policy.</p>
+<p>Replace the average over actions by the best action:</p>
+<p><span class="math display">\[V^*(s) = \max_a \sum_{s&#39;} P(s&#39; \mid s, a)\,\big[R(s, a, s&#39;) + \gamma V^*(s&#39;)\big]\]</span> <span class="math display">\[Q^*(s, a) = \sum_{s&#39;} P(s&#39; \mid s, a)\,\big[R(s, a, s&#39;) + \gamma \max_{a&#39;} Q^*(s&#39;, a&#39;)\big]\]</span></p>
+<p>Then <span class="math inline">\(V^*(s) = \max_a Q^*(s, a)\)</span> and <span class="math inline">\(\pi^*(s) = \arg\max_a Q^*(s, a)\)</span>. With <span class="math inline">\(Q^*\)</span> in hand, choosing the best action is a <strong>table lookup that needs no model</strong>, which is exactly what <a href="Q_Learning.html">Q-learning</a> exploits. The max makes the equations non-linear, so you solve them by <a href="Value_Iteration.html">iterating</a>. No proofs in this course (slide 23).</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(Q^*(s, \cdot) = \{N: 0.3,\ S: -0.2,\ E: 0.8,\ W: 0.5\}\)</span>. Then <span class="math inline">\(V^*(s) = \max = 0.8\)</span> and <span class="math inline">\(\pi^*(s) = \arg\max = E\)</span>.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge 2.6 “Utility functions”, Tileworld (pp. 38 to 40)</td>
+<td><strong>Read</strong></td>
+<td>utility over runs; the return is one</td>
+</tr>
+<tr class="even">
+<td>Wooldridge 2.6 “Maximizing expected utility” (p. 40)</td>
+<td><strong>Read</strong></td>
+<td>equation 2.1, the optimal agent; it “does not give us any clues about how to implement” it, which is what Bellman supplies</td>
+</tr>
+<tr class="odd">
+<td>Sutton and Barto 3.3 to 3.6</td>
+<td>Optional</td>
+<td>returns, discounting, value functions, Bellman equations</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 4 (MDPs and reinforcement learning). I want practice on RETURN, VALUE AND THE BELLMAN EQUATIONS:
+- computing discounted returns G_t for short reward sequences and different gamma, forwards and backwards with G_t = r_{t+1} + gamma G_{t+1}
+- the r/(1 - gamma) formula, why gamma &lt; 1 is needed in general and when gamma = 1 is fine
+- V^pi(s) and Q^pi(s, a) in words and symbols, and how they relate to expected utility
+- evaluating a fixed policy on a tiny corridor MDP by writing and solving the Bellman equations
+- the Bellman optimality equations for V* and Q*, max vs argmax, and reading off the optimal policy from Q*
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/MDPs.html"><small>&larr; Previous</small>Markov decision processes</a><a class="next" href="../w4/Value_Iteration.html"><small>Next &rarr;</small>Value iteration</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

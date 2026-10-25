@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training neural networks · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w4_Training_Neural_Networks" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="../w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a href="../w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a href="../w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="../w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="../w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not a model: toolkit</span><span class="chip">Week 4</span><span class="chip">5 techniques</span></div>
+  <h1>Training neural networks</h1>
+  <p class="tagline">There's no formula for the best weights, so start from small random numbers and walk downhill. Backpropagation is the chain rule that tells every weight which way is downhill; PyTorch does it for you with one line.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> not a model: how <a href="Neural_Network.html">neural networks</a> are fitted (regression or <a href="Neural_Network_Classifier.html">classification</a>).<br />
+<strong>Week:</strong> 4.<br />
+<strong>Book:</strong> ISLP 10.7, 10.7.1, 10.7.2.<br />
+<strong>Techniques on this page:</strong> non-convex losses, gradient descent from random starts, ridge penalty and early stopping, minibatches and epochs, backpropagation, PyTorch’s training loop.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>For <a href="../w2/Linear_Regression.html">linear regression</a> the error is one smooth bowl and you can solve for the bottom. A network’s weights sit inside the bends, so there’s no formula, and the error surface has many valleys. And with thousands of weights, the network can memorise the training set.</p>
+<p>So training is two jobs: <strong>get downhill</strong> (gradient descent, with backprop computing the gradient), and <strong>don’t overfit</strong> (penalties, early stopping, validation data).</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>non-convex</td>
+<td>an error surface with several valleys</td>
+</tr>
+<tr class="even">
+<td>local minimum</td>
+<td>the bottom of one valley, maybe not the lowest</td>
+</tr>
+<tr class="odd">
+<td>learning rate <span class="math inline">\(\eta\)</span></td>
+<td>step size</td>
+</tr>
+<tr class="even">
+<td>backpropagation</td>
+<td>chain rule, run from the output back to the inputs</td>
+</tr>
+<tr class="odd">
+<td>minibatch, SGD</td>
+<td>use a random handful of points for each step</td>
+</tr>
+<tr class="even">
+<td>epoch</td>
+<td>one pass through all the training data</td>
+</tr>
+<tr class="odd">
+<td>early stopping</td>
+<td>stop when the validation error starts rising</td>
+</tr>
+<tr class="even">
+<td>Adam</td>
+<td>gradient descent with automatic per-weight step sizes</td>
+</tr>
+<tr class="odd">
+<td>autograd</td>
+<td>PyTorch’s automatic chain rule: <code>loss.backward()</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-gradient-descent-from-small-random-starts">Technique 1: gradient descent from small random starts</h2>
+<p><strong>Problem it solves:</strong> finding good weights without a formula.</p>
+<p>Put every weight in one vector <span class="math inline">\(\theta\)</span> and repeat <span class="math inline">\(\theta \leftarrow \theta - \eta\nabla R(\theta)\)</span>. Start from <strong>small random</strong> values: if every weight starts at 0, all hidden units are identical and stay identical (and with ReLU nothing moves at all). Different starts can end in different valleys; for big networks, most valleys are good enough.</p>
+<h2 id="technique-2-dont-overfit">Technique 2: don’t overfit</h2>
+<p><strong>Problem it solves:</strong> a network with more weights than data points will memorise.</p>
+<ul>
+<li><strong>Ridge penalty:</strong> minimise <span class="math inline">\(\text{RSS} + \lambda\|\theta\|^2\)</span>, not penalising the intercepts (week 2’s <a href="../w2/Ridge_Regression.html">ridge</a>). In PyTorch, <code>weight_decay=λ</code> (which does include the biases).</li>
+<li><strong>Early stopping (slow learning):</strong> watch the validation error each epoch; keep the weights from the best epoch.</li>
+<li><strong>Fewer hidden units.</strong></li>
+</ul>
+<h2 id="technique-3-backpropagation">Technique 3: backpropagation</h2>
+<p><strong>Problem it solves:</strong> computing the gradient for every weight cheaply.</p>
+<p>For one point with residual <span class="math inline">\(e = y - f(x)\)</span> and <span class="math inline">\(R = e^2\)</span>:</p>
+<p><span class="math display">\[\frac{\partial R}{\partial\beta_k} = -2e\,A_k,\qquad \frac{\partial R}{\partial w_{kj}} = -2e\cdot\beta_k\cdot g&#39;(z_k)\cdot x_j\]</span></p>
+<p>The error starts at the output and is passed back, shared out by how much each weight contributed. That’s the chain rule; “back” because it runs output → inputs.</p>
+<div class="example">
+<p><strong>Worked example.</strong> One input <span class="math inline">\(x = 2\)</span>, target <span class="math inline">\(y = 3\)</span>. Unit 1: <span class="math inline">\(z_1 = 0 + 1(2) = 2\)</span>, <span class="math inline">\(A_1 = 2\)</span>. Unit 2: <span class="math inline">\(z_2 = 1 - 2 = -1\)</span>, <span class="math inline">\(A_2 = 0\)</span>. <span class="math inline">\(f = 0.5 + 1(2) + 2(0) = 2.5\)</span>, <span class="math inline">\(e = 0.5\)</span>, so <span class="math inline">\(-2e = -1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\partial R/\partial\beta_1 = -1 \times 2 = -2\)</span>; <span class="math inline">\(\partial R/\partial\beta_2 = -1 \times 0 = 0\)</span>.</li>
+<li><span class="math inline">\(\partial R/\partial w_{11} = -1 \times \beta_1 \times 1 \times 2 = -2\)</span>.</li>
+<li>Unit 2 gets <strong>zero</strong> gradient: its ReLU is off (<span class="math inline">\(z_2 &lt; 0\)</span>). A unit that’s off for every point never learns (“dead”).</li>
+<li>One step with <span class="math inline">\(\eta = 0.05\)</span> moves <span class="math inline">\(f\)</span> from 2.5 to 3.025: much closer to 3.</li>
+</ul>
+</div>
+<div data-widget="nonconvex">
+
+</div>
+<div class="warn">
+<p><strong>Book vs slides:</strong> ISLP puts <span class="math inline">\(\tfrac12\)</span> in front of the RSS, so its gradients say <span class="math inline">\(-(y - f)\)</span> where the slides say <span class="math inline">\(-2(y - f)\)</span>. Same direction; only the step size differs. Also, slide eq. (28) sets <span class="math inline">\(z_{i0} = 1\)</span> to cover the intercept, but the factor for <span class="math inline">\(\beta_0\)</span> should be 1, not <span class="math inline">\(g(1)\)</span>.</p>
+</div>
+<h2 id="technique-4-minibatches-and-epochs">Technique 4: minibatches and epochs</h2>
+<p><strong>Problem it solves:</strong> a full gradient over all the data is slow.</p>
+<p>Each step uses a random minibatch (the lab uses 32). One epoch = one pass through the data: 1,257 images in batches of 32 is 40 steps. Noisier steps, much faster progress.</p>
+<h2 id="technique-5-the-pytorch-loop">Technique 5: the PyTorch loop</h2>
+<p><strong>Problem it solves:</strong> never writing a gradient by hand again.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> X_b, y_b <span class="kw">in</span> train_loader:      <span class="co"># one epoch</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> model(X_b)               <span class="co"># forward pass</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> criterion(out, y_b)     <span class="co"># nn.MSELoss() or nn.CrossEntropyLoss()</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    optimizer.zero_grad()          <span class="co"># clear old gradients (they add up otherwise)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    loss.backward()                <span class="co"># backprop: every parameter&#39;s .grad is filled in</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    optimizer.step()               <span class="co"># theta &lt;- theta - eta * grad (Adam: smarter steps)</span></span></code></pre></div>
+<div class="warn">
+<p><strong>Regression shape trap (lab Q2):</strong> with <code>nn.MSELoss</code>, the target must be shape <span class="math inline">\((n, 1)\)</span> like the output. Passing a shape-<span class="math inline">\((n,)\)</span> target makes PyTorch compare every prediction with every target and silently report the wrong loss. Use <code>y.reshape(-1, 1)</code>. Standardising the salary target also makes training far easier.</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10.7 Fitting a neural network (p427–428)</td>
+<td><strong>Read</strong></td>
+<td>Non-convexity, slow learning, regularisation</td>
+</tr>
+<tr class="even">
+<td>10.7.1 Backpropagation</td>
+<td><strong>Read</strong></td>
+<td>Mind the <span class="math inline">\(\tfrac12\)</span></td>
+</tr>
+<tr class="odd">
+<td>10.7.2 Regularization and SGD</td>
+<td><strong>Read</strong></td>
+<td>Minibatches, epochs, early stopping: all in the lab</td>
+</tr>
+<tr class="even">
+<td>10.7.3 Dropout, 10.7.4 Network tuning</td>
+<td>Skim</td>
+<td>Tuning helps with lab Q2</td>
+</tr>
+<tr class="odd">
+<td>10.8 Double descent</td>
+<td>Skip</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 10.7). I want practice questions on TRAINING NEURAL NETWORKS, done by hand:
+- backpropagation for a network with one input, two ReLU or sigmoid hidden units and one output: forward pass, residual, gradients for every weight
+- one gradient-descent step and the new prediction
+- dead ReLU units and tiny sigmoid slopes
+- why we start from small random weights, not zeros
+- the ridge penalty&#39;s extra gradient term, and early stopping from training/validation curves
+- minibatches, epochs and number of steps
+- what each line of a PyTorch training loop does, and common bugs (no zero_grad, wrong target shape)
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/Neural_Network_Classifier.html"><small>&larr; Previous</small>Neural network classifier</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

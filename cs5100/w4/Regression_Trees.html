@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regression trees · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w4_Regression_Trees" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a class="active" aria-current="page" href="../w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a href="../w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a href="../w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="../w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="../w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a href="../w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip reg">Regression model</span><span class="chip">Week 4</span><span class="chip">4 techniques</span></div>
+  <h1>Regression trees</h1>
+  <p class="tagline">Ask a short list of yes/no questions about the inputs ("has this player been in the league less than 4.5 years?"). Each answer path ends in a box of similar training points, and the prediction is simply their average.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> regression (the answer is a number). Classification trees are on <a href="Classification_Trees.html">their own page</a>.<br />
+<strong>Week:</strong> 4.<br />
+<strong>Book:</strong> ISLP 8.1.1 (and 8.1.3, 8.1.4).<br />
+<strong>Techniques on this page:</strong> splitting the input space into boxes, predicting the box average, scoring a tree by its RSS, recursive binary splitting (top-down and greedy), stopping rules.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="../w2/Linear_Regression.html">Linear regression</a> uses one formula everywhere. But some relationships are more like a set of rules: “new players earn little whatever they do; experienced players earn more, especially if they hit a lot”. A single sloped line can’t say that. <a href="../w2/KNN_Regression.html">KNN</a> can bend, but you can’t read it, and it needs every input on the same scale.</p>
+<p>A tree learns the rules themselves. It’s <strong>as readable as a flow chart</strong>, handles inputs on any scale (each question looks at one input), and can capture jumps and interactions that a straight line misses. The price: one tree is jumpy. A slightly different training set can give a very different tree (high variance), which is why <a href="Tree_Pruning.html">pruning</a> exists.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>split, internal node</td>
+<td>one yes/no question “is <span class="math inline">\(X_j &lt; s\)</span>?”</td>
+</tr>
+<tr class="even">
+<td>cutpoint, threshold <span class="math inline">\(s\)</span></td>
+<td>the number in the question</td>
+</tr>
+<tr class="odd">
+<td>leaf, terminal node, region <span class="math inline">\(R_m\)</span></td>
+<td>where a path of answers ends: a box of training points</td>
+</tr>
+<tr class="even">
+<td>root</td>
+<td>the first question; every point passes through it</td>
+</tr>
+<tr class="odd">
+<td>depth</td>
+<td>how many questions on the longest path</td>
+</tr>
+<tr class="even">
+<td>recursive binary splitting</td>
+<td>build the tree one two-way split at a time</td>
+</tr>
+<tr class="odd">
+<td>greedy</td>
+<td>take the best split <em>now</em>, without planning ahead</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\lvert R_m\rvert\)</span></td>
+<td>the number of training points in box <span class="math inline">\(m\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-boxes-and-box-averages">Technique 1: boxes and box averages</h2>
+<p><strong>Problem it solves:</strong> making a prediction once the space has been cut up.</p>
+<p>Each question compares <strong>one</strong> input with a threshold, so the regions are rectangles (“boxes”) with edges parallel to the axes. ISLP’s baseball example (log-salary from Years and Hits) has three:</p>
+<pre><code>                 Years &lt; 4.5 ?
+                /             \
+             yes               no
+          R1: 5.11        Hits &lt; 117.5 ?
+                          /           \
+                       R2: 6.00     R3: 6.74</code></pre>
+<p>To predict for a new player, answer the questions from the top until you reach a leaf, and output the <strong>average response of the training players in that leaf</strong>. 6 years and 130 hits: right, right, 6.74. The tree also reads as a story: experience matters most; for newcomers hits barely matter.</p>
+<p>Why the average? Within one box, the single number <span class="math inline">\(c\)</span> that makes <span class="math inline">\(\sum(y_i - c)^2\)</span> smallest is the mean.</p>
+<h2 id="technique-2-score-a-tree-by-its-rss">Technique 2: score a tree by its RSS</h2>
+<p><strong>Problem it solves:</strong> deciding which tree is “best” on the training data.</p>
+<p><span class="math display">\[\text{RSS}(T) = \sum_{m=1}^{J}\;\sum_{i \in R_m}(y_i - \hat y_m)^2,\qquad \hat y_m = \text{average of the } y_i \text{ in box } m\]</span></p>
+<p>The same score as linear regression: add up the squared misses. A good tree has boxes whose responses are close to each other.</p>
+<h2 id="technique-3-recursive-binary-splitting-greedy">Technique 3: recursive binary splitting (greedy)</h2>
+<p><strong>Problem it solves:</strong> there are far too many possible trees to try them all.</p>
+<ol type="1">
+<li>Start with all the data in one box.</li>
+<li>For every box, every input <span class="math inline">\(X_j\)</span> and every cutpoint <span class="math inline">\(s\)</span> (midpoints between neighbouring values), compute the RSS you’d get by splitting that box in two at <span class="math inline">\(X_j &lt; s\)</span>.</li>
+<li>Make the single split with the lowest RSS. You now have one more box.</li>
+<li>Repeat from step 2.</li>
+</ol>
+<p>It’s <strong>greedy</strong>: it never goes back to change an earlier split, and it doesn’t look ahead.</p>
+<div class="example">
+<p><strong>Worked example.</strong> Years <span class="math inline">\(x = (1, 2, 3, 5, 7, 8)\)</span>, salary <span class="math inline">\(y = (2, 3, 5, 8, 9, 12)\)</span>. One box: mean 6.5, RSS 73.5.</p>
+<table>
+<thead>
+<tr class="header">
+<th>cut <span class="math inline">\(s\)</span></th>
+<th>left</th>
+<th>right</th>
+<th>total RSS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.5</td>
+<td>{2}</td>
+<td>{3, 5, 8, 9, 12}</td>
+<td>49.2</td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td>{2, 3}</td>
+<td>{5, 8, 9, 12}</td>
+<td>25.5</td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong></td>
+<td>{2, 3, 5} mean 3.33</td>
+<td>{8, 9, 12} mean 9.67</td>
+<td><strong>13.33</strong></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>{2, 3, 5, 8}</td>
+<td>{9, 12}</td>
+<td>25.5</td>
+</tr>
+<tr class="odd">
+<td>7.5</td>
+<td>{2, 3, 5, 8, 9}</td>
+<td>{12}</td>
+<td>37.2</td>
+</tr>
+</tbody>
+</table>
+<p>Split at 4. Next round, the best split of the left box saves 4.17; the best of the right box (at 7.5) saves 8.17. So split the right box at 7.5. Three leaves: <span class="math inline">\(x &lt; 4 \to 3.33\)</span>; <span class="math inline">\(4 \le x &lt; 7.5 \to 8.5\)</span>; <span class="math inline">\(x \ge 7.5 \to 12\)</span>. RSS 5.17.</p>
+</div>
+<div data-widget="treesplit">
+
+</div>
+<h2 id="technique-4-when-to-stop">Technique 4: when to stop</h2>
+<p><strong>Problem it solves:</strong> without a rule, splitting goes on until every leaf holds one point.</p>
+<p>Stop when the leaves are small (at most <span class="math inline">\(n_{\text{stop}}\)</span> points) or the tree reaches a maximum depth (<code>max_depth</code> in sklearn). With <span class="math inline">\(n_{\text{stop}} = 1\)</span> every leaf predicts its own training point exactly: training RSS 0, memorised noise, poor test error. The better fix is to grow big and then <a href="Tree_Pruning.html">prune</a>.</p>
+<div class="warn">
+<p><strong>Lab habit to avoid:</strong> the lab standardises training, validation and test sets each with their <em>own</em> mean and sd. Use the training mean and sd for all three. (Trees don’t care about scaling, but the networks later in the lab do.)</p>
+</div>
+<h2 id="trees-vs-linear-regression">Trees vs linear regression</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>linear regression</th>
+<th>regression tree</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>shape</td>
+<td>one sloped plane</td>
+<td>flat steps on boxes</td>
+</tr>
+<tr class="even">
+<td>best when</td>
+<td>the truth is roughly linear</td>
+<td>the truth has jumps, thresholds, interactions</td>
+</tr>
+<tr class="odd">
+<td>needs scaling?</td>
+<td>for gradient descent</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>readable?</td>
+<td>coefficients</td>
+<td>a flow chart</td>
+</tr>
+<tr class="odd">
+<td>variance</td>
+<td>low</td>
+<td>high</td>
+</tr>
+</tbody>
+</table>
+<p>This is exactly lab Q1. ISLP 8.1.3 (one page) is the argument to use in your answer.</p>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8.1.1 Regression trees, up to “Tree pruning” (p331–335)</td>
+<td><strong>Read</strong></td>
+<td>Core: Hitters, RSS of boxes (8.1), recursive binary splitting (8.2–8.3)</td>
+</tr>
+<tr class="even">
+<td>8.1.3 Trees versus linear models</td>
+<td><strong>Read</strong></td>
+<td>Not on the slides, but it’s lab Q1’s comparison</td>
+</tr>
+<tr class="odd">
+<td>8.1.4 Advantages and disadvantages</td>
+<td><strong>Read</strong></td>
+<td>Matches slides 7–8</td>
+</tr>
+<tr class="even">
+<td>8.2 Bagging, random forests, boosting</td>
+<td>Skip</td>
+<td>Only named on slide 8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 8.1.1). I want practice questions on REGRESSION TREES, done by hand:
+- reading a small tree diagram: which leaf a new point lands in and what it predicts
+- describing the regions of a tree as sets / boxes in the input plane
+- computing the RSS of a leaf and of a whole tree
+- finding the best first split of a tiny 1D data set by trying every midpoint
+- choosing between splitting one region or another in the second round (greedy, biggest RSS drop)
+- what n_stop = 1 or a maximum depth does, and why a fully grown tree overfits
+- why trees don&#39;t need standardised inputs, and when a tree beats linear regression
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/Judging_Classifiers.html"><small>&larr; Previous</small>Judging classifiers</a><a class="next" href="../w4/Classification_Trees.html"><small>Next &rarr;</small>Classification trees</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

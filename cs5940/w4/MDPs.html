@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markov decision processes · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w4_MDPs" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a class="active" aria-current="page" href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 4</span><span class="chip">4 techniques</span></div>
+  <h1>Markov decision processes</h1>
+  <p class="tagline">Weeks 2 and 3 described how an agent is built. This page makes "choosing well" precise: a world where actions have random outcomes and consequences that arrive later, written down as five things.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> not an agent: the problem every week 4 agent solves.<br />
+<strong>Week:</strong> 4 (slides 5 to 15).<br />
+<strong>Book:</strong> not in Wooldridge. 2.5 “purely reactive agents” (p. 36) is the closest idea. Sutton and Barto 3.1 to 3.3, or Russell and Norvig 17.1, if you want a second explanation.<br />
+<strong>Techniques on this page:</strong> the MDP tuple, the Markov property, the gridworld’s noisy transitions, where policies come from.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>STRIPS planning (week 2) assumed every action has <strong>one certain outcome</strong>. Real actions don’t: a robot’s wheels slip, a message might not arrive. And some consequences only show up later: the route past the cliff edge is as short as the safe one, it’s just riskier.</p>
+<p>A <strong>Markov decision process</strong> (MDP) is the standard way to describe that kind of problem precisely, so that “the best thing to do” has a definite meaning and can be computed (value iteration) or learned (Q-learning).</p>
+<p>The lecture makes one big simplifying assumption until the last part: the agent <strong>sees the true state</strong> (<span class="math inline">\(o_t = s_t\)</span>) and needs <strong>no memory</strong> beyond it (<span class="math inline">\(m_t = s_t\)</span>). <a href="POMDPs_and_Belief.html">POMDPs</a> drop it.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(s_t \in S\)</span></td>
+<td>the state of the world at time <span class="math inline">\(t\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a_t \in A\)</span></td>
+<td>the action the agent takes at time <span class="math inline">\(t\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(s&#39; \mid s, a)\)</span></td>
+<td>the chance of landing in <span class="math inline">\(s&#39;\)</span> if you do <span class="math inline">\(a\)</span> in <span class="math inline">\(s\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(R(s, a, s&#39;)\)</span></td>
+<td>the reward for that step; it arrives as <span class="math inline">\(r_{t+1}\)</span>, together with <span class="math inline">\(s_{t+1}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\gamma\)</span> (gamma)</td>
+<td>the discount factor: how much a reward one step later counts</td>
+</tr>
+<tr class="even">
+<td>policy <span class="math inline">\(\pi\)</span></td>
+<td>the agent’s rule: what to do in each state. The <em>solution</em>, not part of the problem</td>
+</tr>
+<tr class="odd">
+<td>stationary</td>
+<td>the same policy at every time step</td>
+</tr>
+<tr class="even">
+<td>terminal state</td>
+<td>the episode ends there</td>
+</tr>
+<tr class="odd">
+<td>living cost</td>
+<td>the small negative reward for every step that doesn’t end the episode</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-mdp-tuple">Technique 1: the MDP tuple</h2>
+<p><strong>Problem it solves:</strong> pins down exactly what the agent faces.</p>
+<p>An MDP is <span class="math inline">\(\langle S, A, P, R, \gamma\rangle\)</span>. One tick of the loop (slide 6): the agent sees <span class="math inline">\(s_t\)</span> and picks <span class="math inline">\(a_t\)</span> with its policy; the world draws <span class="math inline">\(s_{t+1}\)</span> from <span class="math inline">\(P(\cdot \mid s_t, a_t)\)</span> and hands back <span class="math inline">\(r_{t+1} = R(s_t, a_t, s_{t+1})\)</span>; repeat.</p>
+<p>Week 1’s vocabulary collapses onto it (slide 8): <span class="math inline">\(o_t = s_t\)</span>, <span class="math inline">\(m_t = s_t\)</span>, the goal <span class="math inline">\(g_t\)</span> is <strong>absorbed into <span class="math inline">\(R\)</span></strong> (reach the goal and you get +1), and <span class="math inline">\(a_t = \pi(m_t, g_t)\)</span> becomes <span class="math inline">\(a_t \sim \pi(\cdot \mid s_t)\)</span>.</p>
+<p><strong>Keep two things apart:</strong> <span class="math inline">\(P\)</span> is what the <em>world</em> does. <span class="math inline">\(\pi\)</span> is what the <em>agent</em> does. The MDP is the problem; the policy is the answer.</p>
+<h2 id="technique-2-the-markov-property">Technique 2: the Markov property</h2>
+<p><strong>Problem it solves:</strong> justifies deciding from the current state alone.</p>
+<p><span class="math display">\[P(s_{t+1} \mid s_t, a_t, s_{t-1}, a_{t-1}, \ldots, s_0) = P(s_{t+1} \mid s_t, a_t)\]</span></p>
+<p>“The future depends on the past only through the present.” Then <span class="math inline">\(s_t\)</span> is a <strong>sufficient statistic</strong>: knowing how you got here adds nothing.</p>
+<p>Slide 9’s key point: <strong>it’s a modelling claim, not a fact.</strong> It depends on what the designer put into <span class="math inline">\(s_t\)</span>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> A ball rolling along a track, with <span class="math inline">\(s_t\)</span> = its position. Two balls at the same spot, one rolling left and one right, have different futures. Not Markov. Add velocity: <span class="math inline">\(s_t = (\text{position}, \text{velocity})\)</span>, and it is.</p>
+<p>A delivery robot with <span class="math inline">\(s_t\)</span> = the room it’s in: not Markov if the right move depends on whether it’s carrying the parcel. <span class="math inline">\(s_t = (\text{room}, \text{carrying?})\)</span> fixes it.</p>
+</div>
+<p>This is why an MDP policy can be <strong>purely reactive</strong> (<span class="math inline">\(\pi: S \to A\)</span>, Wooldridge’s <span class="math inline">\(Ag: E \to Ac\)</span>, book p. 36) without losing anything: if the state is Markov, there’s nothing extra in the history to use.</p>
+<h2 id="technique-3-the-gridworlds-noisy-transitions">Technique 3: the gridworld’s noisy transitions</h2>
+<p><strong>Problem it solves:</strong> turns “actions sometimes go wrong” into numbers.</p>
+<p>The 4 × 3 gridworld (Russell and Norvig, slides 12 to 14). Cells <span class="math inline">\(s_{x,y}\)</span>, column <span class="math inline">\(x\)</span> = 1 to 4, row <span class="math inline">\(y\)</span> = 1 to 3:</p>
+<pre><code> | s1,3 | s2,3 | s3,3 |  +1  |
+ | s1,2 | wall | s3,2 |  −1  |
+ | s1,1 | s2,1 | s3,1 | s4,1 |</code></pre>
+<p>11 states (the wall isn’t one), two terminal. The intended move happens with probability <strong>0.8</strong>; the agent slips <strong>90° left or right with 0.1 each</strong>; bumping into the wall or edge leaves it in place. Each step costs <strong>−0.04</strong>; entering a terminal gives +1 or −1.</p>
+<p><strong>Recipe:</strong> list the three directions (intended, and the two at right angles), find where each lands, add up the probabilities of directions that land in the same cell.</p>
+<div class="example">
+<p><strong>Worked example.</strong> From <span class="math inline">\(s_{3,2}\)</span>, action North: North to <span class="math inline">\(s_{3,3}\)</span> (0.8); slip East into the −1 (0.1); slip West into the wall, stay in <span class="math inline">\(s_{3,2}\)</span> (0.1).</p>
+<p>From <span class="math inline">\(s_{1,1}\)</span>, action West: West hits the edge (0.8, stay); slip North to <span class="math inline">\(s_{1,2}\)</span> (0.1); slip South into the edge (0.1, stay). So <span class="math inline">\(P(s_{1,1} \mid s_{1,1}, W) = 0.9\)</span>.</p>
+</div>
+<p>Because a plan can be wrecked by the first slip, the answer to an MDP is a <strong>policy</strong> (an action for every state), not a plan (a fixed sequence). That’s the big difference from STRIPS.</p>
+<h2 id="technique-4-where-policies-come-from">Technique 4: where policies come from</h2>
+<p><strong>Problem it solves:</strong> connects this week’s maths to the architectures of weeks 2 and 3.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>How</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hand-designed</td>
+<td>the designer writes condition–action rules</td>
+<td><a href="../w2/Teleo_Reactive_Programs.html">teleo-reactive programs</a>, <a href="../w3/Subsumption.html">subsumption</a></td>
+</tr>
+<tr class="even">
+<td>planned</td>
+<td>computed from a known <span class="math inline">\(P\)</span> and <span class="math inline">\(R\)</span></td>
+<td><a href="Value_Iteration.html">value iteration</a></td>
+</tr>
+<tr class="odd">
+<td>learned</td>
+<td>estimated from experience when <span class="math inline">\(P\)</span>, <span class="math inline">\(R\)</span> are unknown</td>
+<td><a href="Q_Learning.html">Q-learning</a></td>
+</tr>
+</tbody>
+</table>
+<p>All three produce <strong>the same object</strong>, a map from states to actions (slide 15). They differ only in how they get it.</p>
+<div class="example">
+<p><strong>Worked example.</strong> How many deterministic policies does the gridworld have? 9 non-terminal states, 4 actions each: <span class="math inline">\(4^9 = 262{,}144\)</span>. Same counting as week 1’s <span class="math inline">\(|Ac|^{|E|}\)</span> reactive agents.</p>
+</div>
+<div class="warn">
+<p><strong>The Markov discussion (slide 10).</strong> No real state representation is exactly Markov; the question is whether it’s “Markov enough”. You can test it: does adding the previous state or action improve your predictions of <span class="math inline">\(s_{t+1}\)</span>? If so, your state is missing something, and every later guarantee (optimal values, convergence) is about the model, not the world.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge 2.5 “Purely reactive agents”, p. 36</td>
+<td><strong>Read</strong></td>
+<td>Slide 11 cites it: <span class="math inline">\(Ag: E \to Ac\)</span> and the thermostat</td>
+</tr>
+<tr class="even">
+<td>Wooldridge, rest of Ch. 2</td>
+<td>Done in week 1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Sutton and Barto 3.1 to 3.3 (free online)</td>
+<td>Optional</td>
+<td>the agent–environment loop and the Markov property</td>
+</tr>
+<tr class="even">
+<td>Russell and Norvig 17.1</td>
+<td>Optional</td>
+<td>where the gridworld comes from</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 4 (MDPs and reinforcement learning). I want practice on MARKOV DECISION PROCESSES:
+- the tuple &lt;S, A, P, R, gamma&gt; and what each part means; why the policy is not part of the MDP
+- why the reward for acting at time t is written r_{t+1}
+- the Markov property, and deciding whether a given state representation is Markov (and how to fix it)
+- transition probabilities in the 4x3 gridworld (0.8 intended, 0.1 slip each side at 90 degrees, walls leave you in place)
+- why the solution is a policy, not a plan; counting deterministic policies
+- hand-designed vs planned vs learned policies, with examples from teleo-reactive programs, value iteration and Q-learning
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w3/Hybrid_Architectures.html"><small>&larr; Previous</small>Hybrid architectures</a><a class="next" href="../w4/Return_and_Value.html"><small>Next &rarr;</small>Return, value and Bellman</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

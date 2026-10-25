@@ -284,6 +284,84 @@ var builders={
       var best=p.indexOf(Math.max.apply(null,p));stats(u.out,[['e^z =',e.map(function(v){return f2(v)}).join(', ')],['total',f2(S)],['predict','class '+(best+1)]]);}
     z.forEach(function(s){s.on(draw)});draw();W.push(draw);
   },
+  /* ================= CS5100 week 4 ================= */
+  /* Regression tree: one split */
+  treesplit:function(host){
+    var X=[1,2,3,5,7,8],Y=[2,3,5,8,9,12];
+    var u=mk(host,'Try a cutpoint','The guide’s six players. Move the cut s: points left of it are predicted by their average, points right of it by theirs. The red lines are the misses whose squares make the RSS.','&#127795;');
+    var S=slider(u.ctl,'cut s',0.5,8.5,0.1,6,function(v){return f2(v,1)});
+    function parts(s){var L=[],R=[];X.forEach(function(x,i){(x<s?L:R).push(Y[i])});function m(a){return a.length?a.reduce(function(p,c){return p+c},0)/a.length:NaN}function r(a,mm){return a.reduce(function(p,c){return p+(c-mm)*(c-mm)},0)}var ml=m(L),mr=m(R);return {L:L,R:R,ml:ml,mr:mr,rl:L.length?r(L,ml):0,rr:R.length?r(R,mr):0}}
+    button(u.ctl,'Jump to best',function(){var best=null,bv=1e9;[1.5,2.5,4,6,7.5].forEach(function(s){var q=parts(s);if(q.rl+q.rr<bv){bv=q.rl+q.rr;best=s}});S.set(best);draw()});
+    function draw(){var s=S.v,q=parts(s);var F=frame(u.svg,640,250,[0,9],[0,14]);F.axes([0,1,2,3,4,5,6,7,8,9],[0,4,8,12],'years x','salary y');
+      el('line',{x1:F.X(s),x2:F.X(s),y1:F.Y(0),y2:F.Y(14),style:'stroke:var(--ink);stroke-width:2;stroke-dasharray:6 4'},u.svg);
+      if(q.L.length)el('line',{x1:F.X(0),x2:F.X(s),y1:F.Y(q.ml),y2:F.Y(q.ml),style:'stroke:var(--reg);stroke-width:3'},u.svg);
+      if(q.R.length)el('line',{x1:F.X(s),x2:F.X(9),y1:F.Y(q.mr),y2:F.Y(q.mr),style:'stroke:var(--cls);stroke-width:3'},u.svg);
+      X.forEach(function(x,i){var m=x<s?q.ml:q.mr;el('line',{x1:F.X(x),x2:F.X(x),y1:F.Y(Y[i]),y2:F.Y(m),style:'stroke:#d33;stroke-width:1.5;opacity:.7'},u.svg);el('circle',{cx:F.X(x),cy:F.Y(Y[i]),r:6,style:'fill:'+(x<s?'var(--reg)':'var(--cls)')+';stroke:var(--surface);stroke-width:2'},u.svg)});
+      stats(u.out,[['left mean',q.L.length?f2(q.ml):'–'],['left RSS',f2(q.rl)],['right mean',q.R.length?f2(q.mr):'–'],['right RSS',f2(q.rr)],['total RSS',f2(q.rl+q.rr)+(Math.abs(q.rl+q.rr-13.333)<0.01?' ✅ best':'')]]);}
+    S.on(draw);draw();W.push(draw);
+  },
+  /* Classification tree: impurity curves */
+  impurity:function(host){
+    var u=mk(host,'Three ways to measure a mixed leaf','Slide the fraction of class 1 in a two-class leaf. All three scores are 0 when the leaf is pure; Gini and entropy are curved, the error rate is a tent.','&#9878;');
+    var P=slider(u.ctl,'fraction of class 1, p',0,1,0.01,0.3,function(v){return f2(v)});
+    function err(p){return 1-Math.max(p,1-p)}function gin(p){return 2*p*(1-p)}function ent(p){return (p<=0||p>=1)?0:-(p*Math.log(p)+(1-p)*Math.log(1-p))}
+    function draw(){var F=frame(u.svg,640,250,[0,1],[0,0.75]);F.axes([0,0.25,0.5,0.75,1],[0,0.25,0.5,0.75],'p','impurity');
+      F.path(err,0,1,'stroke:var(--muted);stroke-width:2.5');F.path(gin,0,1,'stroke:var(--accent);stroke-width:3');F.path(ent,0,1,'stroke:var(--cls);stroke-width:3');
+      [[err,'var(--muted)'],[gin,'var(--accent)'],[ent,'var(--cls)']].forEach(function(a){el('circle',{cx:F.X(P.v),cy:F.Y(a[0](P.v)),r:6,style:'fill:'+a[1]+';stroke:var(--surface);stroke-width:2'},u.svg)});
+      el('line',{x1:F.X(P.v),x2:F.X(P.v),y1:F.Y(0),y2:F.Y(0.75),style:'stroke:var(--line);stroke-dasharray:4 4'},u.svg);
+      [['error rate','var(--muted)',0.62],['Gini','var(--accent)',0.55],['entropy','var(--cls)',0.70]].forEach(function(a){var t=el('text',{x:F.X(0.83),y:F.Y(a[2]),style:'fill:'+a[1]+';font-size:12px;font-weight:700'},u.svg);t.textContent=a[0]});
+      stats(u.out,[['error',f2(err(P.v),3)],['Gini',f2(gin(P.v),3)],['entropy',f2(ent(P.v),3)],['leaf predicts',P.v>0.5?'class 1':P.v<0.5?'class 0':'tie']]);}
+    P.on(draw);draw();W.push(draw);
+  },
+  /* Pruning: C_alpha bars */
+  prune:function(host){
+    var L=[1,2,3,4,6],R=[73.5,13.33,5.17,1.0,0];
+    var u=mk(host,'Charge a fee per leaf','Each bar is a subtree of the worked example: the darker part is its training RSS, the lighter part is the fee α × leaves. The lowest bar wins. Raise α and watch the winner shrink.','&#9986;');
+    var A=slider(u.ctl,'fee per leaf α',0,70,0.25,5,function(v){return f2(v,2)});
+    function draw(){var a=A.v,C=L.map(function(l,i){return R[i]+a*l}),best=C.indexOf(Math.min.apply(null,C));var top=Math.max.apply(null,C)*1.1;
+      var F=frame(u.svg,640,250,[0,5],[0,top],{l:46,r:14,t:12,b:30});F.axes([],[0,Math.round(top/2),Math.round(top)],'','C_α');
+      L.forEach(function(l,i){var x0=F.X(i+0.18),w=F.X(i+0.82)-x0;var on=i===best;
+        el('rect',{x:x0,y:F.Y(R[i]),width:w,height:F.Y(0)-F.Y(R[i]),style:'fill:'+(on?'var(--done)':'var(--accent)')+';opacity:'+(on?1:.55)},u.svg);
+        el('rect',{x:x0,y:F.Y(C[i]),width:w,height:F.Y(R[i])-F.Y(C[i]),style:'fill:'+(on?'var(--done)':'var(--accent)')+';opacity:'+(on?.45:.22)},u.svg);
+        var t=el('text',{x:x0+w/2,y:F.Y(0)+16,'text-anchor':'middle','class':'axt'},u.svg);t.textContent=l+(l===1?' leaf':' leaves');
+        var t2=el('text',{x:x0+w/2,y:F.Y(C[i])-5,'text-anchor':'middle','class':'axt',style:'font-weight:700'},u.svg);t2.textContent=f2(C[i],1)});
+      stats(u.out,[['chosen subtree',L[best]+(L[best]===1?' leaf':' leaves')],['its RSS',f2(R[best])],['sklearn ccp_alpha (n = 6)',f2(a/6,3)]]);}
+    A.on(draw);draw();W.push(draw);
+  },
+  /* Neural net: sum of ReLU hinges */
+  relunet:function(host){
+    var xs=[],ys=[];for(var i=0;i<15;i++){var x=-3+6*i/14;xs.push(x);ys.push(Math.sin(1.2*x)+0.3*x)}
+    var u=mk(host,'Build a curve from ReLU hinges','f(x) = β₀ + β₁·ReLU(x − c₁) + β₂·ReLU(x − c₂) + β₃·ReLU(x − c₃). Each unit adds a corner at cₖ and changes the slope by βₖ after it. Try to fit the dots.','&#129504;');
+    var b0=slider(u.ctl,'β₀',-3,3,0.05,-0.6,function(v){return f2(v)});
+    var c=[],b=[],c0=[-3,-1,1];
+    for(var k0=0;k0<3;k0++){c.push(slider(u.ctl,'c'+'₁₂₃'[k0],-3,3,0.05,c0[k0],function(v){return f2(v)}));b.push(slider(u.ctl,'β'+'₁₂₃'[k0],-3,3,0.05,0,function(v){return f2(v)}))}
+    function f(x){var v=b0.v;for(var k=0;k<3;k++)v+=b[k].v*Math.max(0,x-c[k].v);return v}
+    function draw(){var F=frame(u.svg,640,250,[-3.2,3.2],[-2.5,2.5]);F.axes([-3,-2,-1,0,1,2,3],[-2,-1,0,1,2],'x','f(x)');
+      for(var k=0;k<3;k++){(function(k){F.path(function(x){return b[k].v*Math.max(0,x-c[k].v)},-3.2,3.2,'stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3;opacity:.7')})(k);el('line',{x1:F.X(c[k].v),x2:F.X(c[k].v),y1:F.Y(-2.5),y2:F.Y(-2.3),style:'stroke:var(--ink);stroke-width:2'},u.svg)}
+      xs.forEach(function(x,i){el('circle',{cx:F.X(x),cy:F.Y(ys[i]),r:5,style:'fill:var(--ex-b)'},u.svg)});
+      F.path(f,-3.2,3.2,'stroke:var(--accent);stroke-width:3',400);
+      var m=0;xs.forEach(function(x,i){m+=Math.pow(ys[i]-f(x),2)});m/=xs.length;
+      stats(u.out,[['training MSE',f2(m,3)],['verdict',m<0.03?'✅ great fit with 3 units':m<0.15?'close':'keep going (stuck? with the corners at −3, −1, 1 try β₁ ≈ −0.45, β₂ ≈ 2, β₃ ≈ −2)']]);}
+    [b0].concat(c,b).forEach(function(s){s.on(draw)});draw();W.push(draw);
+  },
+  /* Training: GD on a non-convex loss */
+  nonconvex:function(host){
+    var u=mk(host,'Gradient descent in a landscape with two valleys','R(θ) = (θ² − 1)² + 0.3θ has a lower valley on the left and a higher one on the right. Where you start decides where you end up.','&#9968;');
+    var T0=slider(u.ctl,'start θ₀',-1.8,1.8,0.05,0.6,function(v){return f2(v)}),E=slider(u.ctl,'learning rate η',0.005,0.3,0.005,0.05,function(v){return f2(v,3)});
+    var th=0.6,hist=[0.6],timer=null;
+    function R(t){return Math.pow(t*t-1,2)+0.3*t}function dR(t){return 4*t*(t*t-1)+0.3}
+    function reset(){clearInterval(timer);th=T0.v;hist=[th];draw()}
+    function step(){th=th-E.v*dR(th);hist.push(th);draw()}
+    button(u.ctl,'Step',step);button(u.ctl,'Run 30',function(){var n=0;clearInterval(timer);timer=setInterval(function(){step();if(++n>=30||Math.abs(th)>5)clearInterval(timer)},90)});button(u.ctl,'Reset',reset);
+    T0.on(reset);E.on(function(){});
+    function draw(){var F=frame(u.svg,640,250,[-1.9,1.9],[-0.6,4]);F.axes([-1.5,-1,-0.5,0,0.5,1,1.5],[0,2,4],'θ','R(θ)');
+      F.path(R,-1.9,1.9,'stroke:var(--accent);stroke-width:3');
+      var d='';hist.forEach(function(t,i){var tt=Math.max(-1.9,Math.min(1.9,t));d+=(i?'L':'M')+F.X(tt)+','+F.Y(Math.min(4,R(tt)))});el('path',{d:d,fill:'none',style:'stroke:var(--ex-b);stroke-width:1.5;opacity:.7'},u.svg);
+      var tt=Math.max(-1.9,Math.min(1.9,th));el('circle',{cx:F.X(tt),cy:F.Y(Math.min(4,R(tt))),r:8,style:'fill:var(--cls);stroke:var(--surface);stroke-width:2'},u.svg);
+      var g=dR(th);var where=Math.abs(g)<1e-3?(th<0?'✅ global minimum (θ ≈ −1.04)':'⚠ stuck in the local minimum (θ ≈ 0.96)'):(Math.abs(th)>3?'blew up: η too big':'rolling…');
+      stats(u.out,[['steps',hist.length-1],['θ =',Math.abs(th)>100?'∞':f2(th,3)],['R(θ) =',Math.abs(th)>100?'∞':f2(R(th),3)],['slope',Math.abs(g)>1e4?'huge':f2(g,3)],['status',where]]);}
+    draw();W.push(draw);
+  },
   /* ================= CS5940 widgets ================= */
   /* Environment properties: classify-it quiz */
   envquiz:function(host){
@@ -489,6 +567,95 @@ var builders={
       var H=Math.pow(M,n.v),V=M*M*(n.v-1);
       stats(u.out,[['<span style="color:var(--cls)">■</span> horizontal mⁿ',H.toLocaleString()],['<span style="color:var(--reg)">■</span> vertical m²(n−1)',V.toLocaleString()],['ratio',f2(H/V,1)+'×']]);}
     n.on(draw);m.on(draw);draw();W.push(draw);
+  },
+  /* MDP: discount weights */
+  discount:function(host){
+    var u=mk(host,'What does γ do to future rewards?','Each bar is how much a reward k steps away counts, γᵏ. The readout uses slide 20’s run (four steps of −0.04, then +1) and a living cost of −0.04 for ever.','&#9203;');
+    var g=slider(u.ctl,'γ',0,1,0.01,0.9,function(v){return f2(v,2)});
+    function draw(){var G=g.v,K=20;var F=frame(u.svg,640,220,[-0.6,K-0.4],[0,1.05]);F.axes([0,5,10,15],[0,0.5,1],'steps away k','weight γᵏ');
+      var bw=(F.X(1)-F.X(0))*0.7;for(var k=0;k<K;k++){var v=Math.pow(G,k);el('rect',{x:F.X(k)-bw/2,y:F.Y(v),width:bw,height:F.Y(0)-F.Y(v),rx:2,style:'fill:'+(k===4?'var(--cls)':'var(--accent)')},u.svg)}
+      var ret=-0.04*(1+G+G*G+G*G*G)+Math.pow(G,4);
+      stats(u.out,[['slide 20 return G₀',f2(ret,4)],['+1 at step 4 counts',f2(Math.pow(G,4),3)],['−0.04 for ever',G<1?f2(-0.04/(1-G),3):'−∞ (diverges)'],['reward 10 steps away counts',f2(Math.pow(G,10),3)]]);}
+    g.on(draw);draw();W.push(draw);
+  },
+  /* MDP: gridworld value iteration */
+  gridvi:function(host){
+    var u=mk(host,'Value iteration on the 4 × 3 gridworld','Each sweep applies the Bellman optimality update to every cell (0.8 intended move, 0.1 slip each side). Numbers are V; arrows are the greedy policy. Change γ or the living cost and run again.','&#129517;');
+    var g=slider(u.ctl,'γ',0.5,1,0.01,1,function(v){return f2(v,2)}),c=slider(u.ctl,'living cost',-2,0.1,0.01,-0.04,function(v){return f2(v,2)});
+    var cells=[],T={'4,3':1,'4,2':-1},A={N:[0,1],S:[0,-1],E:[1,0],W:[-1,0]},SL={N:['W','E'],S:['E','W'],E:['N','S'],W:['S','N']},V,k,lastD;
+    for(var x=1;x<=4;x++)for(var y=1;y<=3;y++)if(!(x===2&&y===2))cells.push(x+','+y);
+    function mv(s,d){var p=s.split(',').map(Number),n=(p[0]+A[d][0])+','+(p[1]+A[d][1]);return cells.indexOf(n)>=0?n:s}
+    function q(s,a,Vv){var tot=0;[[a,.8],[SL[a][0],.1],[SL[a][1],.1]].forEach(function(z){var n=mv(s,z[0]);tot+=z[1]*((n in T?T[n]:c.v)+g.v*(n in T?0:Vv[n]))});return tot}
+    function best(s,Vv){var b='N',bv=-1e18;['N','S','E','W'].forEach(function(a){var v=q(s,a,Vv);if(v>bv+1e-12){bv=v;b=a}});return [b,bv]}
+    function reset(){V={};cells.forEach(function(s){V[s]=0});k=0;lastD=null;draw()}
+    function sweep(){var N={},d=0;cells.forEach(function(s){N[s]=s in T?0:best(s,V)[1];d=Math.max(d,Math.abs(N[s]-V[s]))});V=N;k++;lastD=d}
+    function draw(){var W0=640,H0=260;u.svg.setAttribute('viewBox','0 0 '+W0+' '+H0);while(u.svg.firstChild)u.svg.removeChild(u.svg.firstChild);
+      var cw=150,ch=80,ox=20,oy=10,arr={N:'↑',S:'↓',E:'→',W:'←'};
+      for(var x=1;x<=4;x++)for(var y=1;y<=3;y++){var s=x+','+y,X=ox+(x-1)*cw,Y=oy+(3-y)*ch;
+        var fill=s==='2,2'?'var(--line)':s in T?(T[s]>0?'color-mix(in srgb,var(--reg) 35%,transparent)':'color-mix(in srgb,var(--cls) 35%,transparent)'):'var(--surface-2)';
+        el('rect',{x:X+2,y:Y+2,width:cw-4,height:ch-4,rx:8,style:'fill:'+fill+';stroke:var(--line)'},u.svg);
+        var t=el('text',{x:X+cw/2,y:Y+ch/2+6,'text-anchor':'middle',style:'fill:var(--ink);font-size:18px;font-weight:700'},u.svg);
+        if(s==='2,2')t.textContent='wall';else if(s in T)t.textContent=(T[s]>0?'+1':'−1');else{t.textContent=(k?arr[best(s,V)[0]]+' ':'')+f2(V[s],3)}
+        var l=el('text',{x:X+8,y:Y+16,style:'fill:var(--muted);font-size:11px'},u.svg);l.textContent='s'+x+','+y}
+      stats(u.out,[['sweeps',k],['biggest change last sweep',lastD===null?'–':f2(lastD,5)],['V(s1,1)',f2(V['1,1'],3)],['converged?',lastD!==null&&lastD<1e-5?'yes':'not yet']]);}
+    button(u.ctl,'Sweep once',function(){sweep();draw()});
+    button(u.ctl,'Run to convergence',function(){var i=0;do{sweep();i++}while(lastD>1e-6&&i<2000);draw();if(lastD>1e-6)u.out.innerHTML+='<span class="stat">&#9888; <b>not converging: with γ = 1 and a positive living reward the values grow for ever</b></span>'});
+    button(u.ctl,'Reset',reset);g.on(reset);c.on(reset);reset();W.push(draw);
+  },
+  /* Q-learning on the corridor */
+  qlearn:function(host){
+    var u=mk(host,'Q-learning on the corridor','s1 ⇄ s2 → s3 (goal). −0.1 per step, 0.9 for entering s3, West from s1 stays. “Slide step” replays slides 36 to 37 in order; “Episode” runs one episode from s1 choosing ε-greedily (ε = 0.3).','&#129504;');
+    u.svg.style.display='none';
+    var a=slider(u.ctl,'α',0.05,1,0.05,0.5,function(v){return f2(v,2)}),g=slider(u.ctl,'γ',0.5,0.99,0.01,0.9,function(v){return f2(v,2)});
+    var box=document.createElement('div');host.insertBefore(box,u.ctl);var lg=document.createElement('div');lg.className='log';host.appendChild(lg);
+    var Q,log,si,seed,SL=[['s2','E',0.9,'s3'],['s1','E',-0.1,'s2'],['s2','E',0.9,'s3'],['s1','E',-0.1,'s2'],['s2','W',-0.1,'s1']];
+    function R(){seed=(seed*1103515245+12345)%2147483648;return seed/2147483648}
+    function env(s,x){if(x==='E')return s==='s1'?['s2',-0.1]:['s3',0.9];return ['s1',-0.1]}
+    function mx(s){return s==='s3'?0:Math.max(Q[s+'E'],Q[s+'W'])}
+    function upd(s,x,r,n){var t=r+g.v*mx(n),d=t-Q[s+x];Q[s+x]+=a.v*d;log.push('('+s+', '+x+', '+(r>0?'+':'')+r+', '+n+'): target '+f2(t,4)+', δ '+f2(d,4)+' → Q('+s+','+x+') = '+f2(Q[s+x],4))}
+    function reset(){Q={s1E:0,s1W:0,s2E:0,s2W:0};log=[];si=0;seed=7;draw()}
+    function qstar(){var G=g.v,v2=0.9,v1=Math.max(-0.1+G*0.9,-0.1/(1-G));return {s1E:-0.1+G*v2,s1W:-0.1+G*v1,s2E:0.9,s2W:-0.1+G*v1}}
+    function draw(){var S=qstar(),h='<table class="rules"><tr><td></td><td><b>Q(·, East)</b></td><td><b>Q(·, West)</b></td><td><b>greedy</b></td></tr>';
+      ['s1','s2'].forEach(function(s){h+='<tr><td><b>'+s+'</b></td><td>'+f2(Q[s+'E'],4)+' <small>(Q* '+f2(S[s+'E'],3)+')</small></td><td>'+f2(Q[s+'W'],4)+' <small>(Q* '+f2(S[s+'W'],3)+')</small></td><td>'+(Q[s+'E']>=Q[s+'W']?'East':'West')+'</td></tr>'});
+      box.innerHTML=h+'</table>';lg.textContent=log.length?log.slice(-12).join('\n'):'Press a button. Each line is one update.';
+      stats(u.out,[['updates',log.length],['slide steps used',si+' of 5']]);}
+    button(u.ctl,'Slide step',function(){if(si<5){var z=SL[si++];upd(z[0],z[1],z[2],z[3])}draw()});
+    button(u.ctl,'Episode',function(){var s='s1',n=0;while(s!=='s3'&&n<50){var x=R()<0.3?(R()<0.5?'E':'W'):(Q[s+'E']>=Q[s+'W']?'E':'W');var e=env(s,x);upd(s,x,e[1],e[0]);s=e[0];n++}draw()});
+    button(u.ctl,'Reset',reset);a.on(draw);g.on(draw);reset();
+  },
+  /* Exploration: the tempting exit */
+  explore:function(host){
+    var u=mk(host,'Does the learner find the long way round?','Corridor 0–1–2–3–4 from 0. West at 0 exits with 0.3; reaching 4 gives 1; γ = 0.95; α = 0.5. Ties go to West. Each run trains one Q-learner; the bar shows how many of 20 runs end up choosing East at 0 (the right answer). Start with ε = 0.2, then try ε = 0.5, more episodes, or initial Q = 1.','&#129517;');
+    var e=slider(u.ctl,'ε',0,0.6,0.05,0.2,function(v){return f2(v,2)}),n=slider(u.ctl,'episodes',50,3000,50,300),o=slider(u.ctl,'initial Q',0,1,0.1,0,function(v){return f2(v,1)});
+    function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+    function run(seed){var R=rng(seed),Q={},I=o.v;function g(s,a){return (s+a) in Q?Q[s+a]:I}
+      for(var ep=0;ep<n.v;ep++){var s=0,steps=0;while(s!=='x'&&s!==4&&steps<200){var a=R()<e.v?(R()<0.5?'W':'E'):(g(s,'E')>g(s,'W')?'E':'W');
+        var s2,r;if(a==='W'){if(s===0){s2='x';r=0.3}else{s2=s-1;r=0}}else{s2=s+1;r=s2===4?1:0}
+        var nb=(s2==='x'||s2===4)?0:Math.max(g(s2,'W'),g(s2,'E'));Q[s+a]=g(s,a)+0.5*(r+0.95*nb-g(s,a));s=s2;steps++}}
+      return [g(0,'E')>g(0,'W'),g(0,'E')]}
+    function draw(){var hits=0,qe=0;for(var i=0;i<20;i++){var z=run(100+i);hits+=z[0]?1:0;qe+=z[1]}
+      var F=frame(u.svg,640,90,[0,20],[0,1],{l:10,r:10,t:10,b:24});el('rect',{x:F.X(0),y:F.Y(.9),width:F.X(20)-F.X(0),height:F.Y(.1)-F.Y(.9),rx:8,style:'fill:var(--surface-2);stroke:var(--line)'},u.svg);
+      el('rect',{x:F.X(0),y:F.Y(.9),width:F.X(hits)-F.X(0),height:F.Y(.1)-F.Y(.9),rx:8,style:'fill:var(--reg)'},u.svg);
+      stats(u.out,[['runs choosing East at 0',hits+' / 20'],['average Q(0, East)',f2(qe/20,3)],['true Q*(0, East)',f2(Math.pow(0.95,3),3)],['Q(0,East) = 0.271 means','learned “go East, come back, exit”']]);}
+    [e,n,o].forEach(function(z){z.on(draw)});draw();W.push(draw);
+  },
+  /* POMDP: belief update */
+  belief:function(host){
+    var u=mk(host,'Update the belief: which room am I in?','Rooms L and R. Each step the robot stays with the probability below (otherwise it is moved). Then it sees a window or not. Press an observation to predict, correct and normalise.','&#128301;');
+    var st=slider(u.ctl,'P(stay)',0.5,1,0.05,0.9,function(v){return f2(v,2)}),wl=slider(u.ctl,'O(window | L)',0,1,0.05,0.8,function(v){return f2(v,2)}),wr=slider(u.ctl,'O(window | R)',0,1,0.05,0.3,function(v){return f2(v,2)});
+    var lg=document.createElement('div');lg.className='log';host.appendChild(lg);var m,log;
+    function reset(){m=[0.5,0.5];log=[];draw()}
+    function obs(w){var p=st.v,pr=[m[0]*p+m[1]*(1-p),m[1]*p+m[0]*(1-p)],oL=w?wl.v:1-wl.v,oR=w?wr.v:1-wr.v,c=[pr[0]*oL,pr[1]*oR],z=c[0]+c[1];
+      if(z<=0){log.push('impossible observation under this model');draw();return}
+      m=[c[0]/z,c[1]/z];log.push((w?'window':'none  ')+': predict ('+f2(pr[0],3)+', '+f2(pr[1],3)+')  correct ('+f2(c[0],3)+', '+f2(c[1],3)+')  normalise → ('+f2(m[0],3)+', '+f2(m[1],3)+')');draw()}
+    function draw(){var F=frame(u.svg,640,120,[0,1],[0,2],{l:30,r:14,t:10,b:20});
+      [['L',m[0],1.35,'var(--reg)'],['R',m[1],0.45,'var(--cls)']].forEach(function(b){el('rect',{x:F.X(0),y:F.Y(b[2]+0.35),width:F.X(1)-F.X(0),height:F.Y(b[2]-0.35)-F.Y(b[2]+0.35),rx:6,style:'fill:var(--surface-2)'},u.svg);
+        el('rect',{x:F.X(0),y:F.Y(b[2]+0.35),width:F.X(b[1])-F.X(0),height:F.Y(b[2]-0.35)-F.Y(b[2]+0.35),rx:6,style:'fill:'+b[3]},u.svg);
+        var t=el('text',{x:F.pad.l-8,y:F.Y(b[2])+5,'text-anchor':'end','class':'axt'},u.svg);t.textContent=b[0]});
+      lg.textContent=log.length?log.slice(-10).join('\n'):'Start at (0.5, 0.5). Try window, window, none (guide 8.5).';
+      stats(u.out,[['P(L)',f2(m[0],3)],['P(R)',f2(m[1],3)],['best guess',m[0]>=m[1]?'L':'R'],['observations',log.length]]);}
+    button(u.ctl,'&#129695; see window',function(){obs(true)});button(u.ctl,'&#11036; see nothing',function(){obs(false)});button(u.ctl,'Reset',reset);
+    [st,wl,wr].forEach(function(z){z.on(draw)});reset();W.push(draw);
   }
 };
 function widgets(){document.querySelectorAll('[data-widget]').forEach(function(h){var f=builders[h.getAttribute('data-widget')];if(f){h.classList.add('widget');try{f(h)}catch(e){h.textContent='(interactive demo failed to load)'}}})}

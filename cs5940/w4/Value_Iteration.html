@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Value iteration · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w4_Value_Iteration" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip delib">Deliberative agent</span><span class="chip">Week 4</span><span class="chip">5 techniques</span></div>
+  <h1>Value iteration</h1>
+  <p class="tagline">An agent that knows exactly how its world works can work out the best thing to do in every state before it moves: start with all values at zero and keep applying the Bellman equation until nothing changes.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> deliberative agent (planning with a known model).<br />
+<strong>Week:</strong> 4 (slides 22 to 28).<br />
+<strong>Book:</strong> not in Wooldridge. Sutton and Barto 4.4, Russell and Norvig 17.2.1.<br />
+<strong>Techniques on this page:</strong> the sweep, value flowing back from the goal, extracting the policy, a gridworld backup by hand, what reshapes the policy.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The <a href="Return_and_Value.html">Bellman optimality equation</a> describes the best values, but it has a max in it, so you can’t just solve it like simultaneous equations.</p>
+<p><strong>Value iteration</strong> turns the equation into a repeated update. It needs the whole model, <span class="math inline">\(P\)</span> and <span class="math inline">\(R\)</span>, which makes it <strong>planning</strong>: like STRIPS (week 2), but for a world with random outcomes and rewards, and producing an action for every state instead of a single plan.</p>
+<p>Slide 28’s core point: <strong>acting well now depends on the value of states you may reach later.</strong></p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sweep</td>
+<td>one pass that updates every state’s value once</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(V_k\)</span></td>
+<td>the values after <span class="math inline">\(k\)</span> sweeps</td>
+</tr>
+<tr class="odd">
+<td>Bellman backup</td>
+<td>one application of the update to one state: pull value back from the next states</td>
+</tr>
+<tr class="even">
+<td>converged</td>
+<td>another sweep changes nothing (or almost nothing)</td>
+</tr>
+<tr class="odd">
+<td>policy extraction</td>
+<td>reading off the best action in each state from the values</td>
+</tr>
+<tr class="even">
+<td>planning</td>
+<td>using (estimated) future value to choose now</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-sweep">Technique 1: the sweep</h2>
+<p><strong>Problem it solves:</strong> computes <span class="math inline">\(V^*\)</span> from the model.</p>
+<ol type="1">
+<li>Start with <span class="math inline">\(V_0(s) = 0\)</span> for every state (terminal states stay 0).</li>
+<li>For every non-terminal <span class="math inline">\(s\)</span>: <span class="math inline">\(V_{k+1}(s) = \max_a \sum_{s&#39;} P(s&#39; \mid s, a)[R(s, a, s&#39;) + \gamma V_k(s&#39;)]\)</span>, using the <strong>previous</strong> row on the right.</li>
+<li>Repeat until <span class="math inline">\(V_{k+1} = V_k\)</span>.</li>
+</ol>
+<div class="example">
+<p><strong>Worked example (slides 25 to 26).</strong> Corridor <span class="math inline">\(s_1 \leftrightarrow s_2 \to s_3\)</span>, certain moves, West from <span class="math inline">\(s_1\)</span> stays, −0.1 per step, <span class="math inline">\(R(s_2, E, s_3) = 0.9\)</span>, <span class="math inline">\(\gamma = 0.9\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(s_1\)</span></th>
+<th><span class="math inline">\(s_2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(V_0\)</span></td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(V_1\)</span></td>
+<td>−0.1</td>
+<td>0.9</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(V_2\)</span></td>
+<td>0.71</td>
+<td>0.9</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(V_3\)</span></td>
+<td>0.71</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+<p>Sweep 2 at <span class="math inline">\(s_1\)</span>: East <span class="math inline">\(-0.1 + 0.9(0.9) = 0.71\)</span>; West <span class="math inline">\(-0.1 + 0.9(-0.1) = -0.19\)</span>; max 0.71. Sweep 3 changes nothing: converged.</p>
+</div>
+<h2 id="technique-2-value-flows-back-from-the-goal">Technique 2: value flows back from the goal</h2>
+<p><strong>Problem it solves:</strong> explains <em>why</em> it takes several sweeps.</p>
+<p>After sweep 1 only <span class="math inline">\(s_2\)</span>, next to the goal, has a good value. After sweep 2 the news has reached <span class="math inline">\(s_1\)</span>. <strong>Value moves back one step per sweep</strong>, so a start state <span class="math inline">\(n\)</span> steps from the goal needs about <span class="math inline">\(n\)</span> sweeps to feel it. This is the same “credit flowing backwards” that <a href="Q_Learning.html">Q-learning</a> does from experience.</p>
+<h2 id="technique-3-extracting-the-policy">Technique 3: extracting the policy</h2>
+<p><strong>Problem it solves:</strong> turns values into actions.</p>
+<p><span class="math display">\[\pi^*(s) = \arg\max_a \sum_{s&#39;} P(s&#39; \mid s, a)\,[R(s, a, s&#39;) + \gamma V^*(s&#39;)]\]</span></p>
+<div class="example">
+<p><strong>Worked example (slide 27).</strong> At convergence: <span class="math inline">\(Q^*(s_1, E) = 0.71\)</span>, <span class="math inline">\(Q^*(s_1, W) = -0.1 + 0.9(0.71) = 0.539\)</span>, <span class="math inline">\(Q^*(s_2, E) = 0.9\)</span>, <span class="math inline">\(Q^*(s_2, W) = 0.539\)</span>. So East in both states.</p>
+<p>At <span class="math inline">\(s_1\)</span> both actions cost −0.1 right now. Only the values of where they lead break the tie: that’s the whole point.</p>
+</div>
+<h2 id="technique-4-a-gridworld-backup-by-hand">Technique 4: a gridworld backup by hand</h2>
+<p><strong>Problem it solves:</strong> checks one arrow of slide 14’s policy.</p>
+<p>Converged values for <span class="math inline">\(\gamma = 1\)</span>, living cost −0.04: <span class="math inline">\(V^*(s_{2,1}) = 0.695\)</span>, <span class="math inline">\(V^*(s_{3,2}) = 0.700\)</span>, <span class="math inline">\(V^*(s_{3,1}) = 0.651\)</span>, <span class="math inline">\(V^*(s_{4,1}) = 0.428\)</span>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> At <span class="math inline">\(s_{3,1}\)</span> (bottom row, below the cell next to the −1):</p>
+<p><strong>North:</strong> 0.8 to <span class="math inline">\(s_{3,2}\)</span>, 0.1 slip West to <span class="math inline">\(s_{2,1}\)</span>, 0.1 slip East to <span class="math inline">\(s_{4,1}\)</span>: <span class="math inline">\(0.8(0.660) + 0.1(0.655) + 0.1(0.388) = 0.632\)</span>.</p>
+<p><strong>West:</strong> 0.8 to <span class="math inline">\(s_{2,1}\)</span>, 0.1 slip North to <span class="math inline">\(s_{3,2}\)</span>, 0.1 slip South into the edge (stay): <span class="math inline">\(0.8(0.655) + 0.1(0.660) + 0.1(0.611) = 0.651\)</span>.</p>
+<p>(Each bracket is <span class="math inline">\(-0.04 + V^*\)</span> of the cell.) West wins, so the arrow points West, away from the goal. Small margin, so it flips easily.</p>
+</div>
+<h2 id="technique-5-what-reshapes-the-policy">Technique 5: what reshapes the policy</h2>
+<p><strong>Problem it solves:</strong> shows that the reward and γ, not just the goal, decide behaviour.</p>
+<div data-widget="gridvi">
+
+</div>
+<p>Try it: living cost −0.01 makes the agent so careful it walks into walls rather than risk the −1; −0.4 takes the short risky route; −2 jumps straight into the −1 to stop paying; <span class="math inline">\(\gamma = 0.9\)</span> flips the bottom row. A positive living reward means it never finishes: <a href="RL_Limits.html">reward hacking</a> in miniature.</p>
+<div class="warn">
+<p><strong>Slide 7 vs slide 20.</strong> Slide 7 says <span class="math inline">\(\gamma \in [0, 1)\)</span>, but the gridworld policy on slide 14 is the one for <span class="math inline">\(\gamma = 1\)</span>. Fine: the gridworld is episodic. Also note rewards differ by problem: the gridworld’s +1 <em>replaces</em> the step cost; the corridor’s 0.9 is the step cost <em>plus</em> 1.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td>value iteration isn’t in the book</td>
+</tr>
+<tr class="even">
+<td>Sutton and Barto 4.4</td>
+<td>Optional</td>
+<td>value iteration, a page and a half</td>
+</tr>
+<tr class="odd">
+<td>Russell and Norvig 17.1 to 17.2.1</td>
+<td>Optional</td>
+<td>the gridworld and value iteration, with the living-cost experiment</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 4 (MDPs and reinforcement learning). I want practice on VALUE ITERATION:
+- running value iteration by hand on small deterministic corridors (sweeps from V0 = 0 using the previous row), until convergence
+- how value propagates back one step per sweep
+- extracting Q* and the optimal policy from the converged values
+- one Bellman backup in the 4x3 gridworld with noisy moves (0.8 / 0.1 / 0.1) given the neighbouring values
+- how gamma and the living cost change the optimal policy
+- how value iteration compares with STRIPS planning, and why it needs P and R
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/Return_and_Value.html"><small>&larr; Previous</small>Return, value and Bellman</a><a class="next" href="../w4/Q_Learning.html"><small>Next &rarr;</small>Q-learning</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

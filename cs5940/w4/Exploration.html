@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exploration vs exploitation · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w4_Exploration" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 4</span><span class="chip">4 techniques</span></div>
+  <h1>Exploration vs exploitation</h1>
+  <p class="tagline">A learning agent has to try things to find out what they're worth, but every untried action might be a waste. Too little exploring and it settles for the first decent option; too much and it never uses what it knows.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> not an agent: how a learning agent picks its actions while it learns.<br />
+<strong>Week:</strong> 4 (slides 41 to 43).<br />
+<strong>Book:</strong> not in Wooldridge. Sutton and Barto 2.2, 2.3 and 2.6.<br />
+<strong>Techniques on this page:</strong> the dilemma, ε-greedy, decaying ε, optimistic initial values and Thompson sampling.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p><a href="Q_Learning.html">Q-learning</a> can only learn <span class="math inline">\(Q(s, a)\)</span> by actually doing <span class="math inline">\(a\)</span> in <span class="math inline">\(s\)</span>. An agent that always picks the action that currently looks best (<strong>exploitation</strong>) never collects evidence about the others, and can lock onto a mediocre choice for ever. An agent that always acts at random (<strong>exploration</strong>) learns a lot but never benefits. The behaviour policy has to balance both (slide 41).</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>exploit</td>
+<td>take <span class="math inline">\(\arg\max_a Q(s, a)\)</span>, the action believed best</td>
+</tr>
+<tr class="even">
+<td>explore</td>
+<td>try something else to check the belief</td>
+</tr>
+<tr class="odd">
+<td>greedy</td>
+<td>always exploit</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\varepsilon\)</span> (epsilon)</td>
+<td>the chance of acting at random</td>
+</tr>
+<tr class="odd">
+<td>decay</td>
+<td>shrinking ε as learning goes on</td>
+</tr>
+<tr class="even">
+<td>optimistic initialisation</td>
+<td>starting every Q-value high</td>
+</tr>
+<tr class="odd">
+<td>Thompson sampling</td>
+<td>act greedily on a random draw from what the values might plausibly be</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-dilemma-in-a-tiny-world">Technique 1: the dilemma, in a tiny world</h2>
+<p><strong>Problem it solves:</strong> shows how pure greed fails.</p>
+<div class="example">
+<p><strong>Worked example (the tempting exit).</strong> A corridor 0 – 1 – 2 – 3 – 4, start at 0. West from 0 exits at once with reward 0.3; reaching 4 gives 1; <span class="math inline">\(\gamma = 0.95\)</span>. Best at 0 is East: <span class="math inline">\(0.95^3 \approx 0.857 &gt; 0.3\)</span>.</p>
+<p>A greedy agent with <span class="math inline">\(Q = 0\)</span> that breaks ties towards West exits on its first try: <span class="math inline">\(Q(0, W)\)</span> becomes positive, <span class="math inline">\(Q(0, E)\)</span> stays exactly 0 because East is never tried, and it exits for ever. It never learns East was better.</p>
+</div>
+<h2 id="technique-2-ε-greedy">Technique 2: ε-greedy</h2>
+<p><strong>Problem it solves:</strong> the simple default way to keep exploring (slide 42).</p>
+<p><span class="math display">\[\pi(s) = \begin{cases}\text{a random action from } A &amp; \text{with probability } \varepsilon\\ \arg\max_a Q(s, a) &amp; \text{with probability } 1 - \varepsilon\end{cases}\]</span></p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(|A| = 4\)</span>, <span class="math inline">\(\varepsilon = 0.2\)</span>, random choice over <strong>all</strong> of <span class="math inline">\(A\)</span> (as on the slide): greedy action <span class="math inline">\(1 - \varepsilon + \varepsilon/|A| = 0.8 + 0.05 = 0.85\)</span>; each other action <span class="math inline">\(\varepsilon/|A| = 0.05\)</span>.</p>
+<p><span class="math inline">\(|A| = 3\)</span>, <span class="math inline">\(\varepsilon = 0.3\)</span>: greedy <span class="math inline">\(0.7 + 0.1 = 0.8\)</span>, others <span class="math inline">\(0.1\)</span> each.</p>
+</div>
+<p>Because Q-learning is <strong>off-policy</strong>, learning from ε-greedy behaviour still gives the greedy policy’s values.</p>
+<div data-widget="explore">
+
+</div>
+<h2 id="technique-3-decaying-ε">Technique 3: decaying ε</h2>
+<p><strong>Problem it solves:</strong> explore while <span class="math inline">\(Q\)</span> is unreliable, exploit once it’s good.</p>
+<p>For example <span class="math inline">\(\varepsilon_k = \max(0.05, 0.995^k)\)</span> after episode <span class="math inline">\(k\)</span>: 0.61 after 100 episodes, 0.08 after 500, then it stays at the 0.05 floor.</p>
+<h2 id="technique-4-optimism-and-thompson-sampling">Technique 4: optimism and Thompson sampling</h2>
+<p><strong>Problem it solves:</strong> smarter exploration than random dithering (slide 43, “optional contrasts”).</p>
+<ul>
+<li><strong>Optimism in the face of uncertainty:</strong> start every <span class="math inline">\(Q\)</span> high (above any real return). Untried actions look great until trying them brings them down, so even a purely greedy agent tries everything. In the tempting-exit world, starting <span class="math inline">\(Q\)</span> at 1 finds East straight away.</li>
+<li><strong>Thompson sampling:</strong> keep a distribution over plausible Q-values, sample one, act greedily on the sample. Uncertain actions sometimes sample high, so they get tried about as often as they plausibly deserve.</li>
+</ul>
+<p>Both can need fewer samples than ε-greedy, which has to stumble on a good route at random (in the tempting exit, East at four cells in a row). ε-greedy stays the workhorse because it’s simple with one parameter. RLHF (topic 5) carries these ideas into fine-tuning LLMs.</p>
+<div class="warn">
+<p><strong>Two versions of ε-greedy.</strong> Some books choose the random action only among the <em>non-greedy</em> ones (then the greedy action has exactly <span class="math inline">\(1 - \varepsilon\)</span>). Slide 42 says “random <span class="math inline">\(a_t \in A\)</span>”, so the greedy action can also come up at random.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Sutton and Barto 2.2 to 2.3, 2.6</td>
+<td>Optional</td>
+<td>ε-greedy on bandits, optimistic initial values</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 4 (MDPs and reinforcement learning). I want practice on EXPLORATION VS EXPLOITATION:
+- why a purely greedy learner can lock onto a poor action, with a small example
+- epsilon-greedy action probabilities for different |A| and epsilon (random choice over all actions)
+- decaying epsilon schedules
+- how optimistic initial values make a greedy agent explore, and what Thompson sampling does
+- why Q-learning can learn the greedy policy from epsilon-greedy behaviour (off-policy)
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/Q_Learning.html"><small>&larr; Previous</small>Q-learning</a><a class="next" href="../w4/POMDPs_and_Belief.html"><small>Next &rarr;</small>POMDPs and belief states</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

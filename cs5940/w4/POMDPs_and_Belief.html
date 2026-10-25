@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POMDPs and belief states · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w4_POMDPs_and_Belief" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 4</span><span class="chip">4 techniques</span></div>
+  <h1>POMDPs and belief states</h1>
+  <p class="tagline">Real agents rarely see the true state of the world. A POMDP agent keeps a probability for every state it might be in, and updates it after each action and observation. That belief, not the raw observation, is what it acts on.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> not an agent: the model for agents that can’t see everything.<br />
+<strong>Week:</strong> 4 (slides 45 to 50).<br />
+<strong>Book:</strong> one paragraph in Wooldridge, Ch. 2 notes (p. 46), citing the same paper as slide 46 (Kaelbling et al. 1998). Russell and Norvig 17.4 for more.<br />
+<strong>Techniques on this page:</strong> the POMDP tuple, the belief as the new state, the Bayes-filter update, <span class="math inline">\(o_t\)</span> vs <span class="math inline">\(m_t\)</span> vs <span class="math inline">\(s_t\)</span> for LLM agents.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Everything in the <a href="MDPs.html">MDP</a> pages assumed the agent sees the true state, <span class="math inline">\(o_t = s_t\)</span>. Many settings break that (slide 45): robot sensors are noisy; a doctor sees symptoms, not physiology; an <strong>LLM agent never sees the world, only text</strong>. Week 1 called this an <em>inaccessible</em> (partially observable) environment.</p>
+<p>Acting on the latest observation alone (a purely reactive agent, <span class="math inline">\(a_t = \pi(o_t)\)</span>) then throws information away. The fix is to carry a <strong>belief</strong> forward, and the lecture’s punchline is that the belief is Markov even when the observations aren’t.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>POMDP</td>
+<td>partially observable MDP</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Omega\)</span> (Omega)</td>
+<td>the set of possible observations</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O(o \mid s&#39;, a)\)</span></td>
+<td>the chance of seeing <span class="math inline">\(o\)</span> on arriving in <span class="math inline">\(s&#39;\)</span> after action <span class="math inline">\(a\)</span></td>
+</tr>
+<tr class="even">
+<td>belief <span class="math inline">\(m_t\)</span></td>
+<td>a probability for each state: “where I think I am”</td>
+</tr>
+<tr class="odd">
+<td>Bayes filter</td>
+<td>predict with <span class="math inline">\(P\)</span>, correct with <span class="math inline">\(O\)</span>, normalise</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\propto\)</span></td>
+<td>“proportional to”: divide by the total at the end</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-pomdp-tuple">Technique 1: the POMDP tuple</h2>
+<p><strong>Problem it solves:</strong> adds what the agent can observe to the MDP.</p>
+<p><span class="math display">\[\langle S, A, P, R, \gamma, \Omega, O\rangle\]</span></p>
+<p>The agent never sees <span class="math inline">\(s_t\)</span>, only <span class="math inline">\(o_0, o_1, \ldots\)</span> and its own actions (slide 46).</p>
+<h2 id="technique-2-the-belief-is-the-new-state">Technique 2: the belief is the new state</h2>
+<p><strong>Problem it solves:</strong> gets back a Markov state to decide from.</p>
+<p><span class="math display">\[m_t(s) = P(s_t = s \mid o_0, a_0, \ldots, a_{t-1}, o_t)\]</span></p>
+<p>The belief summarises the whole history that matters, so <strong>it is Markov</strong> (slide 47). The price: it lives in the space of probability distributions over <span class="math inline">\(S\)</span>, which is continuous and much bigger than <span class="math inline">\(S\)</span>.</p>
+<p>Compare <a href="../w2/BDI_Practical_Reasoning.html">BDI</a> (week 2): there beliefs were symbolic facts (“door is closed”); here they’re numbers (“closed with probability 0.85”). Same role.</p>
+<h2 id="technique-3-the-belief-update">Technique 3: the belief update</h2>
+<p><strong>Problem it solves:</strong> folds each new observation into what the agent believes (slide 48).</p>
+<p><span class="math display">\[m_t(s&#39;) \propto O(o_t \mid s&#39;, a_{t-1}) \sum_s P(s&#39; \mid s, a_{t-1})\, m_{t-1}(s)\]</span></p>
+<ol type="1">
+<li><strong>Predict:</strong> push the old belief through the dynamics.</li>
+<li><strong>Correct:</strong> multiply each state by how well it explains what was just seen.</li>
+<li><strong>Normalise</strong> so it sums to 1.</li>
+</ol>
+<p>This is week 1’s <span class="math inline">\(m_t = f(m_{t-1}, o_t, a_{t-1})\)</span> (the <code>next</code> function) made precise.</p>
+<div class="example">
+<p><strong>Worked example (which room am I in?).</strong> Rooms L and R. Each step the robot stays, but is moved to the other room with probability 0.1. Its camera sees a window with probability 0.8 in L and 0.3 in R. Start at <span class="math inline">\((0.5, 0.5)\)</span>.</p>
+<p><strong>“window”:</strong> predict <span class="math inline">\((0.5, 0.5)\)</span>; correct <span class="math inline">\((0.8 \times 0.5, 0.3 \times 0.5) = (0.40, 0.15)\)</span>; normalise by 0.55: <span class="math inline">\((0.727, 0.273)\)</span>.</p>
+<p><strong>“window” again:</strong> predict <span class="math inline">\(L = 0.727(0.9) + 0.273(0.1) = 0.682\)</span>; correct <span class="math inline">\((0.545, 0.095)\)</span>; <span class="math inline">\((0.851, 0.149)\)</span>.</p>
+<p><strong>“none”:</strong> predict <span class="math inline">\(L = 0.781\)</span>; correct <span class="math inline">\((0.2 \times 0.781, 0.7 \times 0.219) = (0.1562, 0.1534)\)</span>; <span class="math inline">\((0.504, 0.496)\)</span>. One “none” nearly cancels two “window”s, because “none” is 3.5 times likelier in R.</p>
+</div>
+<div data-widget="belief">
+
+</div>
+<h2 id="technique-4-o_t-m_t-s_t-for-an-llm-agent">Technique 4: <span class="math inline">\(o_t\)</span>, <span class="math inline">\(m_t\)</span>, <span class="math inline">\(s_t\)</span> for an LLM agent</h2>
+<p><strong>Problem it solves:</strong> says precisely why week 1 kept three symbols (slides 49 to 50).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>What it is</th>
+<th>For an LLM agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(o_t\)</span></td>
+<td>what the environment reveals</td>
+<td>a tool result, a message</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(m_t\)</span></td>
+<td>what the agent carries forward</td>
+<td>(roughly) its context window</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(s_t\)</span></td>
+<td>the true state, maybe never fully known</td>
+<td>the database row, the file, what the user really wants</td>
+</tr>
+</tbody>
+</table>
+<p>The true state is <strong>outside</strong> the agent’s boundary. An LLM’s context is not automatically a Markov state (topic 6): if it was trimmed (as in practical 2’s conversation window) or a tool result is stale, <span class="math inline">\(m_t\)</span> no longer summarises what matters, and the agent acts on a wrong picture.</p>
+<div class="warn">
+<p><strong>A failure to recognise.</strong> The agent read a file earlier; another process edits it; the agent edits based on the old contents in its context. <span class="math inline">\(s_t\)</span> changed, <span class="math inline">\(m_t\)</span> didn’t. Re-reading before writing is a belief update.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge, Ch. 2 Notes and Further Reading (p. 46)</td>
+<td>Skim one paragraph</td>
+<td>the book’s only mention of POMDPs</td>
+</tr>
+<tr class="even">
+<td>Russell and Norvig 17.4 (first pages)</td>
+<td>Optional</td>
+<td>belief states and the filtering update</td>
+</tr>
+</tbody>
+</table>
+<p>Page numbers are the book’s; in the scanned PDF add 21.</p>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 4 (MDPs and reinforcement learning). I want practice on POMDPs AND BELIEF STATES:
+- what a POMDP adds to an MDP (Omega and O), and why the agent can&#39;t act on s_t
+- what a belief m_t is, and why it is Markov when observations are not
+- doing the belief update by hand (predict with P, correct with O, normalise) on two-state examples with friendly numbers
+- why acting on the belief beats acting on the latest observation
+- the difference between o_t, m_t and s_t for an LLM agent, with examples of when m_t goes stale
+
+Please:
+1. Use plain, everyday language and explain any symbol in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/Exploration.html"><small>&larr; Previous</small>Exploration vs exploitation</a><a class="next" href="../w4/RL_Limits.html"><small>Next &rarr;</small>When RL goes wrong</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

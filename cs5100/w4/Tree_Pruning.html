@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tree pruning (cost complexity) · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w4_Tree_Pruning" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="../w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a href="../w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="../w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="../w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a href="../w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not a model: toolkit</span><span class="chip">Week 4</span><span class="chip">3 techniques</span></div>
+  <h1>Tree pruning (cost complexity)</h1>
+  <p class="tagline">Grow a tree far too big on purpose, then cut it back. Every leaf is charged a fee α; a branch is kept only if it reduces the error by more than its fee. Choose the fee on validation data.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> not a model: a way to control a tree’s size (regression or classification).<br />
+<strong>Week:</strong> 4.<br />
+<strong>Book:</strong> ISLP 8.1.1, “Tree pruning” (p335–337, Algorithm 8.1).<br />
+<strong>Techniques on this page:</strong> grow-then-prune, the penalised score <span class="math inline">\(\text{RSS} + \alpha|T|\)</span>, weakest-link pruning, choosing <span class="math inline">\(\alpha\)</span> on a validation set, sklearn’s <code>ccp_alpha</code>.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>A fully grown <a href="Regression_Trees.html">regression tree</a> memorises its training data. Stopping early (“only split if it helps a lot”) sounds sensible but is short-sighted: a dull split can open the door to a great one later.</p>
+<p>So grow big, then prune. But a big tree has millions of subtrees, too many to test one by one. Cost-complexity pruning boils them down to a short, nested list, one per value of a single dial <span class="math inline">\(\alpha\)</span>, and then you only need to pick the dial. It’s the tree version of <a href="../w2/Ridge_Regression.html">ridge regression’s</a> <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(T_0\)</span></td>
+<td>the big tree you grow first</td>
+</tr>
+<tr class="even">
+<td>subtree</td>
+<td><span class="math inline">\(T_0\)</span> with some branches cut off (their points merged back into one leaf)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\lvert T\rvert\)</span></td>
+<td>number of leaves</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\alpha\)</span></td>
+<td>the fee per leaf (the tuning dial)</td>
+</tr>
+<tr class="odd">
+<td>weakest link</td>
+<td>the branch that saves the least error per leaf: cut first</td>
+</tr>
+<tr class="even">
+<td><code>ccp_alpha</code></td>
+<td>sklearn’s name for <span class="math inline">\(\alpha\)</span>, on a per-data-point scale</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-penalised-score">Technique 1: the penalised score</h2>
+<p><strong>Problem it solves:</strong> comparing trees of different sizes fairly.</p>
+<p><span class="math display">\[C_\alpha(T) = \underbrace{\text{RSS}(T)}_{\text{how badly it fits}} + \underbrace{\alpha\,|T|}_{\text{fee for its size}}\]</span></p>
+<p>For each <span class="math inline">\(\alpha\)</span>, keep the subtree with the smallest <span class="math inline">\(C_\alpha\)</span>. <span class="math inline">\(\alpha = 0\)</span>: the full tree. Bigger <span class="math inline">\(\alpha\)</span>: smaller trees. Huge <span class="math inline">\(\alpha\)</span>: just the root.</p>
+<div class="example">
+<p><strong>Worked example.</strong> The subtrees of the <a href="Regression_Trees.html">regression tree</a> example:</p>
+<table>
+<thead>
+<tr class="header">
+<th>leaves</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RSS</td>
+<td>73.5</td>
+<td>13.33</td>
+<td>5.17</td>
+<td>1.0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(C_5\)</span></td>
+<td>78.5</td>
+<td>23.33</td>
+<td><strong>20.17</strong></td>
+<td>21.0</td>
+<td>30.0</td>
+</tr>
+</tbody>
+</table>
+<p>With <span class="math inline">\(\alpha = 5\)</span> the 3-leaf tree wins. The 4th leaf only saves <span class="math inline">\(5.17 - 1.0 = 4.17\)</span>, less than its fee of 5.</p>
+</div>
+<div data-widget="prune">
+
+</div>
+<h2 id="technique-2-weakest-link-pruning-the-nested-sequence">Technique 2: weakest-link pruning (the nested sequence)</h2>
+<p><strong>Problem it solves:</strong> finding all the <span class="math inline">\(T_\alpha\)</span> without searching.</p>
+<p>Each split survives while its saving exceeds <span class="math inline">\(\alpha\)</span>. In the example the savings are 0.5 (the last tiny splits), 4.17, 8.17 and 60.17, so as <span class="math inline">\(\alpha\)</span> rises past each value one more split disappears: 6 leaves → 4 → 3 → 2 → 1. The trees are <strong>nested</strong>: each is a pruned version of the one before. (For a branch with several leaves, the saving counted is its RSS drop per leaf removed.)</p>
+<h2 id="technique-3-choose-alpha-on-a-validation-set">Technique 3: choose <span class="math inline">\(\alpha\)</span> on a validation set</h2>
+<p><strong>Problem it solves:</strong> the training RSS always prefers the biggest tree.</p>
+<ol type="1">
+<li>Grow <span class="math inline">\(T_0\)</span> on the training data.</li>
+<li>Get the sequence of <span class="math inline">\(\alpha\)</span> values where the subtree changes.</li>
+<li>Score each subtree on the <strong>validation</strong> set; take the best <span class="math inline">\(\hat\alpha\)</span>.</li>
+<li>Refit with <span class="math inline">\(\hat\alpha\)</span> (the lab uses train + validation) and report the <strong>test</strong> error once.</li>
+</ol>
+<p>Plot validation error against <span class="math inline">\(\alpha\)</span> and you get the usual U: too small, overfitting; too big, underfitting. ISLP uses K-fold cross-validation for step 3; same idea.</p>
+<div class="warn">
+<p><strong>sklearn’s <span class="math inline">\(\alpha\)</span> is per data point.</strong> <code>cost_complexity_pruning_path</code> and <code>ccp_alpha</code> use the training <strong>MSE</strong> (RSS<span class="math inline">\(/n\)</span>), not the RSS. So sklearn’s <span class="math inline">\(\alpha\)</span> = the slides’ <span class="math inline">\(\alpha\)</span> / <span class="math inline">\(n\)</span>. In the example (<span class="math inline">\(n = 6\)</span>), the savings 4.17 and 8.17 show up as 0.69 and 1.36. The path can also list the same <span class="math inline">\(\alpha\)</span> several times in a row, when several branches tie.</p>
+</div>
+<div class="warn">
+<p><strong>Lab plot typo:</strong> the pruning cell calls <code>plt.xlabel</code> twice; the second should be <code>plt.ylabel('error')</code>.</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8.1.1 “Tree pruning” (p335–337)</td>
+<td><strong>Read</strong></td>
+<td>Eq. 8.4, Algorithm 8.1, Figs 8.4–8.5</td>
+</tr>
+<tr class="even">
+<td>Algorithm 8.1 step 3 (K-fold CV)</td>
+<td>Read, but note</td>
+<td>The slides and lab use one validation set instead</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 8.1.1, tree pruning). I want practice questions on COST-COMPLEXITY PRUNING, done by hand:
+- given a list of subtrees with (number of leaves, training RSS), find the subtree that minimises RSS + alpha * leaves for several alphas
+- the alpha at which one subtree starts to beat a bigger one (the saving per leaf)
+- why the subtrees form a nested sequence (weakest-link pruning)
+- why alpha must be chosen on validation data, and what the validation-error-vs-alpha curve looks like
+- converting between sklearn&#39;s ccp_alpha (MSE scale) and the RSS-scale alpha
+- comparing pruning with stopping early, and with ridge regression&#39;s lambda
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/Classification_Trees.html"><small>&larr; Previous</small>Classification trees</a><a class="next" href="../w4/Neural_Network.html"><small>Next &rarr;</small>Neural network</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

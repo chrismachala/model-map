@@ -43,6 +43,13 @@
 <a href="w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
 <a href="w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
 <a href="w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a href="w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a href="w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a href="w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
 <div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
 </nav>
 <main><div class="content">
@@ -62,8 +69,8 @@
 <p>The same handful of techniques keeps reappearing across models. Once you know them, each “new” model is mostly old pieces in a new arrangement.</p>
 </div>
 <h2 id="pick-a-page">Pick a page</h2>
-<div class="filter"><button class="on" data-f="all">All</button><button data-f="reg">Regression</button><button data-f="cls">Classification</button><button data-f="tool">Toolkits</button><button data-f="w1">Week 1</button><button data-f="w2">Week 2</button><button data-f="w3">Week 3</button></div>
-<div class="grid"><a class="tile" href="w1/00_Start_Here_The_Big_Picture.html" data-kind="tool" data-week="w1" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="wk">W1</span><div class="t"><span class="dot tool"></span>Start here: the big picture</div><div class="d">The frame every model fits in: the rule, the luck, scoring, overfitting, bias vs variance.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/01_Maths_Toolkit.html" data-kind="tool" data-week="w1" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="wk">W1</span><div class="t"><span class="dot tool"></span>Maths toolkit</div><div class="d">Vectors, slopes, the chain rule and gradients, and why a data course needs them.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/Bayes_Classifier.html" data-kind="cls" data-week="w1" data-page="w1_Bayes_Classifier" data-total="3"><span class="wk">W1</span><div class="t"><span class="dot cls"></span>Bayes classifier</div><div class="d">The ideal: always pick the most likely category. Every classifier tries to copy it.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/KNN.html" data-kind="cls" data-week="w1" data-page="w1_KNN" data-total="4"><span class="wk">W1</span><div class="t"><span class="dot cls"></span>KNN (classifier)</div><div class="d">Ask your K nearest neighbours and go with the majority. Also used again in week 3.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Linear_Regression.html" data-kind="reg" data-week="w2" data-page="w2_Linear_Regression" data-total="8"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>Linear regression</div><div class="d">The closest straight line. Least squares, the matrix formula, gradient descent, R².</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Polynomial_and_Step_Regression.html" data-kind="reg" data-week="w2" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>Polynomial &amp; step regression</div><div class="d">Bend the line by inventing new columns: x², x³, or &quot;is x in this range?&quot;.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Ridge_Regression.html" data-kind="reg" data-week="w2" data-page="w2_Ridge_Regression" data-total="4"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>Ridge regression</div><div class="d">Linear regression with a &quot;keep coefficients small&quot; rule, so it stops chasing noise.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/KNN_Regression.html" data-kind="reg" data-week="w2" data-page="w2_KNN_Regression" data-total="3"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>KNN regression</div><div class="d">KNN for numbers: average the neighbours. Compared with linear regression in lab Q2.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Logistic_Regression.html" data-kind="cls" data-week="w3" data-page="w3_Logistic_Regression" data-total="7"><span class="wk">W3</span><div class="t"><span class="dot cls"></span>Logistic regression</div><div class="d">Squash a line into an S-curve of probability. Maximum likelihood and gradient descent.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/LDA.html" data-kind="cls" data-week="w3" data-page="w3_LDA" data-total="5"><span class="wk">W3</span><div class="t"><span class="dot cls"></span>LDA</div><div class="d">Describe each class with a bell curve, then flip it with Bayes’ theorem.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Naive_Bayes.html" data-kind="cls" data-week="w3" data-page="w3_Naive_Bayes" data-total="3"><span class="wk">W3</span><div class="t"><span class="dot cls"></span>Naive Bayes</div><div class="d">LDA’s shortcut cousin: treat each input separately and multiply.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Judging_Classifiers.html" data-kind="tool" data-week="w3" data-page="w3_Judging_Classifiers" data-total="4"><span class="wk">W3</span><div class="t"><span class="dot tool"></span>Judging classifiers</div><div class="d">Confusion matrix, thresholds, ROC curves and AUC. Used in the week 3 lab.</div><div class="bar"><i></i></div></a></div>
+<div class="filter"><button class="on" data-f="all">All</button><button data-f="reg">Regression</button><button data-f="cls">Classification</button><button data-f="tool">Toolkits</button><button data-f="w1">Week 1</button><button data-f="w2">Week 2</button><button data-f="w3">Week 3</button><button data-f="w4">Week 4</button></div>
+<div class="grid"><a class="tile" href="w1/00_Start_Here_The_Big_Picture.html" data-kind="tool" data-week="w1" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="wk">W1</span><div class="t"><span class="dot tool"></span>Start here: the big picture</div><div class="d">The frame every model fits in: the rule, the luck, scoring, overfitting, bias vs variance.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/01_Maths_Toolkit.html" data-kind="tool" data-week="w1" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="wk">W1</span><div class="t"><span class="dot tool"></span>Maths toolkit</div><div class="d">Vectors, slopes, the chain rule and gradients, and why a data course needs them.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/Bayes_Classifier.html" data-kind="cls" data-week="w1" data-page="w1_Bayes_Classifier" data-total="3"><span class="wk">W1</span><div class="t"><span class="dot cls"></span>Bayes classifier</div><div class="d">The ideal: always pick the most likely category. Every classifier tries to copy it.</div><div class="bar"><i></i></div></a><a class="tile" href="w1/KNN.html" data-kind="cls" data-week="w1" data-page="w1_KNN" data-total="4"><span class="wk">W1</span><div class="t"><span class="dot cls"></span>KNN (classifier)</div><div class="d">Ask your K nearest neighbours and go with the majority. Also used again in week 3.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Linear_Regression.html" data-kind="reg" data-week="w2" data-page="w2_Linear_Regression" data-total="8"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>Linear regression</div><div class="d">The closest straight line. Least squares, the matrix formula, gradient descent, R².</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Polynomial_and_Step_Regression.html" data-kind="reg" data-week="w2" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>Polynomial &amp; step regression</div><div class="d">Bend the line by inventing new columns: x², x³, or &quot;is x in this range?&quot;.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/Ridge_Regression.html" data-kind="reg" data-week="w2" data-page="w2_Ridge_Regression" data-total="4"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>Ridge regression</div><div class="d">Linear regression with a &quot;keep coefficients small&quot; rule, so it stops chasing noise.</div><div class="bar"><i></i></div></a><a class="tile" href="w2/KNN_Regression.html" data-kind="reg" data-week="w2" data-page="w2_KNN_Regression" data-total="3"><span class="wk">W2</span><div class="t"><span class="dot reg"></span>KNN regression</div><div class="d">KNN for numbers: average the neighbours. Compared with linear regression in lab Q2.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Logistic_Regression.html" data-kind="cls" data-week="w3" data-page="w3_Logistic_Regression" data-total="7"><span class="wk">W3</span><div class="t"><span class="dot cls"></span>Logistic regression</div><div class="d">Squash a line into an S-curve of probability. Maximum likelihood and gradient descent.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/LDA.html" data-kind="cls" data-week="w3" data-page="w3_LDA" data-total="5"><span class="wk">W3</span><div class="t"><span class="dot cls"></span>LDA</div><div class="d">Describe each class with a bell curve, then flip it with Bayes’ theorem.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Naive_Bayes.html" data-kind="cls" data-week="w3" data-page="w3_Naive_Bayes" data-total="3"><span class="wk">W3</span><div class="t"><span class="dot cls"></span>Naive Bayes</div><div class="d">LDA’s shortcut cousin: treat each input separately and multiply.</div><div class="bar"><i></i></div></a><a class="tile" href="w3/Judging_Classifiers.html" data-kind="tool" data-week="w3" data-page="w3_Judging_Classifiers" data-total="4"><span class="wk">W3</span><div class="t"><span class="dot tool"></span>Judging classifiers</div><div class="d">Confusion matrix, thresholds, ROC curves and AUC. Used in the week 3 lab.</div><div class="bar"><i></i></div></a><a class="tile" href="w4/Regression_Trees.html" data-kind="reg" data-week="w4" data-page="w4_Regression_Trees" data-total="4"><span class="wk">W4</span><div class="t"><span class="dot reg"></span>Regression trees</div><div class="d">Yes/no questions cut the inputs into boxes; predict each box’s average. Greedy splitting by RSS.</div><div class="bar"><i></i></div></a><a class="tile" href="w4/Classification_Trees.html" data-kind="cls" data-week="w4" data-page="w4_Classification_Trees" data-total="4"><span class="wk">W4</span><div class="t"><span class="dot cls"></span>Classification trees</div><div class="d">Boxes that vote. Gini, entropy and the error rate, and why Gini grows better trees.</div><div class="bar"><i></i></div></a><a class="tile" href="w4/Tree_Pruning.html" data-kind="tool" data-week="w4" data-page="w4_Tree_Pruning" data-total="3"><span class="wk">W4</span><div class="t"><span class="dot tool"></span>Tree pruning</div><div class="d">Grow too big, then cut back with a fee per leaf (α). Weakest-link pruning and sklearn’s ccp_alpha.</div><div class="bar"><i></i></div></a><a class="tile" href="w4/Neural_Network.html" data-kind="reg" data-week="w4" data-page="w4_Neural_Network" data-total="4"><span class="wk">W4</span><div class="t"><span class="dot reg"></span>Neural network</div><div class="d">Invent features with bent weighted sums (ReLU, sigmoid), then fit a line on them.</div><div class="bar"><i></i></div></a><a class="tile" href="w4/Neural_Network_Classifier.html" data-kind="cls" data-week="w4" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="wk">W4</span><div class="t"><span class="dot cls"></span>Neural network classifier</div><div class="d">One output per class, softmax and cross-entropy. Plus the lab’s double-softmax bug.</div><div class="bar"><i></i></div></a><a class="tile" href="w4/Training_Neural_Networks.html" data-kind="tool" data-week="w4" data-page="w4_Training_Neural_Networks" data-total="5"><span class="wk">W4</span><div class="t"><span class="dot tool"></span>Training neural networks</div><div class="d">Random starts, gradient descent, backprop, early stopping, and the PyTorch training loop.</div><div class="bar"><i></i></div></a></div>
 <h2 id="which-techniques-belong-to-which-model">Which techniques belong to which model</h2>
 <table>
 <colgroup>
@@ -135,6 +142,30 @@
 <td>(fixed by its assumption)</td>
 <td>error rate, ROC, AUC</td>
 </tr>
+<tr class="even">
+<td><a href="w4/Regression_Trees.html">Regression tree</a></td>
+<td>greedy splits that cut the RSS most; leaf averages</td>
+<td>depth, leaf size, <a href="w4/Tree_Pruning.html">pruning</a> fee <span class="math inline">\(\alpha\)</span></td>
+<td>test MSE, <span class="math inline">\(R^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><a href="w4/Classification_Trees.html">Classification tree</a></td>
+<td>greedy splits that cut the Gini index most; leaf votes</td>
+<td>depth, pruning fee <span class="math inline">\(\alpha\)</span></td>
+<td>error rate</td>
+</tr>
+<tr class="even">
+<td><a href="w4/Neural_Network.html">Neural network</a></td>
+<td>gradient descent + backpropagation</td>
+<td>hidden units <span class="math inline">\(K\)</span>, penalty <span class="math inline">\(\lambda\)</span>, early stopping</td>
+<td>test MSE</td>
+</tr>
+<tr class="odd">
+<td><a href="w4/Neural_Network_Classifier.html">Neural network classifier</a></td>
+<td>gradient descent on cross-entropy</td>
+<td>same as above</td>
+<td>error rate, confusion matrix</td>
+</tr>
 </tbody>
 </table>
 <h2 id="techniques-that-keep-coming-back">Techniques that keep coming back</h2>
@@ -160,7 +191,7 @@
 <tr class="even">
 <td>Gradient descent</td>
 <td>walks downhill when there’s no formula, or the data is huge</td>
-<td>linear regression (lab), logistic regression (lab)</td>
+<td>linear regression (lab), logistic regression (lab), neural networks</td>
 </tr>
 <tr class="odd">
 <td>Dummy variables</td>
@@ -170,24 +201,39 @@
 <tr class="even">
 <td>Normalising inputs</td>
 <td>puts inputs on the same scale</td>
-<td>KNN, gradient descent, ridge</td>
+<td>KNN, gradient descent, ridge, neural networks (not needed for trees)</td>
 </tr>
 <tr class="odd">
 <td>Train / validation / test split</td>
 <td>chooses settings honestly</td>
-<td>KNN’s <span class="math inline">\(K\)</span>, ridge’s <span class="math inline">\(\lambda\)</span>, polynomial degree</td>
+<td>KNN’s <span class="math inline">\(K\)</span>, ridge’s <span class="math inline">\(\lambda\)</span>, polynomial degree, pruning’s <span class="math inline">\(\alpha\)</span>, a network’s <span class="math inline">\(K\)</span> and stopping epoch</td>
 </tr>
 <tr class="even">
+<td>Penalty for complexity</td>
+<td>trades training fit for simplicity</td>
+<td>ridge (<span class="math inline">\(\lambda\sum\beta^2\)</span>), tree pruning (<span class="math inline">\(\alpha\lvert T\rvert\)</span>), network weight decay</td>
+</tr>
+<tr class="odd">
+<td>The chain rule</td>
+<td>slopes of functions inside functions</td>
+<td>logistic regression’s gradient, backpropagation</td>
+</tr>
+<tr class="even">
+<td>Softmax + cross-entropy</td>
+<td>probabilities for many classes, and how to train them</td>
+<td>multinomial logistic regression, neural network classifier</td>
+</tr>
+<tr class="odd">
 <td>Bias vs variance (the U shape)</td>
 <td>explains why “more flexible” isn’t always better</td>
 <td>every model</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Bayes classifier rule (pick the most likely)</td>
 <td>turns chances into a decision</td>
 <td>KNN, logistic regression, LDA, naive Bayes</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Bayes’ theorem</td>
 <td>flips “inputs given class” into “class given inputs”</td>
 <td>LDA, naive Bayes</td>
@@ -199,6 +245,7 @@
 <li><strong>Week 1</strong> sets the stage. What a model is, how to score it, why the test score matters more than the training score, and the ideal classifier we’re all trying to copy. KNN is the first real model: it copies the ideal by counting neighbours.</li>
 <li><strong>Week 2</strong> builds the first model with numbers to fit, the straight line. Then it bends it (polynomials, steps) and calms it down when it bends too much (ridge).</li>
 <li><strong>Week 3</strong> goes back to categories. Three new ways to estimate the chance of each class: squash a line into an S-curve (logistic), or describe each class and flip with Bayes’ theorem (LDA, naive Bayes). Then how to judge them properly.</li>
+<li><strong>Week 4</strong> brings two flexible models that work for numbers <em>and</em> categories. Trees cut the inputs into boxes with yes/no questions (and get pruned with a penalty, like ridge). Neural networks learn their own features and are fitted with gradient descent, using the chain rule (backpropagation) and week 3’s softmax.</li>
 </ol>
 <h2 id="how-to-use-these-pages">How to use these pages</h2>
 <ul>
@@ -211,7 +258,7 @@
 <li>Each page also says which parts of the book chapter are on the slides and which you can skip.</li>
 </ul>
 <p style="color:var(--muted);font-size:.9rem">
-Built from the week 1 to 3 slides, lab notebooks and chapter lists (C1C2, C3C6C7, C4). Pages for later weeks can be added in new w4, w5… folders.
+Built from the week 1 to 4 slides, lab notebooks and chapter lists (C1C2, C3C6C7, C4; week 4’s chapters 8.1 and 10 come from the slide headers). Pages for later weeks can be added in new w5, w6… folders.
 </p>
 
 <nav class="pager"><a class="next" href="w1/00_Start_Here_The_Big_Picture.html"><small>Next &rarr;</small>Start here: the big picture</a></nav>

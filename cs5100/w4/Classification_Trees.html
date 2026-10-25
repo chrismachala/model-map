@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classification trees · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w4_Classification_Trees" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="../w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a href="../w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="../w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="../w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a href="../w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip cls">Classification model</span><span class="chip">Week 4</span><span class="chip">4 techniques</span></div>
+  <h1>Classification trees</h1>
+  <p class="tagline">The same yes/no questions as a regression tree, but each leaf votes for its most common category, and the splits are chosen to make the leaves as "pure" (one category) as possible.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> classification.<br />
+<strong>Week:</strong> 4.<br />
+<strong>Book:</strong> ISLP 8.1.2.<br />
+<strong>Techniques on this page:</strong> majority vote and leaf probabilities, the error rate, the Gini index and entropy, information gain.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>A <a href="Regression_Trees.html">regression tree</a> predicts the average of a leaf and picks splits by RSS. Neither makes sense for categories: you can’t average “yes” and “no”, and the codes 0, 1, 2 are just labels.</p>
+<p>So two pieces change. A leaf predicts the <strong>most common class</strong>, and can give a probability for every class by counting. And a split is good if it makes the leaves <strong>purer</strong>, so we need a number that measures how mixed a leaf is.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hat p_{mk}\)</span></td>
+<td>fraction of the training points in leaf <span class="math inline">\(m\)</span> that are class <span class="math inline">\(k\)</span></td>
+</tr>
+<tr class="even">
+<td>pure leaf</td>
+<td>all its points are one class</td>
+</tr>
+<tr class="odd">
+<td>impurity</td>
+<td>how mixed a leaf is (0 = pure)</td>
+</tr>
+<tr class="even">
+<td>error rate</td>
+<td>fraction of the leaf not in its majority class</td>
+</tr>
+<tr class="odd">
+<td>Gini index</td>
+<td><span class="math inline">\(\sum_k\hat p_{mk}(1 - \hat p_{mk})\)</span>, a smoother impurity score</td>
+</tr>
+<tr class="even">
+<td>entropy</td>
+<td><span class="math inline">\(-\sum_k\hat p_{mk}\log\hat p_{mk}\)</span>, another one, similar to Gini</td>
+</tr>
+<tr class="odd">
+<td>information gain</td>
+<td>impurity before a split minus the (size-weighted) impurity after</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-majority-vote-and-leaf-probabilities">Technique 1: majority vote and leaf probabilities</h2>
+<p><strong>Problem it solves:</strong> turning a leaf into a prediction.</p>
+<p>Count the classes among the leaf’s training points. A leaf with 7 “Yes” and 3 “No” predicts <strong>Yes</strong>, with <span class="math inline">\(\hat P(\text{Yes}) = 0.7\)</span>. That’s the <a href="../w1/Bayes_Classifier.html">Bayes classifier</a> rule with the probabilities estimated by counting inside the box, much like <a href="../w1/KNN.html">KNN</a> counts among neighbours.</p>
+<h2 id="technique-2-measuring-impurity">Technique 2: measuring impurity</h2>
+<p><strong>Problem it solves:</strong> a number for “how mixed is this leaf?”.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>two-class fraction <span class="math inline">\(p\)</span></th>
+<th>error <span class="math inline">\(1 - \max(p, 1-p)\)</span></th>
+<th>Gini <span class="math inline">\(2p(1-p)\)</span></th>
+<th>entropy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 or 1 (pure)</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0.1</td>
+<td>0.10</td>
+<td>0.18</td>
+<td>0.33</td>
+</tr>
+<tr class="odd">
+<td>0.3</td>
+<td>0.30</td>
+<td>0.42</td>
+<td>0.61</td>
+</tr>
+<tr class="even">
+<td>0.5 (evenly mixed)</td>
+<td>0.50</td>
+<td>0.50</td>
+<td>0.69</td>
+</tr>
+</tbody>
+</table>
+<p>All three are 0 for a pure leaf and biggest at 50/50. Gini and entropy are <strong>curved</strong>, which turns out to matter (Technique 4).</p>
+<div data-widget="impurity">
+
+</div>
+<h2 id="technique-3-information-gain">Technique 3: information gain</h2>
+<p><strong>Problem it solves:</strong> scoring a candidate split.</p>
+<p><span class="math display">\[\text{gain} = G(\text{parent}) - \frac{n_{\text{left}}\,G(\text{left}) + n_{\text{right}}\,G(\text{right})}{n_{\text{parent}}}\]</span></p>
+<p>Weight each half by its share of the points. Pick the split with the <strong>biggest</strong> gain. (Entropy can replace <span class="math inline">\(G\)</span>.)</p>
+<div class="example">
+<p><strong>Worked example.</strong> A box with 6 A and 4 B: Gini <span class="math inline">\(0.6 \times 0.4 + 0.4 \times 0.6 = 0.48\)</span>.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>split</th>
+<th>left</th>
+<th>right</th>
+<th>Gini after</th>
+<th>gain</th>
+<th>error after</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>(4 A, 0 B)</td>
+<td>(2 A, 4 B)</td>
+<td><span class="math inline">\(0.6 \times 0.444 = 0.267\)</span></td>
+<td><strong>0.213</strong></td>
+<td>0.2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>(3 A, 1 B)</td>
+<td>(3 A, 3 B)</td>
+<td><span class="math inline">\(0.4 \times 0.375 + 0.6 \times 0.5 = 0.45\)</span></td>
+<td>0.030</td>
+<td>0.4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>(5 A, 1 B)</td>
+<td>(1 A, 3 B)</td>
+<td><span class="math inline">\(0.6 \times 0.278 + 0.4 \times 0.375 = 0.317\)</span></td>
+<td>0.163</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+<p>Split 1 wins. Splits 1 and 3 have the <strong>same</strong> error rate afterwards, so the error rate couldn’t choose; Gini rewards split 1’s perfectly pure leaf.</p>
+</div>
+<h2 id="technique-4-why-grow-with-gini-not-the-error-rate">Technique 4: why grow with Gini, not the error rate</h2>
+<p><strong>Problem it solves:</strong> the error rate often can’t see progress.</p>
+<p>Box (8 A, 2 B), error 0.2. Split into (4 A, 2 B) and (4 A, 0 B). Both halves still predict A, so the error rate is still <span class="math inline">\(0.6 \times \frac13 = 0.2\)</span>: <strong>no gain</strong>. But Gini drops from 0.32 to <span class="math inline">\(0.6 \times 0.444 = 0.267\)</span>: a pure group has been carved out, and the remaining mixed group is smaller and easier to split next time. A greedy algorithm needs a score that notices this. That’s ISLP’s RestECG example (p341). The error rate is still fine for judging the <em>final</em> tree.</p>
+<h2 id="classification-tree-vs-other-classifiers">Classification tree vs other classifiers</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>logistic regression / LDA</th>
+<th>KNN</th>
+<th>classification tree</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>boundary</td>
+<td>straight line</td>
+<td>wiggly</td>
+<td>staircase of axis-parallel steps</td>
+</tr>
+<tr class="even">
+<td>readable</td>
+<td>coefficients</td>
+<td>no</td>
+<td>a flow chart</td>
+</tr>
+<tr class="odd">
+<td>scaling needed</td>
+<td>for gradient descent</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>categories as inputs</td>
+<td>dummy variables</td>
+<td>awkward</td>
+<td>split on them directly (ISLP p340)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8.1.2 Classification trees (p337–341)</td>
+<td><strong>Read</strong></td>
+<td>Core: error, Gini, entropy (8.5–8.7), the Heart example</td>
+</tr>
+<tr class="even">
+<td>— splits on qualitative predictors (Thal:a, ChestPain:bc)</td>
+<td>Skim</td>
+<td>Not on the slides</td>
+</tr>
+<tr class="odd">
+<td>— the RestECG&lt;1 paragraph (p341)</td>
+<td><strong>Read</strong></td>
+<td>The clearest reason to prefer Gini</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, section 8.1.2). I want practice questions on CLASSIFICATION TREES, done by hand:
+- a leaf&#39;s majority-vote prediction and its class probabilities from counts
+- the error rate, Gini index and entropy of a leaf (two and three classes, natural logs)
+- information gain of a candidate split, weighting each half by its size
+- comparing two or three candidate splits and choosing the best
+- examples where the error rate shows no improvement but Gini does, and why that matters for greedy growing
+- how a classification tree&#39;s decision boundary looks compared with logistic regression and KNN
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/Regression_Trees.html"><small>&larr; Previous</small>Regression trees</a><a class="next" href="../w4/Tree_Pruning.html"><small>Next &rarr;</small>Tree pruning</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>
