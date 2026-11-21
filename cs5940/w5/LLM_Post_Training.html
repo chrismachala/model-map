@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post-training and the three knobs · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w5_LLM_Post_Training" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="../w5/Deep_RL.html" data-page="cs5940_w5_Deep_RL" data-total="7"><span class="dot learn"></span>Deep reinforcement learning<span class="tick"></span></a>
+<a href="../w5/LLM_Foundations.html" data-page="cs5940_w5_LLM_Foundations" data-total="5"><span class="dot tool"></span>How an LLM generates text<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w5/LLM_Post_Training.html" data-page="cs5940_w5_LLM_Post_Training" data-total="5"><span class="dot learn"></span>Post-training and the three knobs<span class="tick"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="../w6/LLM_Agent_Harness.html" data-page="cs5940_w6_LLM_Agent_Harness" data-total="7"><span class="dot llm"></span>LLM agents: the loop and the harness<span class="tick"></span></a>
+<a href="../w6/Tools_and_Skills.html" data-page="cs5940_w6_Tools_and_Skills" data-total="6"><span class="dot llm"></span>Tools and skills<span class="tick"></span></a>
+<a href="../w6/Context_Memory_RAG.html" data-page="cs5940_w6_Context_Memory_RAG" data-total="6"><span class="dot llm"></span>Context, retrieval and memory<span class="tick"></span></a>
+<a href="../w6/Orchestration.html" data-page="cs5940_w6_Orchestration" data-total="6"><span class="dot llm"></span>Planning and orchestration<span class="tick"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="../w7/Utilities_and_Games.html" data-page="cs5940_w7_Utilities_and_Games" data-total="6"><span class="dot mas"></span>Utilities, preferences and games<span class="tick"></span></a>
+<a href="../w7/Solution_Concepts.html" data-page="cs5940_w7_Solution_Concepts" data-total="7"><span class="dot mas"></span>Solution concepts<span class="tick"></span></a>
+<a href="../w7/Prisoners_Dilemma.html" data-page="cs5940_w7_Prisoners_Dilemma" data-total="8"><span class="dot mas"></span>The prisoner’s dilemma<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot llm"></i>llm-based agent</span><span><i class="dot mas"></i>multi-agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip learn">Learning agent</span><span class="chip">Week 5</span><span class="chip">5 techniques</span></div>
+  <h1>Post-training and the three knobs</h1>
+  <p class="tagline">A pretrained model predicts web text. Post-training (fine-tuning on examples, then RL from preferences or from checkable answers) turns it into an assistant. And a quiz favourite: knowing which actions actually change the weights, and why a model that generates text still isn't an agent.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> learning (how LLM behaviour is shaped after pretraining).<br />
+<strong>Week:</strong> 5, Part B, second half (slides 39 to 54).<br />
+<strong>Book:</strong> not in Wooldridge. Optional: Ouyang et al. 2022 (InstructGPT, RLHF), DeepSeek-AI 2025 (R1).<br />
+<strong>Techniques on this page:</strong> supervised fine-tuning, RLHF and RLAIF, RLVR, DPO, the DeepSeek-R1 case study, “reasoning” models as a continuum, the three knobs (training, decoding, inference-time compute), two meanings of “policy”, why an LLM is not yet an agent.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Pretraining gives broad ability but no guarantee of truthfulness, of following instructions, or of pursuing goals reliably (slide 40). <strong>Post-training</strong> reshapes behaviour with new training signals. Some of it is RL, which is where Part A and Part B meet: the LLM becomes a <strong>policy</strong> <span class="math inline">\(\pi_\theta\)</span> over tokens, and a reward pushes its probabilities.</p>
+<p>Then the agent question (slides 50 to 53): even a well-trained model only <em>generates tokens</em>. To act in the world it needs something around it that executes requests, observes results and loops. That’s week 6.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SFT</td>
+<td>supervised fine-tuning: train on chosen (prompt, good response) pairs</td>
+</tr>
+<tr class="even">
+<td>RLHF</td>
+<td>RL from human feedback: humans compare responses → train a reward model → RL (e.g. PPO) towards higher reward</td>
+</tr>
+<tr class="odd">
+<td>RLAIF</td>
+<td>the same, but an AI gives the preference judgements (e.g. Constitutional AI)</td>
+</tr>
+<tr class="even">
+<td>RLVR</td>
+<td>RL with verifiable rewards: a checker (right number, tests pass) gives the reward</td>
+</tr>
+<tr class="odd">
+<td>reward model</td>
+<td>a network trained to score responses the way the human comparisons did</td>
+</tr>
+<tr class="even">
+<td>DPO</td>
+<td>direct preference optimisation: learn straight from chosen/rejected pairs; no separate reward model, no RL loop</td>
+</tr>
+<tr class="odd">
+<td>GRPO</td>
+<td>group relative policy optimisation: PPO-style, scores each answer against other answers to the same question; no critic</td>
+</tr>
+<tr class="even">
+<td>in-context examples</td>
+<td>worked examples put in the prompt; change the output but <strong>not the weights</strong></td>
+</tr>
+<tr class="odd">
+<td>reward hacking / overoptimisation</td>
+<td>getting high reward without the behaviour you wanted</td>
+</tr>
+<tr class="even">
+<td>inference-time compute</td>
+<td>spending more computation at answer time: reasoning tokens, several attempts, search, checking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-post-training-menu">Technique 1: the post-training menu</h2>
+<p><strong>Problem it solves:</strong> different signals teach different things (slide 42).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage / method</th>
+<th>Training signal</th>
+<th>Main idea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pretraining</td>
+<td>next token in a text corpus</td>
+<td>general ability and representations</td>
+</tr>
+<tr class="even">
+<td><strong>SFT</strong></td>
+<td>target responses to prompts</td>
+<td>task behaviour and formatting</td>
+</tr>
+<tr class="odd">
+<td><strong>RLHF</strong></td>
+<td>human comparisons → reward model</td>
+<td>RL towards preferred responses</td>
+</tr>
+<tr class="even">
+<td><strong>RLAIF</strong></td>
+<td>AI-generated preference judgements</td>
+<td>RL with AI-derived feedback</td>
+</tr>
+<tr class="odd">
+<td><strong>RLVR</strong></td>
+<td>automatically checked answers or outcomes</td>
+<td>RL for verifiable success</td>
+</tr>
+</tbody>
+</table>
+<p>Not a fixed recipe: stages can be mixed, repeated or skipped. <strong>DPO</strong> learns from chosen/rejected pairs <em>without</em> a reward model or RL loop.</p>
+<p><strong>SFT</strong> (slide 43) trains on demonstrations (“Explain Q-learning simply” → a clear explanation). It <strong>updates the weights</strong>. Putting examples in the prompt does not. Standard SFT doesn’t compare good and bad answers; preference methods do.</p>
+<p><strong>RLHF pipeline</strong> (slide 44): prompt → policy <span class="math inline">\(\pi_\theta\)</span> writes candidate responses → humans (or an AI, for RLAIF) compare them → a <strong>reward model</strong> learns those preferences → RL update of the policy against the reward model. Risk: the policy finds ways to score highly that the reward model mis-rates (<strong>overoptimisation</strong>, reward hacking again).</p>
+<p><strong>RLVR</strong> (slide 45): maths or code problem → model writes a solution → a <strong>verifier</strong> checks the answer or runs tests → reward → RL update. Less subjective than human judgement, but incomplete tests can still be gamed. Typically the whole completed response gets one outcome reward.</p>
+<div class="example">
+<p><strong>Which method?</strong> (a) A team has 10,000 expert-written answers to customer questions: <strong>SFT</strong>. (b) Labellers say which of two answers is better, and a model is trained to predict their choice, then used as the reward: <strong>RLHF</strong>. (c) Each answer to a maths problem is marked right or wrong by comparing with the known result: <strong>RLVR</strong>. (d) Pairs of (preferred, rejected) responses, trained on directly with no reward model: <strong>DPO</strong>.</p>
+</div>
+<h2 id="technique-2-deepseek-r1-the-rl-case-study">Technique 2: DeepSeek-R1, the RL case study</h2>
+<p><strong>Problem it solves:</strong> shows RL can improve reasoning in an already-pretrained model (slide 46).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>DeepSeek-R1-Zero</th>
+<th>DeepSeek-R1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>starts from</td>
+<td>DeepSeek-V3-Base</td>
+<td>DeepSeek-V3-Base</td>
+</tr>
+<tr class="even">
+<td>post-training</td>
+<td><strong>RL (GRPO) only, no SFT first</strong></td>
+<td>cold-start SFT → reasoning RL → curated SFT → final RL</td>
+</tr>
+<tr class="odd">
+<td>feedback</td>
+<td>mainly rule-based accuracy and format rewards</td>
+<td>rule-based, later also preference-based</td>
+</tr>
+<tr class="even">
+<td>what happened</td>
+<td>reflection and self-checking <strong>emerged</strong></td>
+<td>strong reasoning, more readable, more useful</td>
+</tr>
+</tbody>
+</table>
+<p>R1-Zero’s catch: poor readability and language mixing, which R1’s extra SFT and RL fixed.</p>
+<p><strong>“Reasoning” vs “standard” models are a continuum</strong> (slide 47): they differ in training (extra reasoning SFT/RL, verifiable rewards), in inference compute (more tokens, attempts, search), in system setup (adjustable effort, routing), and in what’s shown (a summary is not necessarily the whole internal process). More compute at answer time can help hard tasks but <strong>doesn’t guarantee correctness</strong>.</p>
+<h2 id="technique-3-the-three-knobs">Technique 3: the three knobs</h2>
+<p><strong>Problem it solves:</strong> three different things all get called “making the model better” (slide 48).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Knob</th>
+<th>What it does</th>
+<th>Changes <span class="math inline">\(\theta\)</span>?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. <strong>Training</strong></td>
+<td>pretraining, SFT, preference optimisation, RL</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr class="even">
+<td>2. <strong>Decoding</strong></td>
+<td>how tokens are picked: greedy, temperature sampling</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td>3. <strong>Inference-time computation</strong></td>
+<td>extra reasoning steps, samples or checking before the final answer</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>If a model solves a hard question after “thinking longer”, has it <strong>learned</strong>? No: it computed more or used more context. Learning means a training update to <span class="math inline">\(\theta\)</span>.</p>
+<div class="warn">
+<p><strong>Poll 3 (slide 49): which updates θ?</strong> Only <strong>training with verifiable rewards (RLVR)</strong> (D). Lower temperature (A) is decoding; worked examples in the prompt (B) are context; more reasoning tokens (C) are inference-time compute. None of those touches the weights. This is a likely quiz trap: “in-context learning” sounds like learning but isn’t a weight update.</p>
+</div>
+<h2 id="technique-4-two-meanings-of-policy">Technique 4: two meanings of “policy”</h2>
+<p><strong>Problem it solves:</strong> the word is used for the model and for the agent, and they’re different (slide 50).</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model-level policy</th>
+<th>Agent-level policy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\pi_\theta(x_t \mid c, x_{&lt;t})\)</span></td>
+<td><span class="math inline">\(\pi(a_t \mid h_t, g)\)</span></td>
+</tr>
+<tr class="even">
+<td>a distribution over <strong>next tokens</strong>, given context and earlier tokens</td>
+<td>a choice of <strong>environment actions</strong>, given the interaction history and the goal</td>
+</tr>
+</tbody>
+</table>
+<p>An LLM can implement <em>part</em> of an agent policy, e.g. by writing a structured tool request. But a token distribution is <strong>not</strong> an executed policy over tools or physical actions: an <strong>executor</strong> has to interpret and run the request. And a frozen model can still respond differently as its context changes, without learning anything.</p>
+<h2 id="technique-5-an-llm-is-not-yet-a-tool-using-agent">Technique 5: an LLM is not yet a tool-using agent</h2>
+<p><strong>Problem it solves:</strong> separates “says it will act” from “acts” (slide 51).</p>
+<p>The loop an agent needs: context → frozen LLM → reply <em>or</em> a proposed tool request → <strong>controller and executor</strong> (with permissions) runs it → tool results go back into the context and memory → next step. Tool calling needs an <strong>executor and permissions</strong>, not just tool-shaped text.</p>
+<p><strong>The five distinctions</strong> (slide 53), worth learning word for word:</p>
+<ol type="1">
+<li><strong>Q-table vs DQN:</strong> tabular values vs neural function approximation.</li>
+<li><strong>Model-free vs model-based:</strong> learning without a dynamics model vs using one to plan or learn.</li>
+<li><strong>RL vs pretraining:</strong> optimising reward vs predicting tokens in training data.</li>
+<li><strong>Training vs inference:</strong> updating parameters vs generating with (normally) fixed parameters.</li>
+<li><strong>LLM vs LLM agent:</strong> token generation vs a runtime action–observation loop with tools and control logic.</li>
+</ol>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Slides 39 to 54</td>
+<td><strong>Primary</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Ouyang et al. 2022 (InstructGPT)</td>
+<td>Optional</td>
+<td>the standard RLHF pipeline, Figure 2</td>
+</tr>
+<tr class="even">
+<td>DeepSeek-R1 paper (arXiv 2501.12948)</td>
+<td>Optional</td>
+<td>sections 2.2 to 2.3 for R1-Zero vs R1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 5 Part B (LLM post-training). I want quiz practice on:
+- SFT vs RLHF vs RLAIF vs RLVR vs DPO: given a description of a training signal, name the method
+- the RLHF pipeline (policy, comparisons, reward model, RL update) and reward-model overoptimisation
+- DeepSeek-R1-Zero vs DeepSeek-R1, and what GRPO is
+- the three knobs: training vs decoding vs inference-time compute; which ones change the weights theta
+- model-level policy vs agent-level policy
+- why an LLM is not yet a tool-using agent; the five distinctions from slide 53
+
+Please:
+1. Ask multiple-choice questions like a university quiz, ONE at a time, including &quot;which of these updates theta?&quot; style traps.
+2. Wait for my answer, then mark it and explain every option.
+3. Every 5 questions, summarise what I keep confusing.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w5/LLM_Foundations.html"><small>&larr; Previous</small>How an LLM generates text</a><a class="next" href="../w6/LLM_Agent_Harness.html"><small>Next &rarr;</small>LLM agents: the loop and the harness</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

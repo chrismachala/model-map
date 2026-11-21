@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Gaussian bell curve · CS5100 Maths-first path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 25, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 35, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 40, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t07_gaussian", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths_t07_gaussian" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a class="active" aria-current="page" href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>22. Final: spot the shared maths<span class="pstat" data-i="21"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 7 of 22</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 25 min</span></div>
+  <h1>The Gaussian bell curve</h1>
+  <p class="tagline">One density, three jobs: it describes each class in LDA and naive Bayes, it is the noise assumption that secretly justifies least squares, and it is the smooth "bump" in kernel density estimation. The trick that makes it so useful: its log is a squared distance.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 4.4.1 (LDA with one input, eq. 4.16 to 4.18: the Gaussian density and the discriminant). <strong>Skim</strong> 4.4.2 (the multivariate version with a covariance matrix <span class="math inline">\(\mathbf{\Sigma}\)</span>): know it exists, don’t learn the algebra. Week 7 slides, “Smooth kernels”, for the Gaussian kernel <span class="math inline">\(K(x) = (2\pi)^{-p/2}e^{-\frac12x^Tx}\)</span>. The week 7 slides say parametric (Gaussian) density estimation is “not in this module”, but the Gaussian <strong>kernel</strong> is.</p>
+</div>
+<h2 id="the-formula">1. The formula</h2>
+<p>A Gaussian (normal) distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> has density</p>
+<p><span class="math display">\[\boxed{f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\Big(-\frac{(x - \mu)^2}{2\sigma^2}\Big)}\]</span></p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is the centre (the peak). <span class="math inline">\(\sigma\)</span> is the spread: about 68% of the mass is within <span class="math inline">\(\mu \pm \sigma\)</span>, 95% within <span class="math inline">\(\mu \pm 2\sigma\)</span>.</li>
+<li>The front factor <span class="math inline">\(\frac{1}{\sqrt{2\pi\sigma^2}}\)</span> just makes the area 1. The <strong>shape</strong> is all in the exponent.</li>
+<li>A density can be bigger than 1 (a narrow Gaussian with <span class="math inline">\(\sigma = 0.1\)</span> peaks at about 4). It’s area, not height, that’s a probability.</li>
+</ul>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\sigma = 1\)</span>, <span class="math inline">\(x = 3\)</span>. Exponent term <span class="math inline">\((3 - 2)^2/2 = 0.5\)</span>. <span class="math inline">\(f(3) = \frac{1}{\sqrt{2\pi}}e^{-0.5} = 0.3989 \times 0.6065 = 0.242\)</span>.</p>
+</div>
+<div class="q" kind="gen" data-gen="gauss">
+
+</div>
+<h2 id="its-log-is-a-squared-distance">2. Its log is a squared distance</h2>
+<p><span class="math display">\[\log f(x) = \underbrace{-\tfrac12\log(2\pi\sigma^2)}_{\text{constant}} - \frac{(x - \mu)^2}{2\sigma^2}.\]</span></p>
+<p>So “make <span class="math inline">\(f(x)\)</span> big” means “make <span class="math inline">\((x - \mu)^2\)</span> small”. That is the bridge between probability and squared error (Toolkit 3), and it pays off three times:</p>
+<ol type="1">
+<li><strong>Least squares is maximum likelihood.</strong> If <span class="math inline">\(y_i = f(x_i) + \epsilon_i\)</span> with Gaussian noise, the log-likelihood of the data is a constant minus <span class="math inline">\(\frac{1}{2\sigma^2}\sum(y_i - f(x_i))^2\)</span>. Maximising it <strong>is</strong> minimising RSS (w2, revisited in w3).</li>
+<li><strong>The best estimate of <span class="math inline">\(\mu\)</span> is the mean.</strong> Maximising <span class="math inline">\(\prod f(x_i)\)</span> over <span class="math inline">\(\mu\)</span> means minimising <span class="math inline">\(\sum(x_i - \mu)^2\)</span>, so <span class="math inline">\(\hat\mu = \bar x\)</span> (Toolkit 3 again). That’s why LDA estimates each class centre as the class average.</li>
+<li><strong>LDA’s boundary is linear</strong> (next step).</li>
+</ol>
+<h2 id="gaussian-bayes-rule-lda">3. Gaussian + Bayes’ rule = LDA</h2>
+<p>LDA gives every class a Gaussian with its own mean <span class="math inline">\(\mu_k\)</span> but the <strong>same</strong> variance <span class="math inline">\(\sigma^2\)</span>. Take logs of <span class="math inline">\(\pi_kf_k(x)\)</span> and drop anything that doesn’t depend on <span class="math inline">\(k\)</span>:</p>
+<p><span class="math display">\[\log\big(\pi_kf_k(x)\big) = \text{const} - \frac{x^2}{2\sigma^2} + \frac{x\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log\pi_k.\]</span></p>
+<p>The <span class="math inline">\(x^2\)</span> term is the same for every class, so it can’t change which class wins. What’s left is the <strong>discriminant</strong></p>
+<p><span class="math display">\[\delta_k(x) = \frac{x\,\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log\pi_k,\]</span></p>
+<p>which is <strong>linear in <span class="math inline">\(x\)</span></strong>: a dot product plus a constant (Toolkit 1). Hence “linear” discriminant analysis. With equal priors, the boundary between two classes is the midpoint <span class="math inline">\((\mu_0 + \mu_1)/2\)</span>.</p>
+<p>The estimates are all averages (Toolkit 2): <span class="math inline">\(\hat\pi_k = n_k/n\)</span>, <span class="math inline">\(\hat\mu_k\)</span> = class mean, <span class="math inline">\(\hat\sigma^2 = \frac{1}{n - m}\sum_k\sum_{i\in k}(x_i - \hat\mu_k)^2\)</span> (pooled, <span class="math inline">\(m\)</span> classes).</p>
+<div data-widget="lda">
+
+</div>
+<div class="q" kind="gen" data-gen="lda">
+
+</div>
+<h2 id="the-gaussian-as-a-kernel">4. The Gaussian as a kernel</h2>
+<p>In kernel density estimation (w7) each data point puts down a bump and the estimate is the average bump height:</p>
+<p><span class="math display">\[f_{\text{KDE}}(x) = \frac{1}{nh^p}\sum_{i=1}^{n}K\Big(\frac{x - x_i}{h}\Big), \qquad K(u) = (2\pi)^{-p/2}e^{-\frac12u^Tu}.\]</span></p>
+<p><span class="math inline">\(K\)</span> is a Gaussian with mean 0 and variance 1 in each direction, and <span class="math inline">\(u^Tu\)</span> is a squared length (Toolkit 1). The bandwidth <span class="math inline">\(h\)</span> plays the role of <span class="math inline">\(\sigma\)</span>: wider bumps mean a smoother estimate (Toolkit 5).</p>
+<div class="q" kind="num" data-answer="0.242" data-tol="0.003" label="K(1)">
+<p>In one dimension, <span class="math inline">\(K(u) = \frac{1}{\sqrt{2\pi}}e^{-u^2/2}\)</span>. Compute <span class="math inline">\(K(1)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(0.3989 \times e^{-0.5} = 0.3989 \times 0.6065 = 0.242\)</span>. Same as the worked example: <span class="math inline">\(K\)</span> is the Gaussian with <span class="math inline">\(\mu = 0\)</span>, <span class="math inline">\(\sigma = 1\)</span>.</p>
+</div>
+</div>
+<h2 id="where-this-comes-back">Where this comes back</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Page</th>
+<th>How it shows up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td><a href="../w2/Linear_Regression.html">Linear regression</a></td>
+<td>least squares = Gaussian-noise maximum likelihood</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><a href="../w3/LDA.html">LDA</a></td>
+<td>Gaussian class densities with a shared <span class="math inline">\(\sigma^2\)</span>; linear <span class="math inline">\(\delta_k\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><a href="../w3/Naive_Bayes.html">Naive Bayes</a></td>
+<td>often one Gaussian per input per class</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td><a href="../w7/Density_Estimation.html">Density estimation</a></td>
+<td>the Gaussian kernel; bandwidth <span class="math inline">\(h\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="gauss">
+
+</div>
+<div class="q" kind="gen" data-gen="lda">
+
+</div>
+<div class="q" kind="num" data-answer="4" label="boundary">
+<p>LDA, one input, two classes with equal priors, class means <span class="math inline">\(\hat\mu_0 = 1\)</span> and <span class="math inline">\(\hat\mu_1 = 7\)</span>, shared variance. Where is the decision boundary?</p>
+<div class="expl">
+<p>With equal priors the <span class="math inline">\(\log\pi_k\)</span> terms cancel and the boundary is the midpoint: <span class="math inline">\((1 + 7)/2 = 4\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why is LDA’s decision boundary linear in <span class="math inline">\(x\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Because the Gaussian density is linear.</label></li>
+<li><label><input type="checkbox" checked="" />Because all classes share one variance, so the <span class="math inline">\(x^2\)</span> term in <span class="math inline">\(\log\pi_kf_k(x)\)</span> is the same for every class and cancels.</label></li>
+<li><label><input type="checkbox" />Because it uses gradient descent.</label></li>
+<li><label><input type="checkbox" />Because the priors are equal.</label></li>
+</ul>
+<div class="expl">
+<p>If each class had its own variance (QDA), the <span class="math inline">\(x^2\)</span> terms wouldn’t cancel and the boundary would be quadratic.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Under which assumption is minimising RSS the same as maximum likelihood?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The inputs are independent.</label></li>
+<li><label><input type="checkbox" checked="" />The errors <span class="math inline">\(\epsilon_i\)</span> are independent Gaussians with equal variance.</label></li>
+<li><label><input type="checkbox" />The responses are 0 or 1.</label></li>
+<li><label><input type="checkbox" />The model is a tree.</label></li>
+</ul>
+<div class="expl">
+<p>The log of a Gaussian density is a constant minus a squared error, so the log-likelihood is a constant minus RSS/<span class="math inline">\((2\sigma^2)\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t06_bayes_rule.html"><small>&larr; Stage 6</small>Probability and Bayes&#x27; rule</a><a class="next" href="t08_sigmoid_softmax.html"><small>Stage 8 &rarr;</small>Sigmoid, log-odds and softmax</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

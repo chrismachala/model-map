@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM agents: the loop and the harness · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w6_LLM_Agent_Harness" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="../w5/Deep_RL.html" data-page="cs5940_w5_Deep_RL" data-total="7"><span class="dot learn"></span>Deep reinforcement learning<span class="tick"></span></a>
+<a href="../w5/LLM_Foundations.html" data-page="cs5940_w5_LLM_Foundations" data-total="5"><span class="dot tool"></span>How an LLM generates text<span class="tick"></span></a>
+<a href="../w5/LLM_Post_Training.html" data-page="cs5940_w5_LLM_Post_Training" data-total="5"><span class="dot learn"></span>Post-training and the three knobs<span class="tick"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a class="active" aria-current="page" href="../w6/LLM_Agent_Harness.html" data-page="cs5940_w6_LLM_Agent_Harness" data-total="7"><span class="dot llm"></span>LLM agents: the loop and the harness<span class="tick"></span></a>
+<a href="../w6/Tools_and_Skills.html" data-page="cs5940_w6_Tools_and_Skills" data-total="6"><span class="dot llm"></span>Tools and skills<span class="tick"></span></a>
+<a href="../w6/Context_Memory_RAG.html" data-page="cs5940_w6_Context_Memory_RAG" data-total="6"><span class="dot llm"></span>Context, retrieval and memory<span class="tick"></span></a>
+<a href="../w6/Orchestration.html" data-page="cs5940_w6_Orchestration" data-total="6"><span class="dot llm"></span>Planning and orchestration<span class="tick"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="../w7/Utilities_and_Games.html" data-page="cs5940_w7_Utilities_and_Games" data-total="6"><span class="dot mas"></span>Utilities, preferences and games<span class="tick"></span></a>
+<a href="../w7/Solution_Concepts.html" data-page="cs5940_w7_Solution_Concepts" data-total="7"><span class="dot mas"></span>Solution concepts<span class="tick"></span></a>
+<a href="../w7/Prisoners_Dilemma.html" data-page="cs5940_w7_Prisoners_Dilemma" data-total="8"><span class="dot mas"></span>The prisoner’s dilemma<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot llm"></i>llm-based agent</span><span><i class="dot mas"></i>multi-agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip llm">LLM-based agent</span><span class="chip">Week 6</span><span class="chip">7 techniques</span></div>
+  <h1>LLM agents: the loop and the harness</h1>
+  <p class="tagline">An LLM only writes text. What turns it into an agent is the code around it, the harness: it builds what the model sees, checks every tool request, runs the allowed ones, feeds back the results and decides when to stop. Only one line of that loop is learned.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> LLM-based agent.<br />
+<strong>Week:</strong> 6, Parts I and II (slides 1 to 20), plus the failure autopsy (slides 44 to 48).<br />
+<strong>Book:</strong> not in Wooldridge. The slides cite Anthropic, <em>Building Effective Agents</em> (2024), and Raschka, <em>Components of a coding agent</em>.<br />
+<strong>Techniques on this page:</strong> workflow vs agent, the agent loop, the harness as six components, the formal loop, from output to action, the minimal harness in code, the failure autopsy.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The airline scenario (slide 3). The passenger asks: <em>find a flight SFO → New York on 18 April, after 10:00, at most $500. Do not book yet.</em> A bare LLM replies: “Coastal Air CA 1523 leaves at 11:15 and costs $389. Shall I book it?”</p>
+<p>Two things are wrong:</p>
+<ol type="1">
+<li>It <strong>fits every constraint and sounds right, but nothing was checked</strong>: no search, no fare quote. The flight may not exist.</li>
+<li>It <strong>offers to book</strong>: an action it can’t perform, and one the passenger ruled out.</li>
+</ol>
+<p>Week 5 ended with “an LLM is not yet an agent”. Week 6 adds, one component at a time, what lets it <strong>observe, act and keep track</strong>. The answer to slide 4’s warm-up (“where does a good agent’s competence come from?”) is <strong>D: the pretrained model, the engineering around it, and the tools and data, jointly</strong>.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>workflow</td>
+<td>a program fixes the path: which steps run, in what order, where the model is called</td>
+</tr>
+<tr class="even">
+<td>agent</td>
+<td>the model’s output helps choose the next step or tool, based on what it just observed</td>
+</tr>
+<tr class="odd">
+<td>augmented LLM</td>
+<td>an LLM plus retrieval, tools and memory: a building block for both workflows and agents</td>
+</tr>
+<tr class="even">
+<td>harness (scaffold, agent runtime)</td>
+<td>all the code around the model: context building, model calls, tool dispatch, state, limits, stopping, recovery</td>
+</tr>
+<tr class="odd">
+<td>tool call</td>
+<td>a structured request the model writes, e.g. <code>check_fare(flight_id="441")</code>; the harness decides whether to run it</td>
+</tr>
+<tr class="even">
+<td>observation</td>
+<td>what comes back: a tool result, an error, a user reply</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(c_t\)</span>, <span class="math inline">\(u_t\)</span>, <span class="math inline">\(a_t\)</span>, <span class="math inline">\(o_{t+1}\)</span>, <span class="math inline">\(m_t\)</span></td>
+<td>context, model output, accepted action, observation, runtime state</td>
+</tr>
+<tr class="even">
+<td>step limit</td>
+<td>the maximum number of loop iterations before the harness stops</td>
+</tr>
+<tr class="odd">
+<td>idempotency</td>
+<td>doing a request twice has the same effect as doing it once</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-workflow-or-agent">Technique 1: workflow or agent?</h2>
+<p><strong>Problem it solves:</strong> tells you whether you’re building an agent at all (slides 8 to 9).</p>
+<p>The deciding question is <strong>control: does the model’s output choose the next step?</strong> A workflow can have tools, retrieval and memory too. The runtime in an agent still validates, executes and enforces limits.</p>
+<div class="example">
+<p><strong>Slide 9’s four systems.</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>System</th>
+<th>Answer</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A. LLM labels each email as refund, complaint or other</td>
+<td>workflow</td>
+<td>one model call, fixed path</td>
+</tr>
+<tr class="even">
+<td>B. Docs chatbot: one search of the manual, then one answer</td>
+<td>workflow</td>
+<td>retrieval, but the program fixes the path</td>
+</tr>
+<tr class="odd">
+<td>C. Coding assistant: edit, run tests, read failures, try again until pass or give up</td>
+<td><strong>agent</strong></td>
+<td>the model’s output picks the next step from what it just saw</td>
+</tr>
+<tr class="even">
+<td>D. Nightly: fetch sales, LLM summarises, email managers</td>
+<td>workflow</td>
+<td>tools, but a fixed pipeline</td>
+</tr>
+</tbody>
+</table>
+<p>Quiz 1 asked the same thing: three LLM calls in a fixed order (summarise, classify urgency, draft) is a <strong>workflow, because it follows a predefined code path</strong>, even though it uses an LLM.</p>
+</div>
+<h2 id="technique-2-the-agent-loop">Technique 2: the agent loop</h2>
+<p><strong>Problem it solves:</strong> maps the classical agent onto an LLM agent (slides 10 to 11).</p>
+<p>The model generates <span class="math inline">\(u_t \sim p_\theta(\cdot \mid c_t)\)</span>: a distribution over <strong>generated output</strong>, not over successful actions. <strong>Even in an agent the model only generates text. A tool request is not, by itself, an action.</strong> So who acts? The harness.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Classical agent (Russell and Norvig)</th>
+<th>LLM-based agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>percepts via sensors</td>
+<td><strong>feedback</strong>: tool results, errors, user replies</td>
+</tr>
+<tr class="even">
+<td>actions via actuators</td>
+<td><strong>actions</strong>: tool calls, and the final answer</td>
+</tr>
+<tr class="odd">
+<td>the agent program</td>
+<td>LLM call inside a loop, run by the <strong>harness</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="technique-3-the-harnesss-six-components">Technique 3: the harness’s six components</h2>
+<p><strong>Problem it solves:</strong> a checklist of what an agent needs besides the model (slides 6 and 13, the lecture map).</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Job in the airline clerk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>LLM</strong></td>
+<td>proposes the next search or fare check</td>
+</tr>
+<tr class="even">
+<td><strong>Context builder</strong></td>
+<td>decides what the model sees this step: task, schemas, filtered results</td>
+</tr>
+<tr class="odd">
+<td><strong>Control and dispatch</strong></td>
+<td>validates calls, enforces permissions and limits (book_flight not exposed)</td>
+</tr>
+<tr class="even">
+<td><strong>Tools</strong></td>
+<td><code>search_flights</code>, <code>check_fare</code>: how it observes and acts</td>
+</tr>
+<tr class="odd">
+<td><strong>Skills</strong></td>
+<td>reusable procedure: how to compare fares and report caveats</td>
+</tr>
+<tr class="even">
+<td><strong>State, memory and retrieval</strong></td>
+<td>fare history, progress notes, the policy index</td>
+</tr>
+<tr class="odd">
+<td><strong>Planning and orchestration</strong></td>
+<td>for bigger jobs (a five-city tour): plans, sub-agents</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technique-4-the-loop-formally">Technique 4: the loop, formally</h2>
+<p><strong>Problem it solves:</strong> shows exactly which part is learned (slide 18).</p>
+<p><span class="math display">\[c_t = \text{BuildContext}(m_t, g, T, K_t)\]</span> <span class="math display">\[u_t \sim p_\theta(\cdot \mid c_t)\]</span> <span class="math display">\[a_t = \text{InterpretAndValidate}(u_t)\]</span> <span class="math display">\[o_{t+1} = \text{Execute}(a_t)\]</span> <span class="math display">\[m_{t+1} = \text{UpdateState}(m_t, u_t, a_t, o_{t+1})\]</span></p>
+<p><span class="math inline">\(g\)</span> = task, <span class="math inline">\(T\)</span> = tool descriptions, <span class="math inline">\(K_t\)</span> = skills loaded so far, <span class="math inline">\(m_t\)</span> = runtime state. <strong>Only <span class="math inline">\(p_\theta\)</span> is learned. Every other line is engineered: that’s the harness.</strong> In the role-play, the “Harness” player was BuildContext, InterpretAndValidate and UpdateState.</p>
+<p>Cross-cutting harness duties: logging and traces, step and cost limits, retries and back-off, error handling, checkpoints.</p>
+<h2 id="technique-5-from-output-to-action-or-not">Technique 5: from output to action, or not</h2>
+<p><strong>Problem it solves:</strong> what happens to each kind of model output (slide 19).</p>
+<ul>
+<li><strong>Final answer</strong> → stop, return it to the user.</li>
+<li><strong>Question</strong> → ask the passenger, wait for the reply.</li>
+<li><strong>Tool request</strong> → validate: known tool? valid arguments? permitted? If yes, <strong>execute</strong> and record the result or error; if no, a <strong>rejection message</strong>.</li>
+<li>Either way, <strong>update state</strong> and build the next context.</li>
+</ul>
+<p>Two rules: <strong>errors and rejections are observations too</strong> (they go back into the context), and <strong>the runtime, not the model, owns validation, permissions, limits and termination</strong>.</p>
+<div class="example">
+<p><strong>Slide 17’s sample run.</strong> (1) <code>search_flights(SFO, New York, 2027-04-18, after 10:00)</code> → #293 10:00 $450, #441 12:00 $490 (the harness retried once after <code>RateLimited</code>). (2) <code>check_fare(441)</code> → $560: over budget. (3) search later departures → #517 14:30 $470, #602 18:45 $520. (4) <code>check_fare(517)</code> → $475, available. (5) Final answer: recommend #517 at $475; #293 fits only if “after 10:00” includes 10:00; <strong>nothing booked</strong>. Stop.</p>
+<p>Notice: the searched price ($490) and the quoted price ($560) differ. Only the quote counts.</p>
+</div>
+<div data-widget="harness">
+
+</div>
+<h2 id="technique-6-the-minimal-harness-in-code">Technique 6: the minimal harness in code</h2>
+<p><strong>Problem it solves:</strong> the loop is short enough to write in an exam (slide 20).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>state <span class="op">=</span> initialise(task)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> step <span class="kw">in</span> <span class="bu">range</span>(MAX_STEPS):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    context <span class="op">=</span> build_context(state, tools, active_skills)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> call_model(context)            <span class="co"># the only learned line</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    state.add(output)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> output.is_final:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> output.message</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> output.tool_calls:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        state.add(feedback(<span class="st">&quot;expected tool call or answer&quot;</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> call <span class="kw">in</span> output.tool_calls:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> validate(call, tools):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            state.add(error(call, <span class="st">&quot;invalid/not permitted&quot;</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> execute(call)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> ToolError <span class="im">as</span> e:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> error(call, e)         <span class="co"># errors are observations</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        state.add(call, result)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> <span class="st">&quot;Stopped at step limit&quot;</span></span></code></pre></div>
+<p><strong>Which line is the only learned one?</strong> <code>call_model(context)</code>. Real harnesses add permissions, context compaction, artefacts, checkpoints and sometimes sub-agents.</p>
+<h2 id="technique-7-the-failure-autopsy">Technique 7: the failure autopsy</h2>
+<p><strong>Problem it solves:</strong> diagnose which component failed, and what engineered fix catches it (slides 45 to 46).</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Run</th>
+<th>What happened</th>
+<th>Component that failed</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>step 2 search: #441 $490; step 3 quote: $560; context <strong>compacted</strong> at step 9; step 14: “Best option #441 at $490”</td>
+<td><strong>state and context</strong>: compaction kept the old price and dropped the new one; nothing marked which was current</td>
+<td>reconciled working state that survives compaction</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>search_flights(date="18/04")</code> → error “date must be YYYY-MM-DD”; same call 8 more times; “Stopped at step limit”</td>
+<td><strong>model interpretation and control</strong>: model ignored the error; harness didn’t notice the repeats</td>
+<td>detect repeated identical failures; error messages that show a valid example</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>search, quote $475, then “Done, I’ve booked you on #517” (no booking tool existed)</td>
+<td><strong>model output</strong>: claimed an action that never happened</td>
+<td>check final answers against the <strong>action log</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Not exposing <code>book_flight</code> prevented the <em>harm</em> in run 3, but not the <em>false claim</em>.</p>
+<div class="warn">
+<p><strong>Three distinctions to take away</strong> (slide 48): (1) <strong>model output ≠ environment action</strong>: the harness mediates every tool call. (2) <strong>context ≠ persistent, correct world state</strong>: the model sees a designed, possibly incomplete view. (3) <strong>LLM inference ≠ the whole agent policy</strong>: context building, tools, memory, control and stopping jointly shape behaviour.</p>
+<p><strong>Slide typo:</strong> the title slide says “Lecture 5 | 3 November”; it’s lecture 6.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Slides 1 to 20 and 44 to 48</td>
+<td><strong>Primary</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Anthropic, “Building Effective Agents” (Dec 2024)</td>
+<td>Recommended, 20 min</td>
+<td>workflow vs agent, augmented LLM, the patterns used all lecture</td>
+</tr>
+<tr class="even">
+<td>Raschka, “Components of a coding agent”</td>
+<td>Optional</td>
+<td>the harness diagram on slide 12</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 6 (LLM-based agents: the loop and the harness). Airline scenario: search_flights, check_fare, book_flight not exposed. I want quiz practice on:
+- workflow vs agent (the deciding question is control); classify short system descriptions
+- percepts/actions in a classical agent vs feedback/tool calls in an LLM agent
+- the six harness components, and which one does what
+- the formal loop: BuildContext, u_t ~ p_theta, InterpretAndValidate, Execute, UpdateState; which line is learned
+- what happens to a final answer, a question, a valid tool call, an invalid one; errors as observations
+- the failure autopsy: given a trace, name the failed component and the engineered fix
+
+Please:
+1. Ask scenario-based multiple-choice questions like a university quiz, ONE at a time.
+2. Wait for my answer, then mark it and explain every option.
+3. Every 5 questions, summarise what I keep confusing.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w5/LLM_Post_Training.html"><small>&larr; Previous</small>Post-training and the three knobs</a><a class="next" href="../w6/Tools_and_Skills.html"><small>Next &rarr;</small>Tools and skills</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

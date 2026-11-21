@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bias, variance and regularisation · CS5100 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}, {"id": "s19_bias_variance", "title": "Bias, variance and regularisation", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 40, "blurb": "Training vs test error, the decomposition by hand, the U-shape, KNN and K, pruning and ridge as fit + penalty.", "href": "s19_bias_variance.html"}, {"id": "s20_comparing", "title": "Comparing two algorithms", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 35, "blurb": "Contingency tables, the null hypothesis, binomial probabilities, p-values and significance levels.", "href": "s20_comparing.html"}, {"id": "s21_bagging_oob", "title": "Bootstrap, bagging and OOB error", "group": "Week 6 \u00b7 Ensemble methods", "mins": 45, "blurb": "Sampling with replacement, bagging by vote or average, the 36.8% lemma, and the OOB calculation (2023 and 2025).", "href": "s21_bagging_oob.html"}, {"id": "s22_forests_boosting", "title": "Random forests and boosting", "group": "Week 6 \u00b7 Ensemble methods", "mins": 40, "blurb": "m attributes per split, residual fitting, \u03b7, B and d, and which one can overfit (2025 Q3a).", "href": "s22_forests_boosting.html"}, {"id": "s23_kmeans", "title": "Metrics and K-means", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Metrics, the SSE objective, K-means by hand, the termination proof, restarts, choosing K, empty clusters.", "href": "s23_kmeans.html"}, {"id": "s24_hierarchical", "title": "Hierarchical clustering", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 45, "blurb": "Dendrograms, the four linkages by hand (2023 Q5), chaining, inversions, cutting, divisive vs agglomerative.", "href": "s24_hierarchical.html"}, {"id": "s25_density", "title": "Density estimation and semi-supervised learning", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Histograms and the curse of dimensionality, k/(nV), Parzen windows, KDE, bandwidth; seeded and constrained K-means.", "href": "s25_density.html"}, {"id": "s26_mock_part2", "title": "Mock exam part 2 (weeks 5-7)", "group": "Final", "mins": 50, "blurb": "Second-half questions in the past papers' shape: ensembles and OOB, clustering, density estimation. Pass 70%.", "href": "s26_mock_part2.html"}], "stage": "s19_bias_variance", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s19_bias_variance" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+<h4>Week 5 · Evaluating and comparing</h4>
+<a class="active" aria-current="page" href="s19_bias_variance.html"><span class="dot path"></span>19. Bias, variance and regularisation<span class="pstat" data-i="18"></span></a>
+<a href="s20_comparing.html"><span class="dot path"></span>20. Comparing two algorithms<span class="pstat" data-i="19"></span></a>
+<h4>Week 6 · Ensemble methods</h4>
+<a href="s21_bagging_oob.html"><span class="dot path"></span>21. Bootstrap, bagging and OOB error<span class="pstat" data-i="20"></span></a>
+<a href="s22_forests_boosting.html"><span class="dot path"></span>22. Random forests and boosting<span class="pstat" data-i="21"></span></a>
+<h4>Week 7 · Unsupervised learning</h4>
+<a href="s23_kmeans.html"><span class="dot path"></span>23. Metrics and K-means<span class="pstat" data-i="22"></span></a>
+<a href="s24_hierarchical.html"><span class="dot path"></span>24. Hierarchical clustering<span class="pstat" data-i="23"></span></a>
+<a href="s25_density.html"><span class="dot path"></span>25. Density estimation and semi-supervised learning<span class="pstat" data-i="24"></span></a>
+<h4>Final</h4>
+<a href="s26_mock_part2.html"><span class="dot path"></span>26. Mock exam part 2 (weeks 5-7)<span class="pstat" data-i="25"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 19 of 26</span><span class="chip">Week 5 · Evaluating and comparing</span><span class="chip">about 40 min</span></div>
+  <h1>Bias, variance and regularisation</h1>
+  <p class="tagline">Week 5 opens the second half. A model is judged on data it hasn't seen, and its expected test error splits into bias², variance and noise. Every flexibility knob in the course trades the first two; regularisation is a dial for doing it on purpose.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 2.2.1–2.2.2 (training vs test MSE, eq. 2.7, Figs 2.9 and 2.12): <strong>read</strong>. 5.1.1 (validation set): <strong>read</strong>. 5.1.2–5.1.5 (cross-validation): skim, not on the slides. Re-read 6.2.1 (ridge) and 8.1.1 (pruning). The slides cite ESL, Bishop and Mitchell; you don’t need them.</p>
+</div>
+<h2 id="training-error-is-optimistic">1. Training error is optimistic</h2>
+<p>The model was tuned to the training data, so its error there is too rosy: 1-NN and a fully grown tree score 0. What matters is the error on <strong>new</strong> data from the same distribution (training and test examples are <strong>i.i.d.</strong>).</p>
+<p>Plot error against flexibility: training error only falls; test error falls then rises, a <strong>U</strong>. The bottom of the U is the model you want. You can’t pick it on the test set (then the test error is optimistic too), so hold out a <strong>validation set</strong>, choose there, and touch the test set once.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>training error</th>
+<th>test error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>underfitting</td>
+<td>high</td>
+<td>high</td>
+</tr>
+<tr class="even">
+<td>overfitting</td>
+<td>very low</td>
+<td>much higher</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="mcq">
+<p>A model has training MSE 0.2 and test MSE 9.5. A simpler model has 3.1 and 3.6. What is happening to the first?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />It overfits: it learned the noise in the training data.</label></li>
+<li><label><input type="checkbox" />It underfits.</label></li>
+<li><label><input type="checkbox" />It has too much bias.</label></li>
+<li><label><input type="checkbox" />The test set is too small to say anything.</label></li>
+</ul>
+<div class="expl">
+<p>A tiny training error with a much larger test error is the signature of overfitting (high variance).</p>
+</div>
+</div>
+<h2 id="the-decomposition">2. The decomposition</h2>
+<p>With <span class="math inline">\(Y = f_{true}(X) + \mathcal E\)</span> and the average taken over training sets and test noise: <span class="math display">\[\mathbb E\big(\hat f(x_0) - Y\big)^2 = \underbrace{\big(\mathbb E\hat f(x_0) - f_{true}(x_0)\big)^2}_{\text{bias}^2} + \underbrace{\mathrm{Var}\,\hat f(x_0)}_{\text{variance}} + \underbrace{\mathrm{Var}\,\mathcal E}_{\text{noise}}.\]</span></p>
+<p>More flexibility: bias down, variance up. Their sum is the U.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(f_{true}(x_0) = 5\)</span>, noise variance 1. Over training sets the model predicts 2, 4 or 6, equally often. Mean 4: bias² <span class="math inline">\(= 1\)</span>. Variance <span class="math inline">\(= (4 + 0 + 4)/3 = 2.67\)</span>. Expected test error <span class="math inline">\(= 1 + 2.67 + 1 = 4.67\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="8" label="expected test error">
+<p><span class="math inline">\(f_{true}(x_0) = 10\)</span>, noise variance 2. Over four training sets the model predicts 8, 12, 10 and 14 at <span class="math inline">\(x_0\)</span>. What is the expected test error at <span class="math inline">\(x_0\)</span>?</p>
+<div class="expl">
+<p>Mean <span class="math inline">\(11\)</span>: bias² <span class="math inline">\(= 1\)</span>. Deviations <span class="math inline">\(-3, 1, -1, 3\)</span>: variance <span class="math inline">\(= (9 + 1 + 1 + 9)/4 = 5\)</span>. Total <span class="math inline">\(1 + 5 + 2 = 8\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>In KNN, increasing <span class="math inline">\(K\)</span> from 1 to 50 makes the model…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />less flexible: bias up, variance down</label></li>
+<li><label><input type="checkbox" />more flexible: bias down, variance up</label></li>
+<li><label><input type="checkbox" />no different, <span class="math inline">\(K\)</span> only affects speed</label></li>
+<li><label><input type="checkbox" />lower in both bias and variance</label></li>
+</ul>
+<div class="expl">
+<p>KNN runs backwards: flexibility falls as <span class="math inline">\(K\)</span> grows. <span class="math inline">\(K = 1\)</span> has training error 0 and the most variance.</p>
+</div>
+</div>
+<h2 id="regularisation-fit-α-complexity">3. Regularisation: fit + α × complexity</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>model</th>
+<th>objective</th>
+<th>more <span class="math inline">\(\alpha\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>tree (pruning)</td>
+<td><span class="math inline">\(\mathrm{RSS}(T) + \alpha\lvert T\rvert\)</span></td>
+<td>fewer leaves</td>
+</tr>
+<tr class="even">
+<td>linear (ridge)</td>
+<td><span class="math inline">\(\mathrm{RSS}(\lambda) + \alpha\sum_{i \ge 1}\lambda_i^2\)</span></td>
+<td>smaller coefficients</td>
+</tr>
+</tbody>
+</table>
+<p>More <span class="math inline">\(\alpha\)</span>: a little more bias, much less variance. Choose <span class="math inline">\(\alpha\)</span> on validation data, then refit on training + validation. (Slide 25 penalises the intercept too; the usual choice, and ISLP’s, doesn’t.)</p>
+<div class="q" kind="num" data-answer="1" label="λ̂">
+<p>One coefficient, no intercept: minimise <span class="math inline">\(\sum(y_n - \lambda x_n)^2 + \alpha\lambda^2\)</span>, so <span class="math inline">\(\hat\lambda = \frac{\sum x_ny_n}{\sum x_n^2 + \alpha}\)</span>. With <span class="math inline">\(x = (1, 2, 3)\)</span>, <span class="math inline">\(y = (2, 4, 7)\)</span> and <span class="math inline">\(\alpha = 17\)</span>, what is <span class="math inline">\(\hat\lambda\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(\sum x_ny_n = 2 + 8 + 21 = 31\)</span>, <span class="math inline">\(\sum x_n^2 = 14\)</span>. <span class="math inline">\(\hat\lambda = 31/(14 + 17) = 1\)</span>. Without the penalty it would be <span class="math inline">\(31/14 = 2.21\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks)</strong> State the bias-variance decomposition of the expected test error at <span class="math inline">\(x_0\)</span> and explain each term.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\mathbb E(\hat f(x_0) - Y)^2 = \text{bias}^2 + \text{variance} + \text{irreducible error}\)</span>, with the formulas.</label></li>
+<li><label><input type="checkbox" checked="" />Bias: how far the average prediction over training sets is from the truth.</label></li>
+<li><label><input type="checkbox" checked="" />Variance: how much the prediction changes from one training set to another.</label></li>
+<li><label><input type="checkbox" checked="" />Irreducible error = noise variance, the floor no model can beat; expectation over training sets and test noise.</label></li>
+</ul>
+<div class="model">
+<p><span class="math inline">\(\mathbb E(\hat f(x_0) - Y)^2 = (\mathbb E\hat f(x_0) - f_{true}(x_0))^2 + \mathrm{Var}\,\hat f(x_0) + \mathrm{Var}\,\mathcal E\)</span>, the expectation taken over random training sets and the noise in the test label. The bias² measures how far the average model is from the truth (rigid models are systematically wrong); the variance measures how much the fitted model moves when the training set changes (flexible models chase the noise); the last term is the noise in <span class="math inline">\(Y\)</span>, which no model can remove.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="4.167" label="expected test error">
+<p>Truth <span class="math inline">\(f_{true}(x_0) = 6\)</span>, noise variance 0.5. Over training sets the model predicts 3, 5 or 7 at <span class="math inline">\(x_0\)</span>, equally often. Expected test error at <span class="math inline">\(x_0\)</span>?</p>
+<div class="expl">
+<p>Mean 5: bias² <span class="math inline">\(= 1\)</span>. Variance <span class="math inline">\(= (4 + 0 + 4)/3 = 2.667\)</span>. Total <span class="math inline">\(1 + 2.667 + 0.5 = 4.167\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why must the regularisation strength <span class="math inline">\(\alpha\)</span> be chosen on a validation set and not on the training set?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />On the training set <span class="math inline">\(\alpha = 0\)</span> always wins, because the penalty can only raise the training error.</label></li>
+<li><label><input type="checkbox" />The validation set is larger.</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\alpha\)</span> doesn’t change the training error.</label></li>
+<li><label><input type="checkbox" />The test set should be used instead.</label></li>
+</ul>
+<div class="expl">
+<p>Only data the model hasn’t been fitted to can show when extra flexibility starts to hurt.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Tick every change that usually <strong>lowers variance</strong>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />increasing <span class="math inline">\(K\)</span> in KNN</label></li>
+<li><label><input type="checkbox" checked="" />increasing <span class="math inline">\(\alpha\)</span> in ridge regression</label></li>
+<li><label><input type="checkbox" />adding more leaves to a tree</label></li>
+<li><label><input type="checkbox" checked="" />collecting more training data</label></li>
+<li><label><input type="checkbox" />raising the polynomial degree</label></li>
+</ul>
+<div class="expl">
+<p>Less flexibility or more data both steady the fitted model.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s18_mock_exam.html"><small>&larr; Stage 18</small>Mock exam (weeks 1-4)</a><a class="next" href="s20_comparing.html"><small>Stage 20 &rarr;</small>Comparing two algorithms</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

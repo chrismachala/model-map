@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Density estimation and semi-supervised learning · CS5100 Maths-first path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 25, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 35, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 40, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m10_density", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths_m10_density" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a class="active" aria-current="page" href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>22. Final: spot the shared maths<span class="pstat" data-i="21"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 21 of 22</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 25 min</span></div>
+  <h1>Density estimation and semi-supervised learning</h1>
+  <p class="tagline">The last week's non-parametric density estimates are "count the nearby points" again. The histogram and Parzen window use an indicator, the smooth kernel uses a Gaussian bump, and the bandwidth is one more flexibility knob. Semi-supervised K-means reuses K-means with a few labels.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A2</strong> counting with indicators: <span class="math inline">\(k/(nV)\)</span> · <strong>A7</strong> the Gaussian kernel · <strong>A1</strong> the kernel’s distance <span class="math inline">\((x - x_i)/h\)</span> · <strong>A5</strong> bandwidth <span class="math inline">\(h\)</span> as the bias-variance dial · K-means from Model 9. Full pages: <a href="../w7/Density_Estimation.html">density estimation</a>, <a href="../w7/Semi_Supervised.html">semi-supervised learning</a>; week-order stage: <a href="../path/s25_density.html">25</a>.</p>
+</div>
+<h2 id="the-assembly">1. The assembly</h2>
+<p>From <span class="math inline">\(P \approx k/n\)</span> and <span class="math inline">\(P \approx f(x)V\)</span> (week 7 slides):</p>
+<p><span class="math display">\[f(x) \approx \frac{k}{nV}\quad\Longrightarrow\quad f(x) = \frac{1}{nh^p}\sum_{i=1}^{n}K\Big(\frac{x - x_i}{h}\Big)\]</span></p>
+<ul>
+<li><strong>Parzen window</strong>: <span class="math inline">\(K(u) = 1\)</span> if <span class="math inline">\(\lvert u_j\rvert \le \frac12\)</span> for all <span class="math inline">\(j\)</span>, else 0. It’s an indicator (A2): <span class="math inline">\(\sum_iK(\cdot)\)</span> counts the points in the cube of side <span class="math inline">\(h\)</span> around <span class="math inline">\(x\)</span>, so this is exactly <span class="math inline">\(k/(nV)\)</span> with <span class="math inline">\(V = h^p\)</span>.</li>
+<li><strong>Gaussian kernel</strong>: <span class="math inline">\(K(u) = (2\pi)^{-p/2}e^{-\frac12u^Tu}\)</span> (A7): every point contributes, nearer points more. Smooth instead of blocky.</li>
+<li><strong>Bandwidth</strong> <span class="math inline">\(h\)</span> (A5): large <span class="math inline">\(h\)</span> over-smooths (bias); small <span class="math inline">\(h\)</span> is spiky (variance).</li>
+</ul>
+<div class="example">
+<p><strong>Worked example (week 7 slides).</strong> <span class="math inline">\(n = 10\)</span>, <span class="math inline">\(h = 4\)</span>, <span class="math inline">\(p = 1\)</span>: <span class="math inline">\(f(10) = \frac{1}{10 \times 4}\times(\text{number of } x_i \text{ within } 2 \text{ of } 10) = \frac{1}{40}\times1 = 0.025\)</span>.</p>
+</div>
+<div class="q" kind="gen" data-gen="parzen">
+
+</div>
+<h2 id="semi-supervised-k-means">2. Semi-supervised K-means</h2>
+<p>A few labelled points, many unlabelled. <strong>Seeded K-means</strong> uses the labelled points’ means as the starting centres (A2), then runs ordinary K-means. <strong>Constrained K-means</strong> does the same but never reassigns the labelled points. Both are Model 9 with a better start.</p>
+<div class="q" kind="mcq">
+<p>In kernel density estimation, what happens as the bandwidth <span class="math inline">\(h \to 0\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The estimate becomes a flat line.</label></li>
+<li><label><input type="checkbox" checked="" />The estimate becomes a set of narrow spikes at the data points: low bias, very high variance.</label></li>
+<li><label><input type="checkbox" />It equals the true density.</label></li>
+<li><label><input type="checkbox" />Nothing changes.</label></li>
+</ul>
+<div class="expl">
+<p>Each bump shrinks around its own point. Large <span class="math inline">\(h\)</span> gives the opposite: one broad smear that hides the structure.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="parzen">
+
+</div>
+<div class="q" kind="gen" data-gen="gauss">
+
+</div>
+<div class="q" kind="num" data-answer="0.05" label="f(x)">
+<p><span class="math inline">\(n = 20\)</span> points in one dimension. A region of width <span class="math inline">\(V = 2\)</span> around <span class="math inline">\(x\)</span> contains <span class="math inline">\(k = 2\)</span> of them. Estimate <span class="math inline">\(f(x)\)</span> by <span class="math inline">\(k/(nV)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(2/(20 \times 2) = 0.05\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why is the Parzen-window estimate an example of “count the points near <span class="math inline">\(x\)</span>” (Toolkit 2)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Its kernel is an indicator of “inside the cube of side <span class="math inline">\(h\)</span> around <span class="math inline">\(x\)</span>”, so the sum counts those points and the estimate is <span class="math inline">\(k/(nV)\)</span>.</label></li>
+<li><label><input type="checkbox" />Because it uses gradient descent.</label></li>
+<li><label><input type="checkbox" />Because it averages the <span class="math inline">\(y\)</span> values.</label></li>
+<li><label><input type="checkbox" />Because it uses the Gaussian.</label></li>
+</ul>
+<div class="expl">
+<p>The Gaussian kernel replaces the hard count with a distance-weighted one.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="m09_clustering.html"><small>&larr; Stage 20</small>K-means and hierarchical clustering</a><a class="next" href="f01_spot_the_tool.html"><small>Stage 22 &rarr;</small>Final: spot the shared maths</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

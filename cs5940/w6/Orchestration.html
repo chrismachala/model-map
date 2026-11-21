@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planning and orchestration · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w6_Orchestration" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="../w5/Deep_RL.html" data-page="cs5940_w5_Deep_RL" data-total="7"><span class="dot learn"></span>Deep reinforcement learning<span class="tick"></span></a>
+<a href="../w5/LLM_Foundations.html" data-page="cs5940_w5_LLM_Foundations" data-total="5"><span class="dot tool"></span>How an LLM generates text<span class="tick"></span></a>
+<a href="../w5/LLM_Post_Training.html" data-page="cs5940_w5_LLM_Post_Training" data-total="5"><span class="dot learn"></span>Post-training and the three knobs<span class="tick"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="../w6/LLM_Agent_Harness.html" data-page="cs5940_w6_LLM_Agent_Harness" data-total="7"><span class="dot llm"></span>LLM agents: the loop and the harness<span class="tick"></span></a>
+<a href="../w6/Tools_and_Skills.html" data-page="cs5940_w6_Tools_and_Skills" data-total="6"><span class="dot llm"></span>Tools and skills<span class="tick"></span></a>
+<a href="../w6/Context_Memory_RAG.html" data-page="cs5940_w6_Context_Memory_RAG" data-total="6"><span class="dot llm"></span>Context, retrieval and memory<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w6/Orchestration.html" data-page="cs5940_w6_Orchestration" data-total="6"><span class="dot llm"></span>Planning and orchestration<span class="tick"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="../w7/Utilities_and_Games.html" data-page="cs5940_w7_Utilities_and_Games" data-total="6"><span class="dot mas"></span>Utilities, preferences and games<span class="tick"></span></a>
+<a href="../w7/Solution_Concepts.html" data-page="cs5940_w7_Solution_Concepts" data-total="7"><span class="dot mas"></span>Solution concepts<span class="tick"></span></a>
+<a href="../w7/Prisoners_Dilemma.html" data-page="cs5940_w7_Prisoners_Dilemma" data-total="8"><span class="dot mas"></span>The prisoner’s dilemma<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot llm"></i>llm-based agent</span><span><i class="dot mas"></i>multi-agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip llm">LLM-based agent</span><span class="chip">Week 6</span><span class="chip">6 techniques</span></div>
+  <h1>Planning and orchestration</h1>
+  <p class="tagline">One loop is enough to find a flight. A twelve-day, five-city tour with hotels and visas needs more structure. The choice is the old one from weeks 2 and 3, react or deliberate, and the rule is to pick the cheapest architecture that handles what must be decided at run time.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> LLM-based agent.<br />
+<strong>Week:</strong> 6, Part IV (slides 38 to 43) and the coding-agent comparison (slide 47).<br />
+<strong>Book:</strong> Wooldridge ch. 4 (BDI) for the analogy only. Optional: Yao et al. 2023 (ReAct), Shinn et al. 2023 (Reflexion), Huang et al. 2024 (LLMs cannot self-correct reasoning yet), Anthropic’s multi-agent research system (2025).<br />
+<strong>Techniques on this page:</strong> BDI vocabulary for LLM agents, three control patterns, choosing the cheapest adequate architecture, orchestration patterns and their cost, reflection.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The passenger now wants a <strong>five-city conference tour</strong> with flights, hotels near venues, visa checks and a $6,000 budget (slide 38). A single step-by-step loop may drift, forget constraints or run out of context. More structure helps, but every extra component costs tokens and can fail. Week 6 ends by tying LLM agents back to the BDI, reactive and hybrid architectures of weeks 2 and 3.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ReAct</td>
+<td>reason + act, incrementally: observe → choose next tool → observe again</td>
+</tr>
+<tr class="even">
+<td>plan then execute</td>
+<td>generate several steps first, then carry them out and check</td>
+</tr>
+<tr class="odd">
+<td>hybrid (control)</td>
+<td>plan, act, monitor, replan, with deterministic checks of the plan</td>
+</tr>
+<tr class="even">
+<td>planner–executor</td>
+<td>one part plans, another executes the steps</td>
+</tr>
+<tr class="odd">
+<td>orchestrator–workers</td>
+<td>an orchestrator delegates sub-tasks to sub-agents (often in parallel)</td>
+</tr>
+<tr class="even">
+<td>sub-agent</td>
+<td>another agent instance with <strong>its own context</strong></td>
+</tr>
+<tr class="odd">
+<td>critic / reflector</td>
+<td>an extra loop that reviews an output</td>
+</tr>
+<tr class="even">
+<td>Reflexion</td>
+<td>verbal feedback stored in episodic memory to improve later attempts, no weight change</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-bdi-vocabulary-for-llm-agents">Technique 1: BDI vocabulary for LLM agents</h2>
+<p><strong>Problem it solves:</strong> links week 6 to weeks 2 and 3 (slide 39).</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>BDI term</th>
+<th>In the LLM-agent trace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>beliefs <span class="math inline">\(B\)</span></td>
+<td>available flights, latest fares, what tools reported</td>
+</tr>
+<tr class="even">
+<td>desires / goals <span class="math inline">\(D\)</span></td>
+<td>find an acceptable flight under the constraints</td>
+</tr>
+<tr class="odd">
+<td>intentions <span class="math inline">\(I\)</span></td>
+<td>commitment to the delegated objective, perhaps a selected option</td>
+</tr>
+<tr class="even">
+<td>plan <span class="math inline">\(\pi\)</span></td>
+<td>search → check → present options → stop</td>
+</tr>
+<tr class="odd">
+<td>commitment strategy (blind / single-minded / open-minded)</td>
+<td>how often the harness lets the model <strong>replan</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="warn">
+<p><strong>Where the analogy breaks.</strong> Text in a context is <strong>not a logically consistent belief base</strong> (it can hold $490 and $560 for the same flight). A plan the model writes is <strong>not automatically a persistent intention</strong> unless the harness stores and enforces it.</p>
+</div>
+<h2 id="technique-2-three-control-patterns">Technique 2: three control patterns</h2>
+<p><strong>Problem it solves:</strong> decides <em>when</em> the deciding happens (slide 40).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Incremental (ReAct-like)</th>
+<th>Plan then execute</th>
+<th>Hybrid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>observe → choose next tool → observe again</td>
+<td>generate several steps, then carry them out and check</td>
+<td>plan, act, monitor, replan; deterministic checks of plans</td>
+</tr>
+<tr class="even">
+<td><strong>responsive</strong>; may drift without explicit state</td>
+<td>clear structure, fewer model calls; <strong>plans can go stale</strong></td>
+<td>flexible, but more engineering</td>
+</tr>
+</tbody>
+</table>
+<p>The old tension returns: <strong>reactivity vs deliberation</strong> (subsumption vs BDI, week 3). One modern answer: let the LLM <strong>propose</strong> plans and let <strong>external verifiers check</strong> them, so intelligence is split between learned and engineered parts (like a hybrid architecture’s layers).</p>
+<h2 id="technique-3-the-cheapest-adequate-architecture">Technique 3: the cheapest adequate architecture</h2>
+<p><strong>Problem it solves:</strong> don’t build an orchestra for a solo (slides 41 to 42). Ask one question: <strong>what must be decided at run time?</strong></p>
+<div class="example">
+<p><strong>Slide 41’s three tasks.</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Pick</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A. Every morning check the SFO → NYC fare for 18 April; email if below $450</td>
+<td><strong>workflow</strong></td>
+<td>nothing to decide: fixed steps and a fixed rule</td>
+</tr>
+<tr class="even">
+<td>B. Today: find a flight after 10:00 for at most $500; don’t book</td>
+<td><strong>single agent loop</strong></td>
+<td>which search next depends on what came back</td>
+</tr>
+<tr class="odd">
+<td>C. 12-day tour: Boston, Toronto, Chicago, Denver, Seattle; flights, hotels, visas, $6,000</td>
+<td><strong>orchestrator with sub-agents</strong> (or planner–executor)</td>
+<td>breadth and parallel work; too much for one context</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-4-orchestration-patterns-and-their-cost">Technique 4: orchestration patterns and their cost</h2>
+<p><strong>Problem it solves:</strong> every pattern buys something and pays for it (slide 42).</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pattern</th>
+<th>Who decides the path</th>
+<th>Fits</th>
+<th>Main cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>workflow, chain, routing</td>
+<td>the program</td>
+<td>task A</td>
+<td>rigid when the unexpected happens</td>
+</tr>
+<tr class="even">
+<td>single agent loop</td>
+<td>the model, step by step</td>
+<td>task B</td>
+<td>drift without explicit state</td>
+</tr>
+<tr class="odd">
+<td>planner–executor</td>
+<td>plan first, then execute</td>
+<td>long, structured tasks</td>
+<td>stale plans; needs replanning triggers</td>
+</tr>
+<tr class="even">
+<td>orchestrator–workers</td>
+<td>orchestrator delegates to sub-agents</td>
+<td>task C: breadth, parallel work</td>
+<td><strong>many more tokens</strong>; coordination failures</td>
+</tr>
+<tr class="odd">
+<td>critic / reflector</td>
+<td>an extra review loop</td>
+<td>checkable outputs</td>
+<td>cost; speculation without new information</td>
+</tr>
+</tbody>
+</table>
+<p>A sub-agent has its <strong>own context</strong>, so delegation is also a <strong>context-management tool</strong>. Anthropic reported its multi-agent research system used roughly <strong>15× the tokens</strong> of a chat. More components need not help a simple task.</p>
+<h2 id="technique-5-reflection">Technique 5: reflection</h2>
+<p><strong>Problem it solves:</strong> learning from mistakes without retraining (slide 43).</p>
+<p>The loop: attempt / action trace → feedback / observation → critique / revision → lesson stored in memory → next attempt. <strong>Reflexion</strong> uses verbal feedback and episodic memory, so behaviour changes <strong>without changing the weights</strong>.</p>
+<div class="warn">
+<p><strong>Self-critique without new external information often fails to improve reasoning, and can make it worse</strong> (Huang et al. 2024). Ask of every extra loop: <strong>what new information does it bring?</strong> A test result or a tool error is new information; the model re-reading its own answer usually isn’t.</p>
+</div>
+<h2 id="technique-6-the-coding-agent-has-the-same-parts">Technique 6: the coding agent has the same parts</h2>
+<p><strong>Problem it solves:</strong> shows the map is general (slide 47).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Airline clerk</th>
+<th>Coding agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>LLM</td>
+<td>chooses searches and fare checks</td>
+<td>chooses files to read, edit, test</td>
+</tr>
+<tr class="even">
+<td>context builder</td>
+<td>task, candidate flights, policy passages</td>
+<td>task, relevant files, test output</td>
+</tr>
+<tr class="odd">
+<td>control and dispatch</td>
+<td>validates calls; <code>book_flight</code> not exposed</td>
+<td>validates edits and shell commands; asks permission</td>
+</tr>
+<tr class="even">
+<td>tools</td>
+<td><code>search_flights</code>, <code>check_fare</code></td>
+<td>read/edit files, run tests, shell, code search</td>
+</tr>
+<tr class="odd">
+<td>skills</td>
+<td>flight-comparison procedure</td>
+<td>project conventions, framework procedures</td>
+</tr>
+<tr class="even">
+<td>state and memory</td>
+<td>fare history, policy index</td>
+<td>progress notes, version history, code index</td>
+</tr>
+<tr class="odd">
+<td>orchestration</td>
+<td>multi-city planner</td>
+<td>sub-agents exploring the codebase in parallel</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Slides 38 to 43, 47</td>
+<td><strong>Primary</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Wooldridge ch. 4 (4.3 is pp. 75 to 79)</td>
+<td>Optional refresher</td>
+<td>the BDI terms in technique 1, already covered in week 3</td>
+</tr>
+<tr class="odd">
+<td>Anthropic, “Building Effective Agents”</td>
+<td>Recommended</td>
+<td>workflows, orchestrator–workers, evaluator–optimiser</td>
+</tr>
+<tr class="even">
+<td>Huang et al. 2024</td>
+<td>Optional</td>
+<td>why self-correction without feedback fails</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 6 (planning and orchestration for LLM agents). I want quiz practice on:
+- mapping BDI terms (beliefs, desires, intentions, plans, commitment strategies) onto an LLM agent, and where the analogy breaks
+- incremental (ReAct) vs plan-then-execute vs hybrid control; strengths and weaknesses
+- choosing the cheapest adequate architecture for a task: workflow, single loop, planner-executor, orchestrator-workers
+- costs of each orchestration pattern (tokens, drift, stale plans, coordination)
+- reflection and Reflexion; why self-critique without new information often fails
+- the same components in an airline clerk and a coding agent
+
+Please:
+1. Ask scenario-based multiple-choice questions like a university quiz, ONE at a time.
+2. Wait for my answer, then mark it and explain every option.
+3. Every 5 questions, summarise what I keep confusing.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w6/Context_Memory_RAG.html"><small>&larr; Previous</small>Context, retrieval and memory</a><a class="next" href="../w7/Utilities_and_Games.html"><small>Next &rarr;</small>Utilities, preferences and games</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

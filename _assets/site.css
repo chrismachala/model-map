@@ -239,3 +239,15 @@ a.iconbtn{text-decoration:none;display:inline-flex;align-items:center;gap:2px}
 .pathcta .ic{font-size:2rem}
 .pathcta b{display:block;font-size:1.05rem}
 .pathcta:hover{box-shadow:var(--shadow)}
+
+:root{--llm:#b07a12;--mas:#3a6fd8}
+:root[data-theme="dark"]{--llm:#e8b84a;--mas:#7fa8f5}
+.dot.llm{background:var(--llm)} .dot.mas{background:var(--mas)}
+.chip.llm{background:color-mix(in srgb,var(--llm) 16%,transparent);color:var(--llm)}
+.chip.mas{background:color-mix(in srgb,var(--mas) 16%,transparent);color:var(--mas)}
+/* CS5100 weeks 6-7 kinds: ensembles and unsupervised methods */
+:root{--ens:#a3366b;--unsup:#2f8f9d}
+:root[data-theme="dark"]{--ens:#e77fb0;--unsup:#6fd0de}
+.dot.ens{background:var(--ens)} .dot.unsup{background:var(--unsup)}
+.chip.ens{background:color-mix(in srgb,var(--ens) 16%,transparent);color:var(--ens)}
+.chip.unsup{background:color-mix(in srgb,var(--unsup) 16%,transparent);color:var(--unsup)}

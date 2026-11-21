@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Likelihood, log-likelihood and cross-entropy · CS5100 Maths-first path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 25, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 35, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 40, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t09_likelihood", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths_t09_likelihood" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a class="active" aria-current="page" href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>22. Final: spot the shared maths<span class="pstat" data-i="21"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 9 of 22</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 40 min</span></div>
+  <h1>Likelihood, log-likelihood and cross-entropy</h1>
+  <p class="tagline">Squared error is the loss for numbers. For classes, the course uses one loss everywhere: minus the log of the probability the model gave to the right answer. It comes from maximum likelihood, it trains logistic regression and neural network classifiers, and its gradient is the same "prediction minus truth" every time. It even turns out to be the entropy of a tree leaf.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 4.3.2 (the likelihood, eq. 4.5: <strong>read</strong> the first half, <strong>skip</strong> Table 4.1’s standard errors and z-statistics), 10.2 p. 405 (one-hot labels and cross-entropy, eq. 10.14). Week 3 slides on maximum likelihood; week 4 slides on the classification objective. <strong>Watch the notation:</strong> on the slides <span class="math inline">\(\ell\)</span> is the likelihood and <span class="math inline">\(-\log\ell\)</span> is minimised; in the week 3 lab notebook <span class="math inline">\(\ell\)</span> already means the negative log-likelihood.</p>
+</div>
+<h2 id="the-likelihood">1. The likelihood</h2>
+<p>A model gives probabilities to outcomes. The <strong>likelihood</strong> of the parameters is the probability the model gives to the data you actually saw. With independent points, multiply:</p>
+<p><span class="math display">\[\ell(\beta) = \prod_{i=1}^{n}P_\beta(y_i\mid x_i).\]</span></p>
+<p><strong>Maximum likelihood</strong> picks the parameters that make <span class="math inline">\(\ell\)</span> as big as possible: “the explanation under which what happened was least surprising”.</p>
+<p>For 0/1 labels with <span class="math inline">\(p_i = P(Y = 1\mid x_i)\)</span>, the probability of what happened is <span class="math inline">\(p_i\)</span> if <span class="math inline">\(y_i = 1\)</span> and <span class="math inline">\(1 - p_i\)</span> if <span class="math inline">\(y_i = 0\)</span>, written in one go as <span class="math inline">\(p_i^{y_i}(1 - p_i)^{1 - y_i}\)</span>.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(y = (1, 0, 1)\)</span>. Model A: <span class="math inline">\(p = (0.9, 0.2, 0.8)\)</span>, <span class="math inline">\(\ell = 0.9 \times 0.8 \times 0.8 = 0.576\)</span>. Model B: <span class="math inline">\(p = (0.6, 0.5, 0.5)\)</span>, <span class="math inline">\(\ell = 0.6 \times 0.5 \times 0.5 = 0.15\)</span>. A explains the data almost four times better.</p>
+</div>
+<h2 id="take-logs-flip-the-sign">2. Take logs, flip the sign</h2>
+<p>Products of many small numbers underflow to 0 and are awkward to differentiate. Take logs (products become sums; log is increasing, so the best parameters don’t move) and negate so we minimise:</p>
+<p><span class="math display">\[\boxed{L(\beta) = -\log\ell(\beta) = -\sum_{i=1}^{n}\Big[y_i\log p_i + (1 - y_i)\log(1 - p_i)\Big]}\]</span></p>
+<p>This is the <strong>negative log-likelihood</strong> (NLL), also called <strong>binary cross-entropy</strong> or <strong>log loss</strong>. Each term is <span class="math inline">\(-\log(\text{probability given to the truth})\)</span>: <span class="math inline">\(-\log 0.99 = 0.01\)</span> for a confident correct answer, <span class="math inline">\(-\log 0.01 = 4.6\)</span> for a confident wrong one.</p>
+<div class="q" kind="gen" data-gen="nll">
+
+</div>
+<h2 id="many-classes-cross-entropy">3. Many classes: cross-entropy</h2>
+<p>With <span class="math inline">\(m\)</span> classes, encode the label as <strong>one-hot</strong> (<span class="math inline">\(y_{ik} = 1\)</span> for the true class, 0 for the others) and let <span class="math inline">\(p_k(x_i)\)</span> be the model’s probabilities (softmax, Toolkit 8):</p>
+<p><span class="math display">\[L = -\sum_{i=1}^{n}\sum_{k=1}^{m}y_{ik}\log p_k(x_i) = -\sum_{i=1}^{n}\log p_{y_i}(x_i).\]</span></p>
+<p>Only the true class’s probability counts. The binary formula above is this with <span class="math inline">\(m = 2\)</span>.</p>
+<div class="q" kind="gen" data-gen="softmax">
+
+</div>
+<h2 id="the-gradient-prediction-minus-truth">4. The gradient: prediction minus truth</h2>
+<p>For logistic regression, chain <span class="math inline">\(\beta \to z = \beta\cdot\tilde x \to p = \sigma(z) \to L\)</span> (Toolkit 4):</p>
+<p><span class="math display">\[\frac{\partial L_i}{\partial p_i} = -\frac{y_i}{p_i} + \frac{1 - y_i}{1 - p_i}, \quad \frac{\partial p_i}{\partial z_i} = p_i(1 - p_i), \quad \frac{\partial z_i}{\partial\beta} = \tilde x_i.\]</span></p>
+<p>The first two multiply to <span class="math inline">\(p_i - y_i\)</span>, so</p>
+<p><span class="math display">\[\boxed{\nabla L(\beta) = \sum_{i=1}^{n}(p_i - y_i)\,\tilde x_i}\]</span></p>
+<p>For softmax + cross-entropy the same cancellation happens per output: <span class="math inline">\(\partial L_i/\partial z_k = p_k(x_i) - y_{ik}\)</span> (w4). And squared error gave <span class="math inline">\(-2(y_i - \hat y_i)\tilde x_i\)</span>. One shape, three models.</p>
+<div class="example">
+<p><strong>Worked example: one step.</strong> <span class="math inline">\(x = (-1, 0, 1, 2)\)</span>, <span class="math inline">\(y = (0, 0, 1, 1)\)</span>, <span class="math inline">\(\beta = (0, 0)\)</span>, <span class="math inline">\(\eta = 0.1\)</span>. All <span class="math inline">\(p_i = 0.5\)</span>, so <span class="math inline">\(p - y = (0.5, 0.5, -0.5, -0.5)\)</span>. <span class="math inline">\(\partial L/\partial\beta_0 = \sum(p_i - y_i) = 0\)</span>; <span class="math inline">\(\partial L/\partial\beta_1 = \sum(p_i - y_i)x_i = -0.5 + 0 - 0.5 - 1 = -2\)</span>. Step: <span class="math inline">\(\beta = (0, 0) - 0.1(0, -2) = (0, 0.2)\)</span>. Loss falls from <span class="math inline">\(2.773\)</span> to <span class="math inline">\(2.402\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="0.1" label="new β₁">
+<p>One point <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(y = 1\)</span>, logistic regression at <span class="math inline">\(\beta = (0, 0)\)</span>, <span class="math inline">\(\eta = 0.1\)</span>. Using <span class="math inline">\(\nabla L = (p - y)\tilde x\)</span>, what is <span class="math inline">\(\beta_1\)</span> after one step?</p>
+<div class="expl">
+<p><span class="math inline">\(p = 0.5\)</span>, <span class="math inline">\(\nabla L = (0.5 - 1)(1, 2) = (-0.5, -1)\)</span>, <span class="math inline">\(\beta = (0, 0) - 0.1(-0.5, -1) = (0.05, 0.1)\)</span>.</p>
+</div>
+</div>
+<h2 id="maximum-likelihood-is-behind-other-estimates-too">5. Maximum likelihood is behind other estimates too</h2>
+<ul>
+<li><strong>Counting is maximum likelihood.</strong> If each class has probability <span class="math inline">\(\pi_k\)</span>, the likelihood of seeing <span class="math inline">\(n_k\)</span> of class <span class="math inline">\(k\)</span> is maximised at <span class="math inline">\(\hat\pi_k = n_k/n\)</span> (LDA and naive Bayes priors, w3; tree leaf proportions, w4).</li>
+<li><strong>The mean is maximum likelihood</strong> for a Gaussian’s centre (Toolkit 7), so LDA’s <span class="math inline">\(\hat\mu_k\)</span> is too.</li>
+<li><strong>Least squares is maximum likelihood</strong> under Gaussian noise (Toolkit 7).</li>
+</ul>
+<h2 id="entropy-is-cross-entropy-in-disguise">6. Entropy is cross-entropy in disguise</h2>
+<p>Suppose a tree leaf has class proportions <span class="math inline">\(\hat p_1, \dots, \hat p_m\)</span> and predicts exactly those probabilities for every point in it. Its average cross-entropy per point is <span class="math inline">\(-\sum_k\hat p_k\log\hat p_k\)</span>: a fraction <span class="math inline">\(\hat p_k\)</span> of the points are class <span class="math inline">\(k\)</span>, and each costs <span class="math inline">\(-\log\hat p_k\)</span>. That is the <strong>entropy</strong> impurity <span class="math inline">\(D\)</span> of Toolkit 10. So splitting a tree to reduce entropy is splitting it to reduce the NLL.</p>
+<div class="q" kind="num" data-answer="0.6931" data-tol="0.003" label="entropy">
+<p>A leaf holds 3 red and 3 blue points. What is its average cross-entropy if it predicts <span class="math inline">\((0.5, 0.5)\)</span> for each point (natural log)?</p>
+<div class="expl">
+<p>Every point costs <span class="math inline">\(-\log 0.5 = 0.693\)</span>, so the average is <span class="math inline">\(0.693 = \log 2\)</span>: the maximum entropy for two classes.</p>
+</div>
+</div>
+<h2 id="where-this-comes-back">Where this comes back</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Page</th>
+<th>How it shows up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td><a href="../w3/Logistic_Regression.html">Logistic regression</a></td>
+<td>maximise <span class="math inline">\(\ell\)</span> = minimise NLL; gradient <span class="math inline">\(\sum(p_i - y_i)\tilde x_i\)</span></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><a href="../w3/LDA.html">LDA</a>, <a href="../w3/Naive_Bayes.html">naive Bayes</a></td>
+<td><span class="math inline">\(\hat\pi_k\)</span>, <span class="math inline">\(\hat\mu_k\)</span> are maximum-likelihood estimates</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><a href="../w4/Classification_Trees.html">Classification trees</a></td>
+<td>entropy = average cross-entropy of the leaf’s proportions</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><a href="../w4/Neural_Network_Classifier.html">Neural network classifier</a></td>
+<td>cross-entropy loss, error signal <span class="math inline">\(p_m - y_m\)</span></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><a href="../w4/Training_Neural_Networks.html">Training neural networks</a></td>
+<td>the objective function asked for in 2025 Q2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="nll">
+
+</div>
+<div class="q" kind="gen" data-gen="softmax">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks; 2023 Q3 and 2025 Q2.)</strong> Write an objective function for training a classifier that outputs class probabilities <span class="math inline">\(p_k(x)\)</span>, and explain where it comes from.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(L = -\sum_i\log p_{y_i}(x_i)\)</span> (or the binary form <span class="math inline">\(-\sum_i[y_i\log p_i + (1 - y_i)\log(1 - p_i)]\)</span>), symbols explained.</label></li>
+<li><label><input type="checkbox" checked="" />It is minus the log of the likelihood, the probability the model gives to the observed labels (independent points).</label></li>
+<li><label><input type="checkbox" checked="" />Log turns the product into a sum without moving the optimum; it’s minimised by gradient descent.</label></li>
+<li><label><input type="checkbox" checked="" />Confident wrong answers are punished heavily (<span class="math inline">\(-\log\)</span> of a small number is large).</label></li>
+</ul>
+<div class="model">
+<p>For training data <span class="math inline">\(\{(x_i, y_i)\}\)</span>, the likelihood is <span class="math inline">\(\ell = \prod_ip_{y_i}(x_i)\)</span>, the probability the model assigns to the labels actually observed (assuming independent points). Maximum likelihood chooses the parameters that maximise it; equivalently we minimise the cross-entropy <span class="math inline">\(L = -\log\ell = -\sum_i\log p_{y_i}(x_i)\)</span>, which for two classes is <span class="math inline">\(-\sum_i[y_i\log p_i + (1 - y_i)\log(1 - p_i)]\)</span>. The log turns the product into a numerically stable sum without changing the optimum. There is usually no closed form, so it’s minimised by gradient descent, using the gradient <span class="math inline">\((p - y)\times\)</span> input.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2.303" data-tol="0.01" label="loss">
+<p>A 3-class network gives the true class probability <span class="math inline">\(0.1\)</span>. What does this point add to the cross-entropy loss?</p>
+<div class="expl">
+<p><span class="math inline">\(-\log 0.1 = 2.303\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>In softmax regression, the gradient of one point’s cross-entropy with respect to the score <span class="math inline">\(z_k\)</span> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\(y_k / p_k\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(p_k - y_k\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(p_k(1 - p_k)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(-\log p_k\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Softmax’s derivative and the log’s derivative cancel, leaving prediction minus truth, the same as binary logistic regression.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t08_sigmoid_softmax.html"><small>&larr; Stage 8</small>Sigmoid, log-odds and softmax</a><a class="next" href="t10_impurity.html"><small>Stage 10 &rarr;</small>Impurity: error, Gini, entropy</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

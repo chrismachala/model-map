@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bayes classifier and KNN · CS5100 Maths-first path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 25, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 35, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 40, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m01_bayes_knn", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths_m01_bayes_knn" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a class="active" aria-current="page" href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>22. Final: spot the shared maths<span class="pstat" data-i="21"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 12 of 22</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 25 min</span></div>
+  <h1>Bayes classifier and KNN</h1>
+  <p class="tagline">Week 1's two classifiers, assembled from parts you already have: Bayes' rule and argmax give the ideal, and distances plus a vote give KNN, the practical copy. Swap the vote for an average and you have week 2's KNN regression.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A6</strong> Bayes’ rule and probability (the target <span class="math inline">\(P(Y = k\mid x)\)</span> and the argmax rule) · <strong>A1</strong> distances (who the neighbours are) · <strong>A2</strong> averages and votes (the estimate) · <strong>A3</strong> squared error (scoring KNN regression) · <strong>A5 / A11</strong> the knob <span class="math inline">\(K\)</span>, chosen on validation data. Full pages: <a href="../w1/Bayes_Classifier.html">Bayes classifier</a>, <a href="../w1/KNN.html">KNN</a>, <a href="../w2/KNN_Regression.html">KNN regression</a>; week-order stage: <a href="../path/s04_bayes_knn.html">Bayes classifier and KNN</a>.</p>
+</div>
+<h2 id="the-assembly">1. The assembly</h2>
+<p><span class="math display">\[\underbrace{\hat Y(x_0) = \arg\max_k}_{\text{A2 vote}}\ \underbrace{\tilde P(Y = k\mid x_0)}_{\text{A6 target}} = \underbrace{\frac1K\sum_{i\in N_K(x_0)}\mathbb 1(y_i = k)}_{\text{A2 proportion}},\qquad N_K(x_0) = \underbrace{\text{the } K \text{ closest by } \|x_i - x_0\|_2}_{\text{A1 distance}}\]</span></p>
+<ul>
+<li>The <strong>Bayes classifier</strong> is the same rule with the <strong>true</strong> <span class="math inline">\(P(Y = k\mid x_0)\)</span>: unbeatable, but never available. Its error <span class="math inline">\(1 - \max_kP(Y = k\mid x_0)\)</span> is the floor.</li>
+<li><strong>KNN regression</strong> replaces the vote by the average: <span class="math inline">\(\hat y(x_0) = \frac1K\sum_{i\in N_K}y_i\)</span>, scored by test MSE.</li>
+<li><strong>Nothing is fitted.</strong> KNN stores the data; all the work happens at prediction time.</li>
+</ul>
+<div class="q" kind="gen" data-gen="knn">
+
+</div>
+<h2 id="the-knob">2. The knob</h2>
+<p><span class="math inline">\(K = 1\)</span> is the most flexible (training error 0, jagged boundary, high variance); <span class="math inline">\(K = n\)</span> predicts the overall majority everywhere (high bias). Choose <span class="math inline">\(K\)</span> on a validation set (A11). Inputs must be on comparable scales (A1), which is why the week 2 lab normalises before KNN regression.</p>
+<div data-widget="knn">
+
+</div>
+<div class="q" kind="mcq">
+<p>What happens to KNN’s training error rate as <span class="math inline">\(K\)</span> goes from <span class="math inline">\(n\)</span> down to 1?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It rises.</label></li>
+<li><label><input type="checkbox" checked="" />It tends to fall, reaching 0 at <span class="math inline">\(K = 1\)</span> (each point is its own nearest neighbour).</label></li>
+<li><label><input type="checkbox" />It stays the same.</label></li>
+<li><label><input type="checkbox" />It’s always 0.</label></li>
+</ul>
+<div class="expl">
+<p>Training error is a bad guide to <span class="math inline">\(K\)</span> for exactly this reason; validation error is U-shaped.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="knn">
+
+</div>
+<div class="q" kind="gen" data-gen="dist">
+
+</div>
+<div class="q" kind="num" data-answer="5" label="ŷ">
+<p>KNN regression with <span class="math inline">\(K = 3\)</span>. The three nearest neighbours of <span class="math inline">\(x_0\)</span> have responses <span class="math inline">\(4, 5, 6\)</span>. Predict <span class="math inline">\(\hat y(x_0)\)</span>.</p>
+<div class="expl">
+<p>The average, <span class="math inline">\((4 + 5 + 6)/3 = 5\)</span> (A2).</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks; 2023 Q2.)</strong> Explain how KNN classifies a new point, and how it can be changed to do regression. How does <span class="math inline">\(K\)</span> affect flexibility?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Find the <span class="math inline">\(K\)</span> training points closest to <span class="math inline">\(x_0\)</span> (e.g. Euclidean distance).</label></li>
+<li><label><input type="checkbox" checked="" />Classification: estimate <span class="math inline">\(P(Y = k\mid x_0)\)</span> as the fraction of neighbours in class <span class="math inline">\(k\)</span> and predict the majority class.</label></li>
+<li><label><input type="checkbox" checked="" />Regression: predict the average of the neighbours’ responses.</label></li>
+<li><label><input type="checkbox" checked="" />Small <span class="math inline">\(K\)</span> = flexible (low bias, high variance); large <span class="math inline">\(K\)</span> = smoother (higher bias, lower variance); choose <span class="math inline">\(K\)</span> on validation data.</label></li>
+</ul>
+<div class="model">
+<p>KNN computes the distance (usually Euclidean, <span class="math inline">\(\sqrt{\sum_j(x_j - x_{0j})^2}\)</span>) from <span class="math inline">\(x_0\)</span> to every training point and takes the <span class="math inline">\(K\)</span> closest. For classification it estimates <span class="math inline">\(P(Y = k\mid x_0)\)</span> by the fraction of those neighbours with label <span class="math inline">\(k\)</span> and predicts the most common class, imitating the Bayes classifier. For regression it predicts the mean of the neighbours’ <span class="math inline">\(y\)</span> values. With <span class="math inline">\(K = 1\)</span> the fit follows every training point (training error 0, high variance); larger <span class="math inline">\(K\)</span> averages over more points, giving a smoother, less flexible fit with more bias and less variance. <span class="math inline">\(K\)</span> is chosen by validation error.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t11_resampling.html"><small>&larr; Stage 11</small>Resampling and averaging many models</a><a class="next" href="m02_linear_family.html"><small>Stage 13 &rarr;</small>Linear, polynomial and ridge regression</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

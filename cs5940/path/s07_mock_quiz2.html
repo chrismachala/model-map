@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock Quiz 2 · CS5940 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5940", "stages": [{"id": "s01_deep_rl", "title": "Deep RL", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 25, "blurb": "Tables to networks, the DQN target, replay vs target network, actor\u2013critic, AlphaZero.", "href": "s01_deep_rl.html"}, {"id": "s02_llms", "title": "LLMs", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 30, "blurb": "Next-token prediction, temperature, SFT / RLHF / RLVR / DPO, what changes the weights.", "href": "s02_llms.html"}, {"id": "s03_harness_tools", "title": "The harness and tools", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Workflow vs agent, the formal loop, validation, where \u201cdo not book\u201d lives, tools vs skills.", "href": "s03_harness_tools.html"}, {"id": "s04_context_orchestration", "title": "Context, memory and orchestration", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Context budget, RAG, keyword vs vector, current facts, memory types, cheapest architecture.", "href": "s04_context_orchestration.html"}, {"id": "s05_game_theory", "title": "Game theory", "group": "Week 7 \u00b7 Multi-agent interaction", "mins": 35, "blurb": "Dominant strategies, Nash, mixed, Pareto, welfare; the prisoner\u2019s dilemma and its fixes.", "href": "s05_game_theory.html"}, {"id": "s06_rl_refresher", "title": "Week 4 refresher", "group": "Week 4 \u00b7 Refresher", "mins": 20, "blurb": "MDPs, returns, value iteration vs Q-learning, \u03b5-greedy, POMDPs, reward hacking.", "href": "s06_rl_refresher.html"}, {"id": "s07_mock_quiz2", "title": "Mock Quiz 2", "group": "Mock quiz", "mins": 30, "blurb": "Fifteen Quiz 1-style questions drawn from weeks 4 to 7. Pass 70%.", "href": "s07_mock_quiz2.html"}], "stage": "s07_mock_quiz2", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5940_path_s07_mock_quiz2" data-module="cs5940" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="s01_deep_rl.html"><span class="dot path"></span>1. Deep RL<span class="pstat" data-i="0"></span></a>
+<a href="s02_llms.html"><span class="dot path"></span>2. LLMs<span class="pstat" data-i="1"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="s03_harness_tools.html"><span class="dot path"></span>3. The harness and tools<span class="pstat" data-i="2"></span></a>
+<a href="s04_context_orchestration.html"><span class="dot path"></span>4. Context, memory and orchestration<span class="pstat" data-i="3"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="s05_game_theory.html"><span class="dot path"></span>5. Game theory<span class="pstat" data-i="4"></span></a>
+<h4>Week 4 · Refresher</h4>
+<a href="s06_rl_refresher.html"><span class="dot path"></span>6. Week 4 refresher<span class="pstat" data-i="5"></span></a>
+<h4>Mock quiz</h4>
+<a class="active" aria-current="page" href="s07_mock_quiz2.html"><span class="dot path"></span>7. Mock Quiz 2<span class="pstat" data-i="6"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 7 of 7</span><span class="chip">Mock quiz</span><span class="chip">about 30 min</span></div>
+  <h1>Mock Quiz 2</h1>
+  <p class="tagline">Fifteen questions drawn at random from a bank covering weeks 4 to 7, in Quiz 1's style: short scenarios, one best answer, a matching question, select-all, and a number to type. Give yourself 30 minutes, the same as Quiz 1, and no notes.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<h2 id="how-to-sit-this-mock">How to sit this mock</h2>
+<ul>
+<li>Set a 30-minute timer. Quiz 1 took you 32 minutes for 15 questions.</li>
+<li>Read every option before choosing: the distractors are built from the confusions the lectures warn about (replay vs target network, workflow vs agent, decoding vs training, Pareto vs Nash).</li>
+<li>After submitting, read the explanation for every question you missed, then follow the link to that topic’s page. Retake: you’ll get a different draw.</li>
+</ul>
+<h2 id="mock-quiz">Mock quiz</h2>
+<div class="test" data-pass="70" data-draw="15">
+<div class="q" kind="mcq">
+<p>A customer-support system sends every email through the same three LLM calls in a fixed order: summarise, classify urgency, draft a reply. Which describes it?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />An agent, because an LLM makes decisions</label></li>
+<li><label><input type="checkbox" checked="" />A workflow, because it follows a predefined code path</label></li>
+<li><label><input type="checkbox" />An agent, because it acts on the user’s behalf</label></li>
+<li><label><input type="checkbox" />Neither, because it uses no tools</label></li>
+</ul>
+<div class="expl">
+<p>Control decides it: the model never chooses the next step.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Match each fix to the DQN problem it addresses. Which pairing is fully correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Experience replay → correlated samples; target network → moving targets; frame stacking → a single frame hides motion</label></li>
+<li><label><input type="checkbox" />Experience replay → moving targets; target network → correlated samples; frame stacking → a single frame hides motion</label></li>
+<li><label><input type="checkbox" />Experience replay → a single frame hides motion; target network → moving targets; frame stacking → correlated samples</label></li>
+<li><label><input type="checkbox" />Experience replay → correlated samples; target network → a single frame hides motion; frame stacking → moving targets</label></li>
+</ul>
+<div class="expl">
+<p>Replay samples randomly from stored transitions; the target network freezes the targets; four frames reveal motion.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="5.5">
+<p>DQN, <span class="math inline">\(\gamma = 0.9\)</span>. A non-terminal transition has <span class="math inline">\(r = 1\)</span> and the target network gives <span class="math inline">\(Q_{\theta^-}(s&#39;, \cdot) = (2, 5, 3)\)</span>. What is the target <span class="math inline">\(y\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(1 + 0.9 \times 5 = 5.5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which of the following updates the model’s parameters <span class="math inline">\(\theta\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Sampling with a lower temperature</label></li>
+<li><label><input type="checkbox" />Adding worked examples to the prompt</label></li>
+<li><label><input type="checkbox" />Generating more reasoning tokens before answering</label></li>
+<li><label><input type="checkbox" checked="" />Supervised fine-tuning on expert answers</label></li>
+</ul>
+<div class="expl">
+<p>Only training changes <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A model uses greedy decoding. Its temperature is changed from 1 to 0.5. What happens to its output?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It becomes less varied.</label></li>
+<li><label><input type="checkbox" />It becomes more varied.</label></li>
+<li><label><input type="checkbox" checked="" />Nothing changes.</label></li>
+<li><label><input type="checkbox" />Its weights are updated.</label></li>
+</ul>
+<div class="expl">
+<p>Greedy always takes the top token, and dividing logits by <span class="math inline">\(T\)</span> doesn’t change which is top.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A coding model is trained by rewarding solutions that pass hidden unit tests. Which method is this, and what is its known risk?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />RLHF; the reward model may be overoptimised</label></li>
+<li><label><input type="checkbox" checked="" />RLVR; incomplete tests or imperfect verifiers can be exploited</label></li>
+<li><label><input type="checkbox" />SFT; it can’t learn formatting</label></li>
+<li><label><input type="checkbox" />DPO; it needs a separate reward model</label></li>
+</ul>
+<div class="expl">
+<p>Verifiable rewards from tests. DPO, by contrast, has <strong>no</strong> separate reward model.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Where should the rule “do not book without approval” live to be <strong>enforced</strong> regardless of what the model generates?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />In the system prompt</label></li>
+<li><label><input type="checkbox" />In a skill</label></li>
+<li><label><input type="checkbox" />In the <code>book_flight</code> tool description</label></li>
+<li><label><input type="checkbox" checked="" />In the harness, e.g. not exposing <code>book_flight</code></label></li>
+</ul>
+<div class="expl">
+<p>The first three are advisory text the model must obey.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A model outputs a call to a tool that isn’t in its tool list. What should the harness do?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Execute it, since the model chose it</label></li>
+<li><label><input type="checkbox" checked="" />Reject it and return an error message to the model as an observation</label></li>
+<li><label><input type="checkbox" />Stop and report success</label></li>
+<li><label><input type="checkbox" />Retrain the model</label></li>
+</ul>
+<div class="expl">
+<p>Validate: known tool? valid arguments? permitted? Rejections go back into the context.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Step 2’s search showed #441 at $490; step 12’s <code>check_fare(441)</code> returned $560. Much later the passenger asks “How much was #441 again?” What will the model report?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Always $490, since it appeared first</label></li>
+<li><label><input type="checkbox" />Always $560, since it’s more recent</label></li>
+<li><label><input type="checkbox" checked="" />It depends: usually $560, but both are just text, so the harness should reconcile which fact is current</label></li>
+<li><label><input type="checkbox" />Neither: models can’t read numbers</label></li>
+</ul>
+<div class="expl">
+<p>Slide 35’s poll. Reconcile: current fact with source and time, old one marked superseded.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Query: “What is the carry-on allowance?” Passage: “Cabin baggage: one item up to 8 kg is included on all fares.” Which retrieval method finds it?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Keyword search only</label></li>
+<li><label><input type="checkbox" checked="" />Vector search only</label></li>
+<li><label><input type="checkbox" />Both</label></li>
+<li><label><input type="checkbox" />Neither</label></li>
+</ul>
+<div class="expl">
+<p>No shared words (keyword misses); same meaning (vector finds).</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Match the memory type to the example. Which pairing is fully correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Episodic → the flight-comparison skill; semantic → last Tuesday’s conversation; procedural → the passenger’s frequent-flyer tier</label></li>
+<li><label><input type="checkbox" checked="" />Episodic → last Tuesday’s conversation; semantic → the passenger’s frequent-flyer tier; procedural → the flight-comparison skill</label></li>
+<li><label><input type="checkbox" />Episodic → the passenger’s frequent-flyer tier; semantic → the flight-comparison skill; procedural → last Tuesday’s conversation</label></li>
+<li><label><input type="checkbox" />Episodic → last Tuesday’s conversation; semantic → the flight-comparison skill; procedural → the passenger’s frequent-flyer tier</label></li>
+</ul>
+<div class="expl">
+<p>Past events, stored facts, how-to.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Every morning, check one fare and email the passenger if it falls below $450. What is the cheapest adequate architecture?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Workflow</label></li>
+<li><label><input type="checkbox" />Single agent loop</label></li>
+<li><label><input type="checkbox" />Planner–executor</label></li>
+<li><label><input type="checkbox" />Orchestrator with sub-agents</label></li>
+</ul>
+<div class="expl">
+<p>Nothing must be decided at run time.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Select <strong>all</strong> that are part of the harness rather than the learned model.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Building the context for each step</label></li>
+<li><label><input type="checkbox" checked="" />Validating tool calls and enforcing permissions</label></li>
+<li><label><input type="checkbox" />Producing the next-token distribution</label></li>
+<li><label><input type="checkbox" checked="" />Enforcing the step limit</label></li>
+<li><label><input type="checkbox" checked="" />Updating the runtime state after each observation</label></li>
+</ul>
+<div class="expl">
+<p>Only <span class="math inline">\(p_\theta\)</span> is learned.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A run ends with “Done, I’ve booked you on #517”, but no booking tool was exposed. Which engineered check would have caught the false claim?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Exposing <code>book_flight</code></label></li>
+<li><label><input type="checkbox" checked="" />Checking final answers against the action log</label></li>
+<li><label><input type="checkbox" />Raising the temperature</label></li>
+<li><label><input type="checkbox" />Adding more tools</label></li>
+</ul>
+<div class="expl">
+<p>Autopsy run 3.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>In the prisoner’s dilemma (T = 4, R = 3, P = 2, S = 1), which outcome is the unique Nash equilibrium?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />(D, D)</label></li>
+<li><label><input type="checkbox" />(C, C)</label></li>
+<li><label><input type="checkbox" />(D, C)</label></li>
+<li><label><input type="checkbox" />There is none</label></li>
+</ul>
+<div class="expl">
+<p>From (D, D) switching to C drops you to 1; from every other cell someone gains by switching to D.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>In the prisoner’s dilemma, select <strong>all</strong> Pareto optimal outcomes.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />(D, D)</label></li>
+<li><label><input type="checkbox" checked="" />(D, C)</label></li>
+<li><label><input type="checkbox" checked="" />(C, D)</label></li>
+<li><label><input type="checkbox" checked="" />(C, C)</label></li>
+</ul>
+<div class="expl">
+<p>Only (D, D) is Pareto dominated (by (C, C)).</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Payoffs (i, j), <span class="math inline">\(i\)</span> on rows: (a, c) = (5, 5), (a, d) = (8, 2), (b, c) = (2, 8), (b, d) = (3, 3). Which is a Nash equilibrium?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />(a, c)</label></li>
+<li><label><input type="checkbox" />(a, d)</label></li>
+<li><label><input type="checkbox" />(b, c)</label></li>
+<li><label><input type="checkbox" />(b, d)</label></li>
+</ul>
+<div class="expl">
+<p>Neither player gains by deviating alone from (a, c).</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Two agents know they’ll play the prisoner’s dilemma exactly 10 times. What does backwards induction predict?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Cooperate throughout</label></li>
+<li><label><input type="checkbox" />TIT-FOR-TAT</label></li>
+<li><label><input type="checkbox" checked="" />Defect in every round</label></li>
+<li><label><input type="checkbox" />Defect only in the last round</label></li>
+</ul>
+<div class="expl">
+<p>The last round is one-shot → defect; then the one before is effectively last, and so on.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="9">
+<p>Five rounds, payoffs T = 4, R = 3, P = 2, S = 1. TIT-FOR-TAT plays ALLD. What is TIT-FOR-TAT’s total?</p>
+<div class="expl">
+<p>1 + 2 + 2 + 2 + 2 = 9.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Matching pennies has which equilibrium?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />(H, H) in pure strategies</label></li>
+<li><label><input type="checkbox" />(H, T) in pure strategies</label></li>
+<li><label><input type="checkbox" checked="" />Only a mixed one: each plays heads with probability 0.5</label></li>
+<li><label><input type="checkbox" />None at all</label></li>
+</ul>
+<div class="expl">
+<p>No pure NE; the 50/50 mix makes each player indifferent.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2.17">
+<p>Q-learning: <span class="math inline">\(Q(s,a) = 2\)</span>, <span class="math inline">\(\alpha = 0.1\)</span>, <span class="math inline">\(\gamma = 0.9\)</span>, <span class="math inline">\(r = 1\)</span>, <span class="math inline">\(\max_{a&#39;} Q(s&#39;, a&#39;) = 3\)</span>. New <span class="math inline">\(Q(s,a)\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(2 + 0.1(1 + 2.7 - 2) = 2.17\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which statement about AlphaZero is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It learned from human expert games and needs no search.</label></li>
+<li><label><input type="checkbox" checked="" />It combines a learned policy and value with tree search over the known game rules, trained by self-play.</label></li>
+<li><label><input type="checkbox" />It learns a model of the rules from scratch, like MuZero.</label></li>
+<li><label><input type="checkbox" />It is model-free.</label></li>
+</ul>
+<div class="expl">
+<p>Model-based with a given model; self-play only.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>An agent has dozens of skills, but only each skill’s name and one-line description sit in its context until one is needed. What is this?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Progressive disclosure</label></li>
+<li><label><input type="checkbox" />Compaction</label></li>
+<li><label><input type="checkbox" />RAG</label></li>
+<li><label><input type="checkbox" />Fine-tuning</label></li>
+</ul>
+<div class="expl">
+<p>Discover → load → use.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which is a difference between pretraining and RL?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Only RL uses gradient descent.</label></li>
+<li><label><input type="checkbox" checked="" />Pretraining predicts tokens in given text; RL optimises reward collected by acting.</label></li>
+<li><label><input type="checkbox" />Only pretraining uses neural networks.</label></li>
+<li><label><input type="checkbox" />RL never appears in LLM training.</label></li>
+</ul>
+<div class="expl">
+<p>Distinction 3 of the five; RL appears in post-training (RLHF, RLVR).</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s06_rl_refresher.html"><small>&larr; Stage 6</small>Week 4 refresher</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

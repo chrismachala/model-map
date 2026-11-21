@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bias, variance and regularisation · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w5_Bias_Variance" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<a href="../maths/index.html"><span class="dot path"></span>Maths-first path</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="../w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a href="../w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a href="../w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="../w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="../w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a href="../w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
+<h4>Week 5 · Evaluating and comparing</h4>
+<a class="active" aria-current="page" href="../w5/Bias_Variance.html" data-page="w5_Bias_Variance" data-total="3"><span class="dot tool"></span>Bias, variance and regularisation<span class="tick"></span></a>
+<a href="../w5/Comparing_Algorithms.html" data-page="w5_Comparing_Algorithms" data-total="3"><span class="dot tool"></span>Comparing two algorithms<span class="tick"></span></a>
+<h4>Week 6 · Ensemble methods</h4>
+<a href="../w6/Bootstrap_and_Bagging.html" data-page="w6_Bootstrap_and_Bagging" data-total="4"><span class="dot ens"></span>Bootstrap and bagging<span class="tick"></span></a>
+<a href="../w6/OOB_Error.html" data-page="w6_OOB_Error" data-total="3"><span class="dot tool"></span>Out-of-bag error<span class="tick"></span></a>
+<a href="../w6/Random_Forests.html" data-page="w6_Random_Forests" data-total="3"><span class="dot ens"></span>Random forests<span class="tick"></span></a>
+<a href="../w6/Boosting.html" data-page="w6_Boosting" data-total="3"><span class="dot ens"></span>Boosting<span class="tick"></span></a>
+<h4>Week 7 · Unsupervised learning</h4>
+<a href="../w7/K_Means.html" data-page="w7_K_Means" data-total="5"><span class="dot unsup"></span>K-means clustering<span class="tick"></span></a>
+<a href="../w7/Hierarchical_Clustering.html" data-page="w7_Hierarchical_Clustering" data-total="4"><span class="dot unsup"></span>Hierarchical clustering<span class="tick"></span></a>
+<a href="../w7/Density_Estimation.html" data-page="w7_Density_Estimation" data-total="4"><span class="dot unsup"></span>Density estimation<span class="tick"></span></a>
+<a href="../w7/Semi_Supervised.html" data-page="w7_Semi_Supervised" data-total="2"><span class="dot unsup"></span>Semi-supervised learning<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot ens"></i>ensemble method</span><span><i class="dot unsup"></i>unsupervised method</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not a model: toolkit</span><span class="chip">Week 5</span><span class="chip">3 techniques</span></div>
+  <h1>Bias, variance and regularisation</h1>
+  <p class="tagline">A model is judged on data it has never seen. Its expected test error splits into three parts: bias (wrong on average), variance (jumps around with the training set) and noise (nobody can fix). Flexibility trades the first two; regularisation is the dial.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> not a model: how to judge and tune any model.<br />
+<strong>Week:</strong> 5 (Ivan Rungger).<br />
+<strong>Book:</strong> ISLP 2.2.1–2.2.2 (p29–35), 5.1.1 (p202–204); re-read 6.2.1 (ridge) and 8.1.1 “Tree pruning”. The slides cite ESL, Bishop and Mitchell instead; you don’t need them.<br />
+<strong>Techniques on this page:</strong> training vs test error, the bias-variance decomposition, the U-shaped test error, validation sets, pruning and ridge as “fit + penalty”.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Training a model means minimising its error on the training set. So the training error is measured on exactly the data the model was tuned to: it is <strong>optimistic</strong>, sometimes absurdly (1-NN and a fully grown tree have training error 0). What we actually want is a low error on <strong>new</strong> data from the same source. This page explains why the two differ, how to predict which way a change of model will push the test error, and how to turn a model’s flexibility down when it overfits.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>i.i.d.</td>
+<td>training and test examples are independent draws from the same distribution <span class="math inline">\(P(X, Y)\)</span></td>
+</tr>
+<tr class="even">
+<td>overfitting</td>
+<td>low training error, much higher test error: the model learned the noise</td>
+</tr>
+<tr class="odd">
+<td>underfitting</td>
+<td>both errors high: the model is too rigid</td>
+</tr>
+<tr class="even">
+<td>flexibility</td>
+<td>how wiggly a model can be: degree, leaves, <span class="math inline">\(1/K\)</span>, hidden units</td>
+</tr>
+<tr class="odd">
+<td>bias</td>
+<td>how far the <em>average</em> model (over many training sets) is from the truth</td>
+</tr>
+<tr class="even">
+<td>variance</td>
+<td>how much the model changes from one training set to another</td>
+</tr>
+<tr class="odd">
+<td>irreducible error</td>
+<td>the noise in the labels, <span class="math inline">\(\mathrm{Var}(\mathcal E)\)</span>: the floor no model can beat</td>
+</tr>
+<tr class="even">
+<td>regularisation</td>
+<td>adding a complexity penalty to the training objective</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-training-vs-test-error-and-the-u-shape">Technique 1: training vs test error and the U-shape</h2>
+<p><strong>Problem it solves:</strong> choosing how flexible a model should be.</p>
+<p>Plot error against flexibility (ISLP Fig 2.9, slide 10):</p>
+<ul>
+<li><strong>training error</strong> always goes down;</li>
+<li><strong>test error</strong> goes down, then up: a <strong>U</strong>.</li>
+</ul>
+<p>The best model is at the bottom of the test U, not the training curve. You can’t choose on the test set (that makes the test error optimistic too), so hold out a <strong>validation set</strong> from the training data, choose there, and use the test set once at the end.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>training error</th>
+<th>test error</th>
+<th>fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>underfitting</td>
+<td>high</td>
+<td>high</td>
+<td>more flexible</td>
+</tr>
+<tr class="even">
+<td>overfitting</td>
+<td>very low</td>
+<td>much higher</td>
+<td>less flexible, regularise, more data</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technique-2-the-bias-variance-decomposition">Technique 2: the bias-variance decomposition</h2>
+<p><strong>Problem it solves:</strong> explaining the U.</p>
+<p>With <span class="math inline">\(Y = f_{true}(X) + \mathcal E\)</span>, <span class="math inline">\(\mathbb E\mathcal E = 0\)</span>, and the expectation taken over training sets <em>and</em> test noise:</p>
+<p><span class="math display">\[\mathbb E\big(\hat f(x_0) - Y\big)^2 = \underbrace{\big(\mathbb E\hat f(x_0) - f_{true}(x_0)\big)^2}_{\text{bias}^2} + \underbrace{\mathrm{Var}\,\hat f(x_0)}_{\text{variance}} + \underbrace{\mathrm{Var}\,\mathcal E}_{\text{irreducible}}\]</span></p>
+<p>Proof in one line: <span class="math inline">\(\mathbb E(Z - \mathcal E)^2 = \mathbb EZ^2 + \mathbb E\mathcal E^2\)</span> for <span class="math inline">\(Z = \hat f(x_0) - f_{true}(x_0)\)</span> independent of the test noise, then <span class="math inline">\(\mathbb EZ^2 = (\mathbb EZ)^2 + \mathrm{Var}Z\)</span>.</p>
+<p>More flexibility: bias ↓, variance ↑. The sum is the U (ISLP Fig 2.12).</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(f_{true}(x_0) = 5\)</span>, noise variance 1. Over training sets the model predicts 2, 4 or 6 at <span class="math inline">\(x_0\)</span>, equally often. Average 4, so bias² <span class="math inline">\(= 1\)</span>. Variance <span class="math inline">\(= \frac{4 + 0 + 4}{3} = 2.67\)</span>. Expected test error <span class="math inline">\(= 1 + 2.67 + 1 = 4.67\)</span>.</p>
+</div>
+<div class="warn">
+<p><strong>KNN runs backwards.</strong> Flexibility <em>decreases</em> as <span class="math inline">\(K\)</span> grows. <span class="math inline">\(K = 1\)</span>: training error 0, jagged boundary, high variance. <span class="math inline">\(K = 100\)</span>: smooth boundary, high bias (slide 18, ISLP Fig 2.16).</p>
+</div>
+<h2 id="technique-3-regularisation-fit-α-complexity">Technique 3: regularisation = fit + α × complexity</h2>
+<p><strong>Problem it solves:</strong> sliding flexibility down <em>within</em> a model class.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>penalised objective</th>
+<th>more <span class="math inline">\(\alpha\)</span> ⟹</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>tree (<a href="../w4/Tree_Pruning.html">pruning</a>)</td>
+<td><span class="math inline">\(\mathrm{RSS}(T) + \alpha\lvert T\rvert\)</span></td>
+<td>fewer leaves</td>
+</tr>
+<tr class="even">
+<td>linear (<a href="../w2/Ridge_Regression.html">ridge</a>)</td>
+<td><span class="math inline">\(\mathrm{RSS}(\lambda) + \alpha\sum_{i\ge1}\lambda_i^2\)</span></td>
+<td>smaller coefficients</td>
+</tr>
+</tbody>
+</table>
+<p>More regularisation: a little more bias, a lot less variance. Choose <span class="math inline">\(\alpha\)</span> on validation data; then (slide 24) refit with the chosen <span class="math inline">\(\alpha\)</span> on training + validation data.</p>
+<div class="example">
+<p><strong>Ridge with one coefficient.</strong> Minimise <span class="math inline">\(\sum(y_n - \lambda x_n)^2 + \alpha\lambda^2\)</span>: <span class="math inline">\(\hat\lambda = \frac{\sum x_ny_n}{\sum x_n^2 + \alpha}\)</span>. With <span class="math inline">\(x = (1, 2, 3)\)</span>, <span class="math inline">\(y = (2, 4, 7)\)</span>: <span class="math inline">\(\alpha = 0\)</span> gives 2.21, <span class="math inline">\(\alpha = 14\)</span> gives 1.11. The penalty shrinks the slope towards 0.</p>
+</div>
+<div class="warn">
+<p><strong>Slide 25 penalises the intercept</strong> (<span class="math inline">\(\|\lambda\|^2\)</span> includes <span class="math inline">\(\lambda_0\)</span>). ISLP and the week 2 slides don’t, and that’s the usual choice. In an exam write <span class="math inline">\(\alpha\sum_{i=1}^d\lambda_i^2\)</span> and say “intercept not penalised”. Standardise the inputs first.</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2.2.1 Measuring the quality of fit</td>
+<td><strong>Read</strong></td>
+<td>Training vs test MSE, Fig 2.9</td>
+</tr>
+<tr class="even">
+<td>2.2.2 The bias-variance trade-off</td>
+<td><strong>Read</strong></td>
+<td>Eq. 2.7, Fig 2.12</td>
+</tr>
+<tr class="odd">
+<td>2.2.3 Fig 2.16 (KNN, K = 1 vs 100)</td>
+<td>Re-read</td>
+<td>Slide 18</td>
+</tr>
+<tr class="even">
+<td>5.1.1 Validation set approach</td>
+<td><strong>Read</strong></td>
+<td>Short</td>
+</tr>
+<tr class="odd">
+<td>5.1.2–5.1.5 cross-validation</td>
+<td>Skim</td>
+<td>Not on the slides</td>
+</tr>
+<tr class="even">
+<td>6.2.1 Ridge, 8.1.1 pruning</td>
+<td>Re-read</td>
+<td>Weeks 2 and 4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis (textbook ISLP, sections 2.2.1-2.2.2, 5.1.1, 6.2.1 and 8.1.1). I want practice questions on TRAINING vs TEST ERROR, BIAS and VARIANCE, and REGULARISATION:
+- spotting overfitting and underfitting from training and test errors
+- computing bias squared, variance and expected test error from a small table of predictions over training sets
+- proving the decomposition E(fhat - Y)^2 = bias^2 + variance + noise
+- the knob that controls flexibility for KNN, polynomials, trees, neural networks and ridge, and which way it moves bias and variance
+- cost-complexity pruning (RSS + alpha |T|) and ridge (RSS + alpha * sum of squared coefficients) by hand
+- why alpha is chosen on a validation set, and why the test set is used only once
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/Training_Neural_Networks.html"><small>&larr; Previous</small>Training neural networks</a><a class="next" href="../w5/Comparing_Algorithms.html"><small>Next &rarr;</small>Comparing two algorithms</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

@@ -657,6 +657,111 @@ var builders={
     button(u.ctl,'&#129695; see window',function(){obs(true)});button(u.ctl,'&#11036; see nothing',function(){obs(false)});button(u.ctl,'Reset',reset);
     [st,wl,wr].forEach(function(z){z.on(draw)});reset();W.push(draw);
   }
+  ,
+  /* Week 5: softmax temperature */
+  temperature:function(host){
+    var u=mk(host,'Temperature reshapes the next-token distribution','Slide 37’s toy example. Faded bars are T = 1; solid bars are the temperature you pick. “Sample 20” draws 20 next tokens at this temperature; greedy decoding would always pick the tallest bar.','&#127777;');
+    var toks=['The','A','One','Some'],p1=[0.5,0.3,0.15,0.05],z=p1.map(Math.log),counts=null,seed=7;
+    var T=slider(u.ctl,'T',0.1,3,0.05,1,function(v){return f2(v,2)});
+    function probs(t){var e=z.map(function(v){return Math.exp(v/t)}),s=e.reduce(function(a,b){return a+b},0);return e.map(function(v){return v/s})}
+    function R(){seed=(seed*1103515245+12345)%2147483648;return seed/2147483648}
+    function draw(){var p=probs(T.v),F=frame(u.svg,640,230,[-0.5,3.5],[0,1]);F.axes([],[0,0.5,1],'','probability');
+      var bw=(F.X(1)-F.X(0))*0.32;
+      p.forEach(function(v,i){var x=F.X(i);el('rect',{x:x-bw-2,y:F.Y(p1[i]),width:bw,height:F.Y(0)-F.Y(p1[i]),rx:3,style:'fill:var(--muted);opacity:.35'},u.svg);
+        el('rect',{x:x+2,y:F.Y(v),width:bw,height:F.Y(0)-F.Y(v),rx:3,style:'fill:var(--accent)'},u.svg);
+        var t=el('text',{x:x,y:F.h-8,'text-anchor':'middle','class':'axt'},u.svg);t.textContent='“'+toks[i]+'”'+(counts?'  ×'+counts[i]:'');
+        var l=el('text',{x:x+2+bw/2,y:F.Y(v)-4,'text-anchor':'middle','class':'axt'},u.svg);l.textContent=f2(v,3)});
+      var H=-p.reduce(function(a,v){return a+(v>0?v*Math.log2(v):0)},0);
+      stats(u.out,[['greedy pick','“The” (at every T)'],['P(“The”)',f2(p[0],3)],['P(“Some”)',f2(p[3],3)],['spread (entropy, bits)',f2(H,2)],['weights changed?','never']]);}
+    button(u.ctl,'Sample 20',function(){var p=probs(T.v);counts=[0,0,0,0];for(var k=0;k<20;k++){var r=R(),c=0,i=0;for(;i<3;i++){c+=p[i];if(r<c)break}counts[i]++}draw()});
+    button(u.ctl,'T = 0.5',function(){T.set(0.5);counts=null;draw()});button(u.ctl,'T = 1',function(){T.set(1);counts=null;draw()});button(u.ctl,'T = 2',function(){T.set(2);counts=null;draw()});
+    T.on(function(){counts=null;draw()});draw();W.push(draw);
+  },
+  /* Week 6: step through the harness loop */
+  harness:function(host){
+    var u=mk(host,'Be the harness: step through slide 17’s run','Each step: the model proposes (u<sub>t</sub>), the harness validates and executes (a<sub>t</sub>), the result comes back (o<sub>t+1</sub>) and the state is updated (m<sub>t+1</sub>). Tick the box to make the model try things it shouldn’t.','&#129520;');
+    u.svg.style.display='none';var box=document.createElement('div');host.insertBefore(box,u.ctl);
+    var bad=document.createElement('label');bad.innerHTML='<input type="checkbox"> model misbehaves';u.ctl.appendChild(bad);var cb=bad.querySelector('input');
+    var good=[
+      ['search_flights(SFO, New York, 2027-04-18, after 10:00)','valid read tool, execute; RateLimited, so retry once','#293 10:00 $450; #441 12:00 $490','candidates #293, #441 (search prices)'],
+      ['check_fare(441)','valid, execute','#441 $560, available','#441 = $560 (quote, supersedes $490): over budget'],
+      ['search_flights(..., after 12:01)','valid, execute','#517 14:30 $470; #602 18:45 $520','candidates #517, #602'],
+      ['check_fare(517)','valid, execute','#517 $475, available','#517 = $475 (quote): fits'],
+      ['FINAL: recommend #517 at $475; #293 only if “after 10:00” includes 10:00; nothing booked','final answer: stop, return to user','(none)','done; action log has no booking']],
+    badRun=[
+      ['search_flights(date="18/04")','validate: bad argument format, reject (not executed)','Error: date must be YYYY-MM-DD (e.g. 2027-04-18)','error recorded as an observation'],
+      ['search_flights(SFO, New York, 2027-04-18, after 10:00)','valid, execute','#293 10:00 $450; #441 12:00 $490','candidates #293, #441'],
+      ['book_flight(441)','validate: tool not exposed, reject (not executed)','Error: book_flight is not an available tool','rejection recorded; nothing booked'],
+      ['FINAL: “Done, I’ve booked #441 for $490.”','final answer checked against the action log: no booking happened','flagged: claim contradicts the log','harness stops the false claim reaching the passenger']],
+    k=0;
+    function run(){return cb.checked?badRun:good}
+    function draw(){var r=run(),h='<table class="rules"><tr><td><b>t</b></td><td><b>model output u<sub>t</sub></b></td><td><b>harness</b></td><td><b>observation o<sub>t+1</sub></b></td><td><b>state m<sub>t+1</sub></b></td></tr>';
+      for(var i=0;i<k;i++)h+='<tr class="'+(i===k-1?'win':'')+'"><td>'+(i+1)+'</td><td><code>'+r[i][0].replace(/</g,'&lt;')+'</code></td><td>'+r[i][1]+'</td><td>'+r[i][2]+'</td><td>'+r[i][3]+'</td></tr>';
+      box.innerHTML=k?h+'</table>':'<p class="wsub">Press “Next step”. Context at t = 1: task + tool schemas (search_flights, check_fare) + skill descriptions.</p>';
+      var ex=r.slice(0,k).filter(function(x){return /execute/.test(x[1])&&!/not executed/.test(x[1])}).length;
+      stats(u.out,[['step',k+' of '+r.length],['learned line','u_t ~ p_θ(· | c_t) only'],['tool calls executed',ex],['stopped?',k===r.length?'yes':'no']]);}
+    button(u.ctl,'Next step',function(){if(k<run().length)k++;draw()});button(u.ctl,'Reset',function(){k=0;draw()});cb.onchange=function(){k=0;draw()};draw();
+  },
+  /* Week 6: the context budget game */
+  budget:function(host){
+    var u=mk(host,'The context budget game','The passenger asks “Is cabin luggage included on #517?” Tick what goes into the context. 8,000 tokens, 1,000 kept free for the answer, so 7,000 usable.','&#129530;');
+    u.svg.style.display='none';var box=document.createElement('div');host.insertBefore(box,u.ctl);
+    var it=[[1,'System prompt: role, rules, tone',900],[2,'Tool schemas (3 tools)',1200],[3,'Passenger’s request, as typed',150],[4,'Entire baggage and fare policy (40 pp.)',38000],[5,'Policy excerpt: cabin baggage by fare class',700],[6,'Policy excerpt: change and cancellation fees',650],[7,'All 25 flights from search_flights, raw JSON',11500],[8,'Same results filtered: 3 flights, fare class and price',500],[9,'Price history for #441',200],[10,'Last week’s conversation, full transcript',14000],[11,'Summary of last week',400],[12,'Passenger profile',250],[13,'Flight-comparison skill: full instructions',3800],[14,'Flight-comparison skill: name + description',90],[15,'Progress notes',350],[16,'This session so far (raw tool output cleared)',1600]];
+    var on={},ref=[1,2,3,5,8,11,12,14,15,16];
+    box.innerHTML='<div>'+it.map(function(x){return '<label style="display:block;margin:2px 0"><input type="checkbox" data-i="'+x[0]+'"> '+x[0]+'. '+x[1]+' <b>'+x[2].toLocaleString('en-GB')+'</b></label>'}).join('')+'</div>';
+    box.querySelectorAll('input').forEach(function(c){c.onchange=function(){on[c.getAttribute('data-i')]=c.checked;draw()}});
+    function draw(){var tot=0;it.forEach(function(x){if(on[x[0]])tot+=x[2]});
+      stats(u.out,[['tokens used',tot.toLocaleString('en-GB')],['usable','7,000'],['left',(7000-tot).toLocaleString('en-GB')],['verdict',tot>7000?'&#9888; over budget':tot===0?'pick some items':'fits']]);}
+    button(u.ctl,'Show the slide’s answer',function(){box.querySelectorAll('input').forEach(function(c){var i=+c.getAttribute('data-i');c.checked=ref.indexOf(i)>=0;on[i]=c.checked});draw()});
+    button(u.ctl,'Clear',function(){box.querySelectorAll('input').forEach(function(c){c.checked=false});on={};draw()});draw();
+  },
+  /* Week 7: 2x2 game analyser */
+  payoff:function(host){
+    var u=mk(host,'Analyse any 2 × 2 game','Type payoffs as (i, j): i picks the row, j the column. The readout finds dominant strategies, pure Nash equilibria, Pareto optimal outcomes, maximum social welfare and the mixed equilibrium if there is one. Try to answer before you look.','&#9814;');
+    u.svg.style.display='none';var box=document.createElement('div');host.insertBefore(box,u.ctl);var res=document.createElement('div');host.appendChild(res);
+    var P={'Prisoner’s dilemma':[['D','C'],['D','C'],[[2,2],[4,1]],[[1,4],[3,3]]],'Chicken':[['D','C'],['D','C'],[[1,1],[4,2]],[[2,4],[3,3]]],'Matching pennies':[['H','T'],['H','T'],[[1,-1],[-1,1]],[[-1,1],[1,-1]]],'Slides’ Nash example':[['a','b'],['c','d'],[[5,5],[8,2]],[[2,8],[3,3]]],'Slides’ dominant example':[['s1','s2'],['s3','s4'],[[1,-1],[3,-3]],[[-2,2],[0,0]]],'Stag hunt':[['Stag','Hare'],['Stag','Hare'],[[4,4],[1,3]],[[3,1],[2,2]]]};
+    var g;
+    function load(name){var q=P[name];g={r:q[0].slice(),c:q[1].slice(),u:[[q[2][0].slice(),q[2][1].slice()],[q[3][0].slice(),q[3][1].slice()]]};build()}
+    function build(){var h='<table class="rules"><tr><td></td><td><b>j: '+g.c[0]+'</b></td><td><b>j: '+g.c[1]+'</b></td></tr>';
+      for(var a=0;a<2;a++){h+='<tr><td><b>i: '+g.r[a]+'</b></td>';for(var b=0;b<2;b++)h+='<td>(<input data-a="'+a+'" data-b="'+b+'" data-p="0" value="'+g.u[a][b][0]+'" style="width:3.2em">, <input data-a="'+a+'" data-b="'+b+'" data-p="1" value="'+g.u[a][b][1]+'" style="width:3.2em">)</td>';h+='</tr>'}
+      box.innerHTML=h+'</table>';box.querySelectorAll('input').forEach(function(x){x.oninput=function(){var v=parseFloat(x.value);if(!isNaN(v)){g.u[+x.getAttribute('data-a')][+x.getAttribute('data-b')][+x.getAttribute('data-p')]=v;analyse()}}});analyse()}
+    function nm(a,b){return '('+g.r[a]+', '+g.c[b]+')'}
+    function analyse(){var U=g.u,ne=[],par=[],sw=[],a,b;
+      function dom(p){var o=p===0?[[U[0][0][0],U[0][1][0]],[U[1][0][0],U[1][1][0]]]:[[U[0][0][1],U[1][0][1]],[U[0][1][1],U[1][1][1]]],L=p===0?g.r:g.c;
+        for(var s=0;s<2;s++){var t=1-s;if(o[s][0]>=o[t][0]&&o[s][1]>=o[t][1]&&(o[s][0]>o[t][0]||o[s][1]>o[t][1]))return L[s]+((o[s][0]>o[t][0]&&o[s][1]>o[t][1])?' (strictly)':' (weakly)')}return 'none'}
+      for(a=0;a<2;a++)for(b=0;b<2;b++){if(U[a][b][0]>=U[1-a][b][0]&&U[a][b][1]>=U[a][1-b][1])ne.push(nm(a,b));
+        var po=true;for(var c=0;c<2;c++)for(var d=0;d<2;d++){if((c!==a||d!==b)&&U[c][d][0]>=U[a][b][0]&&U[c][d][1]>=U[a][b][1]&&(U[c][d][0]>U[a][b][0]||U[c][d][1]>U[a][b][1]))po=false}if(po)par.push(nm(a,b));sw.push([U[a][b][0]+U[a][b][1],nm(a,b)])}
+      var mx=Math.max.apply(null,sw.map(function(x){return x[0]}));
+      var zs=[0,1].every(function(a){return [0,1].every(function(b){return Math.abs(U[a][b][0]+U[a][b][1])<1e-9})});
+      var dq=(U[0][0][0]-U[1][0][0])-(U[0][1][0]-U[1][1][0]),dp=(U[0][0][1]-U[0][1][1])-(U[1][0][1]-U[1][1][1]),mixed='none with both players mixing';
+      if(Math.abs(dq)>1e-9&&Math.abs(dp)>1e-9){var q=(U[1][1][0]-U[0][1][0])/dq,p=(U[1][1][1]-U[1][0][1])/dp;if(q>1e-9&&q<1-1e-9&&p>1e-9&&p<1-1e-9)mixed='i plays '+g.r[0]+' with p = '+f2(p,3)+', j plays '+g.c[0]+' with q = '+f2(q,3)}
+      res.innerHTML='<details><summary><b>Show the analysis</b></summary><table class="rules"><tr><td>dominant strategy for i</td><td><b>'+dom(0)+'</b></td></tr><tr><td>dominant strategy for j</td><td><b>'+dom(1)+'</b></td></tr><tr><td>pure Nash equilibria</td><td><b>'+(ne.join(', ')||'none')+'</b></td></tr><tr><td>Pareto optimal</td><td><b>'+par.join(', ')+'</b></td></tr><tr><td>max social welfare</td><td><b>'+sw.filter(function(x){return x[0]===mx}).map(function(x){return x[1]}).join(', ')+' = '+mx+'</b></td></tr><tr><td>zero-sum?</td><td><b>'+(zs?'yes':'no')+'</b></td></tr><tr><td>mixed equilibrium</td><td><b>'+mixed+'</b></td></tr></table></details>';
+      stats(u.out,[['outcomes',4],['tip','mark best responses first']]);}
+    Object.keys(P).forEach(function(n){button(u.ctl,n,function(){load(n)})});load('Prisoner’s dilemma');
+  },
+  /* Week 7: iterated prisoner's dilemma round robin */
+  ipd:function(host){
+    var u=mk(host,'Axelrod-style tournament','Every strategy plays every strategy (itself included) for n rounds; payoffs T = 4, R = 3, P = 2, S = 1. Noise flips each intended move with the probability shown. Click a score to see that match move by move. With only six entrants the winner depends on n and the noise; Axelrod’s field was much larger, and TIT-FOR-TAT won it.','&#127942;');
+    u.svg.style.display='none';var box=document.createElement('div');host.insertBefore(box,u.ctl);var lg=document.createElement('div');lg.className='log';host.appendChild(lg);
+    var N=slider(u.ctl,'rounds n',1,200,1,10),Z=slider(u.ctl,'noise',0,0.2,0.01,0,function(v){return Math.round(v*100)+'%'});
+    var S=['ALLD','ALLC','TFT','GRIM','Pavlov','RANDOM'],PAY={CC:[3,3],CD:[1,4],DC:[4,1],DD:[2,2]},sel=[2,0],seed;
+    function R(){seed=(seed*1103515245+12345)%2147483648;return seed/2147483648}
+    function move(s,me,op){var t=me.length;if(s==='ALLD')return 'D';if(s==='ALLC')return 'C';if(s==='RANDOM')return R()<0.5?'C':'D';
+      if(s==='TFT')return t?op[t-1]:'C';if(s==='GRIM')return op.indexOf('D')>=0?'D':'C';
+      if(!t)return 'C';var pay=PAY[me[t-1]+op[t-1]][0];return pay>=3?me[t-1]:(me[t-1]==='C'?'D':'C')}
+    function play(a,b){var ma=[],mb=[],sa=0,sb=0;for(var r=0;r<N.v;r++){var x=move(S[a],ma,mb),y=move(S[b],mb,ma);if(R()<Z.v)x=x==='C'?'D':'C';if(R()<Z.v)y=y==='C'?'D':'C';ma.push(x);mb.push(y);var p=PAY[x+y];sa+=p[0];sb+=p[1]}return [sa,sb,ma,mb]}
+    function draw(){seed=12345;var M=S.map(function(){return S.map(function(){return 0})}),tot=S.map(function(){return 0});
+      for(var a=0;a<S.length;a++)for(var b=a;b<S.length;b++){var r=play(a,b);M[a][b]=r[0];M[b][a]=r[1];tot[a]+=r[0];if(a!==b)tot[b]+=r[1]}
+      var order=S.map(function(s,i){return i}).sort(function(x,y){return tot[y]-tot[x]});
+      var h='<table class="rules"><tr><td><b>row’s score vs column</b></td>'+S.map(function(s){return '<td><b>'+s+'</b></td>'}).join('')+'<td><b>total</b></td></tr>';
+      S.forEach(function(s,i){h+='<tr class="'+(i===order[0]?'win':'')+'"><td><b>'+s+'</b></td>'+M[i].map(function(v,j){return '<td style="cursor:pointer" data-a="'+i+'" data-b="'+j+'">'+v+'</td>'}).join('')+'<td><b>'+tot[i]+'</b></td></tr>'});
+      box.innerHTML=h+'</table>';
+      box.querySelectorAll('td[data-a]').forEach(function(c){c.onclick=function(){sel=[+c.getAttribute('data-a'),+c.getAttribute('data-b')];draw()}});
+      seed=999;var m=play(sel[0],sel[1]),pad=function(s){return (s+'       ').slice(0,8)};
+      lg.textContent=S[sel[0]]+' vs '+S[sel[1]]+(N.v>40?' (first 40 rounds shown)':'')+'\n'+pad(S[sel[0]])+m[2].slice(0,40).join(' ')+'   total '+m[0]+'\n'+pad(S[sel[1]])+m[3].slice(0,40).join(' ')+'   total '+m[1];
+      stats(u.out,[['winner',S[order[0]]],['runner-up',S[order[1]]],['last',S[order[S.length-1]]],['best possible per match',4*N.v]]);}
+    N.on(draw);Z.on(draw);draw();
+  }
 };
 function widgets(){document.querySelectorAll('[data-widget]').forEach(function(h){var f=builders[h.getAttribute('data-widget')];if(f){h.classList.add('widget');try{f(h)}catch(e){h.textContent='(interactive demo failed to load)'}}})}
 })();

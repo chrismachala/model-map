@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Density estimation and semi-supervised learning · CS5100 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}, {"id": "s19_bias_variance", "title": "Bias, variance and regularisation", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 40, "blurb": "Training vs test error, the decomposition by hand, the U-shape, KNN and K, pruning and ridge as fit + penalty.", "href": "s19_bias_variance.html"}, {"id": "s20_comparing", "title": "Comparing two algorithms", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 35, "blurb": "Contingency tables, the null hypothesis, binomial probabilities, p-values and significance levels.", "href": "s20_comparing.html"}, {"id": "s21_bagging_oob", "title": "Bootstrap, bagging and OOB error", "group": "Week 6 \u00b7 Ensemble methods", "mins": 45, "blurb": "Sampling with replacement, bagging by vote or average, the 36.8% lemma, and the OOB calculation (2023 and 2025).", "href": "s21_bagging_oob.html"}, {"id": "s22_forests_boosting", "title": "Random forests and boosting", "group": "Week 6 \u00b7 Ensemble methods", "mins": 40, "blurb": "m attributes per split, residual fitting, \u03b7, B and d, and which one can overfit (2025 Q3a).", "href": "s22_forests_boosting.html"}, {"id": "s23_kmeans", "title": "Metrics and K-means", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Metrics, the SSE objective, K-means by hand, the termination proof, restarts, choosing K, empty clusters.", "href": "s23_kmeans.html"}, {"id": "s24_hierarchical", "title": "Hierarchical clustering", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 45, "blurb": "Dendrograms, the four linkages by hand (2023 Q5), chaining, inversions, cutting, divisive vs agglomerative.", "href": "s24_hierarchical.html"}, {"id": "s25_density", "title": "Density estimation and semi-supervised learning", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Histograms and the curse of dimensionality, k/(nV), Parzen windows, KDE, bandwidth; seeded and constrained K-means.", "href": "s25_density.html"}, {"id": "s26_mock_part2", "title": "Mock exam part 2 (weeks 5-7)", "group": "Final", "mins": 50, "blurb": "Second-half questions in the past papers' shape: ensembles and OOB, clustering, density estimation. Pass 70%.", "href": "s26_mock_part2.html"}], "stage": "s25_density", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s25_density" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+<h4>Week 5 · Evaluating and comparing</h4>
+<a href="s19_bias_variance.html"><span class="dot path"></span>19. Bias, variance and regularisation<span class="pstat" data-i="18"></span></a>
+<a href="s20_comparing.html"><span class="dot path"></span>20. Comparing two algorithms<span class="pstat" data-i="19"></span></a>
+<h4>Week 6 · Ensemble methods</h4>
+<a href="s21_bagging_oob.html"><span class="dot path"></span>21. Bootstrap, bagging and OOB error<span class="pstat" data-i="20"></span></a>
+<a href="s22_forests_boosting.html"><span class="dot path"></span>22. Random forests and boosting<span class="pstat" data-i="21"></span></a>
+<h4>Week 7 · Unsupervised learning</h4>
+<a href="s23_kmeans.html"><span class="dot path"></span>23. Metrics and K-means<span class="pstat" data-i="22"></span></a>
+<a href="s24_hierarchical.html"><span class="dot path"></span>24. Hierarchical clustering<span class="pstat" data-i="23"></span></a>
+<a class="active" aria-current="page" href="s25_density.html"><span class="dot path"></span>25. Density estimation and semi-supervised learning<span class="pstat" data-i="24"></span></a>
+<h4>Final</h4>
+<a href="s26_mock_part2.html"><span class="dot path"></span>26. Mock exam part 2 (weeks 5-7)<span class="pstat" data-i="25"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 25 of 26</span><span class="chip">Week 7 · Unsupervised learning</span><span class="chip">about 40 min</span></div>
+  <h1>Density estimation and semi-supervised learning</h1>
+  <p class="tagline">Where do the data crowd together? Count the points in a small window around x and divide by n times the window's size. Histograms, Parzen windows and kernel density estimates are three versions of that idea. Then: using unlabelled data to help a classifier.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>Density estimation and semi-supervised learning are <strong>not in ISLP</strong>. Optional: Duda, Hart and Stork 4.2–4.3 (Parzen windows), Bishop 2.5 (kernel density estimators). This stage and the study guide cover everything on slides 51–76.</p>
+</div>
+<h2 id="parametric-vs-non-parametric-histograms">1. Parametric vs non-parametric; histograms</h2>
+<p><strong>Parametric</strong> density estimation fixes a form and fits its parameters: a Gaussian, or a <strong>mixture of Gaussians</strong> fitted with EM (2023 Q1(d)i: parametric). <strong>Non-parametric</strong> lets the data decide.</p>
+<p>Histogram: <span class="math inline">\(f_H(x) = \frac{\#\text{ in } x\text{&#39;s bin}}{n\,w}\)</span>. Parameters: number of bins, width, start. Drawbacks: depends on the start; jumps at edges; the <strong>curse of dimensionality</strong>: <span class="math inline">\(m\)</span> bins per axis in <span class="math inline">\(p\)</span> dimensions is <span class="math inline">\(m^p\)</span> bins, so the data needed grow exponentially with <span class="math inline">\(p\)</span>.</p>
+<div class="q" kind="num" data-answer="1000000" label="bins">
+<p>A histogram uses 10 bins per axis in 6 dimensions. How many bins?</p>
+<div class="expl">
+<p><span class="math inline">\(10^6 = 1{,}000{,}000\)</span>. With a few thousand points almost every bin is empty.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p><strong>(2023 Q1(d)i.)</strong> Fitting a mixture of three Gaussians with the EM algorithm is…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />parametric: a fixed number of parameters (means, covariances, weights)</label></li>
+<li><label><input type="checkbox" />non-parametric, because it has several components</label></li>
+<li><label><input type="checkbox" />neither</label></li>
+<li><label><input type="checkbox" />non-parametric, because EM is iterative</label></li>
+</ul>
+<div class="expl">
+<p>The number of parameters doesn’t grow with the data.</p>
+</div>
+</div>
+<h2 id="fx-approx-knv-and-parzen-windows">2. <span class="math inline">\(f(x) \approx k/(nV)\)</span> and Parzen windows</h2>
+<p><span class="math inline">\(P(R) = \int_Rf \approx f(x)V\)</span> for a small region; <span class="math inline">\(P(R) \approx k/n\)</span>; so <span class="math inline">\(f(x) \approx k/(nV)\)</span>. <span class="math inline">\(V\)</span> large enough to hold enough points, small enough that <span class="math inline">\(f\)</span> is flat inside.</p>
+<p>Parzen: a box of side <span class="math inline">\(h\)</span> centred at <span class="math inline">\(x\)</span>: in 1D count points within <span class="math inline">\(h/2\)</span> (edges count) and divide by <span class="math inline">\(nh\)</span>; in <span class="math inline">\(p\)</span> dimensions divide by <span class="math inline">\(nh^p\)</span>.</p>
+<div class="example">
+<p><span class="math inline">\(X = \{4, 5, 5, 6, 12, 14, 15, 15, 16, 17\}\)</span>, <span class="math inline">\(h = 4\)</span>: <span class="math inline">\(f(3) = 3/40 = 0.075\)</span>, <span class="math inline">\(f(10) = 1/40 = 0.025\)</span>, <span class="math inline">\(f(15) = 5/40 = 0.125\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="0.3" label="f(1.5)">
+<p>Data <span class="math inline">\((1, 1.7, 2, 3.4, 8)\)</span>. Parzen window estimate at <span class="math inline">\(x = 1.5\)</span> with <span class="math inline">\(h = 2\)</span>?</p>
+<div class="expl">
+<p>Window <span class="math inline">\([0.5, 2.5]\)</span> holds 1, 1.7, 2: <span class="math inline">\(3/(5 \times 2) = 0.3\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.125" label="f(0,0)">
+<p>2D, <span class="math inline">\(h = 2\)</span>, at <span class="math inline">\((0, 0)\)</span>. Data <span class="math inline">\((0.5, 0.5)\)</span>, <span class="math inline">\((1, -0.9)\)</span>, <span class="math inline">\((1.5, 0)\)</span>, <span class="math inline">\((-3, 2)\)</span>. Estimate <span class="math inline">\(f(0, 0)\)</span>.</p>
+<div class="expl">
+<p>Inside <span class="math inline">\(|x_1|, |x_2| \le 1\)</span>: the first two. <span class="math inline">\(2/(4 \times 2^2) = 0.125\)</span>.</p>
+</div>
+</div>
+<h2 id="smooth-kernels-and-the-bandwidth">3. Smooth kernels and the bandwidth</h2>
+<p>Parzen estimates jump and weight all points in the window equally. A smooth kernel (Gaussian, triangular <span class="math inline">\(1 - |u|\)</span>, Epanechnikov) in the same formula gives a <strong>KDE</strong>: a sum of <span class="math inline">\(n\)</span> bumps of area <span class="math inline">\(1/n\)</span>. The bandwidth <span class="math inline">\(h\)</span> matters more than the kernel: large <span class="math inline">\(h\)</span> over-smooths (bias), small <span class="math inline">\(h\)</span> is spiky (variance).</p>
+<div class="q" kind="gen" data-gen="parzen">
+
+</div>
+<div class="q" kind="mcq">
+<p>You halve the bandwidth of a KDE. What happens?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Spikier estimate: bias down, variance up.</label></li>
+<li><label><input type="checkbox" />Smoother estimate: bias up, variance down.</label></li>
+<li><label><input type="checkbox" />Nothing: only the kernel shape matters.</label></li>
+<li><label><input type="checkbox" />The estimate no longer integrates to 1.</label></li>
+</ul>
+<div class="expl">
+<p>Narrower bumps follow individual points.</p>
+</div>
+</div>
+<h2 id="semi-supervised-learning">4. Semi-supervised learning</h2>
+<p><span class="math inline">\(l\)</span> labelled points, <span class="math inline">\(u \gg l\)</span> unlabelled. Two uses on the slides:</p>
+<ul>
+<li><strong>Re-weighting:</strong> estimate the density from the unlabelled data and weight each labelled point by how typical its region is.</li>
+<li><strong>Seeded K-means:</strong> start centre <span class="math inline">\(j\)</span> at the mean of the seeds labelled <span class="math inline">\(j\)</span>, then ordinary K-means. <strong>Constrained K-means:</strong> the same, but seeds never change cluster.</li>
+</ul>
+<div class="q" kind="mcq">
+<p>Seeds: class A at 1 and 3, class B at 9. Unlabelled 2, 6, 7, 10. Seeded K-means (<span class="math inline">\(K = 2\)</span>) ends with B <span class="math inline">\(=\)</span>…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\{6, 7, 9, 10\}\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\{7, 9, 10\}\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\{9, 10\}\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\{2, 6, 7, 9, 10\}\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Centres 2 and 9; 6 is 4 vs 3, so B. New centres 2 and 8; nothing moves.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="parzen">
+
+</div>
+<div class="q" kind="gen" data-gen="parzen">
+
+</div>
+<div class="q" kind="self" data-need="4" data-marks="6">
+<p><strong>(6 marks; 2023 Q1(d)ii.)</strong> Explain why histograms suffer from the curse of dimensionality.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A histogram divides each axis into <span class="math inline">\(m\)</span> bins.</label></li>
+<li><label><input type="checkbox" checked="" />In <span class="math inline">\(p\)</span> dimensions that’s <span class="math inline">\(m^p\)</span> bins: exponential in <span class="math inline">\(p\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />A concrete number (e.g. 10 bins, 10 dimensions: <span class="math inline">\(10^{10}\)</span> bins).</label></li>
+<li><label><input type="checkbox" checked="" />With realistic <span class="math inline">\(n\)</span> almost all bins are empty, so the estimate is 0 almost everywhere / meaningless.</label></li>
+<li><label><input type="checkbox" checked="" />The data needed grow exponentially with <span class="math inline">\(p\)</span>; histograms only useful in 1–2 dimensions.</label></li>
+</ul>
+<div class="model">
+<p>A histogram estimates the density in each bin by the fraction of points in it divided by the bin’s volume. With <span class="math inline">\(m\)</span> bins along each axis, a <span class="math inline">\(p\)</span>-dimensional histogram has <span class="math inline">\(m^p\)</span> bins, a number that grows exponentially with <span class="math inline">\(p\)</span>: 10 bins per axis in 10 dimensions gives <span class="math inline">\(10^{10}\)</span> bins. Even a million observations leave almost every bin empty, so the estimate is zero almost everywhere and the non-empty bins rest on one or two points. To keep enough points per bin the sample size would have to grow exponentially with the dimension, so histograms are only practical in one or two dimensions.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>(3 marks)</strong> Derive <span class="math inline">\(f(x) \approx \frac{k}{nV}\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(P = \int_Rf(x&#39;)\,dx&#39; \approx f(x)V\)</span> for a small region <span class="math inline">\(R\)</span> of volume <span class="math inline">\(V\)</span> around <span class="math inline">\(x\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(P \approx k/n\)</span>, the fraction of the <span class="math inline">\(n\)</span> points in <span class="math inline">\(R\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Equate: <span class="math inline">\(f(x) \approx k/(nV)\)</span>.</label></li>
+</ul>
+<div class="model">
+<p>Let <span class="math inline">\(R\)</span> be a small region around <span class="math inline">\(x\)</span> with volume <span class="math inline">\(V\)</span>. The probability that an observation falls in <span class="math inline">\(R\)</span> is <span class="math inline">\(P = \int_Rf(x&#39;)\,dx&#39;\)</span>, and since <span class="math inline">\(f\)</span> is nearly constant on a small region, <span class="math inline">\(P \approx f(x)V\)</span>. If <span class="math inline">\(k\)</span> of the <span class="math inline">\(n\)</span> observations fall in <span class="math inline">\(R\)</span>, the relative frequency estimates the probability: <span class="math inline">\(P \approx k/n\)</span>. Hence <span class="math inline">\(f(x) \approx k/(nV)\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>How does constrained K-means differ from seeded K-means?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Seeds keep their labelled cluster at every step; in seeded K-means they’re used only to start.</label></li>
+<li><label><input type="checkbox" />It uses more clusters.</label></li>
+<li><label><input type="checkbox" />It ignores the unlabelled points.</label></li>
+<li><label><input type="checkbox" />It doesn’t compute centroids.</label></li>
+</ul>
+<div class="expl">
+<p>Use constrained when you trust the labels.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s24_hierarchical.html"><small>&larr; Stage 24</small>Hierarchical clustering</a><a class="next" href="s26_mock_part2.html"><small>Stage 26 &rarr;</small>Mock exam part 2 (weeks 5-7)</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

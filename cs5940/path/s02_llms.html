@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM foundations and post-training · CS5940 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5940", "stages": [{"id": "s01_deep_rl", "title": "Deep RL", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 25, "blurb": "Tables to networks, the DQN target, replay vs target network, actor\u2013critic, AlphaZero.", "href": "s01_deep_rl.html"}, {"id": "s02_llms", "title": "LLMs", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 30, "blurb": "Next-token prediction, temperature, SFT / RLHF / RLVR / DPO, what changes the weights.", "href": "s02_llms.html"}, {"id": "s03_harness_tools", "title": "The harness and tools", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Workflow vs agent, the formal loop, validation, where \u201cdo not book\u201d lives, tools vs skills.", "href": "s03_harness_tools.html"}, {"id": "s04_context_orchestration", "title": "Context, memory and orchestration", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Context budget, RAG, keyword vs vector, current facts, memory types, cheapest architecture.", "href": "s04_context_orchestration.html"}, {"id": "s05_game_theory", "title": "Game theory", "group": "Week 7 \u00b7 Multi-agent interaction", "mins": 35, "blurb": "Dominant strategies, Nash, mixed, Pareto, welfare; the prisoner\u2019s dilemma and its fixes.", "href": "s05_game_theory.html"}, {"id": "s06_rl_refresher", "title": "Week 4 refresher", "group": "Week 4 \u00b7 Refresher", "mins": 20, "blurb": "MDPs, returns, value iteration vs Q-learning, \u03b5-greedy, POMDPs, reward hacking.", "href": "s06_rl_refresher.html"}, {"id": "s07_mock_quiz2", "title": "Mock Quiz 2", "group": "Mock quiz", "mins": 30, "blurb": "Fifteen Quiz 1-style questions drawn from weeks 4 to 7. Pass 70%.", "href": "s07_mock_quiz2.html"}], "stage": "s02_llms", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5940_path_s02_llms" data-module="cs5940" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="s01_deep_rl.html"><span class="dot path"></span>1. Deep RL<span class="pstat" data-i="0"></span></a>
+<a class="active" aria-current="page" href="s02_llms.html"><span class="dot path"></span>2. LLMs<span class="pstat" data-i="1"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="s03_harness_tools.html"><span class="dot path"></span>3. The harness and tools<span class="pstat" data-i="2"></span></a>
+<a href="s04_context_orchestration.html"><span class="dot path"></span>4. Context, memory and orchestration<span class="pstat" data-i="3"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="s05_game_theory.html"><span class="dot path"></span>5. Game theory<span class="pstat" data-i="4"></span></a>
+<h4>Week 4 · Refresher</h4>
+<a href="s06_rl_refresher.html"><span class="dot path"></span>6. Week 4 refresher<span class="pstat" data-i="5"></span></a>
+<h4>Mock quiz</h4>
+<a href="s07_mock_quiz2.html"><span class="dot path"></span>7. Mock Quiz 2<span class="pstat" data-i="6"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 2 of 7</span><span class="chip">Week 5 · Deep RL and LLMs</span><span class="chip">about 30 min</span></div>
+  <h1>LLM foundations and post-training</h1>
+  <p class="tagline">Week 5 Part B: what the model computes (next-token probabilities), how temperature and decoding work, what pretraining and post-training each do, and the favourite trap: which of these actually changes the weights?</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>Full notes: <a href="../w5/LLM_Foundations.html">How an LLM generates text</a> and <a href="../w5/LLM_Post_Training.html">Post-training and the three knobs</a>.</p>
+<h2 id="next-token-prediction-is-not-rl">1. Next-token prediction is not RL</h2>
+<p>An autoregressive LM gives <span class="math inline">\(P_\theta(x_t \mid x_{&lt;t})\)</span>; a sequence’s probability is the product <span class="math inline">\(\prod_t P_\theta(x_t \mid x_{&lt;t})\)</span>. <strong>Pretraining</strong> minimises <span class="math inline">\(-\sum_t \log P_\theta(x_t \mid x_{&lt;t})\)</span> on real text. The text supplies the targets, the model doesn’t act or receive reward: <strong>pretraining is not reinforcement learning</strong>. RL appears later, in some post-training.</p>
+<p>Self-attention lets tokens use context (“it” → “box”); the <strong>causal mask</strong> stops position <span class="math inline">\(t\)</span> seeing later tokens during training.</p>
+<div class="q" kind="num" data-answer="0.04">
+<p><span class="math inline">\(P(\text{The}) = 0.5\)</span>, <span class="math inline">\(P(\text{cat} \mid \text{The}) = 0.2\)</span>, <span class="math inline">\(P(\text{sat} \mid \text{The cat}) = 0.4\)</span>. What probability does the model give the sequence “The cat sat”?</p>
+<div class="expl">
+<p>Chain rule: <span class="math inline">\(0.5 \times 0.2 \times 0.4 = 0.04\)</span>.</p>
+</div>
+</div>
+<h2 id="softmax-temperature-decoding">2. Softmax, temperature, decoding</h2>
+<p><span class="math inline">\(P_T(i) = \dfrac{\exp(z_i / T)}{\sum_j \exp(z_j / T)}\)</span>. Low <span class="math inline">\(T\)</span> sharpens, high <span class="math inline">\(T\)</span> flattens. Shortcut: <span class="math inline">\(P_T(i) \propto P_1(i)^{1/T}\)</span>. <strong>Greedy decoding always picks the top token, and dividing all logits by the same <span class="math inline">\(T &gt; 0\)</span> never changes which is top.</strong></p>
+<div class="q" kind="num" data-answer="0.8" data-tol="0.002">
+<p>At <span class="math inline">\(T = 1\)</span> a model gives two tokens probabilities 0.667 and 0.333 (logits differ by <span class="math inline">\(\ln 2\)</span>). What is the first token’s probability at <span class="math inline">\(T = 0.5\)</span>? (Two decimal places is fine.)</p>
+<div class="expl">
+<p>Square and renormalise: <span class="math inline">\(0.667^2 = 0.444\)</span>, <span class="math inline">\(0.333^2 = 0.111\)</span>, total 0.556; <span class="math inline">\(0.444 / 0.556 = 0.80\)</span>. (Exactly: ratio 2:1 becomes 4:1, so 0.8.)</p>
+</div>
+</div>
+<h2 id="the-post-training-menu">3. The post-training menu</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Training signal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>SFT</strong></td>
+<td>target responses (demonstrations)</td>
+</tr>
+<tr class="even">
+<td><strong>RLHF</strong></td>
+<td>human comparisons → reward model → RL (e.g. PPO)</td>
+</tr>
+<tr class="odd">
+<td><strong>RLAIF</strong></td>
+<td>AI preference judgements → RL</td>
+</tr>
+<tr class="even">
+<td><strong>RLVR</strong></td>
+<td>a verifier checks the answer / runs tests → RL (DeepSeek-R1)</td>
+</tr>
+<tr class="odd">
+<td><strong>DPO</strong></td>
+<td>chosen/rejected pairs directly, <strong>no reward model, no RL loop</strong></td>
+</tr>
+</tbody>
+</table>
+<p>DeepSeek-R1-Zero: <strong>RL (GRPO) with no SFT first</strong>; reflection emerged, but readability and language mixing were poor. R1 added SFT stages. GRPO scores each answer against others for the same question, <strong>no critic</strong>.</p>
+<div class="q" kind="mcq">
+<p>A lab trains a coding model by running each generated solution against unit tests and rewarding passing solutions. Which method is this?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Supervised fine-tuning</label></li>
+<li><label><input type="checkbox" />RLHF</label></li>
+<li><label><input type="checkbox" checked="" />RLVR</label></li>
+<li><label><input type="checkbox" />DPO</label></li>
+</ul>
+<div class="expl">
+<p>An automatic verifier (tests) gives the reward: RL with verifiable rewards. RLHF would use human comparisons via a reward model.</p>
+</div>
+</div>
+<h2 id="the-three-knobs-and-two-policies">4. The three knobs and two policies</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Knob</th>
+<th>Changes <span class="math inline">\(\theta\)</span>?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>training (pretraining, SFT, RLHF, RLVR, DPO)</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr class="even">
+<td>decoding (greedy, temperature)</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td>inference-time compute (more reasoning tokens, samples, checking)</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>Worked examples in the prompt change the output but <strong>not the weights</strong>. A <strong>model-level policy</strong> is a distribution over next tokens; an <strong>agent-level policy</strong> chooses environment actions from history and goal. A tool request is just text until an <strong>executor</strong> runs it.</p>
+<div class="q" kind="mcq">
+<p>Poll 3: which of these updates the model’s parameters <span class="math inline">\(\theta\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Sampling with a lower temperature</label></li>
+<li><label><input type="checkbox" />Adding worked examples to the prompt</label></li>
+<li><label><input type="checkbox" />Letting the model generate more reasoning tokens</label></li>
+<li><label><input type="checkbox" checked="" />Training with verifiable rewards (RLVR)</label></li>
+</ul>
+<div class="expl">
+<p>Only training changes <span class="math inline">\(\theta\)</span>. The others are decoding, context, and inference-time compute.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80" data-draw="9">
+<div class="q" kind="mcq">
+<p>A model uses greedy decoding. The temperature is raised from 1 to 2. What happens to its output?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It becomes more varied.</label></li>
+<li><label><input type="checkbox" />It becomes more repetitive.</label></li>
+<li><label><input type="checkbox" checked="" />Nothing: the top-ranked token is unchanged.</label></li>
+<li><label><input type="checkbox" />The model’s weights are updated.</label></li>
+</ul>
+<div class="expl">
+<p>Temperature reshapes the distribution but never changes which token ranks first, and greedy only looks at the top token.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why is next-token pretraining <strong>not</strong> reinforcement learning?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Because it doesn’t use gradient descent.</label></li>
+<li><label><input type="checkbox" checked="" />Because the training text supplies the targets; the model doesn’t act in an environment to collect reward.</label></li>
+<li><label><input type="checkbox" />Because it uses a neural network.</label></li>
+<li><label><input type="checkbox" />Because it never uses probabilities.</label></li>
+</ul>
+<div class="expl">
+<p>Both use networks and gradients. The difference is the signal: given targets from text vs reward from acting.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What does the causal mask in a GPT-style transformer do?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Hides rare tokens from the vocabulary.</label></li>
+<li><label><input type="checkbox" checked="" />Stops each position attending to later positions, so it can’t see the token it must predict.</label></li>
+<li><label><input type="checkbox" />Removes toxic text from the training data.</label></li>
+<li><label><input type="checkbox" />Forces greedy decoding.</label></li>
+</ul>
+<div class="expl">
+<p>At position <span class="math inline">\(t\)</span> the prediction may depend only on <span class="math inline">\(x_1, \dots, x_t\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Labellers repeatedly pick the better of two responses. A separate network learns to predict their choices and is then used as the reward for PPO updates. Which method is this?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />SFT</label></li>
+<li><label><input type="checkbox" checked="" />RLHF</label></li>
+<li><label><input type="checkbox" />RLVR</label></li>
+<li><label><input type="checkbox" />DPO</label></li>
+</ul>
+<div class="expl">
+<p>Human comparisons → reward model → RL: RLHF. DPO would train on the pairs directly, with no reward model.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What distinguishes DPO from RLHF?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />DPO uses human preferences; RLHF doesn’t.</label></li>
+<li><label><input type="checkbox" checked="" />DPO learns directly from chosen/rejected pairs, with no separate reward model or RL loop.</label></li>
+<li><label><input type="checkbox" />DPO only works for maths problems with checkable answers.</label></li>
+<li><label><input type="checkbox" />DPO updates the weights at inference time.</label></li>
+</ul>
+<div class="expl">
+<p>Both use preferences; DPO skips the reward model and the RL optimisation.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What was notable about DeepSeek-R1-Zero?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It was trained from scratch with no pretraining.</label></li>
+<li><label><input type="checkbox" checked="" />RL (GRPO) applied to a pretrained base model, with no preliminary SFT, produced reflection and self-checking behaviour.</label></li>
+<li><label><input type="checkbox" />It used only human preference labels.</label></li>
+<li><label><input type="checkbox" />It had excellent readability, so R1 needed no extra stages.</label></li>
+</ul>
+<div class="expl">
+<p>R1-Zero started from DeepSeek-V3-Base with RL only. Its readability and language mixing were poor, which R1 fixed with extra SFT and RL.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Select <strong>all</strong> that leave the model’s weights <span class="math inline">\(\theta\)</span> unchanged.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Putting three worked examples in the prompt</label></li>
+<li><label><input type="checkbox" checked="" />Raising the temperature to 1.5</label></li>
+<li><label><input type="checkbox" checked="" />Letting the model “think longer” before answering</label></li>
+<li><label><input type="checkbox" />Supervised fine-tuning on 10,000 expert answers</label></li>
+<li><label><input type="checkbox" checked="" />Retrieving a policy document into the context</label></li>
+</ul>
+<div class="expl">
+<p>Only SFT is a training update. Context, decoding and inference-time compute don’t touch <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.685" data-tol="0.003">
+<p>At <span class="math inline">\(T = 1\)</span> the next-token probabilities are 0.5, 0.3, 0.15, 0.05. What is the first token’s probability at <span class="math inline">\(T = 0.5\)</span>? (Three decimals.)</p>
+<div class="expl">
+<p>Square: 0.25, 0.09, 0.0225, 0.0025; total 0.365; <span class="math inline">\(0.25 / 0.365 = 0.685\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2.30" data-tol="0.01">
+<p>The true next tokens received probabilities 0.5, 0.25 and 0.8. What is the pretraining loss <span class="math inline">\(-\sum \ln P\)</span>? (Two decimals.)</p>
+<div class="expl">
+<p><span class="math inline">\(0.693 + 1.386 + 0.223 = 2.30\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>An LLM outputs <code>book_flight(id=441)</code>. What has happened in the world?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Nothing yet: it’s generated text until an executor validates and runs it.</label></li>
+<li><label><input type="checkbox" />The flight is booked, because the model chose that action.</label></li>
+<li><label><input type="checkbox" />The flight is booked if the temperature was low.</label></li>
+<li><label><input type="checkbox" />The model’s weights have been updated to remember the booking.</label></li>
+</ul>
+<div class="expl">
+<p>Model-level policy (tokens) ≠ agent-level policy (actions). Acting needs an executor and permissions.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which is the best description of Shannon’s 1948 experiments compared with modern LLMs?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Shannon used neural networks with very short contexts.</label></li>
+<li><label><input type="checkbox" checked="" />Shannon used k-gram count tables over characters; LLMs learn neural representations over much longer contexts, but keep the predict-sample-append loop.</label></li>
+<li><label><input type="checkbox" />Shannon’s models were given explicit grammar rules.</label></li>
+<li><label><input type="checkbox" />LLMs are simply very large k-gram tables.</label></li>
+</ul>
+<div class="expl">
+<p>Continuity: generate by repeatedly predicting the next symbol. Difference: learned distributed representations and long context, not count tables.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s01_deep_rl.html"><small>&larr; Stage 1</small>Deep RL</a><a class="next" href="s03_harness_tools.html"><small>Stage 3 &rarr;</small>The harness and tools</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

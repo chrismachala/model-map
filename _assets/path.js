@@ -50,6 +50,43 @@ function close(v,ans,tol){if(!isFinite(v))return false;var t=tol!=null?tol:Math.
    {q: html, fields:[{label, answer, tol} | {label, type:'choice', options:[...], answer:'...'}], expl: html}
    ====================================================================== */
 var G={
+  /* ---- maths-first path generators ---- */
+  /* Gaussian density value */
+  gauss:function(){var mu=ri(-2,6),sd=pick([1,2,0.5]),x=mu+pick([-2,-1,-0.5,0.5,1,1.5,2])*sd;
+    var z=(x-mu)/sd,q=z*z/2,fx=Math.exp(-q)/Math.sqrt(2*Math.PI*sd*sd);
+    return {q:'<p>A Gaussian has mean '+T('\\mu='+mu)+' and standard deviation '+T('\\sigma='+sd)+' (so '+T('\\sigma^2='+f(sd*sd))+'). At '+T('x='+f(x))+' give the exponent term '+T('\\frac{(x-\\mu)^2}{2\\sigma^2}')+' and the density '+T('f(x)')+'.</p>',
+      fields:[{label:'exponent term',answer:q,tol:0.005},{label:T('f(x)'),answer:fx,tol:Math.max(0.002,fx*0.01)}],
+      expl:'<p>'+T('\\frac{('+f(x)+'-'+par(mu)+')^2}{2\\times'+f(sd*sd)+'}='+f(q,4))+'.</p><p>'+T('f(x)=\\frac{1}{\\sqrt{2\\pi\\cdot'+f(sd*sd)+'}}e^{-'+f(q,4)+'}='+f(1/Math.sqrt(2*Math.PI*sd*sd),4)+'\\times'+f(Math.exp(-q),4)+'='+f(fx,4))+'. Note the exponent is a <b>squared distance</b> scaled by the variance.</p>'};
+  },
+  /* L1 / L2 / L-infinity distances */
+  minkowski:function(){var a=[ri(-4,4),ri(-4,4),ri(-4,4)],b=[ri(-4,4),ri(-4,4),ri(-4,4)];if(a.join()===b.join())b[0]+=2;
+    var d=a.map(function(v,i){return Math.abs(v-b[i])}),l1=d.reduce(function(p,c){return p+c},0),l2=Math.sqrt(d.reduce(function(p,c){return p+c*c},0)),li=Math.max.apply(null,d);
+    return {q:'<p>For '+T('x=('+a.join(', ')+')')+' and '+T('y=('+b.join(', ')+')')+' give the Manhattan '+T('(L_1)')+', Euclidean '+T('(L_2)')+' and maximum '+T('(L_\\infty)')+' distances.</p>',
+      fields:[{label:T('L_1'),answer:l1,tol:0.001},{label:T('L_2'),answer:l2,tol:0.01},{label:T('L_\\infty'),answer:li,tol:0.001}],
+      expl:'<p>Coordinate gaps '+T('|x_i-y_i|')+': '+d.join(', ')+'.</p><p>'+T('L_1='+d.join('+')+'='+l1)+'. '+T('L_2=\\sqrt{'+d.map(function(v){return v*v}).join('+')+'}='+f(l2))+'. '+T('L_\\infty=\\max='+li)+'. Always '+T('L_\\infty\\le L_2\\le L_1')+'.</p>'};
+  },
+  /* centroid and SSE about it (K-means update, leaf mean) */
+  centroid:function(){var n=pick([3,4]),P=[];for(var i=0;i<n;i++)P.push([ri(-2,6),ri(-2,6)]);
+    var m=[0,1].map(function(j){return P.reduce(function(s,p){return s+p[j]},0)/n});
+    var sq=P.map(function(p){return (p[0]-m[0])*(p[0]-m[0])+(p[1]-m[1])*(p[1]-m[1])}),sse=sq.reduce(function(a,b){return a+b},0);
+    return {q:'<p>A cluster holds the points '+P.map(function(p){return T('('+p.join(', ')+')')}).join(', ')+'. Give its centroid (mean) and the sum of squared Euclidean distances from the points to the centroid.</p>',
+      fields:[{label:'mean '+T('x_1'),answer:m[0],tol:0.006},{label:'mean '+T('x_2'),answer:m[1],tol:0.006},{label:'SSE',answer:sse,tol:Math.max(0.02,sse*0.01)}],
+      expl:'<p>Centroid: average each coordinate, '+T('\\mu=('+f(m[0])+', '+f(m[1])+')')+'.</p><p>Squared distances '+T('\\|x-\\mu\\|^2')+': '+sq.map(function(v){return f(v)}).join(', ')+'; total '+T(f(sse))+'. No other centre gives a smaller total: <b>the mean minimises squared error</b>.</p>'};
+  },
+  /* variance of an average of B correlated models */
+  avgvar:function(){var s2=pick([1,2,4,9]),rho=pick([0,0.1,0.2,0.3,0.5]),B=pick([5,10,25,100]);var v=rho*s2+(1-rho)*s2/B;
+    return {q:'<p>Each of '+T('B='+B)+' models has prediction variance '+T('\\sigma^2='+s2)+' and any two have correlation '+T('\\rho='+rho)+'. What is the variance of their average? What would it be with '+T('B\\to\\infty')+'?</p>',
+      fields:[{label:'variance',answer:v,tol:Math.max(0.002,v*0.01)},{label:T('B\\to\\infty'),answer:rho*s2,tol:0.002}],
+      expl:'<p>'+T('\\rho\\sigma^2+\\frac{1-\\rho}{B}\\sigma^2='+f(rho*s2)+'+\\frac{'+f(1-rho)+'}{'+B+'}\\times'+s2+'='+f(v,4))+'.</p><p>As '+T('B')+' grows the second term vanishes, leaving '+T('\\rho\\sigma^2='+f(rho*s2))+'. Only lowering '+T('\\rho')+' (random forests) pushes it further down.</p>'};
+  },
+  /* penalised objective: which candidate wins? */
+  penalty:function(){var lam=pick([0.5,1,2,5,10]);var A={rss:ri(10,30),b:[ri(-4,4),ri(-4,4)]},Bc={rss:0,b:[ri(-2,2),ri(-2,2)]};
+    var pa=A.b[0]*A.b[0]+A.b[1]*A.b[1],pb=Bc.b[0]*Bc.b[0]+Bc.b[1]*Bc.b[1];if(pa<=pb){A.b=[A.b[0]+3,A.b[1]];pa=A.b[0]*A.b[0]+A.b[1]*A.b[1]}
+    Bc.rss=A.rss+ri(2,15);var oa=A.rss+lam*pa,ob=Bc.rss+lam*pb;if(Math.abs(oa-ob)<1e-9){Bc.rss+=1;ob+=1}
+    return {q:'<p>Two fitted models: <b>A</b> has RSS '+T(A.rss)+' and coefficients '+T('('+A.b.join(', ')+')')+'; <b>B</b> has RSS '+T(Bc.rss)+' and coefficients '+T('('+Bc.b.join(', ')+')')+'. With the ridge objective '+T('\\mathrm{RSS}+\\lambda\\|\\beta\\|_2^2')+' and '+T('\\lambda='+lam)+', give both objective values and the winner.</p>',
+      fields:[{label:'A',answer:oa,tol:0.01},{label:'B',answer:ob,tol:0.01},{label:'winner',type:'choice',options:['A','B'],answer:oa<ob?'A':'B'}],
+      expl:'<p>'+T('\\|\\beta_A\\|^2='+pa+',\\ \\|\\beta_B\\|^2='+pb)+'.</p><p>A: '+T(A.rss+'+'+lam+'\\times'+pa+'='+f(oa))+'. B: '+T(Bc.rss+'+'+lam+'\\times'+pb+'='+f(ob))+'. The smaller objective wins: <b>'+(oa<ob?'A':'B')+'</b>. Bigger '+T('\\lambda')+' favours small coefficients even at the cost of a worse fit.</p>'};
+  },
   /* KNN classification on a line */
   knn:function(){
     var xs=[];while(xs.length<6){var v=ri(0,12);if(xs.indexOf(v)<0)xs.push(v)}xs.sort(function(a,b){return a-b});
@@ -228,6 +265,81 @@ var G={
   polydf:function(){var d=ri(1,5),pp=pick([1,2]);var n=pp===1?d+1:(d+1)*(d+2)/2;
     return {q:'<p>A polynomial regression of degree '+d+' in '+(pp===1?'one input '+T('X'):'two inputs '+T('X_1,X_2')+' (all monomials of total degree at most '+d+')')+' is written '+T('f(X)=\\lambda\\cdot\\phi(X)')+'. How many parameters (degrees of freedom) does it have, including the intercept?</p>',fields:[{label:'parameters',answer:n,tol:0.01}],
       expl:pp===1?'<p>'+T('\\phi(X)=(1,X,\\dots,X^{'+d+'})')+' has '+(d+1)+' entries, so '+T('\\lambda\\in\\mathbb R^{'+(d+1)+'}')+'.</p>':'<p>Count the monomials '+T('X_1^aX_2^b')+' with '+T('a+b\\le'+d)+': there are '+T('\\binom{'+(d+2)+'}{2}='+n)+'. (Degree 2 gives '+T('1,X_1,X_2,X_1^2,X_1X_2,X_2^2')+': 6.)</p>'};
+  }  ,
+  /* ---------- weeks 5-7 ---------- */
+  /* binomial sign test from a contingency table (week 5 slides 27-35) */
+  signtest:function(){var N=ri(8,14),k=ri(Math.ceil(N/2)+1,N-1),a=ri(60,200),c=ri(5,30);
+    function C(n,r){var v=1;for(var i=1;i<=r;i++)v=v*(n-r+i)/i;return v}
+    var p=0;for(var j=k;j<=N;j++)p+=C(N,j);p/=Math.pow(2,N);var dec=p<=0.05?'reject':'do not reject';
+    var tbl='<table><tr><th></th><th>Alg 1 correct</th><th>Alg 1 wrong</th></tr><tr><th>Alg 0 correct</th><td>'+a+'</td><td>'+(N-k)+'</td></tr><tr><th>Alg 0 wrong</th><td>'+k+'</td><td>'+c+'</td></tr></table>';
+    return {q:'<p>Two classifiers on the same test set:</p>'+tbl+'<p>'+T('H_0')+': Algorithm 1 is not better than Algorithm 0. Compute the one-sided p-value '+T('P(Y\\ge k)')+' with '+T('Y\\sim\\mathrm{Binomial}(N,\\tfrac12)')+', and decide at the 5% level.</p>',
+      fields:[{label:T('N'),answer:N,tol:0.01},{label:T('k'),answer:k,tol:0.01},{label:'p-value',answer:p,tol:Math.max(0.0005,p*0.01)},{label:'at 5%',type:'choice',options:['reject','do not reject'],answer:dec}],
+      expl:'<p>Discard the '+a+' + '+c+' agreements. '+T('N='+(N-k)+'+'+k+'='+N)+' disagreements; Algorithm 1 wins '+T('k='+k)+'.</p><p>'+T('p=\\sum_{j='+k+'}^{'+N+'}\\binom{'+N+'}{j}/2^{'+N+'}')+' = '+f(p,4)+'. '+(p<=0.05?f(p,4)+' ≤ 0.05: <b>reject</b> '+T('H_0')+' at 5%'+(p<=0.01?' (and at 1%)':' (but not at 1%)')+'.':f(p,4)+' > 0.05: <b>cannot reject</b> '+T('H_0')+'.')+'</p>'};
+  },
+  /* probability a point is out of bag */
+  bootprob:function(){var n=pick([2,3,4,5,6,8,10,20,50]),p=Math.pow(1-1/n,n);
+    return {q:'<p>A training set has '+T('n='+n)+' distinct observations. What is the probability that a particular observation is <b>not</b> in a bootstrap sample (and so is out-of-bag for that tree)?</p>',fields:[{label:'probability',answer:p,tol:0.001}],
+      expl:'<p>Each of the '+n+' draws misses it with probability '+T('1-\\tfrac1{'+n+'}')+', independently: '+T('(1-\\tfrac1{'+n+'})^{'+n+'}='+f(p,4))+'. As '+T('n\\to\\infty')+' this tends to '+T('1/e\\approx0.368')+'.</p>'};
+  },
+  /* OOB MSE, 2023 / 2025 style */
+  oob:function(){var n=4,xs=[0,1,2,3].map(function(i){return i*ri(1,3)+ri(0,1)});for(var i=1;i<n;i++)if(xs[i]<=xs[i-1])xs[i]=xs[i-1]+1;
+    var ys=xs.map(function(){return ri(0,10)}),B=5,S=[],P=[],tries=0;
+    do{S=[];for(var b=0;b<B;b++){var s=[];for(var j=0;j<n;j++)s.push(ri(0,n-1));s.sort();S.push(s)}tries++}
+    while(tries<200&&![0,1,2,3].every(function(i){return S.some(function(s){return s.indexOf(i)<0})}));
+    for(var b2=0;b2<B;b2++)P.push(ys.map(function(y){return y+ri(-3,3)}));
+    var oob=[],err=0;for(var i2=0;i2<n;i2++){var ps=[];for(var b3=0;b3<B;b3++)if(S[b3].indexOf(i2)<0)ps.push(P[b3][i2]);var m=ps.reduce(function(a,v){return a+v},0)/ps.length;oob.push({m:m,ps:ps,sets:S.map(function(s,bb){return s.indexOf(i2)<0?bb+1:0}).filter(Boolean)});err+=(ys[i2]-m)*(ys[i2]-m)}
+    var mse=err/n,a=ri(0,3),b4;do{b4=ri(0,3)}while(b4===a);
+    var pt=function(i){return '('+xs[i]+', '+ys[i]+')'};
+    var tbl='<table><tr><th>BTS</th>'+xs.map(function(x){return '<th>'+T('\\hat y('+x+')')+'</th>'}).join('')+'</tr>'+S.map(function(s,bb){return '<tr><td>'+T('\\{'+s.map(function(i){return pt(i)}).join(', ')+'\\}')+'</td>'+P[bb].map(function(v){return '<td>'+v+'</td>'}).join('')+'</tr>'}).join('')+'</table>';
+    return {q:'<p>Data '+T('D=\\{'+xs.map(function(x,i){return pt(i)}).join(', ')+'\\}')+'. Five bootstrapped training sets and their models\' predictions:</p>'+tbl+'<p>Find the OOB predictions at '+T('x='+xs[a])+' and '+T('x='+xs[b4])+', and the OOB MSE over all four points.</p>',
+      fields:[{label:'OOB at '+xs[a],answer:oob[a].m,tol:0.01},{label:'OOB at '+xs[b4],answer:oob[b4].m,tol:0.01},{label:'OOB MSE',answer:mse,tol:0.01}],
+      expl:'<p>'+xs.map(function(x,i){return T('x='+x)+' is missing from BTS '+oob[i].sets.join(', ')+': '+T('('+oob[i].ps.join('+')+')/'+oob[i].ps.length+'='+f(oob[i].m))}).join('<br>')+'</p><p>OOB MSE '+T('=\\tfrac14['+xs.map(function(x,i){return '('+ys[i]+'-'+par(oob[i].m)+')^2'}).join('+')+']='+f(mse))+'. Use only the sets that do <b>not</b> contain the point.</p>'};
+  },
+  /* one boosting step (week 6 slide 33) */
+  boost:function(){var r=[0,0,0,0,0].map(function(){return ri(-3,6)}),t=r.map(function(v){return v+ri(-2,2)}),eta=pick([0.1,0.2,0.5,1]),i=ri(0,4),j;do{j=ri(0,4)}while(j===i);
+    var nr=r.map(function(v,k){return v-eta*t[k]});
+    return {q:'<p>One step of boosting with learning rate '+T('\\eta='+eta)+'. Residuals at the start of the step: '+T('r=('+r.join(', ')+')')+'. The new tree, fitted to them, predicts '+T('('+t.join(', ')+')')+' at the five training points. Give the new residuals '+T('r_'+(i+1))+' and '+T('r_'+(j+1))+', and the amount by which the model\'s prediction '+T('\\hat f(x_'+(i+1)+')')+' changes.</p>',
+      fields:[{label:T('r_'+(i+1)),answer:nr[i],tol:0.001},{label:T('r_'+(j+1)),answer:nr[j],tol:0.001},{label:'change in '+T('\\hat f(x_'+(i+1)+')'),answer:eta*t[i],tol:0.001}],
+      expl:'<p>'+T('r_i:=r_i-\\eta\\hat f^b(x_i)')+': new residuals '+T('('+nr.map(function(v){return f(v)}).join(', ')+')')+'. The model gains '+T('\\eta\\hat f^b(x_'+(i+1)+')='+eta+'\\times'+par(t[i])+'='+f(eta*t[i]))+' at '+T('x_'+(i+1))+', exactly what the residual loses.</p>'};
+  },
+  /* K-means in 1D from a given initial assignment (lecture version) */
+  kmeans1d:function(){var xs=[];while(xs.length<6){var v=ri(0,20);if(xs.indexOf(v)<0)xs.push(v)}xs.sort(function(a,b){return a-b});
+    var lab;do{lab=xs.map(function(){return ri(0,1)})}while(lab.indexOf(0)<0||lab.indexOf(1)<0);var init=lab.slice(),it=0,hist=[];
+    while(it<20){var c=[0,1].map(function(k){var s=0,n=0;xs.forEach(function(x,i){if(lab[i]===k){s+=x;n++}});return n?s/n:null});
+      var nw=xs.map(function(x,i){var o=lab[i],other=1-o;if(c[other]===null)return o;return Math.abs(x-c[other])<Math.abs(x-c[o])-1e-12?other:o});
+      hist.push(c.slice());it++;if(nw.join()===lab.join())break;lab=nw}
+    var J=0;[0,1].forEach(function(k){var pts=xs.filter(function(x,i){return lab[i]===k});if(!pts.length)return;var m=pts.reduce(function(a,v){return a+v},0)/pts.length;pts.forEach(function(x){J+=(x-m)*(x-m)})});
+    var sizeMin=lab.filter(function(l){return l===lab[0]}).length;
+    return {q:'<p>Run K-means ('+T('K=2')+', the lecture algorithm) on '+T(xs.join(',\\ '))+' from the initial clusters '+T('A=\\{'+xs.filter(function(x,i){return init[i]===0}).join(', ')+'\\}')+', '+T('B=\\{'+xs.filter(function(x,i){return init[i]===1}).join(', ')+'\\}')+'. Give the size of the final cluster containing '+xs[0]+' and the final '+T('J_{SSE}')+'.</p>',
+      fields:[{label:'size',answer:sizeMin,tol:0.01},{label:T('J_{SSE}'),answer:J,tol:0.01}],
+      expl:'<p>Centroids by iteration: '+hist.map(function(c,k){return '('+(c[0]===null?'–':f(c[0]))+', '+(c[1]===null?'–':f(c[1]))+')'}).join(' → ')+'. Final clusters '+T('\\{'+xs.filter(function(x,i){return lab[i]===0}).join(', ')+'\\}')+' and '+T('\\{'+xs.filter(function(x,i){return lab[i]===1}).join(', ')+'\\}')+'; '+T('J_{SSE}='+f(J))+' (sum of squared distances to each cluster mean).</p>'};
+  },
+  /* linkages between two small 2D clusters (2023 Q5b, q07 Q19) */
+  linkage:function(){var pts=function(){return [ri(-4,5),ri(-4,5)]},A=[pts(),pts()],B=[pts(),pts(),pts()];
+    var D=[];A.forEach(function(a){B.forEach(function(b){D.push(Math.sqrt((a[0]-b[0])*(a[0]-b[0])+(a[1]-b[1])*(a[1]-b[1])))})});
+    if(Math.min.apply(null,D)===0)return G.linkage();
+    var ca=[(A[0][0]+A[1][0])/2,(A[0][1]+A[1][1])/2],cb=[(B[0][0]+B[1][0]+B[2][0])/3,(B[0][1]+B[1][1]+B[2][1])/3],cen=Math.hypot(ca[0]-cb[0],ca[1]-cb[1]);
+    var s=function(P){return T('\\{'+P.map(function(p){return '('+p.join(',')+')'}).join(',')+'\\}')};
+    return {q:'<p>Clusters '+T('\\omega_1=')+s(A)+' and '+T('\\omega_2=')+s(B)+'. Compute the single, complete, average and centroid linkage (Euclidean). Answers like sqrt(18) are fine.</p>',
+      fields:[{label:'single',answer:Math.min.apply(null,D),tol:0.01},{label:'complete',answer:Math.max.apply(null,D),tol:0.01},{label:'average',answer:D.reduce(function(a,v){return a+v},0)/6,tol:0.01},{label:'centroid',answer:cen,tol:0.01}],
+      expl:'<p>The six cross distances: '+D.map(function(d){return f(d)}).join(', ')+'. Single = smallest, complete = largest, average = their mean '+f(D.reduce(function(a,v){return a+v},0)/6)+'. Centroids '+T('('+f(ca[0])+','+f(ca[1])+')')+' and '+T('('+f(cb[0])+','+f(cb[1])+')')+': distance '+f(cen)+'.</p>'};
+  },
+  /* agglomerative clustering in 1D (q07 Q24, slide 44) */
+  ahc1d:function(){var xs=[];while(xs.length<5){var v=ri(-5,25);if(xs.indexOf(v)<0)xs.push(v)}xs.sort(function(a,b){return a-b});var kind=pick(['single','complete']);
+    var cl=xs.map(function(x){return [x]}),H=[],steps=[];
+    while(cl.length>1){var best=null,tie=false;for(var i=0;i<cl.length;i++)for(var j=i+1;j<cl.length;j++){var ds=[];cl[i].forEach(function(a){cl[j].forEach(function(b){ds.push(Math.abs(a-b))})});var d=kind==='single'?Math.min.apply(null,ds):Math.max.apply(null,ds);
+        if(best===null||d<best.d-1e-9){best={d:d,i:i,j:j};tie=false}else if(Math.abs(d-best.d)<1e-9)tie=true}
+      if(tie)return G.ahc1d();H.push(best.d);steps.push('{'+cl[best.i].join(',')+'} + {'+cl[best.j].join(',')+'} at '+best.d);var m=cl[best.i].concat(cl[best.j]).sort(function(a,b){return a-b});cl=cl.filter(function(c,k){return k!==best.i&&k!==best.j});cl.push(m)}
+    return {q:'<p>Agglomerative clustering with <b>'+kind+'</b> linkage on '+T('\\{'+xs.join(', ')+'\\}')+'. Give the heights of the 2nd, 3rd and 4th (last) merges.</p>',
+      fields:[{label:'2nd',answer:H[1],tol:0.01},{label:'3rd',answer:H[2],tol:0.01},{label:'4th',answer:H[3],tol:0.01}],
+      expl:'<p>Merges: '+steps.join('; ')+'. '+(kind==='single'?'Single linkage: closest pair between clusters.':'Complete linkage: furthest pair between clusters (in 1D, the span of the merged cluster).')+'</p>'};
+  },
+  /* Parzen window / triangular KDE at a point (slides 60-63, q07 Q37, Q41) */
+  parzen:function(){var n=pick([6,8,10]),xs=[];for(var i=0;i<n;i++)xs.push(ri(0,15));xs.sort(function(a,b){return a-b});var h=pick([2,3,4]),kern=pick(['Parzen window','Parzen window','triangular']),x0=ri(xs[1],xs[n-2])+pick([0,0.5]);
+    var K=function(u){return kern==='triangular'?Math.max(0,1-Math.abs(u)):(Math.abs(u)<=0.5+1e-12?1:0)},ks=xs.map(function(x){return K((x0-x)/h)}),s=ks.reduce(function(a,v){return a+v},0),fx=s/(n*h);
+    return {q:'<p>Data '+T('\\{'+xs.join(', ')+'\\}')+' ('+T('n='+n)+'). Estimate the density at '+T('x='+x0)+' with bandwidth '+T('h='+h)+' and the '+(kern==='triangular'?'triangular kernel '+T('K(u)=\\max(0,1-|u|)'):'Parzen window '+T('K(u)=1')+' if '+T('|u|\\le\\tfrac12'))+': '+T('f(x)=\\frac1{nh}\\sum_iK\\big(\\frac{x-x_i}h\\big)')+'.</p>',
+      fields:[{label:T('f('+x0+')'),answer:fx,tol:0.0005}],
+      expl:'<p>Kernel values: '+ks.map(function(k){return f(k)}).join(', ')+'; sum '+f(s)+'. '+T('f='+f(s)+'/('+n+'\\times'+h+')='+f(fx,4))+'.'+(kern==='triangular'?'':' (Count the points within '+T('h/2='+h/2)+' of '+x0+', edges included.)')+'</p>'};
   }
 };
 function olsData(){var n=pick([4,5]),xs=[0,1,2,3,4,5,6].slice(0,7);shuffle(xs);xs=xs.slice(0,n).sort(function(a,b){return a-b});

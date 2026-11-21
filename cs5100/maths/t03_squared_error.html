@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Squared error: MSE, RSS, SSE and friends · CS5100 Maths-first path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 25, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 35, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 40, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t03_squared_error", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths_t03_squared_error" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a class="active" aria-current="page" href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>22. Final: spot the shared maths<span class="pstat" data-i="21"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 3 of 22</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 35 min</span></div>
+  <h1>Squared error: MSE, RSS, SSE and friends</h1>
+  <p class="tagline">Take each error, square it, add them up. The course gives this sum at least seven names (RSS, MSE, TSS, SSE, RSS(T), the NN loss, the bias-variance decomposition), but it is one formula. Learn it once, plus one fact: the mean is the number that makes it smallest.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 2.2.1 (MSE), 3.1.1 to 3.1.3 (RSS, TSS, <span class="math inline">\(R^2\)</span>, RSE), 2.2.2 (the bias-variance trade-off, eq. 2.7). <strong>Skip</strong> in 3.1.2 the standard errors, confidence intervals, t-statistics and p-values: the course doesn’t test them. The decomposition is in the week 5 slides (I. Rungger) with the course’s notation.</p>
+</div>
+<h2 id="one-formula-many-names">1. One formula, many names</h2>
+<p>For true values <span class="math inline">\(y_i\)</span> and predictions <span class="math inline">\(\hat y_i\)</span>, the <strong>residual</strong> is <span class="math inline">\(e_i = y_i - \hat y_i\)</span> and</p>
+<p><span class="math display">\[\boxed{\text{RSS} = \sum_{i=1}^{n}(y_i - \hat y_i)^2, \qquad \text{MSE} = \frac1n\,\text{RSS}}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>What it is</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MSE</td>
+<td>RSS divided by <span class="math inline">\(n\)</span></td>
+<td>w1 accuracy, test MSE everywhere</td>
+</tr>
+<tr class="even">
+<td>RSS</td>
+<td>the sum itself</td>
+<td>linear regression (w2)</td>
+</tr>
+<tr class="odd">
+<td>TSS</td>
+<td>RSS of the “always predict <span class="math inline">\(\bar y\)</span>” model: <span class="math inline">\(\sum(y_i - \bar y)^2\)</span></td>
+<td><span class="math inline">\(R^2 = 1 - \text{RSS}/\text{TSS}\)</span> (w2)</td>
+</tr>
+<tr class="even">
+<td>RSE</td>
+<td><span class="math inline">\(\sqrt{\text{RSS}/(n - p - 1)}\)</span></td>
+<td>w2</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\text{RSS}(T)\)</span></td>
+<td>RSS added over the leaves of a tree</td>
+<td>regression trees (w4)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(R(\theta)\)</span></td>
+<td>the NN regression objective</td>
+<td>neural networks (w4)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(J_{SSE}\)</span></td>
+<td><span class="math inline">\(\sum_j\sum_{x\in\omega_j}\|x - \mu_j\|^2\)</span></td>
+<td>K-means (w7)</td>
+</tr>
+</tbody>
+</table>
+<p>The K-means version uses vectors, but <span class="math inline">\(\|x - \mu\|^2 = \sum_d(x_d - \mu_d)^2\)</span> is still a sum of squared gaps (Toolkit 1).</p>
+<div class="q" kind="gen" data-gen="mse">
+
+</div>
+<h2 id="why-squares">2. Why squares?</h2>
+<p>Squaring makes every error positive (so overshoots and undershoots don’t cancel), punishes big errors far more than small ones, and is smooth, so you can differentiate it (Toolkit 4). It also has a probability story: least squares is exactly maximum likelihood when the noise is Gaussian (Toolkits 7 and 9).</p>
+<h2 id="the-mean-minimises-squared-error">3. The mean minimises squared error</h2>
+<p><strong>Fact.</strong> For numbers <span class="math inline">\(y_1, \dots, y_n\)</span>, the constant <span class="math inline">\(c\)</span> that minimises <span class="math inline">\(\sum_i(y_i - c)^2\)</span> is <span class="math inline">\(c = \bar y\)</span>.</p>
+<p><strong>Proof.</strong> Differentiate: <span class="math inline">\(\frac{d}{dc}\sum(y_i - c)^2 = -2\sum(y_i - c) = -2(n\bar y - nc)\)</span>. This is zero when <span class="math inline">\(c = \bar y\)</span>, and the second derivative <span class="math inline">\(2n &gt; 0\)</span> says it’s a minimum.</p>
+<p>This one fact explains a lot:</p>
+<ul>
+<li>A <strong>regression tree</strong> predicts the <strong>mean</strong> of each leaf, because that minimises the leaf’s RSS (w4).</li>
+<li><strong>K-means</strong> moves each centre to the <strong>mean</strong> of its points, because that minimises the SSE (w7).</li>
+<li><strong>TSS</strong> is the RSS of the best constant model, which is why <span class="math inline">\(R^2\)</span> compares against it (w2).</li>
+<li><strong>Linear regression’s</strong> intercept makes the residuals sum to zero for the same reason.</li>
+</ul>
+<div class="example">
+<p><strong>Worked example.</strong> Leaf responses <span class="math inline">\(2, 4, 9\)</span>. Mean <span class="math inline">\(5\)</span>: RSS <span class="math inline">\(= 9 + 1 + 16 = 26\)</span>. Try the median <span class="math inline">\(4\)</span> instead: <span class="math inline">\(4 + 0 + 25 = 29\)</span>. Bigger, as promised.</p>
+</div>
+<div class="q" kind="num" data-answer="26" label="RSS at the mean">
+<p>A tree leaf contains <span class="math inline">\(y = 1, 3, 4, 8\)</span>. What is the smallest RSS any single prediction for this leaf can achieve?</p>
+<div class="expl">
+<p>Predict the mean, <span class="math inline">\((1 + 3 + 4 + 8)/4 = 4\)</span>. RSS <span class="math inline">\(= (1 - 4)^2 + (3 - 4)^2 + (4 - 4)^2 + (8 - 4)^2 = 9 + 1 + 0 + 16 = 26\)</span>.</p>
+</div>
+</div>
+<h2 id="rss-tss-and-r2">4. RSS, TSS and <span class="math inline">\(R^2\)</span></h2>
+<p><span class="math inline">\(R^2 = 1 - \text{RSS}/\text{TSS}\)</span> says what fraction of the spread in <span class="math inline">\(y\)</span> the model explains. 0 means no better than predicting <span class="math inline">\(\bar y\)</span>; 1 means a perfect fit on these points.</p>
+<div class="q" kind="gen" data-gen="rsq">
+
+</div>
+<h2 id="the-bias-variance-decomposition">5. The bias-variance decomposition</h2>
+<p>The week 5 result: for a fixed input <span class="math inline">\(x_0\)</span>, averaging over training sets,</p>
+<p><span class="math display">\[\mathbb E\big(\hat f(x_0) - Y\big)^2 = \underbrace{\big(\mathbb E\hat f(x_0) - f(x_0)\big)^2}_{\text{bias}^2} + \underbrace{\mathrm{Var}\,\hat f(x_0)}_{\text{variance}} + \underbrace{\sigma^2}_{\text{noise}}.\]</span></p>
+<p>It is a statement about <strong>expected squared error</strong>, so it only exists because the course measures error with squares. It’s the reason the test-error curve is U-shaped and why every model has a flexibility knob (Toolkit 5).</p>
+<div class="example">
+<p><strong>Worked example.</strong> Over many training sets a model’s predictions at <span class="math inline">\(x_0\)</span> are <span class="math inline">\(4, 6, 5, 5\)</span>, the true <span class="math inline">\(f(x_0) = 6\)</span> and <span class="math inline">\(\sigma^2 = 1\)</span>. Average prediction <span class="math inline">\(5\)</span>, so bias<span class="math inline">\(^2 = (5 - 6)^2 = 1\)</span>; variance <span class="math inline">\(= \frac14(1 + 1 + 0 + 0) = 0.5\)</span>; expected test MSE <span class="math inline">\(= 1 + 0.5 + 1 = 2.5\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="3.25" label="expected test MSE">
+<p>At <span class="math inline">\(x_0\)</span>, a model’s predictions over training sets are <span class="math inline">\(2, 4, 3, 3\)</span>. The truth is <span class="math inline">\(f(x_0) = 4.5\)</span> and the noise variance is <span class="math inline">\(\sigma^2 = 0.5\)</span>. Compute bias² + variance + noise.</p>
+<div class="expl">
+<p>Mean prediction <span class="math inline">\(3\)</span>. Bias<span class="math inline">\(^2 = (3 - 4.5)^2 = 2.25\)</span>. Variance <span class="math inline">\(= \frac14(1 + 1 + 0 + 0) = 0.5\)</span>. Total <span class="math inline">\(2.25 + 0.5 + 0.5 = 3.25\)</span>.</p>
+</div>
+</div>
+<h2 id="where-this-comes-back">Where this comes back</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Page</th>
+<th>How it shows up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><a href="../w1/00_Start_Here_The_Big_Picture.html">Big picture</a></td>
+<td>MSE, test vs training MSE</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><a href="../w2/Linear_Regression.html">Linear regression</a></td>
+<td>minimise RSS; TSS, <span class="math inline">\(R^2\)</span>, RSE</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><a href="../w2/Polynomial_and_Step_Regression.html">Polynomial regression</a>, <a href="../w2/Ridge_Regression.html">ridge</a></td>
+<td>RSS on new columns; RSS + penalty</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><a href="../w4/Regression_Trees.html">Regression trees</a></td>
+<td>choose the split with the smallest <span class="math inline">\(\text{RSS}(T)\)</span>; predict leaf means</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><a href="../w4/Tree_Pruning.html">Pruning</a></td>
+<td><span class="math inline">\(\text{RSS}(T) + \alpha\lvert T\rvert\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><a href="../w4/Neural_Network.html">Neural network</a></td>
+<td>regression objective <span class="math inline">\(\sum(y_i - f(x_i))^2\)</span></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><a href="../w5/Bias_Variance.html">Bias and variance</a></td>
+<td>the three-part decomposition</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><a href="../w6/Boosting.html">Boosting</a></td>
+<td>residuals <span class="math inline">\(r_i = y_i - \hat f(x_i)\)</span>, each tree fitted to them by least squares</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><a href="../w7/K_Means.html">K-means</a></td>
+<td><span class="math inline">\(J_{SSE}\)</span> and the mean as best centre</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="mse">
+
+</div>
+<div class="q" kind="gen" data-gen="rsq">
+
+</div>
+<div class="q" kind="num" data-answer="2" label="best constant">
+<p>Which single number <span class="math inline">\(c\)</span> minimises <span class="math inline">\((1 - c)^2 + (2 - c)^2 + (3 - c)^2\)</span>?</p>
+<div class="expl">
+<p>The mean of <span class="math inline">\(1, 2, 3\)</span>, which is <span class="math inline">\(2\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>(3 marks, exam format 2; 2024 Q1.)</strong> Write the formula for the RSS of a linear regression model <span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span> on data <span class="math inline">\(\{(x_i, y_i)\}_{i=1}^n\)</span>, and say what is done with it.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\text{RSS}(\lambda) = \sum_{i=1}^n\big(y_i - \lambda_0 - \lambda_1x_i\big)^2\)</span>, with every symbol explained.</label></li>
+<li><label><input type="checkbox" checked="" />The parameters are chosen to minimise it (least squares), by setting the derivatives to zero or by gradient descent.</label></li>
+<li><label><input type="checkbox" checked="" />Mentions that it measures fit on the training data only, so a low RSS doesn’t guarantee a low test error.</label></li>
+</ul>
+<div class="model">
+<p><span class="math inline">\(\text{RSS}(\lambda_0, \lambda_1) = \sum_{i=1}^{n}\big(y_i - (\lambda_0 + \lambda_1x_i)\big)^2\)</span>: the sum, over training points, of the squared differences between the observed <span class="math inline">\(y_i\)</span> and the model’s prediction. Least squares picks the <span class="math inline">\(\lambda\)</span> that minimises it, either in closed form (set both partial derivatives to zero) or by gradient descent. It measures training fit only; a flexible model can make it small while the test error is large.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why does a regression tree predict the <strong>mean</strong> of the responses in each leaf?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Because the mean is robust to outliers.</label></li>
+<li><label><input type="checkbox" checked="" />Because the mean minimises the leaf’s sum of squared errors, and trees are grown to minimise RSS.</label></li>
+<li><label><input type="checkbox" />Because ISLP says so.</label></li>
+<li><label><input type="checkbox" />Because the median can’t be computed for real numbers.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(\frac{d}{dc}\sum(y_i - c)^2 = 0\)</span> gives <span class="math inline">\(c = \bar y\)</span>. The same reason makes K-means use means.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t02_averages_votes.html"><small>&larr; Stage 2</small>Averages, indicators and votes</a><a class="next" href="t04_gradient_descent.html"><small>Stage 4 &rarr;</small>Derivatives and gradient descent</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

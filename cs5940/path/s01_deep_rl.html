@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep reinforcement learning · CS5940 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5940", "stages": [{"id": "s01_deep_rl", "title": "Deep RL", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 25, "blurb": "Tables to networks, the DQN target, replay vs target network, actor\u2013critic, AlphaZero.", "href": "s01_deep_rl.html"}, {"id": "s02_llms", "title": "LLMs", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 30, "blurb": "Next-token prediction, temperature, SFT / RLHF / RLVR / DPO, what changes the weights.", "href": "s02_llms.html"}, {"id": "s03_harness_tools", "title": "The harness and tools", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Workflow vs agent, the formal loop, validation, where \u201cdo not book\u201d lives, tools vs skills.", "href": "s03_harness_tools.html"}, {"id": "s04_context_orchestration", "title": "Context, memory and orchestration", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Context budget, RAG, keyword vs vector, current facts, memory types, cheapest architecture.", "href": "s04_context_orchestration.html"}, {"id": "s05_game_theory", "title": "Game theory", "group": "Week 7 \u00b7 Multi-agent interaction", "mins": 35, "blurb": "Dominant strategies, Nash, mixed, Pareto, welfare; the prisoner\u2019s dilemma and its fixes.", "href": "s05_game_theory.html"}, {"id": "s06_rl_refresher", "title": "Week 4 refresher", "group": "Week 4 \u00b7 Refresher", "mins": 20, "blurb": "MDPs, returns, value iteration vs Q-learning, \u03b5-greedy, POMDPs, reward hacking.", "href": "s06_rl_refresher.html"}, {"id": "s07_mock_quiz2", "title": "Mock Quiz 2", "group": "Mock quiz", "mins": 30, "blurb": "Fifteen Quiz 1-style questions drawn from weeks 4 to 7. Pass 70%.", "href": "s07_mock_quiz2.html"}], "stage": "s01_deep_rl", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5940_path_s01_deep_rl" data-module="cs5940" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a class="active" aria-current="page" href="s01_deep_rl.html"><span class="dot path"></span>1. Deep RL<span class="pstat" data-i="0"></span></a>
+<a href="s02_llms.html"><span class="dot path"></span>2. LLMs<span class="pstat" data-i="1"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="s03_harness_tools.html"><span class="dot path"></span>3. The harness and tools<span class="pstat" data-i="2"></span></a>
+<a href="s04_context_orchestration.html"><span class="dot path"></span>4. Context, memory and orchestration<span class="pstat" data-i="3"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="s05_game_theory.html"><span class="dot path"></span>5. Game theory<span class="pstat" data-i="4"></span></a>
+<h4>Week 4 · Refresher</h4>
+<a href="s06_rl_refresher.html"><span class="dot path"></span>6. Week 4 refresher<span class="pstat" data-i="5"></span></a>
+<h4>Mock quiz</h4>
+<a href="s07_mock_quiz2.html"><span class="dot path"></span>7. Mock Quiz 2<span class="pstat" data-i="6"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 1 of 7</span><span class="chip">Week 5 · Deep RL and LLMs</span><span class="chip">about 25 min</span></div>
+  <h1>Deep reinforcement learning</h1>
+  <p class="tagline">Week 5 Part A in quiz form: why tables fail, what DQN learns, the two stabilising tricks, and the vocabulary (value vs policy, actor–critic, model-free vs model-based) that quiz distractors are built from.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>Full notes: <a href="../w5/Deep_RL.html">Deep reinforcement learning</a>.</p>
+<h2 id="from-tables-to-networks">1. From tables to networks</h2>
+<p>A Q-table stores one number per (state, action) and learns nothing about states it hasn’t visited. With pixel observations the table is impossibly large and there’s <strong>no reuse</strong> between similar states. Deep RL replaces the lookup with <span class="math inline">\(Q_\theta(s, a)\)</span>: a network whose shared weights give estimates for <strong>unseen</strong> states too. That’s generalisation, which is <strong>not</strong> a guarantee of correctness.</p>
+<p>DQN feeds the network <strong>four recent frames</strong> because one frame can’t show which way the ball is moving: a single observation needn’t reveal the full state (partial observability).</p>
+<div class="q" kind="mcq">
+<p>Why does DQN use the four most recent frames as its input, rather than one?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Four frames make the network train four times faster.</label></li>
+<li><label><input type="checkbox" checked="" />A single frame can’t show motion, so one observation doesn’t reveal the full state.</label></li>
+<li><label><input type="checkbox" />The Atari console only outputs every fourth frame.</label></li>
+<li><label><input type="checkbox" />Four frames act as a model of the game’s physics.</label></li>
+</ul>
+<div class="expl">
+<p>Same pixels, ball moving left or right: different underlying states. A short history helps infer motion (partial observability from week 4). It isn’t a physics model: DQN is model-free.</p>
+</div>
+</div>
+<h2 id="the-dqn-target">2. The DQN target</h2>
+<p><span class="math display">\[y = \begin{cases} r &amp; \text{episode ends} \\ r + \gamma \max_{a&#39;} Q_{\theta^-}(s&#39;, a&#39;) &amp; \text{otherwise}\end{cases} \qquad L(\theta) \approx \tfrac{1}{N}\textstyle\sum (y_i - Q_\theta(s_i, a_i))^2\]</span></p>
+<p>Reward now plus discounted best value later, computed with the <strong>frozen target network</strong> <span class="math inline">\(\theta^-\)</span>; the online network <span class="math inline">\(\theta\)</span> is trained to predict it.</p>
+<div class="q" kind="num" data-answer="5.5">
+<p><span class="math inline">\(\gamma = 0.9\)</span>. A replayed transition has reward <span class="math inline">\(r = 1\)</span> and does not end the episode. The target network gives <span class="math inline">\(Q_{\theta^-}(s&#39;, \cdot) = (2, 5, 3)\)</span>. What is the DQN target <span class="math inline">\(y\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(y = 1 + 0.9 \times \max(2, 5, 3) = 1 + 4.5 = 5.5\)</span>.</p>
+</div>
+</div>
+<h2 id="replay-and-the-target-network">3. Replay and the target network</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>consecutive frames are highly <strong>correlated</strong></td>
+<td><strong>experience replay</strong>: store <span class="math inline">\((s, a, r, s&#39;, \text{done})\)</span>, train on <strong>random mini-batches</strong></td>
+</tr>
+<tr class="even">
+<td>the network moves its own targets (<strong>moving targets</strong>)</td>
+<td><strong>target network</strong> <span class="math inline">\(Q_{\theta^-}\)</span>: frozen copy for targets, refreshed periodically</td>
+</tr>
+</tbody>
+</table>
+<p>Both improve stability; <strong>neither guarantees convergence</strong>.</p>
+<div class="q" kind="mcq">
+<p>Poll 1 from the lecture: why does DQN compute its learning targets with a separate network <span class="math inline">\(Q_{\theta^-}\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />To reduce correlation between consecutive frames.</label></li>
+<li><label><input type="checkbox" checked="" />To stop the targets shifting every time the online weights change.</label></li>
+<li><label><input type="checkbox" />To provide a model of the game’s dynamics for planning.</label></li>
+<li><label><input type="checkbox" />To guarantee convergence to the optimal <span class="math inline">\(Q^*\)</span>.</label></li>
+</ul>
+<div class="expl">
+<ol type="A">
+<li>is replay’s job; (C) is wrong, DQN is model-free; (D) nothing guarantees convergence.</li>
+</ol>
+</div>
+</div>
+<h2 id="value-policy-actorcritic-model-based">4. Value, policy, actor–critic, model-based</h2>
+<ul>
+<li><strong>Value-based</strong> (DQN): learn <span class="math inline">\(Q_\theta(s, a)\)</span>, act by argmax. Suits small discrete action sets.</li>
+<li><strong>Policy-based</strong>: learn <span class="math inline">\(\pi_\theta(a \mid s)\)</span>, sample actions. Suits stochastic policies and <strong>continuous</strong> control.</li>
+<li><strong>Actor–critic</strong>: actor = policy that acts; critic = value estimate <span class="math inline">\(V_w(s)\)</span> that <strong>helps train</strong> the actor. The critic isn’t needed at deployment.</li>
+<li><strong>Model-free</strong> learns values/policies directly; <strong>model-based</strong> plans with known (AlphaZero: the game rules) or learned (MuZero) dynamics. AlphaGo used human games + self-play + MCTS; AlphaZero dropped the human games.</li>
+</ul>
+<div class="q" kind="mcq">
+<p>In an actor–critic method, what is the critic for?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It chooses the agent’s actions at deployment.</label></li>
+<li><label><input type="checkbox" checked="" />It estimates values that are used to train the actor.</label></li>
+<li><label><input type="checkbox" />It stores past transitions for replay.</label></li>
+<li><label><input type="checkbox" />It models the environment’s transition function.</label></li>
+</ul>
+<div class="expl">
+<p>Actor acts; critic estimates <span class="math inline">\(V_w(s)\)</span> as a training aid. Replay buffers and transition models are other things.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80" data-draw="8">
+<div class="q" kind="mcq">
+<p>A robot must learn to control the continuous torque on each of its six joints. Which approach fits best?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A Q-table with one row per joint angle</label></li>
+<li><label><input type="checkbox" />DQN taking the argmax over every possible torque</label></li>
+<li><label><input type="checkbox" checked="" />A policy-based method that outputs a continuous action distribution</label></li>
+<li><label><input type="checkbox" />Value iteration with a known transition model</label></li>
+</ul>
+<div class="expl">
+<p>Continuous actions: you can’t argmax over infinitely many torques, and a table can’t cover continuous states. Policy-based methods output a distribution over continuous actions. Value iteration needs a known model.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which statement about function approximation <span class="math inline">\(Q_\theta(s, a)\)</span> is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It guarantees correct values for states never seen in training.</label></li>
+<li><label><input type="checkbox" checked="" />It lets experience in some states change estimates for many similar, unseen states.</label></li>
+<li><label><input type="checkbox" />It removes the need for a reward signal.</label></li>
+<li><label><input type="checkbox" />It stores one parameter for each state–action pair.</label></li>
+</ul>
+<div class="expl">
+<p>Shared weights generalise, but generalisation is not correctness. One parameter per pair would just be a table.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>DQN stores transitions in a buffer and trains on random mini-batches drawn from it. Which problem does this mainly address?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Highly correlated consecutive samples</label></li>
+<li><label><input type="checkbox" />Targets that move whenever the weights change</label></li>
+<li><label><input type="checkbox" />The lack of a model of the game</label></li>
+<li><label><input type="checkbox" />Partial observability of single frames</label></li>
+</ul>
+<div class="expl">
+<p>That’s experience replay, the fix for correlated samples. Moving targets → target network; partial observability → frame stacking.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="1">
+<p><span class="math inline">\(\gamma = 0.9\)</span>. A transition has <span class="math inline">\(r = 1\)</span> and <strong>ends the episode</strong>. The target network gives <span class="math inline">\(Q_{\theta^-}(s&#39;, \cdot) = (2, 5, 3)\)</span>. What is the DQN target?</p>
+<div class="expl">
+<p>At the end of an episode the target is just the reward: <span class="math inline">\(y = 1\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2.25">
+<p>Continuing: the target is <span class="math inline">\(y = 5.5\)</span> and the online network predicts <span class="math inline">\(Q_\theta(s, a) = 4\)</span>. What is this sample’s squared error <span class="math inline">\((y - Q_\theta(s,a))^2\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\((5.5 - 4)^2 = 1.5^2 = 2.25\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>AlphaZero plays Go by combining a learned policy and value with Monte Carlo tree search over the game’s rules. How is it best classified?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Model-free: it learns only from self-play</label></li>
+<li><label><input type="checkbox" checked="" />Model-based: it plans using a given model (the rules)</label></li>
+<li><label><input type="checkbox" />Model-based: it plans using a model learned from human games</label></li>
+<li><label><input type="checkbox" />Not RL: it uses supervised learning on expert games only</label></li>
+</ul>
+<div class="expl">
+<p>The rules are a known model used for search: model-based. AlphaZero used <strong>no</strong> human games (that was AlphaGo); MuZero learns its model.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Select <strong>all</strong> the failure modes of deep RL named on the slides.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Poor sample efficiency</label></li>
+<li><label><input type="checkbox" checked="" />Training instability</label></li>
+<li><label><input type="checkbox" checked="" />Reward misspecification</label></li>
+<li><label><input type="checkbox" checked="" />Poor generalisation to new circumstances</label></li>
+<li><label><input type="checkbox" />Guaranteed divergence whenever a neural network is used</label></li>
+</ul>
+<div class="expl">
+<p>The slide lists sample efficiency, instability, reward misspecification, generalisation and (for model-based) model error. Instability is a risk, not a guarantee.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>In multi-agent hide and seek, both teams learn at the same time. Why is this different from a single-agent MDP?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The rewards are not numbers.</label></li>
+<li><label><input type="checkbox" checked="" />The other agents’ learning changes the effective environment, so the transition law isn’t fixed.</label></li>
+<li><label><input type="checkbox" />There is no state.</label></li>
+<li><label><input type="checkbox" />The agents can’t use neural networks.</label></li>
+</ul>
+<div class="expl">
+<p>From each agent’s point of view, the others are part of the environment, and they keep changing their behaviour. That’s the bridge to game theory in week 7.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which pairing is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />AlphaGo: self-play only, no human data</label></li>
+<li><label><input type="checkbox" checked="" />AlphaGo: human expert games + self-play RL + search</label></li>
+<li><label><input type="checkbox" />AlphaZero: human expert games + search, no RL</label></li>
+<li><label><input type="checkbox" />MuZero: plays using the known game rules</label></li>
+</ul>
+<div class="expl">
+<p>AlphaGo (2016) used human games, self-play and search; AlphaZero (2018) dropped human games; MuZero learns a model instead of being given the rules.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What do the critic and actor need at <strong>deployment</strong> (after training) in a typical actor–critic agent?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Only the actor is needed to choose actions.</label></li>
+<li><label><input type="checkbox" />Only the critic is needed to choose actions.</label></li>
+<li><label><input type="checkbox" />Both are always needed.</label></li>
+<li><label><input type="checkbox" />Neither: a Q-table replaces them.</label></li>
+</ul>
+<div class="expl">
+<p>The critic is primarily a training aid (slide 20); the actor can act alone.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="index.html"><small>&larr; Back to</small>Path overview</a><a class="next" href="s02_llms.html"><small>Stage 2 &rarr;</small>LLMs</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

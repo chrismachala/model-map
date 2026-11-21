@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The agent loop, the harness, tools and skills · CS5940 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5940", "stages": [{"id": "s01_deep_rl", "title": "Deep RL", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 25, "blurb": "Tables to networks, the DQN target, replay vs target network, actor\u2013critic, AlphaZero.", "href": "s01_deep_rl.html"}, {"id": "s02_llms", "title": "LLMs", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 30, "blurb": "Next-token prediction, temperature, SFT / RLHF / RLVR / DPO, what changes the weights.", "href": "s02_llms.html"}, {"id": "s03_harness_tools", "title": "The harness and tools", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Workflow vs agent, the formal loop, validation, where \u201cdo not book\u201d lives, tools vs skills.", "href": "s03_harness_tools.html"}, {"id": "s04_context_orchestration", "title": "Context, memory and orchestration", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Context budget, RAG, keyword vs vector, current facts, memory types, cheapest architecture.", "href": "s04_context_orchestration.html"}, {"id": "s05_game_theory", "title": "Game theory", "group": "Week 7 \u00b7 Multi-agent interaction", "mins": 35, "blurb": "Dominant strategies, Nash, mixed, Pareto, welfare; the prisoner\u2019s dilemma and its fixes.", "href": "s05_game_theory.html"}, {"id": "s06_rl_refresher", "title": "Week 4 refresher", "group": "Week 4 \u00b7 Refresher", "mins": 20, "blurb": "MDPs, returns, value iteration vs Q-learning, \u03b5-greedy, POMDPs, reward hacking.", "href": "s06_rl_refresher.html"}, {"id": "s07_mock_quiz2", "title": "Mock Quiz 2", "group": "Mock quiz", "mins": 30, "blurb": "Fifteen Quiz 1-style questions drawn from weeks 4 to 7. Pass 70%.", "href": "s07_mock_quiz2.html"}], "stage": "s03_harness_tools", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5940_path_s03_harness_tools" data-module="cs5940" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="s01_deep_rl.html"><span class="dot path"></span>1. Deep RL<span class="pstat" data-i="0"></span></a>
+<a href="s02_llms.html"><span class="dot path"></span>2. LLMs<span class="pstat" data-i="1"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a class="active" aria-current="page" href="s03_harness_tools.html"><span class="dot path"></span>3. The harness and tools<span class="pstat" data-i="2"></span></a>
+<a href="s04_context_orchestration.html"><span class="dot path"></span>4. Context, memory and orchestration<span class="pstat" data-i="3"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="s05_game_theory.html"><span class="dot path"></span>5. Game theory<span class="pstat" data-i="4"></span></a>
+<h4>Week 4 · Refresher</h4>
+<a href="s06_rl_refresher.html"><span class="dot path"></span>6. Week 4 refresher<span class="pstat" data-i="5"></span></a>
+<h4>Mock quiz</h4>
+<a href="s07_mock_quiz2.html"><span class="dot path"></span>7. Mock Quiz 2<span class="pstat" data-i="6"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 3 of 7</span><span class="chip">Week 6 · LLM-based agents</span><span class="chip">about 30 min</span></div>
+  <h1>The agent loop, the harness, tools and skills</h1>
+  <p class="tagline">Week 6 first half, around the airline clerk: workflow or agent, what the harness does at each step, where a rule like "do not book" should live, how tool calls work, and tools vs skills.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>Full notes: <a href="../w6/LLM_Agent_Harness.html">LLM agents: the loop and the harness</a> and <a href="../w6/Tools_and_Skills.html">Tools and skills</a>.</p>
+<h2 id="workflow-or-agent">1. Workflow or agent?</h2>
+<p>The deciding question is <strong>control: does the model’s output choose the next step?</strong> A program with fixed steps is a <strong>workflow</strong>, even if it calls an LLM, uses tools or retrieval. An <strong>agent</strong> picks its next step from what it just observed (and the runtime still validates and limits it).</p>
+<div class="q" kind="mcq">
+<p>A documentation chatbot runs exactly one search of the manual for every question, then makes one LLM call to answer. How should it be classed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />An agent, because it uses a tool.</label></li>
+<li><label><input type="checkbox" />An agent, because an LLM generates the answer.</label></li>
+<li><label><input type="checkbox" checked="" />A workflow, because the program fixes the path.</label></li>
+<li><label><input type="checkbox" />Neither, because it has no memory.</label></li>
+</ul>
+<div class="expl">
+<p>Slide 9, system B. Retrieval doesn’t make it an agent; the model never chooses the next step.</p>
+</div>
+</div>
+<h2 id="what-the-harness-does">2. What the harness does</h2>
+<p><span class="math inline">\(c_t = \text{BuildContext}(m_t, g, T, K_t)\)</span>; <span class="math inline">\(u_t \sim p_\theta(\cdot \mid c_t)\)</span>; <span class="math inline">\(a_t = \text{InterpretAndValidate}(u_t)\)</span>; <span class="math inline">\(o_{t+1} = \text{Execute}(a_t)\)</span>; <span class="math inline">\(m_{t+1} = \text{UpdateState}(\dots)\)</span>. <strong>Only <span class="math inline">\(p_\theta\)</span> is learned.</strong></p>
+<p>Output types: <strong>final answer</strong> → stop; <strong>question</strong> → ask the user and wait; <strong>tool request</strong> → validate (known? valid args? permitted?) → execute, or reject. <strong>Errors and rejections are observations</strong>, fed back into the context. The <strong>runtime owns validation, permissions, limits and termination</strong>.</p>
+<div class="q" kind="mcq">
+<p>The model requests <code>search_flights(date="18/04")</code> but the tool requires YYYY-MM-DD. What should a well-built harness do?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Silently drop the request and call the model again with the same context.</label></li>
+<li><label><input type="checkbox" />Execute it anyway and let the airline system crash.</label></li>
+<li><label><input type="checkbox" checked="" />Reject it and put the error message (ideally with a valid example) into the next context.</label></li>
+<li><label><input type="checkbox" />Stop the run immediately and report success.</label></li>
+</ul>
+<div class="expl">
+<p>Errors are observations. Run 2 of the autopsy also shows the harness should notice repeated identical failures.</p>
+</div>
+</div>
+<h2 id="where-should-do-not-book-live">3. Where should “do not book” live?</h2>
+<p>System prompt, skill, tool description: all <strong>advisory</strong> (the model must read and obey). <strong>Harness</strong> (a validation rule, or simply <strong>not exposing</strong> <code>book_flight</code>): <strong>enforced regardless of what the model generates</strong>.</p>
+<p>A model knows a tool <strong>only from its description in the context</strong>, so tool names and descriptions are prompt engineering. A safe write tool binds to a checked quote (<code>quote_id</code>), needs an <code>approval_token</code>, and an <code>idempotency_key</code> so a retry never books twice.</p>
+<div class="q" kind="mcq">
+<p>Which placement of the rule “never book without approval” gives the strongest guarantee?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />In the system prompt</label></li>
+<li><label><input type="checkbox" />In the flight-comparison skill’s instructions</label></li>
+<li><label><input type="checkbox" />In the <code>book_flight</code> tool description</label></li>
+<li><label><input type="checkbox" checked="" />In the harness: don’t expose <code>book_flight</code>, or validate every call against an approval</label></li>
+</ul>
+<div class="expl">
+<p>Only the harness can enforce it whatever the model writes.</p>
+</div>
+</div>
+<h2 id="tools-vs-skills">4. Tools vs skills</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Skill</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>execute an operation or get data</td>
+<td>reusable know-how and procedures</td>
+</tr>
+<tr class="even">
+<td>named interface + schema</td>
+<td>folder with <code>SKILL.md</code>, optional scripts/references</td>
+</tr>
+<tr class="odd">
+<td>model requests, harness executes</td>
+<td>harness discovers and loads on demand</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Progressive disclosure:</strong> only name + description in context (≈100 tokens) → load <code>SKILL.md</code> when relevant → open references or run scripts only if needed. Skills are <strong>procedural memory outside the weights</strong>. MCP = a standard way to expose tools to any compatible client.</p>
+<div class="q" kind="mcq">
+<p>An agent has 40 skills available but only their names and one-line descriptions are in its context; it reads a skill’s full instructions only when a task needs it. What is this called?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Context compaction</label></li>
+<li><label><input type="checkbox" checked="" />Progressive disclosure</label></li>
+<li><label><input type="checkbox" />Retrieval-augmented generation</label></li>
+<li><label><input type="checkbox" />Constrained decoding</label></li>
+</ul>
+<div class="expl">
+<p>Discover, load, use: progressive disclosure keeps many skills available while few occupy the context.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80" data-draw="9">
+<div class="q" kind="mcq">
+<p>A coding assistant edits code, runs the tests, reads the failures and tries again until the tests pass or it gives up. How is it classed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Workflow, because it runs tests</label></li>
+<li><label><input type="checkbox" checked="" />Agent, because the model’s output chooses the next step based on what it observed</label></li>
+<li><label><input type="checkbox" />Workflow, because it has a stopping condition</label></li>
+<li><label><input type="checkbox" />Neither, because it doesn’t use retrieval</label></li>
+</ul>
+<div class="expl">
+<p>Slide 9, system C: the only agent of the four.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A nightly job fetches sales data, has an LLM summarise it, and emails the summary to managers. How is it classed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Agent, because it uses tools to fetch and email</label></li>
+<li><label><input type="checkbox" />Agent, because it runs without a human</label></li>
+<li><label><input type="checkbox" checked="" />Workflow, because the program fixes the path</label></li>
+<li><label><input type="checkbox" />Neither, because the LLM is only called once</label></li>
+</ul>
+<div class="expl">
+<p>Slide 9, system D. Tools and autonomy don’t make an agent; control does.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>In the formal loop, which line is the only <strong>learned</strong> component?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\(c_t = \text{BuildContext}(m_t, g, T, K_t)\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(u_t \sim p_\theta(\cdot \mid c_t)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(a_t = \text{InterpretAndValidate}(u_t)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(m_{t+1} = \text{UpdateState}(m_t, u_t, a_t, o_{t+1})\)</span></label></li>
+</ul>
+<div class="expl">
+<p>Everything except the model call is engineered: that’s the harness.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Mapping the classical agent onto an LLM agent, what corresponds to <strong>percepts</strong>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The model’s weights</label></li>
+<li><label><input type="checkbox" />The system prompt</label></li>
+<li><label><input type="checkbox" checked="" />Feedback: tool results, errors and user replies</label></li>
+<li><label><input type="checkbox" />The tool schemas</label></li>
+</ul>
+<div class="expl">
+<p>Percepts ↔︎ feedback; actuators/actions ↔︎ tool calls and the final answer.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The model writes “Done: I’ve booked you on #517 for $475”, but no booking tool was exposed. Which engineered fix catches this?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A larger context window</label></li>
+<li><label><input type="checkbox" />A lower temperature</label></li>
+<li><label><input type="checkbox" checked="" />Checking final answers against the action log</label></li>
+<li><label><input type="checkbox" />Exposing <code>book_flight</code> so the claim becomes true</label></li>
+</ul>
+<div class="expl">
+<p>Autopsy run 3: the model claimed an action that never happened. Not exposing the tool prevented harm but not the false claim.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The same malformed tool call fails eight times in a row until the step limit stops the run. Which component failed, alongside the model?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Control: the harness never noticed the repeated identical failures</label></li>
+<li><label><input type="checkbox" />Retrieval: the wrong document was fetched</label></li>
+<li><label><input type="checkbox" />Memory: an old fare survived compaction</label></li>
+<li><label><input type="checkbox" />Orchestration: too many sub-agents</label></li>
+</ul>
+<div class="expl">
+<p>Autopsy run 2: detect repeated failures; make error messages show a valid example.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A <code>book_flight</code> design includes an <code>idempotency_key</code>. Which failure does it prevent?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Booking at a stale price</label></li>
+<li><label><input type="checkbox" />Booking without the passenger’s approval</label></li>
+<li><label><input type="checkbox" checked="" />Booking twice when a request is retried</label></li>
+<li><label><input type="checkbox" />Booking for the wrong passenger</label></li>
+</ul>
+<div class="expl">
+<p>Same key, same effect: a retry after a timeout or rate limit can’t create a second booking.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>How does an LLM “know” which tools it can call?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The tools are built into its weights during pretraining.</label></li>
+<li><label><input type="checkbox" checked="" />Tool names, descriptions and parameter schemas are given to it as text in the context.</label></li>
+<li><label><input type="checkbox" />The harness executes every tool on every step.</label></li>
+<li><label><input type="checkbox" />MCP lets the model run tools without a harness.</label></li>
+</ul>
+<div class="expl">
+<p>A tool schema is just text in the context; that’s why descriptions are prompt engineering.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Select <strong>all</strong> statements that are true of agent skills.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A skill is a folder containing a <code>SKILL.md</code> file, optionally with scripts and references.</label></li>
+<li><label><input type="checkbox" checked="" />Only a skill’s name and short description need to sit in the context until it’s relevant.</label></li>
+<li><label><input type="checkbox" />A skill is the same thing as a tool.</label></li>
+<li><label><input type="checkbox" checked="" />A skill can teach the agent how and when to use its tools.</label></li>
+<li><label><input type="checkbox" />Loading a skill updates the model’s weights.</label></li>
+</ul>
+<div class="expl">
+<p>Skills are procedural memory <strong>outside</strong> the weights; they’re not tools (a script inside a skill still runs through an execution tool).</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What is the Model Context Protocol (MCP)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A training method for tool use</label></li>
+<li><label><input type="checkbox" />A context-compaction algorithm</label></li>
+<li><label><input type="checkbox" checked="" />A standard interface letting servers expose named tools with schemas to any compatible client</label></li>
+<li><label><input type="checkbox" />A type of agent skill</label></li>
+</ul>
+<div class="expl">
+<p>Interoperability infrastructure (slide 29).</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>In the lecture’s warm-up, where does a good LLM agent’s competence come from?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Only the pretrained model</label></li>
+<li><label><input type="checkbox" />Only the engineering around it</label></li>
+<li><label><input type="checkbox" />Only the tools and data</label></li>
+<li><label><input type="checkbox" checked="" />All three jointly</label></li>
+</ul>
+<div class="expl">
+<p>Slide 4, answer D: model, harness and tools/data together.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s02_llms.html"><small>&larr; Stage 2</small>LLMs</a><a class="next" href="s04_context_orchestration.html"><small>Stage 4 &rarr;</small>Context, memory and orchestration</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The prisoner&#x27;s dilemma · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w7_Prisoners_Dilemma" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="../w5/Deep_RL.html" data-page="cs5940_w5_Deep_RL" data-total="7"><span class="dot learn"></span>Deep reinforcement learning<span class="tick"></span></a>
+<a href="../w5/LLM_Foundations.html" data-page="cs5940_w5_LLM_Foundations" data-total="5"><span class="dot tool"></span>How an LLM generates text<span class="tick"></span></a>
+<a href="../w5/LLM_Post_Training.html" data-page="cs5940_w5_LLM_Post_Training" data-total="5"><span class="dot learn"></span>Post-training and the three knobs<span class="tick"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="../w6/LLM_Agent_Harness.html" data-page="cs5940_w6_LLM_Agent_Harness" data-total="7"><span class="dot llm"></span>LLM agents: the loop and the harness<span class="tick"></span></a>
+<a href="../w6/Tools_and_Skills.html" data-page="cs5940_w6_Tools_and_Skills" data-total="6"><span class="dot llm"></span>Tools and skills<span class="tick"></span></a>
+<a href="../w6/Context_Memory_RAG.html" data-page="cs5940_w6_Context_Memory_RAG" data-total="6"><span class="dot llm"></span>Context, retrieval and memory<span class="tick"></span></a>
+<a href="../w6/Orchestration.html" data-page="cs5940_w6_Orchestration" data-total="6"><span class="dot llm"></span>Planning and orchestration<span class="tick"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="../w7/Utilities_and_Games.html" data-page="cs5940_w7_Utilities_and_Games" data-total="6"><span class="dot mas"></span>Utilities, preferences and games<span class="tick"></span></a>
+<a href="../w7/Solution_Concepts.html" data-page="cs5940_w7_Solution_Concepts" data-total="7"><span class="dot mas"></span>Solution concepts<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w7/Prisoners_Dilemma.html" data-page="cs5940_w7_Prisoners_Dilemma" data-total="8"><span class="dot mas"></span>The prisoner’s dilemma<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot llm"></i>llm-based agent</span><span><i class="dot mas"></i>multi-agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip mas">Multi-agent: game theory</span><span class="chip">Week 7</span><span class="chip">8 techniques</span></div>
+  <h1>The prisoner&#x27;s dilemma</h1>
+  <p class="tagline">Two agents each do what's individually rational and both end up worse off than if they had cooperated. That's the fundamental problem of multi-agent interaction. This page covers the dilemma itself, the ways people have tried to recover cooperation (programs, repetition, Axelrod's tournament), the other 2 × 2 games, and the beauty contest.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> multi-agent interaction.<br />
+<strong>Week:</strong> 7, Parts IV to VI.<br />
+<strong>Book:</strong> Wooldridge 11.5 The prisoner’s dilemma (pp. 236 to 240), 11.5.1 The shadow of the future (pp. 240 to 243), 11.5.2 Program equilibria (pp. 243 to 245), 11.6 Other symmetric 2 × 2 interactions (pp. 245 to 248, Table 11.1 on p. 246), 11.7 Representing multiagent scenarios (pp. 248 to 249). <strong>Skip</strong> 11.8 dependence relations.<br />
+<strong>Techniques on this page:</strong> the dilemma and its payoffs, the four solution concepts applied, recovering cooperation, program equilibria, the iterated game and backwards induction, Axelrod’s strategies, the other 2 × 2 orderings, beauty contests.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>The prisoner’s dilemma shows that <strong>individually rational choices can produce a collectively bad outcome</strong>, and seems to imply that cooperation won’t happen among self-interested agents. Yet it’s everywhere: nuclear arms reduction (“why don’t I keep mine?”), free riders on public transport, TV licences in the UK. Agent designers need to know when cooperation can be recovered, and how.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cooperate (C)</td>
+<td>stay silent: choose the common good</td>
+</tr>
+<tr class="even">
+<td>defect (D)</td>
+<td>betray: choose your own good</td>
+</tr>
+<tr class="odd">
+<td>T, R, P, S</td>
+<td>temptation (4), reward for mutual cooperation (3), punishment for mutual defection (2), sucker’s payoff (1)</td>
+</tr>
+<tr class="even">
+<td>program equilibrium</td>
+<td>agents submit programs that can read each other’s code; a mediator runs them</td>
+</tr>
+<tr class="odd">
+<td>iterated prisoner’s dilemma (IPD)</td>
+<td>the same game played repeatedly against the same opponent</td>
+</tr>
+<tr class="even">
+<td>shadow of the future</td>
+<td>the prospect of meeting again, which makes defection costly</td>
+</tr>
+<tr class="odd">
+<td>backwards induction</td>
+<td>reasoning from the last round back to the first</td>
+</tr>
+<tr class="even">
+<td>TIT-FOR-TAT (TFT)</td>
+<td>cooperate first, then copy the opponent’s last move</td>
+</tr>
+<tr class="odd">
+<td>GRIM</td>
+<td>cooperate until the opponent defects once, then defect for ever</td>
+</tr>
+<tr class="even">
+<td>Pavlov</td>
+<td>win-stay, lose-shift</td>
+</tr>
+<tr class="odd">
+<td>level-k reasoning</td>
+<td>a level-k player best-responds to players one level below</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-dilemma-and-its-payoffs">Technique 1: the dilemma and its payoffs</h2>
+<p><strong>Problem it solves:</strong> the canonical model of “cooperate or betray”.</p>
+<p>Two prisoners, separate cells, no communication. If one defects and the other stays silent, the defector goes <strong>free</strong> and the other gets <strong>3 years</strong>. Both defect: <strong>2 years</strong> each. Both stay silent: <strong>1 year</strong> each.</p>
+<p>Utilities: freed = 4, 1 year = 3, 2 years = 2, 3 years = 1. Any payoffs work as long as <strong>T &gt; R &gt; P &gt; S</strong>.</p>
+<p>Payoffs (i, j), <span class="math inline">\(i\)</span> on the rows (the slides draw <span class="math inline">\(i\)</span> as the column player; same numbers):</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(j\)</span>: D</th>
+<th><span class="math inline">\(j\)</span>: C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="math inline">\(i\)</span>: D</strong></td>
+<td>(2, 2) punishment</td>
+<td>(4, 1) temptation / sucker</td>
+</tr>
+<tr class="even">
+<td><strong><span class="math inline">\(i\)</span>: C</strong></td>
+<td>(1, 4) sucker / temptation</td>
+<td>(3, 3) reward</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technique-2-the-four-solution-concepts-applied">Technique 2: the four solution concepts, applied</h2>
+<p><strong>Problem it solves:</strong> the most-asked quiz matrix.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Answer</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>dominant strategy</strong></td>
+<td><strong>D for both</strong></td>
+<td>if <span class="math inline">\(j\)</span> defects, D gives 2 &gt; 1; if <span class="math inline">\(j\)</span> cooperates, D gives 4 &gt; 3</td>
+</tr>
+<tr class="even">
+<td><strong>Nash equilibrium</strong></td>
+<td><strong>(D, D) only</strong></td>
+<td>from (D, D) switching to C drops you from 2 to 1; from any other cell somebody gains by switching to D</td>
+</tr>
+<tr class="odd">
+<td><strong>Pareto optimal</strong></td>
+<td><strong>all except (D, D)</strong></td>
+<td>(C, C) is better for both than (D, D)</td>
+</tr>
+<tr class="even">
+<td><strong>max social welfare</strong></td>
+<td><strong>(C, C)</strong>, total 6</td>
+<td>vs 5, 5, 4</td>
+</tr>
+</tbody>
+</table>
+<p>“Defection guarantees no worse than 2; cooperation guarantees at most… well, as little as 1.” So both defect and get 2, when they could both have had 3. <strong>That gap is the paradox.</strong></p>
+<h2 id="technique-3-recovering-cooperation">Technique 3: recovering cooperation</h2>
+<p><strong>Problem it solves:</strong> is game-theoretic rationality wrong, or is the game set up wrong?</p>
+<p>The slides’ list of counter-arguments:</p>
+<ul>
+<li><strong>We are not all Machiavelli!</strong> People care about others, so the payoffs aren’t really T &gt; R &gt; P &gt; S.</li>
+<li><strong>The other prisoner is my twin!</strong> If we think alike, we’ll choose alike, so only (C, C) and (D, D) are really possible, and (C, C) is better. (Wooldridge calls this the <strong>fallacy of the twins</strong>: if I can make my twin choose just by thinking it, there aren’t really two players, so it isn’t the prisoner’s dilemma at all.)</li>
+<li><strong>Program equilibria and mediators</strong> (technique 4).</li>
+<li><strong>The shadow of the future</strong> (technique 5).</li>
+</ul>
+<p>In module terms: real agents are <strong>heterogeneous</strong>, and the environment is <strong>dynamic and uncertain</strong>.</p>
+<h2 id="technique-4-program-equilibria">Technique 4: program equilibria</h2>
+<p><strong>Problem it solves:</strong> lets you play “I’ll cooperate if he will”.</p>
+<p>Each agent submits a <strong>program</strong> to a <strong>mediator</strong>, which runs them together. Programs can be <strong>conditioned on the other’s program</strong>.</p>
+<pre><code>IF TheirProgram == ThisProgram THEN
+    DO(C)
+ELSE
+    DO(D)
+END-IF</code></pre>
+<p>(<code>==</code> is textual comparison.) The <strong>best response to this program is to submit the same program</strong>, giving <strong>(C, C)</strong>. And you <strong>can’t get the sucker’s payoff</strong> by submitting it: against anything different it defects.</p>
+<h2 id="technique-5-the-iterated-game-and-backwards-induction">Technique 5: the iterated game and backwards induction</h2>
+<p><strong>Problem it solves:</strong> does meeting again make cooperation rational?</p>
+<p>Play the game <strong>repeatedly</strong>. If you’ll meet again, defecting now invites retaliation later, so the incentive to defect appears to evaporate. <strong>In the infinitely repeated</strong> prisoner’s dilemma, cooperation <strong>can</strong> be rational.</p>
+<p><strong>Backwards induction</strong> spoils the finite case. Suppose you both know you’ll play <strong>exactly <span class="math inline">\(n\)</span> rounds</strong>. In the last round there’s no future, so it’s a one-shot game: defect. Knowing that, round <span class="math inline">\(n - 1\)</span> is effectively the last “real” round: defect there too. And so on back to round 1. <strong>With a fixed, finite, pre-determined, commonly known number of rounds, defection is the best strategy.</strong></p>
+<div class="example">
+<p><strong>Why each condition matters.</strong> Unknown number of rounds (each round there’s a 90% chance of another) → no last round to unravel from → cooperation can survive. Known 10 rounds → unravels to all-D. Infinite → no last round.</p>
+</div>
+<h2 id="technique-6-axelrods-tournament">Technique 6: Axelrod’s tournament</h2>
+<p><strong>Problem it solves:</strong> which strategy does best against a whole population of opponents?</p>
+<p>Axelrod (1984) ran computer tournaments of IPD programs. The slides’ strategies:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ALLD</strong></td>
+<td>always defect (the “hawk”)</td>
+</tr>
+<tr class="even">
+<td><strong>TIT-FOR-TAT</strong></td>
+<td>round 0: cooperate; round <span class="math inline">\(u &gt; 0\)</span>: do what the opponent did in round <span class="math inline">\(u - 1\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>GRIM</strong></td>
+<td>cooperate; if the opponent <strong>ever</strong> defects, defect for ever</td>
+</tr>
+<tr class="even">
+<td><strong>Pavlov</strong></td>
+<td>win-stay, lose-shift: repeat your move after a good payoff (T or R), switch after a bad one (P or S)</td>
+</tr>
+</tbody>
+</table>
+<p>From Wooldridge (pp. 241 to 243): in Axelrod’s 1980 tournament every program played every other (five games of 200 rounds), and the overall winner was <strong>TIT-FOR-TAT</strong>, the simplest entry. It won on total score across all opponents, not by beating anyone head to head (against ALLD it loses). Axelrod’s four rules: <strong>don’t be envious</strong>, <strong>don’t be the first to defect</strong> (being “nice” was the best predictor of success), <strong>reciprocate cooperation and defection</strong>, and <strong>don’t be too clever</strong>.</p>
+<div class="example">
+<p><strong>Five rounds, payoffs 4/3/2/1.</strong> TFT vs ALLD: TFT plays C, D, D, D, D; ALLD plays D every time. TFT scores 1 + 2 + 2 + 2 + 2 = <strong>9</strong>; ALLD scores 4 + 2 + 2 + 2 + 2 = <strong>12</strong>. TFT vs TFT: C every round, <strong>15</strong> each. TFT never beats its opponent in a single match, yet wins tournaments because it collects lots of mutual-cooperation payoffs.</p>
+</div>
+<div data-widget="ipd">
+
+</div>
+<h2 id="technique-7-other-symmetric-2-2-games">Technique 7: other symmetric 2 × 2 games</h2>
+<p><strong>Problem it solves:</strong> the prisoner’s dilemma is one of many possible preference orderings.</p>
+<p>PD ordering for <span class="math inline">\(i\)</span>: <span class="math inline">\((D, C) \succ_i (C, C) \succ_i (D, D) \succ_i (C, D)\)</span>. With four outcomes there are <span class="math inline">\(4! = 24\)</span> orderings (Wooldridge Table 11.1, p. 246). Examples from the slides:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ordering for <span class="math inline">\(i\)</span></th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\((C, C) \succ (C, D) \succ (D, C) \succ (D, D)\)</span></td>
+<td>cooperation dominates</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\((C, C) \succ (C, D) \succ (D, D) \succ (D, C)\)</span></td>
+<td>cooperation dominates</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\((D, C) \succ (C, C) \succ (C, D) \succ (D, D)\)</span></td>
+<td><strong>game of chicken</strong></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\((D, D) \succ (D, C) \succ (C, C) \succ (C, D)\)</span></td>
+<td>defection dominates</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\((D, D) \succ (D, C) \succ (C, D) \succ (C, C)\)</span></td>
+<td>defection dominates</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Chicken</strong> differs from the PD only in swapping the bottom two: mutual defection (crash) is the <strong>worst</strong> outcome, worse than being the sucker (swerving). So there’s no dominant strategy and <strong>two pure Nash equilibria</strong>, (C, D) and (D, C): whoever swerves loses face, but neither wants the crash.</p>
+<p><strong>Representing interactions</strong> (11.7): rules can be <strong>hard-wired</strong> into agents at design time, or written so agents can <strong>process them at run time</strong>, as in Stanford’s <strong>General Game Playing</strong> competition (game rules in a logic language, read by the agent before play).</p>
+<h2 id="technique-8-guessing-games-the-beauty-contest">Technique 8: guessing games (the beauty contest)</h2>
+<p><strong>Problem it solves:</strong> shows how deep “I think that you think” reasoning goes, and how far people are from equilibrium.</p>
+<p><strong>Two-player:</strong> each picks <span class="math inline">\(x_1, x_2 \in [0, 100]\)</span>. Target <span class="math inline">\(t = \frac{2}{3} \cdot \frac{x_1 + x_2}{2}\)</span>. Closest wins; ties split. <strong>The lower number always wins</strong> when they differ, so the unique Nash equilibrium is <strong>(0, 0)</strong>.</p>
+<p><strong><span class="math inline">\(n\)</span>-player:</strong> <span class="math inline">\(t = \frac{2}{3} \cdot \frac{1}{n}\sum_i x_i\)</span>. Reasoning about others gives successively lower guesses; unique NE: <strong>everyone picks 0</strong>.</p>
+<div class="example">
+<p><strong>Level-k reasoning.</strong> Level 0 picks at random (average 50). Level 1 best-responds to that: <span class="math inline">\(\frac{2}{3} \times 50 = 33.3\)</span>. Level 2: <span class="math inline">\(\frac{2}{3} \times 33.3 = 22.2\)</span>. Level 3: 14.8. Infinite levels → 0. The lecture’s data: humans averaged about <strong>29</strong> (roughly level 1 to 2), a learning model (EWA) about 11; LLM players clustered at different levels depending on the model and prompt.</p>
+</div>
+<div class="warn">
+<p><strong>Slide typo:</strong> the title slide says “10 October 2026”; lecture 7 was in November.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge 11.5 (pp. 236 to 240)</td>
+<td><strong>Read</strong></td>
+<td>the dilemma, the payoff matrix and the “recovering cooperation” arguments</td>
+</tr>
+<tr class="even">
+<td>Wooldridge 11.5.1 (pp. 240 to 243)</td>
+<td><strong>Read</strong></td>
+<td>iterated PD, backwards induction, Axelrod’s tournament and his four rules</td>
+</tr>
+<tr class="odd">
+<td>Wooldridge 11.5.2 (pp. 243 to 245)</td>
+<td><strong>Read</strong></td>
+<td>program equilibria</td>
+</tr>
+<tr class="even">
+<td>Wooldridge 11.6 (pp. 245 to 248)</td>
+<td>Read Table 11.1 and the chicken game; skim the rest</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Wooldridge 11.7 (pp. 248 to 249)</td>
+<td>Skim</td>
+<td>general game playing</td>
+</tr>
+<tr class="even">
+<td>Wooldridge 11.8 (pp. 249 to 251)</td>
+<td><strong>Skip</strong></td>
+<td>dependence relations: not on the slides</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 7 (the prisoner&#39;s dilemma; Wooldridge 11.5-11.7). I want quiz practice on:
+- the PD payoffs (T &gt; R &gt; P &gt; S) and the four solution concepts: dominant strategy, Nash equilibrium, Pareto optimal, social welfare
+- arguments for recovering cooperation; program equilibria (the &quot;cooperate if your program equals mine&quot; program)
+- iterated PD: why infinite repetition allows cooperation and why a known finite number of rounds unravels by backwards induction
+- ALLD, TIT-FOR-TAT, GRIM, Pavlov: trace a few rounds and total the payoffs
+- other symmetric 2x2 orderings: game of chicken vs PD vs cooperation/defection dominates; Nash equilibria of chicken
+- the 2/3-of-the-average beauty contest: Nash equilibrium and level-k reasoning
+
+Please:
+1. Ask multiple-choice or short numeric questions like a university quiz, ONE at a time.
+2. Wait for my answer, then mark it with full working.
+3. Every 5 questions, summarise what I keep getting wrong.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w7/Solution_Concepts.html"><small>&larr; Previous</small>Solution concepts</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

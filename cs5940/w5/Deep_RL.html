@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep reinforcement learning · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w5_Deep_RL" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a class="active" aria-current="page" href="../w5/Deep_RL.html" data-page="cs5940_w5_Deep_RL" data-total="7"><span class="dot learn"></span>Deep reinforcement learning<span class="tick"></span></a>
+<a href="../w5/LLM_Foundations.html" data-page="cs5940_w5_LLM_Foundations" data-total="5"><span class="dot tool"></span>How an LLM generates text<span class="tick"></span></a>
+<a href="../w5/LLM_Post_Training.html" data-page="cs5940_w5_LLM_Post_Training" data-total="5"><span class="dot learn"></span>Post-training and the three knobs<span class="tick"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="../w6/LLM_Agent_Harness.html" data-page="cs5940_w6_LLM_Agent_Harness" data-total="7"><span class="dot llm"></span>LLM agents: the loop and the harness<span class="tick"></span></a>
+<a href="../w6/Tools_and_Skills.html" data-page="cs5940_w6_Tools_and_Skills" data-total="6"><span class="dot llm"></span>Tools and skills<span class="tick"></span></a>
+<a href="../w6/Context_Memory_RAG.html" data-page="cs5940_w6_Context_Memory_RAG" data-total="6"><span class="dot llm"></span>Context, retrieval and memory<span class="tick"></span></a>
+<a href="../w6/Orchestration.html" data-page="cs5940_w6_Orchestration" data-total="6"><span class="dot llm"></span>Planning and orchestration<span class="tick"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="../w7/Utilities_and_Games.html" data-page="cs5940_w7_Utilities_and_Games" data-total="6"><span class="dot mas"></span>Utilities, preferences and games<span class="tick"></span></a>
+<a href="../w7/Solution_Concepts.html" data-page="cs5940_w7_Solution_Concepts" data-total="7"><span class="dot mas"></span>Solution concepts<span class="tick"></span></a>
+<a href="../w7/Prisoners_Dilemma.html" data-page="cs5940_w7_Prisoners_Dilemma" data-total="8"><span class="dot mas"></span>The prisoner’s dilemma<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot llm"></i>llm-based agent</span><span><i class="dot mas"></i>multi-agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip learn">Learning agent</span><span class="chip">Week 5</span><span class="chip">7 techniques</span></div>
+  <h1>Deep reinforcement learning</h1>
+  <p class="tagline">Q-learning keeps one number per (state, action). That's fine for a 3-cell corridor and hopeless for a screen of pixels. Deep RL swaps the table for a neural network that <em>estimates</em> Q, or picks actions directly, so that what it learns in one situation carries over to similar ones.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> learning agent (deep, mostly model-free, reinforcement learning).<br />
+<strong>Week:</strong> 5, Part A (slides 5 to 26).<br />
+<strong>Book:</strong> not in Wooldridge. Optional: Mnih et al. 2015 (DQN, Nature), Sutton and Barto ch. 9 and 13.<br />
+<strong>Techniques on this page:</strong> the neuron and backpropagation (recap), function approximation, DQN and its learning target, experience replay and target networks, value-based vs policy-based vs actor–critic, model-free vs model-based (AlphaZero), failure modes.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>In week 4 the agent learned <span class="math inline">\(Q(s, a)\)</span> as a <strong>table</strong> (slide 9). Two things break when <span class="math inline">\(s\)</span> is a camera image:</p>
+<ol type="1">
+<li><strong>Size.</strong> Every different image is a different state. The table would need more rows than there are atoms.</li>
+<li><strong>No reuse.</strong> A table learns nothing about a state it has never visited, even if it differs from a familiar one by one pixel (the ball moved slightly).</li>
+</ol>
+<p>The fix: <strong>replace the lookup with an approximation</strong>, <span class="math inline">\(Q(s, a) \to Q_\theta(s, a)\)</span>, where <span class="math inline">\(\theta\)</span> are the weights of a neural network (slide 11). Changing <span class="math inline">\(\theta\)</span> changes the estimates for <em>many</em> states at once, including ones never seen. That’s generalisation, and it’s also why training gets unstable.</p>
+<p>The framing question for the whole of topic 5: <em>how do neural networks learn from data and experience, and how can what they learn support an agent’s decisions?</em></p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>neuron</td>
+<td>weighted sum of inputs plus a bias, passed through an activation: <span class="math inline">\(y = \phi(w \cdot x + b)\)</span></td>
+</tr>
+<tr class="even">
+<td>backpropagation</td>
+<td>working out how much each weight contributed to the loss (its gradient)</td>
+</tr>
+<tr class="odd">
+<td>optimiser</td>
+<td>the rule that nudges the weights downhill on the loss (e.g. gradient descent)</td>
+</tr>
+<tr class="even">
+<td>deep</td>
+<td>several learned layers stacked; each builds more useful features from the last</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Q_\theta(s, a)\)</span></td>
+<td>a network with weights <span class="math inline">\(\theta\)</span> that outputs one Q-value per action</td>
+</tr>
+<tr class="even">
+<td>DQN</td>
+<td>Deep Q-Network (Mnih et al. 2015): Q-learning with a network, from Atari pixels</td>
+</tr>
+<tr class="odd">
+<td>target network <span class="math inline">\(Q_{\theta^-}\)</span></td>
+<td>a frozen copy of the network used only to compute targets; refreshed now and then</td>
+</tr>
+<tr class="even">
+<td>experience replay</td>
+<td>store past transitions <span class="math inline">\((s, a, r, s&#39;, \text{done})\)</span>, train on random mini-batches of them</td>
+</tr>
+<tr class="odd">
+<td>policy <span class="math inline">\(\pi_\theta(a \mid s)\)</span></td>
+<td>a network that outputs action probabilities directly</td>
+</tr>
+<tr class="even">
+<td>actor–critic</td>
+<td>actor = policy network that acts; critic = value network that helps train it</td>
+</tr>
+<tr class="odd">
+<td>model-free / model-based</td>
+<td>learn values or a policy directly / use known or learned dynamics to plan</td>
+</tr>
+<tr class="even">
+<td>MCTS</td>
+<td>Monte Carlo tree search: look ahead through possible futures using the game rules</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-neural-network-recap">Technique 1: the neural network recap</h2>
+<p><strong>Problem it solves:</strong> a flexible function you can fit to data by adjusting numbers.</p>
+<p>A <strong>neuron</strong> combines inputs: <span class="math inline">\(z = w_1x_1 + w_2x_2 + w_3x_3 + b\)</span>, then <span class="math inline">\(y = \phi(z)\)</span> (slide 5). The weights set each input’s influence, the bias shifts the response, and the activation <span class="math inline">\(\phi\)</span> (often non-linear) transforms the score.</p>
+<p><strong>Training loop</strong> (slide 6): <strong>forward</strong> pass to get a prediction <span class="math inline">\(\hat y\)</span> → <strong>loss</strong> compares <span class="math inline">\(\hat y\)</span> with the target <span class="math inline">\(y\)</span> → <strong>backpropagate</strong> to get each weight’s gradient → <strong>update</strong> the weights to reduce the error. Repeat over many examples.</p>
+<p><strong>Deep</strong> means several hidden layers (slide 7). Early layers find simple features, later ones combine them.</p>
+<div class="example">
+<p><strong>Worked example.</strong> Weights <span class="math inline">\(w = (0.5, -1, 2)\)</span>, bias <span class="math inline">\(b = 0.5\)</span>, input <span class="math inline">\(x = (2, 1, 0.5)\)</span>, ReLU activation. <span class="math inline">\(z = 1 - 1 + 1 + 0.5 = 1.5\)</span>, so <span class="math inline">\(y = \max(0, 1.5) = 1.5\)</span>. With <span class="math inline">\(x = (0, 2, 0)\)</span>: <span class="math inline">\(z = -2 + 0.5 = -1.5\)</span>, <span class="math inline">\(y = 0\)</span>.</p>
+</div>
+<h2 id="technique-2-function-approximation">Technique 2: function approximation</h2>
+<p><strong>Problem it solves:</strong> huge state spaces, and generalising to states never seen.</p>
+<p>Swap the table for <span class="math inline">\(Q_\theta(s, a)\)</span> (slide 11): observation (pixels) → network → one output per action. Earlier layers learn a <strong>representation</strong> of the observation; later layers turn it into values.</p>
+<div class="warn">
+<p><strong>Generalisation is not correctness</strong> (slide 11 caveat). The network gives <em>an</em> estimate for a new state; nothing guarantees it’s right. A table at least knows when it knows nothing.</p>
+</div>
+<h2 id="technique-3-dqn-and-its-learning-target">Technique 3: DQN and its learning target</h2>
+<p><strong>Problem it solves:</strong> Q-learning from raw pixels, with no model of the game.</p>
+<p>DQN (slide 12) takes <strong>four recent frames</strong>, outputs <span class="math inline">\(Q_\theta(s_t, \cdot)\)</span> for every action, picks one <strong>ε-greedily</strong>, and learns from the game score alone. No game physics is given.</p>
+<p><strong>Why four frames?</strong> One frame can’t show which way the ball is moving (slide 13): same pixels, different underlying state. That’s <strong>partial observability</strong> from week 4. A short history helps; it doesn’t always remove the problem.</p>
+<p><strong>What it learns from one transition</strong> (slide 14):</p>
+<p><span class="math display">\[y_t = \begin{cases} r_{t+1} &amp; \text{if the episode ends} \\ r_{t+1} + \gamma \max_{a&#39;} Q_{\theta^-}(s_{t+1}, a&#39;) &amp; \text{otherwise}\end{cases}\]</span></p>
+<p><span class="math display">\[L(\theta) \approx \frac{1}{N}\sum_{i=1}^{N}\big(y_i - Q_\theta(s_i, a_i)\big)^2\]</span></p>
+<p>Same target as tabular Q-learning (“reward now + value later”), but instead of nudging one table cell, gradient descent nudges <span class="math inline">\(\theta\)</span> to shrink the squared gap between <strong>target</strong> and <strong>prediction</strong>, averaged over a mini-batch.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(\gamma = 0.9\)</span>. A replayed transition has <span class="math inline">\(r = 1\)</span>, and the target network says <span class="math inline">\(Q_{\theta^-}(s&#39;, \cdot) = (2, 5, 3)\)</span>. Target <span class="math inline">\(y = 1 + 0.9 \times 5 = 5.5\)</span>. The online network currently predicts <span class="math inline">\(Q_\theta(s, a) = 4\)</span>, so this sample’s squared error is <span class="math inline">\((5.5 - 4)^2 = 2.25\)</span>, and training pushes <span class="math inline">\(Q_\theta(s, a)\)</span> up. If the transition ended the episode, <span class="math inline">\(y = 1\)</span> and the error is <span class="math inline">\((1 - 4)^2 = 9\)</span>.</p>
+</div>
+<h2 id="technique-4-experience-replay-and-the-target-network">Technique 4: experience replay and the target network</h2>
+<p><strong>Problem it solves:</strong> deep Q-learning is unstable to train (slide 15).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Why it hurts</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Correlated samples</strong></td>
+<td>consecutive frames are nearly identical, so training on them in order is like studying one page 100 times</td>
+<td><strong>experience replay</strong>: store transitions in a buffer and train on <strong>random</strong> mini-batches</td>
+</tr>
+<tr class="even">
+<td><strong>Moving targets</strong></td>
+<td>the same weights make the prediction <em>and</em> the target, so every update moves the goalposts</td>
+<td><strong>target network</strong> <span class="math inline">\(Q_{\theta^-}\)</span>: a frozen copy for targets, copied from <span class="math inline">\(\theta\)</span> every so often</td>
+</tr>
+</tbody>
+</table>
+<p>Replay also lets one experience be reused for several updates (slide 16). It stores <strong>real past transitions</strong>, not a learned simulator, so old data can go stale if the game changes.</p>
+<div class="warn">
+<p><strong>Poll 1 (slide 17).</strong> The target network exists to <strong>stop the targets shifting every time θ changes</strong> (B). Not (A): de-correlating frames is replay’s job. Not (C): it is not a model of the game. Not (D): <strong>neither trick guarantees convergence</strong>; they improve stability.</p>
+</div>
+<h2 id="technique-5-value-based-policy-based-and-actorcritic">Technique 5: value-based, policy-based and actor–critic</h2>
+<p><strong>Problem it solves:</strong> different action spaces suit different things to learn (slides 19 to 20).</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Value-based (DQN)</th>
+<th>Policy-based (policy gradient)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>learns</td>
+<td><span class="math inline">\(Q_\theta(s, a)\)</span></td>
+<td><span class="math inline">\(\pi_\theta(a \mid s)\)</span></td>
+</tr>
+<tr class="even">
+<td>outputs</td>
+<td>expected return for each action</td>
+<td>action probabilities, or a continuous action distribution</td>
+</tr>
+<tr class="odd">
+<td>acts by</td>
+<td><span class="math inline">\(\arg\max_a Q_\theta(s, a)\)</span> (ε-greedy in training)</td>
+<td>sampling <span class="math inline">\(a \sim \pi_\theta(\cdot \mid s)\)</span></td>
+</tr>
+<tr class="even">
+<td>good for</td>
+<td>small discrete action sets</td>
+<td>stochastic policies, continuous control (steering angle, joint torque)</td>
+</tr>
+</tbody>
+</table>
+<p>Both can be <strong>model-free</strong>.</p>
+<p><strong>Actor–critic</strong> splits the work: the <strong>actor</strong> <span class="math inline">\(\pi_\theta\)</span> chooses actions; the <strong>critic</strong> <span class="math inline">\(V_w(s)\)</span> estimates values that help train the actor. The critic is a <strong>training aid</strong>: at deployment the actor can act alone. PPO combines policy optimisation with value estimation (details out of scope). You’ll meet parameterised policies again in LLM post-training.</p>
+<h2 id="technique-6-model-free-vs-model-based-alphago-and-alphazero">Technique 6: model-free vs model-based (AlphaGo and AlphaZero)</h2>
+<p><strong>Problem it solves:</strong> learning alone vs learning plus look-ahead (slides 21 to 22).</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model-free</th>
+<th>Model-based</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>learn a policy or value directly from experience; no transition model used to choose actions</td>
+<td>use <strong>known or learned</strong> dynamics to predict futures and plan</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a = \arg\max_{a&#39;} Q_\theta(s, a&#39;)\)</span></td>
+<td><span class="math inline">\(a = \text{Plan}(s; T \text{ or } \hat T)\)</span></td>
+</tr>
+<tr class="odd">
+<td>DQN</td>
+<td>AlphaZero (model <strong>given</strong>: the rules of Go), MuZero (model <strong>learned</strong>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AlphaGo / AlphaZero = learning + search.</strong> A learned <strong>policy</strong> suggests promising moves, a learned <strong>value</strong> scores positions (one network in AlphaZero), and <strong>MCTS</strong> looks ahead using the known rules, consulting those predictions. AlphaGo (2016) used human expert games + self-play RL + search; AlphaZero (2018) used <strong>self-play only</strong>, no human games.</p>
+<p><strong>Hide and seek (slide 23):</strong> self-play produced strategies and counter-strategies with boxes and ramps that nobody scripted. When the other agents are learning too, <strong>your environment keeps changing</strong>, so it’s no longer a single-agent MDP with a fixed transition law (the slide 24 discussion). That’s a bridge to week 7.</p>
+<h2 id="technique-7-how-deep-rl-fails">Technique 7: how deep RL fails</h2>
+<p><strong>Problem it solves:</strong> knowing what <em>not</em> to claim (slide 25).</p>
+<ul>
+<li><strong>Sample efficiency:</strong> may need millions of interactions.</li>
+<li><strong>Instability:</strong> function approximation + bootstrapping + off-policy learning can interact badly (the “deadly triad”; the slides list the three).</li>
+<li><strong>Reward misspecification:</strong> high reward ≠ the behaviour you wanted (week 4’s boat race).</li>
+<li><strong>Generalisation:</strong> success in training environments needn’t survive new ones.</li>
+<li><strong>Model error</strong> (model-based): planning with wrong learned dynamics compounds errors.</li>
+</ul>
+<p>The slide ends with the question that sets up Part B: could we first learn broad representations from huge amounts of data, then optimise behaviour for particular tasks? That’s what LLMs do.</p>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td>the book has no learning</td>
+</tr>
+<tr class="even">
+<td>Slides 5 to 26</td>
+<td><strong>Primary</strong></td>
+<td>everything above is from them</td>
+</tr>
+<tr class="odd">
+<td>Mnih et al. 2015, “Human-level control through deep RL”</td>
+<td>Optional</td>
+<td>the DQN paper; the methods section explains replay and the target network</td>
+</tr>
+<tr class="even">
+<td>Sutton and Barto ch. 9 (function approximation), ch. 13 (policy gradient)</td>
+<td>Optional</td>
+<td>if you want the maths behind the tables above</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 5 Part A (deep reinforcement learning). I want quiz practice on:
+- why Q-tables fail for image observations, and what function approximation Q_theta(s,a) buys (and doesn&#39;t)
+- the DQN target y = r + gamma max_a&#39; Q_theta-(s&#39;,a&#39;) (just r if the episode ends) and the squared loss; compute targets by hand
+- why DQN uses 4 frames (partial observability)
+- experience replay (fixes correlated samples) vs target network (fixes moving targets); neither guarantees convergence
+- value-based vs policy-based vs actor-critic, and what the critic is for
+- model-free vs model-based; AlphaGo vs AlphaZero vs MuZero; multi-agent self-play changes the environment
+- deep RL failure modes
+
+Please:
+1. Ask multiple-choice questions like a university quiz, ONE at a time, with four options and one plausible distractor based on a common confusion.
+2. Wait for my answer, then mark it and explain why each wrong option is wrong.
+3. Every 5 questions, tell me which ideas I keep mixing up.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w4/RL_Limits.html"><small>&larr; Previous</small>When RL goes wrong</a><a class="next" href="../w5/LLM_Foundations.html"><small>Next &rarr;</small>How an LLM generates text</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

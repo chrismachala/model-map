@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context, retrieval and memory · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w6_Context_Memory_RAG" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="../w5/Deep_RL.html" data-page="cs5940_w5_Deep_RL" data-total="7"><span class="dot learn"></span>Deep reinforcement learning<span class="tick"></span></a>
+<a href="../w5/LLM_Foundations.html" data-page="cs5940_w5_LLM_Foundations" data-total="5"><span class="dot tool"></span>How an LLM generates text<span class="tick"></span></a>
+<a href="../w5/LLM_Post_Training.html" data-page="cs5940_w5_LLM_Post_Training" data-total="5"><span class="dot learn"></span>Post-training and the three knobs<span class="tick"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="../w6/LLM_Agent_Harness.html" data-page="cs5940_w6_LLM_Agent_Harness" data-total="7"><span class="dot llm"></span>LLM agents: the loop and the harness<span class="tick"></span></a>
+<a href="../w6/Tools_and_Skills.html" data-page="cs5940_w6_Tools_and_Skills" data-total="6"><span class="dot llm"></span>Tools and skills<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w6/Context_Memory_RAG.html" data-page="cs5940_w6_Context_Memory_RAG" data-total="6"><span class="dot llm"></span>Context, retrieval and memory<span class="tick"></span></a>
+<a href="../w6/Orchestration.html" data-page="cs5940_w6_Orchestration" data-total="6"><span class="dot llm"></span>Planning and orchestration<span class="tick"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="../w7/Utilities_and_Games.html" data-page="cs5940_w7_Utilities_and_Games" data-total="6"><span class="dot mas"></span>Utilities, preferences and games<span class="tick"></span></a>
+<a href="../w7/Solution_Concepts.html" data-page="cs5940_w7_Solution_Concepts" data-total="7"><span class="dot mas"></span>Solution concepts<span class="tick"></span></a>
+<a href="../w7/Prisoners_Dilemma.html" data-page="cs5940_w7_Prisoners_Dilemma" data-total="8"><span class="dot mas"></span>The prisoner’s dilemma<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot llm"></i>llm-based agent</span><span><i class="dot mas"></i>multi-agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip llm">LLM-based agent</span><span class="chip">Week 6</span><span class="chip">6 techniques</span></div>
+  <h1>Context, retrieval and memory</h1>
+  <p class="tagline">The model sees only what the harness puts in front of it this step. Choosing that (context engineering), fetching the right passage (retrieval), and keeping track of what's true now (state and memory) are three different jobs, and most agent failures come from getting one of them wrong.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> LLM-based agent.<br />
+<strong>Week:</strong> 6, Part III second half (slides 30 to 37).<br />
+<strong>Book:</strong> not in Wooldridge. Optional: Anthropic, <em>Effective context engineering for AI agents</em> (2025) and <em>Introducing contextual retrieval</em> (2024); Lewis et al. 2020 (RAG); Sumers et al. 2024 (CoALA).<br />
+<strong>Techniques on this page:</strong> context engineering and the budget game, retrieval-augmented generation, keyword vs vector search and cosine similarity, state reconciliation, kinds of memory, compaction for long runs.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>A context window is finite, and even when it’s big, filling it costs money, time and the model’s attention. Meanwhile the useful information lives in four different places: the model’s weights (general knowledge, not current), documents (the baggage policy), live systems (today’s fare) and the agent’s own records (what it did earlier). Each needs a different way in. And a fact being <em>somewhere in the context</em> doesn’t make it <em>current</em>.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>context engineering</td>
+<td>deliberately choosing what goes into the model’s context for this step</td>
+</tr>
+<tr class="even">
+<td>RAG</td>
+<td>retrieval-augmented generation: fetch relevant passages, put them in the context, then generate</td>
+</tr>
+<tr class="odd">
+<td>chunk</td>
+<td>a piece of a document stored in the index</td>
+</tr>
+<tr class="even">
+<td>sparse / keyword search</td>
+<td>score passages by shared words; rare words count more (e.g. BM25)</td>
+</tr>
+<tr class="odd">
+<td>dense / vector search</td>
+<td>embed query and passages as vectors; return the nearest</td>
+</tr>
+<tr class="even">
+<td>embedding <span class="math inline">\(e(\cdot)\)</span></td>
+<td>a vector of numbers that captures meaning; similar texts get nearby vectors</td>
+</tr>
+<tr class="odd">
+<td>cosine similarity</td>
+<td><span class="math inline">\(\dfrac{e(q) \cdot e(d)}{\lVert e(q)\rVert \lVert e(d)\rVert}\)</span>: the angle between two vectors, 1 = same direction</td>
+</tr>
+<tr class="even">
+<td>hybrid search</td>
+<td>combine keyword and vector results</td>
+</tr>
+<tr class="odd">
+<td>state reconciliation</td>
+<td>the harness records which fact is current, with source and time, and marks old ones superseded</td>
+</tr>
+<tr class="even">
+<td>working state <span class="math inline">\(m_t\)</span></td>
+<td>progress, constraints, current facts, pending steps</td>
+</tr>
+<tr class="odd">
+<td>episodic / semantic / procedural memory</td>
+<td>past events / stored facts / how to do things</td>
+</tr>
+<tr class="even">
+<td>compaction</td>
+<td>replacing old history with a summary plus structured state</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-context-engineering-the-budget-game">Technique 1: context engineering (the budget game)</h2>
+<p><strong>Problem it solves:</strong> the model can’t use what it isn’t shown, and drowns in what it doesn’t need (slides 30 to 31).</p>
+<p>The passenger asks <em>“Is cabin luggage included on #517?”</em> Budget 8,000 tokens, 1,000 kept free for the answer, so <strong>7,000 usable</strong>.</p>
+<div class="example">
+<p><strong>One good answer: items 1 to 3, 5, 8, 11, 12, 14 to 16 = 6,140 tokens.</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mechanism</th>
+<th>Take</th>
+<th>Not</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>select</strong></td>
+<td>5: cabin-baggage excerpt (700)</td>
+<td>4: the whole 40-page policy (38,000)</td>
+</tr>
+<tr class="even">
+<td><strong>filter</strong></td>
+<td>8: three flights, fare class and price (500)</td>
+<td>7: all 25 flights as raw JSON (11,500)</td>
+</tr>
+<tr class="odd">
+<td><strong>summarise</strong></td>
+<td>11: summary of last week (400)</td>
+<td>10: last week’s full transcript (14,000)</td>
+</tr>
+<tr class="even">
+<td><strong>disclose progressively</strong></td>
+<td>14: skill name + description (90)</td>
+<td>13: full skill instructions (3,800)</td>
+</tr>
+<tr class="odd">
+<td><strong>keep structured state</strong></td>
+<td>15: progress notes (350)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>prune history</strong></td>
+<td>16: this session, raw tool output cleared (1,600)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Plus the essentials: 1 system prompt (900), 2 tool schemas (1,200), 3 the request (150), 12 passenger profile (250). Item 6 (change fees) and 9 (price history) aren’t needed for a baggage question.</p>
+</div>
+<div data-widget="budget">
+
+</div>
+<p>In practice much selection is <strong>just in time</strong>: the agent keeps references and fetches passages or skill text through tools when it needs them. <strong>The model sees only what the builder puts into <span class="math inline">\(c_t\)</span>.</strong></p>
+<h2 id="technique-2-retrieval-and-rag">Technique 2: retrieval and RAG</h2>
+<p><strong>Problem it solves:</strong> each kind of knowledge has its proper access route (slide 32).</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>LLM parameters</td>
+<td>general language and task knowledge; <strong>not</strong> a current, authoritative database</td>
+</tr>
+<tr class="even">
+<td>indexed documents</td>
+<td>retrieve relevant passages on demand (baggage policy): <strong>RAG</strong></td>
+</tr>
+<tr class="odd">
+<td>live systems</td>
+<td>query authoritative services (fares, availability): <strong>API tools</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>RAG pipeline:</strong> in advance, documents → chunks → index. At question time: retriever searches the index → passages → build context → LLM → answer <strong>with sources and citations</strong>.</p>
+<p>Sources support checking, but <strong>retrieval doesn’t guarantee correctness</strong>. And a fixed retrieve-then-generate pipeline is a <strong>workflow</strong>, not necessarily an agent.</p>
+<h2 id="technique-3-keyword-vs-vector-search">Technique 3: keyword vs vector search</h2>
+<p><strong>Problem it solves:</strong> finding passages by exact terms vs by meaning (slides 33 to 34).</p>
+<ul>
+<li><strong>Keyword (sparse):</strong> the index records which passages contain which words; more query words matched = higher score, rare words count more (BM25). “pet fee” finds passages with <em>pet</em> and <em>fee</em>.</li>
+<li><strong>Vector (dense):</strong> an embedding model maps query and passages to vectors trained so similar meanings are close; return the nearest by cosine similarity. “bringing my cat” finds “pets in the cabin”.</li>
+</ul>
+<div class="example">
+<p><strong>Slide 34.</strong> P1: “Cabin baggage: one item up to 8 kg is included on all fares.” P2: “Fare rule Y-2: changes permitted up to 24 hours before departure for a fee.” P3: “Fare rule Y-3: changes not permitted after booking.”</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Keyword</th>
+<th>Vector</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Q1 “What is the carry-on allowance?”</td>
+<td><strong>misses P1</strong>: no words in common</td>
+<td><strong>finds P1</strong>: “carry-on” ≈ “cabin baggage”</td>
+</tr>
+<tr class="even">
+<td>Q2 “Can I change a ticket booked under Y-2?”</td>
+<td><strong>ranks P2 first</strong>: “Y-2” is a rare exact match</td>
+<td>finds P2 and P3 but <strong>can’t tell Y-2 from Y-3</strong></td>
+</tr>
+</tbody>
+</table>
+<p>So production systems use <strong>hybrid search</strong>.</p>
+</div>
+<div class="example">
+<p><strong>Cosine similarity by hand.</strong> <span class="math inline">\(e(q) = (1, 2, 2)\)</span>, <span class="math inline">\(e(d_1) = (2, 1, 2)\)</span>, <span class="math inline">\(e(d_2) = (0, 0, 3)\)</span>. <span class="math inline">\(\lVert e(q)\rVert = 3\)</span>. <span class="math inline">\(q \cdot d_1 = 2 + 2 + 4 = 8\)</span>, <span class="math inline">\(\lVert d_1\rVert = 3\)</span>, cosine <span class="math inline">\(= 8/9 = 0.889\)</span>. <span class="math inline">\(q \cdot d_2 = 6\)</span>, <span class="math inline">\(\lVert d_2\rVert = 3\)</span>, cosine <span class="math inline">\(= 6/9 = 0.667\)</span>. Retrieve <span class="math inline">\(d_1\)</span> first.</p>
+</div>
+<h2 id="technique-4-state-reconciliation">Technique 4: state reconciliation</h2>
+<p><strong>Problem it solves:</strong> two numbers for the same thing in the context, and nothing says which is current (slide 35).</p>
+<p>Step 2’s search said #441 costs $490; step 12’s <code>check_fare(441)</code> said $560. The passenger asks “how much was #441 again?” Poll answer: <strong>C, it depends</strong>: usually $560, but not guaranteed. Both are just text.</p>
+<p><strong>The harness fixes it:</strong> store the current fact (#441 = $560, with source and time), keep $490 labelled <strong>superseded</strong>, <strong>recompute progress</strong> (#441 now breaks the budget), and put the reconciled fact into the next context. <strong>Retrieving a record is not the same as establishing that it is current or correct.</strong></p>
+<h2 id="technique-5-context-state-and-memory">Technique 5: context, state and memory</h2>
+<p><strong>Problem it solves:</strong> the words get used loosely; they mean different things (slide 36).</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>What it provides</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>model context <span class="math inline">\(c_t\)</span></td>
+<td>the tokens the LLM sees <strong>now</strong></td>
+</tr>
+<tr class="even">
+<td>working state <span class="math inline">\(m_t\)</span></td>
+<td>progress, constraints, current facts, pending steps</td>
+</tr>
+<tr class="odd">
+<td><strong>episodic</strong> memory</td>
+<td>records of past interactions, actions and outcomes</td>
+</tr>
+<tr class="even">
+<td><strong>semantic</strong> memory</td>
+<td>stored facts, retrieved on demand</td>
+</tr>
+<tr class="odd">
+<td><strong>procedural</strong> memory</td>
+<td>how to do things: skills, stored procedures (and, implicitly, the weights)</td>
+</tr>
+<tr class="even">
+<td>RAG knowledge base</td>
+<td>searchable documents; not necessarily memories of <em>this</em> agent</td>
+</tr>
+</tbody>
+</table>
+<p>A memory system <strong>writes, stores, retrieves and updates</strong>. Typical failures: wrong item retrieved, stale entries, contradictions, constraints omitted. (The terms come from cognitive psychology via CoALA; practice often just says short-term vs long-term.)</p>
+<div class="example">
+<p><strong>Classify.</strong> “Last Tuesday the passenger rejected a red-eye” → episodic. “The passenger is a gold frequent flyer” → semantic. The flight-comparison skill → procedural. The 40-page baggage policy in a vector index → RAG knowledge base. “Searched SFO–NYC; #517 checked at $475; still to do: confirm baggage” → working state.</p>
+</div>
+<h2 id="technique-6-long-runs-and-compaction">Technique 6: long runs and compaction</h2>
+<p><strong>Problem it solves:</strong> the context grows every step and the model re-reads all of it every step (slide 37).</p>
+<p>Remedies: <strong>compaction</strong> (history → summary + state), <strong>structured state</strong>, <strong>prompt caching</strong>, <strong>sub-agents with clean contexts</strong>. Checkpoints and files carry multi-session work: the context can be rebuilt from persistent state.</p>
+<div class="warn">
+<p>Compaction is exactly what broke run 1 in the failure autopsy: the summary kept the old $490 and dropped the newer $560 quote. Compaction must preserve <strong>reconciled</strong> state, not just whatever text happened to survive.</p>
+</div>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Slides 30 to 37 and 51 (retrieval methods)</td>
+<td><strong>Primary</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Anthropic, “Effective context engineering for AI agents” (Sep 2025)</td>
+<td>Recommended</td>
+<td>the select / summarise / disclose ideas</td>
+</tr>
+<tr class="even">
+<td>Anthropic, “Introducing contextual retrieval” (Sep 2024)</td>
+<td>Optional</td>
+<td>hybrid search and contextual chunking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 6 (context, retrieval and memory; airline clerk scenario). I want quiz practice on:
+- context engineering: select, filter, summarise, disclose progressively, keep structured state, prune history; a token-budget question
+- where knowledge should come from: model weights vs RAG over documents vs live API tools
+- the RAG pipeline; why a fixed retrieve-then-generate pipeline is a workflow
+- keyword (BM25) vs vector search, with examples where each wins; cosine similarity by hand
+- state reconciliation: two prices in the context, which is current, what the harness should do
+- context vs working state vs episodic / semantic / procedural memory vs a RAG knowledge base
+- compaction and why it can lose the current fact
+
+Please:
+1. Ask scenario-based multiple-choice or short numeric questions like a university quiz, ONE at a time.
+2. Wait for my answer, then mark it and explain.
+3. Every 5 questions, summarise what I keep confusing.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w6/Tools_and_Skills.html"><small>&larr; Previous</small>Tools and skills</a><a class="next" href="../w6/Orchestration.html"><small>Next &rarr;</small>Planning and orchestration</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

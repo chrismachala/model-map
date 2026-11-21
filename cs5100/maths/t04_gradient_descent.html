@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Derivatives and gradient descent · CS5100 Maths-first path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 25, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 35, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 40, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t04_gradient_descent", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths_t04_gradient_descent" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a class="active" aria-current="page" href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>22. Final: spot the shared maths<span class="pstat" data-i="21"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 4 of 22</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 40 min</span></div>
+  <h1>Derivatives and gradient descent</h1>
+  <p class="tagline">Every "fit the model" step in the course is "make a loss as small as possible". There are only two ways the course does it: set the derivative to zero and solve (least squares, ridge, the mean), or, when that can't be solved, walk downhill a step at a time (logistic regression, neural networks). The chain rule supplies the derivatives in both cases.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>Week 1 slides, “calculus basics” (derivatives, chain rule, gradient); week 2 slides, gradient descent for the linear model; week 4 slides, backpropagation. ISLP 10.7.1 (backpropagation) and 10.7.2 to 10.7.3 (regularisation, SGD). <strong>Skip</strong> ISLP 10.7’s mentions of momentum, Adam and dropout details beyond the idea; the course uses plain gradient descent and early stopping.</p>
+</div>
+<h2 id="derivative-gradient-chain-rule">1. Derivative, gradient, chain rule</h2>
+<p>The derivative <span class="math inline">\(f&#39;(z)\)</span> is the slope: how much <span class="math inline">\(f\)</span> changes per unit change in <span class="math inline">\(z\)</span>. With several parameters, the <strong>gradient</strong> <span class="math inline">\(\nabla L = (\partial L/\partial\beta_0, \dots, \partial L/\partial\beta_p)\)</span> collects all the slopes. It points uphill, so <span class="math inline">\(-\nabla L\)</span> points downhill.</p>
+<p>The <strong>chain rule</strong>: if <span class="math inline">\(L\)</span> depends on <span class="math inline">\(\beta\)</span> only through <span class="math inline">\(z\)</span>, then</p>
+<p><span class="math display">\[\frac{\partial L}{\partial\beta} = \frac{\partial L}{\partial z}\cdot\frac{\partial z}{\partial\beta}.\]</span></p>
+<p>Models in this course are chains: <span class="math inline">\(\beta \to z = \beta\cdot\tilde x \to p = \sigma(z) \to L\)</span>. The last link <span class="math inline">\(\partial z/\partial\beta = \tilde x\)</span> is always the input vector, which is why every gradient in the course ends “<span class="math inline">\(\times\ \tilde x_i\)</span>”.</p>
+<p>The four derivatives you need again and again:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Derivative</th>
+<th>Used in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\((y - z)^2\)</span></td>
+<td><span class="math inline">\(-2(y - z)\)</span></td>
+<td>all squared-error fits</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\log z\)</span></td>
+<td><span class="math inline">\(1/z\)</span></td>
+<td>likelihoods (w3, w4)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma(z) = 1/(1 + e^{-z})\)</span></td>
+<td><span class="math inline">\(\sigma(z)(1 - \sigma(z))\)</span></td>
+<td>logistic regression, sigmoid neurons</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{ReLU}(z) = \max(0, z)\)</span></td>
+<td><span class="math inline">\(1\)</span> if <span class="math inline">\(z &gt; 0\)</span>, else <span class="math inline">\(0\)</span></td>
+<td>ReLU neurons (w4)</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="num" data-answer="0.1966" data-tol="0.002" label="σ′(1)">
+<p>Compute <span class="math inline">\(\sigma&#39;(1) = \sigma(1)(1 - \sigma(1))\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\sigma(1) = 1/(1 + e^{-1}) = 0.7311\)</span>. So <span class="math inline">\(\sigma&#39;(1) = 0.7311 \times 0.2689 = 0.1966\)</span>.</p>
+</div>
+</div>
+<h2 id="way-one-set-the-derivative-to-zero">2. Way one: set the derivative to zero</h2>
+<p>When the loss is a polynomial in the parameters (squared error with a linear model), setting the gradient to zero gives linear equations you can solve:</p>
+<ul>
+<li>Simple regression: <span class="math inline">\(\hat\beta_1 = \frac{\sum(x_i - \bar x)(y_i - \bar y)}{\sum(x_i - \bar x)^2}\)</span>, <span class="math inline">\(\hat\beta_0 = \bar y - \hat\beta_1\bar x\)</span> (w2).</li>
+<li>Multiple regression: <span class="math inline">\(\mathbf X^T\mathbf X\hat\beta = \mathbf X^T\mathbf y\)</span>, so <span class="math inline">\(\hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span> (w2).</li>
+<li>Ridge, one centred input: <span class="math inline">\(\hat\beta = \frac{\sum x_iy_i}{\sum x_i^2 + \lambda}\)</span> (w2).</li>
+<li>The best constant: <span class="math inline">\(c = \bar y\)</span> (Toolkit 3).</li>
+</ul>
+<div class="example">
+<p><strong>Worked example.</strong> Minimise <span class="math inline">\(g(\beta) = \sum(y_i - \beta x_i)^2\)</span> for <span class="math inline">\(x = (1, 2)\)</span>, <span class="math inline">\(y = (2, 3)\)</span>. <span class="math inline">\(g&#39;(\beta) = -2\sum x_i(y_i - \beta x_i) = -2(\sum x_iy_i - \beta\sum x_i^2) = -2(8 - 5\beta)\)</span>. Zero at <span class="math inline">\(\beta = 8/5 = 1.6\)</span>.</p>
+</div>
+<div class="q" kind="gen" data-gen="ols">
+
+</div>
+<h2 id="way-two-gradient-descent">3. Way two: gradient descent</h2>
+<p>When <span class="math inline">\(\beta\)</span> is trapped inside a non-linear function (a sigmoid, a ReLU network), <span class="math inline">\(\nabla L = 0\)</span> has no algebraic solution. Then repeat:</p>
+<p><span class="math display">\[\boxed{\beta^{(t+1)} = \beta^{(t)} - \eta\,\nabla L(\beta^{(t)})}\]</span></p>
+<p>with <strong>learning rate</strong> <span class="math inline">\(\eta\)</span>. Too small: painfully slow. Too big: overshoots and can diverge. The week 2 lab runs it on the linear model (where you could have used the formula) precisely so you can check it against the exact answer.</p>
+<div data-widget="gd">
+
+</div>
+<div class="q" kind="gen" data-gen="gd">
+
+</div>
+<h2 id="convex-or-not">4. Convex or not?</h2>
+<p>A <strong>convex</strong> loss is bowl-shaped: one minimum, and gradient descent with a small enough <span class="math inline">\(\eta\)</span> finds it from any start. RSS for linear models and the negative log-likelihood for logistic regression are convex.</p>
+<p>A <strong>non-convex</strong> loss has several valleys, so where you end up depends on where you started:</p>
+<ul>
+<li><strong>Neural networks</strong> (w4): random starting weights, possibly different answers each run.</li>
+<li><strong>K-means</strong> (w7): it alternately (1) assigns points to their nearest centre, (2) moves centres to the means. Each step can only lower the SSE, so it always stops, but often in a <strong>local</strong> minimum. Hence: several random restarts, keep the lowest SSE. Same cure as for networks.</li>
+</ul>
+<div data-widget="nonconvex">
+
+</div>
+<div class="q" kind="mcq">
+<p>Why does the week 2 lab ask you to run gradient descent for linear regression from 10 random starting points, and what should you see?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Because linear regression has many local minima; you should see 10 different answers.</label></li>
+<li><label><input type="checkbox" checked="" />To check convergence: RSS is convex, so all 10 runs should end at (nearly) the same <span class="math inline">\(\beta\)</span>, which matches <span class="math inline">\((\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span>.</label></li>
+<li><label><input type="checkbox" />To choose the learning rate.</label></li>
+<li><label><input type="checkbox" />Because the matrix formula is wrong.</label></li>
+</ul>
+<div class="expl">
+<p>Different answers would mean the step size or number of iterations is wrong, not that the problem has several minima. For a neural network, by contrast, different starts can genuinely end in different places.</p>
+</div>
+</div>
+<h2 id="the-gradient-that-keeps-coming-back">5. The gradient that keeps coming back</h2>
+<p>Here’s a pattern worth spotting now. For one training point:</p>
+<ul>
+<li>Squared error with a linear model: <span class="math inline">\(\nabla_\beta(y - \beta\cdot\tilde x)^2 = -2(y - \hat y)\,\tilde x\)</span>.</li>
+<li>Cross-entropy with logistic regression: <span class="math inline">\(\nabla_\beta L = -(y - p)\,\tilde x\)</span> (Toolkit 9).</li>
+<li>Cross-entropy with softmax, per output score: <span class="math inline">\(p_m - y_m\)</span> (Toolkit 9, w4).</li>
+</ul>
+<p>Each time: <strong>(prediction − truth) × input</strong>. A badly predicted point pushes hard in the direction of its own input; a well-predicted one barely moves anything. Backpropagation (w4) is this, passed backwards through the layers with the chain rule.</p>
+<div class="q" kind="num" data-answer="0.1" label="new β₁">
+<p>Squared-error loss <span class="math inline">\((y - \beta_0 - \beta_1x)^2\)</span> on one point <span class="math inline">\(x = 1\)</span>, <span class="math inline">\(y = 2\)</span>, starting at <span class="math inline">\(\beta = (0, 0)\)</span>. Using <span class="math inline">\(\nabla = -2(y - \hat y)\tilde x\)</span> and <span class="math inline">\(\eta = 0.025\)</span>, what is <span class="math inline">\(\beta_1\)</span> after one step?</p>
+<div class="expl">
+<p><span class="math inline">\(\hat y = 0\)</span>, so <span class="math inline">\(\nabla = -2(2)(1, 1) = (-4, -4)\)</span>. <span class="math inline">\(\beta \leftarrow (0, 0) - 0.025(-4, -4) = (0.1, 0.1)\)</span>.</p>
+</div>
+</div>
+<h2 id="where-this-comes-back">Where this comes back</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Page</th>
+<th>How it shows up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><a href="../w1/01_Maths_Toolkit.html">Maths toolkit</a></td>
+<td>slopes, chain rule, <span class="math inline">\(z^* = \sum x_iy_i/\sum x_i^2\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><a href="../w2/Linear_Regression.html">Linear regression</a></td>
+<td>normal equations; gradient descent in the lab</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><a href="../w2/Ridge_Regression.html">Ridge</a></td>
+<td>derivative = 0 gives the shrunk formula</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><a href="../w3/Logistic_Regression.html">Logistic regression</a></td>
+<td>no closed form: gradient descent on the NLL</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><a href="../w4/Training_Neural_Networks.html">Training neural networks</a></td>
+<td>backpropagation = chain rule; random starts; early stopping</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><a href="../w6/Boosting.html">Boosting</a></td>
+<td>each tree fits the residuals, which are <span class="math inline">\(-\frac12\times\)</span> the gradient of squared error (an aside: the slides don’t say this)</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><a href="../w7/K_Means.html">K-means</a></td>
+<td>alternating minimisation; local minima; restarts</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="gd">
+
+</div>
+<div class="q" kind="gen" data-gen="ols">
+
+</div>
+<div class="q" kind="num" data-answer="0" label="ReLU′(−2)">
+<p>What is the derivative of <span class="math inline">\(\text{ReLU}(z) = \max(0, z)\)</span> at <span class="math inline">\(z = -2\)</span>?</p>
+<div class="expl">
+<p>For <span class="math inline">\(z &lt; 0\)</span> the function is flat at 0, so its slope is <span class="math inline">\(0\)</span>. That’s why a ReLU unit that is “off” passes no gradient back in backpropagation.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which of these models are fitted by gradient descent in the course because no closed-form solution exists?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Linear regression</label></li>
+<li><label><input type="checkbox" />Ridge regression</label></li>
+<li><label><input type="checkbox" checked="" />Logistic regression and neural networks</label></li>
+<li><label><input type="checkbox" />KNN</label></li>
+</ul>
+<div class="expl">
+<p>Linear and ridge regression have closed forms (gradient descent is optional); KNN has nothing to fit.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Which statements are true? Tick all that apply.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A too-large learning rate can make gradient descent diverge.</label></li>
+<li><label><input type="checkbox" checked="" />K-means always terminates but may stop at a local minimum.</label></li>
+<li><label><input type="checkbox" />The negative log-likelihood of logistic regression has many local minima.</label></li>
+<li><label><input type="checkbox" checked="" />Every gradient in the course ends with a factor of the input <span class="math inline">\(\tilde x_i\)</span> by the chain rule.</label></li>
+</ul>
+<div class="expl">
+<p>The logistic NLL is convex. The last statement holds because <span class="math inline">\(\partial(\beta\cdot\tilde x)/\partial\beta = \tilde x\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t03_squared_error.html"><small>&larr; Stage 3</small>Squared error: MSE, RSS, SSE</a><a class="next" href="t05_penalties.html"><small>Stage 5 &rarr;</small>Fit plus penalty, and flexibility knobs</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

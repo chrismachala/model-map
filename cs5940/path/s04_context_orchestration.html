@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context, memory and orchestration · CS5940 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5940", "stages": [{"id": "s01_deep_rl", "title": "Deep RL", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 25, "blurb": "Tables to networks, the DQN target, replay vs target network, actor\u2013critic, AlphaZero.", "href": "s01_deep_rl.html"}, {"id": "s02_llms", "title": "LLMs", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 30, "blurb": "Next-token prediction, temperature, SFT / RLHF / RLVR / DPO, what changes the weights.", "href": "s02_llms.html"}, {"id": "s03_harness_tools", "title": "The harness and tools", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Workflow vs agent, the formal loop, validation, where \u201cdo not book\u201d lives, tools vs skills.", "href": "s03_harness_tools.html"}, {"id": "s04_context_orchestration", "title": "Context, memory and orchestration", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Context budget, RAG, keyword vs vector, current facts, memory types, cheapest architecture.", "href": "s04_context_orchestration.html"}, {"id": "s05_game_theory", "title": "Game theory", "group": "Week 7 \u00b7 Multi-agent interaction", "mins": 35, "blurb": "Dominant strategies, Nash, mixed, Pareto, welfare; the prisoner\u2019s dilemma and its fixes.", "href": "s05_game_theory.html"}, {"id": "s06_rl_refresher", "title": "Week 4 refresher", "group": "Week 4 \u00b7 Refresher", "mins": 20, "blurb": "MDPs, returns, value iteration vs Q-learning, \u03b5-greedy, POMDPs, reward hacking.", "href": "s06_rl_refresher.html"}, {"id": "s07_mock_quiz2", "title": "Mock Quiz 2", "group": "Mock quiz", "mins": 30, "blurb": "Fifteen Quiz 1-style questions drawn from weeks 4 to 7. Pass 70%.", "href": "s07_mock_quiz2.html"}], "stage": "s04_context_orchestration", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5940_path_s04_context_orchestration" data-module="cs5940" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="s01_deep_rl.html"><span class="dot path"></span>1. Deep RL<span class="pstat" data-i="0"></span></a>
+<a href="s02_llms.html"><span class="dot path"></span>2. LLMs<span class="pstat" data-i="1"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="s03_harness_tools.html"><span class="dot path"></span>3. The harness and tools<span class="pstat" data-i="2"></span></a>
+<a class="active" aria-current="page" href="s04_context_orchestration.html"><span class="dot path"></span>4. Context, memory and orchestration<span class="pstat" data-i="3"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="s05_game_theory.html"><span class="dot path"></span>5. Game theory<span class="pstat" data-i="4"></span></a>
+<h4>Week 4 · Refresher</h4>
+<a href="s06_rl_refresher.html"><span class="dot path"></span>6. Week 4 refresher<span class="pstat" data-i="5"></span></a>
+<h4>Mock quiz</h4>
+<a href="s07_mock_quiz2.html"><span class="dot path"></span>7. Mock Quiz 2<span class="pstat" data-i="6"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 4 of 7</span><span class="chip">Week 6 · LLM-based agents</span><span class="chip">about 30 min</span></div>
+  <h1>Context, memory and orchestration</h1>
+  <p class="tagline">Week 6 second half: what goes into the context, RAG and keyword vs vector search, which price is current, the kinds of memory, and choosing the cheapest architecture that does the job.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>Full notes: <a href="../w6/Context_Memory_RAG.html">Context, retrieval and memory</a> and <a href="../w6/Orchestration.html">Planning and orchestration</a>.</p>
+<h2 id="context-engineering-and-rag">1. Context engineering and RAG</h2>
+<p>The model sees <strong>only</strong> what the context builder puts in <span class="math inline">\(c_t\)</span>. Mechanisms: <strong>select</strong> (an excerpt, not the 40-page policy), <strong>filter</strong> (3 flights, not 25 in raw JSON), <strong>summarise</strong> (last week’s summary, not the transcript), <strong>disclose progressively</strong> (skill name, not full text), <strong>keep structured state</strong> (progress notes), <strong>prune history</strong>.</p>
+<p>Knowledge routes: <strong>weights</strong> for general knowledge (not current), <strong>RAG</strong> over indexed documents, <strong>API tools</strong> for live data (fares, availability). A fixed retrieve-then-generate pipeline is a <strong>workflow</strong>. Retrieval gives sources, not guaranteed correctness.</p>
+<div class="q" kind="mcq">
+<p>The clerk needs today’s fare for flight #517. Where should it come from?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The model’s parameters, since it was trained on airline websites</label></li>
+<li><label><input type="checkbox" />RAG over the fare policy document</label></li>
+<li><label><input type="checkbox" checked="" />A live API tool such as <code>check_fare</code></label></li>
+<li><label><input type="checkbox" />Episodic memory of last week’s conversation</label></li>
+</ul>
+<div class="expl">
+<p>Live, authoritative data → API tool. Weights aren’t current; the policy document has rules, not today’s prices.</p>
+</div>
+</div>
+<h2 id="keyword-vs-vector-search">2. Keyword vs vector search</h2>
+<p><strong>Keyword (BM25):</strong> shared words, rare words weigh more. Great for exact identifiers (“Y-2”); misses synonyms. <strong>Vector:</strong> embeddings, nearest by cosine similarity <span class="math inline">\(\frac{e(q) \cdot e(d)}{\lVert e(q) \rVert \lVert e(d) \rVert}\)</span>. Great for meaning (“carry-on” ≈ “cabin baggage”); can’t tell “Y-2” from “Y-3”. Production: <strong>hybrid</strong>.</p>
+<div class="q" kind="num" data-answer="0.889" data-tol="0.003">
+<p><span class="math inline">\(e(q) = (1, 2, 2)\)</span> and <span class="math inline">\(e(d) = (2, 1, 2)\)</span>. What is their cosine similarity? (Three decimals.)</p>
+<div class="expl">
+<p>Dot product <span class="math inline">\(2 + 2 + 4 = 8\)</span>; both lengths are 3; <span class="math inline">\(8/9 = 0.889\)</span>.</p>
+</div>
+</div>
+<h2 id="which-price-is-current-memory-types">3. Which price is current? Memory types</h2>
+<p>Step 2: search says #441 $490. Step 12: <code>check_fare</code> says $560. Asked later, the model will <strong>usually</strong> say $560 but it <strong>depends</strong>: both are just text. The <strong>harness</strong> should reconcile: current fact ($560, with source and time), old one marked <strong>superseded</strong>, progress recomputed.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>context <span class="math inline">\(c_t\)</span></td>
+<td>what the LLM sees now</td>
+</tr>
+<tr class="even">
+<td>working state <span class="math inline">\(m_t\)</span></td>
+<td>progress, constraints, current facts, pending steps</td>
+</tr>
+<tr class="odd">
+<td><strong>episodic</strong></td>
+<td>past interactions, actions, outcomes</td>
+</tr>
+<tr class="even">
+<td><strong>semantic</strong></td>
+<td>stored facts</td>
+</tr>
+<tr class="odd">
+<td><strong>procedural</strong></td>
+<td>how to do things: skills (and implicitly the weights)</td>
+</tr>
+<tr class="even">
+<td>RAG knowledge base</td>
+<td>searchable documents, not necessarily this agent’s memories</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="mcq">
+<p>The agent stores “On 3 November the passenger rejected an overnight flight to Boston.” What kind of memory is this?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Episodic</label></li>
+<li><label><input type="checkbox" />Semantic</label></li>
+<li><label><input type="checkbox" />Procedural</label></li>
+<li><label><input type="checkbox" />Working state</label></li>
+</ul>
+<div class="expl">
+<p>A record of a past interaction and its outcome: episodic.</p>
+</div>
+</div>
+<h2 id="orchestration">4. Orchestration</h2>
+<p>Control patterns: <strong>incremental / ReAct</strong> (responsive; may drift), <strong>plan then execute</strong> (structured, fewer calls; plans go stale), <strong>hybrid</strong> (plan, act, monitor, replan; more engineering). Choose the <strong>cheapest adequate</strong> architecture by asking: <strong>what must be decided at run time?</strong> Daily fare check → <strong>workflow</strong>; one flight search → <strong>single agent loop</strong>; five-city tour → <strong>orchestrator with sub-agents</strong> (≈15× the tokens of a chat). A sub-agent has its <strong>own context</strong>. <strong>Reflection without new external information often fails</strong>.</p>
+<div class="q" kind="mcq">
+<p>Every morning a system checks one route’s fare and emails the passenger if it drops below $450. What is the cheapest adequate architecture?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A workflow</label></li>
+<li><label><input type="checkbox" />A single agent loop</label></li>
+<li><label><input type="checkbox" />A planner–executor</label></li>
+<li><label><input type="checkbox" />An orchestrator with sub-agents</label></li>
+</ul>
+<div class="expl">
+<p>Nothing needs deciding at run time beyond a fixed rule (slide 41, task A).</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80" data-draw="9">
+<div class="q" kind="mcq">
+<p>Policy passages: P1 “Cabin baggage: one item up to 8 kg is included on all fares.” The passenger asks “What is the carry-on allowance?” Which retrieval method finds P1?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Keyword search only</label></li>
+<li><label><input type="checkbox" checked="" />Vector search only</label></li>
+<li><label><input type="checkbox" />Both</label></li>
+<li><label><input type="checkbox" />Neither</label></li>
+</ul>
+<div class="expl">
+<p>No words in common, so keyword misses it; “carry-on” and “cabin baggage” mean the same, so vector finds it.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The passenger asks “Can I change a ticket booked under Y-2?” Passages for fare rules Y-2 and Y-3 are worded almost identically. Which method is most likely to rank the Y-2 passage first?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Keyword search</label></li>
+<li><label><input type="checkbox" />Vector search</label></li>
+<li><label><input type="checkbox" />Neither can find it</label></li>
+<li><label><input type="checkbox" />Both rank it equally</label></li>
+</ul>
+<div class="expl">
+<p>“Y-2” is a rare exact token: keyword search wins. Vector search sees Y-2 and Y-3 as near-identical in meaning.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>After compaction at step 9, the summary keeps #441 at $490 but drops the later $560 quote; the agent recommends #441 at $490. Which component failed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The tools</label></li>
+<li><label><input type="checkbox" checked="" />State and context: nothing marked which fact was current</label></li>
+<li><label><input type="checkbox" />The skill</label></li>
+<li><label><input type="checkbox" />The model’s pretraining data</label></li>
+</ul>
+<div class="expl">
+<p>Autopsy run 1. Fix: reconciled working state that survives compaction.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>With a budget of 7,000 usable tokens and a question about cabin baggage on #517, which pair shows the <strong>filter</strong> mechanism?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Summary of last week instead of last week’s full transcript</label></li>
+<li><label><input type="checkbox" checked="" />Three flights with fare class and price instead of all 25 flights as raw JSON</label></li>
+<li><label><input type="checkbox" />Skill name and description instead of the full skill</label></li>
+<li><label><input type="checkbox" />Cabin-baggage excerpt instead of the whole policy document</label></li>
+</ul>
+<div class="expl">
+<ol type="A">
+<li>is summarise, (C) is progressive disclosure, (D) is select.</li>
+</ol>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The flight-comparison procedure stored as a skill is an example of which kind of memory?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Episodic</label></li>
+<li><label><input type="checkbox" />Semantic</label></li>
+<li><label><input type="checkbox" checked="" />Procedural</label></li>
+<li><label><input type="checkbox" />Working state</label></li>
+</ul>
+<div class="expl">
+<p>Knowing how to do something: procedural memory, stored outside the weights.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which statement about RAG is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Retrieval guarantees the answer is correct, because it cites sources.</label></li>
+<li><label><input type="checkbox" checked="" />A fixed retrieve-then-generate pipeline is a workflow, not necessarily an agent.</label></li>
+<li><label><input type="checkbox" />RAG updates the model’s weights with the retrieved documents.</label></li>
+<li><label><input type="checkbox" />RAG is the best way to get live fares.</label></li>
+</ul>
+<div class="expl">
+<p>Sources support checking but don’t guarantee correctness; live data comes from API tools; RAG changes the context, not the weights.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A 12-day, five-city conference tour needs flights, hotels near each venue, visa checks and a $6,000 budget. Which architecture fits best?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A fixed workflow</label></li>
+<li><label><input type="checkbox" />A single ReAct loop with no saved plan</label></li>
+<li><label><input type="checkbox" checked="" />An orchestrator delegating to sub-agents (or a planner–executor)</label></li>
+<li><label><input type="checkbox" />No LLM: a lookup table</label></li>
+</ul>
+<div class="expl">
+<p>Breadth and parallel sub-tasks; each sub-agent gets a clean context. The cost is many more tokens.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which is the main weakness of plan-then-execute compared with incremental (ReAct-like) control?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It needs more model calls.</label></li>
+<li><label><input type="checkbox" checked="" />Its plans can go stale when the world changes.</label></li>
+<li><label><input type="checkbox" />It can’t use tools.</label></li>
+<li><label><input type="checkbox" />It has no structure.</label></li>
+</ul>
+<div class="expl">
+<p>Clear structure and fewer calls, but stale plans; ReAct is responsive but may drift.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Mapping BDI onto an LLM agent, where does the analogy break down?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Tool results can’t be beliefs.</label></li>
+<li><label><input type="checkbox" checked="" />Text in the context isn’t a logically consistent belief base, and a written plan isn’t a persistent intention unless the harness stores and enforces it.</label></li>
+<li><label><input type="checkbox" />LLM agents have no goals.</label></li>
+<li><label><input type="checkbox" />Commitment strategies have no equivalent.</label></li>
+</ul>
+<div class="expl">
+<p>Slide 39. Commitment strategy ↔︎ how often the harness lets the model replan.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>An agent re-reads its own answer and “critiques” it three times without running any tests or tools. What does the lecture say about this?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It always improves reasoning.</label></li>
+<li><label><input type="checkbox" checked="" />Self-critique without new external information often fails to improve reasoning and can make it worse.</label></li>
+<li><label><input type="checkbox" />It updates the model’s weights.</label></li>
+<li><label><input type="checkbox" />It’s the same as Reflexion with test feedback.</label></li>
+</ul>
+<div class="expl">
+<p>Ask of every extra loop: what new information does it bring? Reflexion uses real feedback stored in episodic memory.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.667" data-tol="0.003">
+<p><span class="math inline">\(e(q) = (1, 2, 2)\)</span> and <span class="math inline">\(e(d) = (0, 0, 3)\)</span>. What is their cosine similarity? (Three decimals.)</p>
+<div class="expl">
+<p>Dot product <span class="math inline">\(6\)</span>; lengths 3 and 3; <span class="math inline">\(6/9 = 0.667\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s03_harness_tools.html"><small>&larr; Stage 3</small>The harness and tools</a><a class="next" href="s05_game_theory.html"><small>Stage 5 &rarr;</small>Game theory</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

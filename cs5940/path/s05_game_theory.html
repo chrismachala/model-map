@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game theory and the prisoner&#x27;s dilemma · CS5940 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5940", "stages": [{"id": "s01_deep_rl", "title": "Deep RL", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 25, "blurb": "Tables to networks, the DQN target, replay vs target network, actor\u2013critic, AlphaZero.", "href": "s01_deep_rl.html"}, {"id": "s02_llms", "title": "LLMs", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 30, "blurb": "Next-token prediction, temperature, SFT / RLHF / RLVR / DPO, what changes the weights.", "href": "s02_llms.html"}, {"id": "s03_harness_tools", "title": "The harness and tools", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Workflow vs agent, the formal loop, validation, where \u201cdo not book\u201d lives, tools vs skills.", "href": "s03_harness_tools.html"}, {"id": "s04_context_orchestration", "title": "Context, memory and orchestration", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Context budget, RAG, keyword vs vector, current facts, memory types, cheapest architecture.", "href": "s04_context_orchestration.html"}, {"id": "s05_game_theory", "title": "Game theory", "group": "Week 7 \u00b7 Multi-agent interaction", "mins": 35, "blurb": "Dominant strategies, Nash, mixed, Pareto, welfare; the prisoner\u2019s dilemma and its fixes.", "href": "s05_game_theory.html"}, {"id": "s06_rl_refresher", "title": "Week 4 refresher", "group": "Week 4 \u00b7 Refresher", "mins": 20, "blurb": "MDPs, returns, value iteration vs Q-learning, \u03b5-greedy, POMDPs, reward hacking.", "href": "s06_rl_refresher.html"}, {"id": "s07_mock_quiz2", "title": "Mock Quiz 2", "group": "Mock quiz", "mins": 30, "blurb": "Fifteen Quiz 1-style questions drawn from weeks 4 to 7. Pass 70%.", "href": "s07_mock_quiz2.html"}], "stage": "s05_game_theory", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5940_path_s05_game_theory" data-module="cs5940" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="s01_deep_rl.html"><span class="dot path"></span>1. Deep RL<span class="pstat" data-i="0"></span></a>
+<a href="s02_llms.html"><span class="dot path"></span>2. LLMs<span class="pstat" data-i="1"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="s03_harness_tools.html"><span class="dot path"></span>3. The harness and tools<span class="pstat" data-i="2"></span></a>
+<a href="s04_context_orchestration.html"><span class="dot path"></span>4. Context, memory and orchestration<span class="pstat" data-i="3"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a class="active" aria-current="page" href="s05_game_theory.html"><span class="dot path"></span>5. Game theory<span class="pstat" data-i="4"></span></a>
+<h4>Week 4 · Refresher</h4>
+<a href="s06_rl_refresher.html"><span class="dot path"></span>6. Week 4 refresher<span class="pstat" data-i="5"></span></a>
+<h4>Mock quiz</h4>
+<a href="s07_mock_quiz2.html"><span class="dot path"></span>7. Mock Quiz 2<span class="pstat" data-i="6"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 5 of 7</span><span class="chip">Week 7 · Multi-agent interaction</span><span class="chip">about 35 min</span></div>
+  <h1>Game theory and the prisoner&#x27;s dilemma</h1>
+  <p class="tagline">Week 7: read a payoff matrix, find dominant strategies and Nash equilibria, spot Pareto optimal and welfare-maximising outcomes, and know the prisoner's dilemma, its iterated version and the beauty contest cold.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>Full notes: <a href="../w7/Utilities_and_Games.html">Utilities and games</a>, <a href="../w7/Solution_Concepts.html">Solution concepts</a>, <a href="../w7/Prisoners_Dilemma.html">The prisoner’s dilemma</a>. In this stage every matrix is written <strong>(i, j)</strong> with <strong>i choosing the row</strong>.</p>
+<h2 id="best-responses-dominance-nash">1. Best responses, dominance, Nash</h2>
+<p>For each of <span class="math inline">\(j\)</span>’s columns, mark <span class="math inline">\(i\)</span>’s best row; for each of <span class="math inline">\(i\)</span>’s rows, mark <span class="math inline">\(j\)</span>’s best column. A player whose best response never changes has a <strong>dominant strategy</strong>. A cell with <strong>both</strong> marked is a <strong>pure Nash equilibrium</strong>: no one gains by deviating alone.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(j\)</span>: c</th>
+<th><span class="math inline">\(j\)</span>: d</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="math inline">\(i\)</span>: a</strong></td>
+<td>(5, 5)</td>
+<td>(8, 2)</td>
+</tr>
+<tr class="even">
+<td><strong><span class="math inline">\(i\)</span>: b</strong></td>
+<td>(2, 8)</td>
+<td>(3, 3)</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="mcq">
+<p>In the matrix above, which outcome is a pure Nash equilibrium?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />(a, c)</label></li>
+<li><label><input type="checkbox" />(a, d)</label></li>
+<li><label><input type="checkbox" />(b, c)</label></li>
+<li><label><input type="checkbox" />(b, d)</label></li>
+</ul>
+<div class="expl">
+<p>At (a, c): <span class="math inline">\(i\)</span> switching to b gets 2 &lt; 5; <span class="math inline">\(j\)</span> switching to d gets 2 &lt; 5. Every other cell has someone who gains by switching.</p>
+</div>
+</div>
+<h2 id="pareto-and-social-welfare">2. Pareto and social welfare</h2>
+<p><strong>Pareto optimal</strong>: no other outcome makes someone better off without making someone worse off. <strong>Social welfare</strong>: the sum of utilities. In a <strong>zero-sum</strong> game utilities always add to 0, so every outcome is Pareto optimal.</p>
+<p>Prisoner’s dilemma: (D, D) = (2, 2), (D, C) = (4, 1), (C, D) = (1, 4), (C, C) = (3, 3).</p>
+<div class="q" kind="multi">
+<p>In the prisoner’s dilemma above, select <strong>all</strong> Pareto optimal outcomes.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />(D, D)</label></li>
+<li><label><input type="checkbox" checked="" />(D, C)</label></li>
+<li><label><input type="checkbox" checked="" />(C, D)</label></li>
+<li><label><input type="checkbox" checked="" />(C, C)</label></li>
+</ul>
+<div class="expl">
+<p>(C, C) beats (D, D) for both, so only (D, D) is Pareto dominated.</p>
+</div>
+</div>
+<h2 id="mixed-strategies">3. Mixed strategies</h2>
+<p>Matching pennies has <strong>no pure NE</strong>. The mixed NE: each plays heads with probability 0.5, making the other indifferent (<span class="math inline">\(EU = 0\)</span> either way). Every finite game has at least one NE in mixed strategies.</p>
+<div class="q" kind="num" data-answer="0.5">
+<p>Matching pennies: <span class="math inline">\(i\)</span> gets +1 if the coins match and −1 otherwise. If <span class="math inline">\(j\)</span> plays heads with probability <span class="math inline">\(q\)</span>, then <span class="math inline">\(EU_i(H) = 2q - 1\)</span> and <span class="math inline">\(EU_i(T) = 1 - 2q\)</span>. For which <span class="math inline">\(q\)</span> is <span class="math inline">\(i\)</span> indifferent?</p>
+<div class="expl">
+<p><span class="math inline">\(2q - 1 = 1 - 2q \Rightarrow q = 0.5\)</span>.</p>
+</div>
+</div>
+<h2 id="recovering-cooperation">4. Recovering cooperation</h2>
+<ul>
+<li><strong>Program equilibria:</strong> submit “IF TheirProgram == ThisProgram THEN C ELSE D”; best response is the same program → (C, C), and it can never be suckered.</li>
+<li><strong>Infinitely repeated</strong> PD: cooperation can be rational. <strong>Known finite <span class="math inline">\(n\)</span> rounds:</strong> backwards induction unravels to defect every round.</li>
+<li><strong>Axelrod:</strong> TIT-FOR-TAT (cooperate, then copy) won overall; GRIM (defect for ever after one defection); Pavlov (win-stay, lose-shift); ALLD.</li>
+<li><strong>Chicken:</strong> <span class="math inline">\((D, C) \succ (C, C) \succ (C, D) \succ (D, D)\)</span>: no dominant strategy, two pure NE, (C, D) and (D, C).</li>
+<li><strong>Beauty contest</strong> (<span class="math inline">\(\frac{2}{3}\)</span> of the average): unique NE everyone picks 0; level-k: 50 → 33.3 → 22.2 → 14.8.</li>
+</ul>
+<div class="q" kind="num" data-answer="9">
+<p>Five rounds of the PD (T = 4, R = 3, P = 2, S = 1). TIT-FOR-TAT plays ALLD. What is TIT-FOR-TAT’s total score?</p>
+<div class="expl">
+<p>TFT: C, D, D, D, D; ALLD: D every round. TFT scores 1 + 2 + 2 + 2 + 2 = 9 (ALLD scores 12).</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80" data-draw="10">
+<div class="q" kind="mcq">
+<p>In the prisoner’s dilemma, what is the dominant strategy?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Defect, for both players</label></li>
+<li><label><input type="checkbox" />Cooperate, for both players</label></li>
+<li><label><input type="checkbox" />Defect for <span class="math inline">\(i\)</span>, cooperate for <span class="math inline">\(j\)</span></label></li>
+<li><label><input type="checkbox" />There is no dominant strategy</label></li>
+</ul>
+<div class="expl">
+<p>Against D, defecting gives 2 &gt; 1; against C, 4 &gt; 3. Same for both.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which outcome of the prisoner’s dilemma maximises social welfare?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />(D, D)</label></li>
+<li><label><input type="checkbox" />(D, C)</label></li>
+<li><label><input type="checkbox" checked="" />(C, C)</label></li>
+<li><label><input type="checkbox" />(D, C) and (C, D) equally</label></li>
+</ul>
+<div class="expl">
+<p>Sums: 4, 5, 5, 6. (C, C) = 6.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Payoffs (i, j), i on rows:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(j\)</span>: <span class="math inline">\(s_3\)</span></th>
+<th><span class="math inline">\(j\)</span>: <span class="math inline">\(s_4\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="math inline">\(i\)</span>: <span class="math inline">\(s_1\)</span></strong></td>
+<td>(1, −1)</td>
+<td>(3, −3)</td>
+</tr>
+<tr class="even">
+<td><strong><span class="math inline">\(i\)</span>: <span class="math inline">\(s_2\)</span></strong></td>
+<td>(−2, 2)</td>
+<td>(0, 0)</td>
+</tr>
+</tbody>
+</table>
+<p>Which is a dominant strategy for <span class="math inline">\(i\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(s_1\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(s_2\)</span></label></li>
+<li><label><input type="checkbox" />Both are dominant</label></li>
+<li><label><input type="checkbox" />Neither</label></li>
+</ul>
+<div class="expl">
+<p>Against <span class="math inline">\(s_3\)</span>: 1 &gt; −2. Against <span class="math inline">\(s_4\)</span>: 3 &gt; 0. <span class="math inline">\(s_1\)</span> is always better.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Payoffs (i, j), i on rows: (Swerve, Swerve) = (3, 3), (Swerve, Straight) = (2, 4), (Straight, Swerve) = (4, 2), (Straight, Straight) = (1, 1). How many pure Nash equilibria are there?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" checked="" />2</label></li>
+<li><label><input type="checkbox" />4</label></li>
+</ul>
+<div class="expl">
+<p>This is chicken. (Straight, Swerve) and (Swerve, Straight) are stable; at (Straight, Straight) both would swerve, at (Swerve, Swerve) both would go straight.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which ordering of outcomes for <span class="math inline">\(i\)</span> is the game of chicken?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\((D, C) \succ (C, C) \succ (D, D) \succ (C, D)\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\((D, C) \succ (C, C) \succ (C, D) \succ (D, D)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\((C, C) \succ (C, D) \succ (D, C) \succ (D, D)\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\((D, D) \succ (D, C) \succ (C, C) \succ (C, D)\)</span></label></li>
+</ul>
+<div class="expl">
+<ol type="A">
+<li>is the prisoner’s dilemma; chicken swaps the bottom two so mutual defection is worst. (C) cooperation dominates; (D) defection dominates.</li>
+</ol>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Two agents will play the prisoner’s dilemma exactly 100 times, and both know it. What does backwards induction predict?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Cooperate in every round</label></li>
+<li><label><input type="checkbox" />Cooperate until the last round, then defect</label></li>
+<li><label><input type="checkbox" checked="" />Defect in every round</label></li>
+<li><label><input type="checkbox" />Play TIT-FOR-TAT</label></li>
+</ul>
+<div class="expl">
+<p>Round 100 is a one-shot game → defect; so round 99 is effectively last → defect; and so on back to round 1.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Each agent submits the program “IF TheirProgram == ThisProgram THEN DO(C) ELSE DO(D)” to a mediator. Why is this attractive?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It guarantees the sucker’s payoff is shared equally.</label></li>
+<li><label><input type="checkbox" checked="" />Submitting the same program gives (C, C), and it defects against anything different, so it can’t be exploited.</label></li>
+<li><label><input type="checkbox" />It forces the other agent to cooperate whatever they submit.</label></li>
+<li><label><input type="checkbox" />It turns the game into a zero-sum game.</label></li>
+</ul>
+<div class="expl">
+<p>The best response to this program is the same program: mutual cooperation, with no sucker’s payoff possible.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What does Pavlov do in the iterated prisoner’s dilemma?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Always copies the opponent’s last move</label></li>
+<li><label><input type="checkbox" />Cooperates until betrayed once, then defects for ever</label></li>
+<li><label><input type="checkbox" checked="" />Repeats its last move after a good payoff, switches after a bad one</label></li>
+<li><label><input type="checkbox" />Always defects</label></li>
+</ul>
+<div class="expl">
+<p>Win-stay, lose-shift. (A) is TIT-FOR-TAT; (B) is GRIM; (D) is ALLD.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Matching pennies: which statement is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It has one pure Nash equilibrium.</label></li>
+<li><label><input type="checkbox" checked="" />It has no pure Nash equilibrium; both playing 50/50 is a mixed Nash equilibrium.</label></li>
+<li><label><input type="checkbox" />Heads is a dominant strategy for <span class="math inline">\(i\)</span>.</label></li>
+<li><label><input type="checkbox" />It maximises social welfare at (H, H).</label></li>
+</ul>
+<div class="expl">
+<p>Whatever pure pair is chosen, someone wishes they’d switched. The game is zero-sum, so every outcome has welfare 0.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Select <strong>all</strong> true statements about zero-sum games.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(u_i(\omega) + u_j(\omega) = 0\)</span> for every outcome.</label></li>
+<li><label><input type="checkbox" checked="" />Every outcome is Pareto optimal.</label></li>
+<li><label><input type="checkbox" />They always have a pure Nash equilibrium.</label></li>
+<li><label><input type="checkbox" checked="" />One agent’s best outcome is the other’s worst.</label></li>
+<li><label><input type="checkbox" />They are very common in real life.</label></li>
+</ul>
+<div class="expl">
+<p>Matching pennies is zero-sum with no pure NE. Wooldridge: real zero-sum encounters are rare, though people often act as if they were.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="22.2" data-tol="0.15">
+<p>Beauty contest: the target is <span class="math inline">\(\frac{2}{3}\)</span> of the average. Level-0 players guess 50 on average. What does a level-2 player guess? (One decimal.)</p>
+<div class="expl">
+<p>Level 1: <span class="math inline">\(\frac{2}{3} \times 50 = 33.3\)</span>. Level 2: <span class="math inline">\(\frac{2}{3} \times 33.3 = 22.2\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which statement about TIT-FOR-TAT in Axelrod’s tournament is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It won by beating every opponent head to head.</label></li>
+<li><label><input type="checkbox" checked="" />It won on total score across all opponents, despite never beating any single opponent in a match.</label></li>
+<li><label><input type="checkbox" />It lost to ALLD in total score.</label></li>
+<li><label><input type="checkbox" />It was the most complex program entered.</label></li>
+</ul>
+<div class="expl">
+<p>It scores less than or equal to its opponent in every match (against ALLD it loses), but collects many mutual-cooperation payoffs. It was the simplest entry.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p><span class="math inline">\(u_i(D, D) = 1\)</span>, <span class="math inline">\(u_i(D, C) = 1\)</span>, <span class="math inline">\(u_i(C, D) = 4\)</span>, <span class="math inline">\(u_i(C, C) = 4\)</span> (i’s action first). What is the rational choice for <span class="math inline">\(i\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />C, because every outcome after C is better for <span class="math inline">\(i\)</span> than every outcome after D</label></li>
+<li><label><input type="checkbox" />D, because it guarantees at least 1</label></li>
+<li><label><input type="checkbox" />It depends on what <span class="math inline">\(j\)</span> does</label></li>
+<li><label><input type="checkbox" />Mix 50/50</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(i\)</span> gets 4 from C whatever <span class="math inline">\(j\)</span> does, and 1 from D whatever <span class="math inline">\(j\)</span> does.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s04_context_orchestration.html"><small>&larr; Stage 4</small>Context, memory and orchestration</a><a class="next" href="s06_rl_refresher.html"><small>Stage 6 &rarr;</small>Week 4 refresher</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

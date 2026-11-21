@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 4 refresher: MDPs and Q-learning · CS5940 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5940", "stages": [{"id": "s01_deep_rl", "title": "Deep RL", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 25, "blurb": "Tables to networks, the DQN target, replay vs target network, actor\u2013critic, AlphaZero.", "href": "s01_deep_rl.html"}, {"id": "s02_llms", "title": "LLMs", "group": "Week 5 \u00b7 Deep RL and LLMs", "mins": 30, "blurb": "Next-token prediction, temperature, SFT / RLHF / RLVR / DPO, what changes the weights.", "href": "s02_llms.html"}, {"id": "s03_harness_tools", "title": "The harness and tools", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Workflow vs agent, the formal loop, validation, where \u201cdo not book\u201d lives, tools vs skills.", "href": "s03_harness_tools.html"}, {"id": "s04_context_orchestration", "title": "Context, memory and orchestration", "group": "Week 6 \u00b7 LLM-based agents", "mins": 30, "blurb": "Context budget, RAG, keyword vs vector, current facts, memory types, cheapest architecture.", "href": "s04_context_orchestration.html"}, {"id": "s05_game_theory", "title": "Game theory", "group": "Week 7 \u00b7 Multi-agent interaction", "mins": 35, "blurb": "Dominant strategies, Nash, mixed, Pareto, welfare; the prisoner\u2019s dilemma and its fixes.", "href": "s05_game_theory.html"}, {"id": "s06_rl_refresher", "title": "Week 4 refresher", "group": "Week 4 \u00b7 Refresher", "mins": 20, "blurb": "MDPs, returns, value iteration vs Q-learning, \u03b5-greedy, POMDPs, reward hacking.", "href": "s06_rl_refresher.html"}, {"id": "s07_mock_quiz2", "title": "Mock Quiz 2", "group": "Mock quiz", "mins": 30, "blurb": "Fifteen Quiz 1-style questions drawn from weeks 4 to 7. Pass 70%.", "href": "s07_mock_quiz2.html"}], "stage": "s06_rl_refresher", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5940_path_s06_rl_refresher" data-module="cs5940" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="s01_deep_rl.html"><span class="dot path"></span>1. Deep RL<span class="pstat" data-i="0"></span></a>
+<a href="s02_llms.html"><span class="dot path"></span>2. LLMs<span class="pstat" data-i="1"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="s03_harness_tools.html"><span class="dot path"></span>3. The harness and tools<span class="pstat" data-i="2"></span></a>
+<a href="s04_context_orchestration.html"><span class="dot path"></span>4. Context, memory and orchestration<span class="pstat" data-i="3"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="s05_game_theory.html"><span class="dot path"></span>5. Game theory<span class="pstat" data-i="4"></span></a>
+<h4>Week 4 · Refresher</h4>
+<a class="active" aria-current="page" href="s06_rl_refresher.html"><span class="dot path"></span>6. Week 4 refresher<span class="pstat" data-i="5"></span></a>
+<h4>Mock quiz</h4>
+<a href="s07_mock_quiz2.html"><span class="dot path"></span>7. Mock Quiz 2<span class="pstat" data-i="6"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 6 of 7</span><span class="chip">Week 4 · Refresher</span><span class="chip">about 20 min</span></div>
+  <h1>Week 4 refresher: MDPs and Q-learning</h1>
+  <p class="tagline">Quiz 2 will almost certainly include week 4, and week 5 builds straight on it. A fast pass over the MDP pieces, returns, Bellman, value iteration vs Q-learning, ε-greedy, POMDPs and reward hacking, with the hand calculations a quiz can ask for.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<p>Full notes: the <a href="../w4/MDPs.html">week 4 pages</a> (<a href="../w4/Return_and_Value.html">return and value</a>, <a href="../w4/Value_Iteration.html">value iteration</a>, <a href="../w4/Q_Learning.html">Q-learning</a>, <a href="../w4/Exploration.html">exploration</a>, <a href="../w4/POMDPs_and_Belief.html">POMDPs</a>, <a href="../w4/RL_Limits.html">when RL goes wrong</a>).</p>
+<h2 id="mdps-return-and-value">1. MDPs, return and value</h2>
+<p>An MDP: states <span class="math inline">\(S\)</span>, actions <span class="math inline">\(A\)</span>, transitions <span class="math inline">\(P(s&#39; \mid s, a)\)</span>, rewards <span class="math inline">\(R\)</span>, discount <span class="math inline">\(\gamma\)</span>. <strong>Markov property</strong>: the next state depends only on the current state and action. The answer is a <strong>policy</strong> <span class="math inline">\(\pi: S \to A\)</span>, not a fixed plan, because outcomes are random. Return <span class="math inline">\(G_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots\)</span>; value = expected return.</p>
+<div class="q" kind="num" data-answer="0.5185" data-tol="0.002">
+<p>Rewards along a run: −0.04, −0.04, −0.04, −0.04, +1, with <span class="math inline">\(\gamma = 0.9\)</span>. What is the return <span class="math inline">\(G_0\)</span>? (Four decimals.)</p>
+<div class="expl">
+<p>Backwards: <span class="math inline">\(G_4 = 1\)</span>, <span class="math inline">\(G_3 = -0.04 + 0.9 = 0.86\)</span>, <span class="math inline">\(G_2 = 0.734\)</span>, <span class="math inline">\(G_1 = 0.6206\)</span>, <span class="math inline">\(G_0 = -0.04 + 0.9 \times 0.6206 = 0.5185\)</span>.</p>
+</div>
+</div>
+<h2 id="value-iteration-vs-q-learning">2. Value iteration vs Q-learning</h2>
+<p><strong>Value iteration</strong> (planning) needs the model <span class="math inline">\(P\)</span>, <span class="math inline">\(R\)</span>: repeat <span class="math inline">\(V(s) \leftarrow \max_a \sum_{s&#39;} P(s&#39; \mid s, a)[R + \gamma V(s&#39;)]\)</span> until it settles. <strong>Q-learning</strong> (model-free) learns from samples: <span class="math inline">\(Q(s,a) \leftarrow Q(s,a) + \alpha[r + \gamma \max_{a&#39;} Q(s&#39;, a&#39;) - Q(s,a)]\)</span>. Off-policy (learns greedy values while exploring), bootstraps on its own estimates.</p>
+<div class="q" kind="num" data-answer="2.17">
+<p><span class="math inline">\(Q(s, a) = 2\)</span>, <span class="math inline">\(\alpha = 0.1\)</span>, <span class="math inline">\(\gamma = 0.9\)</span>, <span class="math inline">\(r = 1\)</span>, and <span class="math inline">\(\max_{a&#39;} Q(s&#39;, a&#39;) = 3\)</span>. What is the new <span class="math inline">\(Q(s, a)\)</span>?</p>
+<div class="expl">
+<p>Target <span class="math inline">\(1 + 2.7 = 3.7\)</span>; TD error <span class="math inline">\(1.7\)</span>; new <span class="math inline">\(Q = 2 + 0.17 = 2.17\)</span>.</p>
+</div>
+</div>
+<h2 id="exploration-pomdps-reward-hacking">3. Exploration, POMDPs, reward hacking</h2>
+<p><strong>ε-greedy</strong>: with probability ε act at random (over all actions), else greedy. Greedy action probability <span class="math inline">\(1 - \varepsilon + \varepsilon/|A|\)</span>. <strong>POMDP</strong>: the agent can’t see the state, so it keeps a <strong>belief</strong> (a probability over states) updated by predict → correct → normalise. <strong>Reward hacking</strong>: high reward, wrong behaviour (the boat going in circles collecting points).</p>
+<div class="q" kind="num" data-answer="0.85">
+<p><span class="math inline">\(|A| = 4\)</span> and <span class="math inline">\(\varepsilon = 0.2\)</span>, with the random choice made over all four actions. What is the probability of taking the greedy action?</p>
+<div class="expl">
+<p><span class="math inline">\(0.8 + 0.2/4 = 0.85\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80" data-draw="8">
+<div class="q" kind="mcq">
+<p>Which statement is the Markov property?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The agent always knows the true state.</label></li>
+<li><label><input type="checkbox" checked="" />The next state depends only on the current state and action, not on earlier history.</label></li>
+<li><label><input type="checkbox" />Rewards are always positive.</label></li>
+<li><label><input type="checkbox" />The transition probabilities are known to the agent.</label></li>
+</ul>
+<div class="expl">
+<p>Knowing the state is full observability (POMDPs drop it); knowing <span class="math inline">\(P\)</span> is what planning needs.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why is the solution to an MDP a policy rather than a fixed sequence of actions?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Policies use less memory.</label></li>
+<li><label><input type="checkbox" checked="" />Outcomes are random, so the agent needs an action for whatever state it ends up in.</label></li>
+<li><label><input type="checkbox" />Plans can’t contain loops.</label></li>
+<li><label><input type="checkbox" />MDPs have no goal.</label></li>
+</ul>
+<div class="expl">
+<p>A plan can be wrecked by the first slip; a policy covers every state.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>What does value iteration need that Q-learning doesn’t?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A reward signal</label></li>
+<li><label><input type="checkbox" />A discount factor</label></li>
+<li><label><input type="checkbox" checked="" />A known transition model <span class="math inline">\(P\)</span> and reward function <span class="math inline">\(R\)</span></label></li>
+<li><label><input type="checkbox" />A neural network</label></li>
+</ul>
+<div class="expl">
+<p>Planning sweeps the known model; Q-learning learns from sampled transitions.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="1.9">
+<p><span class="math inline">\(Q(s, a) = 2\)</span>, <span class="math inline">\(\alpha = 0.1\)</span>, <span class="math inline">\(\gamma = 0.9\)</span>, <span class="math inline">\(r = 1\)</span>, and <span class="math inline">\(s&#39;\)</span> is <strong>terminal</strong>. What is the new <span class="math inline">\(Q(s, a)\)</span>?</p>
+<div class="expl">
+<p>Terminal: target <span class="math inline">\(= 1\)</span>; TD error <span class="math inline">\(= -1\)</span>; new <span class="math inline">\(Q = 2 - 0.1 = 1.9\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why is Q-learning called off-policy?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It ignores the reward.</label></li>
+<li><label><input type="checkbox" checked="" />Its target uses the best next action, so it learns the greedy policy’s values even while behaving exploratively.</label></li>
+<li><label><input type="checkbox" />It only works offline.</label></li>
+<li><label><input type="checkbox" />It needs a separate policy network.</label></li>
+</ul>
+<div class="expl">
+<p>The <span class="math inline">\(\max_{a&#39;}\)</span> in the target is what makes it off-policy.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.8">
+<p><span class="math inline">\(|A| = 3\)</span> and <span class="math inline">\(\varepsilon = 0.3\)</span>, random choice over all three actions. What is the probability of the greedy action?</p>
+<div class="expl">
+<p><span class="math inline">\(0.7 + 0.3/3 = 0.8\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.8">
+<p><span class="math inline">\(Q^*(s, \cdot) = \{N: 0.3,\ S: -0.2,\ E: 0.8,\ W: 0.5\}\)</span>. What is <span class="math inline">\(V^*(s)\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(V^*(s) = \max_a Q^*(s, a) = 0.8\)</span>, and <span class="math inline">\(\pi^*(s) = E\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A robot can’t tell two identical-looking corridors apart, but must act differently in each. In week 4 terms, what does it need?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A larger discount factor</label></li>
+<li><label><input type="checkbox" checked="" />A belief state (or internal memory) summarising its history, since the problem is partially observable</label></li>
+<li><label><input type="checkbox" />A faster perception-action loop</label></li>
+<li><label><input type="checkbox" />More actions</label></li>
+</ul>
+<div class="expl">
+<p>Quiz 1 asked the same idea: internal state that tracks where it has been. Week 4 calls it a belief over states in a POMDP.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A boat-racing agent learns to circle forever collecting bonus points instead of finishing the race. What is this?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Overfitting to the discount factor</label></li>
+<li><label><input type="checkbox" checked="" />Reward hacking: the reward didn’t capture what the designer meant</label></li>
+<li><label><input type="checkbox" />Partial observability</label></li>
+<li><label><input type="checkbox" />A failure of exploration</label></li>
+</ul>
+<div class="expl">
+<p>High measured reward, unwanted behaviour. Week 5 lists it again as reward misspecification.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>With <span class="math inline">\(\gamma\)</span> close to 0, what does the agent care about?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Mostly immediate rewards</label></li>
+<li><label><input type="checkbox" />Mostly distant rewards</label></li>
+<li><label><input type="checkbox" />All rewards equally</label></li>
+<li><label><input type="checkbox" />Only the final reward</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(\gamma^k\)</span> shrinks fast when <span class="math inline">\(\gamma\)</span> is small, so later rewards barely count.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s05_game_theory.html"><small>&larr; Stage 5</small>Game theory</a><a class="next" href="s07_mock_quiz2.html"><small>Stage 7 &rarr;</small>Mock Quiz 2</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

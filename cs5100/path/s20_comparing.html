@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparing two algorithms · CS5100 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}, {"id": "s19_bias_variance", "title": "Bias, variance and regularisation", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 40, "blurb": "Training vs test error, the decomposition by hand, the U-shape, KNN and K, pruning and ridge as fit + penalty.", "href": "s19_bias_variance.html"}, {"id": "s20_comparing", "title": "Comparing two algorithms", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 35, "blurb": "Contingency tables, the null hypothesis, binomial probabilities, p-values and significance levels.", "href": "s20_comparing.html"}, {"id": "s21_bagging_oob", "title": "Bootstrap, bagging and OOB error", "group": "Week 6 \u00b7 Ensemble methods", "mins": 45, "blurb": "Sampling with replacement, bagging by vote or average, the 36.8% lemma, and the OOB calculation (2023 and 2025).", "href": "s21_bagging_oob.html"}, {"id": "s22_forests_boosting", "title": "Random forests and boosting", "group": "Week 6 \u00b7 Ensemble methods", "mins": 40, "blurb": "m attributes per split, residual fitting, \u03b7, B and d, and which one can overfit (2025 Q3a).", "href": "s22_forests_boosting.html"}, {"id": "s23_kmeans", "title": "Metrics and K-means", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Metrics, the SSE objective, K-means by hand, the termination proof, restarts, choosing K, empty clusters.", "href": "s23_kmeans.html"}, {"id": "s24_hierarchical", "title": "Hierarchical clustering", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 45, "blurb": "Dendrograms, the four linkages by hand (2023 Q5), chaining, inversions, cutting, divisive vs agglomerative.", "href": "s24_hierarchical.html"}, {"id": "s25_density", "title": "Density estimation and semi-supervised learning", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Histograms and the curse of dimensionality, k/(nV), Parzen windows, KDE, bandwidth; seeded and constrained K-means.", "href": "s25_density.html"}, {"id": "s26_mock_part2", "title": "Mock exam part 2 (weeks 5-7)", "group": "Final", "mins": 50, "blurb": "Second-half questions in the past papers' shape: ensembles and OOB, clustering, density estimation. Pass 70%.", "href": "s26_mock_part2.html"}], "stage": "s20_comparing", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s20_comparing" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+<h4>Week 5 · Evaluating and comparing</h4>
+<a href="s19_bias_variance.html"><span class="dot path"></span>19. Bias, variance and regularisation<span class="pstat" data-i="18"></span></a>
+<a class="active" aria-current="page" href="s20_comparing.html"><span class="dot path"></span>20. Comparing two algorithms<span class="pstat" data-i="19"></span></a>
+<h4>Week 6 · Ensemble methods</h4>
+<a href="s21_bagging_oob.html"><span class="dot path"></span>21. Bootstrap, bagging and OOB error<span class="pstat" data-i="20"></span></a>
+<a href="s22_forests_boosting.html"><span class="dot path"></span>22. Random forests and boosting<span class="pstat" data-i="21"></span></a>
+<h4>Week 7 · Unsupervised learning</h4>
+<a href="s23_kmeans.html"><span class="dot path"></span>23. Metrics and K-means<span class="pstat" data-i="22"></span></a>
+<a href="s24_hierarchical.html"><span class="dot path"></span>24. Hierarchical clustering<span class="pstat" data-i="23"></span></a>
+<a href="s25_density.html"><span class="dot path"></span>25. Density estimation and semi-supervised learning<span class="pstat" data-i="24"></span></a>
+<h4>Final</h4>
+<a href="s26_mock_part2.html"><span class="dot path"></span>26. Mock exam part 2 (weeks 5-7)<span class="pstat" data-i="25"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 20 of 26</span><span class="chip">Week 5 · Evaluating and comparing</span><span class="chip">about 35 min</span></div>
+  <h1>Comparing two algorithms</h1>
+  <p class="tagline">Algorithm 1 makes fewer test errors than Algorithm 0. Real or luck? Keep only the test cases where they disagree, treat each one as a coin flip, and ask how surprising the score would be if neither were better.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 13.1 <em>A quick review of hypothesis testing</em> (p558–563): <strong>read</strong> for null hypotheses, p-values, Type I and II errors (it uses a t-test; the slides use a binomial test). The slides’ binomial sign test itself isn’t in ISLP: this stage covers it. 13.2–13.5 (multiple testing) aren’t on this year’s slides, but the 2024 paper had a big question on them: ask the lecturer.</p>
+</div>
+<h2 id="keep-only-the-disagreements">1. Keep only the disagreements</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Alg 1 correct</th>
+<th>Alg 1 wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Alg 0 correct</strong></td>
+<td>189</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td><strong>Alg 0 wrong</strong></td>
+<td>17</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<p>Alg 0 errs <span class="math inline">\((17 + 23)/238 = 16.8\%\)</span>, Alg 1 <span class="math inline">\((9 + 23)/238 = 13.4\%\)</span>. Cases where both are right or both wrong say nothing about which is better. That leaves <span class="math inline">\(N = 9 + 17 = 26\)</span> disagreements, and Alg 1 wins <span class="math inline">\(k = 17\)</span>.</p>
+<div class="q" kind="num" data-answer="12.5" data-tol="0.06" label="error rate of B (%)">
+<p>On 200 test cases: both right 150, only A right 10, only B right 25, both wrong 15. What is B’s error rate, in percent?</p>
+<div class="expl">
+<p>B is wrong when only A is right or both are wrong: <span class="math inline">\((10 + 15)/200 = 12.5\%\)</span>.</p>
+</div>
+</div>
+<h2 id="the-null-hypothesis-and-the-p-value">2. The null hypothesis and the p-value</h2>
+<p><span class="math inline">\(H_0\)</span>: “Alg 1 is not better than Alg 0”. If they’re equally good, each disagreement is a fair coin flip, so the number of wins <span class="math inline">\(Y \sim \text{Binomial}(N, \frac12)\)</span>. (If Alg 1 were worse, 17 wins would be even less likely, so the fair coin is the worst case.)</p>
+<p><span class="math display">\[p = P(Y \ge k) = \sum_{j=k}^N\binom Nj\frac1{2^N}.\]</span></p>
+<p>Reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(p \le \epsilon\)</span> (5% or 1%, fixed beforehand). For 17 of 26, <span class="math inline">\(p = 0.0843\)</span>: <strong>can’t reject</strong> at 5%.</p>
+<div class="example">
+<p><span class="math inline">\(N = 10\)</span>, <span class="math inline">\(k = 9\)</span>: <span class="math inline">\(p = \frac{\binom{10}{9} + \binom{10}{10}}{1024} = \frac{11}{1024} = 0.0107\)</span>. Reject at 5%, not at 1%.</p>
+</div>
+<div class="q" kind="num" data-answer="0.0352" data-tol="0.0005" label="p-value">
+<p><span class="math inline">\(N = 8\)</span> disagreements; Algorithm 1 wins 7. Compute the one-sided p-value.</p>
+<div class="expl">
+<p><span class="math inline">\(\frac{\binom87 + \binom88}{2^8} = \frac{8 + 1}{256} = 0.0352\)</span>. Reject at 5%, not at 1%.</p>
+</div>
+</div>
+<h2 id="reading-it-right">3. Reading it right</h2>
+<ul>
+<li>“Can’t reject” is not “they’re equal”: just not enough evidence.</li>
+<li>The p-value is <span class="math inline">\(P(\text{data at least this extreme} \mid H_0)\)</span>, <strong>not</strong> <span class="math inline">\(P(H_0 \mid \text{data})\)</span>.</li>
+<li>Same win rate, more data: smaller p (34 of 52 gives 0.018).</li>
+<li>A <strong>Type I error</strong> is rejecting a true <span class="math inline">\(H_0\)</span>; testing at level <span class="math inline">\(\epsilon\)</span> keeps its probability <span class="math inline">\(\le \epsilon\)</span>.</li>
+</ul>
+<div class="q" kind="mcq">
+<p>A test gives <span class="math inline">\(p = 0.03\)</span>. Which statement is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />If the algorithms were equally good, a result at least this lopsided would happen about 3% of the time.</label></li>
+<li><label><input type="checkbox" />There is a 3% chance the algorithms are equally good.</label></li>
+<li><label><input type="checkbox" />Algorithm 1 is 3% better.</label></li>
+<li><label><input type="checkbox" />There is a 97% chance Algorithm 1 is better.</label></li>
+</ul>
+<div class="expl">
+<p>A p-value is a probability about the data, computed assuming <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="signtest">
+
+</div>
+<div class="q" kind="gen" data-gen="signtest">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks)</strong> Explain why the binomial test for comparing two classifiers ignores the test cases where both are right or both are wrong, and why under <span class="math inline">\(H_0\)</span> the number of wins is <span class="math inline">\(\text{Binomial}(N, \frac12)\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Agreements are equally good (or bad) for both: they carry no information about which is better.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(N\)</span> = number of disagreements; <span class="math inline">\(k\)</span> = those Alg 1 wins.</label></li>
+<li><label><input type="checkbox" checked="" />Under <span class="math inline">\(H_0\)</span> (equally good), each disagreement is equally likely to go either way: a fair coin.</label></li>
+<li><label><input type="checkbox" checked="" />Independent test cases, so the count is binomial; p-value <span class="math inline">\(= P(Y \ge k)\)</span>.</label></li>
+</ul>
+<div class="model">
+<p>When both classifiers are right, or both wrong, the case says nothing about which is better, so only the <span class="math inline">\(N\)</span> disagreements matter. If the two were equally good, each disagreement would be equally likely to be won by either, independently across the i.i.d. test cases, so the number <span class="math inline">\(Y\)</span> won by Algorithm 1 is <span class="math inline">\(\text{Binomial}(N, \frac12)\)</span>; the p-value is <span class="math inline">\(P(Y \ge k)\)</span> for the observed <span class="math inline">\(k\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>With <span class="math inline">\(\epsilon = 5\%\)</span> you get <span class="math inline">\(p = 0.084\)</span>. The right conclusion is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />We cannot reject <span class="math inline">\(H_0\)</span>: the data don’t show Algorithm 1 is better.</label></li>
+<li><label><input type="checkbox" />The algorithms are equally good.</label></li>
+<li><label><input type="checkbox" />Algorithm 0 is better.</label></li>
+<li><label><input type="checkbox" />Reject <span class="math inline">\(H_0\)</span>.</label></li>
+</ul>
+<div class="expl">
+<p>Failing to reject only means there isn’t enough evidence.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.0039" data-tol="0.0002" label="p-value">
+<p>All 8 disagreements go to Algorithm 1. p-value?</p>
+<div class="expl">
+<p><span class="math inline">\(1/2^8 = 1/256 = 0.0039\)</span>. Reject even at 1%.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s19_bias_variance.html"><small>&larr; Stage 19</small>Bias, variance and regularisation</a><a class="next" href="s21_bagging_oob.html"><small>Stage 21 &rarr;</small>Bootstrap, bagging and OOB error</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

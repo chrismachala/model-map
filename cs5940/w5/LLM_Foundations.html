@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How an LLM generates text · CS5940 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="cs5940_w5_LLM_Foundations" data-module="cs5940">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">Ag</span><span>CS5940 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a href="../../cs5100/index.html">CS5100</a>
+<a class="on" href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="cs5940_index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · What is an agent?</h4>
+<a href="../w1/00_Start_Here_What_Is_An_Agent.html" data-page="cs5940_w1_00_Start_Here_What_Is_An_Agent" data-total="6"><span class="dot tool"></span>Start here: what is an agent?<span class="tick"></span></a>
+<a href="../w1/Environment_Properties.html" data-page="cs5940_w1_Environment_Properties" data-total="3"><span class="dot tool"></span>Environment properties<span class="tick"></span></a>
+<a href="../w1/Formal_Agent_Model.html" data-page="cs5940_w1_Formal_Agent_Model" data-total="5"><span class="dot tool"></span>The formal agent model<span class="tick"></span></a>
+<a href="../w1/LLM_Chat_Loop.html" data-page="cs5940_w1_LLM_Chat_Loop" data-total="6"><span class="dot prac"></span>Practical 1: the chat loop<span class="tick"></span></a>
+<h4>Week 2 · Symbolic, planning, BDI</h4>
+<a href="../w2/Deductive_Reasoning_Agents.html" data-page="cs5940_w2_Deductive_Reasoning_Agents" data-total="5"><span class="dot delib"></span>Deductive reasoning agents<span class="tick"></span></a>
+<a href="../w2/Teleo_Reactive_Programs.html" data-page="cs5940_w2_Teleo_Reactive_Programs" data-total="4"><span class="dot react"></span>Teleo-reactive programs<span class="tick"></span></a>
+<a href="../w2/Agent0.html" data-page="cs5940_w2_Agent0" data-total="5"><span class="dot delib"></span>Agent0 (agent-oriented programming)<span class="tick"></span></a>
+<a href="../w2/BDI_Practical_Reasoning.html" data-page="cs5940_w2_BDI_Practical_Reasoning" data-total="5"><span class="dot delib"></span>BDI and practical reasoning<span class="tick"></span></a>
+<a href="../w2/STRIPS_Planning.html" data-page="cs5940_w2_STRIPS_Planning" data-total="4"><span class="dot delib"></span>STRIPS planning<span class="tick"></span></a>
+<a href="../w2/Coach_Practical.html" data-page="cs5940_w2_Coach_Practical" data-total="6"><span class="dot prac"></span>Practical 2: the running coach<span class="tick"></span></a>
+<h4>Week 3 · BDI loops, reactive, hybrid</h4>
+<a href="../w3/BDI_Control_Loop.html" data-page="cs5940_w3_BDI_Control_Loop" data-total="5"><span class="dot delib"></span>The BDI control loop<span class="tick"></span></a>
+<a href="../w3/Intention_Reconsideration.html" data-page="cs5940_w3_Intention_Reconsideration" data-total="5"><span class="dot delib"></span>Intention reconsideration<span class="tick"></span></a>
+<a href="../w3/AgentSpeak.html" data-page="cs5940_w3_AgentSpeak" data-total="6"><span class="dot delib"></span>AgentSpeak(L)<span class="tick"></span></a>
+<a href="../w3/Subsumption.html" data-page="cs5940_w3_Subsumption" data-total="5"><span class="dot react"></span>Subsumption (Brooks)<span class="tick"></span></a>
+<a href="../w3/Hybrid_Architectures.html" data-page="cs5940_w3_Hybrid_Architectures" data-total="5"><span class="dot hyb"></span>Hybrid architectures<span class="tick"></span></a>
+<h4>Week 4 · MDPs and reinforcement learning</h4>
+<a href="../w4/MDPs.html" data-page="cs5940_w4_MDPs" data-total="4"><span class="dot tool"></span>Markov decision processes<span class="tick"></span></a>
+<a href="../w4/Return_and_Value.html" data-page="cs5940_w4_Return_and_Value" data-total="5"><span class="dot tool"></span>Return, value and Bellman<span class="tick"></span></a>
+<a href="../w4/Value_Iteration.html" data-page="cs5940_w4_Value_Iteration" data-total="5"><span class="dot delib"></span>Value iteration<span class="tick"></span></a>
+<a href="../w4/Q_Learning.html" data-page="cs5940_w4_Q_Learning" data-total="5"><span class="dot learn"></span>Q-learning<span class="tick"></span></a>
+<a href="../w4/Exploration.html" data-page="cs5940_w4_Exploration" data-total="4"><span class="dot tool"></span>Exploration vs exploitation<span class="tick"></span></a>
+<a href="../w4/POMDPs_and_Belief.html" data-page="cs5940_w4_POMDPs_and_Belief" data-total="4"><span class="dot tool"></span>POMDPs and belief states<span class="tick"></span></a>
+<a href="../w4/RL_Limits.html" data-page="cs5940_w4_RL_Limits" data-total="3"><span class="dot tool"></span>When RL goes wrong<span class="tick"></span></a>
+<h4>Week 5 · Deep RL and LLMs</h4>
+<a href="../w5/Deep_RL.html" data-page="cs5940_w5_Deep_RL" data-total="7"><span class="dot learn"></span>Deep reinforcement learning<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w5/LLM_Foundations.html" data-page="cs5940_w5_LLM_Foundations" data-total="5"><span class="dot tool"></span>How an LLM generates text<span class="tick"></span></a>
+<a href="../w5/LLM_Post_Training.html" data-page="cs5940_w5_LLM_Post_Training" data-total="5"><span class="dot learn"></span>Post-training and the three knobs<span class="tick"></span></a>
+<h4>Week 6 · LLM-based agents</h4>
+<a href="../w6/LLM_Agent_Harness.html" data-page="cs5940_w6_LLM_Agent_Harness" data-total="7"><span class="dot llm"></span>LLM agents: the loop and the harness<span class="tick"></span></a>
+<a href="../w6/Tools_and_Skills.html" data-page="cs5940_w6_Tools_and_Skills" data-total="6"><span class="dot llm"></span>Tools and skills<span class="tick"></span></a>
+<a href="../w6/Context_Memory_RAG.html" data-page="cs5940_w6_Context_Memory_RAG" data-total="6"><span class="dot llm"></span>Context, retrieval and memory<span class="tick"></span></a>
+<a href="../w6/Orchestration.html" data-page="cs5940_w6_Orchestration" data-total="6"><span class="dot llm"></span>Planning and orchestration<span class="tick"></span></a>
+<h4>Week 7 · Multi-agent interaction</h4>
+<a href="../w7/Utilities_and_Games.html" data-page="cs5940_w7_Utilities_and_Games" data-total="6"><span class="dot mas"></span>Utilities, preferences and games<span class="tick"></span></a>
+<a href="../w7/Solution_Concepts.html" data-page="cs5940_w7_Solution_Concepts" data-total="7"><span class="dot mas"></span>Solution concepts<span class="tick"></span></a>
+<a href="../w7/Prisoners_Dilemma.html" data-page="cs5940_w7_Prisoners_Dilemma" data-total="8"><span class="dot mas"></span>The prisoner’s dilemma<span class="tick"></span></a>
+<div class="legend"><span><i class="dot delib"></i>deliberative agent</span><span><i class="dot react"></i>reactive agent</span><span><i class="dot hyb"></i>hybrid agent</span><span><i class="dot learn"></i>learning agent</span><span><i class="dot llm"></i>llm-based agent</span><span><i class="dot mas"></i>multi-agent</span><span><i class="dot tool"></i>not an agent</span><span><i class="dot prac"></i>practical</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not an agent: toolkit</span><span class="chip">Week 5</span><span class="chip">5 techniques</span></div>
+  <h1>How an LLM generates text</h1>
+  <p class="tagline">An LLM does one thing: given the tokens so far, it gives a probability for every possible next token. Pick one, append it, repeat. Everything else on this page (tokens, attention, softmax, temperature, pretraining) is a detail of how that one step works and how the model learned it.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Kind:</strong> toolkit (what’s inside the model an LLM agent is built on).<br />
+<strong>Week:</strong> 5, Part B, first half (slides 27 to 41).<br />
+<strong>Book:</strong> not in Wooldridge. Optional: Raschka, <em>Build a Large Language Model (From Scratch)</em> ch. 1 to 3; the Transformer Explainer (linked on slide 55).<br />
+<strong>Techniques on this page:</strong> next-token prediction and the chain rule, Shannon’s k-gram models, tokens, self-attention and the causal mask, logits and softmax, temperature and decoding, pretraining with cross-entropy.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>Deep RL learns from <strong>reward</strong>: act, get a score, change the weights to get more. LLM <strong>pretraining</strong> learns from a completely different signal (slide 27): take real text, hide the next token, and change the weights so the model predicts it better. The training text supplies the answers, so <strong>no acting and no reward</strong>: next-token pretraining is <strong>not RL</strong>. (RL comes back later, in post-training.)</p>
+<p>Why care in an agents module? Because the next weeks build agents <em>around</em> this model. You need to know exactly what it does and doesn’t do: it outputs <strong>probabilities over tokens</strong>, with <strong>fixed weights</strong> at inference, and generating text is <strong>not the same as acting</strong> in the world.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word or symbol</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>token</td>
+<td>a piece of text the model works with: a word, part of a word, punctuation or a space</td>
+</tr>
+<tr class="even">
+<td>tokenizer</td>
+<td>maps text to integer IDs and back (“Hello world” → [15496, 995] in GPT-2)</td>
+</tr>
+<tr class="odd">
+<td>embedding</td>
+<td>a vector of numbers that represents a token inside the network</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{&lt;t}\)</span></td>
+<td>all the tokens before position <span class="math inline">\(t\)</span></td>
+</tr>
+<tr class="odd">
+<td>autoregressive</td>
+<td>generates one token at a time, each one conditioned on everything before it</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P_\theta(x_t \mid x_{&lt;t})\)</span></td>
+<td>the model’s probability for the next token, with weights <span class="math inline">\(\theta\)</span></td>
+</tr>
+<tr class="odd">
+<td>context (window)</td>
+<td>the tokens the model can see right now</td>
+</tr>
+<tr class="even">
+<td>self-attention</td>
+<td>lets each token’s representation pull in information from other (earlier) tokens</td>
+</tr>
+<tr class="odd">
+<td>causal mask</td>
+<td>blocks attention to <em>future</em> tokens</td>
+</tr>
+<tr class="even">
+<td>logits <span class="math inline">\(z_i\)</span></td>
+<td>raw scores, one per possible next token, before softmax</td>
+</tr>
+<tr class="odd">
+<td>softmax</td>
+<td>turns scores into probabilities that sum to 1</td>
+</tr>
+<tr class="even">
+<td>temperature <span class="math inline">\(T\)</span></td>
+<td>divides the logits before softmax: low <span class="math inline">\(T\)</span> sharpens, high <span class="math inline">\(T\)</span> flattens</td>
+</tr>
+<tr class="odd">
+<td>greedy decoding</td>
+<td>always take the most likely token</td>
+</tr>
+<tr class="even">
+<td>sampling</td>
+<td>draw the next token at random from the probabilities</td>
+</tr>
+<tr class="odd">
+<td>cross-entropy / NLL</td>
+<td><span class="math inline">\(-\log P\)</span> of the true next token: how surprised the model was</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-next-token-prediction">Technique 1: next-token prediction</h2>
+<p><strong>Problem it solves:</strong> turns “generate text” into a sequence of small prediction problems.</p>
+<p>An autoregressive model gives <span class="math inline">\(P_\theta(x_t \mid x_1, \dots, x_{t-1})\)</span> (slide 31). The probability of a whole sequence is the product of the steps (the <strong>chain rule</strong>):</p>
+<p><span class="math display">\[P_\theta(x_{1:n}) = \prod_{t=1}^{n} P_\theta(x_t \mid x_{&lt;t})\]</span></p>
+<p>To generate, apply a <strong>decoding</strong> rule (greedy or sampling) to pick a token, append it, and predict again.</p>
+<div class="example">
+<p><strong>Worked example.</strong> <span class="math inline">\(P(\text{The}) = 0.5\)</span>, <span class="math inline">\(P(\text{cat} \mid \text{The}) = 0.2\)</span>, <span class="math inline">\(P(\text{sat} \mid \text{The cat}) = 0.4\)</span>. Then <span class="math inline">\(P(\text{The cat sat}) = 0.5 \times 0.2 \times 0.4 = 0.04\)</span>.</p>
+</div>
+<p><strong>Shannon got there first (1948, slides 28 to 30).</strong> He generated English with <span class="math inline">\(k\)</span>-gram models: count which character follows each <span class="math inline">\(k\)</span>-character context in a corpus and turn the counts into probabilities. Zero-order (uniform letters) gives <code>XFOML RXKHRJFFJUJ</code>; each higher order looks more like English, with no grammar rules supplied. Modern LLMs keep the same loop (predict, sample, append) but replace the count table with <strong>learned neural representations</strong> and <strong>much longer context</strong>. They are not <span class="math inline">\(k\)</span>-gram tables.</p>
+<h2 id="technique-2-tokens">Technique 2: tokens</h2>
+<p><strong>Problem it solves:</strong> gives the network a fixed vocabulary of discrete IDs.</p>
+<p>A tokenizer splits text into tokens and maps each to an ID (slide 32): “The autonomous agents cooperate.” might become <code>The | auton | omous | agents | cooperate | .</code>. Boundaries depend on the tokenizer. The model sees <strong>IDs and embedding vectors</strong>, never words as symbols. (That’s why costs and limits are counted in tokens, as in the practicals.)</p>
+<h2 id="technique-3-self-attention-and-the-causal-mask">Technique 3: self-attention and the causal mask</h2>
+<p><strong>Problem it solves:</strong> the same token means different things in different contexts.</p>
+<p>The embedding for “it” on its own can’t say what “it” refers to. <strong>Self-attention</strong> lets each token’s representation take in information from other tokens (slide 34): in “The robot moved the box because it was heavy”, “it” should attend strongly to “box”. <strong>Multiple heads</strong> can track different relationships at once.</p>
+<p><strong>Causal attention</strong> (slide 35): at position <span class="math inline">\(t\)</span> the prediction may depend only on <span class="math inline">\(x_1, \dots, x_t\)</span>. A <strong>mask</strong> blocks every later position, so in training the model can’t peek at the token it’s supposed to predict. At inference, the model appends each new token and predicts again.</p>
+<div class="example">
+<p><strong>The mask as a grid.</strong> Rows = query position, columns = key position. Position 3 may look at 1, 2 and 3 only. In a 5-token sequence the allowed (query, key) pairs form a lower triangle: <span class="math inline">\(1 + 2 + 3 + 4 + 5 = 15\)</span> of the 25 cells.</p>
+</div>
+<h2 id="technique-4-logits-softmax-and-temperature">Technique 4: logits, softmax and temperature</h2>
+<p><strong>Problem it solves:</strong> turns raw scores into a distribution you can choose from.</p>
+<p>The last layer outputs one <strong>logit</strong> <span class="math inline">\(z_i\)</span> per vocabulary token. <strong>Softmax</strong> (slide 36):</p>
+<p><span class="math display">\[P_\theta(x_t = i \mid x_{&lt;t}) = \frac{\exp(z_i)}{\sum_j \exp(z_j)}\]</span></p>
+<p><strong>Temperature</strong> (slide 37) divides the logits first:</p>
+<p><span class="math display">\[P_T(i) = \frac{\exp(z_i / T)}{\sum_j \exp(z_j / T)}, \quad T &gt; 0\]</span></p>
+<ul>
+<li><span class="math inline">\(T &lt; 1\)</span> concentrates probability on the likely tokens (less varied output when sampling).</li>
+<li><span class="math inline">\(T &gt; 1\)</span> flattens the distribution (more varied, more mistakes).</li>
+<li><strong>Greedy decoding ignores temperature</strong>: dividing every logit by the same positive <span class="math inline">\(T\)</span> doesn’t change which one is largest.</li>
+</ul>
+<div class="example">
+<p><strong>Slide 37’s table.</strong> At <span class="math inline">\(T = 1\)</span>: The 0.50, A 0.30, One 0.15, Some 0.05. A shortcut: <span class="math inline">\(P_T(i) \propto P_1(i)^{1/T}\)</span>.</p>
+<ul>
+<li><span class="math inline">\(T = 0.5\)</span>: square them: 0.25, 0.09, 0.0225, 0.0025; total 0.365; divide: <strong>0.685, 0.247, 0.062, 0.007</strong>.</li>
+<li><span class="math inline">\(T = 2\)</span>: square-root them: 0.707, 0.548, 0.387, 0.224; total 1.866; divide: <strong>0.379, 0.294, 0.208, 0.120</strong>.</li>
+</ul>
+<p>“The” is top in every column.</p>
+</div>
+<div data-widget="temperature">
+
+</div>
+<div class="warn">
+<p><strong>Poll 2 (slide 38).</strong> Greedy decoding, temperature raised from 1 to 2: <strong>nothing changes</strong> (C), the top-ranked token is the same. Temperature only matters when you <em>sample</em>. And it never updates the weights.</p>
+<p><strong>Token probabilities are not truth.</strong> A probability of 0.9 for the next token says nothing about whether the whole answer is correct (slide 36).</p>
+</div>
+<h2 id="technique-5-pretraining">Technique 5: pretraining</h2>
+<p><strong>Problem it solves:</strong> gets general language, knowledge and coding skill without hand-made labels.</p>
+<p>Collect huge amounts of text and code. For each position, reveal the prefix and score the true next token (slide 40):</p>
+<p><span class="math display">\[L_{\text{pretrain}}(\theta) = -\sum_t \log P_\theta(x_t \mid x_{&lt;t})\]</span></p>
+<p>“How surprised the model was by each true next token, added up.” Minimise it by gradient descent over many examples.</p>
+<div class="example">
+<p><strong>Worked example.</strong> The true next tokens got probabilities 0.5, 0.25 and 0.8. Loss <span class="math inline">\(= -(\ln 0.5 + \ln 0.25 + \ln 0.8) = 0.693 + 1.386 + 0.223 = 2.30\)</span>. A perfect model (probability 1 each time) has loss 0.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pretraining <strong>can</strong> give (slide 41)</th>
+<th>It does <strong>not</strong> guarantee</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rich reusable token representations</td>
+<td>that every output is true</td>
+</tr>
+<tr class="even">
+<td>general language and code generation</td>
+<td>understanding what the user meant</td>
+</tr>
+<tr class="odd">
+<td>patterns useful for answering and solving tasks</td>
+<td>reliable reasoning or verification</td>
+</tr>
+<tr class="even">
+<td>transfer to prompts unlike any training example</td>
+<td><strong>permission to act</strong> in external systems</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-to-read">What to read</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wooldridge</td>
+<td>Not covered</td>
+<td>the book predates LLMs</td>
+</tr>
+<tr class="even">
+<td>Slides 27 to 41</td>
+<td><strong>Primary</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Transformer Explainer (slide 55)</td>
+<td>Recommended, 15 min</td>
+<td>watch attention and temperature live</td>
+</tr>
+<tr class="even">
+<td>Raschka 2024, ch. 1 to 3</td>
+<td>Optional</td>
+<td>the slides’ transformer and training diagrams come from here</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5940 Intelligent Agents, week 5 Part B (LLM foundations). I want quiz practice on:
+- why next-token pretraining is not reinforcement learning
+- the chain rule P(x_1..n) = product of P(x_t | x_&lt;t), with small numbers
+- Shannon&#39;s k-gram models vs modern LLMs
+- tokens and tokenizers; self-attention; why the causal mask exists
+- softmax and temperature: compute probabilities at T = 0.5, 1, 2 from given probabilities or logits
+- greedy decoding vs sampling, and why temperature does not change greedy output
+- the pretraining loss -sum log P, and what pretraining does and does not give
+
+Please:
+1. Ask multiple-choice or short numeric questions like a university quiz, ONE at a time.
+2. Wait for my answer, then mark it with full working.
+3. Every 5 questions, tell me what I keep getting wrong.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w5/Deep_RL.html"><small>&larr; Previous</small>Deep reinforcement learning</a><a class="next" href="../w5/LLM_Post_Training.html"><small>Next &rarr;</small>Post-training and the three knobs</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

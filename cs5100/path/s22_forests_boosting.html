@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Random forests and boosting · CS5100 Learning path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100", "stages": [{"id": "s01_big_picture", "title": "The big picture", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "Y = f(X) + \u03b5, prediction vs inference, parametric vs not, supervised vs unsupervised, regression vs classification.", "href": "s01_big_picture.html"}, {"id": "s02_maths", "title": "Maths toolkit", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "Vectors, dot products and orthogonality, distances, derivatives, the chain rule, gradients.", "href": "s02_maths.html"}, {"id": "s03_accuracy", "title": "Accuracy, flexibility and overfitting", "group": "Week 1 \u00b7 Foundations", "mins": 35, "blurb": "MSE and error rate, train / validation / test, bias and variance, the U-shaped test error.", "href": "s03_accuracy.html"}, {"id": "s04_bayes_knn", "title": "Bayes classifier and KNN", "group": "Week 1 \u00b7 Foundations", "mins": 40, "blurb": "The best possible classifier, the Bayes error rate, and KNN as a way to copy it. The role of K.", "href": "s04_bayes_knn.html"}, {"id": "s05_simple_regression", "title": "Simple linear regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Least squares from scratch, the slope formula, RSS, TSS, R\u00b2 and RSE, degrees of freedom.", "href": "s05_simple_regression.html"}, {"id": "s06_multiple_regression", "title": "Multiple regression", "group": "Week 2 \u00b7 Regression", "mins": 40, "blurb": "The matrix formula, correlated predictors, dummy variables, interactions.", "href": "s06_multiple_regression.html"}, {"id": "s07_basis_functions", "title": "Polynomials, steps and flexibility", "group": "Week 2 \u00b7 Regression", "mins": 35, "blurb": "Non-linear in X but linear in \u03bb, basis functions, degrees of freedom and overfitting (2024 Q1).", "href": "s07_basis_functions.html"}, {"id": "s08_gd_ridge", "title": "Gradient descent, ridge and KNN regression", "group": "Week 2 \u00b7 Regression", "mins": 45, "blurb": "Walk downhill, pick a learning rate, shrink with a penalty, choose \u03bb on validation data.", "href": "s08_gd_ridge.html"}, {"id": "s09_logistic_model", "title": "Logistic regression: the model", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Why not a straight line, the sigmoid and its derivative, odds and log-odds, predicting by hand (2023 Q3).", "href": "s09_logistic_model.html"}, {"id": "s10_logistic_fit", "title": "Fitting logistic regression", "group": "Week 3 \u00b7 Classification", "mins": 40, "blurb": "Likelihood, the negative log-likelihood, its gradient, gradient descent, softmax for many classes.", "href": "s10_logistic_fit.html"}, {"id": "s11_generative", "title": "LDA and naive Bayes", "group": "Week 3 \u00b7 Classification", "mins": 45, "blurb": "Bayes\u2019 theorem by counting, LDA\u2019s bell curves and boundary, naive Bayes\u2019 independence trick.", "href": "s11_generative.html"}, {"id": "s12_judging", "title": "Judging classifiers", "group": "Week 3 \u00b7 Classification", "mins": 35, "blurb": "Confusion matrix, sensitivity and specificity, thresholds, ROC curves and AUC, which method when.", "href": "s12_judging.html"}, {"id": "s13_regression_trees", "title": "Regression trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 35, "blurb": "Boxes from yes/no questions, leaf averages, greedy splitting by RSS, by hand.", "href": "s13_regression_trees.html"}, {"id": "s14_classification_trees", "title": "Classification trees", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Error, Gini and entropy, information gain, decision stumps: the 2024 and 2025 exam calculations.", "href": "s14_classification_trees.html"}, {"id": "s15_pruning", "title": "Tree pruning", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 30, "blurb": "Flexibility in terminal nodes, cost-complexity pruning, weakest links, choosing \u03b1.", "href": "s15_pruning.html"}, {"id": "s16_neural_networks", "title": "Neural networks: the model", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 40, "blurb": "Hidden neurons, ReLU and sigmoid, counting parameters, forward passes, why more flexible (2025 Q2).", "href": "s16_neural_networks.html"}, {"id": "s17_training_networks", "title": "Training neural networks", "group": "Week 4 \u00b7 Trees and neural networks", "mins": 45, "blurb": "Objective functions, non-convexity, backpropagation by hand, softmax and cross-entropy, PyTorch.", "href": "s17_training_networks.html"}, {"id": "s18_mock_exam", "title": "Mock exam (weeks 1-4)", "group": "Final", "mins": 60, "blurb": "Exam-format questions on everything so far, marked like the real paper. Pass 70% to finish the path.", "href": "s18_mock_exam.html"}, {"id": "s19_bias_variance", "title": "Bias, variance and regularisation", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 40, "blurb": "Training vs test error, the decomposition by hand, the U-shape, KNN and K, pruning and ridge as fit + penalty.", "href": "s19_bias_variance.html"}, {"id": "s20_comparing", "title": "Comparing two algorithms", "group": "Week 5 \u00b7 Evaluating and comparing", "mins": 35, "blurb": "Contingency tables, the null hypothesis, binomial probabilities, p-values and significance levels.", "href": "s20_comparing.html"}, {"id": "s21_bagging_oob", "title": "Bootstrap, bagging and OOB error", "group": "Week 6 \u00b7 Ensemble methods", "mins": 45, "blurb": "Sampling with replacement, bagging by vote or average, the 36.8% lemma, and the OOB calculation (2023 and 2025).", "href": "s21_bagging_oob.html"}, {"id": "s22_forests_boosting", "title": "Random forests and boosting", "group": "Week 6 \u00b7 Ensemble methods", "mins": 40, "blurb": "m attributes per split, residual fitting, \u03b7, B and d, and which one can overfit (2025 Q3a).", "href": "s22_forests_boosting.html"}, {"id": "s23_kmeans", "title": "Metrics and K-means", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Metrics, the SSE objective, K-means by hand, the termination proof, restarts, choosing K, empty clusters.", "href": "s23_kmeans.html"}, {"id": "s24_hierarchical", "title": "Hierarchical clustering", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 45, "blurb": "Dendrograms, the four linkages by hand (2023 Q5), chaining, inversions, cutting, divisive vs agglomerative.", "href": "s24_hierarchical.html"}, {"id": "s25_density", "title": "Density estimation and semi-supervised learning", "group": "Week 7 \u00b7 Unsupervised learning", "mins": 40, "blurb": "Histograms and the curse of dimensionality, k/(nV), Parzen windows, KDE, bandwidth; seeded and constrained K-means.", "href": "s25_density.html"}, {"id": "s26_mock_part2", "title": "Mock exam part 2 (weeks 5-7)", "group": "Final", "mins": 50, "blurb": "Second-half questions in the past papers' shape: ensembles and OOB, clustering, density estimation. Pass 70%.", "href": "s26_mock_part2.html"}], "stage": "s22_forests_boosting", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_path_s22_forests_boosting" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Week 1 · Foundations</h4>
+<a href="s01_big_picture.html"><span class="dot path"></span>1. The big picture<span class="pstat" data-i="0"></span></a>
+<a href="s02_maths.html"><span class="dot path"></span>2. Maths toolkit<span class="pstat" data-i="1"></span></a>
+<a href="s03_accuracy.html"><span class="dot path"></span>3. Accuracy, flexibility and overfitting<span class="pstat" data-i="2"></span></a>
+<a href="s04_bayes_knn.html"><span class="dot path"></span>4. Bayes classifier and KNN<span class="pstat" data-i="3"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="s05_simple_regression.html"><span class="dot path"></span>5. Simple linear regression<span class="pstat" data-i="4"></span></a>
+<a href="s06_multiple_regression.html"><span class="dot path"></span>6. Multiple regression<span class="pstat" data-i="5"></span></a>
+<a href="s07_basis_functions.html"><span class="dot path"></span>7. Polynomials, steps and flexibility<span class="pstat" data-i="6"></span></a>
+<a href="s08_gd_ridge.html"><span class="dot path"></span>8. Gradient descent, ridge and KNN regression<span class="pstat" data-i="7"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="s09_logistic_model.html"><span class="dot path"></span>9. Logistic regression: the model<span class="pstat" data-i="8"></span></a>
+<a href="s10_logistic_fit.html"><span class="dot path"></span>10. Fitting logistic regression<span class="pstat" data-i="9"></span></a>
+<a href="s11_generative.html"><span class="dot path"></span>11. LDA and naive Bayes<span class="pstat" data-i="10"></span></a>
+<a href="s12_judging.html"><span class="dot path"></span>12. Judging classifiers<span class="pstat" data-i="11"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="s13_regression_trees.html"><span class="dot path"></span>13. Regression trees<span class="pstat" data-i="12"></span></a>
+<a href="s14_classification_trees.html"><span class="dot path"></span>14. Classification trees<span class="pstat" data-i="13"></span></a>
+<a href="s15_pruning.html"><span class="dot path"></span>15. Tree pruning<span class="pstat" data-i="14"></span></a>
+<a href="s16_neural_networks.html"><span class="dot path"></span>16. Neural networks: the model<span class="pstat" data-i="15"></span></a>
+<a href="s17_training_networks.html"><span class="dot path"></span>17. Training neural networks<span class="pstat" data-i="16"></span></a>
+<h4>Final</h4>
+<a href="s18_mock_exam.html"><span class="dot path"></span>18. Mock exam (weeks 1-4)<span class="pstat" data-i="17"></span></a>
+<h4>Week 5 · Evaluating and comparing</h4>
+<a href="s19_bias_variance.html"><span class="dot path"></span>19. Bias, variance and regularisation<span class="pstat" data-i="18"></span></a>
+<a href="s20_comparing.html"><span class="dot path"></span>20. Comparing two algorithms<span class="pstat" data-i="19"></span></a>
+<h4>Week 6 · Ensemble methods</h4>
+<a href="s21_bagging_oob.html"><span class="dot path"></span>21. Bootstrap, bagging and OOB error<span class="pstat" data-i="20"></span></a>
+<a class="active" aria-current="page" href="s22_forests_boosting.html"><span class="dot path"></span>22. Random forests and boosting<span class="pstat" data-i="21"></span></a>
+<h4>Week 7 · Unsupervised learning</h4>
+<a href="s23_kmeans.html"><span class="dot path"></span>23. Metrics and K-means<span class="pstat" data-i="22"></span></a>
+<a href="s24_hierarchical.html"><span class="dot path"></span>24. Hierarchical clustering<span class="pstat" data-i="23"></span></a>
+<a href="s25_density.html"><span class="dot path"></span>25. Density estimation and semi-supervised learning<span class="pstat" data-i="24"></span></a>
+<h4>Final</h4>
+<a href="s26_mock_part2.html"><span class="dot path"></span>26. Mock exam part 2 (weeks 5-7)<span class="pstat" data-i="25"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 22 of 26</span><span class="chip">Week 6 · Ensemble methods</span><span class="chip">about 40 min</span></div>
+  <h1>Random forests and boosting</h1>
+  <p class="tagline">Two ways to improve on bagging. Random forests make the trees disagree by letting each split choose from only m random attributes. Boosting grows small trees one after another, each fitted to what the model still gets wrong, adding only a fraction η of each.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book: what to read for this stage</span></p>
+<p>ISLP 8.2.2 <em>Random forests</em> (p346–347) and 8.2.3 <em>Boosting</em> (p347–350, <strong>Algorithm 8.2</strong>): <strong>read</strong>. 8.2.4 BART: skip. 8.2.5 summary: skim.</p>
+</div>
+<h2 id="random-forests">1. Random forests</h2>
+<p>Bagged trees are correlated: if one attribute is strong, nearly every tree splits on it first, and averaging near-copies barely helps. A random forest is bagging plus one rule: <strong>at every split</strong>, choose a fresh random subset of <span class="math inline">\(m\)</span> of the <span class="math inline">\(p\)</span> attributes and split on the best of those.</p>
+<p>Typical <span class="math inline">\(m\)</span>: <span class="math inline">\(\sqrt p\)</span> (classification), <span class="math inline">\(p/3\)</span> (regression). <span class="math inline">\(m = p\)</span> is bagging.</p>
+<p>Why it helps: <span class="math inline">\(B\)</span> trees with variance <span class="math inline">\(\sigma^2\)</span> and correlation <span class="math inline">\(\rho\)</span> average to variance <span class="math inline">\(\rho\sigma^2 + \frac{1 - \rho}{B}\sigma^2\)</span>. More trees kill only the second term; lowering <span class="math inline">\(\rho\)</span> shrinks the first.</p>
+<div class="q" kind="num" data-answer="2.02" data-tol="0.005" label="variance">
+<p>Trees have variance <span class="math inline">\(\sigma^2 = 4\)</span> and pairwise correlation <span class="math inline">\(\rho = 0.5\)</span>. What is the variance of the average of <span class="math inline">\(B = 100\)</span> trees?</p>
+<div class="expl">
+<p><span class="math inline">\(0.5 \times 4 + \frac{0.5}{100} \times 4 = 2 + 0.02 = 2.02\)</span>. Even infinitely many trees can’t go below 2.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Where does the random attribute subset get drawn in a random forest?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Afresh at every split of every tree.</label></li>
+<li><label><input type="checkbox" />Once per tree.</label></li>
+<li><label><input type="checkbox" />Once for the whole forest.</label></li>
+<li><label><input type="checkbox" />Only at the root.</label></li>
+</ul>
+<div class="expl">
+<p>Slide 26. “One subset per tree” is the classic wrong answer.</p>
+</div>
+</div>
+<h2 id="boosting-algorithm-8.2">2. Boosting (Algorithm 8.2)</h2>
+<ol type="1">
+<li><span class="math inline">\(\hat f := 0\)</span>, <span class="math inline">\(r_i := y_i\)</span>.</li>
+<li>For <span class="math inline">\(b = 1, \dots, B\)</span>: fit a tree <span class="math inline">\(\hat f^b\)</span> with <span class="math inline">\(d\)</span> splits to <span class="math inline">\((x_i, r_i)\)</span>; <span class="math inline">\(\hat f := \hat f + \eta\hat f^b\)</span>; <span class="math inline">\(r_i := r_i - \eta\hat f^b(x_i)\)</span>.</li>
+<li>Output <span class="math inline">\(\hat f = \sum_b\eta\hat f^b\)</span>.</li>
+</ol>
+<div class="example">
+<p><strong>Slide 33.</strong> Residuals <span class="math inline">\((2, 1, 3, 5, 4)\)</span>, new tree predicts <span class="math inline">\((1, 2, 4, 5, 4)\)</span>. <span class="math inline">\(\eta = 0.1\)</span>: <span class="math inline">\((1.9, 0.8, 2.6, 4.5, 3.6)\)</span>. <span class="math inline">\(\eta = 1\)</span>: <span class="math inline">\((1, -1, -1, 0, 0)\)</span>: greedy.</p>
+</div>
+<div class="q" kind="num" data-answer="2.4" label="new residual">
+<p>A residual is 3, the new tree predicts 6 there, and <span class="math inline">\(\eta = 0.1\)</span>. What is the new residual?</p>
+<div class="expl">
+<p><span class="math inline">\(3 - 0.1 \times 6 = 2.4\)</span>.</p>
+</div>
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>role</th>
+<th>too big</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td>number of trees</td>
+<td><strong>overfits</strong> (slowly): choose by validation</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\eta\)</span></td>
+<td>learning rate (0.01, 0.001)</td>
+<td>greedy; smaller <span class="math inline">\(\eta\)</span> needs larger <span class="math inline">\(B\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(d\)</span></td>
+<td>splits per tree (often 1: stumps)</td>
+<td>each tree overfits</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="boost">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks; 2025 Q3a.)</strong> Can bagging and boosting overfit if the number of trees is too large? Justify both answers.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Bagging: no.</label></li>
+<li><label><input type="checkbox" checked="" />Reason: more trees only reduce the variance of the average; bias unchanged; test error levels off.</label></li>
+<li><label><input type="checkbox" checked="" />Boosting: yes.</label></li>
+<li><label><input type="checkbox" checked="" />Reason: each tree fits the remaining training residuals, eventually the noise; choose <span class="math inline">\(B\)</span> by validation / CV (slowly, if <span class="math inline">\(\eta\)</span> small).</label></li>
+</ul>
+<div class="model">
+<p>Bagging: no. Its trees are grown independently on bootstrap samples and averaged; adding trees leaves the bias unchanged and only makes the average more precise, so the test error levels off. Boosting: yes. Each tree is fitted to the current training residuals, so with enough trees the model fits the training data ever more closely, eventually the noise, and the test error rises again (slowly when <span class="math inline">\(\eta\)</span> is small); <span class="math inline">\(B\)</span> must be chosen by validation or cross-validation.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="4" label="m">
+<p>A classification problem has <span class="math inline">\(p = 16\)</span> attributes. What is the usual choice of <span class="math inline">\(m\)</span> for a random forest?</p>
+<div class="expl">
+<p><span class="math inline">\(\sqrt{16} = 4\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A random forest with <span class="math inline">\(m = p\)</span> is…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />bagging</label></li>
+<li><label><input type="checkbox" />boosting</label></li>
+<li><label><input type="checkbox" />a single deep tree</label></li>
+<li><label><input type="checkbox" />a stump</label></li>
+</ul>
+<div class="expl">
+<p>Every attribute is a candidate at every split: ordinary tree growing on bootstrap samples.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Tick every true statement.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Boosting trees are built sequentially, each depending on the previous ones.</label></li>
+<li><label><input type="checkbox" />Random forests use small stumps.</label></li>
+<li><label><input type="checkbox" checked="" />A smaller learning rate usually needs more boosting rounds.</label></li>
+<li><label><input type="checkbox" checked="" />Random forests reduce variance by decorrelating the trees.</label></li>
+<li><label><input type="checkbox" />Boosting averages trees grown on bootstrap samples.</label></li>
+</ul>
+<div class="expl">
+<p>Forests: deep, decorrelated, averaged. Boosting: small, sequential, summed with weight <span class="math inline">\(\eta\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="s21_bagging_oob.html"><small>&larr; Stage 21</small>Bootstrap, bagging and OOB error</a><a class="next" href="s23_kmeans.html"><small>Stage 23 &rarr;</small>Metrics and K-means</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

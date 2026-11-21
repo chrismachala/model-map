@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impurity: error rate, Gini, entropy · CS5100 Maths-first path</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 25, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 40, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 30, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 35, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 35, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 30, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 25, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 40, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t10_impurity", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths_t10_impurity" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a class="active" aria-current="page" href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>22. Final: spot the shared maths<span class="pstat" data-i="21"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 10 of 22</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 30 min</span></div>
+  <h1>Impurity: error rate, Gini, entropy</h1>
+  <p class="tagline">How mixed is a bag of labels? Three formulas answer that, all built from the class proportions in the bag. Trees use them to choose splits, pruning and the ensembles of week 6 inherit them, and the exam asks for a calculation with one of them almost every year.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 8.1.2 (classification trees: classification error rate eq. 8.5, Gini eq. 8.6, entropy eq. 8.7). <strong>Read</strong> all of 8.1.2. <strong>Skip</strong> the discussion of qualitative predictors with many levels. Week 4 slides use the same three measures. ISLP uses natural log; some past papers use <span class="math inline">\(\log_2\)</span>; either is fine if you say which.</p>
+</div>
+<h2 id="proportions-first">1. Proportions first</h2>
+<p>In a node <span class="math inline">\(m\)</span> with <span class="math inline">\(n_m\)</span> points, the proportion of class <span class="math inline">\(k\)</span> is <span class="math inline">\(\hat p_{mk} = \frac{1}{n_m}\sum_{i\in m}\mathbb 1(y_i = k)\)</span>: an average of indicators (Toolkit 2). Every impurity measure is a function of these proportions. All three are <strong>0 for a pure node</strong> (one class only) and <strong>largest when the classes are equally mixed</strong>.</p>
+<h2 id="the-three-measures">2. The three measures</h2>
+<p><span class="math display">\[\boxed{E = 1 - \max_k\hat p_{mk}, \qquad G = \sum_k\hat p_{mk}(1 - \hat p_{mk}), \qquad D = -\sum_k\hat p_{mk}\log\hat p_{mk}}\]</span></p>
+<ul>
+<li><strong>Error rate</strong> <span class="math inline">\(E\)</span>: the fraction misclassified if the node predicts its majority class (Toolkit 2 vote).</li>
+<li><strong>Gini</strong> <span class="math inline">\(G\)</span>: for two classes, <span class="math inline">\(G = 2p(1 - p)\)</span>. Max <span class="math inline">\(0.5\)</span>.</li>
+<li><strong>Entropy</strong> <span class="math inline">\(D\)</span>: for two classes, max <span class="math inline">\(\log 2 = 0.693\)</span> (or 1 bit with <span class="math inline">\(\log_2\)</span>). It is the average cross-entropy of predicting the node’s own proportions (Toolkit 9).</li>
+</ul>
+<div class="example">
+<p><strong>Worked example.</strong> A node with 6 A and 2 B: <span class="math inline">\(\hat p = (0.75, 0.25)\)</span>. <span class="math inline">\(E = 0.25\)</span>. <span class="math inline">\(G = 2 \times 0.75 \times 0.25 = 0.375\)</span>. <span class="math inline">\(D = -(0.75\log0.75 + 0.25\log0.25) = 0.216 + 0.347 = 0.562\)</span>.</p>
+</div>
+<div data-widget="impurity">
+
+</div>
+<div class="q" kind="gen" data-gen="impurity">
+
+</div>
+<h2 id="scoring-a-split-weighted-average">3. Scoring a split: weighted average</h2>
+<p>A split sends <span class="math inline">\(n_L\)</span> points left and <span class="math inline">\(n_R\)</span> right. Its impurity is the <strong>size-weighted average</strong> of the children, and the <strong>gain</strong> is how much that beats the parent:</p>
+<p><span class="math display">\[\text{gain} = I(\text{parent}) - \Big(\frac{n_L}{n}I(\text{left}) + \frac{n_R}{n}I(\text{right})\Big).\]</span></p>
+<p>With entropy this is the <strong>information gain</strong>. The tree picks the split with the biggest gain (equivalently the smallest weighted child impurity). It’s exactly the regression tree’s rule with RSS swapped for impurity: the RSS of a split is also a sum over the two children (Toolkit 3).</p>
+<div class="example">
+<p><strong>Worked example.</strong> Parent 4 A, 4 B (<span class="math inline">\(G = 0.5\)</span>). Split: left 3 A, 0 B (<span class="math inline">\(G = 0\)</span>); right 1 A, 4 B (<span class="math inline">\(G = 2 \times 0.2 \times 0.8 = 0.32\)</span>). Weighted: <span class="math inline">\(\frac38 \times 0 + \frac58 \times 0.32 = 0.2\)</span>. Gain <span class="math inline">\(= 0.5 - 0.2 = 0.3\)</span>.</p>
+</div>
+<div class="q" kind="gen" data-gen="gain">
+
+</div>
+<h2 id="why-grow-with-gini-or-entropy-but-prune-with-error">4. Why grow with Gini or entropy, but prune with error?</h2>
+<p>The error rate only looks at the majority class, so it often can’t tell two splits apart: a split that makes one child much purer without changing either child’s majority gets zero gain. Gini and entropy are smooth and reward any increase in purity, so they <strong>grow</strong> better trees. When <strong>pruning</strong>, the goal is prediction accuracy, so the error rate is the natural choice (ISLP 8.1.2).</p>
+<div class="q" kind="mcq">
+<p>Parent: 400 A, 400 B. Split 1 gives children (300 A, 100 B) and (100 A, 300 B). Split 2 gives (200 A, 400 B) and (200 A, 0 B). Both have weighted error rate 0.25. Which split does the Gini index prefer?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Split 1</label></li>
+<li><label><input type="checkbox" checked="" />Split 2</label></li>
+<li><label><input type="checkbox" />Neither: Gini ties them too</label></li>
+<li><label><input type="checkbox" />Can’t tell without entropy</label></li>
+</ul>
+<div class="expl">
+<p>Split 1: both children have <span class="math inline">\(G = 2 \times 0.75 \times 0.25 = 0.375\)</span>, weighted <span class="math inline">\(0.375\)</span>. Split 2: the first child has <span class="math inline">\(G = 2 \times \frac13 \times \frac23 = 0.444\)</span> with weight <span class="math inline">\(\frac{600}{800}\)</span>, the second is pure: weighted <span class="math inline">\(0.75 \times 0.444 = 0.333\)</span>. Lower is better, so Gini prefers split 2, which creates a pure node. The error rate can’t see the difference (ISLP 8.1.2’s example).</p>
+</div>
+</div>
+<h2 id="where-this-comes-back">Where this comes back</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Page</th>
+<th>How it shows up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4</td>
+<td><a href="../w4/Classification_Trees.html">Classification trees</a></td>
+<td>choose splits by Gini or entropy gain; 2024 and 2025 calculations</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><a href="../w4/Tree_Pruning.html">Tree pruning</a></td>
+<td>prune with the error rate + <span class="math inline">\(\alpha\lvert T\rvert\)</span></td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td><a href="../w6/Bootstrap_and_Bagging.html">Bagging</a>, <a href="../w6/Random_Forests.html">random forests</a></td>
+<td>every tree is grown this way; variable importance adds up Gini decreases</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><a href="../w6/Boosting.html">Boosting</a></td>
+<td>small trees (stumps when <span class="math inline">\(d = 1\)</span>) chosen by the same split search</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="impurity">
+
+</div>
+<div class="q" kind="gen" data-gen="gain">
+
+</div>
+<div class="q" kind="gen" data-gen="stump">
+
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>(3 marks, exam format 2; 2025 Q1.)</strong> Write the formula of the entropy and of the Gini index of a node in a classification tree, explaining the symbols.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(D = -\sum_k\hat p_{mk}\log\hat p_{mk}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(G = \sum_k\hat p_{mk}(1 - \hat p_{mk})\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\hat p_{mk}\)</span> is the proportion of training points in node <span class="math inline">\(m\)</span> belonging to class <span class="math inline">\(k\)</span>; both are 0 for a pure node, largest when classes are evenly mixed.</label></li>
+</ul>
+<div class="model">
+<p>For node <span class="math inline">\(m\)</span> let <span class="math inline">\(\hat p_{mk}\)</span> be the fraction of its training points in class <span class="math inline">\(k\)</span>. Entropy: <span class="math inline">\(D_m = -\sum_{k=1}^{K}\hat p_{mk}\log\hat p_{mk}\)</span>. Gini index: <span class="math inline">\(G_m = \sum_{k=1}^{K}\hat p_{mk}(1 - \hat p_{mk})\)</span>. Both are zero when the node contains a single class and largest when the classes are equally represented, so a split is chosen to make the size-weighted impurity of the children as small as possible.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.48" label="Gini">
+<p>A node contains 2 red and 3 blue points. Compute its Gini index.</p>
+<div class="expl">
+<p><span class="math inline">\(2 \times 0.4 \times 0.6 = 0.48\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t09_likelihood.html"><small>&larr; Stage 9</small>Likelihood and cross-entropy</a><a class="next" href="t11_resampling.html"><small>Stage 11 &rarr;</small>Resampling and averaging many models</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>
