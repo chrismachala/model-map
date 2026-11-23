@@ -146,6 +146,37 @@ function stats(out,items){out.innerHTML=items.map(function(s){return '<span clas
 function f2(v,d){return (+v).toFixed(d==null?2:d)}
 
 var builders={
+  /* PCA: rotate a direction, watch the variance of the projections (week 8) */
+  pcadir:function(host){
+    var u=mk(host,'Find the first principal component by hand','Turn the direction. Each point is projected onto the line; the variance of those projections is φᵀΣφ. The first PC is the angle where it is largest; the second PC is at right angles to it.','&#8635;');
+    var T=slider(u.ctl,'direction angle θ (degrees)',0,179,1,0,function(v){return v+'°'});
+    var s=7,rnd=function(){s=(s*9301+49297)%233280;return s/233280},P=[];
+    for(var i=0;i<24;i++){var a=(rnd()+rnd()+rnd()-1.5)*4.2,b=(rnd()+rnd()+rnd()-1.5)*1.5;P.push([a*0.866-b*0.5,a*0.5+b*0.866])}
+    var mx=P.reduce(function(t,p){return t+p[0]},0)/P.length,my=P.reduce(function(t,p){return t+p[1]},0)/P.length;P=P.map(function(p){return [p[0]-mx,p[1]-my]});
+    var n=P.length,sxx=0,syy=0,sxy=0;P.forEach(function(p){sxx+=p[0]*p[0]/n;syy+=p[1]*p[1]/n;sxy+=p[0]*p[1]/n});
+    var tot=sxx+syy,l1=(sxx+syy)/2+Math.sqrt(Math.pow((sxx-syy)/2,2)+sxy*sxy),best=Math.atan2(l1-sxx,sxy)*180/Math.PI;if(best<0)best+=180;
+    function draw(){var F=frame(u.svg,640,300,[-6,6],[-2.8,2.8],{l:20,r:20,t:10,b:10});
+      el('line',{x1:F.X(-6),x2:F.X(6),y1:F.Y(0),y2:F.Y(0),style:'stroke:var(--line)'},u.svg);el('line',{x1:F.X(0),x2:F.X(0),y1:F.Y(-2.8),y2:F.Y(2.8),style:'stroke:var(--line)'},u.svg);
+      var t=T.v*Math.PI/180,c=Math.cos(t),si=Math.sin(t);
+      el('line',{x1:F.X(-7*c),y1:F.Y(-7*si),x2:F.X(7*c),y2:F.Y(7*si),style:'stroke:var(--accent);stroke-width:2.5'},u.svg);
+      var v=0;P.forEach(function(p){var z=p[0]*c+p[1]*si;v+=z*z/n;
+        el('line',{x1:F.X(p[0]),y1:F.Y(p[1]),x2:F.X(z*c),y2:F.Y(z*si),style:'stroke:var(--muted);stroke-dasharray:3 3;stroke-width:1'},u.svg);
+        el('circle',{cx:F.X(z*c),cy:F.Y(z*si),r:3.5,style:'fill:var(--accent)'},u.svg);
+        el('circle',{cx:F.X(p[0]),cy:F.Y(p[1]),r:4.5,style:'fill:var(--cls);stroke:var(--surface);stroke-width:1.5'},u.svg)});
+      stats(u.out,[['variance along θ',f2(v,2)],['share of total',f2(100*v/tot,1)+'%'],['total variance',f2(tot,2)],['best θ (PC1)',f2(best,1)+'°'],['λ₁',f2(l1,2)],['λ₂',f2(tot-l1,2)]]);}
+    T.on(draw);draw();W.push(draw);
+  },
+  /* MDS: place three points on a line, watch the stress (week 8) */
+  mdsline:function(host){
+    var u=mk(host,'MDS by hand: squash a 3-4-5 triangle onto a line','A sits at 0. Move B and C. The stress adds up the squared differences between the true distances (AB 3, AC 4, BC 5) and the distances on the line. The best you can do is 4/3.','&#8596;');
+    var B=slider(u.ctl,'position of B',-6,6,0.05,3,function(v){return f2(v,2)}),C=slider(u.ctl,'position of C',-6,6,0.05,4,function(v){return f2(v,2)});
+    function draw(){var F=frame(u.svg,640,120,[-6.5,6.5],[-1,1],{l:20,r:20,t:10,b:28});F.axes([-6,-4,-2,0,2,4,6],[],'','');
+      var pts=[['A',0],['B',B.v],['C',C.v]];
+      pts.forEach(function(p,k){el('circle',{cx:F.X(p[1]),cy:F.Y(0),r:9,style:'fill:'+['var(--accent)','var(--cls)','var(--reg)'][k]+';stroke:var(--surface);stroke-width:2'},u.svg);var t=el('text',{x:F.X(p[1]),y:F.Y(0)-14,'text-anchor':'middle',style:'font-weight:700;fill:var(--ink)'},u.svg);t.textContent=p[0]});
+      var ab=Math.abs(B.v),ac=Math.abs(C.v),bc=Math.abs(B.v-C.v),st=Math.pow(3-ab,2)+Math.pow(4-ac,2)+Math.pow(5-bc,2);
+      stats(u.out,[['AB',f2(ab,2)+' (3)'],['AC',f2(ac,2)+' (4)'],['BC',f2(bc,2)+' (5)'],['stress (i<j)',f2(st,3)],['best possible','1.333']]);}
+    B.on(draw);C.on(draw);draw();W.push(draw);
+  },
   /* Logistic: sigmoid explorer */
   sigmoid:function(host){
     var u=mk(host,'Play with the S-curve','Move the sliders to change the coefficients. Watch where the 50% line (the decision boundary) lands.','&#12316;');

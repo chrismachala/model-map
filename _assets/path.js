@@ -340,7 +340,41 @@ var G={
     return {q:'<p>Data '+T('\\{'+xs.join(', ')+'\\}')+' ('+T('n='+n)+'). Estimate the density at '+T('x='+x0)+' with bandwidth '+T('h='+h)+' and the '+(kern==='triangular'?'triangular kernel '+T('K(u)=\\max(0,1-|u|)'):'Parzen window '+T('K(u)=1')+' if '+T('|u|\\le\\tfrac12'))+': '+T('f(x)=\\frac1{nh}\\sum_iK\\big(\\frac{x-x_i}h\\big)')+'.</p>',
       fields:[{label:T('f('+x0+')'),answer:fx,tol:0.0005}],
       expl:'<p>Kernel values: '+ks.map(function(k){return f(k)}).join(', ')+'; sum '+f(s)+'. '+T('f='+f(s)+'/('+n+'\\times'+h+')='+f(fx,4))+'.'+(kern==='triangular'?'':' (Count the points within '+T('h/2='+h/2)+' of '+x0+', edges included.)')+'</p>'};
+  },
+  /* PCA by hand on a symmetric 2D toy set (slides 27-28): lambda1, lambda2, PVE1 */
+  pcatoy:function(){var kind=pick(['diag','axes']),a,b,pts,l1,l2,phi,expl;
+    if(kind==='diag'){a=ri(1,5);do{b=ri(-3,5)}while(b===a||b===-a||Math.abs(b)===Math.abs(a));pts=[[a,b],[b,a],[-a,-b],[-b,-a]];
+      var s11=(a*a+b*b)/2,s12=a*b,lp=Math.pow(a+b,2)/2,lm=Math.pow(a-b,2)/2;l1=Math.max(lp,lm);l2=Math.min(lp,lm);phi=lp>=lm?'\\tfrac1{\\sqrt2}(1,1)':'\\tfrac1{\\sqrt2}(1,-1)';
+      expl='<p>Centred already. '+T('\\Sigma_{11}=\\Sigma_{22}=\\tfrac{'+(2*(a*a+b*b))+'}{4}='+f(s11))+', '+T('\\Sigma_{12}=\\tfrac{4\\times'+par(a*b)+'}{4}='+f(s12))+'. Equal diagonal, so the PCs are the diagonals: along '+T('\\tfrac1{\\sqrt2}(1,1)')+' the scores are '+T('\\pm\\tfrac{'+(a+b)+'}{\\sqrt2}')+', variance '+T('\\tfrac{('+(a+b)+')^2}{2}='+f(lp))+'; along '+T('\\tfrac1{\\sqrt2}(1,-1)')+', '+T('\\tfrac{('+(a-b)+')^2}{2}='+f(lm))+'. (Or '+T('\\lambda=\\Sigma_{11}\\pm\\Sigma_{12}')+'.) PC1 '+T(phi)+', PVE '+T(f(l1)+'/'+f(l1+l2)+'='+f(l1/(l1+l2)))+'.</p>'}
+    else{a=ri(1,6);do{b=ri(1,6)}while(b===a);pts=[[-a,0],[a,0],[0,b],[0,-b]];var lx=a*a/2,ly=b*b/2;l1=Math.max(lx,ly);l2=Math.min(lx,ly);phi=lx>ly?'(1,0)':'(0,1)';
+      expl='<p>Centred, and '+T('\\Sigma_{12}=0')+', so the PCs are the axes (slide 28). Along '+T('(1,0)')+': scores '+T('-'+a+','+a+',0,0')+', variance '+T('\\tfrac{2\\times'+(a*a)+'}{4}='+f(lx))+'. Along '+T('(0,1)')+': '+T('\\tfrac{2\\times'+(b*b)+'}{4}='+f(ly))+'. PC1 '+T(phi)+', PVE '+T(f(l1)+'/'+f(l1+l2)+'='+f(l1/(l1+l2)))+'.</p>'}
+    return {q:'<p>PCA on the four observations '+T(pts.map(function(p){return '('+p.join(',')+')'}).join(',\\ '))+' (variance with '+T('\\tfrac1n')+', like the slides). Give the variances '+T('\\lambda_1\\ge\\lambda_2')+' of the two principal components and the proportion of variance explained by the first.</p>',
+      fields:[{label:T('\\lambda_1'),answer:l1,tol:0.01},{label:T('\\lambda_2'),answer:l2,tol:0.01},{label:'PVE of PC1',answer:l1/(l1+l2),tol:0.005}],expl:expl};
+  },
+  /* PVE, cumulative PVE, choosing M (slides 32, 42) */
+  pve:function(){var p=pick([4,5,6]),lam=[];var left=p*10;for(var i=0;i<p;i++){var v=i===p-1?left:Math.max(1,Math.round(left*(0.35+Math.random()*0.3)));if(i<p-1)v=Math.min(v,left-(p-1-i));lam.push(v);left-=v}
+    lam=lam.map(function(v){return v/10}).sort(function(x,y){return y-x});if(lam[p-1]<=0)return G.pve();
+    var tot=lam.reduce(function(s,v){return s+v},0),cum=[],c=0;lam.forEach(function(v){c+=v;cum.push(c/tot)});var th=pick([0.7,0.8,0.9]),M=0;while(cum[M]<=th+1e-12)M++;M++;
+    var K=lam.filter(function(v){return v>1}).length;
+    return {q:'<p>PCA on '+p+' standardised attributes gives the component variances '+T(lam.map(function(v){return f(v)}).join(',\\ '))+'. Give the cumulative PVE of the first two components, the smallest '+T('M')+' with cumulative PVE above '+T('\\theta='+th)+', and '+T('M')+' by the eigenvalue-one criterion.</p>',
+      fields:[{label:'cumulative PVE, M = 2',answer:cum[1],tol:0.005},{label:T('M')+' for '+T('\\theta='+th),answer:M,tol:0.01},{label:T('M')+' by '+T('\\lambda>1'),answer:K,tol:0.01}],
+      expl:'<p>Total '+f(tot)+' (= '+T('p')+' for standardised data). PVEs '+lam.map(function(v){return f(v/tot)}).join(', ')+'; cumulative '+cum.map(function(v){return f(v)}).join(', ')+'. The first cumulative value above '+th+' is at '+T('M='+M)+'. '+K+' variance'+(K===1?' is':'s are')+' above 1.</p>'};
+  },
+  /* PC scores from a loading matrix (slide 40, guide 6.2) */
+  pcscore:function(){var L=[[0.54,-0.42],[0.58,-0.19],[0.28,0.87],[0.54,0.17]],names=['Murder','Assault','UrbanPop','Rape'];var x=names.map(function(){return pick([-1.5,-1,-0.5,0,0.5,1,1.5,2])});
+    var z=[0,1].map(function(m){return x.reduce(function(s,v,j){return s+v*L[j][m]},0)});
+    return {q:'<p>USArrests loadings (slide 40): PC1 '+T('(0.54, 0.58, 0.28, 0.54)')+', PC2 '+T('(-0.42, -0.19, 0.87, 0.17)')+' for Murder, Assault, UrbanPop, Rape. A state has standardised values '+T('('+x.join(', ')+')')+'. Compute its scores '+T('z_1')+' and '+T('z_2')+'.</p>',
+      fields:[{label:T('z_1'),answer:z[0],tol:0.005},{label:T('z_2'),answer:z[1],tol:0.005}],
+      expl:'<p>'+T('z_m=\\varphi_m^Tx')+': '+T('z_1='+x.map(function(v,j){return L[j][0]+'\\times'+par(v)}).join('+')+'='+f(z[0]))+'; '+T('z_2='+x.map(function(v,j){return par(L[j][1])+'\\times'+par(v)}).join('+')+'='+f(z[1]))+'.</p>'};
+  },
+  /* MDS stress of a 1D embedding of three points (slide 49) */
+  stress:function(){var A=[0,0],B=[ri(1,6),0],C=[0,ri(1,6)];if(Math.random()<0.5)B=[ri(1,4),ri(1,4)];var d=function(p,q){return Math.hypot(p[0]-q[0],p[1]-q[1])};
+    var D=[d(A,B),d(A,C),d(B,C)],e=[0,ri(-6,6),ri(-6,6)];if(e[1]===0||e[2]===0||e[1]===e[2])return G.stress();var E=[Math.abs(e[1]),Math.abs(e[2]),Math.abs(e[1]-e[2])],st=0;D.forEach(function(v,k){st+=(v-E[k])*(v-E[k])});
+    return {q:'<p>Points '+T('A=('+A+'),\\ B=('+B+'),\\ C=('+C+')')+'. MDS places them on a line at '+T('\\tilde A='+e[0]+',\\ \\tilde B='+e[1]+',\\ \\tilde C='+e[2])+'. Compute the stress '+T('\\sum_{i<j}(d_{ij}-\\tilde d_{ij})^2')+' (Euclidean distances; answers like (sqrt(5)-2)^2 are fine).</p>',
+      fields:[{label:'stress',answer:st,tol:0.01}],
+      expl:'<p>Original distances AB '+f(D[0])+', AC '+f(D[1])+', BC '+f(D[2])+'. On the line: '+E.join(', ')+'. Stress '+T('('+f(D[0])+'-'+E[0]+')^2+('+f(D[1])+'-'+E[1]+')^2+('+f(D[2])+'-'+E[2]+')^2='+f(st))+'. (Over all ordered pairs it would be twice this.)</p>'};
   }
+
 };
 function olsData(){var n=pick([4,5]),xs=[0,1,2,3,4,5,6].slice(0,7);shuffle(xs);xs=xs.slice(0,n).sort(function(a,b){return a-b});
   var b=pick([-2,-1,1,2,3]),c=ri(0,5),ys=xs.map(function(x){return c+b*x+ri(-2,2)});

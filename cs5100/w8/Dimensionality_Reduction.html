@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dimensionality reduction · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w8_Dimensionality_Reduction" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<a href="../maths/index.html"><span class="dot path"></span>Maths-first path</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="../w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a href="../w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a href="../w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="../w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="../w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a href="../w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
+<h4>Week 5 · Evaluating and comparing</h4>
+<a href="../w5/Bias_Variance.html" data-page="w5_Bias_Variance" data-total="3"><span class="dot tool"></span>Bias, variance and regularisation<span class="tick"></span></a>
+<a href="../w5/Comparing_Algorithms.html" data-page="w5_Comparing_Algorithms" data-total="3"><span class="dot tool"></span>Comparing two algorithms<span class="tick"></span></a>
+<h4>Week 6 · Ensemble methods</h4>
+<a href="../w6/Bootstrap_and_Bagging.html" data-page="w6_Bootstrap_and_Bagging" data-total="4"><span class="dot ens"></span>Bootstrap and bagging<span class="tick"></span></a>
+<a href="../w6/OOB_Error.html" data-page="w6_OOB_Error" data-total="3"><span class="dot tool"></span>Out-of-bag error<span class="tick"></span></a>
+<a href="../w6/Random_Forests.html" data-page="w6_Random_Forests" data-total="3"><span class="dot ens"></span>Random forests<span class="tick"></span></a>
+<a href="../w6/Boosting.html" data-page="w6_Boosting" data-total="3"><span class="dot ens"></span>Boosting<span class="tick"></span></a>
+<h4>Week 7 · Unsupervised learning</h4>
+<a href="../w7/K_Means.html" data-page="w7_K_Means" data-total="5"><span class="dot unsup"></span>K-means clustering<span class="tick"></span></a>
+<a href="../w7/Hierarchical_Clustering.html" data-page="w7_Hierarchical_Clustering" data-total="4"><span class="dot unsup"></span>Hierarchical clustering<span class="tick"></span></a>
+<a href="../w7/Density_Estimation.html" data-page="w7_Density_Estimation" data-total="4"><span class="dot unsup"></span>Density estimation<span class="tick"></span></a>
+<a href="../w7/Semi_Supervised.html" data-page="w7_Semi_Supervised" data-total="2"><span class="dot unsup"></span>Semi-supervised learning<span class="tick"></span></a>
+<h4>Week 8 · Exploratory data analysis</h4>
+<a class="active" aria-current="page" href="../w8/Dimensionality_Reduction.html" data-page="w8_Dimensionality_Reduction" data-total="3"><span class="dot tool"></span>Dimensionality reduction<span class="tick"></span></a>
+<a href="../w8/PCA.html" data-page="w8_PCA" data-total="5"><span class="dot unsup"></span>Principal component analysis<span class="tick"></span></a>
+<a href="../w8/PCA_In_Practice.html" data-page="w8_PCA_In_Practice" data-total="5"><span class="dot tool"></span>PCA in practice<span class="tick"></span></a>
+<a href="../w8/MDS_and_tSNE.html" data-page="w8_MDS_and_tSNE" data-total="3"><span class="dot unsup"></span>MDS and t-SNE<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot ens"></i>ensemble method</span><span><i class="dot unsup"></i>unsupervised method</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not a model: toolkit</span><span class="chip">Week 8</span><span class="chip">3 techniques</span></div>
+  <h1>Dimensionality reduction</h1>
+  <p class="tagline">Too many attributes to look at, too few observations to fill the space. Shrink p attributes down to M: keep a few of the old ones (feature selection) or build a few new ones from all of them (feature extraction). This page is the "why"; PCA, MDS and t-SNE are the "how".</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> unsupervised: turn <span class="math inline">\(n \times p\)</span> data into <span class="math inline">\(n \times M\)</span> data, <span class="math inline">\(M &lt; p\)</span>.<br />
+<strong>Week:</strong> 8 (slides 4–16).<br />
+<strong>Book:</strong> ISLP 12.1 (p503–504); the curse of dimensionality in ISLP 3.5 (p115) and 6.4.4 (p266) is optional. Duda et al. 3.7 and Bishop 1.4 are the slides’ sources.<br />
+<strong>Past paper:</strong> 2023 Q1(d)ii (curse of dimensionality for histograms, 6 marks).<br />
+<strong>Techniques on this page:</strong> the curse of dimensionality, selection vs extraction, linear feature extraction, PCA vs LDA.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>You can only <em>see</em> two or three dimensions, and with <span class="math inline">\(p = 10\)</span> attributes there are already 45 pairwise scatter plots, none showing the whole picture. Worse, every model that relies on “nearby” data (KNN, histograms, kernel density estimates) needs exponentially more data as <span class="math inline">\(p\)</span> grows. Reducing the dimension helps with <strong>computation</strong> (less to store), <strong>statistics</strong> (less noise, better generalisation) and, above all, <strong>visualisation</strong> (slide 6).</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EDA</td>
+<td>exploratory data analysis: look at the data before modelling</td>
+</tr>
+<tr class="even">
+<td>dimension, <span class="math inline">\(p\)</span></td>
+<td>number of attributes (features) per observation</td>
+</tr>
+<tr class="odd">
+<td>curse of dimensionality</td>
+<td>the space, and the data needed to fill it, grows exponentially with <span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="even">
+<td>feature selection</td>
+<td>keep a subset of the original attributes</td>
+</tr>
+<tr class="odd">
+<td>feature extraction</td>
+<td>build new attributes as combinations of the old ones</td>
+</tr>
+<tr class="even">
+<td>linear projection</td>
+<td>new features <span class="math inline">\(z = Ax\)</span>: weighted sums of the old ones</td>
+</tr>
+<tr class="odd">
+<td>intrinsic dimension</td>
+<td>how many numbers really describe the data (about 30 for faces)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-the-curse-of-dimensionality-slides-79">Technique 1: the curse of dimensionality (slides 7–9)</h2>
+<p>Cut each axis into <span class="math inline">\(m\)</span> pieces: <span class="math inline">\(m^p\)</span> cells (slide 8: <span class="math inline">\(3, 9, 27\)</span> for <span class="math inline">\(D = 1, 2, 3\)</span>). Estimating a function needs data in every region, so the data needed grow <strong>exponentially</strong> with <span class="math inline">\(p\)</span>. For a fixed sample size there’s a number of features beyond which a classifier gets <strong>worse</strong>; the information lost by dropping features is usually more than paid back by a more accurate rule in fewer dimensions (slide 7).</p>
+<div class="example">
+<p><strong>How empty is high-dimensional space?</strong> 1,000 points uniform in <span class="math inline">\([0, 1]^p\)</span>; expected number in the corner cube <span class="math inline">\([0, 0.1]^p\)</span>: <span class="math inline">\(100\)</span> (<span class="math inline">\(p = 1\)</span>), <span class="math inline">\(10\)</span> (<span class="math inline">\(p = 2\)</span>), <span class="math inline">\(1\)</span> (<span class="math inline">\(p = 3\)</span>), <span class="math inline">\(10^{-7}\)</span> (<span class="math inline">\(p = 10\)</span>).</p>
+</div>
+<p>Ways out (slide 9): <strong>prior knowledge</strong>, <strong>smoother</strong> prediction rules, <strong>fewer dimensions</strong>.</p>
+<h2 id="technique-2-selection-vs-extraction-slides-1012">Technique 2: selection vs extraction (slides 10–12)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Feature selection</th>
+<th>Feature extraction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What</td>
+<td>keep a subset of attributes</td>
+<td>new attributes from combinations</td>
+</tr>
+<tr class="even">
+<td>Why</td>
+<td>features cost money to measure; kept ones are interpretable; Occam’s razor</td>
+<td>keeps information from all attributes</td>
+</tr>
+<tr class="odd">
+<td>Geometry</td>
+<td>projection onto an axis-aligned subspace</td>
+<td>projection onto any subspace (if linear)</td>
+</tr>
+<tr class="even">
+<td>Test time</td>
+<td>fast: just read the kept columns</td>
+<td>compute the combinations</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technique-3-linear-feature-extraction-pca-vs-lda-slides-1316">Technique 3: linear feature extraction, PCA vs LDA (slides 13–16)</h2>
+<p>Look for <span class="math inline">\(f: \mathbb{R}^p \to \mathbb{R}^M\)</span> that keeps most of the information. The optimal <span class="math inline">\(f\)</span> is usually non-linear and there’s no systematic way to find it, so restrict to <strong>linear</strong> <span class="math inline">\(z = Ax\)</span>. Two criteria:</p>
+<ul>
+<li><strong>Signal representation</strong> (no labels): represent the data accurately. <strong>PCA</strong>.</li>
+<li><strong>Classification accuracy</strong> (uses labels): keep what separates the classes. <strong>LDA</strong> (Fisher’s view of the week 3 classifier: the direction along which the class means are far apart relative to the spread within classes).</li>
+</ul>
+<p>Other representation methods: <strong>factor analysis</strong> (hidden latent factors) and <strong>MDS</strong> (preserve distances).</p>
+<div class="warn">
+<p><strong>Slide 15</strong> says LDA is “discussed in other modules”, but you met it in week 3 as a classifier. It’s the same model seen as a projection.</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ISLP 12.1 (p503–504)</td>
+<td>Read</td>
+<td>Why unsupervised learning has no “right answer”</td>
+</tr>
+<tr class="even">
+<td>ISLP 3.5 (p115), 6.4.4 (p266)</td>
+<td>Optional</td>
+<td>ISLP’s version of the curse of dimensionality</td>
+</tr>
+<tr class="odd">
+<td>ISLP 6.3 (PCR)</td>
+<td>Skip</td>
+<td>Not on the slides</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis, week 8: dimensionality reduction. I want practice questions on:
+- the curse of dimensionality (grid cells m^p, why a classifier can get worse with more features, histograms in high dimension: 2023 exam, 6 marks)
+- feature selection vs feature extraction: definitions, pros and cons, geometry
+- linear feature extraction: signal representation (PCA) vs classification accuracy (LDA)
+- what factor analysis and multidimensional scaling aim to do
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w7/Semi_Supervised.html"><small>&larr; Previous</small>Semi-supervised learning</a><a class="next" href="../w8/PCA.html"><small>Next &rarr;</small>Principal component analysis</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PCA in practice: how many PCs, scaling, biplots · CS5100 Model Map</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+</head>
+<body data-page="w8_PCA_In_Practice" data-module="cs5100">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<h4>Learning path</h4><a href="../path/index.html"><span class="dot path"></span>Guided path (step by step)</a>
+<a href="../maths/index.html"><span class="dot path"></span>Maths-first path</a>
+<h4>Start</h4>
+<a href="../index.html" data-page="index" data-total="0"><span class="dot home"></span>Home: the map<span class="tick"></span></a>
+<h4>Week 1 · Foundations</h4>
+<a href="../w1/00_Start_Here_The_Big_Picture.html" data-page="w1_00_Start_Here_The_Big_Picture" data-total="0"><span class="dot tool"></span>Start here: the big picture<span class="tick"></span></a>
+<a href="../w1/01_Maths_Toolkit.html" data-page="w1_01_Maths_Toolkit" data-total="0"><span class="dot tool"></span>Maths toolkit<span class="tick"></span></a>
+<a href="../w1/Bayes_Classifier.html" data-page="w1_Bayes_Classifier" data-total="3"><span class="dot cls"></span>Bayes classifier<span class="tick"></span></a>
+<a href="../w1/KNN.html" data-page="w1_KNN" data-total="4"><span class="dot cls"></span>KNN (classifier)<span class="tick"></span></a>
+<h4>Week 2 · Regression</h4>
+<a href="../w2/Linear_Regression.html" data-page="w2_Linear_Regression" data-total="8"><span class="dot reg"></span>Linear regression<span class="tick"></span></a>
+<a href="../w2/Polynomial_and_Step_Regression.html" data-page="w2_Polynomial_and_Step_Regression" data-total="4"><span class="dot reg"></span>Polynomial &amp; step regression<span class="tick"></span></a>
+<a href="../w2/Ridge_Regression.html" data-page="w2_Ridge_Regression" data-total="4"><span class="dot reg"></span>Ridge regression<span class="tick"></span></a>
+<a href="../w2/KNN_Regression.html" data-page="w2_KNN_Regression" data-total="3"><span class="dot reg"></span>KNN regression<span class="tick"></span></a>
+<h4>Week 3 · Classification</h4>
+<a href="../w3/Logistic_Regression.html" data-page="w3_Logistic_Regression" data-total="7"><span class="dot cls"></span>Logistic regression<span class="tick"></span></a>
+<a href="../w3/LDA.html" data-page="w3_LDA" data-total="5"><span class="dot cls"></span>LDA<span class="tick"></span></a>
+<a href="../w3/Naive_Bayes.html" data-page="w3_Naive_Bayes" data-total="3"><span class="dot cls"></span>Naive Bayes<span class="tick"></span></a>
+<a href="../w3/Judging_Classifiers.html" data-page="w3_Judging_Classifiers" data-total="4"><span class="dot tool"></span>Judging classifiers<span class="tick"></span></a>
+<h4>Week 4 · Trees and neural networks</h4>
+<a href="../w4/Regression_Trees.html" data-page="w4_Regression_Trees" data-total="4"><span class="dot reg"></span>Regression trees<span class="tick"></span></a>
+<a href="../w4/Classification_Trees.html" data-page="w4_Classification_Trees" data-total="4"><span class="dot cls"></span>Classification trees<span class="tick"></span></a>
+<a href="../w4/Tree_Pruning.html" data-page="w4_Tree_Pruning" data-total="3"><span class="dot tool"></span>Tree pruning<span class="tick"></span></a>
+<a href="../w4/Neural_Network.html" data-page="w4_Neural_Network" data-total="4"><span class="dot reg"></span>Neural network<span class="tick"></span></a>
+<a href="../w4/Neural_Network_Classifier.html" data-page="w4_Neural_Network_Classifier" data-total="4"><span class="dot cls"></span>Neural network classifier<span class="tick"></span></a>
+<a href="../w4/Training_Neural_Networks.html" data-page="w4_Training_Neural_Networks" data-total="5"><span class="dot tool"></span>Training neural networks<span class="tick"></span></a>
+<h4>Week 5 · Evaluating and comparing</h4>
+<a href="../w5/Bias_Variance.html" data-page="w5_Bias_Variance" data-total="3"><span class="dot tool"></span>Bias, variance and regularisation<span class="tick"></span></a>
+<a href="../w5/Comparing_Algorithms.html" data-page="w5_Comparing_Algorithms" data-total="3"><span class="dot tool"></span>Comparing two algorithms<span class="tick"></span></a>
+<h4>Week 6 · Ensemble methods</h4>
+<a href="../w6/Bootstrap_and_Bagging.html" data-page="w6_Bootstrap_and_Bagging" data-total="4"><span class="dot ens"></span>Bootstrap and bagging<span class="tick"></span></a>
+<a href="../w6/OOB_Error.html" data-page="w6_OOB_Error" data-total="3"><span class="dot tool"></span>Out-of-bag error<span class="tick"></span></a>
+<a href="../w6/Random_Forests.html" data-page="w6_Random_Forests" data-total="3"><span class="dot ens"></span>Random forests<span class="tick"></span></a>
+<a href="../w6/Boosting.html" data-page="w6_Boosting" data-total="3"><span class="dot ens"></span>Boosting<span class="tick"></span></a>
+<h4>Week 7 · Unsupervised learning</h4>
+<a href="../w7/K_Means.html" data-page="w7_K_Means" data-total="5"><span class="dot unsup"></span>K-means clustering<span class="tick"></span></a>
+<a href="../w7/Hierarchical_Clustering.html" data-page="w7_Hierarchical_Clustering" data-total="4"><span class="dot unsup"></span>Hierarchical clustering<span class="tick"></span></a>
+<a href="../w7/Density_Estimation.html" data-page="w7_Density_Estimation" data-total="4"><span class="dot unsup"></span>Density estimation<span class="tick"></span></a>
+<a href="../w7/Semi_Supervised.html" data-page="w7_Semi_Supervised" data-total="2"><span class="dot unsup"></span>Semi-supervised learning<span class="tick"></span></a>
+<h4>Week 8 · Exploratory data analysis</h4>
+<a href="../w8/Dimensionality_Reduction.html" data-page="w8_Dimensionality_Reduction" data-total="3"><span class="dot tool"></span>Dimensionality reduction<span class="tick"></span></a>
+<a href="../w8/PCA.html" data-page="w8_PCA" data-total="5"><span class="dot unsup"></span>Principal component analysis<span class="tick"></span></a>
+<a class="active" aria-current="page" href="../w8/PCA_In_Practice.html" data-page="w8_PCA_In_Practice" data-total="5"><span class="dot tool"></span>PCA in practice<span class="tick"></span></a>
+<a href="../w8/MDS_and_tSNE.html" data-page="w8_MDS_and_tSNE" data-total="3"><span class="dot unsup"></span>MDS and t-SNE<span class="tick"></span></a>
+<div class="legend"><span><i class="dot reg"></i>regression model</span><span><i class="dot cls"></i>classification model</span><span><i class="dot ens"></i>ensemble method</span><span><i class="dot unsup"></i>unsupervised method</span><span><i class="dot tool"></i>not a model</span></div>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip tool">Not a model: toolkit</span><span class="chip">Week 8</span><span class="chip">5 techniques</span></div>
+  <h1>PCA in practice: how many PCs, scaling, biplots</h1>
+  <p class="tagline">p attributes give p principal components; the reduction comes from keeping only the first M. Choose M with the proportion of variance explained, a scree plot or the eigenvalue-one rule, scale the attributes first when their units differ, and read the loadings to say what each component means.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div class="card">
+<p><strong>Question type:</strong> using PCA: choosing <span class="math inline">\(M\)</span>, interpreting loadings, pre-processing.<br />
+<strong>Week:</strong> 8 (slides 29–47).<br />
+<strong>Book:</strong> ISLP 12.2.3 (PVE, p510–512) and 12.2.4 (scaling, uniqueness, how many PCs, p512–515); lab 12.5.1.<br />
+<strong>Past paper:</strong> not yet examined in this shape; 2023 Q1(c)ii’s “all pre-processing steps” includes scaling.<br />
+<strong>Techniques on this page:</strong> PVE and cumulative PVE, scree plots, the eigenvalue-one criterion, scaling, reading a biplot, eigenfaces and reconstruction.</p>
+</div>
+<div class="why">
+<p><span class="label">The problem it solves</span></p>
+<p>PCA always returns <span class="math inline">\(p\)</span> components, and using all of them is just a rotation. You need a rule for how many to keep, a check that one attribute isn’t dominating because of its units, and a way to say what the kept components <em>mean</em>. There’s <strong>no accepted objective rule</strong> for <span class="math inline">\(M\)</span> (slide 33), so you need to know all four and argue for one.</p>
+</div>
+<div class="words">
+<p><span class="label">Words you’ll hear</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Word</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PVE</td>
+<td>proportion of variance explained: <span class="math inline">\(\lambda_m / \sum_j\lambda_j\)</span></td>
+</tr>
+<tr class="even">
+<td>cumulative PVE</td>
+<td>the PVE of the first <span class="math inline">\(M\)</span> together</td>
+</tr>
+<tr class="odd">
+<td>scree plot</td>
+<td>PVE (or <span class="math inline">\(\lambda\)</span>) against <span class="math inline">\(m\)</span>; keep what’s left of the elbow</td>
+</tr>
+<tr class="even">
+<td>eigenvalue-one (Kaiser)</td>
+<td>keep PCs with <span class="math inline">\(\lambda &gt; 1\)</span>, for standardised data</td>
+</tr>
+<tr class="odd">
+<td>biplot</td>
+<td>scores as points and loadings as arrows on one plot</td>
+</tr>
+<tr class="even">
+<td>eigenfaces</td>
+<td>loading vectors of face images, viewed as images</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="technique-1-choosing-m-slides-3133-4243">Technique 1: choosing M (slides 31–33, 42–43)</h2>
+<ol type="1">
+<li><strong>PVE threshold:</strong> smallest <span class="math inline">\(M\)</span> with <span class="math inline">\(\frac{\sum_{m \le M}\lambda_m}{\sum_m\lambda_m} &gt; \theta\)</span>.</li>
+<li><strong>Scree test:</strong> keep the PCs to the left of the elbow (scree = the rubble at the foot of a cliff).</li>
+<li><strong>Eigenvalue-one:</strong> keep <span class="math inline">\(\lambda_m &gt; 1\)</span> (standardised attributes only: each attribute has variance 1).</li>
+<li><strong>Interpretability:</strong> keep what you can explain.</li>
+</ol>
+<div class="example">
+<p><strong>USArrests, standardised</strong> (<span class="math inline">\(\frac1n\)</span>): <span class="math inline">\(\lambda = 2.480, 0.990, 0.357, 0.173\)</span> (sum 4). PVE <span class="math inline">\(62.0\%, 24.7\%, 8.9\%, 4.3\%\)</span>; cumulative <span class="math inline">\(62.0, 86.8, 95.7, 100\)</span>. <span class="math inline">\(\theta = 0.8\)</span>: <span class="math inline">\(M = 2\)</span>; <span class="math inline">\(\theta = 0.9\)</span>: <span class="math inline">\(M = 3\)</span>; scree: <span class="math inline">\(M = 2\)</span>; eigenvalue-one: <span class="math inline">\(M = 1\)</span>, but sklearn’s <span class="math inline">\(\frac1{n-1}\)</span> variances give <span class="math inline">\(\lambda_2 = 1.010\)</span>, so <span class="math inline">\(M = 2\)</span>. Borderline: state your convention.</p>
+</div>
+<h2 id="technique-2-scaling-slide-41">Technique 2: scaling (slide 41)</h2>
+<p>Unscaled USArrests: Assault’s variance (≈ 6945) dwarfs the rest, so PC1 is Assault (loading 0.995) and “explains” 96.6%. Standardise (<code>StandardScaler</code>) when the attributes are in <strong>different units</strong>; you can skip it when they share units (pixels, gene expression).</p>
+<h2 id="technique-3-reading-loadings-and-biplots-slides-3840">Technique 3: reading loadings and biplots (slides 38–40)</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>PC1</th>
+<th>PC2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Murder</td>
+<td>0.54</td>
+<td>−0.42</td>
+</tr>
+<tr class="even">
+<td>Assault</td>
+<td>0.58</td>
+<td>−0.19</td>
+</tr>
+<tr class="odd">
+<td>UrbanPop</td>
+<td>0.28</td>
+<td>0.87</td>
+</tr>
+<tr class="even">
+<td>Rape</td>
+<td>0.54</td>
+<td>0.17</td>
+</tr>
+</tbody>
+</table>
+<p>Columns = loading vectors. <strong>PC1 ≈ overall crime</strong> (three crimes about equal); <strong>PC2 ≈ urbanisation</strong>. Biplot arrows are the <strong>rows</strong>; the crime arrows point together because the crimes are correlated. The lab’s plot is slide 39 <strong>mirrored</strong>: signs are arbitrary.</p>
+<div class="example">
+<p>A state with standardised values <span class="math inline">\((1.2, 0.8, -0.5, 0.3)\)</span>: <span class="math inline">\(z_1 = 0.54(1.2) + 0.58(0.8) + 0.28(-0.5) + 0.54(0.3) = 1.134\)</span>; <span class="math inline">\(z_2 = -0.504 - 0.152 - 0.435 + 0.051 = -1.04\)</span>.</p>
+</div>
+<h2 id="technique-4-reconstruction-compression-eigenfaces-slides-4447">Technique 4: reconstruction, compression, eigenfaces (slides 44–47)</h2>
+<p><span class="math inline">\(x_i \approx \bar x + \sum_{m=1}^Mz_{im}\varphi_m\)</span>. The average squared reconstruction error equals the <strong>sum of the dropped eigenvalues</strong>. With faces, the <span class="math inline">\(\varphi_m\)</span> reshaped as images are <strong>eigenfaces</strong>; a few dozen scores give a fair likeness (intrinsic dimension ≈ 30), so they’re used for compression and recognition.</p>
+<h2 id="technique-5-the-main-limitation-slide-29">Technique 5: the main limitation (slide 29)</h2>
+<p>PCA <strong>ignores labels</strong>: maximum-variance directions need not separate the classes. For that, use LDA (slide 15).</p>
+<div class="warn">
+<p><strong>Lab Exercise 3:</strong> <code>explained_variance_ratio_ = explained_variance_ / explained_variance_.sum()</code> holds only because <code>PCA()</code> kept all components. With <code>n_components=2</code>, divide by the total variance of the data. <strong>Lab text:</strong> the scores come from <code>transform()</code>, not <code>fit()</code>.</p>
+</div>
+<h2 id="what-to-read-in-the-book">What to read in the book</h2>
+<div class="book">
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Read?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ISLP 12.2.3 (p510–512)</td>
+<td><strong>Read</strong></td>
+<td>PVE (12.10), scree plots (Fig 12.3 = slide 43)</td>
+</tr>
+<tr class="even">
+<td>ISLP 12.2.4 (p512–515)</td>
+<td><strong>Read</strong></td>
+<td>Scaling (Fig 12.4 = slide 41), sign, how many PCs</td>
+</tr>
+<tr class="odd">
+<td>ISLP 12.2.5 (p515)</td>
+<td>Skim</td>
+<td>PCs as inputs to other methods</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="practice-prompt">Practice prompt</h2>
+<div class="prompt">
+<pre><code>I&#39;m studying CS5100 Data Analysis, week 8: using PCA in practice. I want practice questions on:
+- computing PVE and cumulative PVE from given PC variances, and choosing M by a threshold, the scree plot and the eigenvalue-one criterion
+- why and when to standardise attributes before PCA (USArrests: unscaled Assault dominates)
+- reading a loading matrix and a biplot, computing PC scores from loadings
+- reconstruction from M PCs, eigenfaces, and why PCA can be bad for classification
+
+Please:
+1. Use plain, everyday language and explain any technical term in one short sentence.
+2. Give me ONE question at a time, easy first, then harder, with friendly numbers.
+3. Wait for my answer, then mark it and show the full working step by step.
+4. If I get it wrong, explain the mistake and give me a similar question.
+5. Every 5 questions, summarise my strengths and what to practise.</code></pre>
+</div>
+
+<nav class="pager"><a href="../w8/PCA.html"><small>&larr; Previous</small>Principal component analysis</a><a class="next" href="../w8/MDS_and_tSNE.html"><small>Next &rarr;</small>MDS and t-SNE</a></nav>
+</div></main>
+<aside class="toc"><h4>On this page</h4><div class="list"></div></aside>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>
