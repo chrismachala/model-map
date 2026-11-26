@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Derivatives and gradient descent · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t04_gradient_descent", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_t04_gradient_descent" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a class="active" aria-current="page" href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 4 of 24</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 70 min</span></div>
+  <h1>Derivatives and gradient descent</h1>
+  <p class="tagline">Every "fit the model" step in the course is "make a loss as small as possible". There are two ways the course does it: set the derivative to zero and solve (least squares, ridge, the mean), or walk downhill one step at a time (logistic regression, neural networks). The chain rule supplies the derivatives both times. This stage builds each derivative from scratch and does full gradient steps by table.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">By the end of this stage you can</span></p>
+<ul>
+<li>differentiate the four functions that the course keeps using, and apply the chain rule to them;</li>
+<li>derive the least-squares slope and intercept by setting derivatives to zero, and compute them from a deviations table;</li>
+<li>do one or two gradient-descent steps on the RSS of a line, by table, with the signs right;</li>
+<li>explain learning rates, convexity, local minima and restarts;</li>
+<li>recognise the gradient pattern “(prediction − truth) × input”.</li>
+</ul>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>Week 1 slides, “calculus basics” (derivatives, chain rule, gradient, eq. 17); week 2 slides, “Gradient of the RSS” and gradient descent for the linear model (the slides minimise the RSS itself, not the MSE); week 3 slide eq. (17), <span class="math inline">\(\hat\beta^{(t+1)} \leftarrow \hat\beta^{(t)} - \eta\nabla(-\log\ell)\)</span>; week 4 slides on backpropagation. ISLP 3.1.1 (eq. 3.4) for the least-squares formulas, 10.7.1 to 10.7.2 for backpropagation and SGD. <strong>Skip</strong> momentum, Adam and dropout details in 10.7: the course uses plain gradient descent and early stopping.</p>
+</div>
+<h2 id="derivatives-and-the-chain-rule">1. Derivatives and the chain rule</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>A <strong>derivative</strong> is a slope: how fast the output changes when you nudge the input. The <strong>gradient</strong> is the list of slopes, one per parameter; it points uphill, so minus the gradient points downhill. The <strong>chain rule</strong> handles functions inside functions: multiply the outer slope by the inner slope.</p>
+</div>
+<p><span class="math display">\[\boxed{\frac{d}{d\beta}g\big(h(\beta)\big) = g&#39;\big(h(\beta)\big)\times h&#39;(\beta)}\]</span></p>
+<p>The four derivatives the course needs again and again:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Derivative</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\((y - z)^2\)</span> (as a function of <span class="math inline">\(z\)</span>)</td>
+<td><span class="math inline">\(-2(y - z)\)</span></td>
+<td>every squared-error fit</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\log z\)</span></td>
+<td><span class="math inline">\(1/z\)</span></td>
+<td>likelihoods (w3, w4)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma(z) = \frac{1}{1 + e^{-z}}\)</span></td>
+<td><span class="math inline">\(\sigma(z)\big(1 - \sigma(z)\big)\)</span></td>
+<td>logistic regression, sigmoid neurons</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{ReLU}(z) = \max(0, z)\)</span></td>
+<td><span class="math inline">\(1\)</span> if <span class="math inline">\(z &gt; 0\)</span>, <span class="math inline">\(0\)</span> if <span class="math inline">\(z &lt; 0\)</span></td>
+<td>ReLU neurons (w4)</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1: chain rule on one squared error.</strong> <span class="math inline">\(L(\beta) = (y - \beta x)^2\)</span> with <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(y = 5\)</span>, at <span class="math inline">\(\beta = 1\)</span>.</p>
+<ul>
+<li>Outer: <span class="math inline">\(g(z) = (y - z)^2\)</span> with <span class="math inline">\(z = \beta x\)</span>. <span class="math inline">\(g&#39;(z) = -2(y - z)\)</span>.</li>
+<li>Inner: <span class="math inline">\(z = \beta x\)</span>, so <span class="math inline">\(dz/d\beta = x\)</span>.</li>
+<li>Together: <span class="math inline">\(L&#39;(\beta) = -2(y - \beta x)\times x\)</span>.</li>
+<li>Numbers: <span class="math inline">\(z = 2\)</span>, <span class="math inline">\(y - z = 3\)</span>, <span class="math inline">\(L&#39;(1) = -2\times3\times2 = -12\)</span>.</li>
+</ul>
+<p>Negative slope: increasing <span class="math inline">\(\beta\)</span> lowers the loss, so gradient descent will increase <span class="math inline">\(\beta\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 2: the sigmoid’s derivative (2023 Q3).</strong> <span class="math inline">\(\sigma(z) = (1 + e^{-z})^{-1}\)</span>.</p>
+<ol type="1">
+<li>Outer: <span class="math inline">\(u^{-1}\)</span> has derivative <span class="math inline">\(-u^{-2}\)</span>. Inner: <span class="math inline">\(u = 1 + e^{-z}\)</span> has derivative <span class="math inline">\(-e^{-z}\)</span>.</li>
+<li><span class="math inline">\(\sigma&#39;(z) = -(1 + e^{-z})^{-2}\times(-e^{-z}) = \dfrac{e^{-z}}{(1 + e^{-z})^2}\)</span>.</li>
+<li>Split: <span class="math inline">\(\dfrac{1}{1 + e^{-z}}\times\dfrac{e^{-z}}{1 + e^{-z}} = \sigma(z)\times\big(1 - \sigma(z)\big)\)</span>, because <span class="math inline">\(\frac{e^{-z}}{1 + e^{-z}} = 1 - \frac{1}{1 + e^{-z}}\)</span>.</li>
+</ol>
+<p>At <span class="math inline">\(z = 0\)</span>: <span class="math inline">\(\sigma = 0.5\)</span>, <span class="math inline">\(\sigma&#39; = 0.25\)</span>, the steepest point of the S-curve.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Dropping the inner derivative.</strong> <span class="math inline">\(\frac{d}{d\beta}(y - \beta x)^2\)</span> is <span class="math inline">\(-2(y - \beta x)x\)</span>, not <span class="math inline">\(2(y - \beta x)\)</span>. The inner function <span class="math inline">\(y - \beta x\)</span> has slope <span class="math inline">\(-x\)</span>.</li>
+<li><strong><span class="math inline">\(\frac{d}{dz}e^{-z} = -e^{-z}\)</span></strong>, with a minus.</li>
+<li><strong>ReLU at exactly 0</strong> isn’t differentiable; exam questions avoid it.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="0.7311;0.1966" data-tol="0.002" label="σ(1);σ′(1)">
+<p>Compute <span class="math inline">\(\sigma(1)\)</span> and then <span class="math inline">\(\sigma&#39;(1) = \sigma(1)(1 - \sigma(1))\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(e^{-1} = 0.3679\)</span>, so <span class="math inline">\(\sigma(1) = 1/1.3679 = 0.7311\)</span>. <span class="math inline">\(\sigma&#39;(1) = 0.7311\times0.2689 = 0.1966\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="-4;24" label="y − βx;L′(β)">
+<p><span class="math inline">\(L(\beta) = (y - \beta x)^2\)</span> with <span class="math inline">\(x = 3\)</span>, <span class="math inline">\(y = 2\)</span>, at <span class="math inline">\(\beta = 2\)</span>. Give the residual <span class="math inline">\(y - \beta x\)</span> and then <span class="math inline">\(L&#39;(\beta) = -2(y - \beta x)x\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(y - \beta x = 2 - 6 = -4\)</span>. <span class="math inline">\(L&#39; = -2\times(-4)\times3 = 8\times3 = 24\)</span>. Positive slope, so gradient descent will <strong>decrease</strong> <span class="math inline">\(\beta\)</span> (towards <span class="math inline">\(2/3\)</span>, where <span class="math inline">\(\beta x = y\)</span>).</p>
+</div>
+</div>
+<h2 id="way-one-set-the-derivative-to-zero">2. Way one: set the derivative to zero</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>At the bottom of a smooth valley the slope is zero. If the loss is a squared error of a linear model, “slope = 0” gives linear equations you can solve exactly. That’s where the least-squares formulas come from.</p>
+</div>
+<p>For the line <span class="math inline">\(\hat y = \beta_0 + \beta_1x\)</span> and <span class="math inline">\(\text{RSS} = \sum_i(y_i - \beta_0 - \beta_1x_i)^2\)</span>:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Working</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>derivative in <span class="math inline">\(\beta_0\)</span></td>
+<td><span class="math inline">\(\partial_{\beta_0}\text{RSS} = -2\sum_i(y_i - \beta_0 - \beta_1x_i) = 0 \Rightarrow \beta_0 = \bar y - \beta_1\bar x\)</span></td>
+</tr>
+<tr class="even">
+<td>derivative in <span class="math inline">\(\beta_1\)</span></td>
+<td><span class="math inline">\(\partial_{\beta_1}\text{RSS} = -2\sum_i(y_i - \beta_0 - \beta_1x_i)x_i = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td>substitute <span class="math inline">\(\beta_0\)</span> and tidy</td>
+<td><span class="math inline">\(\hat\beta_1 = \dfrac{\sum_i(x_i - \bar x)(y_i - \bar y)}{\sum_i(x_i - \bar x)^2} = \dfrac{S_{xy}}{S_{xx}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\boxed{\hat\beta_1 = \frac{S_{xy}}{S_{xx}},\qquad \hat\beta_0 = \bar y - \hat\beta_1\bar x}\]</span></p>
+<p>In matrix form for many inputs, the same “gradient = 0” gives <span class="math inline">\(\mathbf X^T\mathbf X\hat\beta = \mathbf X^T\mathbf y\)</span>, so <span class="math inline">\(\hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 3.</strong> <span class="math inline">\(x = (1, 2, 3, 4)\)</span>, <span class="math inline">\(y = (2, 3, 5, 6)\)</span>. <span class="math inline">\(\bar x = 2.5\)</span>, <span class="math inline">\(\bar y = 4\)</span>.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(x_i - \bar x\)</span></th>
+<th><span class="math inline">\(y_i - \bar y\)</span></th>
+<th>product</th>
+<th><span class="math inline">\((x_i - \bar x)^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>−1.5</td>
+<td>−2</td>
+<td>3</td>
+<td>2.25</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+<td>−0.5</td>
+<td>−1</td>
+<td>0.5</td>
+<td>0.25</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>5</td>
+<td>0.5</td>
+<td>1</td>
+<td>0.5</td>
+<td>0.25</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>6</td>
+<td>1.5</td>
+<td>2</td>
+<td>3</td>
+<td>2.25</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td><strong>7</strong></td>
+<td><strong>5</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\hat\beta_1 = 7/5 = 1.4\)</span>. <span class="math inline">\(\hat\beta_0 = 4 - 1.4\times2.5 = 4 - 3.5 = 0.5\)</span>. Line: <span class="math inline">\(\hat y = 0.5 + 1.4x\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Using <span class="math inline">\(\sum x_iy_i\)</span> and <span class="math inline">\(\sum x_i^2\)</span> without centring.</strong> <span class="math inline">\(\sum x_iy_i/\sum x_i^2 = 50/30\)</span> here, which is wrong. The plain sums only work if <span class="math inline">\(\bar x = 0\)</span> (a “centred” input).</li>
+<li><strong>Swapping the means in <span class="math inline">\(\hat\beta_0\)</span>.</strong> It’s <span class="math inline">\(\bar y - \hat\beta_1\bar x\)</span>: the line passes through <span class="math inline">\((\bar x, \bar y)\)</span>.</li>
+<li><strong>Rounding <span class="math inline">\(\bar x\)</span> early.</strong> Keep fractions until the end.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="2;4;6;8;0.75;2.5" label="x̄;ȳ;S_xy;S_xx;β̂₁;β̂₀">
+<p>Data <span class="math inline">\(x = (0, 2, 4)\)</span>, <span class="math inline">\(y = (3, 3, 6)\)</span>. Build the deviations table, then give <span class="math inline">\(\bar x\)</span>, <span class="math inline">\(\bar y\)</span>, <span class="math inline">\(S_{xy}\)</span>, <span class="math inline">\(S_{xx}\)</span>, <span class="math inline">\(\hat\beta_1\)</span> and <span class="math inline">\(\hat\beta_0\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\bar x = 2\)</span>, <span class="math inline">\(\bar y = 4\)</span>. Deviations <span class="math inline">\(x_i - \bar x = (-2, 0, 2)\)</span>, <span class="math inline">\(y_i - \bar y = (-1, -1, 2)\)</span>. Products <span class="math inline">\(2, 0, 4\)</span>, so <span class="math inline">\(S_{xy} = 6\)</span>. Squares <span class="math inline">\(4, 0, 4\)</span>, so <span class="math inline">\(S_{xx} = 8\)</span>. <span class="math inline">\(\hat\beta_1 = 6/8 = 0.75\)</span>, <span class="math inline">\(\hat\beta_0 = 4 - 0.75\times2 = 2.5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="ols2">
+
+</div>
+<h2 id="way-two-gradient-descent">3. Way two: gradient descent</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>When “slope = 0” can’t be solved by algebra (a sigmoid or a ReLU is in the way), stand somewhere on the loss surface, look which way is downhill, take a small step that way, and repeat. The step size is the <strong>learning rate</strong> <span class="math inline">\(\eta\)</span>.</p>
+</div>
+<p><span class="math display">\[\boxed{\beta^{(t+1)} = \beta^{(t)} - \eta\,\nabla L\big(\beta^{(t)}\big)}\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\beta^{(t)}\)</span></td>
+<td>the parameters after <span class="math inline">\(t\)</span> steps</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\nabla L\)</span></td>
+<td>the gradient: one partial derivative per parameter</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\eta\)</span></td>
+<td>learning rate (step size), a small positive number</td>
+</tr>
+<tr class="even">
+<td>minus sign</td>
+<td>step <strong>against</strong> the gradient, i.e. downhill</td>
+</tr>
+</tbody>
+</table>
+<p>For the RSS of a line, from section 2: <span class="math inline">\(\partial_{\beta_0}\text{RSS} = -2\sum_ir_i\)</span> and <span class="math inline">\(\partial_{\beta_1}\text{RSS} = -2\sum_ir_ix_i\)</span>, where <span class="math inline">\(r_i = y_i - \hat y_i\)</span> is the residual at the current <span class="math inline">\(\beta\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 4: two steps by table.</strong> Data <span class="math inline">\((1, 2)\)</span>, <span class="math inline">\((2, 4)\)</span>; start <span class="math inline">\(\beta = (0, 0)\)</span>; <span class="math inline">\(\eta = 0.05\)</span>.</p>
+<p><strong>Step 1.</strong> Predictions are all 0.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(\hat y_i\)</span></th>
+<th><span class="math inline">\(r_i\)</span></th>
+<th><span class="math inline">\(r_ix_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td>0</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td><strong>6</strong></td>
+<td><strong>10</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Gradient <span class="math inline">\(= (-2\times6,\ -2\times10) = (-12, -20)\)</span>. Update: <span class="math inline">\(\beta = (0, 0) - 0.05\times(-12, -20) = (0.6, 1.0)\)</span>. RSS fell from <span class="math inline">\(4 + 16 = 20\)</span> to <span class="math inline">\((2 - 1.6)^2 + (4 - 2.6)^2 = 0.16 + 1.96 = 2.12\)</span>.</p>
+<p><strong>Step 2.</strong> Now <span class="math inline">\(\hat y = 0.6 + 1.0x\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(\hat y_i\)</span></th>
+<th><span class="math inline">\(r_i\)</span></th>
+<th><span class="math inline">\(r_ix_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>1.6</td>
+<td>0.4</td>
+<td>0.4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td>2.6</td>
+<td>1.4</td>
+<td>2.8</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td><strong>1.8</strong></td>
+<td><strong>3.2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Gradient <span class="math inline">\(= (-3.6, -6.4)\)</span>. Update: <span class="math inline">\(\beta = (0.6 + 0.18,\ 1.0 + 0.32) = (0.78, 1.32)\)</span>. The exact answer is <span class="math inline">\(\beta = (0, 2)\)</span> (the points lie on <span class="math inline">\(y = 2x\)</span>); with more steps it gets there.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Adding the gradient.</strong> <span class="math inline">\(\beta - \eta\nabla L\)</span>, never <span class="math inline">\(+\)</span>. If your loss goes <strong>up</strong> after a step, check this first.</li>
+<li><strong>Losing the <span class="math inline">\(-2\)</span>.</strong> The gradient of the RSS is <span class="math inline">\(-2\sum r_ix_i\)</span>. Forget the minus and you walk uphill.</li>
+<li><strong>Mixing up conventions.</strong> Some texts minimise <span class="math inline">\(\frac1n\)</span>RSS or <span class="math inline">\(\frac12\)</span>RSS; that only rescales the gradient (and so the effective <span class="math inline">\(\eta\)</span>). Use the loss the question states.</li>
+<li><strong><span class="math inline">\(\eta\)</span> too big</strong> makes the steps overshoot the valley and can diverge; too small makes progress painfully slow.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> Data <span class="math inline">\((0, 1)\)</span>, <span class="math inline">\((1, 3)\)</span>; start <span class="math inline">\(\beta = (0, 0)\)</span>; <span class="math inline">\(\eta = 0.1\)</span>; loss = RSS.</p>
+<div class="q" kind="num" data-answer="4;3" label="Σ rᵢ;Σ rᵢxᵢ">
+<p>At the start every <span class="math inline">\(\hat y_i = 0\)</span>. Give <span class="math inline">\(\sum r_i\)</span> and <span class="math inline">\(\sum r_ix_i\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(r = (1, 3)\)</span>, so <span class="math inline">\(\sum r_i = 4\)</span>. <span class="math inline">\(\sum r_ix_i = 1\times0 + 3\times1 = 3\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="-8;-6;0.8;0.6" label="∂β₀;∂β₁;new β₀;new β₁">
+<p>Now the gradient and the updated <span class="math inline">\(\beta\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\nabla = (-2\times4, -2\times3) = (-8, -6)\)</span>. <span class="math inline">\(\beta = (0, 0) - 0.1\times(-8, -6) = (0.8, 0.6)\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="gd2">
+
+</div>
+<h2 id="convex-or-not-and-restarts">4. Convex or not, and restarts</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>A <strong>convex</strong> loss is one bowl: gradient descent with a small enough step reaches the same bottom from anywhere. A <strong>non-convex</strong> loss has several dips, so where you finish depends on where you start. The cure is to start several times and keep the best.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Loss</th>
+<th>Shape</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RSS of linear, polynomial, ridge regression (w2)</td>
+<td>convex</td>
+<td>one answer; matches the formula</td>
+</tr>
+<tr class="even">
+<td>NLL of logistic regression (w3)</td>
+<td>convex</td>
+<td>one answer, but no formula: use GD</td>
+</tr>
+<tr class="odd">
+<td>Neural network loss (w4)</td>
+<td>non-convex</td>
+<td>random starts can end in different places</td>
+</tr>
+<tr class="even">
+<td>K-means <span class="math inline">\(J_{SSE}\)</span> (w7)</td>
+<td>non-convex (over assignments)</td>
+<td>stops at a local minimum: use several random starts</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="mcq">
+<p>Why does the week 2 lab run gradient descent for linear regression from 10 random starting points, and what should you see?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Linear regression has many local minima; expect 10 different answers.</label></li>
+<li><label><input type="checkbox" checked="" />To check convergence: the RSS is convex, so all runs should end at (nearly) the same <span class="math inline">\(\beta\)</span>, matching <span class="math inline">\((\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span>.</label></li>
+<li><label><input type="checkbox" />To choose the learning rate.</label></li>
+<li><label><input type="checkbox" />Because the matrix formula is wrong.</label></li>
+</ul>
+<div class="expl">
+<p>Different answers would mean the step size or the number of iterations is wrong. For a neural network, different starts genuinely can end in different places.</p>
+</div>
+</div>
+<h2 id="the-gradient-that-keeps-coming-back">5. The gradient that keeps coming back</h2>
+<p>For one training point, three models, one pattern:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model and loss</th>
+<th>Gradient in <span class="math inline">\(\beta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>linear model, squared error</td>
+<td><span class="math inline">\(-2(y - \hat y)\,\tilde x = 2(\hat y - y)\,\tilde x\)</span></td>
+</tr>
+<tr class="even">
+<td>logistic regression, cross-entropy (Toolkit 9)</td>
+<td><span class="math inline">\((p - y)\,\tilde x\)</span></td>
+</tr>
+<tr class="odd">
+<td>softmax output, cross-entropy, per class score (w4)</td>
+<td><span class="math inline">\(p_m - y_m\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Each time: <strong>(prediction − truth) × input</strong>. Badly predicted points push hard, in the direction of their own input; well-predicted points barely move anything. Backpropagation (w4) passes this backwards through the layers with the chain rule.</p>
+<div class="q" kind="num" data-answer="0.1;0.1" label="new β₀;new β₁">
+<p>Squared-error loss <span class="math inline">\((y - \beta_0 - \beta_1x)^2\)</span> on one point <span class="math inline">\(x = 1\)</span>, <span class="math inline">\(y = 2\)</span>, starting at <span class="math inline">\(\beta = (0, 0)\)</span>, <span class="math inline">\(\eta = 0.025\)</span>. Using <span class="math inline">\(\nabla = -2(y - \hat y)\tilde x\)</span>, give <span class="math inline">\(\beta\)</span> after one step.</p>
+<div class="expl">
+<p><span class="math inline">\(\hat y = 0\)</span>; <span class="math inline">\(\nabla = -2\times2\times(1, 1) = (-4, -4)\)</span>. <span class="math inline">\(\beta = (0, 0) - 0.025\times(-4, -4) = (0.1, 0.1)\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="gd2">
+
+</div>
+<div class="q" kind="gen" data-gen="ols2">
+
+</div>
+<div class="q" kind="num" data-answer="0" label="ReLU′(−2)">
+<p>What is the derivative of <span class="math inline">\(\text{ReLU}(z) = \max(0, z)\)</span> at <span class="math inline">\(z = -2\)</span>?</p>
+<div class="expl">
+<p>Flat at 0 for <span class="math inline">\(z &lt; 0\)</span>: slope <span class="math inline">\(0\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which models are fitted by gradient descent in the course because no closed-form solution exists?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Linear regression</label></li>
+<li><label><input type="checkbox" />Ridge regression</label></li>
+<li><label><input type="checkbox" checked="" />Logistic regression and neural networks</label></li>
+<li><label><input type="checkbox" />KNN</label></li>
+</ul>
+<div class="expl">
+<p>Linear and ridge regression have closed forms; KNN has nothing to fit.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>(3 marks; 2023 Q3.)</strong> Show that the sigmoid <span class="math inline">\(\sigma(z) = \frac{1}{1 + e^{-z}}\)</span> satisfies <span class="math inline">\(\sigma&#39;(z) = \sigma(z)(1 - \sigma(z))\)</span>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Chain rule: <span class="math inline">\(\sigma&#39;(z) = \frac{e^{-z}}{(1 + e^{-z})^2}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Splits it as <span class="math inline">\(\frac{1}{1 + e^{-z}}\cdot\frac{e^{-z}}{1 + e^{-z}}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Shows <span class="math inline">\(\frac{e^{-z}}{1 + e^{-z}} = 1 - \sigma(z)\)</span>.</label></li>
+</ul>
+<div class="model">
+<p>Write <span class="math inline">\(\sigma(z) = (1 + e^{-z})^{-1}\)</span>. By the chain rule <span class="math inline">\(\sigma&#39;(z) = -(1 + e^{-z})^{-2}\cdot(-e^{-z}) = \frac{e^{-z}}{(1 + e^{-z})^2} = \frac{1}{1 + e^{-z}}\cdot\frac{e^{-z}}{1 + e^{-z}}\)</span>. Since <span class="math inline">\(\frac{e^{-z}}{1 + e^{-z}} = \frac{(1 + e^{-z}) - 1}{1 + e^{-z}} = 1 - \sigma(z)\)</span>, we get <span class="math inline">\(\sigma&#39;(z) = \sigma(z)(1 - \sigma(z))\)</span>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t03_squared_error.html"><small>&larr; Stage 3</small>Squared error: MSE, RSS, SSE</a><a class="next" href="t05_penalties.html"><small>Stage 5 &rarr;</small>Fit plus penalty, and flexibility knobs</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

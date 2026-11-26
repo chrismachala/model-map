@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Averages, indicators and votes · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t02_averages_votes", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_t02_averages_votes" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a class="active" aria-current="page" href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 2 of 24</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 55 min</span></div>
+  <h1>Averages, indicators and votes</h1>
+  <p class="tagline">The humblest tool in the course is also the most used: average the numbers, or count the labels and take the most common one. Do that over "the nearby points" and you have KNN, a tree leaf, a K-means centre and a density estimate. Do it over many models and you have bagging. This stage drills the counting carefully, because a miscount ruins every later step.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">By the end of this stage you can</span></p>
+<ul>
+<li>compute a mean and a centroid (a mean of vectors), and check it;</li>
+<li>use the indicator <span class="math inline">\(\mathbb 1(\cdot)\)</span> to turn “how many?” into a sum, and get an error rate and a class proportion from it;</li>
+<li>take a majority vote and explain the difference between <span class="math inline">\(\max\)</span> and <span class="math inline">\(\arg\max\)</span>;</li>
+<li>run KNN classification and KNN regression by hand with a distance table;</li>
+<li>see one idea, “average or vote over a neighbourhood”, inside six different methods.</li>
+</ul>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>No single section: the idea runs through ISLP 2.2.2 to 2.2.3 (error rate, KNN), 3.5 (KNN regression), 8.1 (tree leaves), 8.2.1 (bagging) and 12.4.1 (K-means centres). Week 7 slides, “Non-parametric density estimation”, derive <span class="math inline">\(f(x) \approx k/(nV)\)</span>. <strong>Slide typo:</strong> week 1 slide equation (33) for KNN leaves out the <span class="math inline">\(\frac1K\)</span>, which turns a probability into a count. Nothing to skip here; it’s all used.</p>
+</div>
+<h2 id="the-mean-and-the-centroid">1. The mean, and the centroid</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>The <strong>mean</strong> is the “fair share”: pool all the values and split them equally. For points with several coordinates, do this separately in each coordinate. The result is the <strong>centroid</strong>, the balance point of the group.</p>
+</div>
+<p><span class="math display">\[\boxed{\bar y = \frac1n\sum_{i=1}^ny_i,\qquad \mu = \frac1n\sum_{i=1}^nx_i = \Big(\frac1n\sum_ix_{i1},\ \frac1n\sum_ix_{i2},\ \dots\Big)}\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(n\)</span></td>
+<td>how many values or points</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(y_i\)</span></td>
+<td>the <span class="math inline">\(i\)</span>-th value</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{ij}\)</span></td>
+<td>coordinate <span class="math inline">\(j\)</span> of point <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mu\)</span></td>
+<td>the centroid: one mean per coordinate</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1.</strong> Points <span class="math inline">\((1, 4)\)</span>, <span class="math inline">\((3, 0)\)</span>, <span class="math inline">\((5, 5)\)</span>, <span class="math inline">\((3, 7)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th><span class="math inline">\(x_{i1}\)</span></th>
+<th><span class="math inline">\(x_{i2}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>3</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td><strong>sum</strong></td>
+<td><strong>12</strong></td>
+<td><strong>16</strong></td>
+</tr>
+<tr class="even">
+<td><strong>÷ 4</strong></td>
+<td><strong>3</strong></td>
+<td><strong>4</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Centroid <span class="math inline">\(\mu = (3, 4)\)</span>.</p>
+<p><strong>Check:</strong> the gaps from the mean always add to zero. First coordinate: <span class="math inline">\((1 - 3) + (3 - 3) + (5 - 3) + (3 - 3) = -2 + 0 + 2 + 0 = 0\)</span>. Second: <span class="math inline">\(0 - 4 + 1 + 3 = 0\)</span>. If a check doesn’t come to 0, the mean is wrong.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Dividing by the wrong <span class="math inline">\(n\)</span>.</strong> Count the points, not the coordinates.</li>
+<li><strong>Averaging across a point instead of down a column.</strong> <span class="math inline">\((1 + 4)/2\)</span> mixes two different inputs; it means nothing.</li>
+<li><strong>Dropping a negative sign in the sum.</strong> Write the column out in full before adding.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="2;3" label="μ₁;μ₂">
+<p>Find the centroid of <span class="math inline">\((0, 2)\)</span>, <span class="math inline">\((4, 5)\)</span>, <span class="math inline">\((2, 2)\)</span>.</p>
+<div class="expl">
+<p>First coordinates <span class="math inline">\(0 + 4 + 2 = 6\)</span>, <span class="math inline">\(/3 = 2\)</span>. Second <span class="math inline">\(2 + 5 + 2 = 9\)</span>, <span class="math inline">\(/3 = 3\)</span>. Check: <span class="math inline">\(-2 + 2 + 0 = 0\)</span> and <span class="math inline">\(-1 + 2 - 1 = 0\)</span>.</p>
+</div>
+</div>
+<h2 id="the-indicator-error-rates-and-proportions">2. The indicator, error rates and proportions</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>The indicator <span class="math inline">\(\mathbb 1(\text{statement})\)</span> is a switch: 1 if the statement is true, 0 if false. Adding indicators <strong>counts</strong> how often something is true. Dividing that count by <span class="math inline">\(n\)</span> gives a <strong>proportion</strong>. So “a proportion is a mean of indicators”.</p>
+</div>
+<p><span class="math display">\[\boxed{\frac1n\sum_{i=1}^n\mathbb 1(y_i = k) = \text{fraction with label } k,\qquad \text{error rate} = \frac1n\sum_{i=1}^n\mathbb 1(\hat y_i \ne y_i)}\]</span></p>
+<div class="example">
+<p><strong>Worked example 2.</strong> True labels and predictions for 6 points:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(\hat y_i\)</span></th>
+<th><span class="math inline">\(\mathbb 1(\hat y_i \ne y_i)\)</span></th>
+<th><span class="math inline">\(\mathbb 1(y_i = A)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>A</td>
+<td>A</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>B</td>
+<td>A</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>A</td>
+<td>A</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>C</td>
+<td>C</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>A</td>
+<td>B</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>B</td>
+<td>B</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><strong>sum</strong></td>
+<td></td>
+<td></td>
+<td><strong>2</strong></td>
+<td><strong>3</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Error rate <span class="math inline">\(= 2/6 = 0.333\)</span>. Proportion of A’s <span class="math inline">\(\hat p_A = 3/6 = 0.5\)</span>. Accuracy <span class="math inline">\(= 1 - 0.333 = 0.667\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="2;0.25" label="mistakes;error rate">
+<p>True labels <span class="math inline">\((1, 0, 0, 1, 1, 0, 1, 0)\)</span>, predictions <span class="math inline">\((1, 0, 1, 1, 0, 0, 1, 0)\)</span>. How many mistakes, and what is the error rate?</p>
+<div class="expl">
+<p>Compare position by position: mismatches at 3 and 5. <span class="math inline">\(2/8 = 0.25\)</span>.</p>
+</div>
+</div>
+<h2 id="vote-max-versus-argmax">3. Vote: <span class="math inline">\(\max\)</span> versus <span class="math inline">\(\arg\max\)</span></h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>To predict a class from a group of labels, pick the most common one. In symbols that’s <span class="math inline">\(\arg\max\)</span>: “the class <span class="math inline">\(k\)</span> that makes the proportion biggest”. <span class="math inline">\(\max\)</span> is the biggest <strong>value</strong> (a number like 0.6); <span class="math inline">\(\arg\max\)</span> is <strong>which class</strong> gives it (a label like “A”).</p>
+</div>
+<p><span class="math display">\[\hat y = \arg\max_k\hat p_k\]</span></p>
+<div class="example">
+<p><strong>Worked example 3.</strong> Labels A, B, A, C, A. <span class="math inline">\(\hat p = (0.6, 0.2, 0.2)\)</span> for (A, B, C). <span class="math inline">\(\max_k\hat p_k = 0.6\)</span>; <span class="math inline">\(\arg\max_k\hat p_k = A\)</span>. The prediction is A, and if it’s wrong, it’s wrong with “probability” <span class="math inline">\(1 - 0.6 = 0.4\)</span> on this group.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Writing a number when the question asks for a class</strong>, or the other way round. “What does the Bayes classifier predict?” wants a label; “what is the Bayes error at <span class="math inline">\(x_0\)</span>?” wants <span class="math inline">\(1 - \max_kP(Y = k\mid x_0)\)</span>, a number.</li>
+<li><strong>Ties.</strong> With an even <span class="math inline">\(K\)</span> in a two-class KNN you can get 2 votes each. Exam questions avoid this by using odd <span class="math inline">\(K\)</span>; if you meet one, say how you’d break it.</li>
+</ul>
+</div>
+<h2 id="knn-distance-table-then-vote-or-average">4. KNN: distance table, then vote or average</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>To predict at a new point <span class="math inline">\(x_0\)</span>: find the <span class="math inline">\(K\)</span> training points closest to it, then <strong>vote</strong> (classification) or <strong>average</strong> (regression). The only skill is ranking distances correctly, so use a table.</p>
+</div>
+<p><span class="math display">\[\tilde P(Y = k\mid x_0) = \frac1K\sum_{i\in\mathcal N_0}\mathbb 1(y_i = k),\qquad \hat f(x_0) = \frac1K\sum_{i\in\mathcal N_0}y_i\]</span></p>
+<p>where <span class="math inline">\(\mathcal N_0\)</span> is the set of the <span class="math inline">\(K\)</span> nearest training points.</p>
+<div class="example">
+<p><strong>Worked example 4: classification in 2D.</strong> Training points: <span class="math inline">\((1, 1)\)</span> A, <span class="math inline">\((2, 5)\)</span> B, <span class="math inline">\((4, 2)\)</span> A, <span class="math inline">\((6, 5)\)</span> B, <span class="math inline">\((3, 4)\)</span> B. Classify <span class="math inline">\(x_0 = (3, 2)\)</span> with <span class="math inline">\(K = 3\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th>label</th>
+<th>gaps to <span class="math inline">\(x_0\)</span></th>
+<th><span class="math inline">\(\|x - x_0\|^2\)</span></th>
+<th>rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1, 1)</td>
+<td>A</td>
+<td>(−2, −1)</td>
+<td>4 + 1 = 5</td>
+<td><strong>3</strong></td>
+</tr>
+<tr class="even">
+<td>(2, 5)</td>
+<td>B</td>
+<td>(−1, 3)</td>
+<td>1 + 9 = 10</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>(4, 2)</td>
+<td>A</td>
+<td>(1, 0)</td>
+<td>1 + 0 = 1</td>
+<td><strong>1</strong></td>
+</tr>
+<tr class="even">
+<td>(6, 5)</td>
+<td>B</td>
+<td>(3, 3)</td>
+<td>9 + 9 = 18</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>(3, 4)</td>
+<td>B</td>
+<td>(0, 2)</td>
+<td>0 + 4 = 4</td>
+<td><strong>2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The three nearest (ranks 1 to 3) have labels A, B, A. So <span class="math inline">\(\tilde P(A\mid x_0) = 2/3\)</span>, <span class="math inline">\(\tilde P(B\mid x_0) = 1/3\)</span>, and KNN predicts <strong>A</strong>.</p>
+<p><strong>Tie check:</strong> the 3rd distance² is 5 and the 4th is 10, so the cut-off is clean. If they had been equal, the answer would depend on how ties are broken, and you should say so.</p>
+<p>With <span class="math inline">\(K = 1\)</span> the answer is A (only <span class="math inline">\((4, 2)\)</span>). With <span class="math inline">\(K = 5\)</span> it’s every point: 2 A, 3 B, so <strong>B</strong>. Changing <span class="math inline">\(K\)</span> can flip the prediction, which is why <span class="math inline">\(K\)</span> is the flexibility knob.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 5: regression on a line.</strong> Training data <span class="math inline">\(x = (1, 2, 4, 7, 8)\)</span>, <span class="math inline">\(y = (3, 5, 4, 10, 12)\)</span>. Predict at <span class="math inline">\(x_0 = 2.5\)</span> with <span class="math inline">\(K = 3\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(\lvert x_i - 2.5\rvert\)</span></th>
+<th>rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>1.5</td>
+<td>2 (tie)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>5</td>
+<td>0.5</td>
+<td><strong>1</strong></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>4</td>
+<td>1.5</td>
+<td>2 (tie)</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>10</td>
+<td>4.5</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>12</td>
+<td>5.5</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>The tie at rank 2 doesn’t matter: both tied points are inside the top 3. <span class="math inline">\(\hat f(2.5) = (5 + 3 + 4)/3 = 4\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Not checking ties at the <span class="math inline">\(K\)</span>-th place.</strong> If the <span class="math inline">\(K\)</span>-th and <span class="math inline">\((K+1)\)</span>-th distances are equal, the answer isn’t defined. Say so.</li>
+<li><strong>Dividing by the number of class-A neighbours</strong> instead of by <span class="math inline">\(K\)</span>. <span class="math inline">\(\tilde P(A) = (\text{A&#39;s among the } K)/K\)</span>.</li>
+<li><strong>Forgetting the <span class="math inline">\(\frac1K\)</span></strong> (week 1 slide (33) has this typo). Without it you get a count, not a probability.</li>
+<li><strong>Square roots slow you down.</strong> To rank, squared distances are enough.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="8;2" label="KNN prediction;A&#39;s among the 2">
+<p>Same data: <span class="math inline">\(x = (0, 3, 5, 6, 10)\)</span>, <span class="math inline">\(y = (2, 8, 7, 9, 1)\)</span>, labels A, B, A, A, B, <span class="math inline">\(x_0 = 4.6\)</span>, <span class="math inline">\(K = 2\)</span>. Give the KNN regression prediction and the number of A’s among the 2 nearest.</p>
+<div class="expl">
+<p>Distances <span class="math inline">\(\lvert x_i - 4.6\rvert\)</span>: <span class="math inline">\(4.6, 1.6, 0.4, 1.4, 5.4\)</span>. Nearest two: <span class="math inline">\(x = 5\)</span> (<span class="math inline">\(y = 7\)</span>, A) and <span class="math inline">\(x = 6\)</span> (<span class="math inline">\(y = 9\)</span>, A). Prediction <span class="math inline">\((7 + 9)/2 = 8\)</span>; both are A.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="knn2">
+
+</div>
+<h2 id="one-idea-many-methods">5. One idea, many methods</h2>
+<p>Most non-parametric methods in the course are “pick a group of points near <span class="math inline">\(x\)</span>, then average or vote”. Only the rule for “near” changes:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Who is “near” <span class="math inline">\(x\)</span></th>
+<th>Then</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>KNN classifier (w1)</td>
+<td>the <span class="math inline">\(K\)</span> closest points</td>
+<td>vote</td>
+</tr>
+<tr class="even">
+<td>KNN regression (w2)</td>
+<td>the <span class="math inline">\(K\)</span> closest points</td>
+<td>average</td>
+</tr>
+<tr class="odd">
+<td>Regression tree (w4)</td>
+<td>points in the same leaf (box)</td>
+<td>average</td>
+</tr>
+<tr class="even">
+<td>Classification tree (w4)</td>
+<td>points in the same leaf</td>
+<td>vote</td>
+</tr>
+<tr class="odd">
+<td>Histogram / <span class="math inline">\(k/(nV)\)</span> (w7)</td>
+<td>points in a region of volume <span class="math inline">\(V\)</span></td>
+<td>count, divide by <span class="math inline">\(nV\)</span></td>
+</tr>
+<tr class="even">
+<td>K-means update (w7)</td>
+<td>points assigned to centre <span class="math inline">\(j\)</span></td>
+<td>average: the new centre</td>
+</tr>
+<tr class="odd">
+<td>Bagging (w6)</td>
+<td>not points but <span class="math inline">\(B\)</span> <strong>models</strong></td>
+<td>average or vote their predictions</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 6: the same data, three methods.</strong> <span class="math inline">\(x = (1, 2, 4, 7, 8)\)</span>, <span class="math inline">\(y = (3, 5, 4, 10, 12)\)</span>, predict at <span class="math inline">\(x_0 = 2.5\)</span>.</p>
+<ul>
+<li>KNN, <span class="math inline">\(K = 3\)</span>: neighbours <span class="math inline">\(x = 2, 1, 4\)</span>, so <span class="math inline">\(\hat y = (5 + 3 + 4)/3 = 4\)</span>.</li>
+<li>A tree split at <span class="math inline">\(x &lt; 5.5\)</span>: <span class="math inline">\(x_0\)</span> falls in the left leaf <span class="math inline">\(\{1, 2, 4\}\)</span>, so <span class="math inline">\(\hat y = 4\)</span>.</li>
+<li>Density with region <span class="math inline">\([1, 4]\)</span> (width <span class="math inline">\(V = 3\)</span>): <span class="math inline">\(k = 3\)</span> of <span class="math inline">\(n = 5\)</span> points inside, so <span class="math inline">\(f(2.5) \approx \frac{k}{nV} = \frac{3}{5\times3} = 0.2\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="multi">
+<p>Which of these are “average or vote over a neighbourhood” methods? Tick all that apply.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />KNN regression</label></li>
+<li><label><input type="checkbox" checked="" />A classification tree’s prediction at a leaf</label></li>
+<li><label><input type="checkbox" checked="" />The K-means centre update</label></li>
+<li><label><input type="checkbox" />Logistic regression’s prediction</label></li>
+<li><label><input type="checkbox" checked="" />The histogram density estimate</label></li>
+</ul>
+<div class="expl">
+<p>Logistic regression uses one global formula <span class="math inline">\(\sigma(\beta\cdot\tilde x)\)</span>; it doesn’t look at a local group when it predicts.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="centroid2">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="knn2">
+
+</div>
+<div class="q" kind="gen" data-gen="knn">
+
+</div>
+<div class="q" kind="gen" data-gen="centroid2">
+
+</div>
+<div class="q" kind="num" data-answer="0.6" label="P̃(red)">
+<p>The 5 nearest neighbours of <span class="math inline">\(x_0\)</span> have labels red, blue, red, red, blue. What is KNN’s <span class="math inline">\(\tilde P(Y = \text{red}\mid x_0)\)</span> with <span class="math inline">\(K = 5\)</span>?</p>
+<div class="expl">
+<p><span class="math inline">\(\frac15\sum\mathbb 1(y_i = \text{red}) = 3/5 = 0.6\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="7" label="prediction">
+<p>Bagging averages three regression trees whose predictions at <span class="math inline">\(x_0\)</span> are <span class="math inline">\(6\)</span>, <span class="math inline">\(7\)</span> and <span class="math inline">\(8\)</span>. What does the bagged model predict?</p>
+<div class="expl">
+<p><span class="math inline">\((6 + 7 + 8)/3 = 7\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>At <span class="math inline">\(x_0\)</span> the class proportions are <span class="math inline">\((0.5, 0.3, 0.2)\)</span> for classes (1, 2, 3). Which statement is right?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><span class="math inline">\(\arg\max_k\hat p_k = 0.5\)</span></label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\arg\max_k\hat p_k = 1\)</span> and <span class="math inline">\(\max_k\hat p_k = 0.5\)</span></label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(\max_k\hat p_k = 1\)</span></label></li>
+<li><label><input type="checkbox" />The prediction is class 3 because it’s the last one.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(\arg\max\)</span> returns the class; <span class="math inline">\(\max\)</span> returns the value.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t01_vectors_distances.html"><small>&larr; Stage 1</small>Vectors, dot products and distances</a><a class="next" href="t03_squared_error.html"><small>Stage 3 &rarr;</small>Squared error: MSE, RSS, SSE</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

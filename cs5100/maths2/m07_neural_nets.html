@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neural networks · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m07_neural_nets", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_m07_neural_nets" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a class="active" aria-current="page" href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 18 of 24</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 65 min</span></div>
+  <h1>Neural networks</h1>
+  <p class="tagline">A neural network with one hidden layer is a stack of Part A pieces: dot products, bent by ReLU or sigmoid, combined by another dot product, then fed into squared error (regression) or softmax and cross-entropy (classification). Training is gradient descent with the chain rule applied backwards: backpropagation. This stage does a forward pass, a parameter count and a backward pass, all by table.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A1</strong> each hidden unit is <span class="math inline">\(g(w_k\cdot\tilde x)\)</span>, and the output is <span class="math inline">\(\beta\cdot\tilde A\)</span> · <strong>A4</strong> the chain rule (backpropagation), gradient descent, non-convexity and random starts · <strong>A3</strong> squared-error loss · <strong>A8, A9</strong> softmax output and cross-entropy · <strong>A5</strong> weight decay and early stopping. Full pages: <a href="../w4/Neural_Network.html">neural network</a>, <a href="../w4/Neural_Network_Classifier.html">NN classifier</a>, <a href="../w4/Training_Neural_Networks.html">training</a>.</p>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 10.1 (single-layer networks, eq. 10.1 and 10.2), 10.2 (multilayer networks for MNIST digits, softmax eq. 10.13, cross-entropy eq. 10.14), 10.7.1 (backpropagation), 10.7.2 to 10.7.3 (regularisation, SGD, early stopping). <strong>Skip</strong> 10.3 to 10.6 (convolutional and recurrent networks) and the details of dropout and Adam. Week 4 slides. <strong>Lab bug:</strong> <code>ShallowNet.forward</code> ends in <code>nn.Softmax</code>, but <code>nn.CrossEntropyLoss</code> applies softmax again (Toolkit 8).</p>
+</div>
+<h2 id="the-forward-pass">1. The forward pass</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Each hidden unit computes its own linear score of the inputs and then “bends” it: ReLU sets negatives to 0; sigmoid squashes to (0, 1). The output is a linear score of those bent features. Without the bend, the whole network would collapse into one linear model.</p>
+</div>
+<p><span class="math display">\[A_k = g\Big(\underbrace{w_{k0} + \sum_{j=1}^pw_{kj}x_j}_{z_k,\ \text{A1}}\Big),\qquad f(x) = \beta_0 + \sum_{k=1}^K\beta_kA_k\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(p\)</span></td>
+<td>number of inputs</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(K\)</span></td>
+<td>number of hidden units</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(w_{kj}\)</span></td>
+<td>weight from input <span class="math inline">\(j\)</span> to hidden unit <span class="math inline">\(k\)</span> (<span class="math inline">\(w_{k0}\)</span> = its bias)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(z_k\)</span></td>
+<td>hidden unit <span class="math inline">\(k\)</span>’s pre-activation (a linear score)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(g\)</span></td>
+<td>activation: ReLU <span class="math inline">\(\max(0, z)\)</span> or sigmoid <span class="math inline">\(\sigma(z)\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_k\)</span></td>
+<td>output weights</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1.</strong> <span class="math inline">\(x = (1, 2)\)</span>. Hidden weights <span class="math inline">\(w_1 = (0.5, 1, -1)\)</span>, <span class="math inline">\(w_2 = (-1, 1, 1)\)</span> (bias first). Output <span class="math inline">\(\beta = (0.5, 1, 1.5)\)</span>.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>unit</th>
+<th><span class="math inline">\(z_k = w_{k0} + w_{k1}x_1 + w_{k2}x_2\)</span></th>
+<th>ReLU <span class="math inline">\(A_k\)</span></th>
+<th>sigmoid <span class="math inline">\(A_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.5 + 1 − 2 = −0.5</td>
+<td>0</td>
+<td>0.3775</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>−1 + 1 + 2 = 2</td>
+<td>2</td>
+<td>0.8808</td>
+</tr>
+</tbody>
+</table>
+<p>ReLU network: <span class="math inline">\(f = 0.5 + 1\times0 + 1.5\times2 = 3.5\)</span>. Sigmoid network: <span class="math inline">\(f = 0.5 + 0.3775 + 1.5\times0.8808 = 2.199\)</span>.</p>
+<p>With ReLU, unit 1 is “off” for this input: it contributes nothing, and (section 3) receives no gradient.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Forgetting the bias</strong> <span class="math inline">\(w_{k0}\)</span> in each unit (the leading 1 again).</li>
+<li><strong>Applying ReLU to the output</strong> in a regression network. The output is linear.</li>
+<li><strong>Passing a negative <span class="math inline">\(z\)</span> through ReLU.</strong> ReLU(−0.5) = 0.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="1;0;1;0;2.5" label="z₁;z₂;A₁ (ReLU);A₂ (ReLU);f(x)">
+<p><span class="math inline">\(x = (2, -1)\)</span>. <span class="math inline">\(w_1 = (0, 1, 1)\)</span>, <span class="math inline">\(w_2 = (1, -1, 1)\)</span>, <span class="math inline">\(\beta = (0.5, 2, 3)\)</span>, ReLU units. Give <span class="math inline">\(z_1\)</span>, <span class="math inline">\(z_2\)</span>, <span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span> and <span class="math inline">\(f(x)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(z_1 = 0 + 2 - 1 = 1\)</span>, <span class="math inline">\(A_1 = 1\)</span>. <span class="math inline">\(z_2 = 1 - 2 - 1 = -2\)</span>, <span class="math inline">\(A_2 = 0\)</span>. <span class="math inline">\(f = 0.5 + 2\times1 + 3\times0 = 2.5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="nnfwd2">
+
+</div>
+<h2 id="counting-parameters">2. Counting parameters</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Each hidden unit has one weight per input plus a bias. Each output has one weight per hidden unit plus a bias. Add them up.</p>
+</div>
+<p><span class="math display">\[\text{parameters} = \underbrace{K(p + 1)}_{\text{hidden layer}} + \underbrace{M(K + 1)}_{\text{output layer}}\]</span></p>
+<p>with <span class="math inline">\(M = 1\)</span> for regression and <span class="math inline">\(M\)</span> = number of classes for a softmax classifier.</p>
+<div class="example">
+<p><strong>Worked example 2.</strong> <span class="math inline">\(p = 4\)</span> inputs, <span class="math inline">\(K = 5\)</span> hidden units, <span class="math inline">\(M = 1\)</span>: <span class="math inline">\(5\times5 + 1\times6 = 31\)</span>.</p>
+<p>Digits (week 4 lab): <span class="math inline">\(p = 64\)</span> pixels, <span class="math inline">\(K = 16\)</span>, <span class="math inline">\(M = 10\)</span>: <span class="math inline">\(16\times65 + 10\times17 = 1040 + 170 = 1210\)</span>.</p>
+</div>
+<div class="q" kind="num" data-answer="30;6;36" label="hidden-layer parameters;output-layer parameters;total">
+<p><span class="math inline">\(p = 5\)</span> inputs, <span class="math inline">\(K = 5\)</span> hidden units, <span class="math inline">\(M = 1\)</span> output. Count each layer and the total.</p>
+<div class="expl">
+<p>Hidden: <span class="math inline">\(5\times(5 + 1) = 30\)</span>. Output: <span class="math inline">\(1\times(5 + 1) = 6\)</span>. Total <span class="math inline">\(36\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="nnparams">
+
+</div>
+<h2 id="training-the-objective-and-backpropagation">3. Training: the objective and backpropagation</h2>
+<p><span class="math display">\[\text{regression: }\sum_i\big(y_i - f(x_i)\big)^2,\qquad \text{classification: }-\sum_i\log p_{y_i}(x_i)\ \text{ with }p = \text{softmax}(f_1, \dots, f_M)\]</span></p>
+<p>Both are <strong>non-convex</strong> in the weights: start from random weights, run gradient descent, maybe restart. Gradients come from the chain rule, applied from the loss backwards.</p>
+<div class="example">
+<p><strong>Worked example 3: one backward pass.</strong> One hidden ReLU unit: <span class="math inline">\(f = \beta_0 + \beta_1A\)</span>, <span class="math inline">\(A = \text{ReLU}(w_0 + w_1x)\)</span>. Loss <span class="math inline">\(R = (y - f)^2\)</span>. Point <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(y = 5\)</span>; current <span class="math inline">\(w = (0, 1)\)</span>, <span class="math inline">\(\beta = (1, 1)\)</span>.</p>
+<p><strong>Forward:</strong> <span class="math inline">\(z = 0 + 1\times2 = 2\)</span>, <span class="math inline">\(A = 2\)</span>, <span class="math inline">\(f = 1 + 2 = 3\)</span>, residual <span class="math inline">\(y - f = 2\)</span>, loss <span class="math inline">\(4\)</span>.</p>
+<p><strong>Backward</strong>, one link of the chain at a time:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>quantity</th>
+<th>rule</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\partial R/\partial f\)</span></td>
+<td><span class="math inline">\(-2(y - f)\)</span></td>
+<td>−4</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\partial R/\partial\beta_0\)</span></td>
+<td><span class="math inline">\(\partial R/\partial f\times1\)</span></td>
+<td>−4</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\partial R/\partial\beta_1\)</span></td>
+<td><span class="math inline">\(\partial R/\partial f\times A\)</span></td>
+<td>−8</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\partial R/\partial A\)</span></td>
+<td><span class="math inline">\(\partial R/\partial f\times\beta_1\)</span></td>
+<td>−4</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\partial R/\partial z\)</span></td>
+<td><span class="math inline">\(\partial R/\partial A\times\text{ReLU}&#39;(z)\)</span>, and <span class="math inline">\(z &gt; 0\)</span> so ReLU′ = 1</td>
+<td>−4</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\partial R/\partial w_0\)</span></td>
+<td><span class="math inline">\(\partial R/\partial z\times1\)</span></td>
+<td>−4</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\partial R/\partial w_1\)</span></td>
+<td><span class="math inline">\(\partial R/\partial z\times x\)</span></td>
+<td>−8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step</strong> with <span class="math inline">\(\eta = 0.05\)</span>: every parameter moves by <span class="math inline">\(-0.05\times\)</span> its gradient: <span class="math inline">\(\beta = (1.2, 1.4)\)</span>, <span class="math inline">\(w = (0.2, 1.4)\)</span>. New forward pass: <span class="math inline">\(z = 3\)</span>, <span class="math inline">\(A = 3\)</span>, <span class="math inline">\(f = 1.2 + 4.2 = 5.4\)</span>; loss <span class="math inline">\(0.16\)</span>, down from 4 (a little overshoot past 5, a sign <span class="math inline">\(\eta\)</span> is on the large side).</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Skipping the activation’s derivative.</strong> If <span class="math inline">\(z &lt; 0\)</span> for a ReLU unit, everything below it gets gradient 0.</li>
+<li><strong>Using the updated <span class="math inline">\(\beta_1\)</span></strong> when computing <span class="math inline">\(\partial R/\partial A\)</span>. Compute every gradient at the <strong>current</strong> weights, then update them all together.</li>
+<li><strong>Sign of <span class="math inline">\(\partial R/\partial f\)</span>.</strong> <span class="math inline">\(R = (y - f)^2\)</span> gives <span class="math inline">\(-2(y - f)\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="-1;2;4;2;4" label="residual y − f;∂R/∂f;∂R/∂β₁;∂R/∂z;∂R/∂w₁">
+<p>Same network, now <span class="math inline">\(x = 2\)</span>, <span class="math inline">\(y = 2\)</span>, with <span class="math inline">\(w = (0, 1)\)</span>, <span class="math inline">\(\beta = (1, 1)\)</span>. Give the residual, <span class="math inline">\(\partial R/\partial f\)</span>, <span class="math inline">\(\partial R/\partial\beta_1\)</span>, <span class="math inline">\(\partial R/\partial z\)</span> and <span class="math inline">\(\partial R/\partial w_1\)</span>.</p>
+<div class="expl">
+<p>Forward: <span class="math inline">\(z = 2\)</span>, <span class="math inline">\(A = 2\)</span>, <span class="math inline">\(f = 3\)</span>, residual <span class="math inline">\(2 - 3 = -1\)</span>. <span class="math inline">\(\partial R/\partial f = -2(-1) = 2\)</span>. <span class="math inline">\(\partial R/\partial\beta_1 = 2\times A = 4\)</span>. <span class="math inline">\(\partial R/\partial A = 2\times\beta_1 = 2\)</span>, and ReLU′(2) = 1, so <span class="math inline">\(\partial R/\partial z = 2\)</span>. <span class="math inline">\(\partial R/\partial w_1 = 2\times x = 4\)</span>. All positive now: the prediction is too big, so gradient descent will shrink these weights.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="backprop">
+
+</div>
+<h2 id="why-more-flexible-and-how-to-rein-it-in">4. Why more flexible, and how to rein it in</h2>
+<p>More hidden units or layers = more flexibility (low bias, high variance). The course’s brakes: <strong>early stopping</strong> (stop when validation error starts rising), <strong>weight decay</strong> (<span class="math inline">\(+\lambda\sum w^2\)</span>, Toolkit 5), fewer units. Because the loss is non-convex, different random starts can end in different minima; keep the one with the best validation error.</p>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="nnfwd2">
+
+</div>
+<div class="q" kind="gen" data-gen="nnparams">
+
+</div>
+<div class="q" kind="gen" data-gen="backprop">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks; 2025 Q2.)</strong> What is a neural network with one hidden layer, and what objective is minimised to train it for (a) regression and (b) classification?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Hidden units <span class="math inline">\(A_k = g(w_{k0} + \sum_jw_{kj}X_j)\)</span> with a non-linear activation (ReLU or sigmoid); output a linear combination <span class="math inline">\(\beta_0 + \sum_k\beta_kA_k\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Regression: minimise <span class="math inline">\(\sum_i(y_i - f(x_i))^2\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Classification: softmax outputs, minimise cross-entropy <span class="math inline">\(-\sum_i\log p_{y_i}(x_i)\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Trained by gradient descent with backpropagation (chain rule); non-convex, random starts.</label></li>
+</ul>
+<div class="model">
+<p>A one-hidden-layer network computes <span class="math inline">\(K\)</span> features <span class="math inline">\(A_k = g(w_{k0} + \sum_{j=1}^pw_{kj}X_j)\)</span>, where <span class="math inline">\(g\)</span> is a non-linear activation such as ReLU <span class="math inline">\(\max(0, z)\)</span> or the sigmoid, and then outputs a linear model in those features, <span class="math inline">\(f(X) = \beta_0 + \sum_{k=1}^K\beta_kA_k\)</span>. For regression the weights are chosen to minimise the squared error <span class="math inline">\(\sum_i(y_i - f(x_i))^2\)</span>. For classification there are <span class="math inline">\(M\)</span> outputs turned into probabilities by softmax, <span class="math inline">\(p_m = e^{f_m}/\sum_{m&#39;}e^{f_{m&#39;}}\)</span>, and the cross-entropy <span class="math inline">\(-\sum_i\log p_{y_i}(x_i)\)</span> is minimised. In both cases the objective is non-convex and is minimised by gradient descent from random initial weights, with gradients computed by backpropagation (the chain rule).</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="m06_trees.html"><small>&larr; Stage 17</small>Regression and classification trees</a><a class="next" href="m08_ensembles.html"><small>Stage 19 &rarr;</small>Bagging, random forests and boosting</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

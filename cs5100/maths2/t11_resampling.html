@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resampling and averaging many models · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t11_resampling", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_t11_resampling" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a class="active" aria-current="page" href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 11 of 24</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 65 min</span></div>
+  <h1>Resampling and averaging many models</h1>
+  <p class="tagline">Two questions run through the second half of the course. How do you measure test error honestly when all you have is training data? And how do you make a wobbly model steadier? The answers are resampling (validation sets, the bootstrap, out-of-bag points) and averaging (bagging, random forests). This stage does the OOB calculation the way the 2023 and 2025 exams ask it, row by row.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">By the end of this stage you can</span></p>
+<ul>
+<li>explain what the training, validation and test sets are each for, and the mistake of tuning on the test set;</li>
+<li>describe a bootstrap sample and compute the chance a point is left out, <span class="math inline">\((1 - 1/n)^n\)</span>;</li>
+<li>compute the variance of an average of <span class="math inline">\(B\)</span> correlated models, and say what bagging and random forests change in it;</li>
+<li>find each point’s out-of-bag predictions from a table of bootstrap sets, and compute the OOB MSE or OOB error rate.</li>
+</ul>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 2.2.1 to 2.2.2 (training vs test error), 5.1.1 (the validation set approach), 5.2 (the bootstrap), 8.2.1 to 8.2.2 (bagging, OOB error, random forests). <strong>Skim</strong> 5.1.2 to 5.1.4 (LOOCV and k-fold cross-validation): know what they are; the slides use a single validation set. <strong>Skip</strong> 5.2’s use of the bootstrap for standard errors: the course uses it for bagging only. Week 6 slides 20 to 24 (OOB estimation and the <span class="math inline">\(1/e\)</span> lemma with its proof).</p>
+</div>
+<h2 id="train-validation-test">1. Train, validation, test</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Training error always falls as a model gets more flexible, so it can’t tell you when to stop. Think of three separate piles of exam papers: one to <strong>learn</strong> from (training), one to <strong>choose your study strategy</strong> with (validation), and one sealed <strong>final exam</strong> you sit once (test). Peek at the final while choosing a strategy, and your final mark no longer means what it says.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Set</th>
+<th>Used for</th>
+<th>Never used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>training</td>
+<td>fitting the parameters (<span class="math inline">\(\beta\)</span>, the tree, the weights)</td>
+<td>judging the model</td>
+</tr>
+<tr class="even">
+<td>validation</td>
+<td>choosing knobs: <span class="math inline">\(K\)</span>, <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\alpha\)</span>, the degree, the epochs</td>
+<td>fitting parameters</td>
+</tr>
+<tr class="odd">
+<td>test</td>
+<td>one final, honest error estimate</td>
+<td>choosing anything</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="mcq">
+<p>You try 20 values of <span class="math inline">\(\lambda\)</span> for ridge and report the lowest <strong>test</strong> error among them. What’s wrong?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Nothing.</label></li>
+<li><label><input type="checkbox" checked="" />The test set was used to choose <span class="math inline">\(\lambda\)</span>, so the reported error is biased downwards; choose on a validation set and test once.</label></li>
+<li><label><input type="checkbox" />Ridge doesn’t need <span class="math inline">\(\lambda\)</span>.</label></li>
+<li><label><input type="checkbox" />You should report the training error instead.</label></li>
+</ul>
+<div class="expl">
+<p>The minimum of 20 noisy numbers favours whichever value got lucky on those particular test points.</p>
+</div>
+</div>
+<h2 id="the-bootstrap">2. The bootstrap</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>A bootstrap sample is made by drawing <span class="math inline">\(n\)</span> points from your <span class="math inline">\(n\)</span> training points <strong>with replacement</strong>: like pulling numbered balls from a bag, writing the number down, and putting the ball back. Some points come out several times, some never. Each sample is a slightly different “alternative training set”.</p>
+</div>
+<p><strong>The chance a given point is never drawn</strong> (Toolkit 6): each draw misses it with probability <span class="math inline">\(1 - \frac1n\)</span>, and the <span class="math inline">\(n\)</span> draws are independent, so</p>
+<p><span class="math display">\[\Big(1 - \frac1n\Big)^n \;\to\; e^{-1} \approx 0.368.\]</span></p>
+<p>So each bootstrap sample contains about 63.2% of the distinct points; the other 36.8% are <strong>out of bag</strong> (OOB) for that sample. The slides’ proof: <span class="math inline">\(\log(1 - \frac1n)^n = n\log(1 - \frac1n) \approx n\times(-\frac1n) = -1\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 1.</strong> <span class="math inline">\(n = 5\)</span> points <span class="math inline">\(\{1, 2, 3, 4, 5\}\)</span>. One bootstrap sample: <span class="math inline">\(\{2, 2, 3, 5, 5\}\)</span>. Points 1 and 4 are OOB. <span class="math inline">\(P(\text{a given point is OOB}) = 0.8^5 = 0.328\)</span>, so on average <span class="math inline">\(5\times0.328 = 1.64\)</span> points are OOB: here we got 2.</p>
+</div>
+<div class="q" kind="num" data-answer="0.2963;0.3487" data-tol="0.002" label="n = 3;n = 10">
+<p>Give <span class="math inline">\((1 - 1/n)^n\)</span> for <span class="math inline">\(n = 3\)</span> and <span class="math inline">\(n = 10\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(n = 3\)</span>: <span class="math inline">\((2/3)^3 = 8/27 = 0.2963\)</span>. <span class="math inline">\(n = 10\)</span>: <span class="math inline">\(0.9^{10} = 0.3487\)</span>. Both creep up towards <span class="math inline">\(0.368\)</span> as <span class="math inline">\(n\)</span> grows.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="bootprob">
+
+</div>
+<h2 id="averaging-cuts-variance">3. Averaging cuts variance</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Ask one nervous friend for a guess and you get a wobbly answer. Ask 100 friends and average: the wobble shrinks, <strong>as long as they don’t all copy each other</strong>. If they’re correlated, there’s a floor the average can’t go below.</p>
+</div>
+<p><span class="math display">\[\boxed{\mathrm{Var}\Big(\frac1B\sum_{b=1}^{B}\hat f_b\Big) = \rho\sigma^2 + \frac{1 - \rho}{B}\sigma^2}\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(B\)</span></td>
+<td>number of models averaged</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>variance of one model’s prediction</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\rho\)</span></td>
+<td>correlation between any two models’ predictions</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\rho\sigma^2\)</span></td>
+<td>the floor as <span class="math inline">\(B \to \infty\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 2.</strong> <span class="math inline">\(\sigma^2 = 4\)</span>.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>setting</th>
+<th><span class="math inline">\(\rho\)</span></th>
+<th><span class="math inline">\(B\)</span></th>
+<th><span class="math inline">\(\rho\sigma^2\)</span></th>
+<th><span class="math inline">\(\frac{1 - \rho}{B}\sigma^2\)</span></th>
+<th>variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>one model</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>bagging, 10 trees</td>
+<td>0.2</td>
+<td>10</td>
+<td>0.8</td>
+<td>0.8 × 4/10 = 0.32</td>
+<td>1.12</td>
+</tr>
+<tr class="odd">
+<td>bagging, many trees</td>
+<td>0.2</td>
+<td>∞</td>
+<td>0.8</td>
+<td>0</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td>random forest, 10 trees</td>
+<td>0.05</td>
+<td>10</td>
+<td>0.2</td>
+<td>0.95 × 4/10 = 0.38</td>
+<td>0.58</td>
+</tr>
+<tr class="odd">
+<td>independent, 10 models</td>
+<td>0</td>
+<td>10</td>
+<td>0</td>
+<td>0.4</td>
+<td>0.4</td>
+</tr>
+</tbody>
+</table>
+<p>More trees help until the floor <span class="math inline">\(\rho\sigma^2\)</span>. Only <strong>lowering <span class="math inline">\(\rho\)</span></strong> pushes the floor down, which is exactly what random forests do by letting each split consider only a random subset of <span class="math inline">\(m\)</span> inputs. Averaging doesn’t change the <strong>bias</strong>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Expecting variance <span class="math inline">\(\to 0\)</span> as <span class="math inline">\(B\)</span> grows.</strong> Only if <span class="math inline">\(\rho = 0\)</span>.</li>
+<li><strong>“More trees overfit”</strong> is false for bagging and forests (they just average); it’s true for boosting (Toolkit 5).</li>
+<li><strong>Forgetting the <span class="math inline">\((1 - \rho)\)</span></strong> in the second term.</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="avgvar">
+
+</div>
+<h2 id="out-of-bag-error-a-free-validation-set">4. Out-of-bag error: a free validation set</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Each tree in a bagged ensemble never saw its OOB points. So to test a point honestly, ask <strong>only the trees that didn’t train on it</strong>, average (or vote) their predictions, and compare with the truth. Do it for every point and average the errors: that’s the OOB error, a test-error estimate with no data held back.</p>
+</div>
+<p><strong>The recipe, for each point:</strong> (1) find the bootstrap sets that do <strong>not</strong> contain it; (2) take those sets’ models’ predictions at that point; (3) average them (regression) or vote (classification); (4) compare with the true value. Then average the squared errors (OOB MSE) or the mistakes (OOB error rate) over the points.</p>
+<div class="example">
+<p><strong>Worked example 3: the exam format.</strong> Data <span class="math inline">\(D = \{(1, 3), (2, 5), (4, 4), (6, 8)\}\)</span> as <span class="math inline">\((x, y)\)</span>. Five bootstrap sets and their models’ predictions at each <span class="math inline">\(x\)</span>:</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>set</th>
+<th>contents</th>
+<th><span class="math inline">\(\hat y(1)\)</span></th>
+<th><span class="math inline">\(\hat y(2)\)</span></th>
+<th><span class="math inline">\(\hat y(4)\)</span></th>
+<th><span class="math inline">\(\hat y(6)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BTS1</td>
+<td>(1,3), (1,3), (2,5), (4,4)</td>
+<td>3</td>
+<td>5</td>
+<td>4</td>
+<td><strong>6</strong></td>
+</tr>
+<tr class="even">
+<td>BTS2</td>
+<td>(2,5), (4,4), (4,4), (6,8)</td>
+<td><strong>4</strong></td>
+<td>5</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>BTS3</td>
+<td>(1,3), (2,5), (6,8), (6,8)</td>
+<td>3</td>
+<td>5</td>
+<td><strong>7</strong></td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>BTS4</td>
+<td>(1,3), (4,4), (6,8), (6,8)</td>
+<td>3</td>
+<td><strong>4</strong></td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>BTS5</td>
+<td>(2,5), (2,5), (4,4), (6,8)</td>
+<td><strong>5</strong></td>
+<td>5</td>
+<td>4</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>Bold = the set does <strong>not</strong> contain that point, so its prediction there is out-of-bag.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>point <span class="math inline">\(x\)</span></th>
+<th>true <span class="math inline">\(y\)</span></th>
+<th>sets missing it</th>
+<th>OOB predictions</th>
+<th>OOB prediction</th>
+<th>squared error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>BTS2, BTS5</td>
+<td>4, 5</td>
+<td>4.5</td>
+<td><span class="math inline">\((3 - 4.5)^2 = 2.25\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>5</td>
+<td>BTS4</td>
+<td>4</td>
+<td>4</td>
+<td><span class="math inline">\((5 - 4)^2 = 1\)</span></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>4</td>
+<td>BTS3</td>
+<td>7</td>
+<td>7</td>
+<td><span class="math inline">\((4 - 7)^2 = 9\)</span></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>8</td>
+<td>BTS1</td>
+<td>6</td>
+<td>6</td>
+<td><span class="math inline">\((8 - 6)^2 = 4\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>16.25</strong></td>
+</tr>
+</tbody>
+</table>
+<p>OOB MSE <span class="math inline">\(= 16.25/4 = 4.0625\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 4: classification, by vote.</strong> Points 1 to 5 with labels A, A, B, B, B. Each point’s OOB trees and their votes:</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th>label</th>
+<th>OOB trees’ votes</th>
+<th>OOB prediction</th>
+<th>correct?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>A</td>
+<td>A, A</td>
+<td>A</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>A</td>
+<td>B</td>
+<td>B</td>
+<td>✗</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>B</td>
+<td>B</td>
+<td>B</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>B</td>
+<td>B, B</td>
+<td>B</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>B</td>
+<td>A</td>
+<td>A</td>
+<td>✗</td>
+</tr>
+</tbody>
+</table>
+<p>OOB error rate <span class="math inline">\(= 2/5 = 0.4\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Using the sets that DO contain the point.</strong> That’s a training prediction, not OOB. Look for the sets where the point is <strong>missing</strong>.</li>
+<li><strong>Averaging all five sets’ predictions.</strong> Only the OOB ones count.</li>
+<li><strong>A point in every set</strong> has no OOB prediction; leave it out of the average and say so.</li>
+<li><strong>Duplicates.</strong> A point that appears twice in a set is still “in” that set.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> Use the table in worked example 3, but suppose BTS2’s prediction at <span class="math inline">\(x = 1\)</span> were 2 instead of 4.</p>
+<div class="q" kind="num" data-answer="3.5;0.25;3.5625" data-tol="0.002" label="OOB prediction at x = 1;its squared error;new OOB MSE">
+<p>Give the new OOB prediction at <span class="math inline">\(x = 1\)</span>, its squared error, and the new OOB MSE.</p>
+<div class="expl">
+<p>OOB sets for <span class="math inline">\(x = 1\)</span>: BTS2 (now 2) and BTS5 (5): average <span class="math inline">\(3.5\)</span>. Squared error <span class="math inline">\((3 - 3.5)^2 = 0.25\)</span>. New total <span class="math inline">\(0.25 + 1 + 9 + 4 = 14.25\)</span>; OOB MSE <span class="math inline">\(= 14.25/4 = 3.5625\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="oob">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="bootprob">
+
+</div>
+<div class="q" kind="gen" data-gen="avgvar">
+
+</div>
+<div class="q" kind="gen" data-gen="oob">
+
+</div>
+<div class="q" kind="mcq">
+<p>Why do random forests usually beat bagging?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />They use more trees.</label></li>
+<li><label><input type="checkbox" />They use shallower trees, which have lower bias.</label></li>
+<li><label><input type="checkbox" checked="" />Considering a random subset of inputs at each split makes the trees less correlated, lowering the floor <span class="math inline">\(\rho\sigma^2\)</span>.</label></li>
+<li><label><input type="checkbox" />They don’t use the bootstrap.</label></li>
+</ul>
+<div class="expl">
+<p>With a strong predictor, bagged trees all split on it first and look alike. Forests break that up.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Which statements are true? Tick all that apply.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />About 36.8% of the training points are out of bag for each bootstrap sample (for large <span class="math inline">\(n\)</span>).</label></li>
+<li><label><input type="checkbox" checked="" />The OOB error is an estimate of the test error.</label></li>
+<li><label><input type="checkbox" />Adding more trees to a bagged model eventually causes overfitting.</label></li>
+<li><label><input type="checkbox" checked="" />Averaging <span class="math inline">\(B\)</span> models doesn’t reduce their bias.</label></li>
+</ul>
+<div class="expl">
+<p>More bagged trees only reduce variance; they don’t overfit.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t10_impurity.html"><small>&larr; Stage 10</small>Impurity: error, Gini, entropy</a><a class="next" href="m01_bayes_knn.html"><small>Stage 12 &rarr;</small>Bayes classifier and KNN</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

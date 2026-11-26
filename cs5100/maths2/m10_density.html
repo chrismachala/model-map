@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Density estimation and semi-supervised learning · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m10_density", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_m10_density" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a class="active" aria-current="page" href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 21 of 24</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 45 min</span></div>
+  <h1>Density estimation and semi-supervised learning</h1>
+  <p class="tagline">Estimating a density without assuming a shape is "count the points near x, then divide by how many points and how much room you looked in". The histogram, the Parzen window and smooth kernels are three versions of that sentence, and the bandwidth h is one more flexibility knob. Semi-supervised K-means is Model 9 with a few labelled points to start from.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A2</strong> counting with indicators · <strong>A1</strong> the scaled gap <span class="math inline">\((x - x_i)/h\)</span> · <strong>A7</strong> the Gaussian bump · <strong>A5</strong> bandwidth as the bias-variance dial · K-means from Model 9. Full pages: <a href="../w7/Density_Estimation.html">density estimation</a>, <a href="../w7/Semi_Supervised.html">semi-supervised learning</a>.</p>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>Week 7 slides (V. Vovk), slides 52 to 69 (density estimation) and the semi-supervised section at the end. ISLP doesn’t cover kernel density estimation; the slides point to Duda et al. 4.2 and Bishop 2.5 if you want more. <strong>Skip</strong> anything about choosing <span class="math inline">\(h\)</span> automatically (cross-validated bandwidths): it isn’t in the slides. The worked exercise below (data <span class="math inline">\(\{4, 5, 5, 6, 12, 14, 15, 15, 16, 17\}\)</span>, <span class="math inline">\(h = 4\)</span>) is slide 62 to 63.</p>
+</div>
+<h2 id="from-probability-of-a-region-to-knv">1. From “probability of a region” to <span class="math inline">\(k/(nV)\)</span></h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Draw a small region around <span class="math inline">\(x\)</span>. Two ways to say how likely a new point is to land there: (a) the fraction of the data that did land there, <span class="math inline">\(k/n\)</span>; (b) the density at <span class="math inline">\(x\)</span> times the size of the region, <span class="math inline">\(f(x)V\)</span>. Set them equal and solve for <span class="math inline">\(f(x)\)</span>. That’s the whole idea; everything else in this stage is a choice of region or a softer way of counting.</p>
+</div>
+<p><span class="math display">\[P \approx \frac{k}{n}\quad\text{and}\quad P \approx f(x)\,V\qquad\Longrightarrow\qquad \boxed{\hat f(x) = \frac{k}{nV}}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(n\)</span></td>
+<td>total number of observations</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(V\)</span></td>
+<td>size of the region around <span class="math inline">\(x\)</span> (a length in 1D, an area in 2D, <span class="math inline">\(h^p\)</span> for a cube of side <span class="math inline">\(h\)</span> in <span class="math inline">\(p\)</span> dimensions)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(k\)</span></td>
+<td>number of observations inside the region</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why both pieces are needed.</strong> Dividing by <span class="math inline">\(n\)</span> turns a count into a fraction. Dividing by <span class="math inline">\(V\)</span> turns “fraction in this region” into “fraction per unit of length (area, volume)”, which is what a density is. Without <span class="math inline">\(V\)</span> the answer would change just by measuring in centimetres instead of metres.</p>
+<p><strong>The histogram</strong> is the same formula with fixed bins: <span class="math inline">\(\hat f_H(x) = \frac{1}{n}\cdot\frac{\text{number of } x_i \text{ in the same bin as } x}{\text{bin width}}\)</span> (slide 53).</p>
+<div class="example">
+<p><strong>Worked example 1: a histogram depends on where the bins start.</strong> Data <span class="math inline">\(\{4, 5, 5, 6, 12, 14, 15, 15, 16, 17\}\)</span>, <span class="math inline">\(n = 10\)</span>, bin width 5. Estimate <span class="math inline">\(\hat f(3)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>bins start at</th>
+<th>bin holding 3</th>
+<th>points in it</th>
+<th><span class="math inline">\(\hat f(3)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><span class="math inline">\([0, 5)\)</span></td>
+<td>4</td>
+<td><span class="math inline">\(\frac{1}{10\times5} = 0.02\)</span></td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td><span class="math inline">\([2.5, 7.5)\)</span></td>
+<td>4, 5, 5, 6</td>
+<td><span class="math inline">\(\frac{4}{10\times5} = 0.08\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Same data, same width, a factor of 4 apart. That arbitrariness (plus jumps at bin edges, and the number of bins exploding in high dimensions) is why the slides move on to windows centred at <span class="math inline">\(x\)</span> itself.</p>
+</div>
+<p><strong>Try it with me.</strong> <span class="math inline">\(n = 20\)</span> points in one dimension; an interval of length <span class="math inline">\(V = 2\)</span> around <span class="math inline">\(x\)</span> contains <span class="math inline">\(k = 2\)</span> of them.</p>
+<div class="q" kind="num" data-answer="0.1;0.05" label="k/n;f(x)" data-tol="0.001">
+<p>Give the fraction <span class="math inline">\(k/n\)</span> and the density estimate <span class="math inline">\(k/(nV)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(k/n = 2/20 = 0.1\)</span>. Then divide by <span class="math inline">\(V = 2\)</span>: <span class="math inline">\(\hat f(x) = 0.1/2 = 0.05\)</span>.</p>
+</div>
+</div>
+<h2 id="the-parzen-window-a-box-centred-at-x">2. The Parzen window: a box centred at <span class="math inline">\(x\)</span></h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Put a box of side <span class="math inline">\(h\)</span> centred <strong>at the point where you want the density</strong>, count the data inside it, and use <span class="math inline">\(k/(nV)\)</span> with <span class="math inline">\(V = h^p\)</span>. The kernel <span class="math inline">\(K\)</span> is just a yes/no test: “is <span class="math inline">\(x_i\)</span> inside the box?” Writing it with <span class="math inline">\(u = (x - x_i)/h\)</span> means “how many box-widths away is <span class="math inline">\(x_i\)</span>?”, and the box reaches half a width either side.</p>
+</div>
+<p><span class="math display">\[K(u) = \begin{cases}1 &amp; \text{if } |u_j| \le \tfrac12 \text{ for every } j = 1,\dots,p\\ 0 &amp; \text{otherwise}\end{cases}\qquad \boxed{\hat f(x) = \frac{1}{nh^p}\sum_{i=1}^n K\Big(\frac{x - x_i}{h}\Big)}\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(h\)</span></td>
+<td>bandwidth: the side of the box</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(p\)</span></td>
+<td>number of dimensions; <span class="math inline">\(V = h^p\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(u_i = (x - x_i)/h\)</span></td>
+<td>the gap in units of <span class="math inline">\(h\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sum_i K(u_i)\)</span></td>
+<td>the count <span class="math inline">\(k\)</span> of points in the box</td>
+</tr>
+</tbody>
+</table>
+<p>In 1D the rule is simply: <strong><span class="math inline">\(x_i\)</span> counts if <span class="math inline">\(|x - x_i| \le h/2\)</span></strong>, and a point exactly <span class="math inline">\(h/2\)</span> away <strong>does</strong> count (<span class="math inline">\(\le\)</span>, not <span class="math inline">\(&lt;\)</span>).</p>
+<div class="example">
+<p><strong>Worked example 2 (slides 62 to 63).</strong> Data <span class="math inline">\(\{4, 5, 5, 6, 12, 14, 15, 15, 16, 17\}\)</span>, <span class="math inline">\(n = 10\)</span>, <span class="math inline">\(p = 1\)</span>, <span class="math inline">\(h = 4\)</span>, so the window is <span class="math inline">\(x \pm 2\)</span> and <span class="math inline">\(nh = 40\)</span>.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th>window</th>
+<th>points inside</th>
+<th><span class="math inline">\(k\)</span></th>
+<th><span class="math inline">\(\hat f(x) = k/40\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\([1, 5]\)</span></td>
+<td>4, 5, 5</td>
+<td>3</td>
+<td><strong>0.075</strong></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><span class="math inline">\([8, 12]\)</span></td>
+<td>12 (exactly on the edge: <span class="math inline">\(u = -0.5\)</span>, counts)</td>
+<td>1</td>
+<td><strong>0.025</strong></td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td><span class="math inline">\([13, 17]\)</span></td>
+<td>14, 15, 15, 16, 17</td>
+<td>5</td>
+<td><strong>0.125</strong></td>
+</tr>
+</tbody>
+</table>
+<p>In kernel form for <span class="math inline">\(x = 10\)</span>: <span class="math inline">\(u_i = (10 - x_i)/4\)</span> gives <span class="math inline">\(1.5, 1.25, 1.25, 1, -0.5, -1, -1.25, -1.25, -1.5, -1.75\)</span>; only <span class="math inline">\(u = -0.5\)</span> passes <span class="math inline">\(|u| \le \frac12\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 3: two dimensions, a square not a circle.</strong> Points <span class="math inline">\((1, 1), (2, 2), (3, 1), (5, 5), (2, 3)\)</span>, <span class="math inline">\(n = 5\)</span>. Estimate <span class="math inline">\(\hat f\)</span> at <span class="math inline">\(x = (2, 2)\)</span> with <span class="math inline">\(h = 2\)</span>, so <span class="math inline">\(V = h^2 = 4\)</span> and the box is <span class="math inline">\([1, 3]\times[1, 3]\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th><span class="math inline">\(|x_1 - x_{i1}| \le 1\)</span>?</th>
+<th><span class="math inline">\(|x_2 - x_{i2}| \le 1\)</span>?</th>
+<th>inside?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1, 1)</td>
+<td>1, yes</td>
+<td>1, yes</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr class="even">
+<td>(2, 2)</td>
+<td>0, yes</td>
+<td>0, yes</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr class="odd">
+<td>(3, 1)</td>
+<td>1, yes</td>
+<td>1, yes</td>
+<td><strong>yes</strong></td>
+</tr>
+<tr class="even">
+<td>(5, 5)</td>
+<td>3, no</td>
+<td>3, no</td>
+<td>no</td>
+</tr>
+<tr class="odd">
+<td>(2, 3)</td>
+<td>0, yes</td>
+<td>1, yes</td>
+<td><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(k = 4\)</span>, so <span class="math inline">\(\hat f(2, 2) = \frac{4}{5 \times 4} = 0.2\)</span>. Note <span class="math inline">\((1, 1)\)</span> is <span class="math inline">\(\sqrt2 \approx 1.41\)</span> away, further than <span class="math inline">\(h/2 = 1\)</span>, but it’s in the <strong>square</strong>: the test is per coordinate.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes with Parzen windows</span></p>
+<ul>
+<li><strong>Dividing by <span class="math inline">\(n\)</span> only.</strong> You need <span class="math inline">\(nV = nh^p\)</span>. With <span class="math inline">\(h = 4\)</span> in the example, forgetting <span class="math inline">\(h\)</span> gives 0.3 instead of 0.075.</li>
+<li><strong>Window of half-width <span class="math inline">\(h\)</span>.</strong> The box has side <span class="math inline">\(h\)</span>, so it reaches <span class="math inline">\(h/2\)</span> each side, not <span class="math inline">\(h\)</span>.</li>
+<li><strong>Excluding edge points.</strong> <span class="math inline">\(|u| \le \frac12\)</span> includes <span class="math inline">\(|u| = \frac12\)</span> exactly (the 12 in the <span class="math inline">\(x = 10\)</span> row).</li>
+<li><strong>Using <span class="math inline">\(h\)</span> instead of <span class="math inline">\(h^p\)</span></strong> in 2D or more: <span class="math inline">\(V = h^2\)</span> for a square.</li>
+<li><strong>Using a circle</strong> (Euclidean distance) instead of the per-coordinate cube test.</li>
+<li><strong>Duplicates.</strong> <span class="math inline">\(\{5, 5\}\)</span> are two observations: count both.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> Same data as Worked example 2, <span class="math inline">\(h = 4\)</span>.</p>
+<div class="q" kind="num" data-answer="4;0.1" label="k;f(5)" data-tol="0.001">
+<p>Estimate the density at <span class="math inline">\(x = 5\)</span>: give the count <span class="math inline">\(k\)</span> and <span class="math inline">\(\hat f(5)\)</span>.</p>
+<div class="expl">
+<p>Window <span class="math inline">\([3, 7]\)</span>: 4, 5, 5, 6, so <span class="math inline">\(k = 4\)</span> and <span class="math inline">\(\hat f(5) = 4/(10\times4) = 0.1\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0;0" label="k;f(9)" data-tol="0.001">
+<p>Now <span class="math inline">\(x = 9\)</span>.</p>
+<div class="expl">
+<p>Window <span class="math inline">\([7, 11]\)</span> is empty, so <span class="math inline">\(\hat f(9) = 0\)</span>. A gap in the data gives a zero estimate, and the estimate jumps as soon as the window reaches a point: the blockiness the next section fixes.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="parzen2">
+
+</div>
+<h2 id="smooth-kernels-bumps-instead-of-boxes">3. Smooth kernels: bumps instead of boxes</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>The box has two faults (slide 64): the estimate jumps whenever a point enters or leaves the window, and a point just inside counts as much as one at the centre. Fix both by replacing the yes/no box with a smooth bump that is tallest at gap 0 and fades with distance. Each data point now contributes a little, nearer points more. The formula keeps exactly the same shape.</p>
+</div>
+<p><span class="math display">\[\boxed{\hat f(x) = \frac{1}{nh^p}\sum_{i=1}^n K\Big(\frac{x - x_i}{h}\Big)},\qquad \text{Gaussian: } K(u) = (2\pi)^{-p/2}e^{-\frac12u^Tu};\quad \text{1D: } K(u) = \frac{1}{\sqrt{2\pi}}e^{-u^2/2}\]</span></p>
+<p>The kernel must integrate to 1 (slide 65), and then so does <span class="math inline">\(\hat f\)</span>: each point contributes a bump of area <span class="math inline">\(\frac{1}{n}\)</span>. Other common shapes: the <strong>triangular</strong> kernel <span class="math inline">\(K(u) = \max(0, 1 - |u|)\)</span>, the <strong>Epanechnikov</strong> kernel. The Parzen box is the special case “flat bump”.</p>
+<p>Handy values: <span class="math inline">\(\phi(0) = 0.3989\)</span>, <span class="math inline">\(\phi(0.5) = 0.3521\)</span>, <span class="math inline">\(\phi(1) = 0.2420\)</span>, <span class="math inline">\(\phi(2) = 0.0540\)</span>, where <span class="math inline">\(\phi(u) = \frac{1}{\sqrt{2\pi}}e^{-u^2/2}\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 4: Gaussian kernel, two bandwidths.</strong> Data <span class="math inline">\(\{1, 2, 4\}\)</span>, <span class="math inline">\(n = 3\)</span>. Estimate <span class="math inline">\(\hat f(2)\)</span>.</p>
+<p><span class="math inline">\(h = 1\)</span>:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(u_i = (2 - x_i)/1\)</span></th>
+<th><span class="math inline">\(K(u_i) = \phi(u_i)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>0.2420</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>0.3989</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>−2</td>
+<td>0.0540</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td></td>
+<td><strong>0.6949</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\hat f(2) = \frac{0.6949}{3\times1} = 0.2316\)</span>.</p>
+<p><span class="math inline">\(h = 2\)</span>:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(u_i = (2 - x_i)/2\)</span></th>
+<th><span class="math inline">\(K(u_i)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.5</td>
+<td>0.3521</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>0.3989</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>−1</td>
+<td>0.2420</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td></td>
+<td><strong>0.9930</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\hat f(2) = \frac{0.9930}{3\times2} = 0.1655\)</span>. The kernel values went up (gaps shrink when measured in bigger units), but dividing by the bigger <span class="math inline">\(h\)</span> wins: a wider bandwidth spreads the same mass more thinly, so peaks come down.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 5: triangular kernel.</strong> Same data <span class="math inline">\(\{1, 2, 4\}\)</span>, <span class="math inline">\(h = 2\)</span>, <span class="math inline">\(x = 2\)</span>: <span class="math inline">\(u = 0.5, 0, -1\)</span> give <span class="math inline">\(K = 0.5, 1, 0\)</span>. Sum 1.5, so <span class="math inline">\(\hat f(2) = 1.5/(3\times2) = 0.25\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes with smooth kernels</span></p>
+<ul>
+<li><strong>Plugging in the raw gap</strong> <span class="math inline">\(x - x_i\)</span> instead of <span class="math inline">\((x - x_i)/h\)</span>.</li>
+<li><strong>Forgetting the <span class="math inline">\(\frac{1}{\sqrt{2\pi}}\)</span></strong> inside <span class="math inline">\(K\)</span>: <span class="math inline">\(e^{-u^2/2}\)</span> alone at <span class="math inline">\(u = 0\)</span> is 1, not 0.3989.</li>
+<li><strong>Double-dividing by <span class="math inline">\(h\)</span></strong>: the <span class="math inline">\(\frac{1}{h}\)</span> is outside the sum once. Don’t also put <span class="math inline">\(\sigma = h\)</span> into the Gaussian’s constant.</li>
+<li><strong>Dropping far points</strong> with a Gaussian kernel: every point contributes, even if only 0.0001.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> Data <span class="math inline">\(\{4, 6, 9\}\)</span>, Gaussian kernel, <span class="math inline">\(h = 1\)</span>, at <span class="math inline">\(x = 5\)</span>.</p>
+<div class="q" kind="num" data-answer="0.2420;0.4841;0.1614" label="K for x=4;sum of K;f(5)" data-tol="0.002">
+<p>Give <span class="math inline">\(K\big((5 - 4)/1\big)\)</span>, the sum of the three kernel values, and <span class="math inline">\(\hat f(5)\)</span>. (For <span class="math inline">\(x_i = 9\)</span>, <span class="math inline">\(u = -4\)</span> and <span class="math inline">\(\phi(-4) \approx 0.0001\)</span>.)</p>
+<div class="expl">
+<p><span class="math inline">\(u = 1, -1, -4\)</span> give <span class="math inline">\(0.2420, 0.2420, 0.0001\)</span>. Sum <span class="math inline">\(0.4841\)</span>; <span class="math inline">\(\hat f(5) = 0.4841/(3\times1) = 0.1614\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="gauss2">
+
+</div>
+<h2 id="bandwidth-is-the-bias-variance-dial">4. Bandwidth is the bias-variance dial</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Small <span class="math inline">\(h\)</span>: you look only very close to <span class="math inline">\(x\)</span>, so the estimate follows the data’s every wiggle (and is zero in gaps): low bias, high variance. Large <span class="math inline">\(h\)</span>: you average over a wide stretch, so real bumps get smeared flat: high bias, low variance. The slides put it as “<span class="math inline">\(V\)</span> large enough to contain enough points (variance), small enough that <span class="math inline">\(f\)</span> is roughly constant inside it (bias)” (slide 58).</p>
+</div>
+<div class="example">
+<p><strong>Worked example 6: <span class="math inline">\(\hat f(15)\)</span> for the slide data as <span class="math inline">\(h\)</span> changes.</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(h\)</span></th>
+<th>window</th>
+<th><span class="math inline">\(k\)</span></th>
+<th><span class="math inline">\(\hat f(15) = k/(10h)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><span class="math inline">\([14.5, 15.5]\)</span></td>
+<td>2</td>
+<td>0.2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\([14, 16]\)</span></td>
+<td>4</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><span class="math inline">\([13, 17]\)</span></td>
+<td>5</td>
+<td>0.125</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><span class="math inline">\([11, 19]\)</span></td>
+<td>6</td>
+<td>0.075</td>
+</tr>
+</tbody>
+</table>
+<p>As <span class="math inline">\(h\)</span> grows, the window swallows the emptier stretch around 11 to 13 and the peak at 15 is flattened.</p>
+</div>
+<div class="q" kind="mcq">
+<p>In kernel density estimation, what happens as the bandwidth <span class="math inline">\(h \to 0\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The estimate becomes a flat line.</label></li>
+<li><label><input type="checkbox" checked="" />The estimate becomes narrow spikes at the data points: low bias, very high variance.</label></li>
+<li><label><input type="checkbox" />It equals the true density.</label></li>
+<li><label><input type="checkbox" />Nothing changes, because <span class="math inline">\(h\)</span> cancels.</label></li>
+</ul>
+<div class="expl">
+<p>Each bump shrinks around its own point. Large <span class="math inline">\(h\)</span> gives the opposite: one broad smear that hides the structure.</p>
+</div>
+</div>
+<h2 id="semi-supervised-k-means">5. Semi-supervised K-means</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Labels are expensive, unlabelled data is cheap. If a few points come with labels (“seeds”), use them to start K-means in a sensible place: each cluster’s starting centre is the <strong>mean of the seeds with that label</strong>. Then two versions (slides, semi-supervised section):</p>
+<ul>
+<li><strong>Seeded K-means</strong>: seeds are used only for the starting centres. After that, run ordinary K-means on all the points; a seed may end up in a different cluster from its label.</li>
+<li><strong>Constrained K-means</strong>: same start, but seeds <strong>keep their labels</strong> in every assignment step. Only the unlabelled points are reassigned. (Seeds still count when computing the means.)</li>
+</ul>
+</div>
+<div class="example">
+<p><strong>Worked example 7: seeded vs constrained, 1D.</strong> Seeds: <span class="math inline">\(1, 2\)</span> labelled A; <span class="math inline">\(6, 12\)</span> labelled B. Unlabelled: <span class="math inline">\(3, 4, 11, 13\)</span>.</p>
+<p>Start: <span class="math inline">\(\mu_A = \frac{1 + 2}{2} = 1.5\)</span>, <span class="math inline">\(\mu_B = \frac{6 + 12}{2} = 9\)</span>.</p>
+<p><strong>Seeded.</strong></p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>step</th>
+<th>A</th>
+<th>B</th>
+<th><span class="math inline">\(\mu_A\)</span></th>
+<th><span class="math inline">\(\mu_B\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>assign to 1.5 / 9</td>
+<td>1, 2, 3, 4</td>
+<td>6, 11, 12, 13</td>
+<td>2.5</td>
+<td>10.5</td>
+</tr>
+<tr class="even">
+<td>assign to 2.5 / 10.5</td>
+<td>1, 2, 3, 4, <strong>6</strong> (gap 3.5 vs 4.5)</td>
+<td>11, 12, 13</td>
+<td>3.2</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>assign to 3.2 / 12</td>
+<td>no change</td>
+<td></td>
+<td>3.2</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>Seed 6 moved from B to A, which is allowed in seeded K-means.</p>
+<p><strong>Constrained.</strong> Same first step. At the second step, 6 is a B seed, so it stays in B even though 2.5 is nearer. The unlabelled points don’t move (4 is nearer 2.5, 11 and 13 nearer 10.5). Final: A <span class="math inline">\(= \{1, 2, 3, 4\}\)</span>, <span class="math inline">\(\mu_A = 2.5\)</span>; B <span class="math inline">\(= \{6, 11, 12, 13\}\)</span>, <span class="math inline">\(\mu_B = 10.5\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes in semi-supervised K-means</span></p>
+<ul>
+<li><strong>Starting centres from all the data</strong> instead of the seed means for each label.</li>
+<li><strong>Mixing up the two</strong>: seeded lets seeds move; constrained pins them.</li>
+<li><strong>Leaving seeds out of the means</strong> in constrained K-means: they’re pinned, not ignored.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="2;9" label="μ_A;μ_B" data-tol="0.001">
+<p>Seeds <span class="math inline">\(1, 3\)</span> labelled A and <span class="math inline">\(8, 10\)</span> labelled B. Give the starting centres.</p>
+<div class="expl">
+<p><span class="math inline">\((1 + 3)/2 = 2\)</span> and <span class="math inline">\((8 + 10)/2 = 9\)</span>.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="parzen2">
+
+</div>
+<div class="q" kind="gen" data-gen="parzen">
+
+</div>
+<div class="q" kind="gen" data-gen="gauss2">
+
+</div>
+<div class="q" kind="num" data-answer="0.1" label="f(13)" data-tol="0.001">
+<p>Data <span class="math inline">\(\{4, 5, 5, 6, 12, 14, 15, 15, 16, 17\}\)</span>, Parzen window, <span class="math inline">\(h = 4\)</span>. Estimate <span class="math inline">\(\hat f(13)\)</span>.</p>
+<div class="expl">
+<p>Window <span class="math inline">\([11, 15]\)</span>: 12, 14, 15, 15, so <span class="math inline">\(k = 4\)</span> and <span class="math inline">\(\hat f(13) = 4/40 = 0.1\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.1875" label="f(x)" data-tol="0.001">
+<p>Points <span class="math inline">\((0, 0), (1, 1), (1, -1), (3, 0)\)</span> in 2D. Parzen window with <span class="math inline">\(h = 2\)</span> at <span class="math inline">\(x = (0, 0)\)</span>. Estimate <span class="math inline">\(\hat f(0, 0)\)</span>.</p>
+<div class="expl">
+<p>The box is <span class="math inline">\([-1, 1]\times[-1, 1]\)</span>. <span class="math inline">\((0, 0)\)</span> is inside; <span class="math inline">\((1, 1)\)</span> and <span class="math inline">\((1, -1)\)</span> have both gaps equal to <span class="math inline">\(1 = h/2\)</span>, so they are inside too; <span class="math inline">\((3, 0)\)</span> is not. So <span class="math inline">\(k = 3\)</span>, <span class="math inline">\(V = h^2 = 4\)</span>, <span class="math inline">\(n = 4\)</span>: <span class="math inline">\(\hat f = 3/(4\times4) = 0.1875\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Why does the Parzen-window formula divide by <span class="math inline">\(nh^p\)</span> rather than by <span class="math inline">\(n\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\sum_iK\)</span> counts the points in a box of volume <span class="math inline">\(h^p\)</span>; dividing by <span class="math inline">\(n\)</span> gives a fraction and dividing by <span class="math inline">\(h^p\)</span> turns it into a density that integrates to 1.</label></li>
+<li><label><input type="checkbox" />To make the estimate smaller.</label></li>
+<li><label><input type="checkbox" />Because there are <span class="math inline">\(h^p\)</span> dimensions.</label></li>
+<li><label><input type="checkbox" />It’s a correction for bias, like <span class="math inline">\(n - 1\)</span> in a variance.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(k/(nV)\)</span> with <span class="math inline">\(V = h^p\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which is the difference between seeded and constrained K-means?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Seeded uses labels; constrained doesn’t.</label></li>
+<li><label><input type="checkbox" checked="" />Both start from the seed means; constrained keeps the seeds’ labels fixed in every assignment step, seeded doesn’t.</label></li>
+<li><label><input type="checkbox" />Constrained uses more clusters.</label></li>
+<li><label><input type="checkbox" />Seeded K-means ignores unlabelled points.</label></li>
+</ul>
+<div class="expl">
+<p>Week 7 slides, semi-supervised K-means.</p>
+</div>
+</div>
+<div class="q" kind="self">
+<p>Past-paper style. Explain the two drawbacks of the Parzen window that motivate smooth kernels, and say what the bandwidth controls.</p>
+<div class="model">
+<p>The Parzen estimate is discontinuous (it jumps when a point enters or leaves the window), and it weights every point inside the window equally regardless of how far it is from <span class="math inline">\(x\)</span>. A smooth kernel such as the Gaussian gives a continuous estimate and weights nearer points more. The bandwidth <span class="math inline">\(h\)</span> controls smoothing: small <span class="math inline">\(h\)</span> gives a spiky, high-variance estimate; large <span class="math inline">\(h\)</span> a smooth but biased one that can hide real structure.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="m09_clustering.html"><small>&larr; Stage 20</small>K-means and hierarchical clustering</a><a class="next" href="t12_variance_projection.html"><small>Stage 22 &rarr;</small>Variance, covariance and projections</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

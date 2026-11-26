@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vectors, dot products and distances · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t01_vectors_distances", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_t01_vectors_distances" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a class="active" aria-current="page" href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 1 of 24</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 65 min</span></div>
+  <h1>Vectors, dot products and distances</h1>
+  <p class="tagline">Two operations on lists of numbers do a huge amount of work in this course. The dot product builds the "score" inside every linear model and every neuron. The distance decides who your neighbours are in KNN, K-means and hierarchical clustering. This stage does both slowly, with every multiplication and every square shown.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">By the end of this stage you can</span></p>
+<ul>
+<li>write a data point as a vector and add the leading 1 that carries the intercept;</li>
+<li>compute a dot product and a linear score <span class="math inline">\(z = \beta\cdot\tilde x\)</span> without dropping the intercept;</li>
+<li>compute the Euclidean, squared Euclidean, Manhattan and maximum distances between two points, by table;</li>
+<li>compute the squared distance from a point to a centre (the building block of the K-means SSE) by subtracting <strong>before</strong> squaring;</li>
+<li>explain why columns must be rescaled before using distances.</li>
+</ul>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>Week 1 slides, “Linear algebra and calculus basics” (vectors, dot product, orthogonality, norms); week 7 slides, “Definition of metric” and the Minkowski distances. ISLP has no chapter for this, it assumes it. <strong>Read</strong> ISLP 2.2.3 for the Euclidean distance in KNN and 12.4.1 for distances in K-means. <strong>Skip</strong> the matrix-algebra details of ISLP 3.2 for now; the multiple regression stage uses only <span class="math inline">\(\mathbf X\beta\)</span>.</p>
+</div>
+<h2 id="vectors-and-the-dot-product">1. Vectors and the dot product</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>A <strong>vector</strong> is just an ordered list of numbers. One customer with age 30, income 25 and 2 children is the vector <span class="math inline">\((30, 25, 2)\)</span>. Order matters: the first slot always means age.</p>
+<p>The <strong>dot product</strong> of two lists of the same length pairs them up slot by slot, multiplies each pair, and adds the results. It’s the maths of “weighted total”: price list · shopping quantities = the bill.</p>
+</div>
+<p><span class="math display">\[\boxed{a\cdot b = a^Tb = a_1b_1 + a_2b_2 + \dots + a_pb_p = \sum_{j=1}^{p}a_jb_j}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(a = (a_1, \dots, a_p)\)</span></td>
+<td>a vector with <span class="math inline">\(p\)</span> entries; <span class="math inline">\(a_j\)</span> is entry number <span class="math inline">\(j\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a^Tb\)</span></td>
+<td>the same thing as <span class="math inline">\(a\cdot b\)</span>, written as a row times a column</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\|a\|_2 = \sqrt{a\cdot a}\)</span></td>
+<td>the length of <span class="math inline">\(a\)</span></td>
+</tr>
+<tr class="even">
+<td>orthogonal</td>
+<td>at right angles: exactly when <span class="math inline">\(a\cdot b = 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1.</strong> <span class="math inline">\(a = (2, -1, 3)\)</span>, <span class="math inline">\(b = (4, 5, -2)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>slot <span class="math inline">\(j\)</span></th>
+<th><span class="math inline">\(a_j\)</span></th>
+<th><span class="math inline">\(b_j\)</span></th>
+<th><span class="math inline">\(a_jb_j\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>−1</td>
+<td>5</td>
+<td>−5</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>3</td>
+<td>−2</td>
+<td>−6</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td><strong>−3</strong></td>
+</tr>
+</tbody>
+</table>
+<p>So <span class="math inline">\(a\cdot b = -3\)</span>. It isn’t 0, so they’re not orthogonal. Length of <span class="math inline">\(a\)</span>: <span class="math inline">\(\|a\|_2 = \sqrt{2^2 + (-1)^2 + 3^2} = \sqrt{4 + 1 + 9} = \sqrt{14} \approx 3.742\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 2 (2023 Q1(c)).</strong> <span class="math inline">\((1, 2, -3)\cdot(5, -4, -1) = 1\times5 + 2\times(-4) + (-3)\times(-1) = 5 - 8 + 3 = 0\)</span>. Orthogonal.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Sign slips with negatives.</strong> <span class="math inline">\((-3)\times(-1) = +3\)</span>. Write each product in its own row so the signs stay visible.</li>
+<li><strong>Multiplying the totals.</strong> <span class="math inline">\(a\cdot b\)</span> is <em>not</em> <span class="math inline">\((\sum a_j)(\sum b_j)\)</span>. In example 1 that would give <span class="math inline">\(4\times7 = 28\)</span>, nowhere near <span class="math inline">\(-3\)</span>.</li>
+<li><strong>Lengths of different sizes.</strong> The dot product only exists for two vectors with the same number of entries.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> <span class="math inline">\(u = (3, -2, 1)\)</span>, <span class="math inline">\(v = (1, 4, 5)\)</span>. Fill in one product at a time.</p>
+<div class="q" kind="num" data-answer="3;-8;5" label="u₁v₁;u₂v₂;u₃v₃">
+<p>Give the three products <span class="math inline">\(u_1v_1\)</span>, <span class="math inline">\(u_2v_2\)</span>, <span class="math inline">\(u_3v_3\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(3\times1 = 3\)</span>, <span class="math inline">\((-2)\times4 = -8\)</span>, <span class="math inline">\(1\times5 = 5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0" label="u·v">
+<p>Now add them. What is <span class="math inline">\(u\cdot v\)</span>, and so are <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> orthogonal?</p>
+<div class="expl">
+<p><span class="math inline">\(3 - 8 + 5 = 0\)</span>, so yes, they’re orthogonal.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="dot">
+
+</div>
+<h2 id="the-score-inside-every-model">2. The score inside every model</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Almost every model in the course starts by computing one number from the inputs: a weighted total of the inputs plus a starting value. The weights are the coefficients <span class="math inline">\(\beta_1, \dots, \beta_p\)</span>; the starting value is the intercept <span class="math inline">\(\beta_0\)</span>. To write that as one dot product, we put a 1 at the front of the input so it can pair with <span class="math inline">\(\beta_0\)</span>.</p>
+</div>
+<p><span class="math display">\[\boxed{z = \beta\cdot\tilde x = \beta_0\cdot1 + \beta_1x_1 + \dots + \beta_px_p,\qquad \tilde x = (1, x_1, \dots, x_p)}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>What happens to the score <span class="math inline">\(z\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Linear regression (w2)</td>
+<td>nothing: <span class="math inline">\(\hat y = z\)</span></td>
+</tr>
+<tr class="even">
+<td>Polynomial / step regression (w2)</td>
+<td>same, with new columns like <span class="math inline">\(x^2\)</span> or <span class="math inline">\(\mathbb 1(x &lt; c)\)</span> in <span class="math inline">\(\tilde x\)</span></td>
+</tr>
+<tr class="odd">
+<td>Logistic regression (w3)</td>
+<td>squashed: <span class="math inline">\(p = \sigma(z)\)</span></td>
+</tr>
+<tr class="even">
+<td>Multinomial logistic, NN classifier (w3, w4)</td>
+<td>one score per class, then softmax</td>
+</tr>
+<tr class="odd">
+<td>LDA (w3)</td>
+<td>each class score <span class="math inline">\(\delta_k(x)\)</span> is linear in <span class="math inline">\(x\)</span></td>
+</tr>
+<tr class="even">
+<td>Neuron (w4)</td>
+<td>bent: <span class="math inline">\(A_k = g(w_k\cdot\tilde x)\)</span>, <span class="math inline">\(g\)</span> = ReLU or sigmoid</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 3.</strong> <span class="math inline">\(\beta = (0.5, 2, -1, 3)\)</span>, input <span class="math inline">\(x = (4, 1, -2)\)</span>, so <span class="math inline">\(\tilde x = (1, 4, 1, -2)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(j\)</span></th>
+<th><span class="math inline">\(\beta_j\)</span></th>
+<th><span class="math inline">\(\tilde x_j\)</span></th>
+<th><span class="math inline">\(\beta_j\tilde x_j\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0.5</td>
+<td>1</td>
+<td>0.5</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>−1</td>
+<td>1</td>
+<td>−1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3</td>
+<td>−2</td>
+<td>−6</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td><strong>1.5</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(z = 1.5\)</span>. In linear regression that is the prediction. In logistic regression it would go into <span class="math inline">\(\sigma(1.5) = 0.818\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Forgetting the 1.</strong> Without it you’d compute <span class="math inline">\(8 - 1 - 6 = 1\)</span> and lose <span class="math inline">\(\beta_0 = 0.5\)</span>.</li>
+<li><strong>Pairing <span class="math inline">\(\beta_1\)</span> with <span class="math inline">\(x_2\)</span>.</strong> After you add the 1, the indices shift: <span class="math inline">\(\tilde x_1 = x_1\)</span>, but it is the <em>second</em> entry of <span class="math inline">\(\tilde x\)</span>. Number the table rows from 0.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="5.5" label="z">
+<p><span class="math inline">\(\beta = (0.5, 2, -1)\)</span> and <span class="math inline">\(x = (3, 1)\)</span>. Compute <span class="math inline">\(z = \beta\cdot\tilde x\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\tilde x = (1, 3, 1)\)</span>. Products: <span class="math inline">\(0.5\)</span>, <span class="math inline">\(6\)</span>, <span class="math inline">\(-1\)</span>. Total <span class="math inline">\(5.5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="score2">
+
+</div>
+<h2 id="distances-between-points">3. Distances between points</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>A distance answers “how different are these two data points?”. Go slot by slot, take the <strong>gap</strong> in each slot, then combine the gaps. Different ways of combining give different distances: add the gaps up (Manhattan, like walking a city grid), or square, add and square-root (Euclidean, a straight ruler line).</p>
+</div>
+<p><span class="math display">\[\boxed{\|x - y\|_k = \Big(\sum_{i=1}^{p}\lvert x_i - y_i\rvert^k\Big)^{1/k}}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th><span class="math inline">\(k\)</span></th>
+<th>Formula</th>
+<th>Used in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Manhattan</td>
+<td>1</td>
+<td><span class="math inline">\(\sum_i\lvert x_i - y_i\rvert\)</span></td>
+<td>w7 examples</td>
+</tr>
+<tr class="even">
+<td>Euclidean</td>
+<td>2</td>
+<td><span class="math inline">\(\sqrt{\sum_i(x_i - y_i)^2}\)</span></td>
+<td>KNN (w1), K-means and linkage (w7)</td>
+</tr>
+<tr class="odd">
+<td>squared Euclidean</td>
+<td>(2, no root)</td>
+<td><span class="math inline">\(\sum_i(x_i - y_i)^2\)</span></td>
+<td>the K-means SSE (w7), the ridge penalty</td>
+</tr>
+<tr class="even">
+<td>maximum</td>
+<td><span class="math inline">\(\infty\)</span></td>
+<td><span class="math inline">\(\max_i\lvert x_i - y_i\rvert\)</span></td>
+<td>w7 examples</td>
+</tr>
+</tbody>
+</table>
+<p>A distance must satisfy four rules (week 7 slides): <span class="math inline">\(d \ge 0\)</span>; <span class="math inline">\(d(x, y) = 0\)</span> only when <span class="math inline">\(x = y\)</span>; <span class="math inline">\(d(x, y) = d(y, x)\)</span>; and the triangle inequality <span class="math inline">\(d(x, z) \le d(x, y) + d(y, z)\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 4.</strong> <span class="math inline">\(x = (1, 5, -2)\)</span>, <span class="math inline">\(y = (4, 1, 0)\)</span>.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>slot</th>
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th>gap <span class="math inline">\(x_i - y_i\)</span></th>
+<th><span class="math inline">\(\lvert\text{gap}\rvert\)</span></th>
+<th><span class="math inline">\(\text{gap}^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>−3</td>
+<td>3</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>5</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>−2</td>
+<td>0</td>
+<td>−2</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>9</strong></td>
+<td><strong>29</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Manhattan <span class="math inline">\(L_1 = 9\)</span>.</li>
+<li>Squared Euclidean <span class="math inline">\(= 29\)</span>; Euclidean <span class="math inline">\(L_2 = \sqrt{29} \approx 5.385\)</span>.</li>
+<li>Maximum <span class="math inline">\(L_\infty = 4\)</span> (the biggest <span class="math inline">\(\lvert\text{gap}\rvert\)</span>).</li>
+</ul>
+<p>Check the order: <span class="math inline">\(L_\infty \le L_2 \le L_1\)</span>, i.e. <span class="math inline">\(4 \le 5.385 \le 9\)</span>. It always holds.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Rooting each square separately.</strong> <span class="math inline">\(\sqrt9 + \sqrt{16} + \sqrt4 = 9\)</span> is the Manhattan distance, not Euclidean. Add first, root once at the end.</li>
+<li><strong>Losing the sign of a gap.</strong> <span class="math inline">\((-3)^2 = 9\)</span>, not <span class="math inline">\(-9\)</span>. Squares and absolute values are never negative.</li>
+<li><strong>Mixing up “distance” and “squared distance”.</strong> K-means’ SSE and ridge use the squared version (no root). KNN can use either for <em>ranking</em>, because squaring doesn’t change which point is nearest.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> <span class="math inline">\(x = (2, 7)\)</span>, <span class="math inline">\(y = (5, 3)\)</span>.</p>
+<div class="q" kind="num" data-answer="-3;4" label="gap 1;gap 2">
+<p>Give the two gaps <span class="math inline">\(x_1 - y_1\)</span> and <span class="math inline">\(x_2 - y_2\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(2 - 5 = -3\)</span> and <span class="math inline">\(7 - 3 = 4\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="25;5;7" label="squared L₂;L₂;L₁">
+<p>Now give the squared Euclidean distance, the Euclidean distance and the Manhattan distance.</p>
+<div class="expl">
+<p>Squares <span class="math inline">\(9 + 16 = 25\)</span>; <span class="math inline">\(\sqrt{25} = 5\)</span>; Manhattan <span class="math inline">\(3 + 4 = 7\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="dist2">
+
+</div>
+<h2 id="distance-to-a-centre-subtract-then-square">4. Distance to a centre: subtract, then square</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>K-means (week 7) and the centroid linkage measure how far a point is from a <strong>centre</strong> <span class="math inline">\(\mu\)</span>, usually the average of a group of points. It’s the same squared distance as above, with <span class="math inline">\(y\)</span> replaced by <span class="math inline">\(\mu\)</span>. The centre often has decimals, which is where most arithmetic slips happen. The rule never changes: <strong>gap first, then square.</strong></p>
+</div>
+<p><span class="math display">\[\|x - \mu\|^2 = (x_1 - \mu_1)^2 + (x_2 - \mu_2)^2 + \dots\]</span></p>
+<div class="example">
+<p><strong>Worked example 5.</strong> <span class="math inline">\(x = (3, 8)\)</span>, centre <span class="math inline">\(\mu = (4.5, 5)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>coordinate</th>
+<th><span class="math inline">\(x_j\)</span></th>
+<th><span class="math inline">\(\mu_j\)</span></th>
+<th>gap <span class="math inline">\(x_j - \mu_j\)</span></th>
+<th>squared gap</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>4.5</td>
+<td>−1.5</td>
+<td>2.25</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>8</td>
+<td>5</td>
+<td>3</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>11.25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\|x - \mu\|^2 = 11.25\)</span>.</p>
+<p>The slip to avoid: <span class="math inline">\(3^2 + 8^2 = 73\)</span>. That’s the squared distance from <span class="math inline">\(x\)</span> to the <strong>origin</strong> <span class="math inline">\((0, 0)\)</span>, which has nothing to do with the cluster.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Squaring raw coordinates.</strong> If your “distance to the centre” doesn’t involve <span class="math inline">\(\mu\)</span> anywhere, it’s wrong. Every row of the table must have a subtraction.</li>
+<li><strong>Squaring a decimal gap badly.</strong> <span class="math inline">\((-1.5)^2 = 2.25\)</span>, <span class="math inline">\((0.5)^2 = 0.25\)</span>, <span class="math inline">\((2.5)^2 = 6.25\)</span>. Learn these three; they come up constantly because centroids of 2 or 4 points end in .5 or .25.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="1.5;-2;6.25" label="gap 1;gap 2;‖x−μ‖²">
+<p><span class="math inline">\(x = (6, 1)\)</span> and the centre is <span class="math inline">\(\mu = (4.5, 3)\)</span>. Give both gaps and the squared distance <span class="math inline">\(\|x - \mu\|^2\)</span>.</p>
+<div class="expl">
+<p>Gaps <span class="math inline">\(6 - 4.5 = 1.5\)</span> and <span class="math inline">\(1 - 3 = -2\)</span>. Squares <span class="math inline">\(2.25 + 4 = 6.25\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="sqdist2">
+
+</div>
+<h2 id="scale-matters">5. Scale matters</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>A distance adds up gaps measured in different units. A gap of £5,000 in income and a gap of 10 years in age are added as if they were the same kind of number, so income swamps age completely. Rescaling every column to a similar spread before computing distances fixes it.</p>
+</div>
+<p>Standardising a column: subtract its mean and divide by its standard deviation, <span class="math inline">\(x&#39; = (x - \bar x)/s\)</span>. The week 2 lab’s <code>normalize()</code> does this before KNN regression. The same problem affects K-means and the ridge penalty.</p>
+<div class="example">
+<p><strong>Worked example 6.</strong> Houses A = (100 m², 2 bathrooms), B = (150 m², 2 bathrooms), C = (102 m², 4 bathrooms). Raw squared distances: <span class="math inline">\(d^2(A, B) = 50^2 + 0^2 = 2500\)</span>, <span class="math inline">\(d^2(A, C) = 2^2 + 2^2 = 8\)</span>. So C counts as A’s near-twin even though it has twice the bathrooms, while B is “far” just because of floor area. After standardising (say area sd 25, bathrooms sd 1): <span class="math inline">\(d^2(A, B) = 2^2 + 0 = 4\)</span>, <span class="math inline">\(d^2(A, C) = 0.08^2 + 2^2 = 4.0064\)</span>. Now both differences count.</p>
+</div>
+<div class="q" kind="mcq">
+<p>You run KNN on houses with inputs “floor area in m²” (40 to 300) and “number of bathrooms” (1 to 4) without rescaling. What happens?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Bathrooms dominate the distance.</label></li>
+<li><label><input type="checkbox" checked="" />Floor area dominates the distance, so neighbours are chosen almost entirely by floor area.</label></li>
+<li><label><input type="checkbox" />Nothing: Euclidean distance has no units.</label></li>
+<li><label><input type="checkbox" />KNN fails to run.</label></li>
+</ul>
+<div class="expl">
+<p>A 50 m² gap contributes <span class="math inline">\(2500\)</span> to the squared distance; a 2-bathroom gap contributes <span class="math inline">\(4\)</span>. Standardise first.</p>
+</div>
+</div>
+<h2 id="where-this-comes-back">Where this comes back</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Page</th>
+<th>How it shows up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><a href="../w1/KNN.html">KNN</a></td>
+<td>Euclidean distance picks the <span class="math inline">\(K\)</span> neighbours</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><a href="../w2/Linear_Regression.html">Linear regression</a></td>
+<td><span class="math inline">\(\hat y = \beta\cdot\tilde x\)</span>; <span class="math inline">\(\mathbf X\beta\)</span> for all points</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><a href="../w2/Ridge_Regression.html">Ridge</a></td>
+<td>penalty <span class="math inline">\(\lambda\|\beta\|_2^2\)</span>, a squared length</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><a href="../w3/Logistic_Regression.html">Logistic regression</a></td>
+<td><span class="math inline">\(p = \sigma(\beta\cdot\tilde x)\)</span></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><a href="../w4/Neural_Network.html">Neural network</a></td>
+<td>each hidden unit is <span class="math inline">\(g(w_k\cdot\tilde x)\)</span></td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td><a href="../w7/K_Means.html">K-means</a></td>
+<td><span class="math inline">\(\|x - \mu_j\|^2\)</span> to each centre</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><a href="../w7/Hierarchical_Clustering.html">Hierarchical clustering</a></td>
+<td>point distances, then linkage between groups</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="dot">
+
+</div>
+<div class="q" kind="gen" data-gen="score2">
+
+</div>
+<div class="q" kind="gen" data-gen="dist2">
+
+</div>
+<div class="q" kind="gen" data-gen="sqdist2">
+
+</div>
+<div class="q" kind="num" data-answer="0" label="dot product">
+<p><strong>(2023 Q1(c)i.)</strong> Compute <span class="math inline">\((2, -1, 4)\cdot(3, 2, -1)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(6 - 2 - 4 = 0\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A point is <span class="math inline">\(x = (2, 3)\)</span> and its cluster centre is <span class="math inline">\(\mu = (1, 1)\)</span>. A student writes <span class="math inline">\(\|x - \mu\|^2 = 2^2 + 3^2 = 13\)</span>. What’s wrong, and what is the right value?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Nothing; 13 is right.</label></li>
+<li><label><input type="checkbox" />They should have taken a square root: <span class="math inline">\(\sqrt{13}\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />They squared the raw coordinates. The gaps are <span class="math inline">\((1, 2)\)</span>, so <span class="math inline">\(\|x - \mu\|^2 = 1 + 4 = 5\)</span>.</label></li>
+<li><label><input type="checkbox" />They should have added the coordinates of <span class="math inline">\(\mu\)</span>: <span class="math inline">\(3^2 + 4^2 = 25\)</span>.</label></li>
+</ul>
+<div class="expl">
+<p>Subtract the centre first, then square the gaps.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="index.html"><small>&larr; Back to</small>Path overview</a><a class="next" href="t02_averages_votes.html"><small>Stage 2 &rarr;</small>Averages, indicators and votes</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Squared error: MSE, RSS, SSE and friends · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t03_squared_error", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_t03_squared_error" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a class="active" aria-current="page" href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 3 of 24</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 65 min</span></div>
+  <h1>Squared error: MSE, RSS, SSE and friends</h1>
+  <p class="tagline">Take each error, square it, add them up. The course gives this sum at least seven names (RSS, MSE, TSS, SSE, RSS(T), the NN loss, the bias-variance decomposition), but it is one recipe: find the gap, square the gap, add. This stage works through it in every form you'll meet, including the K-means SSE about a centroid, line by line.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">By the end of this stage you can</span></p>
+<ul>
+<li>compute RSS and MSE from a residual table, without the classic “square of the sum” slip;</li>
+<li>say exactly what is being subtracted from what in RSS, TSS, the leaf RSS and the K-means SSE;</li>
+<li>prove that the mean is the single number that minimises squared error, and use it;</li>
+<li>compute the SSE of a cluster about its centroid, with gaps <strong>before</strong> squares;</li>
+<li>compute RSS, TSS and <span class="math inline">\(R^2\)</span> for a fitted line;</li>
+<li>split an expected test error into bias², variance and noise.</li>
+</ul>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 2.2.1 (MSE), 3.1.1 to 3.1.3 (RSS, TSS, <span class="math inline">\(R^2\)</span>, RSE), 2.2.2 (bias-variance, eq. 2.7), 12.4.1 (K-means objective). <strong>Skip</strong> in 3.1.2 the standard errors, confidence intervals, t-statistics and p-values: the course doesn’t test them. The week 5 slides (I. Rungger) give the decomposition in the course’s notation; week 7 slide 15 defines <span class="math inline">\(J_{SSE} = \sum_{j=1}^K\sum_{x\in\omega_j}\|x - \mu_j\|^2\)</span> with <span class="math inline">\(\mu_j = \frac{1}{|\omega_j|}\sum_{x\in\omega_j}x\)</span>.</p>
+</div>
+<h2 id="one-recipe-gap-square-add">1. One recipe: gap, square, add</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Every version of squared error has the same three moves:</p>
+<ol type="1">
+<li><strong>Gap.</strong> For each data point, subtract “what we predicted” (or “the centre”) from “what we saw”.</li>
+<li><strong>Square</strong> each gap, so overshoots and undershoots both count as positive and big misses count a lot.</li>
+<li><strong>Add</strong> the squares. Divide by <span class="math inline">\(n\)</span> if you want an average (MSE).</li>
+</ol>
+<p>The only thing that changes between names is <strong>what you subtract</strong>.</p>
+</div>
+<p><span class="math display">\[\boxed{\text{RSS} = \sum_{i=1}^{n}(y_i - \hat y_i)^2,\qquad \text{MSE} = \frac1n\,\text{RSS}}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>The gap is…</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RSS, MSE</td>
+<td><span class="math inline">\(y_i - \hat y_i\)</span> (truth − prediction)</td>
+<td>linear regression (w2), test error everywhere</td>
+</tr>
+<tr class="even">
+<td>TSS</td>
+<td><span class="math inline">\(y_i - \bar y\)</span> (truth − overall mean)</td>
+<td><span class="math inline">\(R^2\)</span> (w2)</td>
+</tr>
+<tr class="odd">
+<td>leaf RSS, <span class="math inline">\(\text{RSS}(T)\)</span></td>
+<td><span class="math inline">\(y_i - \bar y_{\text{leaf}}\)</span></td>
+<td>regression trees (w4)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(J_{SSE}\)</span></td>
+<td><span class="math inline">\(x - \mu_j\)</span>, a <strong>vector</strong> gap to the cluster’s centroid</td>
+<td>K-means (w7)</td>
+</tr>
+<tr class="odd">
+<td>bias-variance</td>
+<td><span class="math inline">\(\hat f(x_0) - Y\)</span>, averaged over training sets</td>
+<td>week 5</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y_i\)</span></td>
+<td>the observed response of point <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat y_i\)</span></td>
+<td>the model’s prediction for point <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(e_i = y_i - \hat y_i\)</span></td>
+<td>the residual (error) of point <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(n\)</span></td>
+<td>number of points</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1.</strong> Truth <span class="math inline">\(y = (3, 7, 4, 10)\)</span>, predictions <span class="math inline">\(\hat y = (4, 5, 4, 7)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(\hat y_i\)</span></th>
+<th><span class="math inline">\(e_i = y_i - \hat y_i\)</span></th>
+<th><span class="math inline">\(e_i^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>4</td>
+<td>−1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>7</td>
+<td>5</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>10</td>
+<td>7</td>
+<td>3</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td><strong>14</strong></td>
+</tr>
+</tbody>
+</table>
+<p>RSS <span class="math inline">\(= 14\)</span>, MSE <span class="math inline">\(= 14/4 = 3.5\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Square of the sum.</strong> <span class="math inline">\((\sum e_i)^2 = 4^2 = 16\)</span> is not the RSS. Square each row <strong>then</strong> add.</li>
+<li><strong>Sum of the gaps.</strong> <span class="math inline">\(\sum e_i = 4\)</span> tells you about bias, not size of error: errors of <span class="math inline">\(+5\)</span> and <span class="math inline">\(-5\)</span> would add to 0.</li>
+<li><strong>MSE vs RSS.</strong> MSE divides by <span class="math inline">\(n\)</span>; RSS doesn’t. Read which one the question asks for.</li>
+<li><strong><span class="math inline">\((-1)^2 = 1\)</span></strong>, never <span class="math inline">\(-1\)</span>. Every entry in the <span class="math inline">\(e_i^2\)</span> column must be <span class="math inline">\(\ge 0\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="-2;1;3;14;4.667" label="e₁;e₂;e₃;RSS;MSE" data-tol="0.001;0.001;0.001;0.01;0.01">
+<p>Truth <span class="math inline">\(y = (1, 6, 8)\)</span>, predictions <span class="math inline">\(\hat y = (3, 5, 5)\)</span>. Give the three residuals <span class="math inline">\(e_i = y_i - \hat y_i\)</span>, then the RSS and the MSE.</p>
+<div class="expl">
+<p><span class="math inline">\(e = (-2, 1, 3)\)</span>. Squares <span class="math inline">\(4, 1, 9\)</span>, RSS <span class="math inline">\(= 14\)</span>, MSE <span class="math inline">\(= 14/3 = 4.667\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="mse2">
+
+</div>
+<h2 id="why-squares-and-why-the-mean-wins">2. Why squares, and why the mean wins</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Squaring makes every error positive, punishes big misses heavily, and gives a smooth curve you can differentiate. It also has a neat consequence: if you must predict <strong>one number</strong> for a whole group, the number that makes the squared error smallest is the group’s <strong>mean</strong>. That one fact explains why tree leaves predict means, why K-means moves centres to means, and why <span class="math inline">\(R^2\)</span> compares against <span class="math inline">\(\bar y\)</span>.</p>
+</div>
+<p><strong>Fact.</strong> For numbers <span class="math inline">\(y_1, \dots, y_n\)</span>, the constant <span class="math inline">\(c\)</span> that minimises <span class="math inline">\(g(c) = \sum_i(y_i - c)^2\)</span> is <span class="math inline">\(c = \bar y\)</span>.</p>
+<p><strong>Proof, step by step.</strong></p>
+<ol type="1">
+<li>Differentiate each term with the chain rule: <span class="math inline">\(\frac{d}{dc}(y_i - c)^2 = 2(y_i - c)\times(-1) = -2(y_i - c)\)</span>.</li>
+<li>Add: <span class="math inline">\(g&#39;(c) = -2\sum_i(y_i - c) = -2\big(\sum_iy_i - nc\big)\)</span>.</li>
+<li>Set to zero: <span class="math inline">\(\sum_iy_i = nc\)</span>, so <span class="math inline">\(c = \frac1n\sum_iy_i = \bar y\)</span>.</li>
+<li>Second derivative <span class="math inline">\(g&#39;&#39;(c) = 2n &gt; 0\)</span>, so it’s a minimum, not a maximum.</li>
+</ol>
+<div class="example">
+<p><strong>Worked example 2.</strong> Leaf responses <span class="math inline">\(2, 4, 9\)</span>, mean <span class="math inline">\(5\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(y_i\)</span></th>
+<th>gap to mean 5</th>
+<th>squared</th>
+<th>gap to median 4</th>
+<th>squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>−3</td>
+<td>9</td>
+<td>−2</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>−1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>4</td>
+<td>16</td>
+<td>5</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td>0</td>
+<td><strong>26</strong></td>
+<td>3</td>
+<td><strong>29</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The mean gives 26, the median 29. No other number beats 26. Notice the gaps to the mean add to 0: that’s the mean’s defining property.</p>
+</div>
+<div class="q" kind="num" data-answer="4;26" label="best constant;smallest RSS">
+<p>A tree leaf contains <span class="math inline">\(y = 1, 3, 4, 8\)</span>. Which single prediction minimises the leaf’s RSS, and what is that smallest RSS?</p>
+<div class="expl">
+<p>The mean <span class="math inline">\((1 + 3 + 4 + 8)/4 = 4\)</span>. Gaps <span class="math inline">\(-3, -1, 0, 4\)</span>; squares <span class="math inline">\(9, 1, 0, 16\)</span>; RSS <span class="math inline">\(= 26\)</span>.</p>
+</div>
+</div>
+<h2 id="the-sse-of-a-cluster-gaps-to-the-centroid">3. The SSE of a cluster: gaps to the centroid</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>K-means measures how tight a cluster is by the sum of squared distances from each point to the cluster’s centre (its centroid). It’s the same recipe, with <strong>vector</strong> gaps: subtract the centroid from the point in every coordinate, square each coordinate gap, add across coordinates, then add across points.</p>
+</div>
+<p><span class="math display">\[\boxed{\text{SSE}(\omega) = \sum_{x\in\omega}\|x - \mu\|^2 = \sum_{x\in\omega}\big[(x_1 - \mu_1)^2 + (x_2 - \mu_2)^2 + \dots\big],\qquad J_{SSE} = \sum_{j=1}^K\text{SSE}(\omega_j)}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\omega\)</span> or <span class="math inline">\(\omega_j\)</span></td>
+<td>a cluster: a set of points</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mu = (\mu_1, \mu_2, \dots)\)</span></td>
+<td>its centroid, the coordinate-wise mean</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\|x - \mu\|^2\)</span></td>
+<td>squared Euclidean distance from point <span class="math inline">\(x\)</span> to <span class="math inline">\(\mu\)</span> (Toolkit 1)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(J_{SSE}\)</span></td>
+<td>the K-means objective: add the SSE of every cluster</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 3: the full layout.</strong> Cluster <span class="math inline">\(\{(1, 2), (3, 6), (5, 4)\}\)</span>.</p>
+<p><strong>Step 1: centroid.</strong> <span class="math inline">\(\mu_1 = (1 + 3 + 5)/3 = 3\)</span>, <span class="math inline">\(\mu_2 = (2 + 6 + 4)/3 = 4\)</span>. So <span class="math inline">\(\mu = (3, 4)\)</span>.</p>
+<p><strong>Step 2: gaps, squares, sums.</strong></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>point</th>
+<th><span class="math inline">\(x_1 - \mu_1\)</span></th>
+<th><span class="math inline">\(x_2 - \mu_2\)</span></th>
+<th><span class="math inline">\((x_1 - \mu_1)^2\)</span></th>
+<th><span class="math inline">\((x_2 - \mu_2)^2\)</span></th>
+<th><span class="math inline">\(\|x - \mu\|^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1, 2)</td>
+<td>1 − 3 = −2</td>
+<td>2 − 4 = −2</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>(3, 6)</td>
+<td>3 − 3 = 0</td>
+<td>6 − 4 = 2</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>(5, 4)</td>
+<td>5 − 3 = 2</td>
+<td>4 − 4 = 0</td>
+<td>4</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td></td>
+<td></td>
+<td><strong>16</strong></td>
+</tr>
+</tbody>
+</table>
+<p>SSE <span class="math inline">\(= 16\)</span>. The two gap columns each add to 0: a built-in check that the centroid is right.</p>
+<p><strong>The slip to avoid.</strong> Squaring the raw coordinates gives <span class="math inline">\((1 + 4) + (9 + 36) + (25 + 16) = 91\)</span>. That number measures distance from the origin <span class="math inline">\((0, 0)\)</span>, not spread around the centre, so it’s meaningless for K-means. If your table has no subtraction column, stop and add one.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 4: decimals in the centroid.</strong> Cluster <span class="math inline">\(\{(0, 1), (2, 1), (2, 4), (4, 2)\}\)</span>. Centroid <span class="math inline">\(\mu = (8/4, 8/4) = (2, 2)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th>gap 1</th>
+<th>gap 2</th>
+<th>squares</th>
+<th><span class="math inline">\(\|x - \mu\|^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(0, 1)</td>
+<td>−2</td>
+<td>−1</td>
+<td>4 + 1</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>(2, 1)</td>
+<td>0</td>
+<td>−1</td>
+<td>0 + 1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>(2, 4)</td>
+<td>0</td>
+<td>2</td>
+<td>0 + 4</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>(4, 2)</td>
+<td>2</td>
+<td>0</td>
+<td>4 + 0</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td>0</td>
+<td>0</td>
+<td></td>
+<td><strong>14</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Now the same cluster plus the point <span class="math inline">\((1, 2)\)</span>: centroid <span class="math inline">\(\mu = (9/5, 10/5) = (1.8, 2)\)</span>. Gaps in the first coordinate become <span class="math inline">\(-1.8, 0.2, 0.2, 2.2, -0.8\)</span> (they add to 0 ✓). Squares <span class="math inline">\(3.24, 0.04, 0.04, 4.84, 0.64\)</span>, sum <span class="math inline">\(8.8\)</span>. Second coordinate gaps <span class="math inline">\(-1, -1, 2, 0, 0\)</span>, squares sum <span class="math inline">\(6\)</span>. SSE <span class="math inline">\(= 8.8 + 6 = 14.8\)</span>. You may add the columns separately like this: the SSE is the sum over coordinates of each coordinate’s own sum of squares.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes in the SSE</span></p>
+<ul>
+<li><strong>Squaring raw coordinates</strong> instead of the gaps to the centroid (see above). This is the most common K-means slip.</li>
+<li><strong>Using the wrong centre.</strong> After a K-means update, the SSE uses the <strong>new</strong> centres. Before the update, it uses the old ones. Read which one the question wants.</li>
+<li><strong>Taking a square root.</strong> <span class="math inline">\(J_{SSE}\)</span> uses <span class="math inline">\(\|x - \mu\|^2\)</span>, the squared distance. No roots anywhere.</li>
+<li><strong>Forgetting a coordinate.</strong> In 2D every point contributes two squared gaps.</li>
+<li><strong>Rounding the centroid early.</strong> Keep <span class="math inline">\(\mu = 1.8\)</span>, not <span class="math inline">\(2\)</span>. Rounding first changes the SSE.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> Cluster <span class="math inline">\(\{(2, 0), (4, 6), (6, 3)\}\)</span>.</p>
+<div class="q" kind="num" data-answer="4;3" label="μ₁;μ₂">
+<p>Step 1: give the centroid.</p>
+<div class="expl">
+<p><span class="math inline">\((2 + 4 + 6)/3 = 4\)</span> and <span class="math inline">\((0 + 6 + 3)/3 = 3\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="-2;-3;13" label="gap 1;gap 2;‖x−μ‖²">
+<p>Step 2: for the first point <span class="math inline">\((2, 0)\)</span>, give both gaps to the centroid and its squared distance.</p>
+<div class="expl">
+<p><span class="math inline">\(2 - 4 = -2\)</span>, <span class="math inline">\(0 - 3 = -3\)</span>; squares <span class="math inline">\(4 + 9 = 13\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="9;4;26" label="‖x−μ‖² for (4,6);‖x−μ‖² for (6,3);SSE">
+<p>Step 3: give the other two squared distances, then the SSE.</p>
+<div class="expl">
+<p><span class="math inline">\((4, 6)\)</span>: gaps <span class="math inline">\((0, 3)\)</span>, so <span class="math inline">\(0 + 9 = 9\)</span>. <span class="math inline">\((6, 3)\)</span>: gaps <span class="math inline">\((2, 0)\)</span>, so <span class="math inline">\(4 + 0 = 4\)</span>. SSE <span class="math inline">\(= 13 + 9 + 4 = 26\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="centroid2">
+
+</div>
+<h2 id="rss-tss-and-r2">4. RSS, TSS and <span class="math inline">\(R^2\)</span></h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>TSS is the RSS of the laziest possible model: “always predict the average <span class="math inline">\(\bar y\)</span>”. RSS is the error left over after your model. <span class="math inline">\(R^2\)</span> asks what fraction of the lazy model’s error your model removed.</p>
+</div>
+<p><span class="math display">\[\text{TSS} = \sum_i(y_i - \bar y)^2,\qquad R^2 = 1 - \frac{\text{RSS}}{\text{TSS}}\]</span></p>
+<p><span class="math inline">\(R^2 = 0\)</span>: no better than predicting <span class="math inline">\(\bar y\)</span>. <span class="math inline">\(R^2 = 1\)</span>: a perfect fit on these points.</p>
+<div class="example">
+<p><strong>Worked example 5.</strong> Data <span class="math inline">\(x = (1, 2, 3, 4)\)</span>, <span class="math inline">\(y = (2, 3, 5, 6)\)</span>, fitted line <span class="math inline">\(\hat y = 0.5 + 1.4x\)</span>. <span class="math inline">\(\bar y = 16/4 = 4\)</span>.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(\hat y_i\)</span></th>
+<th><span class="math inline">\(y_i - \hat y_i\)</span></th>
+<th>squared</th>
+<th><span class="math inline">\(y_i - \bar y\)</span></th>
+<th>squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>1.9</td>
+<td>0.1</td>
+<td>0.01</td>
+<td>−2</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+<td>3.3</td>
+<td>−0.3</td>
+<td>0.09</td>
+<td>−1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>5</td>
+<td>4.7</td>
+<td>0.3</td>
+<td>0.09</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>6</td>
+<td>6.1</td>
+<td>−0.1</td>
+<td>0.01</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td>0</td>
+<td><strong>0.2</strong></td>
+<td>0</td>
+<td><strong>10</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(R^2 = 1 - 0.2/10 = 0.98\)</span>. The line explains 98% of the spread in <span class="math inline">\(y\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Putting <span class="math inline">\(\hat y\)</span> into the TSS.</strong> The TSS never involves the model.</li>
+<li><strong><span class="math inline">\(R^2\)</span> on the test set</strong> can be negative if the model is worse than the training mean. On the training data with least squares it lies between 0 and 1.</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="rsq2">
+
+</div>
+<h2 id="the-bias-variance-decomposition">5. The bias-variance decomposition</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Imagine retraining the same kind of model on many different training sets and predicting at one input <span class="math inline">\(x_0\)</span> each time. The expected squared test error splits into three parts: how far the <strong>average</strong> prediction is from the truth (bias²), how much the predictions <strong>wobble</strong> between training sets (variance), and the noise in <span class="math inline">\(Y\)</span> that nobody can predict.</p>
+</div>
+<p><span class="math display">\[\mathbb E\big(\hat f(x_0) - Y\big)^2 = \underbrace{\big(\mathbb E\hat f(x_0) - f(x_0)\big)^2}_{\text{bias}^2} + \underbrace{\mathbb E\big(\hat f(x_0) - \mathbb E\hat f(x_0)\big)^2}_{\text{variance}} + \underbrace{\sigma^2}_{\text{noise}}\]</span></p>
+<div class="example">
+<p><strong>Worked example 6.</strong> Predictions at <span class="math inline">\(x_0\)</span> from four training sets: <span class="math inline">\(4, 6, 5, 5\)</span>. True <span class="math inline">\(f(x_0) = 6\)</span>, noise <span class="math inline">\(\sigma^2 = 1\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>set</th>
+<th><span class="math inline">\(\hat f(x_0)\)</span></th>
+<th><span class="math inline">\(\hat f - \bar f\)</span></th>
+<th>squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>4</td>
+<td>−1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><strong>average</strong></td>
+<td><span class="math inline">\(\bar f = 5\)</span></td>
+<td>0</td>
+<td><strong>0.5</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Bias² <span class="math inline">\(= (5 - 6)^2 = 1\)</span>. Variance <span class="math inline">\(= 0.5\)</span>. Expected test MSE <span class="math inline">\(= 1 + 0.5 + 1 = 2.5\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Variance measured from the truth.</strong> The variance column subtracts the <strong>average prediction</strong> <span class="math inline">\(\bar f\)</span>, not <span class="math inline">\(f(x_0)\)</span>.</li>
+<li><strong>Forgetting to square the bias.</strong> The term is <span class="math inline">\((\bar f - f(x_0))^2\)</span>.</li>
+<li><strong>Dropping the noise.</strong> Even a perfect model pays <span class="math inline">\(\sigma^2\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="bv2">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="mse2">
+
+</div>
+<div class="q" kind="gen" data-gen="centroid2">
+
+</div>
+<div class="q" kind="gen" data-gen="rsq2">
+
+</div>
+<div class="q" kind="gen" data-gen="bv2">
+
+</div>
+<div class="q" kind="num" data-answer="2" label="best constant">
+<p>Which single number <span class="math inline">\(c\)</span> minimises <span class="math inline">\((1 - c)^2 + (2 - c)^2 + (3 - c)^2\)</span>?</p>
+<div class="expl">
+<p>The mean of <span class="math inline">\(1, 2, 3\)</span>: <span class="math inline">\(c = 2\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="2" data-marks="3">
+<p><strong>(3 marks; 2024 Q1.)</strong> Write the formula for the RSS of a linear regression model <span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span> on data <span class="math inline">\(\{(x_i, y_i)\}_{i=1}^n\)</span>, and say what is done with it.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\text{RSS}(\lambda) = \sum_{i=1}^n\big(y_i - \lambda_0 - \lambda_1x_i\big)^2\)</span>, with every symbol explained.</label></li>
+<li><label><input type="checkbox" checked="" />The parameters are chosen to minimise it (least squares), by setting the derivatives to zero or by gradient descent.</label></li>
+<li><label><input type="checkbox" checked="" />It measures fit on the training data only, so a low RSS doesn’t guarantee a low test error.</label></li>
+</ul>
+<div class="model">
+<p><span class="math inline">\(\text{RSS}(\lambda_0, \lambda_1) = \sum_{i=1}^{n}\big(y_i - (\lambda_0 + \lambda_1x_i)\big)^2\)</span>: the sum, over training points, of the squared differences between the observed <span class="math inline">\(y_i\)</span> and the prediction. Least squares picks the <span class="math inline">\(\lambda\)</span> that minimises it, either in closed form (both partial derivatives set to zero) or by gradient descent. It measures training fit only; a flexible model can make it small while the test error is large.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t02_averages_votes.html"><small>&larr; Stage 2</small>Averages, indicators and votes</a><a class="next" href="t04_gradient_descent.html"><small>Stage 4 &rarr;</small>Derivatives and gradient descent</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

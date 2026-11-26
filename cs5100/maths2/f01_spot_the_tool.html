@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Final: spot the shared maths · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "f01_spot_the_tool", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_f01_spot_the_tool" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a class="active" aria-current="page" href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 24 of 24</span><span class="chip">Final</span><span class="chip">about 60 min</span></div>
+  <h1>Final: spot the shared maths</h1>
+  <p class="tagline">A mixed test across all eight weeks. Most exam questions are one of a dozen calculations in disguise. This stage first practises recognising which one, with a worked "how I spotted it" for each, then collects the common slips from every stage on one page, then tests you on fresh numbers.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">How to use this stage</span></p>
+<p>Read section 1 and do the warm-ups. Then skim the slip list in section 2: each line is a mistake that cost marks somewhere in this route. The final test draws 14 questions from a larger pool and needs <strong>70%</strong>. Retake it as often as you like; the fresh-number questions change every time, and each one shows the full worked table when you check it. Before starting, try writing the twelve formulas of the <a href="index.html">toolkit table</a> from memory on one sheet. That sheet is also most of a good exam crib.</p>
+</div>
+<h2 id="spotting-the-tool">1. Spotting the tool</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Read the question for the <strong>noun</strong>, not the model name. “Distance” or “nearest” → A1. “Average”, “mean”, “centre”, “vote” → A2. “Squared”, “RSS”, “SSE”, “stress” → A3. “Update”, “learning rate”, “gradient” → A4. “Penalty”, “complexity”, “<span class="math inline">\(\lambda\)</span>”, “<span class="math inline">\(\alpha\)</span>” → A5. “Given”, “posterior”, “prior” → A6. “Normal”, “bell”, “shared variance” → A7. “Probability between 0 and 1”, “odds”, “classes summing to 1” → A8. “Likelihood”, “log-loss”, “cross-entropy”, “KL” → A9. “Pure”, “split”, “Gini”, “entropy” → A10. “Bootstrap”, “resample”, “out-of-bag”, “sign test” → A11. “Variance explained”, “direction”, “project” → A12.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>The question says…</th>
+<th>It’s really…</th>
+<th>Toolkit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Compute the SSE of this cluster”</td>
+<td>gaps to the centroid, squared, added</td>
+<td>A2 then A3</td>
+</tr>
+<tr class="even">
+<td>“Which split minimises the RSS?”</td>
+<td>each side’s mean, then squared gaps</td>
+<td>A2 then A3</td>
+</tr>
+<tr class="odd">
+<td>“Predict with 3-NN”</td>
+<td>distances, sort, vote</td>
+<td>A1 then A2</td>
+</tr>
+<tr class="even">
+<td>“Posterior probability of class 1”</td>
+<td>prior × likelihood, then normalise</td>
+<td>A6 (+ A7 for Gaussians)</td>
+</tr>
+<tr class="odd">
+<td>“Probability of default at balance 2000”</td>
+<td>linear score, then sigmoid</td>
+<td>A8</td>
+</tr>
+<tr class="even">
+<td>“One gradient step for logistic regression”</td>
+<td><span class="math inline">\(\sum(p_i - y_i)x_i\)</span>, then <span class="math inline">\(\beta - \eta g\)</span></td>
+<td>A9 then A4</td>
+</tr>
+<tr class="odd">
+<td>“Gini of this node” / “information gain”</td>
+<td>class proportions, impurity, weighted average</td>
+<td>A10</td>
+</tr>
+<tr class="even">
+<td>“Chance a point is out-of-bag”</td>
+<td><span class="math inline">\((1 - 1/n)^n\)</span></td>
+<td>A11</td>
+</tr>
+<tr class="odd">
+<td>“Density at <span class="math inline">\(x\)</span> with <span class="math inline">\(h = 4\)</span>”</td>
+<td>count in the window, divide by <span class="math inline">\(nh\)</span></td>
+<td>A2</td>
+</tr>
+<tr class="even">
+<td>“PVE of the first two PCs”</td>
+<td>eigenvalues over their total</td>
+<td>A12</td>
+</tr>
+<tr class="odd">
+<td>“Stress of this embedding”</td>
+<td>distances, then squared error</td>
+<td>A1 then A3</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1: how I spotted it.</strong> <em>“Points <span class="math inline">\((1, 1), (3, 1), (2, 4)\)</span> form a cluster. Give its contribution to <span class="math inline">\(J_{SSE}\)</span>.”</em></p>
+<p>Noun: “<span class="math inline">\(J_{SSE}\)</span>”, a sum of squared errors (A3). Errors from what? From the cluster’s centre, which is a mean (A2). So: centroid first, then gaps, then squares.</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th>gap to <span class="math inline">\((2, 2)\)</span></th>
+<th>squared</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1, 1)</td>
+<td>(−1, −1)</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>(3, 1)</td>
+<td>(1, −1)</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>(2, 4)</td>
+<td>(0, 2)</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td>(0, 0)</td>
+<td><strong>8</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Not <span class="math inline">\(1 + 1 + 9 + 1 + 4 + 16 = 32\)</span>, the raw-coordinate slip.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 2: how I spotted it.</strong> <em>“A node has 6 of class A and 2 of class B. A split sends (4 A, 0 B) left and (2 A, 2 B) right. Give the decrease in Gini.”</em></p>
+<p>Nouns: “Gini” (A10) and “decrease” (parent minus the weighted children, A2 for the weighting).</p>
+<table>
+<thead>
+<tr class="header">
+<th>node</th>
+<th>proportions</th>
+<th>Gini <span class="math inline">\(= 1 - \sum p_k^2\)</span></th>
+<th>weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>parent</td>
+<td>0.75, 0.25</td>
+<td><span class="math inline">\(1 - 0.5625 - 0.0625 = 0.375\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>left</td>
+<td>1, 0</td>
+<td>0</td>
+<td>4/8</td>
+</tr>
+<tr class="odd">
+<td>right</td>
+<td>0.5, 0.5</td>
+<td>0.5</td>
+<td>4/8</td>
+</tr>
+</tbody>
+</table>
+<p>Weighted children <span class="math inline">\(= 0.5\times0 + 0.5\times0.5 = 0.25\)</span>. Decrease <span class="math inline">\(= 0.375 - 0.25 = 0.125\)</span>.</p>
+</div>
+<p><strong>Warm-ups.</strong></p>
+<div class="q" kind="multi">
+<p>Which of these minimise a sum of squared differences? Tick all that apply.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Least-squares linear regression</label></li>
+<li><label><input type="checkbox" checked="" />Choosing a regression tree split</label></li>
+<li><label><input type="checkbox" checked="" />The K-means objective</label></li>
+<li><label><input type="checkbox" />Training logistic regression</label></li>
+<li><label><input type="checkbox" checked="" />Fitting each boosting tree to the residuals</label></li>
+<li><label><input type="checkbox" checked="" />MDS (the stress)</label></li>
+</ul>
+<div class="expl">
+<p>Logistic regression minimises the negative log-likelihood (cross-entropy), not squared error. MDS’s stress is squared error between distances.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Where does softmax appear? Tick all that apply.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Multinomial logistic regression</label></li>
+<li><label><input type="checkbox" checked="" />The output layer of a neural network classifier</label></li>
+<li><label><input type="checkbox" checked="" />LDA’s posterior probabilities, written in terms of <span class="math inline">\(\delta_k(x)\)</span></label></li>
+<li><label><input type="checkbox" />The Gini index</label></li>
+<li><label><input type="checkbox" />Kernel density estimation</label></li>
+</ul>
+<div class="expl">
+<p>The last two use class proportions and kernels respectively.</p>
+</div>
+</div>
+<div class="q" kind="multi">
+<p>Which of these start by computing a mean? Tick all that apply.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The K-means update step</label></li>
+<li><label><input type="checkbox" checked="" />A regression tree’s prediction in a leaf</label></li>
+<li><label><input type="checkbox" checked="" />Centring the data before PCA</label></li>
+<li><label><input type="checkbox" checked="" />Seeded K-means’s starting centres</label></li>
+<li><label><input type="checkbox" />The sigmoid</label></li>
+</ul>
+<div class="expl">
+<p>All but the sigmoid. The sigmoid turns a score into a probability (A8).</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.3" label="decrease" data-tol="0.002">
+<p>A node has 4 of class A and 4 of class B. A split sends (4 A, 1 B) left and (0 A, 3 B) right. Give the decrease in Gini.</p>
+<div class="expl">
+<p>Parent: <span class="math inline">\(1 - 0.25 - 0.25 = 0.5\)</span>. Left: proportions <span class="math inline">\(0.8, 0.2\)</span>, Gini <span class="math inline">\(1 - 0.64 - 0.04 = 0.32\)</span>, weight <span class="math inline">\(5/8\)</span>. Right: pure, Gini 0, weight <span class="math inline">\(3/8\)</span>. Weighted children <span class="math inline">\(= 0.625\times0.32 = 0.2\)</span>. Decrease <span class="math inline">\(= 0.5 - 0.2 = 0.3\)</span>.</p>
+</div>
+</div>
+<h2 id="every-common-slip-on-one-page">2. Every common slip, on one page</h2>
+<div class="warn">
+<p><span class="label">The slips that cost marks</span></p>
+<ul>
+<li><strong>Squaring raw coordinates</strong> instead of gaps to the mean or centroid (K-means SSE, variance, PCA, RSS of a split).</li>
+<li><strong>Square roots</strong>: SSE, RSS and stress are sums of squares, but the stress squares <strong>distances</strong>, which do have square roots inside.</li>
+<li><strong>Old vs new centres</strong> in K-means; <strong>own cluster’s</strong> centre, not the nearest one.</li>
+<li><strong><span class="math inline">\(n\)</span> vs <span class="math inline">\(n - 1\)</span> vs <span class="math inline">\(n - 2\)</span></strong>: slides use <span class="math inline">\(\frac1n\)</span> for PCA variance, LDA’s pooled variance uses <span class="math inline">\(\frac{1}{n - K}\)</span>.</li>
+<li><strong>Forgetting to normalise</strong>: Bayes’ rule (divide by the evidence), softmax, t-SNE similarities.</li>
+<li><strong>Sign of the gradient step</strong>: <span class="math inline">\(\beta_{\text{new}} = \beta - \eta\nabla L\)</span>.</li>
+<li><strong><span class="math inline">\(\sigma\)</span> vs <span class="math inline">\(\sigma^2\)</span></strong> in the Gaussian.</li>
+<li><strong>Unweighted children</strong> in impurity decrease: weight each child by its share of the points.</li>
+<li><strong>Parzen</strong>: divide by <span class="math inline">\(nh^p\)</span>, the box has half-width <span class="math inline">\(h/2\)</span>, edge points count.</li>
+<li><strong>PCA</strong>: centre first, unit loading vectors, PVE from variances not standard deviations.</li>
+<li><strong>Stress</strong>: compare distances, not coordinates; say <span class="math inline">\(i&lt;j\)</span> or ordered pairs.</li>
+<li><strong>Penalties</strong>: ridge doesn’t penalise the intercept; <span class="math inline">\(\alpha\)</span> multiplies the number of leaves.</li>
+</ul>
+</div>
+<h2 id="final-test">Final test</h2>
+<div class="test" data-pass="70" data-draw="14">
+<div class="q" kind="mcq">
+<p>“Move each centre to the mean of its points” (K-means) and “predict the mean of the leaf” (regression trees) are both justified by the same fact. Which?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The mean is robust to outliers.</label></li>
+<li><label><input type="checkbox" checked="" />The mean minimises the sum of squared distances.</label></li>
+<li><label><input type="checkbox" />The mean is the maximum-likelihood estimate of a Bernoulli probability.</label></li>
+<li><label><input type="checkbox" />Bayes’ rule.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(\frac{d}{dc}\sum(y_i - c)^2 = -2\sum(y_i - c) = 0 \Rightarrow c = \bar y\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The gradient <span class="math inline">\(\sum_i(p_i - y_i)\tilde x_i\)</span> belongs to which model and loss?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Linear regression with RSS</label></li>
+<li><label><input type="checkbox" checked="" />Logistic regression with the negative log-likelihood</label></li>
+<li><label><input type="checkbox" />LDA</label></li>
+<li><label><input type="checkbox" />K-means</label></li>
+</ul>
+<div class="expl">
+<p>RSS gives <span class="math inline">\(-2\sum(y_i - \hat y_i)\tilde x_i\)</span>: the same shape, a different constant.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Ridge’s <span class="math inline">\(\lambda\|\beta\|^2\)</span>, pruning’s <span class="math inline">\(\alpha\lvert T\rvert\)</span> and a neural network’s weight decay are all examples of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Maximum likelihood.</label></li>
+<li><label><input type="checkbox" checked="" />Fit + penalty regularisation, with the dial chosen on validation data.</label></li>
+<li><label><input type="checkbox" />Bootstrap averaging.</label></li>
+<li><label><input type="checkbox" />Impurity measures.</label></li>
+</ul>
+<div class="expl">
+<p>Toolkit 5.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>The 36.8% in out-of-bag error and the p-value in the sign test both come from:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The Gaussian density.</label></li>
+<li><label><input type="checkbox" checked="" />Multiplying probabilities of independent repeated trials.</label></li>
+<li><label><input type="checkbox" />Softmax.</label></li>
+<li><label><input type="checkbox" />Squared error.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\((1 - 1/n)^n\)</span> and <span class="math inline">\(\binom Nj2^{-N}\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>LDA’s boundary is linear because:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It’s fitted by gradient descent.</label></li>
+<li><label><input type="checkbox" checked="" />The log of a Gaussian is a squared distance, and with a shared variance the <span class="math inline">\(x^2\)</span> term is the same for every class.</label></li>
+<li><label><input type="checkbox" />It uses KNN.</label></li>
+<li><label><input type="checkbox" />The priors are equal.</label></li>
+</ul>
+<div class="expl">
+<p>Toolkit 7.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A cluster’s SSE comes out larger than the sum of squared distances between its points. The most likely slip is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />squaring raw coordinates instead of gaps to the centroid</label></li>
+<li><label><input type="checkbox" />using the wrong number of clusters</label></li>
+<li><label><input type="checkbox" />dividing by <span class="math inline">\(n\)</span></label></li>
+<li><label><input type="checkbox" />using Manhattan distance</label></li>
+</ul>
+<div class="expl">
+<p>For a cluster of <span class="math inline">\(m\)</span> points, <span class="math inline">\(\sum_{i&lt;j}\|x_i - x_j\|^2 = m\times\)</span>SSE, so the SSE can’t exceed the pairwise total once <span class="math inline">\(m \ge 2\)</span>. Raw squares measure distance to the origin.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="centroid2">
+
+</div>
+<div class="q" kind="gen" data-gen="kmstep2">
+
+</div>
+<div class="q" kind="gen" data-gen="softmax2">
+
+</div>
+<div class="q" kind="gen" data-gen="sigmoid2">
+
+</div>
+<div class="q" kind="gen" data-gen="impurity2">
+
+</div>
+<div class="q" kind="gen" data-gen="gain2">
+
+</div>
+<div class="q" kind="gen" data-gen="ols2">
+
+</div>
+<div class="q" kind="gen" data-gen="bayes2">
+
+</div>
+<div class="q" kind="gen" data-gen="knn2">
+
+</div>
+<div class="q" kind="gen" data-gen="lgrad2">
+
+</div>
+<div class="q" kind="gen" data-gen="oob">
+
+</div>
+<div class="q" kind="gen" data-gen="nnparams">
+
+</div>
+<div class="q" kind="gen" data-gen="penalty">
+
+</div>
+<div class="q" kind="gen" data-gen="parzen2">
+
+</div>
+<div class="q" kind="gen" data-gen="pve">
+
+</div>
+<div class="q" kind="gen" data-gen="stress">
+
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="m11_pca_mds.html"><small>&larr; Stage 23</small>PCA, MDS and t-SNE</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

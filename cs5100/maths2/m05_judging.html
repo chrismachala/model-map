@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Judging and comparing models · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m05_judging", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_m05_judging" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a class="active" aria-current="page" href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 16 of 24</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 55 min</span></div>
+  <h1>Judging and comparing models</h1>
+  <p class="tagline">Not a model but three ways of scoring them, each built from one toolkit piece: the confusion matrix and ROC curve are counting (A2), the bias-variance split is squared error (A3), and the sign test for "is A really better than B?" is the binomial (A6). This stage fills in every cell and every pair count by hand.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A2</strong> counting with indicators: confusion matrix, rates, AUC as a proportion of pairs · <strong>A3</strong> bias², variance, noise · <strong>A6</strong> the binomial and p-values · <strong>A11</strong> validation and test sets. Full pages: <a href="../w3/Judging_Classifiers.html">judging classifiers</a>, <a href="../w5/Bias_Variance.html">bias and variance</a>, <a href="../w5/Comparing_Algorithms.html">comparing algorithms</a>.</p>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 4.4.2’s subsection on the confusion matrix, sensitivity, specificity and the ROC curve (Tables 4.4 to 4.7, Figure 4.8; <strong>read</strong> those pages only), 2.2.2 (bias-variance). The ROC curve isn’t on the week 3 slides but is used in the week 3 lab (<code>roc_curve</code>, <code>auc</code>). Week 5 slides (I. Rungger) for bias-variance and for comparing two algorithms with a contingency table and the binomial test.</p>
+</div>
+<h2 id="the-confusion-matrix">1. The confusion matrix</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Sort every test point into one of four boxes by (truth, prediction). Every rate the course uses is “one box divided by a row total or a column total”. The trick is remembering which.</p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>predicted +</th>
+<th>predicted −</th>
+<th>row total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>truly +</strong></td>
+<td>TP</td>
+<td>FN</td>
+<td>P = TP + FN</td>
+</tr>
+<tr class="even">
+<td><strong>truly −</strong></td>
+<td>FP</td>
+<td>TN</td>
+<td>N = FP + TN</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rate</th>
+<th>Formula</th>
+<th>Divides by</th>
+<th>Also called</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>true positive rate</td>
+<td>TP / P</td>
+<td>truly +</td>
+<td>sensitivity, recall, power</td>
+</tr>
+<tr class="even">
+<td>false positive rate</td>
+<td>FP / N</td>
+<td>truly −</td>
+<td>1 − specificity, type I error rate</td>
+</tr>
+<tr class="odd">
+<td>specificity</td>
+<td>TN / N</td>
+<td>truly −</td>
+<td>true negative rate</td>
+</tr>
+<tr class="even">
+<td>precision</td>
+<td>TP / (TP + FP)</td>
+<td>predicted +</td>
+<td>positive predictive value</td>
+</tr>
+<tr class="odd">
+<td>accuracy</td>
+<td>(TP + TN) / (P + N)</td>
+<td>everything</td>
+<td>1 − error rate</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1.</strong> TP = 40, FN = 10, FP = 20, TN = 130. So P = 50, N = 150, total 200.</p>
+<table>
+<thead>
+<tr class="header">
+<th>rate</th>
+<th>working</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>TPR (sensitivity)</td>
+<td>40/50</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td>FPR</td>
+<td>20/150</td>
+<td>0.133</td>
+</tr>
+<tr class="odd">
+<td>specificity</td>
+<td>130/150</td>
+<td>0.867</td>
+</tr>
+<tr class="even">
+<td>precision</td>
+<td>40/(40 + 20)</td>
+<td>0.667</td>
+</tr>
+<tr class="odd">
+<td>accuracy</td>
+<td>(40 + 130)/200</td>
+<td>0.85</td>
+</tr>
+<tr class="even">
+<td>error rate</td>
+<td>(10 + 20)/200</td>
+<td>0.15</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>FPR = FP / (all predicted +).</strong> No: FPR divides by the truly negative row, N.</li>
+<li><strong>Precision vs TPR.</strong> Precision divides by the predicted-+ <strong>column</strong>; TPR by the truly-+ <strong>row</strong>.</li>
+<li><strong>High accuracy on unbalanced data.</strong> If 95% are negative, “always predict −” gets 95% accuracy and TPR 0. That’s why the week 3 lab balances the classes.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="40;0.75;0.1;0.8571" data-tol="0.003" label="P;TPR;FPR;accuracy">
+<p>TP = 30, FN = 10, FP = 10, TN = 90. Give P (the number of truly positive points), the TPR, the FPR and the accuracy.</p>
+<div class="expl">
+<p>P = TP + FN = 40. TPR = 0.75, FPR = 0.1, accuracy = 120/140 = 0.857.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="confusion">
+
+</div>
+<h2 id="thresholds-roc-and-auc">2. Thresholds, ROC and AUC</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>A probabilistic classifier predicts + when its score passes a threshold <span class="math inline">\(t\)</span>. Lower <span class="math inline">\(t\)</span>: more positives, so TPR rises but so does FPR. The <strong>ROC curve</strong> plots (FPR, TPR) for every threshold. The <strong>AUC</strong> (area under it) has a lovely counting meaning: pick a random positive and a random negative; AUC is the chance the positive gets the higher score.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 2.</strong> Six test points, sorted by score:</p>
+<table>
+<thead>
+<tr class="header">
+<th>score</th>
+<th>0.9</th>
+<th>0.8</th>
+<th>0.7</th>
+<th>0.6</th>
+<th>0.4</th>
+<th>0.3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>label</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ROC points</strong> (predict + when score <span class="math inline">\(\ge t\)</span>; P = N = 3):</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span></th>
+<th>TP</th>
+<th>FP</th>
+<th>TPR</th>
+<th>FPR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>above 0.9</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0.9</td>
+<td>1</td>
+<td>0</td>
+<td>0.333</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>0.8</td>
+<td>2</td>
+<td>0</td>
+<td>0.667</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0.7</td>
+<td>2</td>
+<td>1</td>
+<td>0.667</td>
+<td>0.333</td>
+</tr>
+<tr class="odd">
+<td>0.6</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>0.333</td>
+</tr>
+<tr class="even">
+<td>0.4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0.667</td>
+</tr>
+<tr class="odd">
+<td>0.3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>AUC by counting pairs:</strong> for each positive, count the negatives it beats.</p>
+<table>
+<thead>
+<tr class="header">
+<th>positive score</th>
+<th>beats negatives (0.7, 0.4, 0.3)</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.9</td>
+<td>all three</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>0.8</td>
+<td>all three</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>0.6</td>
+<td>0.4, 0.3</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td></td>
+<td><strong>8 of 3 × 3 = 9</strong></td>
+</tr>
+</tbody>
+</table>
+<p>AUC <span class="math inline">\(= 8/9 = 0.889\)</span>. (The area under the staircase in the first table gives the same number.)</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Dividing by the number of points</strong> instead of the number of (positive, negative) <strong>pairs</strong>, <span class="math inline">\(P\times N\)</span>.</li>
+<li><strong>Ties</strong> count as half a win.</li>
+<li><strong>AUC 0.5</strong> = random guessing; AUC below 0.5 means the scores are backwards.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="3;2;1;0.6667" data-tol="0.003" label="wins for 0.95;wins for 0.7;wins for 0.4;AUC">
+<p>Scores and labels: 0.95 (1), 0.85 (0), 0.7 (1), 0.5 (0), 0.4 (1), 0.2 (0). For each positive, how many negatives does it beat? Then the AUC.</p>
+<div class="expl">
+<p>Negatives 0.85, 0.5, 0.2. 0.95 beats 3; 0.7 beats 0.5 and 0.2 (2); 0.4 beats 0.2 (1). AUC <span class="math inline">\(= 6/9 = 0.667\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="auc">
+
+</div>
+<h2 id="bias-and-variance-squared-error">3. Bias and variance: squared error</h2>
+<p>The expected test error at <span class="math inline">\(x_0\)</span> splits into bias² + variance + noise (Toolkit 3). Flexible models have low bias, high variance; rigid ones the reverse. The test error is U-shaped in flexibility; the training error just keeps falling.</p>
+<div class="q" kind="gen" data-gen="bv2">
+
+</div>
+<h2 id="comparing-two-algorithms-the-binomial">4. Comparing two algorithms: the binomial</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Algorithm 1 beat algorithm 0 on the test set. Was it skill or luck? Only the points where they <strong>disagree</strong> carry information. If they were equally good, each disagreement would be a fair coin flip. The p-value asks how often a fair coin would give a result at least this lopsided.</p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>alg 1 correct</th>
+<th>alg 1 wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>alg 0 correct</strong></td>
+<td>(agree)</td>
+<td><span class="math inline">\(n_{01}\)</span>: alg 0 wins</td>
+</tr>
+<tr class="even">
+<td><strong>alg 0 wrong</strong></td>
+<td><span class="math inline">\(n_{10}\)</span>: alg 1 wins</td>
+<td>(agree)</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(N = n_{01} + n_{10}\)</span>; <span class="math inline">\(k = n_{10}\)</span>; <span class="math inline">\(p = P(Y \ge k)\)</span> with <span class="math inline">\(Y\sim\text{Binomial}(N, \frac12)\)</span>, i.e. <span class="math inline">\(p = \frac{1}{2^N}\sum_{j=k}^N\binom Nj\)</span>. Reject “not better” at level <span class="math inline">\(\alpha\)</span> if <span class="math inline">\(p \le \alpha\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 3.</strong> Table: both correct 150, alg 0 right and alg 1 wrong 2, alg 0 wrong and alg 1 right 9, both wrong 20.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>step</th>
+<th>working</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>discard agreements</td>
+<td>150 + 20 points carry no information</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(N\)</span>, <span class="math inline">\(k\)</span></td>
+<td><span class="math inline">\(N = 2 + 9 = 11\)</span>, <span class="math inline">\(k = 9\)</span></td>
+</tr>
+<tr class="odd">
+<td>tail terms</td>
+<td><span class="math inline">\(\binom{11}{9} = 55\)</span>, <span class="math inline">\(\binom{11}{10} = 11\)</span>, <span class="math inline">\(\binom{11}{11} = 1\)</span>; sum 67</td>
+</tr>
+<tr class="even">
+<td>p-value</td>
+<td><span class="math inline">\(67/2^{11} = 67/2048 = 0.0327\)</span></td>
+</tr>
+<tr class="odd">
+<td>decision</td>
+<td><span class="math inline">\(0.0327 \le 0.05\)</span>: reject at 5%; <span class="math inline">\(&gt; 0.01\)</span>: not at 1%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong><span class="math inline">\(N\)</span> = test set size.</strong> Only disagreements.</li>
+<li><strong>One term instead of the tail.</strong> <span class="math inline">\(P(Y = 9)\)</span> alone is <span class="math inline">\(55/2048\)</span>; the p-value adds 10 and 11 too.</li>
+<li><strong>Reading the table the wrong way round.</strong> Find the cell where the algorithm you’re testing is right and the other is wrong.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="8;7;0.0352" data-tol="0.01;0.01;0.0005" label="N;k;p-value">
+<p>Alg 0 right / alg 1 wrong: 1. Alg 0 wrong / alg 1 right: 7. Both right: 80. Both wrong: 12. Give <span class="math inline">\(N\)</span>, <span class="math inline">\(k\)</span> and the one-sided p-value.</p>
+<div class="expl">
+<p><span class="math inline">\(N = 8\)</span>, <span class="math inline">\(k = 7\)</span>. <span class="math inline">\(\binom87 + \binom88 = 8 + 1 = 9\)</span>. <span class="math inline">\(p = 9/256 = 0.0352\)</span>: significant at 5%.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="signtest">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="confusion">
+
+</div>
+<div class="q" kind="gen" data-gen="auc">
+
+</div>
+<div class="q" kind="gen" data-gen="signtest">
+
+</div>
+<div class="q" kind="gen" data-gen="bv2">
+
+</div>
+<div class="q" kind="mcq">
+<p>A classifier for a rare disease (1% of patients) has 99% accuracy. What can you conclude?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It is an excellent classifier.</label></li>
+<li><label><input type="checkbox" checked="" />Nothing much: “always healthy” also gets 99%. Look at the TPR and FPR (or the ROC curve).</label></li>
+<li><label><input type="checkbox" />Its AUC is 0.99.</label></li>
+<li><label><input type="checkbox" />Its precision is 0.99.</label></li>
+</ul>
+<div class="expl">
+<p>Accuracy hides everything on unbalanced data.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="m04_lda_nb.html"><small>&larr; Stage 15</small>LDA and naive Bayes</a><a class="next" href="m06_trees.html"><small>Stage 17 &rarr;</small>Regression and classification trees</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

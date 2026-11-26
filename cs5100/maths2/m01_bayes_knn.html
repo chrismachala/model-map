@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bayes classifier and KNN · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m01_bayes_knn", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_m01_bayes_knn" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a class="active" aria-current="page" href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 12 of 24</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 45 min</span></div>
+  <h1>Bayes classifier and KNN</h1>
+  <p class="tagline">Your first two models, built entirely from Part A. The Bayes classifier is Bayes' rule plus argmax: the best possible rule, if only you knew the true probabilities. KNN is distances plus a vote: a practical way to estimate those probabilities from data. Swap the vote for an average and you have KNN regression.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A6</strong> Bayes’ rule and the posterior · <strong>A2</strong> argmax, votes and averages · <strong>A1</strong> Euclidean distance · <strong>A5</strong> <span class="math inline">\(K\)</span> as the flexibility knob · <strong>A3</strong> test MSE to choose <span class="math inline">\(K\)</span>. Full pages: <a href="../w1/Bayes_Classifier.html">Bayes classifier</a>, <a href="../w1/KNN.html">KNN</a>, <a href="../w2/KNN_Regression.html">KNN regression</a>.</p>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 2.2.3 (the Bayes classifier, Bayes error rate and KNN, eq. 2.10 to 2.12; read it all), 3.5 (KNN regression vs linear regression; <strong>skip</strong> the curse-of-dimensionality plots beyond the main message). Week 1 slides, “Bayes classifier and KNN”. <strong>Slide typo:</strong> slide eq. (33) omits the <span class="math inline">\(\frac1K\)</span> in KNN’s probability estimate.</p>
+</div>
+<h2 id="the-bayes-classifier-assembled">1. The Bayes classifier, assembled</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>If an oracle told you <span class="math inline">\(P(Y = k\mid X = x)\)</span> for every <span class="math inline">\(x\)</span>, the best you could do is always bet on the most likely class. You’d still be wrong sometimes (when a less likely class happens), and that unavoidable error is the <strong>Bayes error rate</strong>: the floor for every classifier.</p>
+</div>
+<p><span class="math display">\[\hat Y(x) = \underbrace{\arg\max_k}_{\text{A2}}\ \underbrace{P(Y = k\mid X = x)}_{\text{A6}},\qquad \text{Bayes error} = 1 - \mathbb E_X\Big[\max_kP(Y = k\mid X)\Big]\]</span></p>
+<div class="example">
+<p><strong>Worked example 1: a Bayes error by hand.</strong> <span class="math inline">\(X\)</span> takes the values 1, 2, 3, 4, each with probability <span class="math inline">\(\frac14\)</span>. The true <span class="math inline">\(P(Y = 1\mid x)\)</span>:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(P(Y = 1\mid x)\)</span></th>
+<th><span class="math inline">\(P(Y = 0\mid x)\)</span></th>
+<th>Bayes predicts</th>
+<th>error at <span class="math inline">\(x\)</span> = <span class="math inline">\(1 - \max\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.1</td>
+<td>0.9</td>
+<td>0</td>
+<td>0.1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.4</td>
+<td>0.6</td>
+<td>0</td>
+<td>0.4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.7</td>
+<td>0.3</td>
+<td>1</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.9</td>
+<td>0.1</td>
+<td>1</td>
+<td>0.1</td>
+</tr>
+<tr class="odd">
+<td><strong>average</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>0.225</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Bayes error <span class="math inline">\(= \frac14(0.1 + 0.4 + 0.3 + 0.1) = 0.225\)</span>. No classifier, however clever, can get below 22.5% error on this problem. The <strong>Bayes decision boundary</strong> is between <span class="math inline">\(x = 2\)</span> and <span class="math inline">\(x = 3\)</span>, where <span class="math inline">\(P(Y = 1\mid x)\)</span> crosses 0.5.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Bayes error = 0 for a “perfect” classifier.</strong> Only if the classes never overlap. Overlap makes some error unavoidable.</li>
+<li><strong>Averaging <span class="math inline">\(\min\)</span> instead of <span class="math inline">\(1 - \max\)</span>.</strong> With two classes they’re the same; with three or more, <span class="math inline">\(1 - \max\)</span> is right.</li>
+<li><strong>Forgetting to weight by how often each <span class="math inline">\(x\)</span> occurs</strong> (here all <span class="math inline">\(\frac14\)</span>).</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="0.2;0.3;0.25" label="error at x=1;error at x=2;Bayes error">
+<p><span class="math inline">\(X\)</span> is 1 or 2 with equal probability. Three classes: at <span class="math inline">\(x = 1\)</span> the true probabilities are <span class="math inline">\((0.8, 0.1, 0.1)\)</span>; at <span class="math inline">\(x = 2\)</span> they are <span class="math inline">\((0.3, 0.7, 0)\)</span>. Give the Bayes error at each <span class="math inline">\(x\)</span> and overall.</p>
+<div class="expl">
+<p><span class="math inline">\(x = 1\)</span>: <span class="math inline">\(1 - 0.8 = 0.2\)</span>. <span class="math inline">\(x = 2\)</span>: <span class="math inline">\(1 - 0.7 = 0.3\)</span>. Overall <span class="math inline">\(\frac12(0.2 + 0.3) = 0.25\)</span>.</p>
+</div>
+</div>
+<h2 id="knn-assembled">2. KNN, assembled</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>We never know the true posterior. KNN estimates it locally: look at the <span class="math inline">\(K\)</span> training points nearest to <span class="math inline">\(x_0\)</span> and count. For a number instead of a class, average their responses.</p>
+</div>
+<p><span class="math display">\[\tilde P(Y = k\mid x_0) = \underbrace{\frac1K\sum_{i\in\mathcal N_0}\mathbb 1(y_i = k)}_{\text{A2: a mean of indicators}},\qquad \hat f(x_0) = \frac1K\sum_{i\in\mathcal N_0}y_i,\qquad \mathcal N_0 = K\text{ nearest by }\underbrace{\|x_i - x_0\|_2}_{\text{A1}}\]</span></p>
+<div class="example">
+<p><strong>Worked example 2: KNN regression with three values of <span class="math inline">\(K\)</span>.</strong> <span class="math inline">\(x = (1, 2, 4, 7, 8)\)</span>, <span class="math inline">\(y = (3, 5, 4, 10, 12)\)</span>. Predict at <span class="math inline">\(x_0 = 6\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(\lvert x_i - 6\rvert\)</span></th>
+<th>rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>3</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>5</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>4</td>
+<td>2</td>
+<td>2 (tie)</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>10</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>12</td>
+<td>2</td>
+<td>2 (tie)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(K\)</span></th>
+<th>neighbours’ <span class="math inline">\(y\)</span></th>
+<th><span class="math inline">\(\hat f(6)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>10</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>10, 4, 12</td>
+<td>26/3 = 8.667</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>all</td>
+<td>34/5 = 6.8</td>
+</tr>
+</tbody>
+</table>
+<p>The tie at ranks 2 and 3 is harmless for <span class="math inline">\(K = 3\)</span> (both are in). It would matter for <span class="math inline">\(K = 2\)</span>. As <span class="math inline">\(K\)</span> grows the prediction drifts towards the overall mean <span class="math inline">\(\bar y = 6.8\)</span>: smoother, less flexible.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Including <span class="math inline">\(x_0\)</span> itself</strong> when predicting at a training point and calling that the test error. With <span class="math inline">\(K = 1\)</span> that gives 0 error every time: it’s the training error.</li>
+<li><strong>Forgetting to rescale</strong> inputs with different units (Toolkit 1).</li>
+<li><strong>Ties at the <span class="math inline">\(K\)</span>-th place</strong> (Toolkit 2): check before you average.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> Same data, now at <span class="math inline">\(x_0 = 3\)</span>.</p>
+<div class="q" kind="num" data-answer="2;1;1;4;5" label="|1−3|;|2−3|;|4−3|;|7−3|;|8−3|">
+<p>Give the five distances <span class="math inline">\(\lvert x_i - 3\rvert\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(2, 1, 1, 4, 5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="4.5;4" label="K = 2;K = 3">
+<p>Give the KNN regression prediction with <span class="math inline">\(K = 2\)</span> and with <span class="math inline">\(K = 3\)</span>.</p>
+<div class="expl">
+<p>Nearest two: <span class="math inline">\(x = 2, 4\)</span> (<span class="math inline">\(y = 5, 4\)</span>), so <span class="math inline">\(4.5\)</span>. Add the next, <span class="math inline">\(x = 1\)</span> (<span class="math inline">\(y = 3\)</span>): <span class="math inline">\((5 + 4 + 3)/3 = 4\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="knn2">
+
+</div>
+<h2 id="the-knob-k">3. The knob: <span class="math inline">\(K\)</span></h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p><span class="math inline">\(K = 1\)</span> follows every training point, noise included: zero training error, high variance. Large <span class="math inline">\(K\)</span> averages over many points: steady but blurry, so high bias. <span class="math inline">\(K = n\)</span> predicts the same thing everywhere. Choose <span class="math inline">\(K\)</span> by validation error, which is typically U-shaped in <span class="math inline">\(1/K\)</span>.</p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(K\)</span></th>
+<th>flexibility</th>
+<th>bias</th>
+<th>variance</th>
+<th>training error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>highest</td>
+<td>low</td>
+<td>high</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>moderate</td>
+<td>medium</td>
+<td>medium</td>
+<td>medium</td>
+<td>small</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(n\)</span></td>
+<td>lowest (constant)</td>
+<td>high</td>
+<td>low</td>
+<td>large</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="mcq">
+<p>As <span class="math inline">\(K\)</span> increases in KNN, which happens?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Flexibility increases.</label></li>
+<li><label><input type="checkbox" checked="" />The boundary gets smoother: bias rises, variance falls.</label></li>
+<li><label><input type="checkbox" />Training error falls.</label></li>
+<li><label><input type="checkbox" />The Bayes error rate falls.</label></li>
+</ul>
+<div class="expl">
+<p>The Bayes error is a property of the problem, not of the classifier.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="knn2">
+
+</div>
+<div class="q" kind="gen" data-gen="knn">
+
+</div>
+<div class="q" kind="gen" data-gen="dist2">
+
+</div>
+<div class="q" kind="num" data-answer="5" label="ŷ">
+<p>KNN regression with <span class="math inline">\(K = 3\)</span>: the three nearest neighbours of <span class="math inline">\(x_0\)</span> have <span class="math inline">\(y = 2, 6, 7\)</span>. What is the prediction?</p>
+<div class="expl">
+<p><span class="math inline">\((2 + 6 + 7)/3 = 5\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks; 2023 Q2.)</strong> Explain how KNN classifies a new point, and how it can be changed to do regression. How does <span class="math inline">\(K\)</span> affect flexibility?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Find the <span class="math inline">\(K\)</span> training points closest to <span class="math inline">\(x_0\)</span> (e.g. Euclidean distance).</label></li>
+<li><label><input type="checkbox" checked="" />Classification: estimate <span class="math inline">\(P(Y = k\mid x_0)\)</span> as the fraction of neighbours in class <span class="math inline">\(k\)</span> and predict the majority class.</label></li>
+<li><label><input type="checkbox" checked="" />Regression: predict the average of the neighbours’ responses.</label></li>
+<li><label><input type="checkbox" checked="" />Small <span class="math inline">\(K\)</span> = flexible (low bias, high variance); large <span class="math inline">\(K\)</span> = smoother (higher bias, lower variance); choose <span class="math inline">\(K\)</span> on validation data.</label></li>
+</ul>
+<div class="model">
+<p>KNN computes the distance (usually Euclidean, <span class="math inline">\(\sqrt{\sum_j(x_j - x_{0j})^2}\)</span>) from <span class="math inline">\(x_0\)</span> to every training point and takes the <span class="math inline">\(K\)</span> closest. For classification it estimates <span class="math inline">\(P(Y = k\mid x_0)\)</span> by the fraction of those neighbours with label <span class="math inline">\(k\)</span> and predicts the most common class, imitating the Bayes classifier. For regression it predicts the mean of the neighbours’ <span class="math inline">\(y\)</span> values. With <span class="math inline">\(K = 1\)</span> the fit follows every training point (training error 0, high variance); larger <span class="math inline">\(K\)</span> averages over more points, giving a smoother, less flexible fit with more bias and less variance. <span class="math inline">\(K\)</span> is chosen by validation error.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t11_resampling.html"><small>&larr; Stage 11</small>Resampling and averaging many models</a><a class="next" href="m02_linear_family.html"><small>Stage 13 &rarr;</small>Linear, polynomial and ridge regression</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-means and hierarchical clustering · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m09_clustering", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_m09_clustering" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a class="active" aria-current="page" href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 20 of 24</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 55 min</span></div>
+  <h1>K-means and hierarchical clustering</h1>
+  <p class="tagline">No labels now, but the same tools. K-means is distances, means and squared error, minimised by alternating two easy steps. Hierarchical clustering turns distances between points into distances between groups. This stage runs K-means to convergence by hand, with the SSE computed from gaps to each centroid at every step, then builds a dendrogram.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A1</strong> squared Euclidean distances · <strong>A2</strong> the centroid (a coordinate-wise mean) · <strong>A3</strong> the SSE, and “the mean minimises squared error” · <strong>A4</strong> alternating minimisation, local minima, restarts · <strong>A5</strong> the number of clusters <span class="math inline">\(K\)</span> as a knob. Full pages: <a href="../w7/K_Means.html">K-means</a>, <a href="../w7/Hierarchical_Clustering.html">hierarchical clustering</a>.</p>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 12.4.1 (K-means, eq. 12.15 to 12.18 and Algorithm 12.2; note ISLP writes the objective with pairwise distances, which equals twice the SSE about the centroids, eq. 12.18), 12.4.2 (hierarchical clustering, linkage, dendrograms). <strong>Skip</strong> 12.4.3’s discussion of dissimilarity choices beyond Euclidean and correlation. Week 7 slides (V. Vovk): <span class="math inline">\(J_{SSE} = \sum_{j=1}^K\sum_{x\in\omega_j}\|x - \mu_j\|^2\)</span> with <span class="math inline">\(\mu_j = \frac{1}{|\omega_j|}\sum_{x\in\omega_j}x\)</span> (slide 15), the algorithm (slide 22), and termination (slide 30: <span class="math inline">\(J_{SSE}\)</span> can only go down, ties keep the current assignment).</p>
+</div>
+<h2 id="the-objective-and-how-to-compute-it-correctly">1. The objective, and how to compute it correctly</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>K-means wants <span class="math inline">\(K\)</span> tight groups. “Tight” is measured by the <strong>SSE</strong>: for every point, the squared distance to <strong>its own cluster’s centre</strong>, all added up. A centre is the mean of its cluster’s points. So every term in the SSE is “point minus its centroid, squared”, never the point’s coordinates squared on their own.</p>
+</div>
+<p><span class="math display">\[\boxed{J_{SSE} = \sum_{j=1}^{K}\sum_{x\in\omega_j}\|x - \mu_j\|^2 = \sum_{j=1}^K\sum_{x\in\omega_j}\Big[(x_1 - \mu_{j1})^2 + (x_2 - \mu_{j2})^2\Big]}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(K\)</span></td>
+<td>number of clusters</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\omega_j\)</span></td>
+<td>the set of points in cluster <span class="math inline">\(j\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mu_j\)</span></td>
+<td>cluster <span class="math inline">\(j\)</span>’s centre (in the update step, the centroid of <span class="math inline">\(\omega_j\)</span>)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\|x - \mu_j\|^2\)</span></td>
+<td>squared distance from <span class="math inline">\(x\)</span> to its own centre: gaps, squared, added</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1: one cluster’s SSE, the right way and the wrong way.</strong> Cluster <span class="math inline">\(\omega_2 = \{(6, 4), (8, 5), (7, 9)\}\)</span>.</p>
+<p>Centroid: <span class="math inline">\(\mu_2 = \big(\frac{6 + 8 + 7}{3}, \frac{4 + 5 + 9}{3}\big) = (7, 6)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th><span class="math inline">\(x_1 - 7\)</span></th>
+<th><span class="math inline">\(x_2 - 6\)</span></th>
+<th>squared gaps</th>
+<th><span class="math inline">\(\|x - \mu_2\|^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(6, 4)</td>
+<td>−1</td>
+<td>−2</td>
+<td>1 + 4</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>(8, 5)</td>
+<td>1</td>
+<td>−1</td>
+<td>1 + 1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>(7, 9)</td>
+<td>0</td>
+<td>3</td>
+<td>0 + 9</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td>0</td>
+<td>0</td>
+<td></td>
+<td><strong>16</strong></td>
+</tr>
+</tbody>
+</table>
+<p>SSE of <span class="math inline">\(\omega_2\)</span> = <strong>16</strong>.</p>
+<p>The wrong way: <span class="math inline">\(6^2 + 4^2 + 8^2 + 5^2 + 7^2 + 9^2 = 271\)</span>. That adds up squared distances to the origin, which depends on where you put the axes and says nothing about how tight the cluster is. If your SSE is bigger than the squared distances between the points themselves, you’ve almost certainly squared raw coordinates.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes in the SSE</span></p>
+<ul>
+<li><strong>Squaring raw coordinates</strong> instead of gaps to the centroid. Every row needs “minus <span class="math inline">\(\mu\)</span>”.</li>
+<li><strong>The wrong centre.</strong> Each point uses <strong>its own</strong> cluster’s centre, not the nearest one from a different step, and not the overall mean.</li>
+<li><strong>Old vs new centres.</strong> “<span class="math inline">\(J\)</span> after the update” uses the new centroids; “<span class="math inline">\(J\)</span> for the current assignment and centres” uses whatever centres are current. Read the question.</li>
+<li><strong>Square roots.</strong> None: it’s squared distances.</li>
+<li><strong>Forgetting the gap columns sum to zero.</strong> If they don’t, the centroid is wrong.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> Cluster <span class="math inline">\(\{(1, 1), (3, 1), (2, 4)\}\)</span>.</p>
+<div class="q" kind="num" data-answer="2;2" label="μ₁;μ₂">
+<p>Give the centroid.</p>
+<div class="expl">
+<p><span class="math inline">\((1 + 3 + 2)/3 = 2\)</span> and <span class="math inline">\((1 + 1 + 4)/3 = 2\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="2;2;4;8" label="‖x−μ‖² for (1,1);for (3,1);for (2,4);SSE">
+<p>Give each point’s squared distance to the centroid, and the SSE.</p>
+<div class="expl">
+<p><span class="math inline">\((1, 1)\)</span>: gaps <span class="math inline">\((-1, -1)\)</span>, <span class="math inline">\(1 + 1 = 2\)</span>. <span class="math inline">\((3, 1)\)</span>: gaps <span class="math inline">\((1, -1)\)</span>, <span class="math inline">\(2\)</span>. <span class="math inline">\((2, 4)\)</span>: gaps <span class="math inline">\((0, 2)\)</span>, <span class="math inline">\(4\)</span>. SSE <span class="math inline">\(= 8\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="centroid2">
+
+</div>
+<h2 id="the-algorithm-run-to-convergence">2. The algorithm, run to convergence</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Start with <span class="math inline">\(K\)</span> centres. Then repeat two steps until nothing changes: <strong>assign</strong> every point to its nearest centre; <strong>update</strong> every centre to the mean of its points. Each step can only lower <span class="math inline">\(J\)</span>, so it must stop.</p>
+</div>
+<ol type="1">
+<li><strong>Assign</strong> each point to the nearest centre (A1). Lowers <span class="math inline">\(J\)</span>: each point picks its smallest term.</li>
+<li><strong>Update</strong> each centre to the centroid of its points (A2). Lowers <span class="math inline">\(J\)</span>: the mean minimises squared distance (A3).</li>
+</ol>
+<div class="example">
+<p><strong>Worked example 2: K-means by hand.</strong> Points <span class="math inline">\(x_1 = (1, 1)\)</span>, <span class="math inline">\(x_2 = (3, 1)\)</span>, <span class="math inline">\(x_3 = (2, 4)\)</span>, <span class="math inline">\(x_4 = (6, 4)\)</span>, <span class="math inline">\(x_5 = (8, 5)\)</span>, <span class="math inline">\(x_6 = (7, 9)\)</span>. <span class="math inline">\(K = 2\)</span>, starting centres <span class="math inline">\(\mu_1 = (0, 4)\)</span>, <span class="math inline">\(\mu_2 = (4, 1)\)</span>.</p>
+<p><strong>Iteration 1, assign</strong> (squared distances; no roots needed to compare):</p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th>to <span class="math inline">\(\mu_1 = (0, 4)\)</span></th>
+<th>to <span class="math inline">\(\mu_2 = (4, 1)\)</span></th>
+<th>nearest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1, 1)</td>
+<td>1 + 9 = 10</td>
+<td>9 + 0 = 9</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>(3, 1)</td>
+<td>9 + 9 = 18</td>
+<td>1 + 0 = 1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>(2, 4)</td>
+<td>4 + 0 = 4</td>
+<td>4 + 9 = 13</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>(6, 4)</td>
+<td>36 + 0 = 36</td>
+<td>4 + 9 = 13</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>(8, 5)</td>
+<td>64 + 1 = 65</td>
+<td>16 + 16 = 32</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>(7, 9)</td>
+<td>49 + 25 = 74</td>
+<td>9 + 64 = 73</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(J\)</span> with these starting centres: <span class="math inline">\(9 + 1 + 4 + 13 + 32 + 73 = 132\)</span>.</p>
+<p><strong>Iteration 1, update.</strong> Cluster 1 = <span class="math inline">\(\{(2, 4)\}\)</span>, so <span class="math inline">\(\mu_1 = (2, 4)\)</span>. Cluster 2 = the other five: <span class="math inline">\(\mu_2 = \big(\frac{1 + 3 + 6 + 8 + 7}{5}, \frac{1 + 1 + 4 + 5 + 9}{5}\big) = (5, 4)\)</span>. <span class="math inline">\(J\)</span> with the new centres: <span class="math inline">\(0 + [16 + 9] + [4 + 9] + [1 + 0] + [9 + 1] + [4 + 25] = 78\)</span>.</p>
+<p><strong>Iteration 2, assign:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>point</th>
+<th>to <span class="math inline">\((2, 4)\)</span></th>
+<th>to <span class="math inline">\((5, 4)\)</span></th>
+<th>nearest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1, 1)</td>
+<td>1 + 9 = 10</td>
+<td>16 + 9 = 25</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>(3, 1)</td>
+<td>1 + 9 = 10</td>
+<td>4 + 9 = 13</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>(2, 4)</td>
+<td>0</td>
+<td>9</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>(6, 4)</td>
+<td>16</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>(8, 5)</td>
+<td>36 + 1 = 37</td>
+<td>9 + 1 = 10</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>(7, 9)</td>
+<td>25 + 25 = 50</td>
+<td>4 + 25 = 29</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(J = 10 + 10 + 0 + 1 + 10 + 29 = 60\)</span>.</p>
+<p><strong>Iteration 2, update.</strong> Cluster 1 = <span class="math inline">\(\{(1, 1), (3, 1), (2, 4)\}\)</span>, <span class="math inline">\(\mu_1 = (2, 2)\)</span>. Cluster 2 = <span class="math inline">\(\{(6, 4), (8, 5), (7, 9)\}\)</span>, <span class="math inline">\(\mu_2 = (7, 6)\)</span>. <span class="math inline">\(J = 8 + 16 = 24\)</span> (from the try-it and worked example 1).</p>
+<p><strong>Iteration 3:</strong> every point stays put (check: <span class="math inline">\((6, 4)\)</span> is <span class="math inline">\(16 + 4 = 20\)</span> from <span class="math inline">\((2, 2)\)</span> and <span class="math inline">\(1 + 4 = 5\)</span> from <span class="math inline">\((7, 6)\)</span>), so the centres don’t move. <strong>Converged</strong>, with <span class="math inline">\(J = 24\)</span>.</p>
+<p><span class="math inline">\(J\)</span> went <span class="math inline">\(132 \to 78 \to 60 \to 24\)</span>: it never rose.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes in the algorithm</span></p>
+<ul>
+<li><strong>Updating centres one point at a time.</strong> Assign <strong>all</strong> points first, then recompute <strong>all</strong> centres.</li>
+<li><strong>Comparing distances instead of squared distances is fine</strong>, but don’t mix the two in one table.</li>
+<li><strong>Ties:</strong> the slides keep the current assignment.</li>
+<li><strong>Stopping after one iteration.</strong> Run until no point changes cluster.</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="kmstep2">
+
+</div>
+<div class="q" kind="gen" data-gen="kmeans1d">
+
+</div>
+<h2 id="local-minima-and-choosing-k">3. Local minima and choosing <span class="math inline">\(K\)</span></h2>
+<p>K-means always stops (finitely many assignments, <span class="math inline">\(J\)</span> never rises), but where it stops depends on the start: it can get stuck in a <strong>local</strong> minimum. The cure: several random starts, keep the lowest <span class="math inline">\(J\)</span>. And <span class="math inline">\(J\)</span> always falls as <span class="math inline">\(K\)</span> grows (<span class="math inline">\(K = n\)</span> gives <span class="math inline">\(J = 0\)</span>), so <span class="math inline">\(K\)</span> can’t be chosen by <span class="math inline">\(J\)</span> alone: use an elbow plot or the purpose of the clustering.</p>
+<div class="q" kind="mcq">
+<p>You run K-means twice on the same data with <span class="math inline">\(K = 3\)</span> and get <span class="math inline">\(J = 41\)</span> and <span class="math inline">\(J = 57\)</span>. What should you conclude?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The algorithm has a bug: it should give the same answer.</label></li>
+<li><label><input type="checkbox" checked="" />Different starts reached different local minima; keep the <span class="math inline">\(J = 41\)</span> solution (and try more starts).</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(K = 3\)</span> is wrong; use <span class="math inline">\(K\)</span> with the larger <span class="math inline">\(J\)</span>.</label></li>
+<li><label><input type="checkbox" />Average the two clusterings.</label></li>
+</ul>
+<div class="expl">
+<p>K-means’ result depends on its starting centres.</p>
+</div>
+</div>
+<h2 id="hierarchical-clustering-distances-between-groups">4. Hierarchical clustering: distances between groups</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Start with every point alone. Repeatedly merge the two <strong>closest</strong> clusters until one is left. “Closest” for groups needs a rule (the linkage), built from point distances. The merge heights draw the dendrogram; cut it at a height to get clusters.</p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th>Linkage</th>
+<th>Distance between clusters <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>single</td>
+<td>smallest point-to-point distance</td>
+</tr>
+<tr class="even">
+<td>complete</td>
+<td>largest point-to-point distance</td>
+</tr>
+<tr class="odd">
+<td>average</td>
+<td>mean of all point-to-point distances</td>
+</tr>
+<tr class="even">
+<td>centroid</td>
+<td>distance between the two centroids</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 3: the four linkages.</strong> <span class="math inline">\(A = \{(0, 0), (2, 0)\}\)</span>, <span class="math inline">\(B = \{(5, 4), (6, 0)\}\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>from <span class="math inline">\(A\)</span></th>
+<th>to <span class="math inline">\(B\)</span></th>
+<th>distance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(0, 0)</td>
+<td>(5, 4)</td>
+<td><span class="math inline">\(\sqrt{25 + 16} = \sqrt{41} = 6.403\)</span></td>
+</tr>
+<tr class="even">
+<td>(0, 0)</td>
+<td>(6, 0)</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>(2, 0)</td>
+<td>(5, 4)</td>
+<td><span class="math inline">\(\sqrt{9 + 16} = 5\)</span></td>
+</tr>
+<tr class="even">
+<td>(2, 0)</td>
+<td>(6, 0)</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>Single <span class="math inline">\(= 4\)</span>. Complete <span class="math inline">\(= 6.403\)</span>. Average <span class="math inline">\(= (6.403 + 6 + 5 + 4)/4 = 5.351\)</span>. Centroid: <span class="math inline">\(\bar a = (1, 0)\)</span>, <span class="math inline">\(\bar b = (5.5, 2)\)</span>, distance <span class="math inline">\(\sqrt{4.5^2 + 2^2} = \sqrt{24.25} = 4.924\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Worked example 4: a dendrogram in 1D.</strong> Points <span class="math inline">\(1, 2, 5, 9, 11\)</span>.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>step</th>
+<th>single linkage merges</th>
+<th>height</th>
+<th>complete linkage merges</th>
+<th>height</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>{1} + {2}</td>
+<td>1</td>
+<td>{1} + {2}</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>{9} + {11}</td>
+<td>2</td>
+<td>{9} + {11}</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>{1, 2} + {5}</td>
+<td>3 (5 − 2)</td>
+<td>{1, 2} + {5}</td>
+<td>4 (5 − 1)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>{1, 2, 5} + {9, 11}</td>
+<td>4 (9 − 5)</td>
+<td>{1, 2, 5} + {9, 11}</td>
+<td>10 (11 − 1)</td>
+</tr>
+</tbody>
+</table>
+<p>Cutting the complete-linkage dendrogram at height 5 gives two clusters, <span class="math inline">\(\{1, 2, 5\}\)</span> and <span class="math inline">\(\{9, 11\}\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>“Average linkage” = distance between the averages.</strong> That’s centroid linkage. Average linkage averages the <strong>distances</strong>.</li>
+<li><strong>Recomputing from scratch</strong> after each merge is fine, but use the merged cluster’s <strong>points</strong>, not its centre (except for centroid linkage).</li>
+<li><strong>Single linkage chains</strong>; centroid linkage can produce <strong>inversions</strong> (a later merge at a lower height).</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="linkage2">
+
+</div>
+<div class="q" kind="gen" data-gen="ahc1d">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="centroid2">
+
+</div>
+<div class="q" kind="gen" data-gen="kmstep2">
+
+</div>
+<div class="q" kind="gen" data-gen="linkage2">
+
+</div>
+<div class="q" kind="gen" data-gen="ahc1d">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks; 2023 Q5.)</strong> Describe the K-means algorithm and explain why it always terminates. Does it always find the best clustering?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Objective <span class="math inline">\(J = \sum_j\sum_{x\in\omega_j}\|x - \mu_j\|^2\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" />Alternate: assign points to the nearest centre; move centres to the means of their points.</label></li>
+<li><label><input type="checkbox" checked="" />Each step can’t increase <span class="math inline">\(J\)</span> and there are finitely many partitions, so it terminates.</label></li>
+<li><label><input type="checkbox" checked="" />Only a local minimum: depends on the starting centres; use several random restarts.</label></li>
+</ul>
+<div class="model">
+<p>K-means seeks <span class="math inline">\(K\)</span> clusters minimising <span class="math inline">\(J = \sum_{j=1}^K\sum_{x\in\omega_j}\|x - \mu_j\|^2\)</span>. Starting from <span class="math inline">\(K\)</span> initial centres, it repeats two steps: assign each point to its nearest centre, then replace each centre by the mean of the points assigned to it. The assignment step cannot increase <span class="math inline">\(J\)</span> (each point moves to its closest centre) and the update step cannot increase <span class="math inline">\(J\)</span> (the mean minimises the sum of squared distances). Since <span class="math inline">\(J\)</span> never increases and there are only finitely many ways to partition the data, the algorithm must stop. It converges to a local minimum that depends on the initial centres, so in practice it is run from several random starts and the solution with the smallest <span class="math inline">\(J\)</span> is kept.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="m08_ensembles.html"><small>&larr; Stage 19</small>Bagging, random forests and boosting</a><a class="next" href="m10_density.html"><small>Stage 21 &rarr;</small>Density estimation and semi-supervised learning</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

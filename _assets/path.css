@@ -101,3 +101,14 @@ a.pcard:hover{border-color:var(--accent)}
 .pathcta b{display:block;font-size:1.05rem}
 .pathcta:hover{box-shadow:var(--shadow)}
 @media (max-width:860px){body.pathpage .layout{grid-template-columns:1fr}.pcard .pm{display:none}.qfield input,.qfield select{min-width:120px}}
+
+/* maths route v2: worked tables, slips, fold-out working */
+.worktbl{overflow-x:auto;margin:8px 0}
+.worktbl table{border-collapse:collapse;font-size:.9rem}
+.worktbl th,.worktbl td{padding:4px 10px;border:1px solid var(--line);text-align:center}
+.worktbl tr.tot td{font-weight:700;background:var(--surface-2)}
+p.slip{border-left:3px solid var(--warn-b);background:var(--warn);padding:6px 12px;border-radius:6px}
+details.work{border:1px solid var(--line);border-left:5px solid var(--ex-b);border-radius:var(--radius);padding:10px 18px;margin:1.2rem 0;background:var(--surface)}
+details.work > summary{cursor:pointer;font-weight:650;color:var(--ex-b)}
+details.work[open] > summary{margin-bottom:8px}
+.pathbody table.steps td:first-child{white-space:nowrap;font-weight:600}

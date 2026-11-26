@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probability and Bayes&#x27; rule · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t06_bayes_rule", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_t06_bayes_rule" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a class="active" aria-current="page" href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 6 of 24</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 65 min</span></div>
+  <h1>Probability and Bayes&#x27; rule</h1>
+  <p class="tagline">Classification is about one quantity: the probability of each class given the inputs, P(Y = k | X = x). The Bayes classifier wants it, KNN estimates it by counting, logistic regression models it directly, and LDA and naive Bayes get it by flipping the other conditional with Bayes' rule. The same few probability facts give the bootstrap's 36.8% and the sign test's p-value. This stage does every calculation with a counting table first, so the formulas have something solid to stand on.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">By the end of this stage you can</span></p>
+<ul>
+<li>read and compute a conditional probability, and tell <span class="math inline">\(P(A\mid B)\)</span> apart from <span class="math inline">\(P(B\mid A)\)</span>;</li>
+<li>apply Bayes’ rule using a “imagine 10,000 people” table, then with the formula;</li>
+<li>compute posteriors <span class="math inline">\(P(Y = k\mid x)\)</span> from priors and class densities, and the Bayes classifier’s prediction and error;</li>
+<li>do a naive Bayes calculation by multiplying per-input probabilities;</li>
+<li>compute <span class="math inline">\((1 - 1/n)^n\)</span> and a one-sided binomial p-value.</li>
+</ul>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 2.2.3 (the Bayes classifier and Bayes error rate), 4.4 opening and 4.4.1 (Bayes’ theorem for classification, eq. 4.15), 4.4.4 (naive Bayes), 5.2 (the bootstrap; <span class="math inline">\((1 - 1/n)^n\)</span> is Exercise 5.2). <strong>Skip</strong> 4.4.2 to 4.4.3’s multivariate Gaussian algebra; the slides do one input. Week 5 slides for the binomial sign test; week 6 slide 24 for the <span class="math inline">\(1/e\)</span> lemma and its proof.</p>
+</div>
+<h2 id="conditional-probability">1. Conditional probability</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p><span class="math inline">\(P(A\mid B)\)</span> means: <strong>look only at the cases where <span class="math inline">\(B\)</span> happened</strong>, and ask what fraction of those also have <span class="math inline">\(A\)</span>. The bar “|” means “among those with”. The order matters: “the fraction of smokers among people with lung disease” is not “the fraction with lung disease among smokers”.</p>
+</div>
+<p><span class="math display">\[\boxed{P(A\mid B) = \frac{P(A\text{ and }B)}{P(B)}}\]</span></p>
+<p><strong>Independent</strong> events: <span class="math inline">\(P(A\text{ and }B) = P(A)\,P(B)\)</span>, equivalently <span class="math inline">\(P(A\mid B) = P(A)\)</span>. Knowing <span class="math inline">\(B\)</span> tells you nothing about <span class="math inline">\(A\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 1: from a table of counts.</strong> 200 emails:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>contains “win”</th>
+<th>no “win”</th>
+<th>total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>spam</td>
+<td>30</td>
+<td>50</td>
+<td>80</td>
+</tr>
+<tr class="even">
+<td>ham</td>
+<td>10</td>
+<td>110</td>
+<td>120</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td>40</td>
+<td>160</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="math inline">\(P(\text{win}\mid\text{spam})\)</span>: among the 80 spam, 30 have “win”: <span class="math inline">\(30/80 = 0.375\)</span>.</li>
+<li><span class="math inline">\(P(\text{spam}\mid\text{win})\)</span>: among the 40 with “win”, 30 are spam: <span class="math inline">\(30/40 = 0.75\)</span>.</li>
+</ul>
+<p>Same 30 on top; a different “among” underneath. Those are the two directions Bayes’ rule converts between.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Flipping the conditional.</strong> <span class="math inline">\(P(\text{positive test}\mid\text{ill})\)</span> is the test’s sensitivity; <span class="math inline">\(P(\text{ill}\mid\text{positive})\)</span> is what a patient wants. They can be wildly different.</li>
+<li><strong>Dividing by the grand total</strong> instead of the “among” group.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="0.0833;0.25" data-tol="0.003" label="P(win | ham);P(ham | win)">
+<p>Using the table above, give <span class="math inline">\(P(\text{win}\mid\text{ham})\)</span> and <span class="math inline">\(P(\text{ham}\mid\text{win})\)</span>.</p>
+<div class="expl">
+<p>Among the 120 ham, 10 have “win”: <span class="math inline">\(10/120 = 0.0833\)</span>. Among the 40 with “win”, 10 are ham: <span class="math inline">\(10/40 = 0.25\)</span>.</p>
+</div>
+</div>
+<h2 id="bayes-rule">2. Bayes’ rule</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Bayes’ rule turns “how likely is the evidence if the class is <span class="math inline">\(k\)</span>?” (easy to estimate, one class at a time) into “how likely is class <span class="math inline">\(k\)</span> given the evidence?” (what you actually want). Multiply each class’s prior by how well it explains the evidence, then rescale so the answers add to 1.</p>
+</div>
+<p><span class="math display">\[\boxed{P(Y = k\mid X = x) = \frac{\pi_k\,f_k(x)}{\sum_{l}\pi_l\,f_l(x)}}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\pi_k = P(Y = k)\)</span></td>
+<td>the <strong>prior</strong>: how common class <span class="math inline">\(k\)</span> is before looking at <span class="math inline">\(x\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(f_k(x)\)</span></td>
+<td>the <strong>class density / likelihood</strong>: how probable input <span class="math inline">\(x\)</span> is within class <span class="math inline">\(k\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\pi_kf_k(x)\)</span></td>
+<td>the class’s <strong>score</strong>: prior × likelihood</td>
+</tr>
+<tr class="even">
+<td>denominator</td>
+<td>the sum of all class scores; it makes the posteriors add to 1</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P(Y = k\mid x)\)</span></td>
+<td>the <strong>posterior</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 2: the rare disease, by counting.</strong> 1% of people have a disease. The test is positive for 90% of the ill and 5% of the healthy. Imagine 10,000 people:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>test +</th>
+<th>test −</th>
+<th>total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ill</td>
+<td>10,000 × 0.01 × 0.9 = <strong>90</strong></td>
+<td>10</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>healthy</td>
+<td>9,900 × 0.05 = <strong>495</strong></td>
+<td>9,405</td>
+<td>9,900</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td><strong>585</strong></td>
+<td>9,415</td>
+<td>10,000</td>
+</tr>
+</tbody>
+</table>
+<p>Among the 585 positives, 90 are ill: <span class="math inline">\(P(\text{ill}\mid +) = 90/585 = 0.154\)</span>.</p>
+<p><strong>Same thing with the formula:</strong> <span class="math inline">\(\dfrac{0.01\times0.9}{0.01\times0.9 + 0.99\times0.05} = \dfrac{0.009}{0.0585} = 0.154\)</span>.</p>
+<p>A positive test still means only a 15% chance, because healthy people vastly outnumber ill ones. The prior matters.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Answering 0.9.</strong> That’s <span class="math inline">\(P(+\mid\text{ill})\)</span>, the other direction.</li>
+<li><strong>Leaving out the healthy positives</strong> in the denominator. The bottom line is <em>every</em> way to test positive.</li>
+<li><strong>Using <span class="math inline">\(\pi\)</span> for the healthy class too.</strong> The healthy prior is <span class="math inline">\(1 - \pi\)</span>.</li>
+</ul>
+</div>
+<p><strong>Try it with me.</strong> 5% of transactions are fraud. A detector flags 80% of frauds and 10% of genuine transactions. Imagine 1,000 transactions.</p>
+<div class="q" kind="num" data-answer="50;40;95" label="frauds;flagged frauds;flagged genuine">
+<p>How many are frauds, how many frauds get flagged, and how many genuine ones get flagged?</p>
+<div class="expl">
+<p><span class="math inline">\(1000\times0.05 = 50\)</span> frauds; <span class="math inline">\(50\times0.8 = 40\)</span> flagged. <span class="math inline">\(950\)</span> genuine; <span class="math inline">\(950\times0.1 = 95\)</span> flagged.</p>
+</div>
+</div>
+<div class="q" kind="num" data-answer="0.2963" data-tol="0.003" label="P(fraud | flagged)">
+<p>Now: what fraction of flagged transactions are fraud?</p>
+<div class="expl">
+<p><span class="math inline">\(40/(40 + 95) = 40/135 = 0.296\)</span>. Formula: <span class="math inline">\(\frac{0.05\times0.8}{0.05\times0.8 + 0.95\times0.1} = \frac{0.04}{0.135}\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="bayes2">
+
+</div>
+<h2 id="the-bayes-classifier-the-ideal">3. The Bayes classifier: the ideal</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>If you knew the posteriors exactly, the best possible rule is: predict the class with the biggest posterior. Its error at <span class="math inline">\(x\)</span> is “1 minus that biggest posterior”. No classifier can beat it on average: its error rate is the floor, the <strong>Bayes error rate</strong>.</p>
+</div>
+<p><span class="math display">\[\hat Y(x) = \arg\max_kP(Y = k\mid X = x),\qquad \text{error at }x = 1 - \max_kP(Y = k\mid X = x)\]</span></p>
+<p>To <strong>predict</strong>, you can skip the denominator: <span class="math inline">\(\arg\max_k\pi_kf_k(x)\)</span> picks the same class, since every posterior has the same denominator.</p>
+<div class="example">
+<p><strong>Worked example 3.</strong> Two classes, priors <span class="math inline">\(\pi_0 = 0.7\)</span>, <span class="math inline">\(\pi_1 = 0.3\)</span>. At some <span class="math inline">\(x_0\)</span>, <span class="math inline">\(f_0(x_0) = 0.2\)</span> and <span class="math inline">\(f_1(x_0) = 0.6\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>class</th>
+<th>prior <span class="math inline">\(\pi_k\)</span></th>
+<th><span class="math inline">\(f_k(x_0)\)</span></th>
+<th>score <span class="math inline">\(\pi_kf_k\)</span></th>
+<th>posterior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0.7</td>
+<td>0.2</td>
+<td>0.14</td>
+<td>0.14/0.32 = 0.4375</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0.3</td>
+<td>0.6</td>
+<td>0.18</td>
+<td>0.18/0.32 = 0.5625</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td><strong>0.32</strong></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Predict class 1 (biggest score, so biggest posterior). Error at <span class="math inline">\(x_0\)</span>: <span class="math inline">\(1 - 0.5625 = 0.4375\)</span>. Note class 1 wins even though it is rarer: its density at <span class="math inline">\(x_0\)</span> is three times higher.</p>
+</div>
+<p>How each classifier gets the posteriors:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Classifier</th>
+<th>How it gets <span class="math inline">\(P(Y = k\mid x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>KNN (w1)</td>
+<td>count labels among the <span class="math inline">\(K\)</span> neighbours (Toolkit 2)</td>
+</tr>
+<tr class="even">
+<td>Logistic regression (w3)</td>
+<td>models it directly: <span class="math inline">\(\sigma(\beta\cdot\tilde x)\)</span> or softmax (Toolkit 8)</td>
+</tr>
+<tr class="odd">
+<td>LDA (w3)</td>
+<td>Gaussian <span class="math inline">\(f_k\)</span>, then Bayes’ rule (Toolkit 7)</td>
+</tr>
+<tr class="even">
+<td>Naive Bayes (w3)</td>
+<td><span class="math inline">\(f_k\)</span> as a product over inputs, then Bayes’ rule</td>
+</tr>
+<tr class="odd">
+<td>Trees (w4)</td>
+<td>class proportions in the leaf</td>
+</tr>
+<tr class="even">
+<td>NN classifier (w4)</td>
+<td>softmax of the outputs</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="num" data-answer="0.15;0.2;0.4286;1" data-tol="0.003" label="score class 0;score class 1;P(Y=0 | x);predicted class">
+<p>Priors <span class="math inline">\(\pi_0 = 0.5\)</span>, <span class="math inline">\(\pi_1 = 0.5\)</span>. At <span class="math inline">\(x_0\)</span>, <span class="math inline">\(f_0 = 0.3\)</span>, <span class="math inline">\(f_1 = 0.4\)</span>. Give both scores, <span class="math inline">\(P(Y = 0\mid x_0)\)</span> and the predicted class.</p>
+<div class="expl">
+<p>Scores <span class="math inline">\(0.15\)</span> and <span class="math inline">\(0.20\)</span>, total <span class="math inline">\(0.35\)</span>. <span class="math inline">\(P(Y = 0\mid x_0) = 0.15/0.35 = 0.4286\)</span>. Predict class 1.</p>
+</div>
+</div>
+<h2 id="naive-bayes-multiply-the-inputs">4. Naive Bayes: multiply the inputs</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>With many inputs, the joint density <span class="math inline">\(f_k(x_1, \dots, x_p)\)</span> is hard to estimate. Naive Bayes pretends the inputs are <strong>independent within each class</strong>, so the joint is just the product of one-input probabilities, each easy to count.</p>
+</div>
+<p><span class="math display">\[f_k(x) = f_{k1}(x_1)\times f_{k2}(x_2)\times\dots\times f_{kp}(x_p)\]</span></p>
+<div class="example">
+<p><strong>Worked example 4: spam filter.</strong> <span class="math inline">\(\pi_{\text{spam}} = 0.4\)</span>. The email contains “win” and “free”.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>class</th>
+<th>prior</th>
+<th><span class="math inline">\(P(\text{win}\mid\cdot)\)</span></th>
+<th><span class="math inline">\(P(\text{free}\mid\cdot)\)</span></th>
+<th>score = product</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>spam</td>
+<td>0.4</td>
+<td>0.5</td>
+<td>0.6</td>
+<td>0.4 × 0.5 × 0.6 = 0.12</td>
+</tr>
+<tr class="even">
+<td>ham</td>
+<td>0.6</td>
+<td>0.1</td>
+<td>0.2</td>
+<td>0.6 × 0.1 × 0.2 = 0.012</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>0.132</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(P(\text{spam}\mid x) = 0.12/0.132 = 0.909\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Adding instead of multiplying</strong> the per-word probabilities.</li>
+<li><strong>Forgetting the prior</strong> in each row.</li>
+<li><strong>“Naive” means independent within each class</strong>, not “equal variances” (that’s LDA) and not “ignores the prior”.</li>
+</ul>
+</div>
+<div class="q" kind="gen" data-gen="nb2">
+
+</div>
+<h2 id="repeated-independent-trials">5. Repeated independent trials</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>For independent events, “all of them happen” means multiply. That gives two results the course uses.</p>
+</div>
+<p><strong>The bootstrap’s 36.8% (w6).</strong> Draw <span class="math inline">\(n\)</span> times with replacement from <span class="math inline">\(n\)</span> points. One draw misses a given point with probability <span class="math inline">\(1 - \frac1n\)</span>. All <span class="math inline">\(n\)</span> draws miss it with probability</p>
+<p><span class="math display">\[\Big(1 - \frac1n\Big)^n \;\to\; e^{-1} \approx 0.368.\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(n\)</span></th>
+<th><span class="math inline">\((1 - 1/n)^n\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td><span class="math inline">\(0.5^2 = 0.25\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(0.75^4 = 0.316\)</span></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><span class="math inline">\(0.8^5 = 0.328\)</span></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><span class="math inline">\(0.9^{10} = 0.349\)</span></td>
+</tr>
+<tr class="odd">
+<td>1000</td>
+<td><span class="math inline">\(0.368\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>So about a third of the points are left out of each bootstrap sample (“out of bag”).</p>
+<p><strong>The sign test (w5).</strong> Two classifiers disagree on <span class="math inline">\(N\)</span> test points. If they’re equally good, each disagreement goes to A with probability <span class="math inline">\(\frac12\)</span>, independently, so <span class="math inline">\(Y\)</span> = “wins for A” is Binomial<span class="math inline">\((N, \frac12)\)</span>:</p>
+<p><span class="math display">\[P(Y = j) = \binom{N}{j}\frac{1}{2^N},\qquad p\text{-value} = P(Y \ge k).\]</span></p>
+<div class="example">
+<p><strong>Worked example 5.</strong> A is right on 10 of <span class="math inline">\(N = 12\)</span> disagreements.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(j\)</span></th>
+<th><span class="math inline">\(\binom{12}{j}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10</td>
+<td>66</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><strong>total</strong></td>
+<td><strong>79</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(p = 79/2^{12} = 79/4096 = 0.0193\)</span>. Below 0.05, so reject “equally good” at the 5% level (one-sided).</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Using all test points</strong> for <span class="math inline">\(N\)</span>. Only the points where the two classifiers <strong>disagree</strong> count.</li>
+<li><strong><span class="math inline">\(P(Y = k)\)</span> instead of <span class="math inline">\(P(Y \ge k)\)</span>.</strong> The p-value is the probability of a result <strong>at least this extreme</strong>: add the tail.</li>
+<li><strong><span class="math inline">\(\binom{N}{j}\)</span> slips.</strong> <span class="math inline">\(\binom{N}{N} = 1\)</span>, <span class="math inline">\(\binom{N}{N-1} = N\)</span>, <span class="math inline">\(\binom{N}{N-2} = N(N-1)/2\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="45;10;1;0.0547" data-tol="0.001;0.001;0.001;0.001" label="C(10,8);C(10,9);C(10,10);p-value">
+<p>Two classifiers disagree on 10 points; A wins 8. Give the three binomial coefficients you need and the p-value <span class="math inline">\(P(Y \ge 8)\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(\binom{10}{8} = 45\)</span>, <span class="math inline">\(\binom{10}{9} = 10\)</span>, <span class="math inline">\(\binom{10}{10} = 1\)</span>. <span class="math inline">\(p = 56/1024 = 0.0547\)</span>. Not below 0.05, so not significant at 5%.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="bootprob">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="bayes2">
+
+</div>
+<div class="q" kind="gen" data-gen="nb2">
+
+</div>
+<div class="q" kind="gen" data-gen="bootprob">
+
+</div>
+<div class="q" kind="gen" data-gen="signtest">
+
+</div>
+<div class="q" kind="num" data-answer="0.25" label="error at x₀">
+<p>Two classes. At <span class="math inline">\(x_0\)</span> the true <span class="math inline">\(P(Y = 1\mid x_0) = 0.25\)</span>. What is the Bayes error rate at <span class="math inline">\(x_0\)</span>?</p>
+<div class="expl">
+<p>Bayes predicts class 0 (probability 0.75) and errs with probability <span class="math inline">\(0.25\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>A test has <span class="math inline">\(P(+\mid\text{ill}) = 0.99\)</span>. Which statement is right?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A person who tests positive is 99% likely to be ill.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(P(\text{ill}\mid +)\)</span> also depends on how common the illness is and on <span class="math inline">\(P(+\mid\text{healthy})\)</span>.</label></li>
+<li><label><input type="checkbox" /><span class="math inline">\(P(\text{ill}\mid +) = 0.01\)</span>.</label></li>
+<li><label><input type="checkbox" />Bayes’ rule doesn’t apply to medical tests.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(P(\text{ill}\mid +) = \frac{\pi\times0.99}{\pi\times0.99 + (1 - \pi)P(+\mid\text{healthy})}\)</span>: it needs the prior and the false-positive rate.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t05_penalties.html"><small>&larr; Stage 5</small>Fit plus penalty, and flexibility knobs</a><a class="next" href="t07_gaussian.html"><small>Stage 7 &rarr;</small>The Gaussian bell curve</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

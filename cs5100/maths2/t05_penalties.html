@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fit plus penalty, and flexibility knobs · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "t05_penalties", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_t05_penalties" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a class="active" aria-current="page" href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 5 of 24</span><span class="chip">Part A · The shared toolkit</span><span class="chip">about 55 min</span></div>
+  <h1>Fit plus penalty, and flexibility knobs</h1>
+  <p class="tagline">A flexible model can always fit the training data better, and that's the trap. The course's answer, week after week, is one formula: minimise (how badly you fit) + (a dial) × (how complicated you are). Ridge, tree pruning and penalised logistic regression are the same sentence with different words filled in. This stage computes those objectives by table and shows exactly how the dial changes the winner.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">By the end of this stage you can</span></p>
+<ul>
+<li>write the “loss + λ × complexity” objective for ridge, penalised logistic regression and pruning;</li>
+<li>compute and compare penalised objectives for several candidate models, and say which one wins for a given λ;</li>
+<li>compute a one-input ridge coefficient and see the shrinkage;</li>
+<li>choose the best pruned subtree for a given α, and find the α where the choice changes;</li>
+<li>name the flexibility knob of every model in the course, and which direction means “more flexible”.</li>
+</ul>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 6.2.1 (ridge, eq. 6.5), 8.1.1 “Tree pruning” (cost-complexity, eq. 8.4), 10.7.2 (regularisation and early stopping), 2.2.2 (flexibility and the U-shape). <strong>Skip</strong> 6.2.2 (the lasso) beyond its name and its penalty <span class="math inline">\(\sum\lvert\beta_j\rvert\)</span>; the slides only name it. <strong>Skip</strong> 6.1 (subset selection) and 6.3 (PCR, PLS). Week 2 slides end at ridge; week 5 slides present pruning and ridge as “fit + penalty”. <strong>Lab note:</strong> scikit-learn’s <code>ccp_alpha</code> is the slides’ <span class="math inline">\(\alpha\)</span> divided by <span class="math inline">\(n\)</span>, because sklearn’s impurities are MSEs, not RSSs.</p>
+</div>
+<h2 id="the-one-formula">1. The one formula</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>Think of a job interview with two scores: how well the candidate answered (fit) and how much they’d cost (complexity). The dial <span class="math inline">\(\lambda\)</span> says how much you care about cost. Dial at 0: hire whoever answered best, whatever the cost. Dial huge: hire the cheapest. Somewhere in between gives the best long-term choice, and you find it by testing on <strong>new</strong> data (validation), not the interview itself.</p>
+</div>
+<p><span class="math display">\[\boxed{\text{minimise}\quad\underbrace{\text{loss on training data}}_{\text{fit}} + \underbrace{\lambda\times\text{complexity}}_{\text{penalty}}}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Loss</th>
+<th>Complexity</th>
+<th>Dial</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ridge regression (w2)</td>
+<td>RSS</td>
+<td><span class="math inline">\(\|\beta\|_2^2 = \sum_{j\ge1}\beta_j^2\)</span> (not <span class="math inline">\(\beta_0\)</span>)</td>
+<td><span class="math inline">\(\lambda\)</span></td>
+</tr>
+<tr class="even">
+<td>Penalised logistic regression (w3 lab Q2)</td>
+<td>NLL</td>
+<td><span class="math inline">\(\sum_{j\ge1}\beta_j^2\)</span></td>
+<td><span class="math inline">\(\lambda\)</span></td>
+</tr>
+<tr class="odd">
+<td>Cost-complexity pruning (w4)</td>
+<td><span class="math inline">\(\text{RSS}(T)\)</span> (or misclassification)</td>
+<td><span class="math inline">\(\lvert T\rvert\)</span>, number of leaves</td>
+<td><span class="math inline">\(\alpha\)</span></td>
+</tr>
+<tr class="even">
+<td>Network weight decay (w4, ISLP 10.7)</td>
+<td>RSS or cross-entropy</td>
+<td><span class="math inline">\(\sum w^2\)</span></td>
+<td><span class="math inline">\(\lambda\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1: which model wins?</strong> Three fitted lines (penalty excludes <span class="math inline">\(\beta_0\)</span>):</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>model</th>
+<th>RSS</th>
+<th><span class="math inline">\((\beta_1, \beta_2)\)</span></th>
+<th><span class="math inline">\(\|\beta\|^2 = \beta_1^2 + \beta_2^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>10</td>
+<td>(3, 1)</td>
+<td>9 + 1 = 10</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>14</td>
+<td>(1, 1)</td>
+<td>1 + 1 = 2</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>25</td>
+<td>(0, 0)</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Objective <span class="math inline">\(= \text{RSS} + \lambda\|\beta\|^2\)</span> for three dials:</p>
+<table>
+<thead>
+<tr class="header">
+<th>model</th>
+<th><span class="math inline">\(\lambda = 0.1\)</span></th>
+<th><span class="math inline">\(\lambda = 1\)</span></th>
+<th><span class="math inline">\(\lambda = 10\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>10 + 1 = <strong>11</strong></td>
+<td>10 + 10 = 20</td>
+<td>10 + 100 = 110</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>14 + 0.2 = 14.2</td>
+<td>14 + 2 = <strong>16</strong></td>
+<td>14 + 20 = 34</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>25</td>
+<td>25</td>
+<td>25 + 0 = <strong>25</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Small <span class="math inline">\(\lambda\)</span> picks the best fit (A); medium picks the compromise (B); large picks the simplest (C). Same data, three answers: that’s why <span class="math inline">\(\lambda\)</span> must be chosen on validation data.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Penalising the intercept.</strong> Ridge’s sum starts at <span class="math inline">\(j = 1\)</span>. The intercept just sets the average level; shrinking it would bias every prediction.</li>
+<li><strong>Forgetting to square.</strong> <span class="math inline">\(\|\beta\|_2^2 = 3^2 + 1^2 = 10\)</span>, not <span class="math inline">\(3 + 1 = 4\)</span> (that would be the lasso’s <span class="math inline">\(\sum\lvert\beta_j\rvert\)</span>).</li>
+<li><strong>Choosing <span class="math inline">\(\lambda\)</span> on training data.</strong> <span class="math inline">\(\lambda = 0\)</span> always minimises the training RSS, so training data can’t choose it.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="8;17;1;11" label="‖β_A‖²·λ;A&#39;s objective;‖β_B‖²·λ;B&#39;s objective">
+<p>Ridge, <span class="math inline">\(\lambda = 2\)</span>. Model A: RSS 9, <span class="math inline">\((\beta_1, \beta_2) = (2, 0)\)</span>. Model B: RSS 10, <span class="math inline">\((\beta_1, \beta_2) = (0.5, 0.5)\)</span>. Give each model’s penalty <span class="math inline">\(\lambda\|\beta\|^2\)</span> and its objective. (Which wins?)</p>
+<div class="expl">
+<p>A: <span class="math inline">\(\|\beta\|^2 = 4\)</span>, penalty <span class="math inline">\(8\)</span>, objective <span class="math inline">\(17\)</span>. B: <span class="math inline">\(\|\beta\|^2 = 0.25 + 0.25 = 0.5\)</span>, penalty <span class="math inline">\(1\)</span>, objective <span class="math inline">\(10 + 1 = 11\)</span>. B wins: its slightly worse fit is outweighed by much smaller coefficients.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="penalty">
+
+</div>
+<h2 id="why-the-penalty-helps-shrinking">2. Why the penalty helps: shrinking</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>With the penalty, every coefficient has to “earn its keep”: it only grows if that lowers the RSS by more than it costs. Coefficients get pulled towards 0. Smaller coefficients mean predictions that change less when the training data change, so the variance drops. The price is a little bias.</p>
+</div>
+<p>With one centred input (so <span class="math inline">\(\bar x = 0\)</span> and no intercept to worry about), set the derivative of <span class="math inline">\(\sum_i(y_i - \beta x_i)^2 + \lambda\beta^2\)</span> to zero:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Working</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>derivative</td>
+<td><span class="math inline">\(-2\sum_ix_i(y_i - \beta x_i) + 2\lambda\beta\)</span></td>
+</tr>
+<tr class="even">
+<td>set to 0</td>
+<td><span class="math inline">\(\sum_ix_iy_i = \beta\big(\sum_ix_i^2 + \lambda\big)\)</span></td>
+</tr>
+<tr class="odd">
+<td>solve</td>
+<td><span class="math inline">\(\hat\beta^{\text{ridge}} = \dfrac{\sum_ix_iy_i}{\sum_ix_i^2 + \lambda}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\lambda = 0\)</span> gives ordinary least squares; as <span class="math inline">\(\lambda \to \infty\)</span>, <span class="math inline">\(\hat\beta \to 0\)</span>.</p>
+<div class="example">
+<p><strong>Worked example 2.</strong> Centred <span class="math inline">\(x = (-2, -1, 1, 2)\)</span>, <span class="math inline">\(y = (-3, -1, 2, 4)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(x_iy_i\)</span></th>
+<th><span class="math inline">\(x_i^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>−2</td>
+<td>−3</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>−1</td>
+<td>−1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td>8</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td><strong>17</strong></td>
+<td><strong>10</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\lambda\)</span></th>
+<th><span class="math inline">\(\hat\beta = 17/(10 + \lambda)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1.7 (least squares)</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>17/15 = 1.133</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>17/20 = 0.85</td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td>17/110 = 0.155</td>
+</tr>
+</tbody>
+</table>
+<p>The coefficient shrinks smoothly towards 0 but never reaches it.</p>
+</div>
+<div class="q" kind="gen" data-gen="ridge">
+
+</div>
+<h2 id="pruning-is-the-same-formula">3. Pruning is the same formula</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>For trees, “complexity” is the number of leaves. Each leaf costs a fee <span class="math inline">\(\alpha\)</span>. A split survives only if it lowers the RSS by more than the fee.</p>
+</div>
+<p><span class="math display">\[C_\alpha(T) = \text{RSS}(T) + \alpha\lvert T\rvert\]</span></p>
+<div class="example">
+<p><strong>Worked example 3.</strong> The pruning sequence of a big tree, and the objective <span class="math inline">\(\text{RSS} + \alpha\lvert T\rvert\)</span> for four values of <span class="math inline">\(\alpha\)</span> (smallest in each column in bold):</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>subtree</th>
+<th>leaves <span class="math inline">\(\lvert T\rvert\)</span></th>
+<th>RSS</th>
+<th><span class="math inline">\(\alpha = 2\)</span></th>
+<th><span class="math inline">\(\alpha = 5\)</span></th>
+<th><span class="math inline">\(\alpha = 12\)</span></th>
+<th><span class="math inline">\(\alpha = 50\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(T_1\)</span></td>
+<td>1</td>
+<td>100</td>
+<td>102</td>
+<td>105</td>
+<td>112</td>
+<td><strong>150</strong></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(T_2\)</span></td>
+<td>2</td>
+<td>60</td>
+<td>64</td>
+<td>70</td>
+<td><strong>84</strong></td>
+<td>160</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(T_3\)</span></td>
+<td>3</td>
+<td>50</td>
+<td>56</td>
+<td><strong>65</strong></td>
+<td>86</td>
+<td>200</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(T_5\)</span></td>
+<td>5</td>
+<td>44</td>
+<td><strong>54</strong></td>
+<td>69</td>
+<td>104</td>
+<td>294</td>
+</tr>
+</tbody>
+</table>
+<p>As <span class="math inline">\(\alpha\)</span> grows the winner gets smaller: <span class="math inline">\(T_5\)</span>, then <span class="math inline">\(T_3\)</span>, then <span class="math inline">\(T_2\)</span>, then <span class="math inline">\(T_1\)</span>.</p>
+<p><strong>Where does the choice switch?</strong> Compare neighbours. <span class="math inline">\(T_3\)</span> beats <span class="math inline">\(T_5\)</span> when <span class="math inline">\(50 + 3\alpha &lt; 44 + 5\alpha\)</span>, i.e. <span class="math inline">\(\alpha &gt; 3\)</span>. <span class="math inline">\(T_2\)</span> beats <span class="math inline">\(T_3\)</span> when <span class="math inline">\(60 + 2\alpha &lt; 50 + 3\alpha\)</span>, i.e. <span class="math inline">\(\alpha &gt; 10\)</span>. <span class="math inline">\(T_1\)</span> beats <span class="math inline">\(T_2\)</span> when <span class="math inline">\(100 + \alpha &lt; 60 + 2\alpha\)</span>, i.e. <span class="math inline">\(\alpha &gt; 40\)</span>. Each switch point is “RSS saved ÷ leaves added”: <span class="math inline">\(6/2 = 3\)</span>, <span class="math inline">\(10/1 = 10\)</span>, <span class="math inline">\(40/1 = 40\)</span>.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Comparing RSS alone.</strong> The biggest tree always has the smallest RSS; you must add <span class="math inline">\(\alpha\lvert T\rvert\)</span>.</li>
+<li><strong>Counting all nodes</strong> instead of leaves (terminal nodes) for <span class="math inline">\(\lvert T\rvert\)</span>.</li>
+<li><strong>sklearn’s <code>ccp_alpha</code></strong> is the slides’ <span class="math inline">\(\alpha\)</span> divided by <span class="math inline">\(n\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="84;86;2" label="objective, 2 leaves;objective, 3 leaves;best number of leaves">
+<p>Subtrees: 1 leaf RSS 100; 2 leaves RSS 60; 3 leaves RSS 50; 5 leaves RSS 44. With <span class="math inline">\(\alpha = 12\)</span>, give the objective for the 2-leaf and 3-leaf trees, and the number of leaves of the best subtree.</p>
+<div class="expl">
+<p><span class="math inline">\(60 + 24 = 84\)</span>; <span class="math inline">\(50 + 36 = 86\)</span>. Also <span class="math inline">\(100 + 12 = 112\)</span> and <span class="math inline">\(44 + 60 = 104\)</span>. Best: 2 leaves.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="prune">
+
+</div>
+<h2 id="not-every-knob-is-a-penalty">4. Not every knob is a penalty</h2>
+<p>“How do you control overfitting in X?” is asked every year. Know the knob, and which way is “more flexible”:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>The knob</th>
+<th>More flexible when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>KNN (w1, w2)</td>
+<td><span class="math inline">\(K\)</span></td>
+<td><span class="math inline">\(K\)</span> <strong>smaller</strong></td>
+</tr>
+<tr class="even">
+<td>Polynomial regression (w2)</td>
+<td>degree <span class="math inline">\(d\)</span></td>
+<td><span class="math inline">\(d\)</span> bigger</td>
+</tr>
+<tr class="odd">
+<td>Step functions (w2)</td>
+<td>number of cut points</td>
+<td>more cuts</td>
+</tr>
+<tr class="even">
+<td>Ridge (w2)</td>
+<td><span class="math inline">\(\lambda\)</span></td>
+<td><span class="math inline">\(\lambda\)</span> smaller</td>
+</tr>
+<tr class="odd">
+<td>Trees (w4)</td>
+<td>depth or leaves; <span class="math inline">\(\alpha\)</span></td>
+<td>deeper; <span class="math inline">\(\alpha\)</span> smaller</td>
+</tr>
+<tr class="even">
+<td>Neural networks (w4)</td>
+<td>units, layers, epochs, weight decay</td>
+<td>more units, longer training, less decay</td>
+</tr>
+<tr class="odd">
+<td>Bagging, random forests (w6)</td>
+<td><span class="math inline">\(B\)</span></td>
+<td>more <span class="math inline">\(B\)</span> does <strong>not</strong> overfit</td>
+</tr>
+<tr class="even">
+<td>Boosting (w6)</td>
+<td><span class="math inline">\(B\)</span>, depth <span class="math inline">\(d\)</span>, shrinkage <span class="math inline">\(\eta\)</span></td>
+<td>bigger <span class="math inline">\(B\)</span> <strong>can</strong> overfit; bigger <span class="math inline">\(\eta\)</span> learns faster</td>
+</tr>
+<tr class="odd">
+<td>Kernel density (w7)</td>
+<td>bandwidth <span class="math inline">\(h\)</span></td>
+<td><span class="math inline">\(h\)</span> smaller (spikier)</td>
+</tr>
+<tr class="even">
+<td>K-means (w7)</td>
+<td>number of clusters <span class="math inline">\(K\)</span></td>
+<td><span class="math inline">\(K\)</span> bigger (SSE always falls)</td>
+</tr>
+</tbody>
+</table>
+<div class="q" kind="mcq">
+<p>KNN with <span class="math inline">\(K = 1\)</span> has training error 0 but a high test error. Which change is most likely to help, and why?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Decrease <span class="math inline">\(K\)</span>, to reduce bias.</label></li>
+<li><label><input type="checkbox" checked="" />Increase <span class="math inline">\(K\)</span>: averaging over more neighbours lowers the variance.</label></li>
+<li><label><input type="checkbox" />Add a ridge penalty.</label></li>
+<li><label><input type="checkbox" />Use more inputs.</label></li>
+</ul>
+<div class="expl">
+<p><span class="math inline">\(K = 1\)</span> is the most flexible end. Raising <span class="math inline">\(K\)</span> trades a little bias for a big drop in variance.</p>
+</div>
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="penalty">
+
+</div>
+<div class="q" kind="gen" data-gen="ridge">
+
+</div>
+<div class="q" kind="gen" data-gen="prune">
+
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks, exam format 3.)</strong> Explain what “regularisation” means, using two different models from the course as examples.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Adds a penalty on complexity to the training loss (fit + <span class="math inline">\(\lambda\times\)</span> complexity), or otherwise restricts flexibility, to reduce overfitting.</label></li>
+<li><label><input type="checkbox" checked="" />Example 1 with its formula, e.g. ridge: RSS + <span class="math inline">\(\lambda\sum_j\beta_j^2\)</span>, shrinking coefficients towards 0.</label></li>
+<li><label><input type="checkbox" checked="" />Example 2, e.g. pruning: <span class="math inline">\(\text{RSS}(T) + \alpha\lvert T\rvert\)</span>, or early stopping / weight decay in networks.</label></li>
+<li><label><input type="checkbox" checked="" />The dial is chosen on validation data; larger dial means less variance, more bias.</label></li>
+</ul>
+<div class="model">
+<p>Regularisation means limiting a model’s flexibility so it fits the signal rather than the noise, usually by minimising training loss plus a penalty on complexity. In ridge regression the objective is <span class="math inline">\(\text{RSS} + \lambda\sum_{j\ge1}\beta_j^2\)</span>: the penalty shrinks coefficients towards zero, lowering variance at the cost of some bias. In cost-complexity pruning the objective is <span class="math inline">\(\text{RSS}(T) + \alpha\lvert T\rvert\)</span>, which charges a fee per leaf so only splits that reduce the RSS by more than <span class="math inline">\(\alpha\)</span> survive. In both cases the dial is chosen on a validation set or by cross-validation, because on the training data no penalty always looks best.</p>
+</div>
+</div>
+<div class="q" kind="mcq">
+<p>Which ensemble method can overfit if you use too many trees <span class="math inline">\(B\)</span>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Bagging</label></li>
+<li><label><input type="checkbox" />Random forests</label></li>
+<li><label><input type="checkbox" checked="" />Boosting</label></li>
+<li><label><input type="checkbox" />None of them</label></li>
+</ul>
+<div class="expl">
+<p>Bagging and forests average many trees, so more trees only reduce variance. Boosting keeps fitting the residuals, so with enough trees it fits the noise (2025 Q3a).</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="t04_gradient_descent.html"><small>&larr; Stage 4</small>Derivatives and gradient descent</a><a class="next" href="t06_bayes_rule.html"><small>Stage 6 &rarr;</small>Probability and Bayes&#x27; rule</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>

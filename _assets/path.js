@@ -386,6 +386,227 @@ function olsData(){var n=pick([4,5]),xs=[0,1,2,3,4,5,6].slice(0,7);shuffle(xs);x
 }
 
 /* ======================================================================
+   Maths route v2: scaffolded generators. Same contract as G above, but every
+   explanation is a full worked table plus the usual slip to avoid.
+   ====================================================================== */
+function tb(head,rows,foot){var s='<div class="worktbl"><table><tr>'+head.map(function(c){return '<th>'+c+'</th>'}).join('')+'</tr>';
+  rows.forEach(function(r){s+='<tr>'+r.map(function(c){return '<td>'+c+'</td>'}).join('')+'</tr>'});
+  if(foot)s+='<tr class="tot">'+foot.map(function(c){return '<td>'+c+'</td>'}).join('')+'</tr>';return s+'</table></div>'}
+function sm(a){return a.reduce(function(p,c){return p+c},0)}
+function mn(a){return sm(a)/a.length}
+function sq(x){return x*x}
+function slip(s){return '<p class="slip"><b>Common slip:</b> '+s+'</p>'}
+function pt(p){return '('+p.map(function(v){return f(v)}).join(', ')+')'}
+var G2={
+  /* squared distance from one point to a centre, coordinate by coordinate */
+  sqdist2:function(){var d=pick([2,2,3]),x=[],c=[];for(var i=0;i<d;i++){x.push(ri(-3,8));c.push(ri(-4,12)/2)}
+    var g=x.map(function(v,i){return v-c[i]}),s=sm(g.map(sq)),raw=sm(x.map(sq));
+    return {q:'<p>A point '+T('x='+pt(x))+' belongs to a cluster whose centroid is '+T('\\mu='+pt(c))+'. Work out the gap in each coordinate, then the squared distance '+T('\\|x-\\mu\\|^2')+'.</p>',
+      fields:g.map(function(v,i){return {label:'gap '+T('x_'+(i+1)+'-\\mu_'+(i+1)),answer:v,tol:0.001}}).concat([{label:T('\\|x-\\mu\\|^2'),answer:s,tol:0.01}]),
+      expl:tb(['coordinate',T('x_j'),T('\\mu_j'),'gap '+T('x_j-\\mu_j'),'squared gap'],x.map(function(v,i){return [T('j='+(i+1)),f(v),f(c[i]),f(g[i]),f(sq(g[i]))]}),['total','','','',f(s)])+
+        '<p>'+T('\\|x-\\mu\\|^2='+g.map(function(v){return par(v)+'^2'}).join('+')+'='+f(s))+'. No square root: K-means and the SSE use the <b>squared</b> distance.</p>'+
+        slip('squaring the raw coordinates, '+T(x.map(function(v){return par(v)+'^2'}).join('+')+'='+f(raw))+'. That is the squared distance to the origin, not to the centroid. Subtract first, then square.')};
+  },
+  /* centroid and SSE with the full table (integer centroid so the arithmetic is clean) */
+  centroid2:function(){var n=pick([3,4]),P=[];for(var i=0;i<n;i++)P.push([ri(-2,7),ri(-2,7)]);
+    [0,1].forEach(function(j){var s=sm(P.map(function(p){return p[j]}));var r=((s%n)+n)%n;if(r)P[n-1][j]+=n-r});
+    var m=[0,1].map(function(j){return mn(P.map(function(p){return p[j]}))});
+    var g=P.map(function(p){return [p[0]-m[0],p[1]-m[1]]}),d=g.map(function(v){return sq(v[0])+sq(v[1])}),sse=sm(d),raw=sm(P.map(function(p){return sq(p[0])+sq(p[1])}));
+    return {q:'<p>A cluster holds '+P.map(function(p){return T(pt(p))}).join(', ')+'. Find its centroid '+T('\\mu=(\\mu_1,\\mu_2)')+', then its SSE '+T('\\sum_{x}\\|x-\\mu\\|^2')+'.</p>',
+      fields:[{label:T('\\mu_1'),answer:m[0],tol:0.006},{label:T('\\mu_2'),answer:m[1],tol:0.006},{label:'SSE',answer:sse,tol:Math.max(0.02,sse*0.005)}],
+      expl:'<p><b>Step 1, centroid.</b> '+T('\\mu_1=\\frac{'+P.map(function(p){return par(p[0])}).join('+')+'}{'+n+'}='+f(m[0]))+', '+T('\\mu_2=\\frac{'+P.map(function(p){return par(p[1])}).join('+')+'}{'+n+'}='+f(m[1]))+'.</p>'+
+        '<p><b>Step 2, gaps to the centroid, squared, added.</b></p>'+tb(['point',T('x_1-\\mu_1'),T('x_2-\\mu_2'),T('(x_1-\\mu_1)^2'),T('(x_2-\\mu_2)^2'),T('\\|x-\\mu\\|^2')],
+          P.map(function(p,i){return [T(pt(p)),f(g[i][0]),f(g[i][1]),f(sq(g[i][0])),f(sq(g[i][1])),f(d[i])]}),['total','0','0','','',f(sse)])+
+        '<p>Check: each gap column adds to 0 (that is what the mean does). SSE '+T('='+d.map(function(v){return f(v)}).join('+')+'='+f(sse))+'.</p>'+
+        slip('squaring the raw coordinates instead of the gaps gives '+T(f(raw))+', which is meaningless here. Always subtract the centroid first.')};
+  },
+  /* one K-means iteration in 2D: assign, update, new SSE */
+  kmstep2:function(){var c=[[ri(0,2),ri(0,2)],[ri(6,8),ri(5,8)]],P=[],lab=[],D=[];
+    var tries=0;do{P=[];for(var i=0;i<5;i++)P.push([ri(-1,9),ri(-1,9)]);
+      D=P.map(function(p){return c.map(function(q){return sq(p[0]-q[0])+sq(p[1]-q[1])})});lab=D.map(function(r){return r[0]<r[1]?0:1});tries++}
+    while((D.some(function(r){return r[0]===r[1]})||lab.indexOf(0)<0||lab.indexOf(1)<0||lab.filter(function(l){return l===0}).length<2)&&tries<200);
+    var A=P.filter(function(p,i){return lab[i]===0}),B=P.filter(function(p,i){return lab[i]===1});
+    var mA=[mn(A.map(function(p){return p[0]})),mn(A.map(function(p){return p[1]}))],mB=[mn(B.map(function(p){return p[0]})),mn(B.map(function(p){return p[1]}))];
+    var J=sm(A.map(function(p){return sq(p[0]-mA[0])+sq(p[1]-mA[1])}))+sm(B.map(function(p){return sq(p[0]-mB[0])+sq(p[1]-mB[1])}));
+    return {q:'<p>K-means with '+T('K=2')+'. Current centres '+T('\\mu_1='+pt(c[0]))+' and '+T('\\mu_2='+pt(c[1]))+'. Points: '+P.map(function(p,i){return T('x_'+(i+1)+'='+pt(p))}).join(', ')+'.</p><p>Do one full iteration: assign every point to its nearest centre, then move each centre to the mean of its points. Give how many points join cluster 1, the new '+T('\\mu_1')+', and the SSE '+T('J')+' with the new centres.</p>',
+      fields:[{label:'points in cluster 1',answer:A.length,tol:0.01},{label:'new '+T('\\mu_1')+' (1st coord)',answer:mA[0],tol:0.006},{label:'new '+T('\\mu_1')+' (2nd coord)',answer:mA[1],tol:0.006},{label:T('J'),answer:J,tol:Math.max(0.02,J*0.005)}],
+      expl:'<p><b>Assign.</b> Squared distances are enough to compare (no square roots needed).</p>'+tb(['point',T('\\|x-\\mu_1\\|^2'),T('\\|x-\\mu_2\\|^2'),'nearest'],P.map(function(p,i){return [T('x_'+(i+1)),f(D[i][0]),f(D[i][1]),lab[i]?'2':'1']}))+
+        '<p><b>Update.</b> Cluster 1 = '+A.map(function(p){return T(pt(p))}).join(', ')+' so '+T('\\mu_1='+pt(mA))+'. Cluster 2 = '+B.map(function(p){return T(pt(p))}).join(', ')+' so '+T('\\mu_2='+pt(mB))+'.</p>'+
+        '<p><b>New SSE.</b> Add each point\'s squared distance to its <i>own new</i> centre: '+T('J='+f(J))+'.</p>'+slip('using the old centres in the SSE after the update, or squaring the coordinates themselves.')};
+  },
+  /* RSS and MSE with the residual table */
+  mse2:function(){var n=pick([4,5]),y=[],yh=[];for(var i=0;i<n;i++){var v=ri(1,12);y.push(v);yh.push(v+pick([-3,-2,-1,-1,0,1,1,2,3]))}
+    var e=y.map(function(v,i){return v-yh[i]}),r=sm(e.map(sq));
+    return {q:'<p>True '+T('y=('+y.join(', ')+')')+', predictions '+T('\\hat y=('+yh.join(', ')+')')+'. Compute the RSS and the MSE.</p>',
+      fields:[{label:'RSS',answer:r,tol:0.01},{label:'MSE',answer:r/n,tol:0.006}],
+      expl:tb(['i',T('y_i'),T('\\hat y_i'),T('e_i=y_i-\\hat y_i'),T('e_i^2')],y.map(function(v,i){return [i+1,v,yh[i],f(e[i]),f(sq(e[i]))]}),['total','','',f(sm(e)),f(r)])+
+        '<p>RSS '+T('='+f(r))+'. MSE '+T('=\\text{RSS}/n='+f(r)+'/'+n+'='+f(r/n,4))+'.</p>'+slip('squaring the sum of the errors, '+T('('+f(sm(e))+')^2')+', instead of summing the squares. Overshoots and undershoots would cancel.')};
+  },
+  /* least squares by hand with the deviations table */
+  ols2:function(){var D=olsData(),dx=D.xs.map(function(x){return x-D.mx}),dy=D.ys.map(function(y){return y-D.my});
+    return {q:'<p>Fit '+T('\\hat y=\\hat\\beta_0+\\hat\\beta_1x')+' by least squares.</p>'+D.tbl+'<p>Give '+T('S_{xy}=\\sum(x_i-\\bar x)(y_i-\\bar y)')+', '+T('S_{xx}=\\sum(x_i-\\bar x)^2')+', then '+T('\\hat\\beta_1')+' and '+T('\\hat\\beta_0')+'.</p>',
+      fields:[{label:T('S_{xy}'),answer:D.sxy,tol:0.01},{label:T('S_{xx}'),answer:D.sxx,tol:0.01},{label:T('\\hat\\beta_1'),answer:D.b1,tol:0.006},{label:T('\\hat\\beta_0'),answer:D.b0,tol:0.01}],
+      expl:'<p><b>Step 1.</b> '+T('\\bar x='+f(D.mx))+', '+T('\\bar y='+f(D.my))+'.</p><p><b>Step 2.</b></p>'+
+        tb([T('x_i'),T('y_i'),T('x_i-\\bar x'),T('y_i-\\bar y'),'product',T('(x_i-\\bar x)^2')],D.xs.map(function(x,i){return [x,D.ys[i],f(dx[i]),f(dy[i]),f(dx[i]*dy[i]),f(sq(dx[i]))]}),['total','','0','0',f(D.sxy),f(D.sxx)])+
+        '<p><b>Step 3.</b> '+T('\\hat\\beta_1=\\frac{S_{xy}}{S_{xx}}=\\frac{'+f(D.sxy)+'}{'+f(D.sxx)+'}='+f(D.b1,4))+'. <b>Step 4.</b> '+T('\\hat\\beta_0=\\bar y-\\hat\\beta_1\\bar x='+f(D.my)+'-'+par(+f(D.b1,4))+'\\times'+f(D.mx)+'='+f(D.b0,4))+'.</p>'+
+        slip('dividing by '+T('\\sum x_i^2')+' instead of '+T('\\sum(x_i-\\bar x)^2')+'. The plain sums only work when the data are centred.')};
+  },
+  /* RSS, TSS, R^2 */
+  rsq2:function(){var D=olsData(),dy=D.ys.map(function(y){return y-D.my});
+    return {q:'<p>The least-squares line for these data is '+T('\\hat y='+f(D.b0,4)+(D.b1<0?'-':'+')+f(Math.abs(D.b1),4)+'x')+'.</p>'+D.tbl+'<p>Give the RSS, the TSS and '+T('R^2')+'.</p>',
+      fields:[{label:'RSS',answer:D.rss,tol:Math.max(0.02,D.rss*0.01)},{label:'TSS',answer:D.tss,tol:0.02},{label:T('R^2'),answer:1-D.rss/D.tss,tol:0.006}],
+      expl:tb([T('x_i'),T('y_i'),T('\\hat y_i'),T('y_i-\\hat y_i'),T('(y_i-\\hat y_i)^2'),T('y_i-\\bar y'),T('(y_i-\\bar y)^2')],D.xs.map(function(x,i){return [x,D.ys[i],f(D.yh[i]),f(D.e[i]),f(sq(D.e[i])),f(dy[i]),f(sq(dy[i]))]}),['total','','','',f(D.rss),'',f(D.tss)])+
+        '<p>'+T('\\bar y='+f(D.my))+'. '+T('R^2=1-\\frac{\\text{RSS}}{\\text{TSS}}=1-\\frac{'+f(D.rss)+'}{'+f(D.tss)+'}='+f(1-D.rss/D.tss,4))+'.</p>'+slip('using '+T('\\hat y')+' in the TSS. TSS compares with the flat line '+T('\\bar y')+'; it does not involve the model at all.')};
+  },
+  /* one gradient-descent step on RSS for a line */
+  gd2:function(){var n=pick([2,3]),xs=[],ys=[];for(var i=0;i<n;i++){xs.push(ri(-1,3));ys.push(ri(-2,6))}var b=[pick([0,0,1,-1]),pick([0,0.5,1])],eta=pick([0.01,0.05,0.1]);
+    var yh=xs.map(function(x){return b[0]+b[1]*x}),r=ys.map(function(y,i){return y-yh[i]}),g0=-2*sm(r),g1=-2*sm(r.map(function(v,i){return v*xs[i]}));
+    return {q:'<p>Model '+T('\\hat y=\\beta_0+\\beta_1x')+', loss '+T('\\text{RSS}(\\beta)=\\sum_i(y_i-\\beta_0-\\beta_1x_i)^2')+'. Data: '+xs.map(function(x,i){return T('('+x+', '+ys[i]+')')}).join(', ')+'. Start at '+T('\\beta^{(0)}=('+b.join(', ')+')')+' with '+T('\\eta='+eta)+'.</p><p>Give the two partial derivatives at the start, then '+T('\\beta^{(1)}')+'.</p>',
+      fields:[{label:T('\\partial_{\\beta_0}'),answer:g0,tol:0.01},{label:T('\\partial_{\\beta_1}'),answer:g1,tol:0.01},{label:'new '+T('\\beta_0'),answer:b[0]-eta*g0,tol:0.002},{label:'new '+T('\\beta_1'),answer:b[1]-eta*g1,tol:0.002}],
+      expl:'<p>'+T('\\partial_{\\beta_0}\\text{RSS}=-2\\sum_i(y_i-\\hat y_i)')+' and '+T('\\partial_{\\beta_1}\\text{RSS}=-2\\sum_i(y_i-\\hat y_i)x_i')+' (chain rule: the inner derivative is '+T('-1')+' or '+T('-x_i')+').</p>'+
+        tb([T('x_i'),T('y_i'),T('\\hat y_i'),T('r_i=y_i-\\hat y_i'),T('r_ix_i')],xs.map(function(x,i){return [x,ys[i],f(yh[i]),f(r[i]),f(r[i]*x)]}),['total','','',f(sm(r)),f(g1/-2)])+
+        '<p>'+T('\\partial_{\\beta_0}=-2\\times'+par(sm(r))+'='+f(g0))+', '+T('\\partial_{\\beta_1}=-2\\times'+par(+f(g1/-2))+'='+f(g1))+'.</p><p>'+T('\\beta_0\\leftarrow'+b[0]+'-'+eta+'\\times'+par(g0)+'='+f(b[0]-eta*g0,4))+', '+T('\\beta_1\\leftarrow'+b[1]+'-'+eta+'\\times'+par(g1)+'='+f(b[1]-eta*g1,4))+'.</p>'+
+        slip('adding '+T('\\eta\\nabla')+' instead of subtracting it (that walks uphill), or forgetting the minus sign from the chain rule.')};
+  },
+  /* linear score with the product table */
+  score2:function(){var p=pick([2,3]),be=[pick([-2,-1,-0.5,0,0.5,1,2])],x=[];for(var i=0;i<p;i++){be.push(pick([-3,-2,-1,-0.5,0.5,1,2,3]));x.push(pick([-2,-1,0,1,2,3,4]))}
+    var xt=[1].concat(x),pr=be.map(function(b,i){return b*xt[i]}),z=sm(pr);
+    return {q:'<p>Coefficients '+T('\\beta=('+be.join(', ')+')')+' (intercept first) and input '+T('x=('+x.join(', ')+')')+'. Compute the score '+T('z=\\beta\\cdot\\tilde x')+'.</p>',
+      fields:[{label:T('z'),answer:z,tol:0.001}],
+      expl:tb(['j',T('\\beta_j'),T('\\tilde x_j'),T('\\beta_j\\tilde x_j')],be.map(function(b,i){return [i,f(b),f(xt[i]),f(pr[i])]}),['total','','',f(z)])+'<p>'+T('\\tilde x=(1, '+x.join(', ')+')')+': the leading 1 carries the intercept.</p>'+slip('forgetting the 1 in front, which drops '+T('\\beta_0')+', or pairing '+T('\\beta_1')+' with the wrong input.')};
+  },
+  /* Euclidean distance with a gaps table */
+  dist2:function(){var a=[ri(-4,5),ri(-4,5),ri(-4,5)],b=[ri(-4,5),ri(-4,5),ri(-4,5)];var g=a.map(function(v,i){return v-b[i]}),s=sm(g.map(sq)),l1=sm(g.map(Math.abs));
+    return {q:'<p>'+T('x=('+a.join(', ')+')')+', '+T('y=('+b.join(', ')+')')+'. Give the squared Euclidean distance, the Euclidean distance and the Manhattan distance.</p>',
+      fields:[{label:T('\\|x-y\\|_2^2'),answer:s,tol:0.001},{label:T('\\|x-y\\|_2'),answer:Math.sqrt(s),tol:0.01},{label:T('\\|x-y\\|_1'),answer:l1,tol:0.001}],
+      expl:tb(['j',T('x_j'),T('y_j'),'gap',T('|\\text{gap}|'),T('\\text{gap}^2')],a.map(function(v,i){return [i+1,v,b[i],f(g[i]),f(Math.abs(g[i])),f(sq(g[i]))]}),['total','','','',f(l1),f(s)])+
+        '<p>'+T('\\|x-y\\|_2=\\sqrt{'+s+'}='+f(Math.sqrt(s)))+'.</p>'+slip('taking the square root of each squared gap separately (that gives the Manhattan distance), or forgetting that a negative gap squared is positive.')};
+  },
+  /* KNN in 2D with a distance table */
+  knn2:function(){var P=[],L=[];while(P.length<6){var p=[ri(0,6),ri(0,6)];if(!P.some(function(q){return q[0]===p[0]&&q[1]===p[1]})){P.push(p);L.push(pick(['A','B']))}}
+    if(L.indexOf('A')<0)L[0]='A';if(L.indexOf('B')<0)L[1]='B';var x0=[ri(1,5),ri(1,5)],K=3;
+    var D=P.map(function(p,i){return {i:i,d:sq(p[0]-x0[0])+sq(p[1]-x0[1])}}).sort(function(a,b){return a.d-b.d});if(D[K-1].d===D[K].d)return G2.knn2();
+    var nb=D.slice(0,K),nA=nb.filter(function(o){return L[o.i]==='A'}).length;
+    return {q:'<p>Training points: '+P.map(function(p,i){return T(pt(p))+' '+L[i]}).join(', ')+'. Classify '+T('x_0='+pt(x0))+' with KNN, '+T('K=3')+', Euclidean distance. Give '+T('\\tilde P(A\\mid x_0)')+' and the class.</p>',
+      fields:[{label:T('\\tilde P(A)'),answer:nA/K,tol:0.01},{label:'class',type:'choice',options:['A','B'],answer:nA>=2?'A':'B'}],
+      expl:tb(['point','label',T('\\|x-x_0\\|^2'),'rank'],D.map(function(o,r){return [T(pt(P[o.i])),L[o.i],f(o.d),r<K?'<b>'+(r+1)+'</b>':r+1]}))+
+        '<p>Ranking by squared distance gives the same order as by distance, so you can skip the square roots. The 3 nearest labels: '+nb.map(function(o){return L[o.i]}).join(', ')+', so '+T('\\tilde P(A)=\\frac13\\sum\\mathbb 1(y_i=A)='+nA+'/3')+'.</p>'+slip('using all six points, or dividing by the number of A\'s instead of by '+T('K')+'.')};
+  },
+  /* sigmoid prediction step by step */
+  sigmoid2:function(){var b0=pick([-3,-2,-1,-0.5,0,0.5,1]),b1=pick([-2,-1,-0.5,0.5,1,1.5,2]),x=pick([-2,-1,0,1,2,3]);var z=b0+b1*x,ez=Math.exp(-z),p=1/(1+ez);
+    return {q:'<p>Logistic regression '+T('p(x)=\\sigma(\\beta_0+\\beta_1x)')+' with '+T('\\beta_0='+b0)+', '+T('\\beta_1='+b1)+'. At '+T('x='+x)+' give the score '+T('z')+', '+T('e^{-z}')+', the probability '+T('p')+' and the predicted class (threshold 0.5).</p>',
+      fields:[{label:T('z'),answer:z,tol:0.001},{label:T('e^{-z}'),answer:ez,tol:Math.max(0.002,ez*0.01)},{label:T('p'),answer:p,tol:0.004},{label:'class',type:'choice',options:['0','1'],answer:p>0.5?'1':'0'}],
+      expl:'<p>'+T('z='+b0+'+'+par(b1)+'\\times'+par(x)+'='+f(z))+'. '+T('e^{-z}=e^{'+f(-z)+'}='+f(ez,4))+'. '+T('p=\\frac{1}{1+'+f(ez,4)+'}='+f(p,4))+'. '+(p>0.5?'Above':'Not above')+' 0.5, so class <b>'+(p>0.5?1:0)+'</b>. Shortcut: class 1 exactly when '+T('z>0')+'.</p>'+slip('computing '+T('e^{z}')+' instead of '+T('e^{-z}')+' (you would get '+T('1-p')+'), or using '+T('\\beta_1x')+' without the intercept.')};
+  },
+  /* softmax with exponentials table */
+  softmax2:function(){var z=[ri(-1,3),ri(-1,3),pick([-1,0,0.5,1,2])];if(z[0]===z[1]&&z[1]===z[2])z[2]+=1;var e=z.map(Math.exp),s=sm(e),p=e.map(function(v){return v/s}),k=ri(0,2);var best=p.indexOf(Math.max.apply(null,p));
+    return {q:'<p>Three class scores '+T('z=('+z.join(', ')+')')+'. Give '+T('\\sum_ke^{z_k}')+', '+T('p_'+(k+1))+' and the predicted class.</p>',
+      fields:[{label:T('\\sum e^{z_k}'),answer:s,tol:Math.max(0.01,s*0.005)},{label:T('p_'+(k+1)),answer:p[k],tol:0.004},{label:'class',type:'choice',options:['1','2','3'],answer:String(best+1)}],
+      expl:tb(['class',T('z_k'),T('e^{z_k}'),T('p_k=e^{z_k}/\\sum')],z.map(function(v,i){return [i+1,f(v),f(e[i],4),f(p[i],4)]}),['total','',f(s,4),'1'])+'<p>The largest score always wins, so the class is <b>'+(best+1)+'</b>; softmax just turns the scores into probabilities that add to 1.</p>'+slip('dividing the scores by their sum ('+T('z_k/\\sum z')+') without exponentiating. That can give negative "probabilities".')};
+  },
+  /* negative log-likelihood table */
+  nll2:function(){var n=pick([3,4]),y=[],p=[];for(var i=0;i<n;i++){y.push(ri(0,1));p.push(pick([0.1,0.2,0.3,0.4,0.6,0.7,0.8,0.9]))}
+    var t=p.map(function(v,i){return y[i]?v:1-v}),c=t.map(function(v){return -Math.log(v)}),L=sm(c);
+    return {q:'<p>A logistic model gives '+T('p_i=P(Y=1\\mid x_i)')+' = '+T('('+p.join(', ')+')')+' for points with labels '+T('y=('+y.join(', ')+')')+'. Compute the negative log-likelihood (natural log).</p>',
+      fields:[{label:'NLL',answer:L,tol:0.01}],
+      expl:tb(['i',T('y_i'),T('p_i'),'prob. of the true label',T('-\\log(\\cdot)')],y.map(function(v,i){return [i+1,v,f(p[i]),(v?T('p_i='):T('1-p_i='))+f(t[i]),f(c[i],4)]}),['total','','','',f(L,4)])+
+        '<p>For '+T('y_i=1')+' use '+T('p_i')+'; for '+T('y_i=0')+' use '+T('1-p_i')+'. That is exactly '+T('y_i\\log p_i+(1-y_i)\\log(1-p_i)')+' with the zero term dropped.</p>'+slip('using '+T('p_i')+' for every point regardless of its label.')};
+  },
+  /* logistic gradient (p - y) x */
+  lgrad2:function(){var n=3,xs=[],y=[];for(var i=0;i<n;i++){xs.push(pick([-2,-1,0,1,2,3]));y.push(ri(0,1))}var b=[pick([0,0.5,-0.5]),pick([0,0.5,1])],eta=pick([0.1,0.5]);
+    var z=xs.map(function(x){return b[0]+b[1]*x}),p=z.map(function(v){return 1/(1+Math.exp(-v))}),r=p.map(function(v,i){return v-y[i]}),g0=sm(r),g1=sm(r.map(function(v,i){return v*xs[i]}));
+    return {q:'<p>Logistic regression, current '+T('\\beta=('+b.join(', ')+')')+'. Data '+xs.map(function(x,i){return T('(x='+x+', y='+y[i]+')')}).join(', ')+'. Using '+T('\\nabla L=\\sum_i(p_i-y_i)\\tilde x_i')+', give both gradient components and the new '+T('\\beta_1')+' after one step with '+T('\\eta='+eta)+'.</p>',
+      fields:[{label:T('\\partial_{\\beta_0}L'),answer:g0,tol:0.006},{label:T('\\partial_{\\beta_1}L'),answer:g1,tol:0.006},{label:'new '+T('\\beta_1'),answer:b[1]-eta*g1,tol:0.004}],
+      expl:tb([T('x_i'),T('y_i'),T('z_i'),T('p_i=\\sigma(z_i)'),T('p_i-y_i'),T('(p_i-y_i)x_i')],xs.map(function(x,i){return [x,y[i],f(z[i]),f(p[i],4),f(r[i],4),f(r[i]*x,4)]}),['total','','','',f(g0,4),f(g1,4)])+
+        '<p>'+T('\\beta_1\\leftarrow'+b[1]+'-'+eta+'\\times'+par(+f(g1,4))+'='+f(b[1]-eta*g1,4))+'. Each point pushes in proportion to (prediction − truth) × input.</p>'+slip('writing '+T('y_i-p_i')+' with a minus step (it flips direction), or forgetting the column of 1s for '+T('\\beta_0')+'.')};
+  },
+  /* Bayes' rule with a natural-frequency table */
+  bayes2:function(){var N=10000,pi=pick([0.01,0.02,0.05,0.1]),a=pick([0.8,0.9,0.95]),b=pick([0.05,0.1,0.2]);var S=N*pi,H=N-S,sp=S*a,hp=H*b,post=sp/(sp+hp);
+    return {q:'<p>A condition affects '+f(pi*100)+'% of people. A test is positive for '+f(a*100)+'% of those with it and '+f(b*100)+'% of those without. Imagine '+N.toLocaleString('en-GB')+' people. How many have the condition and test positive, how many don\'t and test positive, and what is '+T('P(\\text{condition}\\mid +)')+'?</p>',
+      fields:[{label:'with & +',answer:sp,tol:0.5},{label:'without & +',answer:hp,tol:0.5},{label:T('P(\\text{cond}\\mid +)'),answer:post,tol:0.004}],
+      expl:tb(['',T('\\text{test}+'),T('\\text{test}-'),'total'],[['condition',f(sp),f(S-sp),f(S)],['no condition',f(hp),f(H-hp),f(H)]],['total',f(sp+hp),f(N-sp-hp),f(N)])+
+        '<p>Among the '+f(sp+hp)+' positives, '+f(sp)+' have the condition: '+T('\\frac{'+f(sp)+'}{'+f(sp+hp)+'}='+f(post,4))+'. Same as '+T('\\frac{\\pi_1f_1}{\\pi_1f_1+\\pi_0f_0}=\\frac{'+pi+'\\times'+a+'}{'+pi+'\\times'+a+'+'+f(1-pi)+'\\times'+b+'}')+'.</p>'+slip('answering '+a+' (that is '+T('P(+\\mid\\text{cond})')+', the other way round) or forgetting the healthy people who test positive.')};
+  },
+  /* naive Bayes with two binary features */
+  nb2:function(){var pi=pick([0.3,0.4,0.5,0.6]),a=[pick([0.5,0.6,0.7,0.8]),pick([0.3,0.4,0.6])],b=[pick([0.1,0.2,0.3]),pick([0.2,0.3,0.5])];
+    var s1=pi*a[0]*a[1],s0=(1-pi)*b[0]*b[1],post=s1/(s1+s0);
+    return {q:'<p>Naive Bayes spam filter. '+T('P(\\text{spam})='+pi)+'. '+T('P(w_1\\mid\\text{spam})='+a[0])+', '+T('P(w_2\\mid\\text{spam})='+a[1])+', '+T('P(w_1\\mid\\text{ham})='+b[0])+', '+T('P(w_2\\mid\\text{ham})='+b[1])+'. An email contains both words. Give the spam score '+T('\\pi_sf_s(x)')+', the ham score and '+T('P(\\text{spam}\\mid x)')+'.</p>',
+      fields:[{label:'spam score',answer:s1,tol:0.0006},{label:'ham score',answer:s0,tol:0.0006},{label:T('P(\\text{spam}\\mid x)'),answer:post,tol:0.004}],
+      expl:'<p>Independence within each class lets you multiply: spam '+T(pi+'\\times'+a[0]+'\\times'+a[1]+'='+f(s1,4))+', ham '+T(f(1-pi)+'\\times'+b[0]+'\\times'+b[1]+'='+f(s0,4))+'.</p><p>Normalise: '+T('\\frac{'+f(s1,4)+'}{'+f(s1,4)+'+'+f(s0,4)+'}='+f(post,4))+'.</p>'+slip('forgetting the prior, or using '+T('1-\\pi')+' for the spam class.')};
+  },
+  /* Gaussian density in steps */
+  gauss2:function(){var mu=ri(-2,6),sd=pick([1,2,0.5]),x=mu+pick([-2,-1,-0.5,0.5,1,1.5,2])*sd;var gp=x-mu,q=gp*gp/(2*sd*sd),c=1/Math.sqrt(2*Math.PI*sd*sd),fx=c*Math.exp(-q);
+    return {q:'<p>Gaussian with '+T('\\mu='+mu)+', '+T('\\sigma='+sd)+'. At '+T('x='+f(x))+' give the gap '+T('x-\\mu')+', the exponent '+T('\\frac{(x-\\mu)^2}{2\\sigma^2}')+', the constant '+T('\\frac1{\\sqrt{2\\pi\\sigma^2}}')+' and '+T('f(x)')+'.</p>',
+      fields:[{label:'gap',answer:gp,tol:0.001},{label:'exponent',answer:q,tol:0.005},{label:'constant',answer:c,tol:0.003},{label:T('f(x)'),answer:fx,tol:Math.max(0.002,fx*0.01)}],
+      expl:'<p>Gap '+T(f(x)+'-'+par(mu)+'='+f(gp))+'. Exponent '+T('\\frac{'+par(+f(gp))+'^2}{2\\times'+f(sd*sd)+'}='+f(q,4))+'. Constant '+T('\\frac1{\\sqrt{2\\pi\\times'+f(sd*sd)+'}}='+f(c,4))+'. '+T('f(x)='+f(c,4)+'\\times e^{-'+f(q,4)+'}='+f(c,4)+'\\times'+f(Math.exp(-q),4)+'='+f(fx,4))+'.</p>'+slip('using '+T('\\sigma')+' where the formula needs '+T('\\sigma^2')+', or dropping the minus sign in the exponent (the density would exceed the peak).')};
+  },
+  /* LDA, one input, equal class sizes, full table */
+  lda2:function(){var c0=[],c1=[];while(c0.length<3){var v=ri(0,5);if(c0.indexOf(v)<0)c0.push(v)}while(c1.length<3){var w=ri(5,11);if(c1.indexOf(w)<0&&c0.indexOf(w)<0)c1.push(w)}c0.sort(function(a,b){return a-b});c1.sort(function(a,b){return a-b});
+    var m0=mn(c0),m1=mn(c1),s0=sm(c0.map(function(v){return sq(v-m0)})),s1=sm(c1.map(function(v){return sq(v-m1)})),s2=(s0+s1)/4,x0=pick([Math.round((m0+m1)/2)-1,Math.round((m0+m1)/2)+1]);
+    var d0=x0*m0/s2-m0*m0/(2*s2)+Math.log(0.5),d1=x0*m1/s2-m1*m1/(2*s2)+Math.log(0.5);
+    return {q:'<p>LDA with one input. Class 0: '+T('x=('+c0.join(', ')+')')+'. Class 1: '+T('x=('+c1.join(', ')+')')+'. Give '+T('\\hat\\mu_0')+', '+T('\\hat\\mu_1')+', the pooled variance '+T('\\hat\\sigma^2=\\frac1{n-2}\\sum_k\\sum_{i\\in k}(x_i-\\hat\\mu_k)^2')+', and the class predicted at '+T('x='+x0)+'.</p>',
+      fields:[{label:T('\\hat\\mu_0'),answer:m0,tol:0.006},{label:T('\\hat\\mu_1'),answer:m1,tol:0.006},{label:T('\\hat\\sigma^2'),answer:s2,tol:0.01},{label:'class at '+T('x='+x0),type:'choice',options:['0','1'],answer:d1>d0?'1':'0'}],
+      expl:tb(['class',T('x_i'),T('x_i-\\hat\\mu_k'),'squared'],c0.map(function(v){return ['0',v,f(v-m0),f(sq(v-m0))]}).concat(c1.map(function(v){return ['1',v,f(v-m1),f(sq(v-m1))]})),['total','','',f(s0+s1)])+
+        '<p>'+T('\\hat\\sigma^2='+f(s0+s1)+'/(6-2)='+f(s2,4))+'. Equal priors (3 and 3), so the boundary is the midpoint '+T('('+f(m0)+'+'+f(m1)+')/2='+f((m0+m1)/2))+'. Check with the scores: '+T('\\delta_0('+x0+')='+f(d0,3))+', '+T('\\delta_1('+x0+')='+f(d1,3))+', so class <b>'+(d1>d0?1:0)+'</b>.</p>'+slip('measuring the gaps from the overall mean instead of each class\'s own mean, or dividing by '+T('n')+' instead of '+T('n-2')+'.')};
+  },
+  /* impurity: error, Gini, entropy with a per-class table */
+  impurity2:function(){var m=pick([2,2,3]),c=[];for(var i=0;i<m;i++)c.push(ri(0,8));if(sm(c)<3)c[0]+=3;var n=sm(c),p=c.map(function(v){return v/n});
+    var E=1-Math.max.apply(null,p),Gi=sm(p.map(function(v){return v*(1-v)})),D=-sm(p.map(function(v){return v>0?v*Math.log(v):0}));
+    return {q:'<p>A tree node holds '+c.map(function(v,i){return v+' of class '+(i+1)}).join(', ')+'. Compute its classification error, Gini index and entropy (natural log).</p>',
+      fields:[{label:'error',answer:E,tol:0.005},{label:'Gini',answer:Gi,tol:0.005},{label:'entropy',answer:D,tol:0.006}],
+      expl:tb(['class','count',T('\\hat p_k'),T('\\hat p_k(1-\\hat p_k)'),T('-\\hat p_k\\log\\hat p_k')],c.map(function(v,i){return [i+1,v,f(p[i],4),f(p[i]*(1-p[i]),4),p[i]>0?f(-p[i]*Math.log(p[i]),4):'0']}),['total',n,'1',f(Gi,4),f(D,4)])+
+        '<p>Error '+T('=1-\\max_k\\hat p_k=1-'+f(Math.max.apply(null,p),4)+'='+f(E,4))+'. A class with count 0 contributes 0 to the entropy (the limit of '+T('p\\log p')+').</p>'+slip('using counts instead of proportions, or (for two classes) writing Gini as '+T('\\hat p(1-\\hat p)')+' once instead of adding both classes, which halves it.')};
+  },
+  /* Gini gain of a split with the weighted table */
+  gain2:function(){var l=[ri(0,6),ri(0,6)],r=[ri(0,6),ri(0,6)];if(l[0]+l[1]<2)l[0]+=2;if(r[0]+r[1]<2)r[1]+=2;
+    function gi(c){var n=c[0]+c[1],p=c[0]/n;return 2*p*(1-p)}var P=[l[0]+r[0],l[1]+r[1]],nl=l[0]+l[1],nr=r[0]+r[1],n=nl+nr,after=(nl*gi(l)+nr*gi(r))/n;
+    return {q:'<p>Parent node: '+P[0]+' A, '+P[1]+' B. The split sends '+l[0]+' A + '+l[1]+' B left and '+r[0]+' A + '+r[1]+' B right. Give the Gini of the left child, the right child, the weighted Gini after the split, and the gain.</p>',
+      fields:[{label:'left',answer:gi(l),tol:0.005},{label:'right',answer:gi(r),tol:0.005},{label:'weighted after',answer:after,tol:0.005},{label:'gain',answer:gi(P)-after,tol:0.006}],
+      expl:tb(['node','A','B','size','weight',T('\\hat p_A'),'Gini '+T('2\\hat p_A(1-\\hat p_A)')],[['parent',P[0],P[1],n,'',f(P[0]/n,4),f(gi(P),4)],['left',l[0],l[1],nl,nl+'/'+n,f(l[0]/nl,4),f(gi(l),4)],['right',r[0],r[1],nr,nr+'/'+n,f(r[0]/nr,4),f(gi(r),4)]])+
+        '<p>After '+T('=\\frac{'+nl+'}{'+n+'}\\times'+f(gi(l),4)+'+\\frac{'+nr+'}{'+n+'}\\times'+f(gi(r),4)+'='+f(after,4))+'. Gain '+T('='+f(gi(P),4)+'-'+f(after,4)+'='+f(gi(P)-after,4))+'.</p>'+slip('averaging the two children\'s Gini equally instead of weighting by size.')};
+  },
+  /* forward pass: 2 inputs, 2 ReLU units, linear output */
+  nnfwd2:function(){var x=[ri(-2,2),ri(-2,3)],W=[[ri(-2,2),ri(-2,2),ri(-2,2)],[ri(-2,2),ri(-2,2),ri(-2,2)]],b=[ri(-2,2),ri(-2,3),ri(-2,3)];
+    var z=W.map(function(w){return w[0]+w[1]*x[0]+w[2]*x[1]}),A=z.map(function(v){return Math.max(0,v)}),out=b[0]+b[1]*A[0]+b[2]*A[1];
+    return {q:'<p>Network with inputs '+T('x=('+x.join(', ')+')')+', two ReLU hidden units '+T('A_k=\\max(0,w_{k0}+w_{k1}x_1+w_{k2}x_2)')+' with '+T('w_1=('+W[0].join(', ')+')')+', '+T('w_2=('+W[1].join(', ')+')')+', and output '+T('f(x)=\\beta_0+\\beta_1A_1+\\beta_2A_2')+' with '+T('\\beta=('+b.join(', ')+')')+'. Give '+T('A_1')+', '+T('A_2')+' and '+T('f(x)')+'.</p>',
+      fields:[{label:T('A_1'),answer:A[0],tol:0.001},{label:T('A_2'),answer:A[1],tol:0.001},{label:T('f(x)'),answer:out,tol:0.001}],
+      expl:tb(['unit','pre-activation '+T('z_k'),T('A_k=\\max(0,z_k)')],z.map(function(v,k){return [k+1,T(W[k][0]+'+'+par(W[k][1])+'\\times'+par(x[0])+'+'+par(W[k][2])+'\\times'+par(x[1])+'='+v),f(A[k])]}))+
+        '<p>'+T('f(x)='+b[0]+'+'+par(b[1])+'\\times'+A[0]+'+'+par(b[2])+'\\times'+A[1]+'='+f(out))+'.</p>'+slip('passing a negative pre-activation straight through. ReLU turns every negative '+T('z_k')+' into 0.')};
+  },
+  /* bias-variance decomposition at one point */
+  bv2:function(){var m=ri(2,7),pr=[m+pick([-2,-1]),m+pick([1,2]),m,m+pick([-1,0,1])];var c=mn(pr);var tr=c+pick([-2,-1.5,-1,1,1.5,2]),s2=pick([0.25,0.5,1]);
+    var b2=sq(c-tr),v=mn(pr.map(function(p){return sq(p-c)}));
+    return {q:'<p>Four training sets give predictions at '+T('x_0')+' of '+T(pr.join(',\\ '))+'. The true '+T('f(x_0)='+f(tr))+' and the noise variance is '+T('\\sigma^2='+s2)+'. Give the average prediction, bias², variance and the expected test MSE.</p>',
+      fields:[{label:'average',answer:c,tol:0.004},{label:'bias²',answer:b2,tol:0.004},{label:'variance',answer:v,tol:0.004},{label:'test MSE',answer:b2+v+s2,tol:0.006}],
+      expl:tb(['set',T('\\hat f(x_0)'),T('\\hat f-\\bar f'),'squared'],pr.map(function(p,i){return [i+1,p,f(p-c),f(sq(p-c))]}),['average',f(c),'0',f(v)])+
+        '<p>Bias² '+T('=(\\bar f-f(x_0))^2=('+f(c)+'-'+f(tr)+')^2='+f(b2))+'. Variance = average squared spread '+T('='+f(v))+'. Total '+T('='+f(b2)+'+'+f(v)+'+'+s2+'='+f(b2+v+s2))+'.</p>'+slip('measuring the spread from the true value instead of from the average prediction, or forgetting the noise term.')};
+  },
+  /* linkages with the cross-distance table */
+  linkage2:function(){var r=function(){return [ri(-3,5),ri(-3,5)]},A=[r(),r()],B=[r(),r()];var D=[];A.forEach(function(a){B.forEach(function(b){D.push(Math.hypot(a[0]-b[0],a[1]-b[1]))})});if(Math.min.apply(null,D)===0)return G2.linkage2();
+    var ca=[mn(A.map(function(p){return p[0]})),mn(A.map(function(p){return p[1]}))],cb=[mn(B.map(function(p){return p[0]})),mn(B.map(function(p){return p[1]}))],cen=Math.hypot(ca[0]-cb[0],ca[1]-cb[1]);
+    var rows=[];A.forEach(function(a,i){B.forEach(function(b,j){rows.push([T('a_'+(i+1)+'='+pt(a)),T('b_'+(j+1)+'='+pt(b)),T('\\sqrt{'+(sq(a[0]-b[0])+sq(a[1]-b[1]))+'}'),f(D[i*2+j])])})});
+    return {q:'<p>Clusters '+T('A=\\{'+A.map(pt).join(', ')+'\\}')+' and '+T('B=\\{'+B.map(pt).join(', ')+'\\}')+'. Give the single, complete, average and centroid linkage distances (Euclidean).</p>',
+      fields:[{label:'single',answer:Math.min.apply(null,D),tol:0.01},{label:'complete',answer:Math.max.apply(null,D),tol:0.01},{label:'average',answer:mn(D),tol:0.01},{label:'centroid',answer:cen,tol:0.01}],
+      expl:tb(['from A','to B','distance','value'],rows)+'<p>Single = smallest '+f(Math.min.apply(null,D))+'; complete = largest '+f(Math.max.apply(null,D))+'; average = mean of the four '+f(mn(D))+'. Centroids '+T(pt(ca))+' and '+T(pt(cb))+', distance '+f(cen)+'.</p>'+slip('averaging the points first and calling that "average linkage". That is the centroid linkage; average linkage averages the distances.')};
+  },
+  /* Parzen / triangular KDE with a kernel table */
+  parzen2:function(){var n=pick([5,6]),xs=[];while(xs.length<n){var v=ri(0,12);if(xs.indexOf(v)<0)xs.push(v)}xs.sort(function(a,b){return a-b});var h=pick([2,3,4]),tri=Math.random()<0.5,x0=ri(xs[1],xs[n-2])+pick([0,0.5]);
+    var u=xs.map(function(x){return (x0-x)/h}),K=u.map(function(v){return tri?Math.max(0,1-Math.abs(v)):(Math.abs(v)<=0.5+1e-12?1:0)}),s=sm(K);
+    return {q:'<p>Data '+T('\\{'+xs.join(', ')+'\\}')+'. Estimate the density at '+T('x='+x0)+' with '+T('h='+h)+' and the '+(tri?'triangular kernel '+T('K(u)=\\max(0,1-|u|)'):'Parzen window '+T('K(u)=\\mathbb 1(|u|\\le\\tfrac12)'))+'. Give '+T('\\sum_iK(u_i)')+' and '+T('\\hat f(x)=\\frac1{nh}\\sum_iK\\big(\\frac{x-x_i}{h}\\big)')+'.</p>',
+      fields:[{label:T('\\sum K'),answer:s,tol:0.005},{label:T('\\hat f(x)'),answer:s/(n*h),tol:0.002}],
+      expl:tb([T('x_i'),T('u_i=(x-x_i)/h'),T('K(u_i)')],xs.map(function(x,i){return [x,f(u[i],3),f(K[i],3)]}),['total','',f(s,3)])+'<p>'+T('\\hat f('+x0+')=\\frac{'+f(s,3)+'}{'+n+'\\times'+h+'}='+f(s/(n*h),4))+'.</p>'+slip('dividing by '+T('n')+' only. The '+T('h')+' in '+T('nh')+' makes the estimate integrate to 1.')};
+  },
+  /* projection score and variance along a direction (centred data) */
+  proj2:function(){var phi=pick([[0.6,0.8],[0.8,0.6],[0.6,-0.8],[1,0],[0,1]]);var P;do{P=[[ri(-3,3),ri(-3,3)],[ri(-3,3),ri(-3,3)],[ri(-3,3),ri(-3,3)]];var s=[sm(P.map(function(p){return p[0]})),sm(P.map(function(p){return p[1]}))];P.push([-s[0],-s[1]])}while(P.every(function(p){return p[0]===0&&p[1]===0}));
+    var sc=P.map(function(p){return phi[0]*p[0]+phi[1]*p[1]}),v=mn(sc.map(sq));
+    return {q:'<p>Centred data (each column has mean 0): '+P.map(function(p){return T(pt(p))}).join(', ')+'. Project onto the unit direction '+T('\\varphi='+pt(phi))+'. Give the score of the first point and the variance of the scores '+T('\\frac1n\\sum_i(\\varphi^Tx_i)^2')+'.</p>',
+      fields:[{label:'score 1',answer:sc[0],tol:0.002},{label:'variance',answer:v,tol:0.01}],
+      expl:tb(['point',T('\\varphi^Tx_i'),'squared'],P.map(function(p,i){return [T(pt(p)),T(phi[0]+'\\times'+par(p[0])+'+'+par(phi[1])+'\\times'+par(p[1])+'='+f(sc[i])),f(sq(sc[i]),4)]}),['average','',f(v,4)])+'<p>The scores have mean 0 because the data are centred, so the variance is just the mean square.</p>'+slip('forgetting to check that '+T('\\varphi')+' has length 1 ('+T('0.6^2+0.8^2=1')+'), or dividing by '+T('n-1')+' when the slides use '+T('n')+'.')};
+  }
+};
+for(var _k in G2)G[_k]=G2[_k];
+
+/* ======================================================================
    Questions
    ====================================================================== */
 var QN=0,ALLQ=window.__pathQs=[];
@@ -415,7 +636,9 @@ Question.prototype.render=function(){
     opts.forEach(function(o,i){var l=h('label','qopt');var inp=document.createElement('input');inp.type=me.kind==='mcq'?'radio':'checkbox';inp.name=name;inp.value=i;l.appendChild(inp);var sp=h('span');sp.appendChild(o.node);l.appendChild(sp);b.appendChild(l);o.inp=inp;o.lab=l;});
     if(this.kind==='multi')b.appendChild(h('div','qhint','Tick every correct option.'));
   }else if(this.kind==='num'){
-    this.fields=[{label:this.div.getAttribute('data-label')||'answer',answer:parseFloat(this.div.getAttribute('data-answer')),tol:this.div.hasAttribute('data-tol')?parseFloat(this.div.getAttribute('data-tol')):null}];
+    /* one answer, or several separated by ';' (labels and tol likewise) for step-by-step checkpoints */
+    var ans=String(this.div.getAttribute('data-answer')).split(';'),labs=(this.div.getAttribute('data-label')||((String(this.div.getAttribute('data-answer')).indexOf(';')>=0||/maths2$/.test(P.module))&&this.div.getAttribute('label'))||'answer').split(';'),tols=this.div.hasAttribute('data-tol')?this.div.getAttribute('data-tol').split(';'):[];
+    this.fields=ans.map(function(a,i){var t=tols.length?tols[Math.min(i,tols.length-1)]:null;return {label:labs[i]||labs[0],answer:parseFloat(a),tol:t!=null?parseFloat(t):null}});
     this.inputs=fieldInputs(b,this.fields);
   }else if(this.kind==='gen'){
     var g=G[this.div.getAttribute('data-gen')];var d=g?g():{q:'(missing generator)',fields:[],expl:''};this.genData=d;

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear, polynomial and ridge regression · CS5100 Maths route v2</title>
+<script>try{var t=localStorage.getItem('mm-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="stylesheet" href="../../_assets/site.css">
+<link rel="stylesheet" href="../../_assets/path.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script defer src="../../_assets/tex-svg.js"></script>
+<script defer src="../../_assets/site.js"></script>
+<script>window.PATH={"module": "cs5100-maths2", "stages": [{"id": "t01_vectors_distances", "title": "Vectors, dot products and distances", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "The weighted sum \u03b2\u00b7x inside every linear model and neuron; L1, L2 and Lk distances behind KNN, K-means and linkage.", "href": "t01_vectors_distances.html"}, {"id": "t02_averages_votes", "title": "Averages, indicators and votes", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "The mean, the indicator 1(\u00b7), majority vote and argmax: KNN, tree leaves, bagging, K-means, histograms and k/(nV).", "href": "t02_averages_votes.html"}, {"id": "t03_squared_error", "title": "Squared error: MSE, RSS, SSE", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "One sum of squares under seven names, why the mean minimises it, and the bias-variance split.", "href": "t03_squared_error.html"}, {"id": "t04_gradient_descent", "title": "Derivatives and gradient descent", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Set the derivative to zero when you can, walk downhill when you can't; the chain rule; convex vs local minima.", "href": "t04_gradient_descent.html"}, {"id": "t05_penalties", "title": "Fit plus penalty, and flexibility knobs", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "RSS + \u03bb\u2016\u03b2\u2016\u00b2, RSS + \u03b1|T|, early stopping, shrinkage \u03b7: one idea, and the knob each model uses to control overfitting.", "href": "t05_penalties.html"}, {"id": "t06_bayes_rule", "title": "Probability and Bayes' rule", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Conditional probability, priors, Bayes' rule, independence, and repeated trials: (1 \u2212 1/n)\u207f and the binomial.", "href": "t06_bayes_rule.html"}, {"id": "t07_gaussian", "title": "The Gaussian bell curve", "group": "Part A \u00b7 The shared toolkit", "mins": 45, "blurb": "The density formula, why its log is a squared distance, and where it turns up: LDA, naive Bayes, least squares, kernels.", "href": "t07_gaussian.html"}, {"id": "t08_sigmoid_softmax", "title": "Sigmoid, log-odds and softmax", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Turning a score into a probability: \u03c3, its derivative, the logit, and softmax for many classes (sigmoid is its 2-class case).", "href": "t08_sigmoid_softmax.html"}, {"id": "t09_likelihood", "title": "Likelihood and cross-entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 70, "blurb": "Maximum likelihood, the negative log-likelihood, cross-entropy, and the gradient (prediction \u2212 truth) \u00d7 input that keeps reappearing.", "href": "t09_likelihood.html"}, {"id": "t10_impurity", "title": "Impurity: error, Gini, entropy", "group": "Part A \u00b7 The shared toolkit", "mins": 55, "blurb": "Three ways to score a mixed bag of labels, weighted averages after a split, and information gain.", "href": "t10_impurity.html"}, {"id": "t11_resampling", "title": "Resampling and averaging many models", "group": "Part A \u00b7 The shared toolkit", "mins": 65, "blurb": "Train / validation / test, the bootstrap, the 36.8% fact, and why averaging B models cuts variance to \u03c1\u03c3\u00b2 + (1 \u2212 \u03c1)\u03c3\u00b2/B.", "href": "t11_resampling.html"}, {"id": "m01_bayes_knn", "title": "Bayes classifier and KNN", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "Bayes' rule + argmax gives the ideal; distances + a vote give KNN; distances + an average give KNN regression.", "href": "m01_bayes_knn.html"}, {"id": "m02_linear_family", "title": "Linear, polynomial and ridge regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product + squared error + derivative = 0; basis functions; add a penalty and you have ridge.", "href": "m02_linear_family.html"}, {"id": "m03_logistic", "title": "Logistic and multinomial regression", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Dot product \u2192 sigmoid (or softmax) \u2192 cross-entropy \u2192 gradient descent. Every piece is from Part A.", "href": "m03_logistic.html"}, {"id": "m04_lda_nb", "title": "LDA and naive Bayes", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bayes' rule with Gaussian class curves; the posterior turns out to be a softmax of linear scores.", "href": "m04_lda_nb.html"}, {"id": "m05_judging", "title": "Judging and comparing models", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Confusion matrices and ROC (counting), the bias-variance split (squared error), the sign test (binomial).", "href": "m05_judging.html"}, {"id": "m06_trees", "title": "Regression and classification trees", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Leaf means or votes, splits scored by RSS or impurity, pruned with RSS + \u03b1|T|.", "href": "m06_trees.html"}, {"id": "m07_neural_nets", "title": "Neural networks", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 65, "blurb": "Dot products through ReLU or sigmoid, a softmax or linear output, squared error or cross-entropy, trained by the chain rule.", "href": "m07_neural_nets.html"}, {"id": "m08_ensembles", "title": "Bagging, random forests and boosting", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Bootstrap + trees + average or vote; OOB from the 36.8%; boosting fits residuals with a shrinkage \u03b7.", "href": "m08_ensembles.html"}, {"id": "m09_clustering", "title": "K-means and hierarchical clustering", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 55, "blurb": "Distances + means + SSE give K-means; distances between groups give the four linkages.", "href": "m09_clustering.html"}, {"id": "m10_density", "title": "Density estimation and semi-supervised learning", "group": "Part B \u00b7 The models, built from the toolkit", "mins": 45, "blurb": "k/(nV) is a local average; kernels are smoothed indicators (or Gaussians); bandwidth is the flexibility knob.", "href": "m10_density.html"}, {"id": "t12_variance_projection", "title": "Variance, covariance and projections", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 55, "blurb": "The covariance (scatter) matrix, projecting with a dot product, the variance \u03c6\u1d40\u03a3\u03c6 along a direction, and eigenvectors as the best directions.", "href": "t12_variance_projection.html"}, {"id": "m11_pca_mds", "title": "PCA, MDS and t-SNE", "group": "Part C \u00b7 Week 8: one more piece, one more model", "mins": 45, "blurb": "Maximise \u03c6\u1d40\u03a3\u03c6 for PCA; squared error between distances for MDS; Gaussian bumps and a KL divergence for t-SNE.", "href": "m11_pca_mds.html"}, {"id": "f01_spot_the_tool", "title": "Final: spot the shared maths", "group": "Final", "mins": 60, "blurb": "Mixed questions across every week: name the toolkit piece, then use it. Pass 70%.", "href": "f01_spot_the_tool.html"}], "stage": "m02_linear_family", "home": "index.html"};</script>
+<script defer src="../../_assets/path.js"></script>
+</head>
+<body data-page="cs5100_maths2_m02_linear_family" data-module="cs5100" class="pathpage">
+<header class="topbar">
+  <button class="iconbtn" id="menuBtn" aria-label="Open menu">&#9776;</button>
+  <a class="brand" href="../index.html"><span class="logo">&#120573;</span><span>CS5100 <span class="full">Model Map</span></span></a>
+  <a class="iconbtn homebtn" href="../../index.html" title="Pick a different module">&#8962;<span class="lbl"> Modules</span></a>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="tryBtn"></button>
+  <button class="iconbtn" id="themeBtn"></button>
+  <div class="progressbar"></div>
+</header>
+<div class="layout">
+<nav class="sidebar">
+<div class="modswitch">
+<a class="on" href="../../cs5100/index.html">CS5100</a>
+<a href="../../cs5940/index.html">CS5940</a>
+</div>
+<a class="pathhome" href="../index.html"><span class="dot home"></span>Model Map home</a>
+<a href="index.html"><span class="dot path"></span>Path overview</a>
+<h4>Part A · The shared toolkit</h4>
+<a href="t01_vectors_distances.html"><span class="dot path"></span>1. Vectors, dot products and distances<span class="pstat" data-i="0"></span></a>
+<a href="t02_averages_votes.html"><span class="dot path"></span>2. Averages, indicators and votes<span class="pstat" data-i="1"></span></a>
+<a href="t03_squared_error.html"><span class="dot path"></span>3. Squared error: MSE, RSS, SSE<span class="pstat" data-i="2"></span></a>
+<a href="t04_gradient_descent.html"><span class="dot path"></span>4. Derivatives and gradient descent<span class="pstat" data-i="3"></span></a>
+<a href="t05_penalties.html"><span class="dot path"></span>5. Fit plus penalty, and flexibility knobs<span class="pstat" data-i="4"></span></a>
+<a href="t06_bayes_rule.html"><span class="dot path"></span>6. Probability and Bayes&#x27; rule<span class="pstat" data-i="5"></span></a>
+<a href="t07_gaussian.html"><span class="dot path"></span>7. The Gaussian bell curve<span class="pstat" data-i="6"></span></a>
+<a href="t08_sigmoid_softmax.html"><span class="dot path"></span>8. Sigmoid, log-odds and softmax<span class="pstat" data-i="7"></span></a>
+<a href="t09_likelihood.html"><span class="dot path"></span>9. Likelihood and cross-entropy<span class="pstat" data-i="8"></span></a>
+<a href="t10_impurity.html"><span class="dot path"></span>10. Impurity: error, Gini, entropy<span class="pstat" data-i="9"></span></a>
+<a href="t11_resampling.html"><span class="dot path"></span>11. Resampling and averaging many models<span class="pstat" data-i="10"></span></a>
+<h4>Part B · The models, built from the toolkit</h4>
+<a href="m01_bayes_knn.html"><span class="dot path"></span>12. Bayes classifier and KNN<span class="pstat" data-i="11"></span></a>
+<a class="active" aria-current="page" href="m02_linear_family.html"><span class="dot path"></span>13. Linear, polynomial and ridge regression<span class="pstat" data-i="12"></span></a>
+<a href="m03_logistic.html"><span class="dot path"></span>14. Logistic and multinomial regression<span class="pstat" data-i="13"></span></a>
+<a href="m04_lda_nb.html"><span class="dot path"></span>15. LDA and naive Bayes<span class="pstat" data-i="14"></span></a>
+<a href="m05_judging.html"><span class="dot path"></span>16. Judging and comparing models<span class="pstat" data-i="15"></span></a>
+<a href="m06_trees.html"><span class="dot path"></span>17. Regression and classification trees<span class="pstat" data-i="16"></span></a>
+<a href="m07_neural_nets.html"><span class="dot path"></span>18. Neural networks<span class="pstat" data-i="17"></span></a>
+<a href="m08_ensembles.html"><span class="dot path"></span>19. Bagging, random forests and boosting<span class="pstat" data-i="18"></span></a>
+<a href="m09_clustering.html"><span class="dot path"></span>20. K-means and hierarchical clustering<span class="pstat" data-i="19"></span></a>
+<a href="m10_density.html"><span class="dot path"></span>21. Density estimation and semi-supervised learning<span class="pstat" data-i="20"></span></a>
+<h4>Part C · Week 8: one more piece, one more model</h4>
+<a href="t12_variance_projection.html"><span class="dot path"></span>22. Variance, covariance and projections<span class="pstat" data-i="21"></span></a>
+<a href="m11_pca_mds.html"><span class="dot path"></span>23. PCA, MDS and t-SNE<span class="pstat" data-i="22"></span></a>
+<h4>Final</h4>
+<a href="f01_spot_the_tool.html"><span class="dot path"></span>24. Final: spot the shared maths<span class="pstat" data-i="23"></span></a>
+</nav>
+<main><div class="content">
+<section class="hero">
+  <div class="chips"><span class="chip path">Stage 13 of 24</span><span class="chip">Part B · The models, built from the toolkit</span><span class="chip">about 55 min</span></div>
+  <h1>Linear, polynomial and ridge regression</h1>
+  <p class="tagline">The whole linear family is three toolkit pieces: a dot product for the prediction, squared error for the score, and "derivative = 0" to fit. Polynomial and step regression just invent new columns and reuse the same maths. Ridge adds a penalty. This stage does the matrix formula on a tiny example so you can see it agree with the slope formula.</p>
+  <div class="meter"><div class="track"><div class="fill"></div></div><span class="txt"></span></div>
+</section>
+<div id="pathlock"></div>
+<div class="pathbody">
+<div class="why">
+<p><span class="label">Built from</span></p>
+<p><strong>A1</strong> <span class="math inline">\(\hat y = \beta\cdot\tilde x\)</span> and <span class="math inline">\(\mathbf X\beta\)</span> · <strong>A3</strong> RSS, TSS, <span class="math inline">\(R^2\)</span> · <strong>A4</strong> derivative = 0 or gradient descent · <strong>A5</strong> the ridge penalty · <strong>A7</strong> least squares = maximum likelihood with Gaussian noise. Full pages: <a href="../w2/Linear_Regression.html">linear regression</a>, <a href="../w2/Polynomial_and_Step_Regression.html">polynomial and step</a>, <a href="../w2/Ridge_Regression.html">ridge</a>.</p>
+</div>
+<div class="book">
+<p><span class="label">Book and slides</span></p>
+<p>ISLP 3.1 (simple regression; <strong>skip</strong> the standard errors, t-statistics and p-values in 3.1.2), 3.2 (multiple regression; <strong>skip</strong> the F-statistic and variable-selection discussion in 3.2.2), 3.3.1 to 3.3.2 (dummy variables, interactions, polynomial regression), 7.1 to 7.3 (polynomials, step functions, basis functions; <strong>skip</strong> 7.4 onwards: splines and GAMs aren’t on the slides), 6.2.1 (ridge). Week 2 slides “Chapter 2: Regression”.</p>
+</div>
+<h2 id="the-assembly">1. The assembly</h2>
+<p><span class="math display">\[\hat y = \underbrace{\beta\cdot\tilde x}_{\text{A1}},\qquad \hat\beta = \arg\min_\beta\underbrace{\sum_i(y_i - \beta\cdot\tilde x_i)^2}_{\text{A3: RSS}}\quad\Rightarrow\quad\underbrace{\mathbf X^T\mathbf X\hat\beta = \mathbf X^T\mathbf y}_{\text{A4: gradient} = 0}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf X\)</span></td>
+<td>the <span class="math inline">\(n\times(p + 1)\)</span> design matrix: one row per point, first column all 1s</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf y\)</span></td>
+<td>the column of <span class="math inline">\(n\)</span> responses</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf X^T\mathbf X\)</span></td>
+<td>a <span class="math inline">\((p + 1)\times(p + 1)\)</span> matrix of sums of products of columns</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat\beta = (\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span></td>
+<td>the least-squares coefficients</td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 1: the matrix formula on three points.</strong> <span class="math inline">\(x = (0, 1, 2)\)</span>, <span class="math inline">\(y = (1, 3, 4)\)</span>.</p>
+<p><span class="math display">\[\mathbf X = \begin{pmatrix}1 &amp; 0\\1 &amp; 1\\1 &amp; 2\end{pmatrix},\quad \mathbf X^T\mathbf X = \begin{pmatrix}3 &amp; 3\\3 &amp; 5\end{pmatrix},\quad \mathbf X^T\mathbf y = \begin{pmatrix}1 + 3 + 4\\0 + 3 + 8\end{pmatrix} = \begin{pmatrix}8\\11\end{pmatrix}.\]</span></p>
+<p>Where the entries come from: top-left = <span class="math inline">\(\sum1 = n = 3\)</span>; off-diagonal = <span class="math inline">\(\sum x_i = 3\)</span>; bottom-right = <span class="math inline">\(\sum x_i^2 = 0 + 1 + 4 = 5\)</span>.</p>
+<p>Invert the <span class="math inline">\(2\times2\)</span>: determinant <span class="math inline">\(3\times5 - 3\times3 = 6\)</span>, so <span class="math inline">\((\mathbf X^T\mathbf X)^{-1} = \frac16\begin{pmatrix}5 &amp; -3\\-3 &amp; 3\end{pmatrix}\)</span>.</p>
+<p><span class="math display">\[\hat\beta = \frac16\begin{pmatrix}5\times8 - 3\times11\\-3\times8 + 3\times11\end{pmatrix} = \frac16\begin{pmatrix}7\\9\end{pmatrix} = \begin{pmatrix}1.167\\1.5\end{pmatrix}.\]</span></p>
+<p><strong>Check with the slope formula (Toolkit 4):</strong> <span class="math inline">\(\bar x = 1\)</span>, <span class="math inline">\(\bar y = 8/3\)</span>; deviations <span class="math inline">\((-1, 0, 1)\)</span> and <span class="math inline">\((-\frac53, \frac13, \frac43)\)</span>; <span class="math inline">\(S_{xy} = \frac53 + 0 + \frac43 = 3\)</span>, <span class="math inline">\(S_{xx} = 2\)</span>; <span class="math inline">\(\hat\beta_1 = 1.5\)</span>, <span class="math inline">\(\hat\beta_0 = \frac83 - 1.5 = 1.167\)</span> ✓. Same answer, two routes.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>Forgetting the column of 1s</strong> in <span class="math inline">\(\mathbf X\)</span>: you’d fit a line forced through the origin.</li>
+<li><strong><span class="math inline">\(2\times2\)</span> inverse slips.</strong> Swap the diagonal, negate the off-diagonal, divide by the determinant <span class="math inline">\(ad - bc\)</span>.</li>
+<li><strong>Order of multiplication.</strong> <span class="math inline">\((\mathbf X^T\mathbf X)^{-1}\mathbf X^T\mathbf y\)</span>, not <span class="math inline">\(\mathbf X^T\mathbf y(\mathbf X^T\mathbf X)^{-1}\)</span>.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="4;6;14" label="n;Σxᵢ;Σxᵢ²">
+<p>For <span class="math inline">\(x = (0, 1, 2, 3)\)</span> with an intercept, <span class="math inline">\(\mathbf X^T\mathbf X = \begin{pmatrix}a &amp; b\\b &amp; c\end{pmatrix}\)</span>. Give <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span>.</p>
+<div class="expl">
+<p><span class="math inline">\(a = n = 4\)</span>, <span class="math inline">\(b = 0 + 1 + 2 + 3 = 6\)</span>, <span class="math inline">\(c = 0 + 1 + 4 + 9 = 14\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="ols2">
+
+</div>
+<h2 id="new-columns-same-maths">2. New columns, same maths</h2>
+<div class="words">
+<p><span class="label">In plain words</span></p>
+<p>To fit a curve, don’t change the method: change the <strong>columns</strong>. Add <span class="math inline">\(x^2\)</span>, <span class="math inline">\(x^3\)</span> as extra inputs and fit a “linear” model to them. It’s linear in the coefficients (which is all least squares cares about), even though it’s curved in <span class="math inline">\(x\)</span>. Step functions do the same with indicator columns <span class="math inline">\(\mathbb 1(c_1 \le x &lt; c_2)\)</span>.</p>
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Basis</th>
+<th>Row of <span class="math inline">\(\mathbf X\)</span> for input <span class="math inline">\(x\)</span></th>
+<th>Coefficients</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>straight line</td>
+<td><span class="math inline">\((1, x)\)</span></td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>polynomial, degree <span class="math inline">\(d\)</span></td>
+<td><span class="math inline">\((1, x, x^2, \dots, x^d)\)</span></td>
+<td><span class="math inline">\(d + 1\)</span></td>
+</tr>
+<tr class="odd">
+<td>step functions, cuts <span class="math inline">\(c_1 &lt; \dots &lt; c_K\)</span></td>
+<td><span class="math inline">\((1, \mathbb 1(c_1 \le x &lt; c_2), \dots, \mathbb 1(x \ge c_K))\)</span></td>
+<td><span class="math inline">\(K + 1\)</span></td>
+</tr>
+<tr class="even">
+<td>full polynomial in 2 inputs, degree <span class="math inline">\(d\)</span></td>
+<td>all <span class="math inline">\(x_1^ax_2^b\)</span> with <span class="math inline">\(a + b \le d\)</span></td>
+<td><span class="math inline">\(\frac{(d + 1)(d + 2)}{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><strong>Worked example 2.</strong> Cubic model <span class="math inline">\(\hat y = 1 + 0.5x - x^2 + 0.25x^3\)</span> at <span class="math inline">\(x = 2\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>term</th>
+<th>column value</th>
+<th>coefficient</th>
+<th>product</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x\)</span></td>
+<td>2</td>
+<td>0.5</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x^2\)</span></td>
+<td>4</td>
+<td>−1</td>
+<td>−4</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x^3\)</span></td>
+<td>8</td>
+<td>0.25</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>total</strong></td>
+<td></td>
+<td></td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\hat y(2) = 0\)</span>. It’s just a dot product (Toolkit 1) with a longer row.</p>
+<p><strong>Counting coefficients (2024 Q1 style).</strong> Degree 3 in two inputs: terms <span class="math inline">\(1;\ x_1, x_2;\ x_1^2, x_1x_2, x_2^2;\ x_1^3, x_1^2x_2, x_1x_2^2, x_2^3\)</span>, that is <span class="math inline">\(1 + 2 + 3 + 4 = 10 = \frac{4\times5}{2}\)</span> ✓.</p>
+</div>
+<div class="warn">
+<p><span class="label">Common mistakes</span></p>
+<ul>
+<li><strong>“Polynomial regression is non-linear regression.”</strong> It’s non-linear in <span class="math inline">\(x\)</span> but linear in <span class="math inline">\(\beta\)</span>, so ordinary least squares still works.</li>
+<li><strong>Forgetting the constant term</strong> when counting coefficients.</li>
+<li><strong>High degree = better.</strong> More columns = more flexible = more variance. Choose <span class="math inline">\(d\)</span> by validation error.</li>
+</ul>
+</div>
+<div class="q" kind="num" data-answer="1;-2;4;-8;-6" label="1;x;x²;x³;ŷ">
+<p>For <span class="math inline">\(x = -2\)</span>, give the cubic row <span class="math inline">\((1, x, x^2, x^3)\)</span>, then <span class="math inline">\(\hat y\)</span> for <span class="math inline">\(\beta = (1, 0.5, -1, 0.25)\)</span>.</p>
+<div class="expl">
+<p>Row <span class="math inline">\((1, -2, 4, -8)\)</span>. Products: <span class="math inline">\(1\times1 = 1\)</span>; <span class="math inline">\(0.5\times(-2) = -1\)</span>; <span class="math inline">\(-1\times4 = -4\)</span>; <span class="math inline">\(0.25\times(-8) = -2\)</span>. Total <span class="math inline">\(-6\)</span>.</p>
+</div>
+</div>
+<div class="q" kind="gen" data-gen="polydf">
+
+</div>
+<h2 id="ridge-add-the-penalty">3. Ridge: add the penalty</h2>
+<p><span class="math display">\[\hat\beta^{\text{ridge}} = \arg\min_\beta\ \underbrace{\text{RSS}(\beta)}_{\text{A3}} + \underbrace{\lambda\sum_{j\ge1}\beta_j^2}_{\text{A5}}\]</span></p>
+<p>Set the gradient to zero again: with centred inputs (so the intercept is just <span class="math inline">\(\bar y\)</span>), <span class="math inline">\(\hat\beta^{\text{ridge}} = (\mathbf X^T\mathbf X + \lambda I)^{-1}\mathbf X^T\mathbf y\)</span>. With one centred input this is <span class="math inline">\(\frac{\sum x_iy_i}{\sum x_i^2 + \lambda}\)</span> (Toolkit 5). The <span class="math inline">\(+\lambda\)</span> on the diagonal also makes the matrix invertible even when inputs are perfectly correlated.</p>
+<div class="q" kind="gen" data-gen="ridge">
+
+</div>
+<h2 id="scoring-the-fit">4. Scoring the fit</h2>
+<p>RSS, TSS and <span class="math inline">\(R^2 = 1 - \text{RSS}/\text{TSS}\)</span> (Toolkit 3). On training data, adding columns can only lower the RSS and raise <span class="math inline">\(R^2\)</span>, so neither can choose the degree or <span class="math inline">\(\lambda\)</span>: use validation MSE.</p>
+<div class="q" kind="gen" data-gen="rsq2">
+
+</div>
+<h2 id="stage-test">Stage test</h2>
+<div class="test" data-pass="80">
+<div class="q" kind="gen" data-gen="ols2">
+
+</div>
+<div class="q" kind="gen" data-gen="ridge">
+
+</div>
+<div class="q" kind="gen" data-gen="gd2">
+
+</div>
+<div class="q" kind="gen" data-gen="polydf">
+
+</div>
+<div class="q" kind="mcq">
+<p>Polynomial regression of degree 5 on one input is fitted by…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />a non-linear optimiser, because the model is a curve.</label></li>
+<li><label><input type="checkbox" checked="" />ordinary least squares on the columns <span class="math inline">\(1, x, \dots, x^5\)</span>, because the model is linear in <span class="math inline">\(\beta\)</span>.</label></li>
+<li><label><input type="checkbox" />KNN with <span class="math inline">\(K = 5\)</span>.</label></li>
+<li><label><input type="checkbox" />gradient descent only.</label></li>
+</ul>
+<div class="expl">
+<p>“Linear” in linear regression means linear in the coefficients.</p>
+</div>
+</div>
+<div class="q" kind="self" data-need="3" data-marks="4">
+<p><strong>(4 marks; 2024 Q1.)</strong> Write a linear regression model with <span class="math inline">\(\lambda \in \mathbb R^2\)</span>, the objective used to fit it, and how ridge regression changes that objective and why.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span>.</label></li>
+<li><label><input type="checkbox" checked="" /><span class="math inline">\(\text{RSS}(\lambda) = \sum_i(y_i - \lambda_0 - \lambda_1x_i)^2\)</span>, minimised (closed form or gradient descent).</label></li>
+<li><label><input type="checkbox" checked="" />Ridge: <span class="math inline">\(\text{RSS} + \alpha\lambda_1^2\)</span> (penalty on the slope, not the intercept).</label></li>
+<li><label><input type="checkbox" checked="" />Why: shrinks the coefficient, lowering variance / overfitting; the penalty weight is chosen on validation data.</label></li>
+</ul>
+<div class="model">
+<p>The model is <span class="math inline">\(f(X) = \lambda_0 + \lambda_1X\)</span>. It is fitted by least squares: choose <span class="math inline">\(\lambda\)</span> to minimise <span class="math inline">\(\text{RSS}(\lambda) = \sum_{i=1}^n(y_i - \lambda_0 - \lambda_1x_i)^2\)</span>, giving <span class="math inline">\(\hat\lambda_1 = \sum(x_i - \bar x)(y_i - \bar y)/\sum(x_i - \bar x)^2\)</span> and <span class="math inline">\(\hat\lambda_0 = \bar y - \hat\lambda_1\bar x\)</span>. Ridge regression minimises <span class="math inline">\(\text{RSS}(\lambda) + \alpha\lambda_1^2\)</span> instead (the intercept is not penalised). The penalty shrinks <span class="math inline">\(\lambda_1\)</span> towards zero, which reduces variance and overfitting, especially with many or correlated inputs, at the cost of some bias; <span class="math inline">\(\alpha\)</span> is chosen on a validation set.</p>
+</div>
+</div>
+</div>
+
+</div>
+<nav class="pager"><a href="m01_bayes_knn.html"><small>&larr; Stage 12</small>Bayes classifier and KNN</a><a class="next" href="m03_logistic.html"><small>Stage 14 &rarr;</small>Logistic and multinomial regression</a></nav>
+</div></main>
+</div>
+<button class="iconbtn" id="toTop" aria-label="Back to top">&#8593; Top</button>
+</body>
+</html>
